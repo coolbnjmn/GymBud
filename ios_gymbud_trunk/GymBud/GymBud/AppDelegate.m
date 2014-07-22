@@ -50,8 +50,10 @@
     }
     else
     {
+        NSLog(@"no cahced user");
         // No cached user so just present the welcome screen
         self.window.rootViewController = [[UINavigationController alloc] initWithRootViewController:[[LoginViewController alloc] init]];
+        
         self.window.backgroundColor = [UIColor whiteColor];
         [self.window makeKeyAndVisible];
     }

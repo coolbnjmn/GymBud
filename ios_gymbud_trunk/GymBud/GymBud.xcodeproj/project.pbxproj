@@ -49,6 +49,11 @@
 		B2C39DB4197E1AD300039F90 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B2C39DB3197E1AD300039F90 /* Security.framework */; };
 		B2C39DB6197E1ADB00039F90 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B2C39DB5197E1ADB00039F90 /* SystemConfiguration.framework */; };
 		B2C39DBB197E1B5D00039F90 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B2C39DB9197E1B5D00039F90 /* Main.storyboard */; };
+		B2D0CAC5197E267D00B17D32 /* LoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B2D0CAC4197E267D00B17D32 /* LoginViewController.xib */; };
+		B2D0CACA197E272400B17D32 /* login-button-small-pressed.png in Resources */ = {isa = PBXBuildFile; fileRef = B2D0CAC6197E272400B17D32 /* login-button-small-pressed.png */; };
+		B2D0CACB197E272400B17D32 /* login-button-small-pressed@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B2D0CAC7197E272400B17D32 /* login-button-small-pressed@2x.png */; };
+		B2D0CACC197E272400B17D32 /* login-button-small.png in Resources */ = {isa = PBXBuildFile; fileRef = B2D0CAC8197E272400B17D32 /* login-button-small.png */; };
+		B2D0CACD197E272400B17D32 /* login-button-small@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B2D0CAC9197E272400B17D32 /* login-button-small@2x.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -120,6 +125,11 @@
 		B2C39DB3197E1AD300039F90 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		B2C39DB5197E1ADB00039F90 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		B2C39DBA197E1B5D00039F90 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = GymBud/Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		B2D0CAC4197E267D00B17D32 /* LoginViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = LoginViewController.xib; path = GymBud/Controllers/LoginViewController.xib; sourceTree = "<group>"; };
+		B2D0CAC6197E272400B17D32 /* login-button-small-pressed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "login-button-small-pressed.png"; path = "GymBud/Assets/login-button-small-pressed.png"; sourceTree = "<group>"; };
+		B2D0CAC7197E272400B17D32 /* login-button-small-pressed@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "login-button-small-pressed@2x.png"; path = "GymBud/Assets/login-button-small-pressed@2x.png"; sourceTree = "<group>"; };
+		B2D0CAC8197E272400B17D32 /* login-button-small.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "login-button-small.png"; path = "GymBud/Assets/login-button-small.png"; sourceTree = "<group>"; };
+		B2D0CAC9197E272400B17D32 /* login-button-small@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "login-button-small@2x.png"; path = "GymBud/Assets/login-button-small@2x.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -217,6 +227,10 @@
 		B2C39D6D197E193000039F90 /* Assets */ = {
 			isa = PBXGroup;
 			children = (
+				B2D0CAC6197E272400B17D32 /* login-button-small-pressed.png */,
+				B2D0CAC7197E272400B17D32 /* login-button-small-pressed@2x.png */,
+				B2D0CAC8197E272400B17D32 /* login-button-small.png */,
+				B2D0CAC9197E272400B17D32 /* login-button-small@2x.png */,
 				B2C39D5D197E191C00039F90 /* blueBubble.png */,
 				B2C39D5E197E191C00039F90 /* blueBubble@2x.png */,
 				B2C39D5F197E191C00039F90 /* grayBubble.png */,
@@ -239,6 +253,7 @@
 				B2C39D72197E194F00039F90 /* EPInterestVC.m */,
 				B2C39D73197E194F00039F90 /* LoginViewController.h */,
 				B2C39D74197E194F00039F90 /* LoginViewController.m */,
+				B2D0CAC4197E267D00B17D32 /* LoginViewController.xib */,
 				B2C39D75197E194F00039F90 /* MessageInboxTVC.h */,
 				B2C39D76197E194F00039F90 /* MessageInboxTVC.m */,
 				B2C39D77197E194F00039F90 /* MessageUserVC.h */,
@@ -380,12 +395,17 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B2D0CAC5197E267D00B17D32 /* LoginViewController.xib in Resources */,
 				B2C39D6B197E191C00039F90 /* Map.png in Resources */,
 				B2C39D67197E191C00039F90 /* grayBubble.png in Resources */,
 				B2C39D43197E172600039F90 /* Images.xcassets in Resources */,
 				B2C39D92197E194F00039F90 /* PAWWallViewController.xib in Resources */,
+				B2D0CACC197E272400B17D32 /* login-button-small.png in Resources */,
+				B2D0CACD197E272400B17D32 /* login-button-small@2x.png in Resources */,
 				B2C39D65197E191C00039F90 /* blueBubble.png in Resources */,
 				B2C39D95197E194F00039F90 /* ViewMessageVC.xib in Resources */,
+				B2D0CACB197E272400B17D32 /* login-button-small-pressed@2x.png in Resources */,
+				B2D0CACA197E272400B17D32 /* login-button-small-pressed.png in Resources */,
 				B2C39DBB197E1B5D00039F90 /* Main.storyboard in Resources */,
 				B2C39D6A197E191C00039F90 /* just_background@2x.png in Resources */,
 				B2C39D6C197E191C00039F90 /* Map@2x.png in Resources */,
@@ -546,6 +566,7 @@
 					"$(PROJECT_DIR)/GymBud/Frameworks",
 				);
 				INFOPLIST_FILE = GymBud/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -562,6 +583,7 @@
 					"$(PROJECT_DIR)/GymBud/Frameworks",
 				);
 				INFOPLIST_FILE = GymBud/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -620,6 +642,7 @@
 				B2C39D54197E172600039F90 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		B2C39D55197E172600039F90 /* Build configuration list for PBXNativeTarget "GymBudTests" */ = {
 			isa = XCConfigurationList;
@@ -628,6 +651,7 @@
 				B2C39D57197E172600039F90 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
