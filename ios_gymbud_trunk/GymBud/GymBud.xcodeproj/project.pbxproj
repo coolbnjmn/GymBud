@@ -1,0 +1,635 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		B2C39D38197E172600039F90 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = B2C39D37197E172600039F90 /* main.m */; };
+		B2C39D3B197E172600039F90 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = B2C39D3A197E172600039F90 /* AppDelegate.m */; };
+		B2C39D43197E172600039F90 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B2C39D42197E172600039F90 /* Images.xcassets */; };
+		B2C39D4F197E172600039F90 /* GymBudTests.m in Sources */ = {isa = PBXBuildFile; fileRef = B2C39D4E197E172600039F90 /* GymBudTests.m */; };
+		B2C39D65197E191C00039F90 /* blueBubble.png in Resources */ = {isa = PBXBuildFile; fileRef = B2C39D5D197E191C00039F90 /* blueBubble.png */; };
+		B2C39D66197E191C00039F90 /* blueBubble@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B2C39D5E197E191C00039F90 /* blueBubble@2x.png */; };
+		B2C39D67197E191C00039F90 /* grayBubble.png in Resources */ = {isa = PBXBuildFile; fileRef = B2C39D5F197E191C00039F90 /* grayBubble.png */; };
+		B2C39D68197E191C00039F90 /* grayBubble@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B2C39D60197E191C00039F90 /* grayBubble@2x.png */; };
+		B2C39D69197E191C00039F90 /* just_background.png in Resources */ = {isa = PBXBuildFile; fileRef = B2C39D61197E191C00039F90 /* just_background.png */; };
+		B2C39D6A197E191C00039F90 /* just_background@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B2C39D62197E191C00039F90 /* just_background@2x.png */; };
+		B2C39D6B197E191C00039F90 /* Map.png in Resources */ = {isa = PBXBuildFile; fileRef = B2C39D63197E191C00039F90 /* Map.png */; };
+		B2C39D6C197E191C00039F90 /* Map@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B2C39D64197E191C00039F90 /* Map@2x.png */; };
+		B2C39D87197E194F00039F90 /* EditProfile.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B2C39D6E197E194F00039F90 /* EditProfile.storyboard */; };
+		B2C39D88197E194F00039F90 /* EditProfileTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = B2C39D70197E194F00039F90 /* EditProfileTVC.m */; };
+		B2C39D89197E194F00039F90 /* EPInterestVC.m in Sources */ = {isa = PBXBuildFile; fileRef = B2C39D72197E194F00039F90 /* EPInterestVC.m */; };
+		B2C39D8A197E194F00039F90 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B2C39D74197E194F00039F90 /* LoginViewController.m */; };
+		B2C39D8B197E194F00039F90 /* MessageInboxTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = B2C39D76197E194F00039F90 /* MessageInboxTVC.m */; };
+		B2C39D8C197E194F00039F90 /* MessageUserVC.m in Sources */ = {isa = PBXBuildFile; fileRef = B2C39D78197E194F00039F90 /* MessageUserVC.m */; };
+		B2C39D8D197E194F00039F90 /* MessageUserVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = B2C39D79197E194F00039F90 /* MessageUserVC.xib */; };
+		B2C39D8E197E194F00039F90 /* PAWWallPostCreateViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B2C39D7B197E194F00039F90 /* PAWWallPostCreateViewController.m */; };
+		B2C39D8F197E194F00039F90 /* PAWWallPostCreateViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B2C39D7C197E194F00039F90 /* PAWWallPostCreateViewController.xib */; };
+		B2C39D90197E194F00039F90 /* PAWWallPostsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B2C39D7E197E194F00039F90 /* PAWWallPostsTableViewController.m */; };
+		B2C39D91197E194F00039F90 /* PAWWallViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B2C39D80197E194F00039F90 /* PAWWallViewController.m */; };
+		B2C39D92197E194F00039F90 /* PAWWallViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B2C39D81197E194F00039F90 /* PAWWallViewController.xib */; };
+		B2C39D93197E194F00039F90 /* UserDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B2C39D83197E194F00039F90 /* UserDetailsViewController.m */; };
+		B2C39D94197E194F00039F90 /* ViewMessageVC.m in Sources */ = {isa = PBXBuildFile; fileRef = B2C39D85197E194F00039F90 /* ViewMessageVC.m */; };
+		B2C39D95197E194F00039F90 /* ViewMessageVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = B2C39D86197E194F00039F90 /* ViewMessageVC.xib */; };
+		B2C39D9A197E197E00039F90 /* PAWPost.m in Sources */ = {isa = PBXBuildFile; fileRef = B2C39D99197E197E00039F90 /* PAWPost.m */; };
+		B2C39D9E197E19A900039F90 /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B2C39D9C197E19A900039F90 /* FacebookSDK.framework */; };
+		B2C39D9F197E19A900039F90 /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B2C39D9D197E19A900039F90 /* Parse.framework */; };
+		B2C39DA2197E1A7100039F90 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B2C39DA1197E1A7100039F90 /* UIKit.framework */; };
+		B2C39DA4197E1A7C00039F90 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B2C39DA3197E1A7C00039F90 /* QuartzCore.framework */; };
+		B2C39DA6197E1A9000039F90 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B2C39DA5197E1A9000039F90 /* StoreKit.framework */; };
+		B2C39DA8197E1A9B00039F90 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B2C39DA7197E1A9B00039F90 /* CoreLocation.framework */; };
+		B2C39DAA197E1AA500039F90 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = B2C39DA9197E1AA500039F90 /* libz.dylib */; };
+		B2C39DAC197E1AAE00039F90 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B2C39DAB197E1AAE00039F90 /* AudioToolbox.framework */; };
+		B2C39DAE197E1AB500039F90 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B2C39DAD197E1AB500039F90 /* CFNetwork.framework */; };
+		B2C39DB0197E1ABE00039F90 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B2C39DAF197E1ABE00039F90 /* Foundation.framework */; };
+		B2C39DB2197E1AC900039F90 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B2C39DB1197E1AC900039F90 /* MobileCoreServices.framework */; };
+		B2C39DB4197E1AD300039F90 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B2C39DB3197E1AD300039F90 /* Security.framework */; };
+		B2C39DB6197E1ADB00039F90 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B2C39DB5197E1ADB00039F90 /* SystemConfiguration.framework */; };
+		B2C39DBB197E1B5D00039F90 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B2C39DB9197E1B5D00039F90 /* Main.storyboard */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		B2C39D49197E172600039F90 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = B2C39D2A197E172600039F90 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = B2C39D31197E172600039F90;
+			remoteInfo = GymBud;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		B2C39D32197E172600039F90 /* GymBud.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GymBud.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		B2C39D36197E172600039F90 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B2C39D37197E172600039F90 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		B2C39D39197E172600039F90 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		B2C39D3A197E172600039F90 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		B2C39D42197E172600039F90 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		B2C39D48197E172600039F90 /* GymBudTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GymBudTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		B2C39D4D197E172600039F90 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B2C39D4E197E172600039F90 /* GymBudTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GymBudTests.m; sourceTree = "<group>"; };
+		B2C39D5D197E191C00039F90 /* blueBubble.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = blueBubble.png; path = GymBud/Assets/blueBubble.png; sourceTree = "<group>"; };
+		B2C39D5E197E191C00039F90 /* blueBubble@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "blueBubble@2x.png"; path = "GymBud/Assets/blueBubble@2x.png"; sourceTree = "<group>"; };
+		B2C39D5F197E191C00039F90 /* grayBubble.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = grayBubble.png; path = GymBud/Assets/grayBubble.png; sourceTree = "<group>"; };
+		B2C39D60197E191C00039F90 /* grayBubble@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "grayBubble@2x.png"; path = "GymBud/Assets/grayBubble@2x.png"; sourceTree = "<group>"; };
+		B2C39D61197E191C00039F90 /* just_background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = just_background.png; path = GymBud/Assets/just_background.png; sourceTree = "<group>"; };
+		B2C39D62197E191C00039F90 /* just_background@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "just_background@2x.png"; path = "GymBud/Assets/just_background@2x.png"; sourceTree = "<group>"; };
+		B2C39D63197E191C00039F90 /* Map.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Map.png; path = GymBud/Assets/Map.png; sourceTree = "<group>"; };
+		B2C39D64197E191C00039F90 /* Map@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Map@2x.png"; path = "GymBud/Assets/Map@2x.png"; sourceTree = "<group>"; };
+		B2C39D6E197E194F00039F90 /* EditProfile.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = EditProfile.storyboard; path = GymBud/Controllers/EditProfile.storyboard; sourceTree = "<group>"; };
+		B2C39D6F197E194F00039F90 /* EditProfileTVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EditProfileTVC.h; path = GymBud/Controllers/EditProfileTVC.h; sourceTree = "<group>"; };
+		B2C39D70197E194F00039F90 /* EditProfileTVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EditProfileTVC.m; path = GymBud/Controllers/EditProfileTVC.m; sourceTree = "<group>"; };
+		B2C39D71197E194F00039F90 /* EPInterestVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EPInterestVC.h; path = GymBud/Controllers/EPInterestVC.h; sourceTree = "<group>"; };
+		B2C39D72197E194F00039F90 /* EPInterestVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EPInterestVC.m; path = GymBud/Controllers/EPInterestVC.m; sourceTree = "<group>"; };
+		B2C39D73197E194F00039F90 /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LoginViewController.h; path = GymBud/Controllers/LoginViewController.h; sourceTree = "<group>"; };
+		B2C39D74197E194F00039F90 /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LoginViewController.m; path = GymBud/Controllers/LoginViewController.m; sourceTree = "<group>"; };
+		B2C39D75197E194F00039F90 /* MessageInboxTVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MessageInboxTVC.h; path = GymBud/Controllers/MessageInboxTVC.h; sourceTree = "<group>"; };
+		B2C39D76197E194F00039F90 /* MessageInboxTVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MessageInboxTVC.m; path = GymBud/Controllers/MessageInboxTVC.m; sourceTree = "<group>"; };
+		B2C39D77197E194F00039F90 /* MessageUserVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MessageUserVC.h; path = GymBud/Controllers/MessageUserVC.h; sourceTree = "<group>"; };
+		B2C39D78197E194F00039F90 /* MessageUserVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MessageUserVC.m; path = GymBud/Controllers/MessageUserVC.m; sourceTree = "<group>"; };
+		B2C39D79197E194F00039F90 /* MessageUserVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = MessageUserVC.xib; path = GymBud/Controllers/MessageUserVC.xib; sourceTree = "<group>"; };
+		B2C39D7A197E194F00039F90 /* PAWWallPostCreateViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PAWWallPostCreateViewController.h; path = GymBud/Controllers/PAWWallPostCreateViewController.h; sourceTree = "<group>"; };
+		B2C39D7B197E194F00039F90 /* PAWWallPostCreateViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PAWWallPostCreateViewController.m; path = GymBud/Controllers/PAWWallPostCreateViewController.m; sourceTree = "<group>"; };
+		B2C39D7C197E194F00039F90 /* PAWWallPostCreateViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = PAWWallPostCreateViewController.xib; path = GymBud/Controllers/PAWWallPostCreateViewController.xib; sourceTree = "<group>"; };
+		B2C39D7D197E194F00039F90 /* PAWWallPostsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PAWWallPostsTableViewController.h; path = GymBud/Controllers/PAWWallPostsTableViewController.h; sourceTree = "<group>"; };
+		B2C39D7E197E194F00039F90 /* PAWWallPostsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PAWWallPostsTableViewController.m; path = GymBud/Controllers/PAWWallPostsTableViewController.m; sourceTree = "<group>"; };
+		B2C39D7F197E194F00039F90 /* PAWWallViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PAWWallViewController.h; path = GymBud/Controllers/PAWWallViewController.h; sourceTree = "<group>"; };
+		B2C39D80197E194F00039F90 /* PAWWallViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PAWWallViewController.m; path = GymBud/Controllers/PAWWallViewController.m; sourceTree = "<group>"; };
+		B2C39D81197E194F00039F90 /* PAWWallViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = PAWWallViewController.xib; path = GymBud/Controllers/PAWWallViewController.xib; sourceTree = "<group>"; };
+		B2C39D82197E194F00039F90 /* UserDetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UserDetailsViewController.h; path = GymBud/Controllers/UserDetailsViewController.h; sourceTree = "<group>"; };
+		B2C39D83197E194F00039F90 /* UserDetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UserDetailsViewController.m; path = GymBud/Controllers/UserDetailsViewController.m; sourceTree = "<group>"; };
+		B2C39D84197E194F00039F90 /* ViewMessageVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ViewMessageVC.h; path = GymBud/Controllers/ViewMessageVC.h; sourceTree = "<group>"; };
+		B2C39D85197E194F00039F90 /* ViewMessageVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ViewMessageVC.m; path = GymBud/Controllers/ViewMessageVC.m; sourceTree = "<group>"; };
+		B2C39D86197E194F00039F90 /* ViewMessageVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ViewMessageVC.xib; path = GymBud/Controllers/ViewMessageVC.xib; sourceTree = "<group>"; };
+		B2C39D98197E197E00039F90 /* PAWPost.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PAWPost.h; path = GymBud/Models/PAWPost.h; sourceTree = "<group>"; };
+		B2C39D99197E197E00039F90 /* PAWPost.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PAWPost.m; path = GymBud/Models/PAWPost.m; sourceTree = "<group>"; };
+		B2C39D9C197E19A900039F90 /* FacebookSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FacebookSDK.framework; path = GymBud/Frameworks/FacebookSDK.framework; sourceTree = "<group>"; };
+		B2C39D9D197E19A900039F90 /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Parse.framework; path = GymBud/Frameworks/Parse.framework; sourceTree = "<group>"; };
+		B2C39DA1197E1A7100039F90 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		B2C39DA3197E1A7C00039F90 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		B2C39DA5197E1A9000039F90 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
+		B2C39DA7197E1A9B00039F90 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		B2C39DA9197E1AA500039F90 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
+		B2C39DAB197E1AAE00039F90 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
+		B2C39DAD197E1AB500039F90 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
+		B2C39DAF197E1ABE00039F90 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		B2C39DB1197E1AC900039F90 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
+		B2C39DB3197E1AD300039F90 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		B2C39DB5197E1ADB00039F90 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		B2C39DBA197E1B5D00039F90 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = GymBud/Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		B2C39D2F197E172600039F90 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B2C39DA2197E1A7100039F90 /* UIKit.framework in Frameworks */,
+				B2C39DB6197E1ADB00039F90 /* SystemConfiguration.framework in Frameworks */,
+				B2C39DB4197E1AD300039F90 /* Security.framework in Frameworks */,
+				B2C39DB2197E1AC900039F90 /* MobileCoreServices.framework in Frameworks */,
+				B2C39DB0197E1ABE00039F90 /* Foundation.framework in Frameworks */,
+				B2C39DAE197E1AB500039F90 /* CFNetwork.framework in Frameworks */,
+				B2C39DAC197E1AAE00039F90 /* AudioToolbox.framework in Frameworks */,
+				B2C39DAA197E1AA500039F90 /* libz.dylib in Frameworks */,
+				B2C39DA8197E1A9B00039F90 /* CoreLocation.framework in Frameworks */,
+				B2C39DA6197E1A9000039F90 /* StoreKit.framework in Frameworks */,
+				B2C39D9E197E19A900039F90 /* FacebookSDK.framework in Frameworks */,
+				B2C39D9F197E19A900039F90 /* Parse.framework in Frameworks */,
+				B2C39DA4197E1A7C00039F90 /* QuartzCore.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B2C39D45197E172600039F90 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		B2C39D29197E172600039F90 = {
+			isa = PBXGroup;
+			children = (
+				B2C39D34197E172600039F90 /* GymBud */,
+				B2C39D6D197E193000039F90 /* Assets */,
+				B2C39D4B197E172600039F90 /* GymBudTests */,
+				B2C39D33197E172600039F90 /* Products */,
+				B2C39DA0197E19B300039F90 /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		B2C39D33197E172600039F90 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				B2C39D32197E172600039F90 /* GymBud.app */,
+				B2C39D48197E172600039F90 /* GymBudTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		B2C39D34197E172600039F90 /* GymBud */ = {
+			isa = PBXGroup;
+			children = (
+				B2C39DB9197E1B5D00039F90 /* Main.storyboard */,
+				B2C39D39197E172600039F90 /* AppDelegate.h */,
+				B2C39D3A197E172600039F90 /* AppDelegate.m */,
+				B2C39D97197E197400039F90 /* Models */,
+				B2C39D9B197E198500039F90 /* Views */,
+				B2C39D96197E195800039F90 /* Controllers */,
+				B2C39D42197E172600039F90 /* Images.xcassets */,
+				B2C39D35197E172600039F90 /* Supporting Files */,
+			);
+			path = GymBud;
+			sourceTree = "<group>";
+		};
+		B2C39D35197E172600039F90 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				B2C39D36197E172600039F90 /* Info.plist */,
+				B2C39D37197E172600039F90 /* main.m */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		B2C39D4B197E172600039F90 /* GymBudTests */ = {
+			isa = PBXGroup;
+			children = (
+				B2C39D4E197E172600039F90 /* GymBudTests.m */,
+				B2C39D4C197E172600039F90 /* Supporting Files */,
+			);
+			path = GymBudTests;
+			sourceTree = "<group>";
+		};
+		B2C39D4C197E172600039F90 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				B2C39D4D197E172600039F90 /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		B2C39D6D197E193000039F90 /* Assets */ = {
+			isa = PBXGroup;
+			children = (
+				B2C39D5D197E191C00039F90 /* blueBubble.png */,
+				B2C39D5E197E191C00039F90 /* blueBubble@2x.png */,
+				B2C39D5F197E191C00039F90 /* grayBubble.png */,
+				B2C39D60197E191C00039F90 /* grayBubble@2x.png */,
+				B2C39D61197E191C00039F90 /* just_background.png */,
+				B2C39D62197E191C00039F90 /* just_background@2x.png */,
+				B2C39D63197E191C00039F90 /* Map.png */,
+				B2C39D64197E191C00039F90 /* Map@2x.png */,
+			);
+			name = Assets;
+			sourceTree = "<group>";
+		};
+		B2C39D96197E195800039F90 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				B2C39D6E197E194F00039F90 /* EditProfile.storyboard */,
+				B2C39D6F197E194F00039F90 /* EditProfileTVC.h */,
+				B2C39D70197E194F00039F90 /* EditProfileTVC.m */,
+				B2C39D71197E194F00039F90 /* EPInterestVC.h */,
+				B2C39D72197E194F00039F90 /* EPInterestVC.m */,
+				B2C39D73197E194F00039F90 /* LoginViewController.h */,
+				B2C39D74197E194F00039F90 /* LoginViewController.m */,
+				B2C39D75197E194F00039F90 /* MessageInboxTVC.h */,
+				B2C39D76197E194F00039F90 /* MessageInboxTVC.m */,
+				B2C39D77197E194F00039F90 /* MessageUserVC.h */,
+				B2C39D78197E194F00039F90 /* MessageUserVC.m */,
+				B2C39D79197E194F00039F90 /* MessageUserVC.xib */,
+				B2C39D7A197E194F00039F90 /* PAWWallPostCreateViewController.h */,
+				B2C39D7B197E194F00039F90 /* PAWWallPostCreateViewController.m */,
+				B2C39D7C197E194F00039F90 /* PAWWallPostCreateViewController.xib */,
+				B2C39D7D197E194F00039F90 /* PAWWallPostsTableViewController.h */,
+				B2C39D7E197E194F00039F90 /* PAWWallPostsTableViewController.m */,
+				B2C39D7F197E194F00039F90 /* PAWWallViewController.h */,
+				B2C39D80197E194F00039F90 /* PAWWallViewController.m */,
+				B2C39D81197E194F00039F90 /* PAWWallViewController.xib */,
+				B2C39D82197E194F00039F90 /* UserDetailsViewController.h */,
+				B2C39D83197E194F00039F90 /* UserDetailsViewController.m */,
+				B2C39D84197E194F00039F90 /* ViewMessageVC.h */,
+				B2C39D85197E194F00039F90 /* ViewMessageVC.m */,
+				B2C39D86197E194F00039F90 /* ViewMessageVC.xib */,
+			);
+			name = Controllers;
+			path = ..;
+			sourceTree = "<group>";
+		};
+		B2C39D97197E197400039F90 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				B2C39D98197E197E00039F90 /* PAWPost.h */,
+				B2C39D99197E197E00039F90 /* PAWPost.m */,
+			);
+			name = Models;
+			path = ..;
+			sourceTree = "<group>";
+		};
+		B2C39D9B197E198500039F90 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Views;
+			path = ..;
+			sourceTree = "<group>";
+		};
+		B2C39DA0197E19B300039F90 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				B2C39DB5197E1ADB00039F90 /* SystemConfiguration.framework */,
+				B2C39DB3197E1AD300039F90 /* Security.framework */,
+				B2C39DB1197E1AC900039F90 /* MobileCoreServices.framework */,
+				B2C39DAF197E1ABE00039F90 /* Foundation.framework */,
+				B2C39DAD197E1AB500039F90 /* CFNetwork.framework */,
+				B2C39DAB197E1AAE00039F90 /* AudioToolbox.framework */,
+				B2C39DA9197E1AA500039F90 /* libz.dylib */,
+				B2C39DA7197E1A9B00039F90 /* CoreLocation.framework */,
+				B2C39DA5197E1A9000039F90 /* StoreKit.framework */,
+				B2C39DA3197E1A7C00039F90 /* QuartzCore.framework */,
+				B2C39DA1197E1A7100039F90 /* UIKit.framework */,
+				B2C39D9C197E19A900039F90 /* FacebookSDK.framework */,
+				B2C39D9D197E19A900039F90 /* Parse.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		B2C39D31197E172600039F90 /* GymBud */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = B2C39D52197E172600039F90 /* Build configuration list for PBXNativeTarget "GymBud" */;
+			buildPhases = (
+				B2C39D2E197E172600039F90 /* Sources */,
+				B2C39D2F197E172600039F90 /* Frameworks */,
+				B2C39D30197E172600039F90 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = GymBud;
+			productName = GymBud;
+			productReference = B2C39D32197E172600039F90 /* GymBud.app */;
+			productType = "com.apple.product-type.application";
+		};
+		B2C39D47197E172600039F90 /* GymBudTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = B2C39D55197E172600039F90 /* Build configuration list for PBXNativeTarget "GymBudTests" */;
+			buildPhases = (
+				B2C39D44197E172600039F90 /* Sources */,
+				B2C39D45197E172600039F90 /* Frameworks */,
+				B2C39D46197E172600039F90 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				B2C39D4A197E172600039F90 /* PBXTargetDependency */,
+			);
+			name = GymBudTests;
+			productName = GymBudTests;
+			productReference = B2C39D48197E172600039F90 /* GymBudTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		B2C39D2A197E172600039F90 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0600;
+				ORGANIZATIONNAME = GymBud;
+				TargetAttributes = {
+					B2C39D31197E172600039F90 = {
+						CreatedOnToolsVersion = 6.0;
+					};
+					B2C39D47197E172600039F90 = {
+						CreatedOnToolsVersion = 6.0;
+						TestTargetID = B2C39D31197E172600039F90;
+					};
+				};
+			};
+			buildConfigurationList = B2C39D2D197E172600039F90 /* Build configuration list for PBXProject "GymBud" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = B2C39D29197E172600039F90;
+			productRefGroup = B2C39D33197E172600039F90 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				B2C39D31197E172600039F90 /* GymBud */,
+				B2C39D47197E172600039F90 /* GymBudTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		B2C39D30197E172600039F90 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B2C39D6B197E191C00039F90 /* Map.png in Resources */,
+				B2C39D67197E191C00039F90 /* grayBubble.png in Resources */,
+				B2C39D43197E172600039F90 /* Images.xcassets in Resources */,
+				B2C39D92197E194F00039F90 /* PAWWallViewController.xib in Resources */,
+				B2C39D65197E191C00039F90 /* blueBubble.png in Resources */,
+				B2C39D95197E194F00039F90 /* ViewMessageVC.xib in Resources */,
+				B2C39DBB197E1B5D00039F90 /* Main.storyboard in Resources */,
+				B2C39D6A197E191C00039F90 /* just_background@2x.png in Resources */,
+				B2C39D6C197E191C00039F90 /* Map@2x.png in Resources */,
+				B2C39D87197E194F00039F90 /* EditProfile.storyboard in Resources */,
+				B2C39D8D197E194F00039F90 /* MessageUserVC.xib in Resources */,
+				B2C39D69197E191C00039F90 /* just_background.png in Resources */,
+				B2C39D8F197E194F00039F90 /* PAWWallPostCreateViewController.xib in Resources */,
+				B2C39D66197E191C00039F90 /* blueBubble@2x.png in Resources */,
+				B2C39D68197E191C00039F90 /* grayBubble@2x.png in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B2C39D46197E172600039F90 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		B2C39D2E197E172600039F90 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B2C39D8C197E194F00039F90 /* MessageUserVC.m in Sources */,
+				B2C39D88197E194F00039F90 /* EditProfileTVC.m in Sources */,
+				B2C39D89197E194F00039F90 /* EPInterestVC.m in Sources */,
+				B2C39D8B197E194F00039F90 /* MessageInboxTVC.m in Sources */,
+				B2C39D3B197E172600039F90 /* AppDelegate.m in Sources */,
+				B2C39D38197E172600039F90 /* main.m in Sources */,
+				B2C39D8A197E194F00039F90 /* LoginViewController.m in Sources */,
+				B2C39D8E197E194F00039F90 /* PAWWallPostCreateViewController.m in Sources */,
+				B2C39D93197E194F00039F90 /* UserDetailsViewController.m in Sources */,
+				B2C39D90197E194F00039F90 /* PAWWallPostsTableViewController.m in Sources */,
+				B2C39D91197E194F00039F90 /* PAWWallViewController.m in Sources */,
+				B2C39D94197E194F00039F90 /* ViewMessageVC.m in Sources */,
+				B2C39D9A197E197E00039F90 /* PAWPost.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B2C39D44197E172600039F90 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B2C39D4F197E172600039F90 /* GymBudTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		B2C39D4A197E172600039F90 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = B2C39D31197E172600039F90 /* GymBud */;
+			targetProxy = B2C39D49197E172600039F90 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		B2C39DB9197E1B5D00039F90 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				B2C39DBA197E1B5D00039F90 /* Base */,
+			);
+			name = Main.storyboard;
+			path = ..;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		B2C39D50197E172600039F90 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		B2C39D51197E172600039F90 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		B2C39D53197E172600039F90 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					/Users/benjaminhendricks/Developer/GymBud/ios_gymbud_trunk,
+					"$(PROJECT_DIR)/GymBud/Frameworks",
+				);
+				INFOPLIST_FILE = GymBud/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		B2C39D54197E172600039F90 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					/Users/benjaminhendricks/Developer/GymBud/ios_gymbud_trunk,
+					"$(PROJECT_DIR)/GymBud/Frameworks",
+				);
+				INFOPLIST_FILE = GymBud/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		B2C39D56197E172600039F90 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/GymBud.app/GymBud";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = GymBudTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+			};
+			name = Debug;
+		};
+		B2C39D57197E172600039F90 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/GymBud.app/GymBud";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = GymBudTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		B2C39D2D197E172600039F90 /* Build configuration list for PBXProject "GymBud" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B2C39D50197E172600039F90 /* Debug */,
+				B2C39D51197E172600039F90 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		B2C39D52197E172600039F90 /* Build configuration list for PBXNativeTarget "GymBud" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B2C39D53197E172600039F90 /* Debug */,
+				B2C39D54197E172600039F90 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		B2C39D55197E172600039F90 /* Build configuration list for PBXNativeTarget "GymBudTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B2C39D56197E172600039F90 /* Debug */,
+				B2C39D57197E172600039F90 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = B2C39D2A197E172600039F90 /* Project object */;
+}
