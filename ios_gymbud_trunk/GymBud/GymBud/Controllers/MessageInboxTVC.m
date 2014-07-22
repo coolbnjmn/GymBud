@@ -8,6 +8,7 @@
 
 #import "MessageInboxTVC.h"
 #import "ViewMessageVC.h"
+#import "FindUserTVC.h"
 
 @interface MessageInboxTVC ()
 
@@ -25,8 +26,20 @@
     // self.clearsSelectionOnViewWillAppear = NO;
     
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    UIBarButtonItem *messageButton = [[UIBarButtonItem alloc] initWithTitle:@"Send Message" style:UIBarButtonItemStyleBordered target:self action:@selector(sendMessage:)];
+    
+    
+    self.navigationItem.rightBarButtonItem = messageButton;
 }
+
+-(void)sendMessage:(id) sender {
+    // about to message user
+    
+    NSLog(@"gonna go find a user to message");
+    FindUserTVC *controller = [[FindUserTVC alloc] initWithNibName:nil bundle:nil];
+    [self.navigationController pushViewController:controller animated:YES]; // or use presentViewController if you're using modals
+}
+
 
 - (void)didReceiveMemoryWarning
 {

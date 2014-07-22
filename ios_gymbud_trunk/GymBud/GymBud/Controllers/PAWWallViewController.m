@@ -186,6 +186,7 @@
     [self.mapView setCenterCoordinate:appDelegate.currentLocation.coordinate animated:YES];
 }
 
+
 - (void)locationManager:(CLLocationManager *)manager didChangeAuthorizationStatus:(CLAuthorizationStatus)status {
 	NSLog(@"%s", __PRETTY_FUNCTION__);
 	switch (status) {
@@ -194,11 +195,12 @@
 			// Re-enable the post button if it was disabled before.
 			self.navigationItem.rightBarButtonItem.enabled = YES;
 			[locationManager startUpdatingLocation];
+            [self startStandardUpdates];
 			break;
 		case kCLAuthorizationStatusDenied:
 			NSLog(@"kCLAuthorizationStatusDenied");
 			{{
-				UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Anywall can’t access your current location.\n\nTo view nearby posts or create a post at your current location, turn on access for Anywall to your location in the Settings app under Location Services." message:nil delegate:self cancelButtonTitle:nil otherButtonTitles:@"Ok", nil];
+				UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"GymBud can’t access your current location.\n\nTo view nearby posts or create a post at your current location, turn on access for GymBud to your location in the Settings app under Location Services." message:nil delegate:self cancelButtonTitle:nil otherButtonTitles:@"Ok", nil];
 				[alertView show];
 				// Disable the post button.
 				self.navigationItem.rightBarButtonItem.enabled = NO;
