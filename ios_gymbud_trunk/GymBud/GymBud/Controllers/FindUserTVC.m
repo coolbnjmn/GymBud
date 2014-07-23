@@ -20,9 +20,11 @@
 @implementation FindUserTVC
 
 - (void)viewDidLoad {
-    [super viewDidLoad];
     
-    self.searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 44)];
+    self.tableView.tableHeaderView = nil;
+    self.tableView.scrollEnabled = YES;
+    
+    self.searchBar = [[UISearchBar alloc] init];
     
     self.tableView.tableHeaderView = self.searchBar;
     
@@ -31,27 +33,36 @@
     self.searchController.searchResultsDataSource = self;
     self.searchController.searchResultsDelegate = self;
     self.searchController.delegate = self;
-        
+    
     CGPoint offset = CGPointMake(0, self.searchBar.frame.size.height);
     
     self.tableView.contentOffset = offset;
-
+    
     self.searchResults = [NSMutableArray array];
+    [super viewDidLoad];
 }
 
 - (void)filterResults:(NSString *)searchTerm {
-    
+    NSLog(@"filterResults being called");
     [self.searchResults removeAllObjects];
     
     PFQuery *query = [PFUser query];
-    [query whereKey:@"profile" containsString:searchTerm];
     
     NSArray *results  = [query findObjects];
+    NSMutableArray *actualResults = [[NSMutableArray alloc] initWithCapacity:10];
     
-    NSLog(@"%@", results);
-    NSLog(@"%u", results.count);
+    for (PFUser *user in results) {
+        NSString *name = [[user objectForKey:@"profile"] objectForKey:@"name"];
+        if ([name rangeOfString:searchTerm].location == NSNotFound) {
+        } else {
+            [actualResults addObject:user];
+        }
+    }
     
-    [self.searchResults addObjectsFromArray:results];
+    NSLog(@"%@", actualResults);
+    NSLog(@"%u", actualResults.count);
+    
+    [self.searchResults addObjectsFromArray:actualResults];
 }
 
 
@@ -69,8 +80,10 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
     if (tableView == self.tableView) {
+        NSLog(@"self.objects.count = %d", self.objects.count);
         return self.objects.count;
     } else {
+        NSLog(@"self.searchResults.count = %d", self.searchResults.count);
         return self.searchResults.count;
     }
     
@@ -91,24 +104,11 @@
 }
 
 - (void)objectsDidLoad:(NSError *)error {
-    [super objectsDidLoad:error];
     
     NSLog(@"objectsDidLoad Find User TVC");
-    self.tableView.tableHeaderView = nil;
-    self.tableView.scrollEnabled = YES;
-    
-    //    NSUInteger unreadCount = 0;
-    //    for (PFObject *activity in self.objects) {
-    //        if ([lastRefresh compare:[activity createdAt]] == NSOrderedAscending && ![[activity objectForKey:kPAPActivityTypeKey] isEqualToString:kPAPActivityTypeJoined]) {
-    //            unreadCount++;
-    //        }
-    //    }
-    //
-    //    if (unreadCount > 0) {
-    //        self.navigationController.tabBarItem.badgeValue = [NSString stringWithFormat:@"%d",unreadCount];
-    //    } else {
-    //        self.navigationController.tabBarItem.badgeValue = nil;
-    //    }
+   
+    [super objectsDidLoad:error];
+
 }
 
 
@@ -128,15 +128,13 @@
     
     PFTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:uniqueIdentifier];
     
-    if (!cell) {
+    if (cell == nil) {
         cell = [[PFTableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:uniqueIdentifier];
 
     }
-    
-    
+
     if (tableView != self.searchDisplayController.searchResultsTableView) {
         cell.textLabel.text = [[object objectForKey:@"profile"] objectForKey:@"name"];
-
     }
     if ([tableView isEqual:self.searchDisplayController.searchResultsTableView]) {
         PFUser *obj2 = [self.searchResults objectAtIndex:indexPath.row];
@@ -156,7 +154,14 @@
     MessageUserVC *detailViewController = [[MessageUserVC alloc] init];
     
     // Pass the selected object to the new view controller.
-    detailViewController.user = [[super objects] objectAtIndex:indexPath.row];
+//    detailViewController.user = [[super objects] objectAtIndex:indexPath.row];
+    if (tableView != self.searchDisplayController.searchResultsTableView) {
+        detailViewController.user = [[super objects] objectAtIndex:indexPath.row];
+        
+    }
+    if ([tableView isEqual:self.searchDisplayController.searchResultsTableView]) {
+        detailViewController.user = [self.searchResults objectAtIndex:indexPath.row];
+    }
     // Push the view controller.
     [self.navigationController pushViewController:detailViewController animated:YES];
 }
