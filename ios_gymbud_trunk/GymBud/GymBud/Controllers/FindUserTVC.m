@@ -26,17 +26,13 @@
     
     self.searchBar = [[UISearchBar alloc] init];
     
-    self.tableView.tableHeaderView = self.searchBar;
     
     self.searchController = [[UISearchDisplayController alloc] initWithSearchBar:self.searchBar contentsController:self];
     
     self.searchController.searchResultsDataSource = self;
     self.searchController.searchResultsDelegate = self;
     self.searchController.delegate = self;
-    
-    CGPoint offset = CGPointMake(0, self.searchBar.frame.size.height);
-    
-    self.tableView.contentOffset = offset;
+    self.tableView.tableHeaderView = self.searchBar;
     
     self.searchResults = [NSMutableArray array];
     [super viewDidLoad];
