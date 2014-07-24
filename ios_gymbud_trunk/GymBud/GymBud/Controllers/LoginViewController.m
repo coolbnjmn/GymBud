@@ -1,6 +1,8 @@
 
 #import "LoginViewController.h"
 #import "UserDetailsViewController.h"
+#import "MessageInboxTVC.h"
+
 #import <Parse/Parse.h>
 
 @implementation LoginViewController
@@ -14,12 +16,30 @@
     
     // Check if user is cached and linked to Facebook, if so, bypass login
     if ([PFUser currentUser] && [PFFacebookUtils isLinkedWithUser:[PFUser currentUser]]) {
-        [self.navigationController pushViewController:[[PAWWallViewController alloc] init] animated:NO];
+//        [self.navigationController pushViewController:[[PAWWallViewController alloc] init] animated:NO];
+//        [self performSegueWithIdentifier:@"LoginToMain" sender:self];
+        [self setUpTabBar];
     }
 }
 
 
 #pragma mark - Login mehtods
+- (void)setUpTabBar {
+    UITabBarController *tbc = [[UITabBarController alloc] init];
+    
+    PAWWallViewController *mapVC = [[PAWWallViewController alloc] init];
+    MessageInboxTVC *inboxVC = [[MessageInboxTVC alloc] init];
+    UINavigationController *nvc1 = [[UINavigationController alloc] initWithRootViewController:mapVC];
+    UINavigationController *nvc2 = [[UINavigationController alloc] initWithRootViewController:inboxVC];
+    
+    nvc1.tabBarItem.title = @"Map";
+    nvc2.tabBarItem.title = @"Inbox";
+
+    NSMutableArray *tbcArray = [[NSMutableArray alloc] initWithObjects:nvc1, nvc2, nil];
+    
+    tbc.viewControllers = tbcArray;
+    [self presentViewController:tbc animated:YES completion:nil];
+}
 
 /* Login to facebook method */
 - (IBAction)loginButtonTouchHandler:(id)sender  {
@@ -42,14 +62,22 @@
             }
         } else if (user.isNew) {
             NSLog(@"User with facebook signed up and logged in!");
-            [self.navigationController pushViewController:[[PAWWallViewController alloc] init] animated:YES];
+            [self setUpTabBar];
+//            [self.navigationController pushViewController:[[PAWWallViewController alloc] init] animated:YES];
         } else {
             NSLog(@"User with facebook logged in!");
-            [self.navigationController pushViewController:[[PAWWallViewController alloc] init] animated:YES];
+            [self setUpTabBar];
+//            [self.navigationController pushViewController:[[PAWWallViewController alloc] init] animated:YES];
         }
     }];
     
     [_activityIndicator startAnimating]; // Show loading indicator until login is finished
+}
+
+- (void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    if([segue.identifier isEqualToString:@"LoginToMain"]) {
+        [self setUpTabBar];
+    }
 }
 
 @end

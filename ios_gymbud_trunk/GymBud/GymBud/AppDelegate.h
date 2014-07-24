@@ -11,6 +11,7 @@
 #import <FacebookSDK/FacebookSDK.h>
 #import "LoginViewController.h"
 #import "PAWWallViewController.h"
+#import "MessageInboxTVC.h"
 
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
@@ -18,7 +19,6 @@
 @property (strong, nonatomic) UIWindow *window;
 @property (nonatomic, strong) CLLocation *currentLocation;
 @property (nonatomic, assign) CLLocationAccuracy filterDistance;
-
 
 @end
 

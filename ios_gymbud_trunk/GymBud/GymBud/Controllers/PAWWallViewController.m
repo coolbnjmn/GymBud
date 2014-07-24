@@ -446,7 +446,8 @@
     [PFUser logOut];
     
     // Return to login view controller
-    [self.navigationController popToRootViewControllerAnimated:YES];
+    LoginViewController *lvc = [[LoginViewController alloc] init];
+    [self presentViewController:lvc animated:YES completion:nil];
 }
 
 - (void)checkInButtonTouchHandler:(id)sender {
