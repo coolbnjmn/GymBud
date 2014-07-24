@@ -2,6 +2,8 @@
 #import "LoginViewController.h"
 #import "UserDetailsViewController.h"
 #import "MessageInboxTVC.h"
+#import "SettingsVC.h"
+
 
 #import <Parse/Parse.h>
 
@@ -14,14 +16,24 @@
     [super viewDidLoad];
     self.title = @"Facebook Profile";
     
+    NSLog(@"current user is: %@", [PFUser currentUser]);
     // Check if user is cached and linked to Facebook, if so, bypass login
     if ([PFUser currentUser] && [PFFacebookUtils isLinkedWithUser:[PFUser currentUser]]) {
 //        [self.navigationController pushViewController:[[PAWWallViewController alloc] init] animated:NO];
 //        [self performSegueWithIdentifier:@"LoginToMain" sender:self];
+        NSLog(@"setting up tab bar");
         [self setUpTabBar];
     }
 }
 
+- (void)viewDidAppear:(BOOL)animated {
+    if ([PFUser currentUser] && [PFFacebookUtils isLinkedWithUser:[PFUser currentUser]]) {
+        //        [self.navigationController pushViewController:[[PAWWallViewController alloc] init] animated:NO];
+        //        [self performSegueWithIdentifier:@"LoginToMain" sender:self];
+        NSLog(@"setting up tab bar");
+        [self setUpTabBar];
+    }
+}
 
 #pragma mark - Login mehtods
 - (void)setUpTabBar {
@@ -29,13 +41,16 @@
     
     PAWWallViewController *mapVC = [[PAWWallViewController alloc] init];
     MessageInboxTVC *inboxVC = [[MessageInboxTVC alloc] init];
+    SettingsVC *settingsVC = [[SettingsVC alloc] init];
     UINavigationController *nvc1 = [[UINavigationController alloc] initWithRootViewController:mapVC];
     UINavigationController *nvc2 = [[UINavigationController alloc] initWithRootViewController:inboxVC];
+    UINavigationController *nvc3 = [[UINavigationController alloc] initWithRootViewController:settingsVC];
     
     nvc1.tabBarItem.title = @"Map";
     nvc2.tabBarItem.title = @"Inbox";
+    nvc3.tabBarItem.title = @"Settings";
 
-    NSMutableArray *tbcArray = [[NSMutableArray alloc] initWithObjects:nvc1, nvc2, nil];
+    NSMutableArray *tbcArray = [[NSMutableArray alloc] initWithObjects:nvc1, nvc2, nvc3, nil];
     
     tbc.viewControllers = tbcArray;
     [self presentViewController:tbc animated:YES completion:nil];

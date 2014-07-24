@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B29774111980D5EF000AD7B6 /* SettingsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = B297740F1980D5EF000AD7B6 /* SettingsVC.m */; };
+		B29774121980D5EF000AD7B6 /* SettingsVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = B29774101980D5EF000AD7B6 /* SettingsVC.xib */; };
 		B2C39D38197E172600039F90 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = B2C39D37197E172600039F90 /* main.m */; };
 		B2C39D3B197E172600039F90 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = B2C39D3A197E172600039F90 /* AppDelegate.m */; };
 		B2C39D43197E172600039F90 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B2C39D42197E172600039F90 /* Images.xcassets */; };
@@ -69,6 +71,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		B297740E1980D5EF000AD7B6 /* SettingsVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SettingsVC.h; path = GymBud/Controllers/SettingsVC.h; sourceTree = "<group>"; };
+		B297740F1980D5EF000AD7B6 /* SettingsVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SettingsVC.m; path = GymBud/Controllers/SettingsVC.m; sourceTree = "<group>"; };
+		B29774101980D5EF000AD7B6 /* SettingsVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = SettingsVC.xib; path = GymBud/Controllers/SettingsVC.xib; sourceTree = "<group>"; };
 		B2C39D32197E172600039F90 /* GymBud.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GymBud.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B2C39D36197E172600039F90 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B2C39D37197E172600039F90 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -279,6 +284,9 @@
 				B2C39D86197E194F00039F90 /* ViewMessageVC.xib */,
 				B2D0CACE197E2BB700B17D32 /* FindUserTVC.h */,
 				B2D0CACF197E2BB700B17D32 /* FindUserTVC.m */,
+				B297740E1980D5EF000AD7B6 /* SettingsVC.h */,
+				B297740F1980D5EF000AD7B6 /* SettingsVC.m */,
+				B29774101980D5EF000AD7B6 /* SettingsVC.xib */,
 			);
 			name = Controllers;
 			path = ..;
@@ -418,6 +426,7 @@
 				B2C39DBB197E1B5D00039F90 /* Main.storyboard in Resources */,
 				B2C39D6A197E191C00039F90 /* just_background@2x.png in Resources */,
 				B2C39D6C197E191C00039F90 /* Map@2x.png in Resources */,
+				B29774121980D5EF000AD7B6 /* SettingsVC.xib in Resources */,
 				B2C39D87197E194F00039F90 /* EditProfile.storyboard in Resources */,
 				B2C39D8D197E194F00039F90 /* MessageUserVC.xib in Resources */,
 				B2C39D69197E191C00039F90 /* just_background.png in Resources */,
@@ -452,6 +461,7 @@
 				B2C39D93197E194F00039F90 /* UserDetailsViewController.m in Sources */,
 				B2C39D90197E194F00039F90 /* PAWWallPostsTableViewController.m in Sources */,
 				B2C39D91197E194F00039F90 /* PAWWallViewController.m in Sources */,
+				B29774111980D5EF000AD7B6 /* SettingsVC.m in Sources */,
 				B2C39D94197E194F00039F90 /* ViewMessageVC.m in Sources */,
 				B2C39D9A197E197E00039F90 /* PAWPost.m in Sources */,
 				B2D0CAD1197E2BB700B17D32 /* FindUserTVC.m in Sources */,
