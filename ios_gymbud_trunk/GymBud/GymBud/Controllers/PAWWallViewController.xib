@@ -7,7 +7,6 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="PAWWallViewController">
             <connections>
-                <outlet property="editProfileButton" destination="Ep8-Cz-n6C" id="Isn-vO-2pr"/>
                 <outlet property="mapView" destination="5" id="8"/>
                 <outlet property="view" destination="1" id="3"/>
             </connections>
@@ -18,32 +17,12 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" showsUserLocation="YES" id="5">
-                    <rect key="frame" x="8" y="46" width="304" height="255"/>
+                    <rect key="frame" x="8" y="46" width="304" height="522"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
                     <connections>
                         <outlet property="delegate" destination="-1" id="7"/>
                     </connections>
                 </mapView>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="Ep8-Cz-n6C">
-                    <rect key="frame" x="20" y="309" width="75" height="30"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <state key="normal" title="Edit Profile">
-                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                    </state>
-                    <connections>
-                        <action selector="editProfile:" destination="-1" eventType="touchUpInside" id="5uz-yr-jxs"/>
-                    </connections>
-                </button>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="ayl-C2-q4f">
-                    <rect key="frame" x="261" y="309" width="39" height="30"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <state key="normal" title="Inbox">
-                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                    </state>
-                    <connections>
-                        <action selector="showInbox:" destination="-1" eventType="touchUpInside" id="eQU-Ze-uDp"/>
-                    </connections>
-                </button>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
             <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>

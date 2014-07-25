@@ -27,6 +27,7 @@
 @property (nonatomic, strong) PAWWallPostsTableViewController *wallPostsTableViewController;
 @property (nonatomic, assign) BOOL mapPinsPlaced;
 @property (nonatomic, assign) BOOL mapPannedSinceLocationUpdate;
+@property (nonatomic, assign) BOOL isShowingTable;
 
 // posts:
 @property (nonatomic, strong) NSMutableArray *allPosts;
@@ -41,15 +42,12 @@
 - (void)locationManager:(CLLocationManager *)manager
        didFailWithError:(NSError *)error;
 
-- (IBAction)settingsButtonSelected:(id)sender;
-- (IBAction)postButtonSelected:(id)sender;
 - (void)queryForAllPostsNearLocation:(CLLocation *)currentLocation withNearbyDistance:(CLLocationAccuracy)nearbyDistance;
 - (void)updatePostsForLocation:(CLLocation *)location withNearbyDistance:(CLLocationAccuracy) filterDistance;
 
 // NSNotification callbacks
 - (void)distanceFilterDidChange:(NSNotification *)note;
 - (void)locationDidChange:(NSNotification *)note;
-- (void)postWasCreated:(NSNotification *)note;
 
 @end
 
@@ -91,22 +89,14 @@
 	self.mapPannedSinceLocationUpdate = NO;
 	[self startStandardUpdates];
     
-    UIBarButtonItem *logoutButton = [[UIBarButtonItem alloc] initWithTitle:@"Log Out" style:UIBarButtonItemStyleBordered target:self action:@selector(logoutButtonTouchHandler:)];
-    self.navigationItem.leftBarButtonItem = logoutButton;
-    
     UIBarButtonItem *checkInButton = [[UIBarButtonItem alloc] initWithTitle:@"Check In" style:UIBarButtonItemStyleBordered target:self action:@selector(checkInButtonTouchHandler:)];
-    self.navigationItem.rightBarButtonItem = checkInButton;
+    self.navigationItem.leftBarButtonItem = checkInButton;
     
-    // Create the table view controller
-    self.wallPostsTableViewController =
-    [[PAWWallPostsTableViewController alloc] initWithStyle:UITableViewStylePlain];
-    self.wallPostsTableViewController.view.frame = CGRectMake(0.f, self.view.frame.size.height-208.f, 320.f, 208.f);
+    UIImage *buttonImage = [UIImage imageNamed:@"tableView.png"];
+    UIBarButtonItem *mapToTableViewButton = [[UIBarButtonItem alloc] initWithImage:[buttonImage imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal] style:UIBarButtonItemStyleBordered target:self action:@selector(toggleMapTable:)];
+    self.navigationItem.rightBarButtonItem = mapToTableViewButton;
+    self.isShowingTable = NO;
     
-    // Add the PAWWallPostsTableViewController as a child of PAWWallViewController
-    [self addChildViewController:self.wallPostsTableViewController];
-    // Add the view of PAWWallPostsTableViewController as a
-    // subview of PAWWallViewController's view
-    [self.view addSubview:self.wallPostsTableViewController.view];
     
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(locationDidChange:) name:@"LocationChangeNotification" object:nil];
@@ -439,16 +429,6 @@
     }
 }
 
-- (void)logoutButtonTouchHandler:(id)sender {
-    
-    NSLog(@"logoutbutton being pressed");
-    // Logout user, this automatically clears the cache
-    [PFUser logOut];
-    
-    // Return to login view controller
-    LoginViewController *lvc = [[LoginViewController alloc] init];
-    [self presentViewController:lvc animated:YES completion:nil];
-}
 
 - (void)checkInButtonTouchHandler:(id)sender {
     NSLog(@"check in button being pressed");
@@ -456,6 +436,22 @@
     [self.navigationController pushViewController:[[PAWWallPostCreateViewController alloc] init] animated:YES];
 }
 
+- (void)toggleMapTable:(id)sender {
+    
+    if(self.isShowingTable) {
+        // show map
+        [self.navigationController popViewControllerAnimated:YES];
+        self.isShowingTable = NO;
+    } else {
+        // Create the table view controller
+        self.wallPostsTableViewController =
+        [[PAWWallPostsTableViewController alloc] init];
+
+        [self.navigationController pushViewController:self.wallPostsTableViewController animated:YES];
+        self.isShowingTable = YES;
+    }
+    
+}
 - (void)locationDidChange:(NSNotification *)note {
     NSLog(@"location Did change in view controller");
     AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
@@ -467,21 +463,5 @@
     [self updatePostsForLocation:appDelegate.currentLocation
               withNearbyDistance:appDelegate.filterDistance];
 }
-
-- (IBAction)editProfile:(id)sender {
-        // show edit profile page here...
-    UIStoryboard *sb = [UIStoryboard storyboardWithName:@"EditProfile" bundle:nil];
-    EditProfileTVC *vc = [sb instantiateViewControllerWithIdentifier:@"EditProfile"];
-    vc.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
-    [self.navigationController pushViewController:vc animated:YES];
-    
-}
-
-- (IBAction)showInbox:(id)sender {
-    NSLog(@"show inbox being pressed");
-    MessageInboxTVC *vc = [[MessageInboxTVC alloc] init];
-    [self.navigationController pushViewController:vc animated:YES];
-}
-
 
 @end

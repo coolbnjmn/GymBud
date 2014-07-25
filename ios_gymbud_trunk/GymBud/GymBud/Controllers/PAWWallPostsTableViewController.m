@@ -63,6 +63,7 @@ static NSUInteger const kPAWTableViewMainSection = 0;
 
 		// The key of the PFObject to display in the label of the default cell style
 		self.textKey = @"text";
+        self.title = @"GymBud";
 
         // Whether the built-in pull-to-refresh is enabled
         if (NSClassFromString(@"UIRefreshControl")) {
@@ -98,8 +99,16 @@ static NSUInteger const kPAWTableViewMainSection = 0;
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(postWasCreated:) name:@"CreatePostNotification" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(locationDidChange:) name:@"LocationChangeNotification" object:nil];
 	
-	self.tableView.backgroundColor = [UIColor clearColor];
+	self.tableView.backgroundColor = [UIColor whiteColor];
 	self.tableView.separatorColor = [UIColor clearColor];
+    
+#pragma GCC diagnostic ignored "-Wundeclared-selector"
+    UIBarButtonItem *checkInButton = [[UIBarButtonItem alloc] initWithTitle:@"Check In" style:UIBarButtonItemStyleBordered target:self.navigationController.viewControllers[self.navigationController.viewControllers.count - 2] action:@selector(checkInButtonTouchHandler:)];
+    self.navigationItem.leftBarButtonItem = checkInButton;
+    
+    UIImage *buttonImage = [UIImage imageNamed:@"mapView.png"];
+    UIBarButtonItem *mapToTableViewButton = [[UIBarButtonItem alloc] initWithImage:[buttonImage imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal] style:UIBarButtonItemStyleBordered target:self.navigationController.viewControllers[self.navigationController.viewControllers.count - 2] action:@selector(toggleMapTable:)];
+    self.navigationItem.rightBarButtonItem = mapToTableViewButton;
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
