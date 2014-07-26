@@ -16,27 +16,17 @@
     [super viewDidLoad];
     self.title = @"Facebook Profile";
     
-//    NSLog(@"current user is: %@", [PFUser currentUser]);
-//    // Check if user is cached and linked to Facebook, if so, bypass login
-//    if ([PFUser currentUser] && [PFFacebookUtils isLinkedWithUser:[PFUser currentUser]]) {
-////        [self.navigationController pushViewController:[[PAWWallViewController alloc] init] animated:NO];
-////        [self performSegueWithIdentifier:@"LoginToMain" sender:self];
-//        NSLog(@"setting up tab bar");
-//        [self setUpTabBar];
-//    }
-}
-
-- (void)viewDidAppear:(BOOL)animated {
-    if ([PFUser currentUser] && [PFFacebookUtils isLinkedWithUser:[PFUser currentUser]]) {
-        //        [self.navigationController pushViewController:[[PAWWallViewController alloc] init] animated:NO];
-        //        [self performSegueWithIdentifier:@"LoginToMain" sender:self];
-        NSLog(@"setting up tab bar");
-        [self setUpTabBar];
-    }
 }
 
 #pragma mark - Login mehtods
 - (void)setUpTabBar {
+    // Notifications stuff first:
+    PFInstallation *currentInstallation = [PFInstallation currentInstallation];
+    if([PFUser currentUser]) {
+        [currentInstallation setObject:[PFUser currentUser] forKey:@"user"];
+    }
+    [currentInstallation saveInBackground];
+    
     UITabBarController *tbc = [[UITabBarController alloc] init];
     
     PAWWallViewController *mapVC = [[PAWWallViewController alloc] init];

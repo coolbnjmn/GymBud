@@ -16,4 +16,6 @@
 
 - (IBAction)loginButtonTouchHandler:(id)sender;
 
+- (void)setUpTabBar;
+
 @end

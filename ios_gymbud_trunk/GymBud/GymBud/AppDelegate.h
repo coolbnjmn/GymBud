@@ -12,6 +12,7 @@
 #import "LoginViewController.h"
 #import "PAWWallViewController.h"
 #import "MessageInboxTVC.h"
+#import "SettingsVC.h"
 
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate>

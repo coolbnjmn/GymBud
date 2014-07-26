@@ -27,13 +27,35 @@
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     
     // Register for push notifications
-    [application registerForRemoteNotificationTypes:
-     UIRemoteNotificationTypeBadge |
-     UIRemoteNotificationTypeAlert |
-     UIRemoteNotificationTypeSound];
+//    [application registerForRemoteNotificationTypes:
+//     UIRemoteNotificationTypeBadge |
+//     UIRemoteNotificationTypeAlert |
+//     UIRemoteNotificationTypeSound];
+    [[UIApplication sharedApplication] registerForRemoteNotificationTypes:UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeAlert | UIRemoteNotificationTypeSound];
     
-    LoginViewController *loginViewController = [[LoginViewController alloc] init];
-    self.window.rootViewController = loginViewController;
+    PFUser *currentUser = [PFUser currentUser];
+    if (currentUser) {
+        UITabBarController *tbc = [[UITabBarController alloc] init];
+        
+        PAWWallViewController *mapVC = [[PAWWallViewController alloc] init];
+        MessageInboxTVC *inboxVC = [[MessageInboxTVC alloc] init];
+        SettingsVC *settingsVC = [[SettingsVC alloc] init];
+        UINavigationController *nvc1 = [[UINavigationController alloc] initWithRootViewController:mapVC];
+        UINavigationController *nvc2 = [[UINavigationController alloc] initWithRootViewController:inboxVC];
+        UINavigationController *nvc3 = [[UINavigationController alloc] initWithRootViewController:settingsVC];
+        
+        nvc1.tabBarItem.title = @"Map";
+        nvc2.tabBarItem.title = @"Inbox";
+        nvc3.tabBarItem.title = @"Settings";
+        
+        NSMutableArray *tbcArray = [[NSMutableArray alloc] initWithObjects:nvc1, nvc2, nvc3, nil];
+        
+        tbc.viewControllers = tbcArray;
+        self.window.rootViewController = tbc;
+    } else {
+        LoginViewController *loginViewController = [[LoginViewController alloc] init];
+        self.window.rootViewController = loginViewController;
+    }
     
     
     self.filterDistance = 1000;
@@ -50,6 +72,9 @@ didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)newDeviceToken {
     // Store the deviceToken in the current installation and save it to Parse.
     PFInstallation *currentInstallation = [PFInstallation currentInstallation];
     [currentInstallation setDeviceTokenFromData:newDeviceToken];
+    if([PFUser currentUser]) {
+        [currentInstallation setObject:[PFUser currentUser] forKey:@"user"];
+    }
     [currentInstallation saveInBackground];
 }
 

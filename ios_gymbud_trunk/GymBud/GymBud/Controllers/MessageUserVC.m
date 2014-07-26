@@ -94,6 +94,8 @@
     PFQuery *innerQuery = [PFUser query];
     
     [innerQuery whereKey:@"username" equalTo:[user objectForKey:@"username"]];
+    NSLog(@"%@", user);
+    NSLog(@"about to push");
     
     NSLog(@"%@", innerQuery);
     PFQuery *query = [PFInstallation query];
