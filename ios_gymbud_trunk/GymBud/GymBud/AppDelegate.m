@@ -32,36 +32,10 @@
      UIRemoteNotificationTypeAlert |
      UIRemoteNotificationTypeSound];
     
-//    PFUser *currentUser = [PFUser currentUser];
-//    if (currentUser)
-//    {
-//        // A user was cached, so skip straight to the main view
-//        PAWWallViewController *wallViewController =
-//        [[PAWWallViewController alloc] initWithNibName:nil bundle:nil];
-//        
-//        UINavigationController *navigation = [[UINavigationController alloc]initWithRootViewController:[[LoginViewController alloc] init]];
-//        self.window.rootViewController = navigation;
-//        [navigation pushViewController:wallViewController animated:NO];
-//        
-//        
-//        [self.window makeKeyAndVisible];
-//        [[PFInstallation currentInstallation] setObject:currentUser forKey:@"user"];
-//        [[PFInstallation currentInstallation] saveEventually];
-//        
-//        return YES;
-//    }
-//    else
-//    {
-//        NSLog(@"no cached user");
-//        // No cached user so just present the welcome screen
-//        self.window.rootViewController = [[UINavigationController alloc] initWithRootViewController:[[LoginViewController alloc] init]];
-//        
-//        self.window.backgroundColor = [UIColor whiteColor];
-//        [self.window makeKeyAndVisible];
-//    }
-    
     LoginViewController *loginViewController = [[LoginViewController alloc] init];
     self.window.rootViewController = loginViewController;
+    
+    
     self.filterDistance = 1000;
     
     

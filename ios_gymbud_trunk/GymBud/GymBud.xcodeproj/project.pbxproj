@@ -11,6 +11,7 @@
 		B29774121980D5EF000AD7B6 /* SettingsVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = B29774101980D5EF000AD7B6 /* SettingsVC.xib */; };
 		B297741519820C4C000AD7B6 /* mapView.png in Resources */ = {isa = PBXBuildFile; fileRef = B297741319820C4C000AD7B6 /* mapView.png */; };
 		B297741619820C4C000AD7B6 /* tableView.png in Resources */ = {isa = PBXBuildFile; fileRef = B297741419820C4C000AD7B6 /* tableView.png */; };
+		B297741819843EC9000AD7B6 /* sampleMapPin.png in Resources */ = {isa = PBXBuildFile; fileRef = B297741719843EC9000AD7B6 /* sampleMapPin.png */; };
 		B2C39D38197E172600039F90 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = B2C39D37197E172600039F90 /* main.m */; };
 		B2C39D3B197E172600039F90 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = B2C39D3A197E172600039F90 /* AppDelegate.m */; };
 		B2C39D43197E172600039F90 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B2C39D42197E172600039F90 /* Images.xcassets */; };
@@ -78,6 +79,7 @@
 		B29774101980D5EF000AD7B6 /* SettingsVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = SettingsVC.xib; path = GymBud/Controllers/SettingsVC.xib; sourceTree = "<group>"; };
 		B297741319820C4C000AD7B6 /* mapView.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = mapView.png; path = GymBud/Assets/mapView.png; sourceTree = "<group>"; };
 		B297741419820C4C000AD7B6 /* tableView.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = tableView.png; path = GymBud/Assets/tableView.png; sourceTree = "<group>"; };
+		B297741719843EC9000AD7B6 /* sampleMapPin.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = sampleMapPin.png; path = GymBud/Assets/sampleMapPin.png; sourceTree = "<group>"; };
 		B2C39D32197E172600039F90 /* GymBud.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GymBud.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B2C39D36197E172600039F90 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B2C39D37197E172600039F90 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -241,6 +243,7 @@
 		B2C39D6D197E193000039F90 /* Assets */ = {
 			isa = PBXGroup;
 			children = (
+				B297741719843EC9000AD7B6 /* sampleMapPin.png */,
 				B297741319820C4C000AD7B6 /* mapView.png */,
 				B297741419820C4C000AD7B6 /* tableView.png */,
 				B2D0CAC6197E272400B17D32 /* login-button-small-pressed.png */,
@@ -417,6 +420,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B297741819843EC9000AD7B6 /* sampleMapPin.png in Resources */,
 				B2D0CAD8197E2EAE00B17D32 /* TableHeaderView.xib in Resources */,
 				B2D0CAC5197E267D00B17D32 /* LoginViewController.xib in Resources */,
 				B2C39D6B197E191C00039F90 /* Map.png in Resources */,

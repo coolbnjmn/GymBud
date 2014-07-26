@@ -78,9 +78,8 @@
 
 - (void)setTitleAndSubtitleOutsideDistance:(BOOL)outside {
     self.title = [self.object objectForKey:@"text"];
-    NSLog(@"user properties include: %@", [[[self.object objectForKey:@"user"] objectForKey:@"profile"] allKeys]);
     self.subtitle = [[[self.object objectForKey:@"user"] objectForKey:@"profile"] objectForKey:@"name"];
-    self.pinColor = MKPinAnnotationColorGreen;
+    self.pinColor = MKPinAnnotationColorRed;
     self.pictureURL = [NSURL URLWithString:[[[self.object objectForKey:@"user"] objectForKey:@"profile"] objectForKey:@"pictureURL"]];
 }
 

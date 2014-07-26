@@ -268,8 +268,9 @@
         }
         pinView.pinColor = [(PAWPost *)annotation pinColor];
         pinView.animatesDrop = [((PAWPost *)annotation) animatesDrop];
-        UIImage *tmp = [UIImage imageWithData:[NSData dataWithContentsOfURL:[((PAWPost *) annotation) pictureURL]]];
-        CGSize destinationSize = CGSizeMake(32, 32);
+//        UIImage *tmp = [UIImage imageWithData:[NSData dataWithContentsOfURL:[((PAWPost *) annotation) pictureURL]]];
+        UIImage *tmp = [UIImage imageNamed:@"sampleMapPin.png"];
+        CGSize destinationSize = CGSizeMake(32, 55);
         UIGraphicsBeginImageContext(destinationSize);
         [tmp drawInRect:CGRectMake(0,0,destinationSize.width,destinationSize.height)];
         UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
@@ -278,6 +279,7 @@
         pinView.canShowCallout = YES;
         
         UIButton *infoButton = [UIButton buttonWithType:UIButtonTypeDetailDisclosure];
+        pinView.leftCalloutAccessoryView = [[UIImageView alloc] initWithImage:[UIImage imageWithData:[NSData dataWithContentsOfURL:[((PAWPost *) annotation) pictureURL]] scale:6]];
         pinView.rightCalloutAccessoryView = infoButton;
         return pinView;
     }

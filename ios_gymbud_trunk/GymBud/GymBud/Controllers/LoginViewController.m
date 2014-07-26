@@ -16,14 +16,14 @@
     [super viewDidLoad];
     self.title = @"Facebook Profile";
     
-    NSLog(@"current user is: %@", [PFUser currentUser]);
-    // Check if user is cached and linked to Facebook, if so, bypass login
-    if ([PFUser currentUser] && [PFFacebookUtils isLinkedWithUser:[PFUser currentUser]]) {
-//        [self.navigationController pushViewController:[[PAWWallViewController alloc] init] animated:NO];
-//        [self performSegueWithIdentifier:@"LoginToMain" sender:self];
-        NSLog(@"setting up tab bar");
-        [self setUpTabBar];
-    }
+//    NSLog(@"current user is: %@", [PFUser currentUser]);
+//    // Check if user is cached and linked to Facebook, if so, bypass login
+//    if ([PFUser currentUser] && [PFFacebookUtils isLinkedWithUser:[PFUser currentUser]]) {
+////        [self.navigationController pushViewController:[[PAWWallViewController alloc] init] animated:NO];
+////        [self performSegueWithIdentifier:@"LoginToMain" sender:self];
+//        NSLog(@"setting up tab bar");
+//        [self setUpTabBar];
+//    }
 }
 
 - (void)viewDidAppear:(BOOL)animated {
