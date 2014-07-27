@@ -8,7 +8,7 @@
 
 #import "PAWWallPostsTableViewController.h"
 #import "PAWWallPostCreateViewController.h"
-#import "PAWWallPostsTableViewController.h"
+#import "UserDetailsViewController.h"
 #import "AppDelegate.h"
 
 static CGFloat const kPAWWallPostTableViewFontSize = 12.f;
@@ -288,7 +288,19 @@ static NSUInteger const kPAWTableViewMainSection = 0;
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
 	// call super because we're a custom subclass.
 	[super tableView:tableView didSelectRowAtIndexPath:indexPath];
-
+    UserDetailsViewController *controller = [[UserDetailsViewController alloc] initWithNibName:nil
+                                                                                        bundle:nil];
+    UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+    
+    NSLog(@"cell.textlabel.text : %@", ((UILabel *)(cell.contentView.subviews[1])).text);
+    PFQuery *query = [PFQuery queryWithClassName:@"Posts"];
+    [query includeKey:@"user"];
+    [query whereKey:@"text" containsString:((UILabel *)(cell.contentView.subviews[1])).text];
+    
+    NSArray *objects = [query findObjects];
+    PAWPost *post = [[PAWPost alloc] initWithPFObject:[objects objectAtIndex:0]];
+    controller.annotation = post;
+    [self.navigationController pushViewController:controller animated:YES]; // or use presentViewController if you're using modals
 	[tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
