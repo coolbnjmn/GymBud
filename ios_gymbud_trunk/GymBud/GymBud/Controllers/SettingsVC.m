@@ -63,7 +63,12 @@
 - (IBAction)enablePushOrNot:(id)sender {
     NSLog(@"user wants to disable push, will have to let him soon");
     // DO NOTHING FOR NOW
-    // TODO: MUST FIX THIS
+    NSInteger yesOrNo = [sender selectedSegmentIndex];
+    if(yesOrNo == 0) {
+        [[UIApplication sharedApplication] registerForRemoteNotificationTypes:UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeAlert | UIRemoteNotificationTypeSound];
+    } else {
+        [[UIApplication sharedApplication] unregisterForRemoteNotifications];
+    }
 }
 
 @end
