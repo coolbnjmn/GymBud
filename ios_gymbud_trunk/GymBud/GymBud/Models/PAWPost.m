@@ -44,6 +44,7 @@
 	self.geopoint = [anObject objectForKey:@"location"];
 	self.user = [anObject objectForKey:@"user"];
 
+    self.activity = [anObject objectForKey:@"activity"];
     [self.user fetchIfNeeded];
 	[anObject fetchIfNeeded]; 
 	CLLocationCoordinate2D aCoordinate = CLLocationCoordinate2DMake(self.geopoint.latitude, self.geopoint.longitude);

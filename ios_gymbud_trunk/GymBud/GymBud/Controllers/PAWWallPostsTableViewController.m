@@ -292,7 +292,6 @@ static NSUInteger const kPAWTableViewMainSection = 0;
                                                                                         bundle:nil];
     UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
     
-    NSLog(@"cell.textlabel.text : %@", ((UILabel *)(cell.contentView.subviews[1])).text);
     PFQuery *query = [PFQuery queryWithClassName:@"Posts"];
     [query includeKey:@"user"];
     [query whereKey:@"text" containsString:((UILabel *)(cell.contentView.subviews[1])).text];
