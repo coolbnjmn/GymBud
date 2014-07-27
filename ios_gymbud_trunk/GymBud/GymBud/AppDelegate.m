@@ -43,13 +43,23 @@
         UINavigationController *nvc1 = [[UINavigationController alloc] initWithRootViewController:mapVC];
         UINavigationController *nvc2 = [[UINavigationController alloc] initWithRootViewController:inboxVC];
         UINavigationController *nvc3 = [[UINavigationController alloc] initWithRootViewController:settingsVC];
-        
+        nvc1.navigationBar.tintColor= [UIColor colorWithRed:44/255.0f green:62/255.0f blue:80/255.0f alpha:1.0f];
+        nvc1.navigationBar.barTintColor = [UIColor colorWithRed:60/255.0f green:151/255.0f blue:211/255.0f alpha:1.0f];
+        nvc2.navigationBar.tintColor= [UIColor colorWithRed:44/255.0f green:62/255.0f blue:80/255.0f alpha:1.0f];
+        nvc2.navigationBar.barTintColor = [UIColor colorWithRed:60/255.0f green:151/255.0f blue:211/255.0f alpha:1.0f];
+        nvc3.navigationBar.tintColor= [UIColor colorWithRed:44/255.0f green:62/255.0f blue:80/255.0f alpha:1.0f];
+        nvc3.navigationBar.barTintColor = [UIColor colorWithRed:60/255.0f green:151/255.0f blue:211/255.0f alpha:1.0f];
+
         nvc1.tabBarItem.title = @"Map";
         nvc2.tabBarItem.title = @"Inbox";
         nvc3.tabBarItem.title = @"Settings";
-        
         NSMutableArray *tbcArray = [[NSMutableArray alloc] initWithObjects:nvc1, nvc2, nvc3, nil];
-        
+        tbc.tabBar.tintColor = [UIColor colorWithRed:44/255.0f green:62/255.0f blue:80/255.0f alpha:1.0f];
+
+        [[UITabBarItem appearance] setTitleTextAttributes:@{NSFontAttributeName : [UIFont fontWithName:@"HelveticaNeue-Bold" size:10.0f],
+                                                            NSForegroundColorAttributeName : [UIColor colorWithRed:44/255.0f green:62/255.0f blue:80/255.0f alpha:1.0f]
+                                                            } forState:UIControlStateNormal];
+        tbc.tabBar.barTintColor = [UIColor colorWithRed:60/255.0f green:151/255.0f blue:211/255.0f alpha:1.0f];
         tbc.viewControllers = tbcArray;
         self.window.rootViewController = tbc;
     } else {

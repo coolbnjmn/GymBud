@@ -29,6 +29,8 @@
     
     UITabBarController *tbc = [[UITabBarController alloc] init];
     
+   tbc.view.backgroundColor = [UIColor colorWithRed:44/255.0f green:62/255.0f blue:80/255.0f alpha:1.0f];
+    tbc.moreNavigationController.navigationBar.tintColor = [UIColor colorWithRed:44/255.0f green:62/255.0f blue:80/255.0f alpha:1.0f];
     PAWWallViewController *mapVC = [[PAWWallViewController alloc] init];
     MessageInboxTVC *inboxVC = [[MessageInboxTVC alloc] init];
     SettingsVC *settingsVC = [[SettingsVC alloc] init];
