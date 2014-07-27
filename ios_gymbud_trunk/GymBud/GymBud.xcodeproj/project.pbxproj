@@ -12,6 +12,13 @@
 		B297741519820C4C000AD7B6 /* mapView.png in Resources */ = {isa = PBXBuildFile; fileRef = B297741319820C4C000AD7B6 /* mapView.png */; };
 		B297741619820C4C000AD7B6 /* tableView.png in Resources */ = {isa = PBXBuildFile; fileRef = B297741419820C4C000AD7B6 /* tableView.png */; };
 		B297741819843EC9000AD7B6 /* sampleMapPin.png in Resources */ = {isa = PBXBuildFile; fileRef = B297741719843EC9000AD7B6 /* sampleMapPin.png */; };
+		B29774201984BF68000AD7B6 /* aerobicsMap.png in Resources */ = {isa = PBXBuildFile; fileRef = B29774191984BF68000AD7B6 /* aerobicsMap.png */; };
+		B29774211984BF68000AD7B6 /* basketballMap.png in Resources */ = {isa = PBXBuildFile; fileRef = B297741A1984BF68000AD7B6 /* basketballMap.png */; };
+		B29774221984BF68000AD7B6 /* crossfitMap.png in Resources */ = {isa = PBXBuildFile; fileRef = B297741B1984BF68000AD7B6 /* crossfitMap.png */; };
+		B29774231984BF68000AD7B6 /* runningMap.png in Resources */ = {isa = PBXBuildFile; fileRef = B297741C1984BF68000AD7B6 /* runningMap.png */; };
+		B29774241984BF68000AD7B6 /* swimmingMap.png in Resources */ = {isa = PBXBuildFile; fileRef = B297741D1984BF68000AD7B6 /* swimmingMap.png */; };
+		B29774251984BF68000AD7B6 /* weightliftingMap.png in Resources */ = {isa = PBXBuildFile; fileRef = B297741E1984BF68000AD7B6 /* weightliftingMap.png */; };
+		B29774261984BF68000AD7B6 /* yogaMap.png in Resources */ = {isa = PBXBuildFile; fileRef = B297741F1984BF68000AD7B6 /* yogaMap.png */; };
 		B2C39D38197E172600039F90 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = B2C39D37197E172600039F90 /* main.m */; };
 		B2C39D3B197E172600039F90 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = B2C39D3A197E172600039F90 /* AppDelegate.m */; };
 		B2C39D43197E172600039F90 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B2C39D42197E172600039F90 /* Images.xcassets */; };
@@ -80,6 +87,13 @@
 		B297741319820C4C000AD7B6 /* mapView.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = mapView.png; path = GymBud/Assets/mapView.png; sourceTree = "<group>"; };
 		B297741419820C4C000AD7B6 /* tableView.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = tableView.png; path = GymBud/Assets/tableView.png; sourceTree = "<group>"; };
 		B297741719843EC9000AD7B6 /* sampleMapPin.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = sampleMapPin.png; path = GymBud/Assets/sampleMapPin.png; sourceTree = "<group>"; };
+		B29774191984BF68000AD7B6 /* aerobicsMap.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = aerobicsMap.png; path = GymBud/Assets/aerobicsMap.png; sourceTree = "<group>"; };
+		B297741A1984BF68000AD7B6 /* basketballMap.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = basketballMap.png; path = GymBud/Assets/basketballMap.png; sourceTree = "<group>"; };
+		B297741B1984BF68000AD7B6 /* crossfitMap.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = crossfitMap.png; path = GymBud/Assets/crossfitMap.png; sourceTree = "<group>"; };
+		B297741C1984BF68000AD7B6 /* runningMap.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = runningMap.png; path = GymBud/Assets/runningMap.png; sourceTree = "<group>"; };
+		B297741D1984BF68000AD7B6 /* swimmingMap.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = swimmingMap.png; path = GymBud/Assets/swimmingMap.png; sourceTree = "<group>"; };
+		B297741E1984BF68000AD7B6 /* weightliftingMap.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = weightliftingMap.png; path = GymBud/Assets/weightliftingMap.png; sourceTree = "<group>"; };
+		B297741F1984BF68000AD7B6 /* yogaMap.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = yogaMap.png; path = GymBud/Assets/yogaMap.png; sourceTree = "<group>"; };
 		B2C39D32197E172600039F90 /* GymBud.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GymBud.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B2C39D36197E172600039F90 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B2C39D37197E172600039F90 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -243,6 +257,13 @@
 		B2C39D6D197E193000039F90 /* Assets */ = {
 			isa = PBXGroup;
 			children = (
+				B29774191984BF68000AD7B6 /* aerobicsMap.png */,
+				B297741A1984BF68000AD7B6 /* basketballMap.png */,
+				B297741B1984BF68000AD7B6 /* crossfitMap.png */,
+				B297741C1984BF68000AD7B6 /* runningMap.png */,
+				B297741D1984BF68000AD7B6 /* swimmingMap.png */,
+				B297741E1984BF68000AD7B6 /* weightliftingMap.png */,
+				B297741F1984BF68000AD7B6 /* yogaMap.png */,
 				B297741719843EC9000AD7B6 /* sampleMapPin.png */,
 				B297741319820C4C000AD7B6 /* mapView.png */,
 				B297741419820C4C000AD7B6 /* tableView.png */,
@@ -420,13 +441,20 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B29774251984BF68000AD7B6 /* weightliftingMap.png in Resources */,
 				B297741819843EC9000AD7B6 /* sampleMapPin.png in Resources */,
 				B2D0CAD8197E2EAE00B17D32 /* TableHeaderView.xib in Resources */,
 				B2D0CAC5197E267D00B17D32 /* LoginViewController.xib in Resources */,
+				B29774211984BF68000AD7B6 /* basketballMap.png in Resources */,
 				B2C39D6B197E191C00039F90 /* Map.png in Resources */,
+				B29774241984BF68000AD7B6 /* swimmingMap.png in Resources */,
 				B2C39D67197E191C00039F90 /* grayBubble.png in Resources */,
 				B297741519820C4C000AD7B6 /* mapView.png in Resources */,
+				B29774201984BF68000AD7B6 /* aerobicsMap.png in Resources */,
 				B2C39D43197E172600039F90 /* Images.xcassets in Resources */,
+				B29774231984BF68000AD7B6 /* runningMap.png in Resources */,
+				B29774261984BF68000AD7B6 /* yogaMap.png in Resources */,
+				B29774221984BF68000AD7B6 /* crossfitMap.png in Resources */,
 				B2C39D92197E194F00039F90 /* PAWWallViewController.xib in Resources */,
 				B2D0CACC197E272400B17D32 /* login-button-small.png in Resources */,
 				B2D0CACD197E272400B17D32 /* login-button-small@2x.png in Resources */,

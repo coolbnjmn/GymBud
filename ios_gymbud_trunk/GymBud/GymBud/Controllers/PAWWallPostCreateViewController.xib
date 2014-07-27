@@ -212,7 +212,7 @@
 					</dictionary>
 					<object class="IBClassDescriptionSource" key="sourceIdentifier">
 						<string key="majorKey">IBProjectSource</string>
-						<string key="minorKey">../GymBud/PAWWallPostCreateViewController.h</string>
+						<string key="minorKey">../GymBud/Controllers/PAWWallPostCreateViewController.h</string>
 					</object>
 				</object>
 				<object class="IBPartialClassDescription">
@@ -233,7 +233,7 @@
 					</dictionary>
 					<object class="IBClassDescriptionSource" key="sourceIdentifier">
 						<string key="majorKey">IBProjectSource</string>
-						<string key="minorKey">../GymBud/PAWWallPostCreateViewController.m</string>
+						<string key="minorKey">../GymBud/Controllers/PAWWallPostCreateViewController.m</string>
 					</object>
 				</object>
 				<object class="IBPartialClassDescription">
