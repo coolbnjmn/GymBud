@@ -267,9 +267,7 @@
         else {
             pinView.annotation = annotation;
         }
-        pinView.pinColor = [(PAWPost *)annotation pinColor];
-        pinView.animatesDrop = [((PAWPost *)annotation) animatesDrop];
-//        UIImage *tmp = [UIImage imageWithData:[NSData dataWithContentsOfURL:[((PAWPost *) annotation) pictureURL]]];
+        
         UIImage *tmp;
         NSString *activity = ((PAWPost *)annotation).activity;
         
@@ -299,6 +297,7 @@
         UIButton *infoButton = [UIButton buttonWithType:UIButtonTypeDetailDisclosure];
         pinView.leftCalloutAccessoryView = [[UIImageView alloc] initWithImage:[UIImage imageWithData:[NSData dataWithContentsOfURL:[((PAWPost *) annotation) pictureURL]] scale:6]];
         pinView.rightCalloutAccessoryView = infoButton;
+        NSLog(@"pinView is now: %@", pinView);
         return pinView;
     }
     
@@ -339,6 +338,24 @@
 
 - (void)mapView:(MKMapView *)mapView regionWillChangeAnimated:(BOOL)animated {
 	self.mapPannedSinceLocationUpdate = YES;
+}
+
+- (void)mapView:(MKMapView *)mapView didAddAnnotationViews:(NSArray *)views {
+    NSLog(@"didAddAnnotationViews");
+    MKAnnotationView *aV;
+    for (aV in views) {
+        CGRect endFrame = aV.frame;
+        
+        NSLog(@"aV is now: %@", aV);
+        aV.frame = CGRectMake(aV.frame.origin.x, aV.frame.origin.y - 230.0, aV.frame.size.width, aV.frame.size.height);
+        
+        [UIView beginAnimations:nil context:NULL];
+        [UIView setAnimationDuration:0.45];
+        [UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
+        [aV setFrame:endFrame];
+        [UIView commitAnimations];
+        
+    }
 }
 
 #pragma mark - Fetch map pins
@@ -421,6 +438,7 @@
             // We should add everything in newPosts to the map, remove everything in postsToRemove,
             // and add newPosts to allPosts.
             [mapView removeAnnotations:postsToRemove];
+            NSLog(@"posts to add: %@", newPosts);
             [mapView addAnnotations:newPosts];
             [allPosts addObjectsFromArray:newPosts];
             [allPosts removeObjectsInArray:postsToRemove];
@@ -492,13 +510,10 @@
 - (void)postWasCreated:(NSNotification *)note {
     NSLog(@"Post Was Created!");
     AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
-    
-    // Update the map with new pins:
+
     [self queryForAllPostsNearLocation:appDelegate.currentLocation
                     withNearbyDistance:appDelegate.filterDistance];
-    // And update the existing pins to reflect any changes in filter distance:
-    [self updatePostsForLocation:appDelegate.currentLocation
-              withNearbyDistance:appDelegate.filterDistance];
+
 }
 
 @end

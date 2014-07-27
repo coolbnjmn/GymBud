@@ -50,6 +50,10 @@
     // Resign first responder to dismiss the keyboard and capture in-flight autocorrect suggestions
     [self.messageTextView resignFirstResponder];
     
+    if (self.messageTextView.text.length == 0) {
+        [self.messageTextView becomeFirstResponder];
+        return;
+    }
     // Data prep:
     AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
     CLLocationCoordinate2D currentCoordinate = appDelegate.currentLocation.coordinate;
