@@ -19,6 +19,9 @@
 		B29774241984BF68000AD7B6 /* swimmingMap.png in Resources */ = {isa = PBXBuildFile; fileRef = B297741D1984BF68000AD7B6 /* swimmingMap.png */; };
 		B29774251984BF68000AD7B6 /* weightliftingMap.png in Resources */ = {isa = PBXBuildFile; fileRef = B297741E1984BF68000AD7B6 /* weightliftingMap.png */; };
 		B29774261984BF68000AD7B6 /* yogaMap.png in Resources */ = {isa = PBXBuildFile; fileRef = B297741F1984BF68000AD7B6 /* yogaMap.png */; };
+		B297742A1984C195000AD7B6 /* PostCreateTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = B29774281984C195000AD7B6 /* PostCreateTVC.m */; };
+		B297742D1984C1BF000AD7B6 /* PostCreateTVC.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B297742C1984C1BF000AD7B6 /* PostCreateTVC.storyboard */; };
+		B29774301984C34E000AD7B6 /* PCInterestTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = B297742F1984C34E000AD7B6 /* PCInterestTVC.m */; };
 		B2C39D38197E172600039F90 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = B2C39D37197E172600039F90 /* main.m */; };
 		B2C39D3B197E172600039F90 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = B2C39D3A197E172600039F90 /* AppDelegate.m */; };
 		B2C39D43197E172600039F90 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B2C39D42197E172600039F90 /* Images.xcassets */; };
@@ -94,6 +97,11 @@
 		B297741D1984BF68000AD7B6 /* swimmingMap.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = swimmingMap.png; path = GymBud/Assets/swimmingMap.png; sourceTree = "<group>"; };
 		B297741E1984BF68000AD7B6 /* weightliftingMap.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = weightliftingMap.png; path = GymBud/Assets/weightliftingMap.png; sourceTree = "<group>"; };
 		B297741F1984BF68000AD7B6 /* yogaMap.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = yogaMap.png; path = GymBud/Assets/yogaMap.png; sourceTree = "<group>"; };
+		B29774271984C195000AD7B6 /* PostCreateTVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PostCreateTVC.h; path = GymBud/Controllers/PostCreateTVC.h; sourceTree = "<group>"; };
+		B29774281984C195000AD7B6 /* PostCreateTVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PostCreateTVC.m; path = GymBud/Controllers/PostCreateTVC.m; sourceTree = "<group>"; };
+		B297742C1984C1BF000AD7B6 /* PostCreateTVC.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = PostCreateTVC.storyboard; path = GymBud/Views/PostCreateTVC.storyboard; sourceTree = "<group>"; };
+		B297742E1984C34E000AD7B6 /* PCInterestTVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PCInterestTVC.h; path = GymBud/Controllers/PCInterestTVC.h; sourceTree = "<group>"; };
+		B297742F1984C34E000AD7B6 /* PCInterestTVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PCInterestTVC.m; path = GymBud/Controllers/PCInterestTVC.m; sourceTree = "<group>"; };
 		B2C39D32197E172600039F90 /* GymBud.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GymBud.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B2C39D36197E172600039F90 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B2C39D37197E172600039F90 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -302,6 +310,10 @@
 				B2C39D7A197E194F00039F90 /* PAWWallPostCreateViewController.h */,
 				B2C39D7B197E194F00039F90 /* PAWWallPostCreateViewController.m */,
 				B2C39D7C197E194F00039F90 /* PAWWallPostCreateViewController.xib */,
+				B29774271984C195000AD7B6 /* PostCreateTVC.h */,
+				B29774281984C195000AD7B6 /* PostCreateTVC.m */,
+				B297742E1984C34E000AD7B6 /* PCInterestTVC.h */,
+				B297742F1984C34E000AD7B6 /* PCInterestTVC.m */,
 				B2C39D7D197E194F00039F90 /* PAWWallPostsTableViewController.h */,
 				B2C39D7E197E194F00039F90 /* PAWWallPostsTableViewController.m */,
 				B2C39D7F197E194F00039F90 /* PAWWallViewController.h */,
@@ -336,6 +348,7 @@
 			isa = PBXGroup;
 			children = (
 				B2D0CAD7197E2EAE00B17D32 /* TableHeaderView.xib */,
+				B297742C1984C1BF000AD7B6 /* PostCreateTVC.storyboard */,
 			);
 			name = Views;
 			path = ..;
@@ -470,6 +483,7 @@
 				B2C39D87197E194F00039F90 /* EditProfile.storyboard in Resources */,
 				B2C39D8D197E194F00039F90 /* MessageUserVC.xib in Resources */,
 				B2C39D69197E191C00039F90 /* just_background.png in Resources */,
+				B297742D1984C1BF000AD7B6 /* PostCreateTVC.storyboard in Resources */,
 				B2C39D8F197E194F00039F90 /* PAWWallPostCreateViewController.xib in Resources */,
 				B2C39D66197E191C00039F90 /* blueBubble@2x.png in Resources */,
 				B2C39D68197E191C00039F90 /* grayBubble@2x.png in Resources */,
@@ -491,10 +505,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				B2C39D8C197E194F00039F90 /* MessageUserVC.m in Sources */,
+				B297742A1984C195000AD7B6 /* PostCreateTVC.m in Sources */,
 				B2C39D88197E194F00039F90 /* EditProfileTVC.m in Sources */,
 				B2C39D89197E194F00039F90 /* EPInterestVC.m in Sources */,
 				B2C39D8B197E194F00039F90 /* MessageInboxTVC.m in Sources */,
 				B2C39D3B197E172600039F90 /* AppDelegate.m in Sources */,
+				B29774301984C34E000AD7B6 /* PCInterestTVC.m in Sources */,
 				B2C39D38197E172600039F90 /* main.m in Sources */,
 				B2C39D8A197E194F00039F90 /* LoginViewController.m in Sources */,
 				B2C39D8E197E194F00039F90 /* PAWWallPostCreateViewController.m in Sources */,

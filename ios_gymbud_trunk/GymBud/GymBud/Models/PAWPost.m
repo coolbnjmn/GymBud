@@ -17,6 +17,7 @@
 @property (nonatomic, copy) NSString *title;
 @property (nonatomic, copy) NSString *subtitle;
 @property (nonatomic, copy) NSURL *pictureURL;
+@property (nonatomic, copy) NSString *activity;
 
 @property (nonatomic, strong) PFObject *object;
 @property (nonatomic, strong) PFGeoPoint *geopoint;
@@ -81,6 +82,7 @@
     self.subtitle = [[[self.object objectForKey:@"user"] objectForKey:@"profile"] objectForKey:@"name"];
     self.pinColor = MKPinAnnotationColorRed;
     self.pictureURL = [NSURL URLWithString:[[[self.object objectForKey:@"user"] objectForKey:@"profile"] objectForKey:@"pictureURL"]];
+    self.activity = [self.object objectForKey:@"activity"];
 }
 
 @end

@@ -12,6 +12,7 @@
 #import "UserDetailsViewController.h"
 #import "EditProfileTVC.h"
 #import "MessageInboxTVC.h"
+#import "PostCreateTVC.h"
 #import "AppDelegate.h"
 
 #import <CoreLocation/CoreLocation.h>
@@ -100,7 +101,7 @@
     
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(locationDidChange:) name:@"LocationChangeNotification" object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(postWasCreated:) name:@"PostCreatedNotification" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(postWasCreated:) name:@"CreatePostNotification" object:nil];
 
 
 }
@@ -269,8 +270,25 @@
         pinView.pinColor = [(PAWPost *)annotation pinColor];
         pinView.animatesDrop = [((PAWPost *)annotation) animatesDrop];
 //        UIImage *tmp = [UIImage imageWithData:[NSData dataWithContentsOfURL:[((PAWPost *) annotation) pictureURL]]];
-        UIImage *tmp = [UIImage imageNamed:@"sampleMapPin.png"];
-        CGSize destinationSize = CGSizeMake(32, 55);
+        UIImage *tmp;
+        NSString *activity = ((PAWPost *)annotation).activity;
+        
+        if([activity isEqualToString:@"Basketball"]) {
+            tmp = [UIImage imageNamed:@"basketballMap.png"];
+        } else if([activity isEqualToString:@"Aerobics"]) {
+            tmp = [UIImage imageNamed:@"aerobicsMap.png"];
+        } else if([activity isEqualToString:@"Crossfit"]) {
+            tmp = [UIImage imageNamed:@"crossfitMap.png"];
+        } else if([activity isEqualToString:@"Running"]) {
+            tmp = [UIImage imageNamed:@"runningMap.png"];
+        } else if([activity isEqualToString:@"Swimming"]) {
+            tmp = [UIImage imageNamed:@"swimmingMap.png"];
+        } else if([activity isEqualToString:@"Weightlifting"]) {
+            tmp = [UIImage imageNamed:@"weightliftingMap.png"];
+        } else {
+            tmp = [UIImage imageNamed:@"yogaMap.png"];
+        }
+        CGSize destinationSize = CGSizeMake(32, 52);
         UIGraphicsBeginImageContext(destinationSize);
         [tmp drawInRect:CGRectMake(0,0,destinationSize.width,destinationSize.height)];
         UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
@@ -435,7 +453,12 @@
 - (void)checkInButtonTouchHandler:(id)sender {
     NSLog(@"check in button being pressed");
     
-    [self.navigationController pushViewController:[[PAWWallPostCreateViewController alloc] init] animated:YES];
+//    [self.navigationController pushViewController:[[PAWWallPostCreateViewController alloc] init] animated:YES];
+    
+    UIStoryboard *sb = [UIStoryboard storyboardWithName:@"PostCreateTVC" bundle:nil];
+    PostCreateTVC *vc = [sb instantiateViewControllerWithIdentifier:@"PostCreate"];
+    vc.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 - (void)toggleMapTable:(id)sender {
@@ -456,6 +479,18 @@
 }
 - (void)locationDidChange:(NSNotification *)note {
     NSLog(@"location Did change in view controller");
+    AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
+    
+    // Update the map with new pins:
+    [self queryForAllPostsNearLocation:appDelegate.currentLocation
+                    withNearbyDistance:appDelegate.filterDistance];
+    // And update the existing pins to reflect any changes in filter distance:
+    [self updatePostsForLocation:appDelegate.currentLocation
+              withNearbyDistance:appDelegate.filterDistance];
+}
+
+- (void)postWasCreated:(NSNotification *)note {
+    NSLog(@"Post Was Created!");
     AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
     
     // Update the map with new pins:

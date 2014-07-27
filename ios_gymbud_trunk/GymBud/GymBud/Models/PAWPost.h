@@ -23,6 +23,7 @@
 @property (nonatomic, readonly, copy) NSString *title;
 @property (nonatomic, readonly, copy) NSString *subtitle;
 @property (nonatomic, readonly, copy) NSURL *pictureURL;
+@property (nonatomic, readonly, copy) NSString *activity;
 // @end
 
 // Other properties:
