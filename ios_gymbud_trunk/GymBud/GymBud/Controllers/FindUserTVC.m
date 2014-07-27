@@ -34,6 +34,13 @@
     self.searchController.delegate = self;
     self.tableView.tableHeaderView = self.searchBar;
     
+    self.searchBar.tintColor = [UIColor colorWithRed:44/255.0f green:62/255.0f blue:80/255.0f alpha:1.0f];
+    
+    [[UITabBarItem appearance] setTitleTextAttributes:@{NSFontAttributeName : [UIFont fontWithName:@"HelveticaNeue-Bold" size:10.0f],
+                                                        NSForegroundColorAttributeName : [UIColor colorWithRed:44/255.0f green:62/255.0f blue:80/255.0f alpha:1.0f]
+                                                        } forState:UIControlStateNormal];
+    self.searchBar.barTintColor = [UIColor colorWithRed:60/255.0f green:151/255.0f blue:211/255.0f alpha:1.0f];
+
     self.searchResults = [NSMutableArray array];
     [super viewDidLoad];
 }

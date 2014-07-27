@@ -7,6 +7,8 @@
 @property (nonatomic, strong) IBOutlet UIView *headerView;
 @property (nonatomic, strong) IBOutlet UILabel *headerNameLabel;
 @property (nonatomic, strong) IBOutlet UIImageView *headerImageView;
+@property (nonatomic, strong) IBOutlet UIImageView *headerPictureLogo;
+@property (weak, nonatomic) IBOutlet UITextView *headerCheckinMessage;
 
 // UITableView row data properties
 @property (nonatomic, strong) NSArray *rowTitleArray;

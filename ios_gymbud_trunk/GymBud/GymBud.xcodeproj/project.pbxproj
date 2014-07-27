@@ -22,6 +22,13 @@
 		B297742A1984C195000AD7B6 /* PostCreateTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = B29774281984C195000AD7B6 /* PostCreateTVC.m */; };
 		B297742D1984C1BF000AD7B6 /* PostCreateTVC.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B297742C1984C1BF000AD7B6 /* PostCreateTVC.storyboard */; };
 		B29774301984C34E000AD7B6 /* PCInterestTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = B297742F1984C34E000AD7B6 /* PCInterestTVC.m */; };
+		B2977438198582A5000AD7B6 /* aerobicsIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = B2977431198582A5000AD7B6 /* aerobicsIcon.png */; };
+		B2977439198582A5000AD7B6 /* basketballIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = B2977432198582A5000AD7B6 /* basketballIcon.png */; };
+		B297743A198582A5000AD7B6 /* crossfitIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = B2977433198582A5000AD7B6 /* crossfitIcon.png */; };
+		B297743B198582A5000AD7B6 /* runningIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = B2977434198582A5000AD7B6 /* runningIcon.png */; };
+		B297743C198582A5000AD7B6 /* swimmingIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = B2977435198582A5000AD7B6 /* swimmingIcon.png */; };
+		B297743D198582A5000AD7B6 /* weightliftingIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = B2977436198582A5000AD7B6 /* weightliftingIcon.png */; };
+		B297743E198582A5000AD7B6 /* yogaIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = B2977437198582A5000AD7B6 /* yogaIcon.png */; };
 		B2C39D38197E172600039F90 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = B2C39D37197E172600039F90 /* main.m */; };
 		B2C39D3B197E172600039F90 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = B2C39D3A197E172600039F90 /* AppDelegate.m */; };
 		B2C39D43197E172600039F90 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B2C39D42197E172600039F90 /* Images.xcassets */; };
@@ -102,6 +109,13 @@
 		B297742C1984C1BF000AD7B6 /* PostCreateTVC.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = PostCreateTVC.storyboard; path = GymBud/Views/PostCreateTVC.storyboard; sourceTree = "<group>"; };
 		B297742E1984C34E000AD7B6 /* PCInterestTVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PCInterestTVC.h; path = GymBud/Controllers/PCInterestTVC.h; sourceTree = "<group>"; };
 		B297742F1984C34E000AD7B6 /* PCInterestTVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PCInterestTVC.m; path = GymBud/Controllers/PCInterestTVC.m; sourceTree = "<group>"; };
+		B2977431198582A5000AD7B6 /* aerobicsIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = aerobicsIcon.png; path = GymBud/Assets/aerobicsIcon.png; sourceTree = "<group>"; };
+		B2977432198582A5000AD7B6 /* basketballIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = basketballIcon.png; path = GymBud/Assets/basketballIcon.png; sourceTree = "<group>"; };
+		B2977433198582A5000AD7B6 /* crossfitIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = crossfitIcon.png; path = GymBud/Assets/crossfitIcon.png; sourceTree = "<group>"; };
+		B2977434198582A5000AD7B6 /* runningIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = runningIcon.png; path = GymBud/Assets/runningIcon.png; sourceTree = "<group>"; };
+		B2977435198582A5000AD7B6 /* swimmingIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = swimmingIcon.png; path = GymBud/Assets/swimmingIcon.png; sourceTree = "<group>"; };
+		B2977436198582A5000AD7B6 /* weightliftingIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = weightliftingIcon.png; path = GymBud/Assets/weightliftingIcon.png; sourceTree = "<group>"; };
+		B2977437198582A5000AD7B6 /* yogaIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = yogaIcon.png; path = GymBud/Assets/yogaIcon.png; sourceTree = "<group>"; };
 		B2C39D32197E172600039F90 /* GymBud.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GymBud.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B2C39D36197E172600039F90 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B2C39D37197E172600039F90 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -265,6 +279,13 @@
 		B2C39D6D197E193000039F90 /* Assets */ = {
 			isa = PBXGroup;
 			children = (
+				B2977431198582A5000AD7B6 /* aerobicsIcon.png */,
+				B2977432198582A5000AD7B6 /* basketballIcon.png */,
+				B2977433198582A5000AD7B6 /* crossfitIcon.png */,
+				B2977434198582A5000AD7B6 /* runningIcon.png */,
+				B2977435198582A5000AD7B6 /* swimmingIcon.png */,
+				B2977436198582A5000AD7B6 /* weightliftingIcon.png */,
+				B2977437198582A5000AD7B6 /* yogaIcon.png */,
 				B29774191984BF68000AD7B6 /* aerobicsMap.png */,
 				B297741A1984BF68000AD7B6 /* basketballMap.png */,
 				B297741B1984BF68000AD7B6 /* crossfitMap.png */,
@@ -454,6 +475,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B297743E198582A5000AD7B6 /* yogaIcon.png in Resources */,
 				B29774251984BF68000AD7B6 /* weightliftingMap.png in Resources */,
 				B297741819843EC9000AD7B6 /* sampleMapPin.png in Resources */,
 				B2D0CAD8197E2EAE00B17D32 /* TableHeaderView.xib in Resources */,
@@ -470,17 +492,23 @@
 				B29774221984BF68000AD7B6 /* crossfitMap.png in Resources */,
 				B2C39D92197E194F00039F90 /* PAWWallViewController.xib in Resources */,
 				B2D0CACC197E272400B17D32 /* login-button-small.png in Resources */,
+				B297743B198582A5000AD7B6 /* runningIcon.png in Resources */,
 				B2D0CACD197E272400B17D32 /* login-button-small@2x.png in Resources */,
 				B2C39D65197E191C00039F90 /* blueBubble.png in Resources */,
 				B2C39D95197E194F00039F90 /* ViewMessageVC.xib in Resources */,
 				B297741619820C4C000AD7B6 /* tableView.png in Resources */,
+				B297743C198582A5000AD7B6 /* swimmingIcon.png in Resources */,
 				B2D0CACB197E272400B17D32 /* login-button-small-pressed@2x.png in Resources */,
+				B297743D198582A5000AD7B6 /* weightliftingIcon.png in Resources */,
 				B2D0CACA197E272400B17D32 /* login-button-small-pressed.png in Resources */,
+				B2977439198582A5000AD7B6 /* basketballIcon.png in Resources */,
 				B2C39DBB197E1B5D00039F90 /* Main.storyboard in Resources */,
 				B2C39D6A197E191C00039F90 /* just_background@2x.png in Resources */,
 				B2C39D6C197E191C00039F90 /* Map@2x.png in Resources */,
 				B29774121980D5EF000AD7B6 /* SettingsVC.xib in Resources */,
+				B2977438198582A5000AD7B6 /* aerobicsIcon.png in Resources */,
 				B2C39D87197E194F00039F90 /* EditProfile.storyboard in Resources */,
+				B297743A198582A5000AD7B6 /* crossfitIcon.png in Resources */,
 				B2C39D8D197E194F00039F90 /* MessageUserVC.xib in Resources */,
 				B2C39D69197E191C00039F90 /* just_background.png in Resources */,
 				B297742D1984C1BF000AD7B6 /* PostCreateTVC.storyboard in Resources */,

@@ -11,8 +11,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.title = @"Facebook Profile";
-    self.tableView.backgroundColor = [UIColor colorWithRed:230.0f/255.0f green:230.0f/255.0f blue:230.0f/255.0f alpha:1.0f];
+    self.title = @"Profile";
+    self.tableView.backgroundColor = [UIColor colorWithRed:44/255.0f green:62/255.0f blue:80/255.0f alpha:1.0f];
     
     UIBarButtonItem *messageButton = [[UIBarButtonItem alloc] initWithTitle:@"Message User" style:UIBarButtonItemStyleBordered target:self action:@selector(messageUser:)];
     self.navigationItem.rightBarButtonItem = messageButton;
@@ -35,65 +35,28 @@
     NSLog(@"%@", annotation);
     PAWPost *post = (PAWPost *) annotation;
     if([post user]) {
+        [[post user] fetchIfNeeded];
         [self updateProfileForUser: [post user]];
     }
     
-    // Send request to Facebook
-//    FBRequest *request = [FBRequest requestForMe];
-//    [request startWithCompletionHandler:^(FBRequestConnection *connection, id result, NSError *error) {
-//        // handle response
-//        if (!error) {
-//            // Parse the data received
-//            NSDictionary *userData = (NSDictionary *)result;
-//            
-//            NSString *facebookID = userData[@"id"];
-//            
-//            NSURL *pictureURL = [NSURL URLWithString:[NSString stringWithFormat:@"https://graph.facebook.com/%@/picture?type=large&return_ssl_resources=1", facebookID]];
-//            
-//            
-//            NSMutableDictionary *userProfile = [NSMutableDictionary dictionaryWithCapacity:7];
-//            
-//            if (facebookID) {
-//                userProfile[@"facebookId"] = facebookID;
-//            }
-//            
-//            if (userData[@"name"]) {
-//                userProfile[@"name"] = userData[@"name"];
-//            }
-//            
-//            if (userData[@"location"][@"name"]) {
-//                userProfile[@"location"] = userData[@"location"][@"name"];
-//            }
-//            
-//            if (userData[@"gender"]) {
-//                userProfile[@"gender"] = userData[@"gender"];
-//            }
-//            
-//            if (userData[@"birthday"]) {
-//                userProfile[@"birthday"] = userData[@"birthday"];
-//            }
-//            
-//            if (userData[@"relationship_status"]) {
-//                userProfile[@"relationship"] = userData[@"relationship_status"];
-//            }
-//            
-//            if ([pictureURL absoluteString]) {
-//                userProfile[@"pictureURL"] = [pictureURL absoluteString];
-//            }
-//            
-//            [[PFUser currentUser] setObject:userProfile forKey:@"profile"];
-//            [[PFUser currentUser] saveInBackground];
-//            
-//            [self updateProfile];
-//        } else if ([[[[error userInfo] objectForKey:@"error"] objectForKey:@"type"]
-//                    isEqualToString: @"OAuthException"]) { // Since the request failed, we can check if it was due to an invalid session
-//            NSLog(@"The facebook session was invalidated");
-//            [self logoutButtonTouchHandler:nil];
-//        } else {
-//            NSLog(@"Some other error: %@", error);
-//        }
-//    }];
-    
+    UIImage *pictureLogo;
+    if([post.activity isEqualToString:@"Aerobics"]) {
+        pictureLogo = [UIImage imageNamed:@"aerobicsIcon.png"];
+    } else if([post.activity isEqualToString:@"Basketball"]) {
+        pictureLogo = [UIImage imageNamed:@"basketballIcon.png"];
+    } else if([post.activity isEqualToString:@"Crossfit"]) {
+        pictureLogo = [UIImage imageNamed:@"crossfitIcon.png"];
+    } else if([post.activity isEqualToString:@"Running"]) {
+        pictureLogo = [UIImage imageNamed:@"runningIcon.png"];
+    } else if([post.activity isEqualToString:@"Swimming"]) {
+        pictureLogo = [UIImage imageNamed:@"swimmingIcon.png"];
+    } else if([post.activity isEqualToString:@"Weightlifting"]) {
+        pictureLogo = [UIImage imageNamed:@"weightliftingIcon.png"];
+    } else {
+        pictureLogo = [UIImage imageNamed:@"yogaIcon.png"];
+    }
+    self.headerPictureLogo.image = pictureLogo;
+    self.headerCheckinMessage.text = post.title;
 }
 
 -(void)messageUser:(id) sender {

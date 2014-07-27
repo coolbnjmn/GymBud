@@ -347,6 +347,9 @@
     NSLog(@"didAddAnnotationViews");
     MKAnnotationView *aV;
     for (aV in views) {
+        if([aV.annotation isKindOfClass:[MKUserLocation class]]) {
+            continue;
+        }
         CGRect endFrame = aV.frame;
         
         NSLog(@"aV is now: %@", aV);
