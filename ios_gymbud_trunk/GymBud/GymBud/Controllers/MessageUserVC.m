@@ -36,7 +36,6 @@
     UIBarButtonItem *sendButton = [[UIBarButtonItem alloc] initWithTitle:@"Send" style:UIBarButtonItemStyleBordered target:self action:@selector(sendMessage:)];
     self.navigationItem.rightBarButtonItem = sendButton;
     
-    
     // Show the keyboard/accept input.
     [textView becomeFirstResponder];
 }

@@ -22,10 +22,10 @@
     self.tableView.tableHeaderView = self.headerView;
     
     // Create array for table row titles
-    self.rowTitleArray = @[@"Location", @"Gender", @"Date of Birth", @"Relationship", @"Interest1", @"Interest2", @"Interest3", @"Background", @"Achievements", @"Goals"];
+    self.rowTitleArray = @[@"Location", @"Gender", @"Date of Birth", @"Interest1", @"Interest2", @"Interest3", @"Background", @"Achievements", @"Goals"];
     
     // Set default values for the table row data
-    self.rowDataArray = [@[@"N/A", @"N/A", @"N/A", @"N/A", @"N/A", @"N/A", @"N/A", @"N/A", @"N/A", @"N/A"] mutableCopy];
+    self.rowDataArray = [@[@"N/A", @"N/A", @"N/A", @"N/A", @"N/A", @"N/A", @"N/A", @"N/A", @"N/A"] mutableCopy];
     
     // If the user is already logged in, display any previously cached values before we get the latest from Facebook.
 //    if ([PFUser currentUser]) {
@@ -97,7 +97,7 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if(indexPath.row < 7) {
+    if(indexPath.row < 6) {
         return 44.0f;
     } else {
         return 180.0f;
@@ -108,13 +108,13 @@
     static NSString *BigCellIdentifier = @"BigCell";
     
     UITableViewCell *cell;
-    if(indexPath.row < 7) {
+    if(indexPath.row < 6) {
         cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     } else {
         cell = [tableView dequeueReusableCellWithIdentifier:BigCellIdentifier];
     }
     
-    if (cell == nil && indexPath.row < 7) {
+    if (cell == nil && indexPath.row < 6) {
         // Create the cell and add the labels
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
         UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake( 0.0f, 0.0f, 120.0f, 44.0f)];
@@ -154,7 +154,7 @@
     
     // Access labels in the cell using the tag #
     UILabel *titleLabel = (UILabel *)[cell viewWithTag:1];
-    if(indexPath.row < 7) {
+    if(indexPath.row < 6) {
         UILabel *dataLabel = (UILabel *)[cell viewWithTag:2];
         dataLabel.text = [self.rowDataArray objectAtIndex:indexPath.row];
     } else {
@@ -193,32 +193,28 @@
         [self.rowDataArray replaceObjectAtIndex:2 withObject:[user objectForKey:@"profile"][@"birthday"]];
     }
     
-    if ([user objectForKey:@"profile"][@"relationship"]) {
-        [self.rowDataArray replaceObjectAtIndex:3 withObject:[user objectForKey:@"profile"][@"relationship"]];
-    }
-    
     if ([user objectForKey:@"gymbudProfile"][@"interest1"]) {
-        [self.rowDataArray replaceObjectAtIndex:4 withObject:[user objectForKey:@"gymbudProfile"][@"interest1"]];
+        [self.rowDataArray replaceObjectAtIndex:3 withObject:[user objectForKey:@"gymbudProfile"][@"interest1"]];
     }
     
     if ([user objectForKey:@"gymbudProfile"][@"interest2"]) {
-        [self.rowDataArray replaceObjectAtIndex:5 withObject:[user objectForKey:@"gymbudProfile"][@"interest2"]];
+        [self.rowDataArray replaceObjectAtIndex:4 withObject:[user objectForKey:@"gymbudProfile"][@"interest2"]];
     }
     
     if ([user objectForKey:@"gymbudProfile"][@"interest3"]) {
-        [self.rowDataArray replaceObjectAtIndex:6 withObject:[user objectForKey:@"gymbudProfile"][@"interest3"]];
+        [self.rowDataArray replaceObjectAtIndex:5 withObject:[user objectForKey:@"gymbudProfile"][@"interest3"]];
     }
     
     if ([user objectForKey:@"gymbudProfile"][@"background"]) {
-        [self.rowDataArray replaceObjectAtIndex:7 withObject:[user objectForKey:@"gymbudProfile"][@"background"]];
+        [self.rowDataArray replaceObjectAtIndex:6 withObject:[user objectForKey:@"gymbudProfile"][@"background"]];
     }
     
     if ([user objectForKey:@"gymbudProfile"][@"achievements"]) {
-        [self.rowDataArray replaceObjectAtIndex:8 withObject:[user objectForKey:@"gymbudProfile"][@"achievements"]];
+        [self.rowDataArray replaceObjectAtIndex:7 withObject:[user objectForKey:@"gymbudProfile"][@"achievements"]];
     }
     
     if ([user objectForKey:@"gymbudProfile"][@"goals"]) {
-        [self.rowDataArray replaceObjectAtIndex:9 withObject:[user objectForKey:@"gymbudProfile"][@"goals"]];
+        [self.rowDataArray replaceObjectAtIndex:8 withObject:[user objectForKey:@"gymbudProfile"][@"goals"]];
     }
     [self.tableView reloadData];
     
@@ -258,32 +254,28 @@
         [self.rowDataArray replaceObjectAtIndex:2 withObject:[[PFUser currentUser] objectForKey:@"profile"][@"birthday"]];
     }
     
-    if ([[PFUser currentUser] objectForKey:@"profile"][@"relationship"]) {
-        [self.rowDataArray replaceObjectAtIndex:3 withObject:[[PFUser currentUser] objectForKey:@"profile"][@"relationship"]];
-    }
-    
     if ([[PFUser currentUser] objectForKey:@"gymbudProfile"][@"interest1"]) {
-        [self.rowDataArray replaceObjectAtIndex:4 withObject:[[PFUser currentUser] objectForKey:@"gymbudProfile"][@"interest1"]];
+        [self.rowDataArray replaceObjectAtIndex:3 withObject:[[PFUser currentUser] objectForKey:@"gymbudProfile"][@"interest1"]];
     }
     
     if ([[PFUser currentUser] objectForKey:@"gymbudProfile"][@"interest2"]) {
-        [self.rowDataArray replaceObjectAtIndex:5 withObject:[[PFUser currentUser] objectForKey:@"gymbudProfile"][@"interest2"]];
+        [self.rowDataArray replaceObjectAtIndex:4 withObject:[[PFUser currentUser] objectForKey:@"gymbudProfile"][@"interest2"]];
     }
     
     if ([[PFUser currentUser] objectForKey:@"gymbudProfile"][@"interest3"]) {
-        [self.rowDataArray replaceObjectAtIndex:6 withObject:[[PFUser currentUser] objectForKey:@"gymbudProfile"][@"interest3"]];
+        [self.rowDataArray replaceObjectAtIndex:5 withObject:[[PFUser currentUser] objectForKey:@"gymbudProfile"][@"interest3"]];
     }
     
     if ([[PFUser currentUser] objectForKey:@"gymbudProfile"][@"background"]) {
-        [self.rowDataArray replaceObjectAtIndex:7 withObject:[[PFUser currentUser] objectForKey:@"gymbudProfile"][@"background"]];
+        [self.rowDataArray replaceObjectAtIndex:6 withObject:[[PFUser currentUser] objectForKey:@"gymbudProfile"][@"background"]];
     }
     
     if ([[PFUser currentUser] objectForKey:@"gymbudProfile"][@"achievements"]) {
-        [self.rowDataArray replaceObjectAtIndex:8 withObject:[[PFUser currentUser] objectForKey:@"gymbudProfile"][@"achievements"]];
+        [self.rowDataArray replaceObjectAtIndex:7 withObject:[[PFUser currentUser] objectForKey:@"gymbudProfile"][@"achievements"]];
     }
     
     if ([[PFUser currentUser] objectForKey:@"gymbudProfile"][@"goals"]) {
-        [self.rowDataArray replaceObjectAtIndex:9 withObject:[[PFUser currentUser] objectForKey:@"gymbudProfile"][@"goals"]];
+        [self.rowDataArray replaceObjectAtIndex:8 withObject:[[PFUser currentUser] objectForKey:@"gymbudProfile"][@"goals"]];
     }
     [self.tableView reloadData];
     
