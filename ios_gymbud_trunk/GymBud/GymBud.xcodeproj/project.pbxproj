@@ -33,6 +33,8 @@
 		B29774441985F085000AD7B6 /* mapTabBar.png in Resources */ = {isa = PBXBuildFile; fileRef = B29774401985F085000AD7B6 /* mapTabBar.png */; };
 		B29774451985F085000AD7B6 /* menu.png in Resources */ = {isa = PBXBuildFile; fileRef = B29774411985F085000AD7B6 /* menu.png */; };
 		B29774461985F085000AD7B6 /* settings.png in Resources */ = {isa = PBXBuildFile; fileRef = B29774421985F085000AD7B6 /* settings.png */; };
+		B297744919861B9D000AD7B6 /* mapTableToggle1.png in Resources */ = {isa = PBXBuildFile; fileRef = B297744719861B9D000AD7B6 /* mapTableToggle1.png */; };
+		B297744A19861B9D000AD7B6 /* mapTableToggle2.png in Resources */ = {isa = PBXBuildFile; fileRef = B297744819861B9D000AD7B6 /* mapTableToggle2.png */; };
 		B2C39D38197E172600039F90 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = B2C39D37197E172600039F90 /* main.m */; };
 		B2C39D3B197E172600039F90 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = B2C39D3A197E172600039F90 /* AppDelegate.m */; };
 		B2C39D43197E172600039F90 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B2C39D42197E172600039F90 /* Images.xcassets */; };
@@ -124,6 +126,8 @@
 		B29774401985F085000AD7B6 /* mapTabBar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = mapTabBar.png; path = GymBud/Assets/mapTabBar.png; sourceTree = "<group>"; };
 		B29774411985F085000AD7B6 /* menu.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = menu.png; path = GymBud/Assets/menu.png; sourceTree = "<group>"; };
 		B29774421985F085000AD7B6 /* settings.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = settings.png; path = GymBud/Assets/settings.png; sourceTree = "<group>"; };
+		B297744719861B9D000AD7B6 /* mapTableToggle1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = mapTableToggle1.png; path = GymBud/Assets/mapTableToggle1.png; sourceTree = "<group>"; };
+		B297744819861B9D000AD7B6 /* mapTableToggle2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = mapTableToggle2.png; path = GymBud/Assets/mapTableToggle2.png; sourceTree = "<group>"; };
 		B2C39D32197E172600039F90 /* GymBud.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GymBud.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B2C39D36197E172600039F90 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B2C39D37197E172600039F90 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -287,6 +291,8 @@
 		B2C39D6D197E193000039F90 /* Assets */ = {
 			isa = PBXGroup;
 			children = (
+				B297744719861B9D000AD7B6 /* mapTableToggle1.png */,
+				B297744819861B9D000AD7B6 /* mapTableToggle2.png */,
 				B297743F1985F085000AD7B6 /* inbox.png */,
 				B29774401985F085000AD7B6 /* mapTabBar.png */,
 				B29774411985F085000AD7B6 /* menu.png */,
@@ -509,6 +515,7 @@
 				B297743B198582A5000AD7B6 /* runningIcon.png in Resources */,
 				B2D0CACD197E272400B17D32 /* login-button-small@2x.png in Resources */,
 				B2C39D65197E191C00039F90 /* blueBubble.png in Resources */,
+				B297744A19861B9D000AD7B6 /* mapTableToggle2.png in Resources */,
 				B29774451985F085000AD7B6 /* menu.png in Resources */,
 				B2C39D95197E194F00039F90 /* ViewMessageVC.xib in Resources */,
 				B297741619820C4C000AD7B6 /* tableView.png in Resources */,
@@ -517,6 +524,7 @@
 				B297743D198582A5000AD7B6 /* weightliftingIcon.png in Resources */,
 				B2D0CACA197E272400B17D32 /* login-button-small-pressed.png in Resources */,
 				B2977439198582A5000AD7B6 /* basketballIcon.png in Resources */,
+				B297744919861B9D000AD7B6 /* mapTableToggle1.png in Resources */,
 				B2C39DBB197E1B5D00039F90 /* Main.storyboard in Resources */,
 				B2C39D6A197E191C00039F90 /* just_background@2x.png in Resources */,
 				B2C39D6C197E191C00039F90 /* Map@2x.png in Resources */,
