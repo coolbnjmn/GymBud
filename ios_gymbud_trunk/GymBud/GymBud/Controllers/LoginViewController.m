@@ -39,8 +39,11 @@
     UINavigationController *nvc3 = [[UINavigationController alloc] initWithRootViewController:settingsVC];
     
     nvc1.tabBarItem.title = @"Map";
+    nvc1.tabBarItem.image = [UIImage imageNamed:@"mapTabBar.png"];
     nvc2.tabBarItem.title = @"Inbox";
+    nvc2.tabBarItem.image = [UIImage imageNamed:@"inbox.png"];
     nvc3.tabBarItem.title = @"Settings";
+    nvc3.tabBarItem.image = [UIImage imageNamed:@"settings.png"];
     nvc1.navigationBar.tintColor= [UIColor colorWithRed:44/255.0f green:62/255.0f blue:80/255.0f alpha:1.0f];
     nvc1.navigationBar.barTintColor = [UIColor colorWithRed:60/255.0f green:151/255.0f blue:211/255.0f alpha:1.0f];
     nvc2.navigationBar.tintColor= [UIColor colorWithRed:44/255.0f green:62/255.0f blue:80/255.0f alpha:1.0f];

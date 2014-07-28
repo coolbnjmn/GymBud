@@ -29,6 +29,10 @@
 		B297743C198582A5000AD7B6 /* swimmingIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = B2977435198582A5000AD7B6 /* swimmingIcon.png */; };
 		B297743D198582A5000AD7B6 /* weightliftingIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = B2977436198582A5000AD7B6 /* weightliftingIcon.png */; };
 		B297743E198582A5000AD7B6 /* yogaIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = B2977437198582A5000AD7B6 /* yogaIcon.png */; };
+		B29774431985F085000AD7B6 /* inbox.png in Resources */ = {isa = PBXBuildFile; fileRef = B297743F1985F085000AD7B6 /* inbox.png */; };
+		B29774441985F085000AD7B6 /* mapTabBar.png in Resources */ = {isa = PBXBuildFile; fileRef = B29774401985F085000AD7B6 /* mapTabBar.png */; };
+		B29774451985F085000AD7B6 /* menu.png in Resources */ = {isa = PBXBuildFile; fileRef = B29774411985F085000AD7B6 /* menu.png */; };
+		B29774461985F085000AD7B6 /* settings.png in Resources */ = {isa = PBXBuildFile; fileRef = B29774421985F085000AD7B6 /* settings.png */; };
 		B2C39D38197E172600039F90 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = B2C39D37197E172600039F90 /* main.m */; };
 		B2C39D3B197E172600039F90 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = B2C39D3A197E172600039F90 /* AppDelegate.m */; };
 		B2C39D43197E172600039F90 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B2C39D42197E172600039F90 /* Images.xcassets */; };
@@ -116,6 +120,10 @@
 		B2977435198582A5000AD7B6 /* swimmingIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = swimmingIcon.png; path = GymBud/Assets/swimmingIcon.png; sourceTree = "<group>"; };
 		B2977436198582A5000AD7B6 /* weightliftingIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = weightliftingIcon.png; path = GymBud/Assets/weightliftingIcon.png; sourceTree = "<group>"; };
 		B2977437198582A5000AD7B6 /* yogaIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = yogaIcon.png; path = GymBud/Assets/yogaIcon.png; sourceTree = "<group>"; };
+		B297743F1985F085000AD7B6 /* inbox.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = inbox.png; path = GymBud/Assets/inbox.png; sourceTree = "<group>"; };
+		B29774401985F085000AD7B6 /* mapTabBar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = mapTabBar.png; path = GymBud/Assets/mapTabBar.png; sourceTree = "<group>"; };
+		B29774411985F085000AD7B6 /* menu.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = menu.png; path = GymBud/Assets/menu.png; sourceTree = "<group>"; };
+		B29774421985F085000AD7B6 /* settings.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = settings.png; path = GymBud/Assets/settings.png; sourceTree = "<group>"; };
 		B2C39D32197E172600039F90 /* GymBud.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GymBud.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B2C39D36197E172600039F90 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B2C39D37197E172600039F90 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -279,6 +287,10 @@
 		B2C39D6D197E193000039F90 /* Assets */ = {
 			isa = PBXGroup;
 			children = (
+				B297743F1985F085000AD7B6 /* inbox.png */,
+				B29774401985F085000AD7B6 /* mapTabBar.png */,
+				B29774411985F085000AD7B6 /* menu.png */,
+				B29774421985F085000AD7B6 /* settings.png */,
 				B2977431198582A5000AD7B6 /* aerobicsIcon.png */,
 				B2977432198582A5000AD7B6 /* basketballIcon.png */,
 				B2977433198582A5000AD7B6 /* crossfitIcon.png */,
@@ -481,6 +493,7 @@
 				B2D0CAD8197E2EAE00B17D32 /* TableHeaderView.xib in Resources */,
 				B2D0CAC5197E267D00B17D32 /* LoginViewController.xib in Resources */,
 				B29774211984BF68000AD7B6 /* basketballMap.png in Resources */,
+				B29774441985F085000AD7B6 /* mapTabBar.png in Resources */,
 				B2C39D6B197E191C00039F90 /* Map.png in Resources */,
 				B29774241984BF68000AD7B6 /* swimmingMap.png in Resources */,
 				B2C39D67197E191C00039F90 /* grayBubble.png in Resources */,
@@ -488,6 +501,7 @@
 				B29774201984BF68000AD7B6 /* aerobicsMap.png in Resources */,
 				B2C39D43197E172600039F90 /* Images.xcassets in Resources */,
 				B29774231984BF68000AD7B6 /* runningMap.png in Resources */,
+				B29774431985F085000AD7B6 /* inbox.png in Resources */,
 				B29774261984BF68000AD7B6 /* yogaMap.png in Resources */,
 				B29774221984BF68000AD7B6 /* crossfitMap.png in Resources */,
 				B2C39D92197E194F00039F90 /* PAWWallViewController.xib in Resources */,
@@ -495,6 +509,7 @@
 				B297743B198582A5000AD7B6 /* runningIcon.png in Resources */,
 				B2D0CACD197E272400B17D32 /* login-button-small@2x.png in Resources */,
 				B2C39D65197E191C00039F90 /* blueBubble.png in Resources */,
+				B29774451985F085000AD7B6 /* menu.png in Resources */,
 				B2C39D95197E194F00039F90 /* ViewMessageVC.xib in Resources */,
 				B297741619820C4C000AD7B6 /* tableView.png in Resources */,
 				B297743C198582A5000AD7B6 /* swimmingIcon.png in Resources */,
@@ -508,6 +523,7 @@
 				B29774121980D5EF000AD7B6 /* SettingsVC.xib in Resources */,
 				B2977438198582A5000AD7B6 /* aerobicsIcon.png in Resources */,
 				B2C39D87197E194F00039F90 /* EditProfile.storyboard in Resources */,
+				B29774461985F085000AD7B6 /* settings.png in Resources */,
 				B297743A198582A5000AD7B6 /* crossfitIcon.png in Resources */,
 				B2C39D8D197E194F00039F90 /* MessageUserVC.xib in Resources */,
 				B2C39D69197E191C00039F90 /* just_background.png in Resources */,

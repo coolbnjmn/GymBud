@@ -106,7 +106,7 @@ static NSUInteger const kPAWTableViewMainSection = 0;
     UIBarButtonItem *checkInButton = [[UIBarButtonItem alloc] initWithTitle:@"Check In" style:UIBarButtonItemStyleBordered target:self.navigationController.viewControllers[self.navigationController.viewControllers.count - 2] action:@selector(checkInButtonTouchHandler:)];
     self.navigationItem.leftBarButtonItem = checkInButton;
     
-    UIImage *buttonImage = [UIImage imageNamed:@"mapView.png"];
+    UIImage *buttonImage = [UIImage imageNamed:@"mapTabBar.png"];
     UIBarButtonItem *mapToTableViewButton = [[UIBarButtonItem alloc] initWithImage:[buttonImage imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal] style:UIBarButtonItemStyleBordered target:self.navigationController.viewControllers[self.navigationController.viewControllers.count - 2] action:@selector(toggleMapTable:)];
     self.navigationItem.rightBarButtonItem = mapToTableViewButton;
 }

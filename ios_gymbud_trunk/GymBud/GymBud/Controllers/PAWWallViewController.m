@@ -93,7 +93,7 @@
     UIBarButtonItem *checkInButton = [[UIBarButtonItem alloc] initWithTitle:@"Check In" style:UIBarButtonItemStyleBordered target:self action:@selector(checkInButtonTouchHandler:)];
     self.navigationItem.leftBarButtonItem = checkInButton;
     
-    UIImage *buttonImage = [UIImage imageNamed:@"tableView.png"];
+    UIImage *buttonImage = [UIImage imageNamed:@"menu.png"];
     UIBarButtonItem *mapToTableViewButton = [[UIBarButtonItem alloc] initWithImage:[buttonImage imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal] style:UIBarButtonItemStyleBordered target:self action:@selector(toggleMapTable:)];
     self.navigationItem.rightBarButtonItem = mapToTableViewButton;
     self.isShowingTable = NO;
