@@ -51,11 +51,11 @@
         nvc3.navigationBar.barTintColor = [UIColor colorWithRed:60/255.0f green:151/255.0f blue:211/255.0f alpha:1.0f];
 
         nvc1.tabBarItem.title = nil;
-        nvc1.tabBarItem.image = [UIImage imageNamed:@"sports.png"];
+        nvc1.tabBarItem.image = [UIImage imageNamed:@"centeredPeople.png"];
         nvc2.tabBarItem.title = nil;
-        nvc2.tabBarItem.image = [UIImage imageNamed:@"inbox.png"];
+        nvc2.tabBarItem.image = [UIImage imageNamed:@"centeredInbox.png"];
         nvc3.tabBarItem.title = nil;
-        nvc3.tabBarItem.image = [UIImage imageNamed:@"settings.png"];
+        nvc3.tabBarItem.image = [UIImage imageNamed:@"centeredGear.png"];
         NSMutableArray *tbcArray = [[NSMutableArray alloc] initWithObjects:nvc1, nvc2, nvc3, nil];
         tbc.tabBar.tintColor = [UIColor colorWithRed:44/255.0f green:62/255.0f blue:80/255.0f alpha:1.0f];
 

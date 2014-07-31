@@ -48,7 +48,7 @@
 						<bool key="IBUIUserInteractionEnabled">NO</bool>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 					</object>
-					<object class="IBUIImageView" id="508678360">
+					<object class="IBUIImageView" id="935111737">
 						<reference key="NSNextResponder" ref="315378294"/>
 						<int key="NSvFlags">292</int>
 						<string key="NSFrame">{{261, 22}, {48, 48}}</string>
@@ -73,7 +73,7 @@
 						<string key="IBUIText">Loading...</string>
 						<object class="NSColor" key="IBUITextColor">
 							<int key="NSColorSpace">1</int>
-							<bytes key="NSRGB">MSAwIDAAA</bytes>
+							<bytes key="NSRGB">MSAxIDEAA</bytes>
 						</object>
 						<nil key="IBUIHighlightedColor"/>
 						<int key="IBUIBaselineAdjustment">1</int>
@@ -88,7 +88,7 @@
 							<int key="NSfFlags">16</int>
 						</object>
 					</object>
-					<object class="IBUITextView" id="749569675">
+					<object class="IBUITextView" id="767527663">
 						<reference key="NSNextResponder" ref="315378294"/>
 						<int key="NSvFlags">292</int>
 						<string key="NSFrame">{{10, 78}, {299, 78}}</string>
@@ -166,7 +166,7 @@
 					<object class="IBCocoaTouchOutletConnection" key="connection">
 						<string key="label">headerPictureLogo</string>
 						<reference key="source" ref="372490531"/>
-						<reference key="destination" ref="508678360"/>
+						<reference key="destination" ref="935111737"/>
 					</object>
 					<int key="connectionID">11</int>
 				</object>
@@ -174,7 +174,7 @@
 					<object class="IBCocoaTouchOutletConnection" key="connection">
 						<string key="label">headerCheckinMessage</string>
 						<reference key="source" ref="372490531"/>
-						<reference key="destination" ref="749569675"/>
+						<reference key="destination" ref="767527663"/>
 					</object>
 					<int key="connectionID">13</int>
 				</object>
@@ -204,8 +204,8 @@
 						<array class="NSMutableArray" key="children">
 							<reference ref="249163630"/>
 							<reference ref="453593102"/>
-							<reference ref="508678360"/>
-							<reference ref="749569675"/>
+							<reference ref="935111737"/>
+							<reference ref="767527663"/>
 						</array>
 						<reference key="parent" ref="0"/>
 					</object>
@@ -221,12 +221,12 @@
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">10</int>
-						<reference key="object" ref="508678360"/>
+						<reference key="object" ref="935111737"/>
 						<reference key="parent" ref="315378294"/>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">12</int>
-						<reference key="object" ref="749569675"/>
+						<reference key="object" ref="767527663"/>
 						<reference key="parent" ref="315378294"/>
 					</object>
 				</array>
@@ -263,23 +263,23 @@
 						<string key="headerView">UIView</string>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="toOneOutletInfosByName">
-						<object class="IBToOneOutletInfo" key="headerCheckinMessage" id="585233464">
+						<object class="IBToOneOutletInfo" key="headerCheckinMessage" id="189381335">
 							<string key="name">headerCheckinMessage</string>
 							<string key="candidateClassName">UITextView</string>
 						</object>
-						<object class="IBToOneOutletInfo" key="headerImageView" id="467233136">
+						<object class="IBToOneOutletInfo" key="headerImageView" id="66883832">
 							<string key="name">headerImageView</string>
 							<string key="candidateClassName">UIImageView</string>
 						</object>
-						<object class="IBToOneOutletInfo" key="headerNameLabel" id="356292626">
+						<object class="IBToOneOutletInfo" key="headerNameLabel" id="374003618">
 							<string key="name">headerNameLabel</string>
 							<string key="candidateClassName">UILabel</string>
 						</object>
-						<object class="IBToOneOutletInfo" key="headerPictureLogo" id="135184787">
+						<object class="IBToOneOutletInfo" key="headerPictureLogo" id="892846938">
 							<string key="name">headerPictureLogo</string>
 							<string key="candidateClassName">UIImageView</string>
 						</object>
-						<object class="IBToOneOutletInfo" key="headerView" id="613187084">
+						<object class="IBToOneOutletInfo" key="headerView" id="718835073">
 							<string key="name">headerView</string>
 							<string key="candidateClassName">UIView</string>
 						</object>
@@ -300,11 +300,11 @@
 						<string key="headerView">UIView</string>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="toOneOutletInfosByName">
-						<reference key="headerCheckinMessage" ref="585233464"/>
-						<reference key="headerImageView" ref="467233136"/>
-						<reference key="headerNameLabel" ref="356292626"/>
-						<reference key="headerPictureLogo" ref="135184787"/>
-						<reference key="headerView" ref="613187084"/>
+						<reference key="headerCheckinMessage" ref="189381335"/>
+						<reference key="headerImageView" ref="66883832"/>
+						<reference key="headerNameLabel" ref="374003618"/>
+						<reference key="headerPictureLogo" ref="892846938"/>
+						<reference key="headerView" ref="718835073"/>
 					</dictionary>
 					<object class="IBClassDescriptionSource" key="sourceIdentifier">
 						<string key="majorKey">IBProjectSource</string>

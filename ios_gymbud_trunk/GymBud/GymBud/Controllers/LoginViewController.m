@@ -39,7 +39,7 @@
     UINavigationController *nvc3 = [[UINavigationController alloc] initWithRootViewController:settingsVC];
     
     nvc1.tabBarItem.title = nil;
-    nvc1.tabBarItem.image = [UIImage imageNamed:@"sports.png"];
+    nvc1.tabBarItem.image = [UIImage imageNamed:@"people.png"];
     nvc2.tabBarItem.title = nil;
     nvc2.tabBarItem.image = [UIImage imageNamed:@"inbox.png"];
     nvc3.tabBarItem.title = nil;
