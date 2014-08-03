@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "91E604CC724A455B95BB4738"
+               BlueprintIdentifier = "32AB00C7DAD34FCCBDF44942"
                BuildableName = "libPods-GymBud-RSDayFlow.a"
                BlueprintName = "Pods-GymBud-RSDayFlow"
                ReferencedContainer = "container:Pods.xcodeproj">

@@ -10,30 +10,85 @@
 	<string>46</string>
 	<key>objects</key>
 	<dict>
-		<key>02A26D904F76465384A85E5D</key>
+		<key>06F371D88485499F95B9F73F</key>
 		<dict>
-			<key>fileRef</key>
-			<string>B28098E244204047B1641892</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>0CBF17A276EE4556B8C73768</key>
-		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
 			<key>isa</key>
 			<string>PBXFileReference</string>
 			<key>lastKnownFileType</key>
-			<string>wrapper.framework</string>
-			<key>name</key>
-			<string>UIKit.framework</string>
+			<string>text</string>
 			<key>path</key>
-			<string>Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS7.1.sdk/System/Library/Frameworks/UIKit.framework</string>
+			<string>Pods-GymBud-acknowledgements.markdown</string>
 			<key>sourceTree</key>
-			<string>DEVELOPER_DIR</string>
+			<string>&lt;group&gt;</string>
 		</dict>
-		<key>0FCF9056F66C429CAD37CFE3</key>
+		<key>087A6147488E439F8FFFAFF7</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>path</key>
+			<string>Pods-GymBud-RSDayFlow-prefix.pch</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>105BFD4615AF4B87843BBD6F</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.objc</string>
+			<key>name</key>
+			<string>RSDFDatePickerView.m</string>
+			<key>path</key>
+			<string>RSDayFlow/RSDFDatePickerView.m</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>13475818773D43CEA8D408FF</key>
+		<dict>
+			<key>fileRef</key>
+			<string>C0D110779AD2449EAC364B19</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>135A8EB00F584FEBB418D477</key>
+		<dict>
+			<key>fileRef</key>
+			<string>CF29868A1E3247E7A0D80AB4</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+			<key>settings</key>
+			<dict>
+				<key>COMPILER_FLAGS</key>
+				<string>-fobjc-arc</string>
+			</dict>
+		</dict>
+		<key>13E05D614F5B47ADB4A169D5</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.objc</string>
+			<key>name</key>
+			<string>RSDFDatePickerDayCell.m</string>
+			<key>path</key>
+			<string>RSDayFlow/RSDFDatePickerDayCell.m</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>168A712166F54ACF916C1323</key>
 		<dict>
 			<key>baseConfigurationReference</key>
-			<string>2C543B83E1374D6CA5A1ECBA</string>
+			<string>A7871C9CE90747399F9BD494</string>
 			<key>buildSettings</key>
 			<dict>
 				<key>ALWAYS_SEARCH_USER_PATHS</key>
@@ -81,20 +136,7 @@
 			<key>name</key>
 			<string>Debug</string>
 		</dict>
-		<key>11548DCC29A140E0A3539C50</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>text</string>
-			<key>path</key>
-			<string>Pods-GymBud-acknowledgements.markdown</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>13273C27DE69436684F58368</key>
+		<key>17100B6DF400415F958B3443</key>
 		<dict>
 			<key>includeInIndex</key>
 			<string>1</string>
@@ -103,46 +145,52 @@
 			<key>lastKnownFileType</key>
 			<string>sourcecode.c.objc</string>
 			<key>name</key>
-			<string>NSCalendar+RSDFAdditions.m</string>
+			<string>RSDFDatePickerMonthHeader.m</string>
 			<key>path</key>
-			<string>RSDayFlow/NSCalendar+RSDFAdditions.m</string>
+			<string>RSDayFlow/RSDFDatePickerMonthHeader.m</string>
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
 		</dict>
-		<key>1627A584AB5E4BB7817F2269</key>
+		<key>26875D0F47584443BD9E803B</key>
 		<dict>
-			<key>children</key>
-			<array>
-				<string>235D51BC80834AAE95D850DC</string>
-				<string>CD485EA9D14845AB9397B720</string>
-				<string>60FA92BBB2174A11A641D257</string>
-				<string>B0E1583489A74DA3BEFA22DA</string>
-				<string>CFA59340E15345A9BBD2B41E</string>
-			</array>
+			<key>fileRef</key>
+			<string>92F8A911760D458C8E4EC476</string>
 			<key>isa</key>
-			<string>PBXGroup</string>
+			<string>PBXBuildFile</string>
+			<key>settings</key>
+			<dict>
+				<key>COMPILER_FLAGS</key>
+				<string>-fobjc-arc</string>
+			</dict>
+		</dict>
+		<key>27904C02509A41A8B1B249B4</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>name</key>
+			<string>RSDFDatePickerCollectionView.h</string>
+			<key>path</key>
+			<string>RSDayFlow/RSDFDatePickerCollectionView.h</string>
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
 		</dict>
-		<key>1B35164750234DE7914ACC9A</key>
+		<key>2960630E9F5F4030B2FDA3C8</key>
 		<dict>
-			<key>buildActionMask</key>
-			<string>2147483647</string>
-			<key>files</key>
-			<array>
-				<string>B6D1BF1F5F7443B7814119F5</string>
-				<string>AE1E239997134C3F98E27960</string>
-				<string>6C796D41DF014400B4BCA034</string>
-				<string>26618B215ADD4AB98AF09738</string>
-				<string>50AC7FD36A6D4C5EB57A646C</string>
-				<string>41BBD4660D234E3FB620ED1A</string>
-			</array>
+			<key>fileRef</key>
+			<string>105BFD4615AF4B87843BBD6F</string>
 			<key>isa</key>
-			<string>PBXSourcesBuildPhase</string>
-			<key>runOnlyForDeploymentPostprocessing</key>
-			<string>0</string>
+			<string>PBXBuildFile</string>
+			<key>settings</key>
+			<dict>
+				<key>COMPILER_FLAGS</key>
+				<string>-fobjc-arc</string>
+			</dict>
 		</dict>
-		<key>235D51BC80834AAE95D850DC</key>
+		<key>2F36CF1D3FD44511916C6808</key>
 		<dict>
 			<key>includeInIndex</key>
 			<string>1</string>
@@ -159,41 +207,52 @@
 			<key>xcLanguageSpecificationIdentifier</key>
 			<string>xcode.lang.ruby</string>
 		</dict>
-		<key>26618B215ADD4AB98AF09738</key>
+		<key>314CFB83E30849499C7B2E4C</key>
 		<dict>
-			<key>fileRef</key>
-			<string>5806251FB62B4ED886F693BF</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-			<key>settings</key>
-			<dict>
-				<key>COMPILER_FLAGS</key>
-				<string>-fobjc-arc</string>
-			</dict>
-		</dict>
-		<key>26664FFE92664435AE99000C</key>
-		<dict>
-			<key>children</key>
+			<key>buildActionMask</key>
+			<string>2147483647</string>
+			<key>files</key>
 			<array>
-				<string>58239236700F47B2ADD2F3B6</string>
-				<string>4FDB52D197524C81915C3E88</string>
-				<string>0CBF17A276EE4556B8C73768</string>
+				<string>6FF1216099D34C1F8F7945A6</string>
 			</array>
 			<key>isa</key>
-			<string>PBXGroup</string>
-			<key>name</key>
-			<string>iOS</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
+			<string>PBXSourcesBuildPhase</string>
+			<key>runOnlyForDeploymentPostprocessing</key>
+			<string>0</string>
 		</dict>
-		<key>2ABFF7E66313486B9AF8E084</key>
+		<key>32AB00C7DAD34FCCBDF44942</key>
+		<dict>
+			<key>buildConfigurationList</key>
+			<string>435291FD29E94B259684D452</string>
+			<key>buildPhases</key>
+			<array>
+				<string>DF6DE5DD0BB5418B9BC4DC17</string>
+				<string>5B39206B842646478DBEF405</string>
+				<string>A17A5A1A7F884A7A91419E4C</string>
+			</array>
+			<key>buildRules</key>
+			<array/>
+			<key>dependencies</key>
+			<array/>
+			<key>isa</key>
+			<string>PBXNativeTarget</string>
+			<key>name</key>
+			<string>Pods-GymBud-RSDayFlow</string>
+			<key>productName</key>
+			<string>Pods-GymBud-RSDayFlow</string>
+			<key>productReference</key>
+			<string>4583445AF5B7439999274D26</string>
+			<key>productType</key>
+			<string>com.apple.product-type.library.static</string>
+		</dict>
+		<key>330C4ABC4A9D479DBC0680EC</key>
 		<dict>
 			<key>fileRef</key>
-			<string>0CBF17A276EE4556B8C73768</string>
+			<string>A8A43AD7AE764C54B8B24338</string>
 			<key>isa</key>
 			<string>PBXBuildFile</string>
 		</dict>
-		<key>2C543B83E1374D6CA5A1ECBA</key>
+		<key>366D514689DE40758E707327</key>
 		<dict>
 			<key>includeInIndex</key>
 			<string>1</string>
@@ -202,11 +261,141 @@
 			<key>lastKnownFileType</key>
 			<string>text.xcconfig</string>
 			<key>path</key>
-			<string>Pods-GymBud-RSDayFlow-Private.xcconfig</string>
+			<string>Pods-GymBud.xcconfig</string>
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
 		</dict>
-		<key>3301CE967E164066B8C37468</key>
+		<key>366E61B6380A4800BFC71A74</key>
+		<dict>
+			<key>children</key>
+			<array>
+				<string>6D14F7B8721A4AEDA825C9B1</string>
+				<string>92F8A911760D458C8E4EC476</string>
+				<string>27904C02509A41A8B1B249B4</string>
+				<string>CF29868A1E3247E7A0D80AB4</string>
+				<string>46B13B0EFBFC497D8ACDB22E</string>
+				<string>13E05D614F5B47ADB4A169D5</string>
+				<string>A8A43AD7AE764C54B8B24338</string>
+				<string>17100B6DF400415F958B3443</string>
+				<string>5F36493A74A342EF8D48CBDE</string>
+				<string>105BFD4615AF4B87843BBD6F</string>
+				<string>9728D9B202654E67BBFEC17F</string>
+				<string>ED538DB5A8734F0FBBA142B9</string>
+			</array>
+			<key>isa</key>
+			<string>PBXGroup</string>
+			<key>name</key>
+			<string>RSDayFlow</string>
+			<key>path</key>
+			<string>RSDayFlow</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>36B67DF10B4345D3BA49A553</key>
+		<dict>
+			<key>baseConfigurationReference</key>
+			<string>366D514689DE40758E707327</string>
+			<key>buildSettings</key>
+			<dict>
+				<key>ALWAYS_SEARCH_USER_PATHS</key>
+				<string>NO</string>
+				<key>COPY_PHASE_STRIP</key>
+				<string>YES</string>
+				<key>DSTROOT</key>
+				<string>/tmp/xcodeproj.dst</string>
+				<key>GCC_C_LANGUAGE_STANDARD</key>
+				<string>gnu99</string>
+				<key>GCC_PRECOMPILE_PREFIX_HEADER</key>
+				<string>YES</string>
+				<key>GCC_VERSION</key>
+				<string>com.apple.compilers.llvm.clang.1_0</string>
+				<key>INSTALL_PATH</key>
+				<string>$(BUILT_PRODUCTS_DIR)</string>
+				<key>IPHONEOS_DEPLOYMENT_TARGET</key>
+				<string>7.0</string>
+				<key>OTHER_CFLAGS</key>
+				<array>
+					<string>-DNS_BLOCK_ASSERTIONS=1</string>
+					<string>$(inherited)</string>
+				</array>
+				<key>OTHER_CPLUSPLUSFLAGS</key>
+				<array>
+					<string>-DNS_BLOCK_ASSERTIONS=1</string>
+					<string>$(inherited)</string>
+				</array>
+				<key>OTHER_LDFLAGS</key>
+				<string></string>
+				<key>PRODUCT_NAME</key>
+				<string>$(TARGET_NAME)</string>
+				<key>PUBLIC_HEADERS_FOLDER_PATH</key>
+				<string>$(TARGET_NAME)</string>
+				<key>SDKROOT</key>
+				<string>iphoneos</string>
+				<key>SKIP_INSTALL</key>
+				<string>YES</string>
+				<key>VALIDATE_PRODUCT</key>
+				<string>YES</string>
+			</dict>
+			<key>isa</key>
+			<string>XCBuildConfiguration</string>
+			<key>name</key>
+			<string>Release</string>
+		</dict>
+		<key>3A3D7B96B5584CF0AB53DDCC</key>
+		<dict>
+			<key>buildConfigurations</key>
+			<array>
+				<string>E5DF015A9B7149888FDCEBE2</string>
+				<string>36B67DF10B4345D3BA49A553</string>
+			</array>
+			<key>defaultConfigurationIsVisible</key>
+			<string>0</string>
+			<key>defaultConfigurationName</key>
+			<string>Release</string>
+			<key>isa</key>
+			<string>XCConfigurationList</string>
+		</dict>
+		<key>3BE75C2501E84432AB4119B1</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>text.plist.xml</string>
+			<key>path</key>
+			<string>Pods-GymBud-acknowledgements.plist</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>3E6FE0BDDB33403EAEE74273</key>
+		<dict>
+			<key>containerPortal</key>
+			<string>945B5D7413DE43A18F56E80E</string>
+			<key>isa</key>
+			<string>PBXContainerItemProxy</string>
+			<key>proxyType</key>
+			<string>1</string>
+			<key>remoteGlobalIDString</key>
+			<string>32AB00C7DAD34FCCBDF44942</string>
+			<key>remoteInfo</key>
+			<string>Pods-GymBud-RSDayFlow</string>
+		</dict>
+		<key>435291FD29E94B259684D452</key>
+		<dict>
+			<key>buildConfigurations</key>
+			<array>
+				<string>168A712166F54ACF916C1323</string>
+				<string>DC66407FD6064205878D585F</string>
+			</array>
+			<key>defaultConfigurationIsVisible</key>
+			<string>0</string>
+			<key>defaultConfigurationName</key>
+			<string>Release</string>
+			<key>isa</key>
+			<string>XCConfigurationList</string>
+		</dict>
+		<key>4583445AF5B7439999274D26</key>
 		<dict>
 			<key>explicitFileType</key>
 			<string>archive.ar</string>
@@ -219,48 +408,7 @@
 			<key>sourceTree</key>
 			<string>BUILT_PRODUCTS_DIR</string>
 		</dict>
-		<key>3308CB5D19EF41519E1C26BC</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.h</string>
-			<key>name</key>
-			<string>NSCalendar+RSDFAdditions.h</string>
-			<key>path</key>
-			<string>RSDayFlow/NSCalendar+RSDFAdditions.h</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>3416F5B66E154828A4874743</key>
-		<dict>
-			<key>children</key>
-			<array>
-				<string>3308CB5D19EF41519E1C26BC</string>
-				<string>13273C27DE69436684F58368</string>
-				<string>984EFDDE68AD4A2EBE97A542</string>
-				<string>8107D2C2A2DA461CA0D3DD9A</string>
-				<string>36B1F29B899B4197B76558F1</string>
-				<string>5806251FB62B4ED886F693BF</string>
-				<string>B97A185EFDE94993AD3E6DAF</string>
-				<string>F774D3DD4BE14F949E93367A</string>
-				<string>C8283D18554348C398C3475F</string>
-				<string>9BE0641BB0F841C3B32B7BCD</string>
-				<string>B28098E244204047B1641892</string>
-				<string>3870638C27494D2BB295CC65</string>
-			</array>
-			<key>isa</key>
-			<string>PBXGroup</string>
-			<key>name</key>
-			<string>RSDayFlow</string>
-			<key>path</key>
-			<string>RSDayFlow</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>36B1F29B899B4197B76558F1</key>
+		<key>46B13B0EFBFC497D8ACDB22E</key>
 		<dict>
 			<key>includeInIndex</key>
 			<string>1</string>
@@ -275,163 +423,96 @@
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
 		</dict>
-		<key>3870638C27494D2BB295CC65</key>
+		<key>4A19F4B4913248A3893AE635</key>
+		<dict>
+			<key>fileRef</key>
+			<string>B5095A8CFEA04DBCB138D409</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>4AAB756BEE4F48C1A6D5C835</key>
+		<dict>
+			<key>fileRef</key>
+			<string>D7164E2992A14A92B36740C4</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>500EF121700649E0951A3334</key>
+		<dict>
+			<key>fileRef</key>
+			<string>27904C02509A41A8B1B249B4</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>50860EFB6529472D81915BCD</key>
 		<dict>
 			<key>children</key>
 			<array>
-				<string>42D4F66DC6F54216B10AB436</string>
-				<string>2C543B83E1374D6CA5A1ECBA</string>
-				<string>C28E4A6A837F44EDB94946F4</string>
-				<string>8528E89242AD404184981738</string>
+				<string>366E61B6380A4800BFC71A74</string>
 			</array>
 			<key>isa</key>
 			<string>PBXGroup</string>
 			<key>name</key>
-			<string>Support Files</string>
-			<key>sourceTree</key>
-			<string>SOURCE_ROOT</string>
-		</dict>
-		<key>41BBD4660D234E3FB620ED1A</key>
-		<dict>
-			<key>fileRef</key>
-			<string>9BE0641BB0F841C3B32B7BCD</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-			<key>settings</key>
-			<dict>
-				<key>COMPILER_FLAGS</key>
-				<string>-fobjc-arc</string>
-			</dict>
-		</dict>
-		<key>42D4F66DC6F54216B10AB436</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>text.xcconfig</string>
-			<key>path</key>
-			<string>Pods-GymBud-RSDayFlow.xcconfig</string>
+			<string>Pods</string>
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
 		</dict>
-		<key>443B88358DE548EDB8C3DA55</key>
+		<key>5292AE951B96427AA630CC25</key>
+		<dict>
+			<key>children</key>
+			<array>
+				<string>A3CDABAD2F324803A8415FA6</string>
+			</array>
+			<key>isa</key>
+			<string>PBXGroup</string>
+			<key>name</key>
+			<string>Targets Support Files</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>5B39206B842646478DBEF405</key>
 		<dict>
 			<key>buildActionMask</key>
 			<string>2147483647</string>
 			<key>files</key>
 			<array>
-				<string>68A52FBD3BC24226AA8EB858</string>
-			</array>
-			<key>isa</key>
-			<string>PBXSourcesBuildPhase</string>
-			<key>runOnlyForDeploymentPostprocessing</key>
-			<string>0</string>
-		</dict>
-		<key>4C1B3AF2BD184E8594E1497B</key>
-		<dict>
-			<key>fileRef</key>
-			<string>C8283D18554348C398C3475F</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>4E090DC696884D12BF6F6E88</key>
-		<dict>
-			<key>fileRef</key>
-			<string>36B1F29B899B4197B76558F1</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>4FDB52D197524C81915C3E88</key>
-		<dict>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>wrapper.framework</string>
-			<key>name</key>
-			<string>QuartzCore.framework</string>
-			<key>path</key>
-			<string>Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS7.1.sdk/System/Library/Frameworks/QuartzCore.framework</string>
-			<key>sourceTree</key>
-			<string>DEVELOPER_DIR</string>
-		</dict>
-		<key>50AC7FD36A6D4C5EB57A646C</key>
-		<dict>
-			<key>fileRef</key>
-			<string>F774D3DD4BE14F949E93367A</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-			<key>settings</key>
-			<dict>
-				<key>COMPILER_FLAGS</key>
-				<string>-fobjc-arc</string>
-			</dict>
-		</dict>
-		<key>525DA1D7EB2E42988CD18ED7</key>
-		<dict>
-			<key>fileRef</key>
-			<string>984EFDDE68AD4A2EBE97A542</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>5806251FB62B4ED886F693BF</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.objc</string>
-			<key>name</key>
-			<string>RSDFDatePickerDayCell.m</string>
-			<key>path</key>
-			<string>RSDayFlow/RSDFDatePickerDayCell.m</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>58239236700F47B2ADD2F3B6</key>
-		<dict>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>wrapper.framework</string>
-			<key>name</key>
-			<string>Foundation.framework</string>
-			<key>path</key>
-			<string>Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS7.1.sdk/System/Library/Frameworks/Foundation.framework</string>
-			<key>sourceTree</key>
-			<string>DEVELOPER_DIR</string>
-		</dict>
-		<key>5BEE6B7CEFE64678A107212B</key>
-		<dict>
-			<key>buildConfigurations</key>
-			<array>
-				<string>0FCF9056F66C429CAD37CFE3</string>
-				<string>ED6568D2AA574E7389F465A2</string>
-			</array>
-			<key>defaultConfigurationIsVisible</key>
-			<string>0</string>
-			<key>defaultConfigurationName</key>
-			<string>Release</string>
-			<key>isa</key>
-			<string>XCConfigurationList</string>
-		</dict>
-		<key>5DBBD1E09D644A848A0C45B3</key>
-		<dict>
-			<key>buildActionMask</key>
-			<string>2147483647</string>
-			<key>files</key>
-			<array>
-				<string>9FBCE84F5DCC473B9959F4B7</string>
-				<string>8FAA53EBA286469FBAD40E43</string>
+				<string>4A19F4B4913248A3893AE635</string>
+				<string>78FA6AACDAEC46FF85F0DB6F</string>
+				<string>13475818773D43CEA8D408FF</string>
 			</array>
 			<key>isa</key>
 			<string>PBXFrameworksBuildPhase</string>
 			<key>runOnlyForDeploymentPostprocessing</key>
 			<string>0</string>
 		</dict>
-		<key>601B29B6B9944DDE92E7FC16</key>
+		<key>5F36493A74A342EF8D48CBDE</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>name</key>
+			<string>RSDFDatePickerView.h</string>
+			<key>path</key>
+			<string>RSDayFlow/RSDFDatePickerView.h</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>60B65FD0E54D4EEF88A6F599</key>
+		<dict>
+			<key>fileRef</key>
+			<string>17100B6DF400415F958B3443</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+			<key>settings</key>
+			<dict>
+				<key>COMPILER_FLAGS</key>
+				<string>-fobjc-arc</string>
+			</dict>
+		</dict>
+		<key>65E654B5860242D28E7F461E</key>
 		<dict>
 			<key>explicitFileType</key>
 			<string>archive.ar</string>
@@ -444,20 +525,30 @@
 			<key>sourceTree</key>
 			<string>BUILT_PRODUCTS_DIR</string>
 		</dict>
-		<key>60FA92BBB2174A11A641D257</key>
+		<key>6605E021ED974DE88398C403</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXTargetDependency</string>
+			<key>target</key>
+			<string>32AB00C7DAD34FCCBDF44942</string>
+			<key>targetProxy</key>
+			<string>3E6FE0BDDB33403EAEE74273</string>
+		</dict>
+		<key>69FAF2D01427473CBCC9A762</key>
 		<dict>
 			<key>children</key>
 			<array>
-				<string>3416F5B66E154828A4874743</string>
+				<string>65E654B5860242D28E7F461E</string>
+				<string>4583445AF5B7439999274D26</string>
 			</array>
 			<key>isa</key>
 			<string>PBXGroup</string>
 			<key>name</key>
-			<string>Pods</string>
+			<string>Products</string>
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
 		</dict>
-		<key>61988F3F2AB749F89FB58667</key>
+		<key>6D14F7B8721A4AEDA825C9B1</key>
 		<dict>
 			<key>includeInIndex</key>
 			<string>1</string>
@@ -465,35 +556,86 @@
 			<string>PBXFileReference</string>
 			<key>lastKnownFileType</key>
 			<string>sourcecode.c.h</string>
+			<key>name</key>
+			<string>NSCalendar+RSDFAdditions.h</string>
 			<key>path</key>
-			<string>Pods-GymBud-environment.h</string>
+			<string>RSDayFlow/NSCalendar+RSDFAdditions.h</string>
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
 		</dict>
-		<key>62DEB1C4CE804AB8BB071B22</key>
+		<key>6E0024CDA2504A109D697095</key>
+		<dict>
+			<key>children</key>
+			<array>
+				<string>B5095A8CFEA04DBCB138D409</string>
+				<string>EA73FC865EDC46119E8C9CEE</string>
+				<string>C0D110779AD2449EAC364B19</string>
+			</array>
+			<key>isa</key>
+			<string>PBXGroup</string>
+			<key>name</key>
+			<string>iOS</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>6FF1216099D34C1F8F7945A6</key>
+		<dict>
+			<key>fileRef</key>
+			<string>A715FA5552DD495C8C16BB44</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>78F0A71391304F85B72DFB2A</key>
+		<dict>
+			<key>fileRef</key>
+			<string>6D14F7B8721A4AEDA825C9B1</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>78FA6AACDAEC46FF85F0DB6F</key>
+		<dict>
+			<key>fileRef</key>
+			<string>EA73FC865EDC46119E8C9CEE</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>900C71E6B71B4133A7DB543F</key>
+		<dict>
+			<key>children</key>
+			<array>
+				<string>6E0024CDA2504A109D697095</string>
+			</array>
+			<key>isa</key>
+			<string>PBXGroup</string>
+			<key>name</key>
+			<string>Frameworks</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>914D04587F2B429DBE5A3AFB</key>
 		<dict>
 			<key>includeInIndex</key>
 			<string>1</string>
 			<key>isa</key>
 			<string>PBXFileReference</string>
 			<key>lastKnownFileType</key>
-			<string>sourcecode.c.objc</string>
+			<string>text.xcconfig</string>
 			<key>path</key>
-			<string>Pods-GymBud-dummy.m</string>
+			<string>Pods-GymBud-RSDayFlow.xcconfig</string>
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
 		</dict>
-		<key>68A52FBD3BC24226AA8EB858</key>
+		<key>9222FEC9C06D4FDC8C43F680</key>
 		<dict>
 			<key>fileRef</key>
-			<string>62DEB1C4CE804AB8BB071B22</string>
+			<string>9728D9B202654E67BBFEC17F</string>
 			<key>isa</key>
 			<string>PBXBuildFile</string>
 		</dict>
-		<key>6C796D41DF014400B4BCA034</key>
+		<key>92ED0800CA944B1D98F1AE4B</key>
 		<dict>
 			<key>fileRef</key>
-			<string>8107D2C2A2DA461CA0D3DD9A</string>
+			<string>13E05D614F5B47ADB4A169D5</string>
 			<key>isa</key>
 			<string>PBXBuildFile</string>
 			<key>settings</key>
@@ -502,74 +644,7 @@
 				<string>-fobjc-arc</string>
 			</dict>
 		</dict>
-		<key>79081190E5314732AE4C9C1A</key>
-		<dict>
-			<key>baseConfigurationReference</key>
-			<string>C8B08D8B4ED3485B892AF1D9</string>
-			<key>buildSettings</key>
-			<dict>
-				<key>ALWAYS_SEARCH_USER_PATHS</key>
-				<string>NO</string>
-				<key>COPY_PHASE_STRIP</key>
-				<string>NO</string>
-				<key>DSTROOT</key>
-				<string>/tmp/xcodeproj.dst</string>
-				<key>GCC_C_LANGUAGE_STANDARD</key>
-				<string>gnu99</string>
-				<key>GCC_DYNAMIC_NO_PIC</key>
-				<string>NO</string>
-				<key>GCC_OPTIMIZATION_LEVEL</key>
-				<string>0</string>
-				<key>GCC_PRECOMPILE_PREFIX_HEADER</key>
-				<string>YES</string>
-				<key>GCC_PREPROCESSOR_DEFINITIONS</key>
-				<array>
-					<string>DEBUG=1</string>
-					<string>$(inherited)</string>
-				</array>
-				<key>GCC_SYMBOLS_PRIVATE_EXTERN</key>
-				<string>NO</string>
-				<key>GCC_VERSION</key>
-				<string>com.apple.compilers.llvm.clang.1_0</string>
-				<key>INSTALL_PATH</key>
-				<string>$(BUILT_PRODUCTS_DIR)</string>
-				<key>IPHONEOS_DEPLOYMENT_TARGET</key>
-				<string>7.0</string>
-				<key>OTHER_LDFLAGS</key>
-				<string></string>
-				<key>PRODUCT_NAME</key>
-				<string>$(TARGET_NAME)</string>
-				<key>PUBLIC_HEADERS_FOLDER_PATH</key>
-				<string>$(TARGET_NAME)</string>
-				<key>SDKROOT</key>
-				<string>iphoneos</string>
-				<key>SKIP_INSTALL</key>
-				<string>YES</string>
-			</dict>
-			<key>isa</key>
-			<string>XCBuildConfiguration</string>
-			<key>name</key>
-			<string>Debug</string>
-		</dict>
-		<key>794CD88775D14F3084A21051</key>
-		<dict>
-			<key>buildActionMask</key>
-			<string>2147483647</string>
-			<key>files</key>
-			<array>
-				<string>DC4CE3E949AC459199544504</string>
-				<string>525DA1D7EB2E42988CD18ED7</string>
-				<string>4E090DC696884D12BF6F6E88</string>
-				<string>B05ACC77A2594FC1960B637D</string>
-				<string>4C1B3AF2BD184E8594E1497B</string>
-				<string>02A26D904F76465384A85E5D</string>
-			</array>
-			<key>isa</key>
-			<string>PBXHeadersBuildPhase</string>
-			<key>runOnlyForDeploymentPostprocessing</key>
-			<string>0</string>
-		</dict>
-		<key>8107D2C2A2DA461CA0D3DD9A</key>
+		<key>92F8A911760D458C8E4EC476</key>
 		<dict>
 			<key>includeInIndex</key>
 			<string>1</string>
@@ -578,59 +653,13 @@
 			<key>lastKnownFileType</key>
 			<string>sourcecode.c.objc</string>
 			<key>name</key>
-			<string>RSDFDatePickerCollectionView.m</string>
+			<string>NSCalendar+RSDFAdditions.m</string>
 			<key>path</key>
-			<string>RSDayFlow/RSDFDatePickerCollectionView.m</string>
+			<string>RSDayFlow/NSCalendar+RSDFAdditions.m</string>
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
 		</dict>
-		<key>84084B0EFDF145518FF53958</key>
-		<dict>
-			<key>containerPortal</key>
-			<string>90C8FCD4C6524768AF1F448F</string>
-			<key>isa</key>
-			<string>PBXContainerItemProxy</string>
-			<key>proxyType</key>
-			<string>1</string>
-			<key>remoteGlobalIDString</key>
-			<string>91E604CC724A455B95BB4738</string>
-			<key>remoteInfo</key>
-			<string>Pods-GymBud-RSDayFlow</string>
-		</dict>
-		<key>8528E89242AD404184981738</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.h</string>
-			<key>path</key>
-			<string>Pods-GymBud-RSDayFlow-prefix.pch</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>8932F4F47B234494B7E5744F</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>text.script.sh</string>
-			<key>path</key>
-			<string>Pods-GymBud-resources.sh</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>8FAA53EBA286469FBAD40E43</key>
-		<dict>
-			<key>fileRef</key>
-			<string>3301CE967E164066B8C37468</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>90C8FCD4C6524768AF1F448F</key>
+		<key>945B5D7413DE43A18F56E80E</key>
 		<dict>
 			<key>attributes</key>
 			<dict>
@@ -638,7 +667,7 @@
 				<string>0510</string>
 			</dict>
 			<key>buildConfigurationList</key>
-			<string>CD1706E597C347F3A5AB1868</string>
+			<string>96EC08AF39374364BFFF87C0</string>
 			<key>compatibilityVersion</key>
 			<string>Xcode 3.2</string>
 			<key>developmentRegion</key>
@@ -652,9 +681,9 @@
 				<string>en</string>
 			</array>
 			<key>mainGroup</key>
-			<string>1627A584AB5E4BB7817F2269</string>
+			<string>D4EEDE9014D14DA490620E96</string>
 			<key>productRefGroup</key>
-			<string>B0E1583489A74DA3BEFA22DA</string>
+			<string>69FAF2D01427473CBCC9A762</string>
 			<key>projectDirPath</key>
 			<string></string>
 			<key>projectReferences</key>
@@ -663,36 +692,65 @@
 			<string></string>
 			<key>targets</key>
 			<array>
-				<string>D0D96C3200614AB49DB1AED1</string>
-				<string>91E604CC724A455B95BB4738</string>
+				<string>C301419E876740FC9E0D464C</string>
+				<string>32AB00C7DAD34FCCBDF44942</string>
 			</array>
 		</dict>
-		<key>91E604CC724A455B95BB4738</key>
+		<key>9496C547159A4E4DA79F3804</key>
 		<dict>
-			<key>buildConfigurationList</key>
-			<string>5BEE6B7CEFE64678A107212B</string>
-			<key>buildPhases</key>
-			<array>
-				<string>1B35164750234DE7914ACC9A</string>
-				<string>E7073F9D4F684C768AE6FC49</string>
-				<string>794CD88775D14F3084A21051</string>
-			</array>
-			<key>buildRules</key>
-			<array/>
-			<key>dependencies</key>
-			<array/>
+			<key>fileRef</key>
+			<string>46B13B0EFBFC497D8ACDB22E</string>
 			<key>isa</key>
-			<string>PBXNativeTarget</string>
-			<key>name</key>
-			<string>Pods-GymBud-RSDayFlow</string>
-			<key>productName</key>
-			<string>Pods-GymBud-RSDayFlow</string>
-			<key>productReference</key>
-			<string>3301CE967E164066B8C37468</string>
-			<key>productType</key>
-			<string>com.apple.product-type.library.static</string>
+			<string>PBXBuildFile</string>
 		</dict>
-		<key>93E846762477458AB666A87F</key>
+		<key>96EC08AF39374364BFFF87C0</key>
+		<dict>
+			<key>buildConfigurations</key>
+			<array>
+				<string>BC225A7CFAED4A26A54F21F6</string>
+				<string>A29807FC40FC4E648EE4800F</string>
+			</array>
+			<key>defaultConfigurationIsVisible</key>
+			<string>0</string>
+			<key>defaultConfigurationName</key>
+			<string>Release</string>
+			<key>isa</key>
+			<string>XCConfigurationList</string>
+		</dict>
+		<key>9728D9B202654E67BBFEC17F</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>name</key>
+			<string>RSDayFlow.h</string>
+			<key>path</key>
+			<string>RSDayFlow/RSDayFlow.h</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>A17A5A1A7F884A7A91419E4C</key>
+		<dict>
+			<key>buildActionMask</key>
+			<string>2147483647</string>
+			<key>files</key>
+			<array>
+				<string>78F0A71391304F85B72DFB2A</string>
+				<string>500EF121700649E0951A3334</string>
+				<string>9496C547159A4E4DA79F3804</string>
+				<string>330C4ABC4A9D479DBC0680EC</string>
+				<string>A8603018475046A3A96C7E6D</string>
+				<string>9222FEC9C06D4FDC8C43F680</string>
+			</array>
+			<key>isa</key>
+			<string>PBXHeadersBuildPhase</string>
+			<key>runOnlyForDeploymentPostprocessing</key>
+			<string>0</string>
+		</dict>
+		<key>A29807FC40FC4E648EE4800F</key>
 		<dict>
 			<key>buildSettings</key>
 			<dict>
@@ -750,22 +808,25 @@
 			<key>name</key>
 			<string>Release</string>
 		</dict>
-		<key>984EFDDE68AD4A2EBE97A542</key>
+		<key>A3CDABAD2F324803A8415FA6</key>
 		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
+			<key>children</key>
+			<array>
+				<string>366D514689DE40758E707327</string>
+				<string>06F371D88485499F95B9F73F</string>
+				<string>3BE75C2501E84432AB4119B1</string>
+				<string>A715FA5552DD495C8C16BB44</string>
+				<string>FAB7DEE918DB4100B3940362</string>
+				<string>BFBC40D7EF6E43C2B66D08DC</string>
+			</array>
 			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.h</string>
+			<string>PBXGroup</string>
 			<key>name</key>
-			<string>RSDFDatePickerCollectionView.h</string>
-			<key>path</key>
-			<string>RSDayFlow/RSDFDatePickerCollectionView.h</string>
+			<string>Pods-GymBud</string>
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
 		</dict>
-		<key>9BE0641BB0F841C3B32B7BCD</key>
+		<key>A715FA5552DD495C8C16BB44</key>
 		<dict>
 			<key>includeInIndex</key>
 			<string>1</string>
@@ -773,83 +834,32 @@
 			<string>PBXFileReference</string>
 			<key>lastKnownFileType</key>
 			<string>sourcecode.c.objc</string>
-			<key>name</key>
-			<string>RSDFDatePickerView.m</string>
 			<key>path</key>
-			<string>RSDayFlow/RSDFDatePickerView.m</string>
+			<string>Pods-GymBud-dummy.m</string>
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
 		</dict>
-		<key>9FBCE84F5DCC473B9959F4B7</key>
-		<dict>
-			<key>fileRef</key>
-			<string>58239236700F47B2ADD2F3B6</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>9FF35B76A76C4219A26DFCD4</key>
-		<dict>
-			<key>fileRef</key>
-			<string>58239236700F47B2ADD2F3B6</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>AE1E239997134C3F98E27960</key>
-		<dict>
-			<key>fileRef</key>
-			<string>C28E4A6A837F44EDB94946F4</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>B05ACC77A2594FC1960B637D</key>
-		<dict>
-			<key>fileRef</key>
-			<string>B97A185EFDE94993AD3E6DAF</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>B0E1583489A74DA3BEFA22DA</key>
-		<dict>
-			<key>children</key>
-			<array>
-				<string>601B29B6B9944DDE92E7FC16</string>
-				<string>3301CE967E164066B8C37468</string>
-			</array>
-			<key>isa</key>
-			<string>PBXGroup</string>
-			<key>name</key>
-			<string>Products</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>B28098E244204047B1641892</key>
+		<key>A7871C9CE90747399F9BD494</key>
 		<dict>
 			<key>includeInIndex</key>
 			<string>1</string>
 			<key>isa</key>
 			<string>PBXFileReference</string>
 			<key>lastKnownFileType</key>
-			<string>sourcecode.c.h</string>
-			<key>name</key>
-			<string>RSDayFlow.h</string>
+			<string>text.xcconfig</string>
 			<key>path</key>
-			<string>RSDayFlow/RSDayFlow.h</string>
+			<string>Pods-GymBud-RSDayFlow-Private.xcconfig</string>
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
 		</dict>
-		<key>B6D1BF1F5F7443B7814119F5</key>
+		<key>A8603018475046A3A96C7E6D</key>
 		<dict>
 			<key>fileRef</key>
-			<string>13273C27DE69436684F58368</string>
+			<string>5F36493A74A342EF8D48CBDE</string>
 			<key>isa</key>
 			<string>PBXBuildFile</string>
-			<key>settings</key>
-			<dict>
-				<key>COMPILER_FLAGS</key>
-				<string>-fobjc-arc</string>
-			</dict>
 		</dict>
-		<key>B97A185EFDE94993AD3E6DAF</key>
+		<key>A8A43AD7AE764C54B8B24338</key>
 		<dict>
 			<key>includeInIndex</key>
 			<string>1</string>
@@ -864,135 +874,20 @@
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
 		</dict>
-		<key>C28E4A6A837F44EDB94946F4</key>
+		<key>B5095A8CFEA04DBCB138D409</key>
 		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
 			<key>isa</key>
 			<string>PBXFileReference</string>
 			<key>lastKnownFileType</key>
-			<string>sourcecode.c.objc</string>
+			<string>wrapper.framework</string>
+			<key>name</key>
+			<string>Foundation.framework</string>
 			<key>path</key>
-			<string>Pods-GymBud-RSDayFlow-dummy.m</string>
+			<string>Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS7.1.sdk/System/Library/Frameworks/Foundation.framework</string>
 			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
+			<string>DEVELOPER_DIR</string>
 		</dict>
-		<key>C50DC81E1FC649ACB2F11649</key>
-		<dict>
-			<key>buildConfigurations</key>
-			<array>
-				<string>79081190E5314732AE4C9C1A</string>
-				<string>F6BA0BE1CF5A4A50832F491D</string>
-			</array>
-			<key>defaultConfigurationIsVisible</key>
-			<string>0</string>
-			<key>defaultConfigurationName</key>
-			<string>Release</string>
-			<key>isa</key>
-			<string>XCConfigurationList</string>
-		</dict>
-		<key>C8283D18554348C398C3475F</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.h</string>
-			<key>name</key>
-			<string>RSDFDatePickerView.h</string>
-			<key>path</key>
-			<string>RSDayFlow/RSDFDatePickerView.h</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>C8B08D8B4ED3485B892AF1D9</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>text.xcconfig</string>
-			<key>path</key>
-			<string>Pods-GymBud.xcconfig</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>CD1706E597C347F3A5AB1868</key>
-		<dict>
-			<key>buildConfigurations</key>
-			<array>
-				<string>DD5F9DC6F23A4EA59F5E2B98</string>
-				<string>93E846762477458AB666A87F</string>
-			</array>
-			<key>defaultConfigurationIsVisible</key>
-			<string>0</string>
-			<key>defaultConfigurationName</key>
-			<string>Release</string>
-			<key>isa</key>
-			<string>XCConfigurationList</string>
-		</dict>
-		<key>CD485EA9D14845AB9397B720</key>
-		<dict>
-			<key>children</key>
-			<array>
-				<string>26664FFE92664435AE99000C</string>
-			</array>
-			<key>isa</key>
-			<string>PBXGroup</string>
-			<key>name</key>
-			<string>Frameworks</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>CFA59340E15345A9BBD2B41E</key>
-		<dict>
-			<key>children</key>
-			<array>
-				<string>E7DAF201E30C408E9B206C7F</string>
-			</array>
-			<key>isa</key>
-			<string>PBXGroup</string>
-			<key>name</key>
-			<string>Targets Support Files</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>D0D96C3200614AB49DB1AED1</key>
-		<dict>
-			<key>buildConfigurationList</key>
-			<string>C50DC81E1FC649ACB2F11649</string>
-			<key>buildPhases</key>
-			<array>
-				<string>443B88358DE548EDB8C3DA55</string>
-				<string>5DBBD1E09D644A848A0C45B3</string>
-			</array>
-			<key>buildRules</key>
-			<array/>
-			<key>dependencies</key>
-			<array>
-				<string>F560F697351543478D56AC5A</string>
-			</array>
-			<key>isa</key>
-			<string>PBXNativeTarget</string>
-			<key>name</key>
-			<string>Pods-GymBud</string>
-			<key>productName</key>
-			<string>Pods-GymBud</string>
-			<key>productReference</key>
-			<string>601B29B6B9944DDE92E7FC16</string>
-			<key>productType</key>
-			<string>com.apple.product-type.library.static</string>
-		</dict>
-		<key>DC4CE3E949AC459199544504</key>
-		<dict>
-			<key>fileRef</key>
-			<string>3308CB5D19EF41519E1C26BC</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>DD5F9DC6F23A4EA59F5E2B98</key>
+		<key>BC225A7CFAED4A26A54F21F6</key>
 		<dict>
 			<key>buildSettings</key>
 			<dict>
@@ -1059,43 +954,133 @@
 			<key>name</key>
 			<string>Debug</string>
 		</dict>
-		<key>E7073F9D4F684C768AE6FC49</key>
+		<key>BFBC40D7EF6E43C2B66D08DC</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>text.script.sh</string>
+			<key>path</key>
+			<string>Pods-GymBud-resources.sh</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>C0D110779AD2449EAC364B19</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>wrapper.framework</string>
+			<key>name</key>
+			<string>UIKit.framework</string>
+			<key>path</key>
+			<string>Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS7.1.sdk/System/Library/Frameworks/UIKit.framework</string>
+			<key>sourceTree</key>
+			<string>DEVELOPER_DIR</string>
+		</dict>
+		<key>C301419E876740FC9E0D464C</key>
+		<dict>
+			<key>buildConfigurationList</key>
+			<string>3A3D7B96B5584CF0AB53DDCC</string>
+			<key>buildPhases</key>
+			<array>
+				<string>314CFB83E30849499C7B2E4C</string>
+				<string>CFDDFCDA1A0B412FABACD304</string>
+			</array>
+			<key>buildRules</key>
+			<array/>
+			<key>dependencies</key>
+			<array>
+				<string>6605E021ED974DE88398C403</string>
+			</array>
+			<key>isa</key>
+			<string>PBXNativeTarget</string>
+			<key>name</key>
+			<string>Pods-GymBud</string>
+			<key>productName</key>
+			<string>Pods-GymBud</string>
+			<key>productReference</key>
+			<string>65E654B5860242D28E7F461E</string>
+			<key>productType</key>
+			<string>com.apple.product-type.library.static</string>
+		</dict>
+		<key>C5A21CDF15F64C7C9AACB28F</key>
+		<dict>
+			<key>fileRef</key>
+			<string>B5095A8CFEA04DBCB138D409</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>C8412F9C8E654D37B2F61682</key>
+		<dict>
+			<key>fileRef</key>
+			<string>4583445AF5B7439999274D26</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>CF29868A1E3247E7A0D80AB4</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.objc</string>
+			<key>name</key>
+			<string>RSDFDatePickerCollectionView.m</string>
+			<key>path</key>
+			<string>RSDayFlow/RSDFDatePickerCollectionView.m</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>CFDDFCDA1A0B412FABACD304</key>
 		<dict>
 			<key>buildActionMask</key>
 			<string>2147483647</string>
 			<key>files</key>
 			<array>
-				<string>9FF35B76A76C4219A26DFCD4</string>
-				<string>F5D7392F679747B0B6D7CB2C</string>
-				<string>2ABFF7E66313486B9AF8E084</string>
+				<string>C5A21CDF15F64C7C9AACB28F</string>
+				<string>C8412F9C8E654D37B2F61682</string>
 			</array>
 			<key>isa</key>
 			<string>PBXFrameworksBuildPhase</string>
 			<key>runOnlyForDeploymentPostprocessing</key>
 			<string>0</string>
 		</dict>
-		<key>E7DAF201E30C408E9B206C7F</key>
+		<key>D4EEDE9014D14DA490620E96</key>
 		<dict>
 			<key>children</key>
 			<array>
-				<string>C8B08D8B4ED3485B892AF1D9</string>
-				<string>11548DCC29A140E0A3539C50</string>
-				<string>EEE20016163A4CBBBE84518F</string>
-				<string>62DEB1C4CE804AB8BB071B22</string>
-				<string>61988F3F2AB749F89FB58667</string>
-				<string>8932F4F47B234494B7E5744F</string>
+				<string>2F36CF1D3FD44511916C6808</string>
+				<string>900C71E6B71B4133A7DB543F</string>
+				<string>50860EFB6529472D81915BCD</string>
+				<string>69FAF2D01427473CBCC9A762</string>
+				<string>5292AE951B96427AA630CC25</string>
 			</array>
 			<key>isa</key>
 			<string>PBXGroup</string>
-			<key>name</key>
-			<string>Pods-GymBud</string>
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
 		</dict>
-		<key>ED6568D2AA574E7389F465A2</key>
+		<key>D7164E2992A14A92B36740C4</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.objc</string>
+			<key>path</key>
+			<string>Pods-GymBud-RSDayFlow-dummy.m</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>DC66407FD6064205878D585F</key>
 		<dict>
 			<key>baseConfigurationReference</key>
-			<string>2C543B83E1374D6CA5A1ECBA</string>
+			<string>A7871C9CE90747399F9BD494</string>
 			<key>buildSettings</key>
 			<dict>
 				<key>ALWAYS_SEARCH_USER_PATHS</key>
@@ -1144,67 +1129,57 @@
 			<key>name</key>
 			<string>Release</string>
 		</dict>
-		<key>EEE20016163A4CBBBE84518F</key>
+		<key>DF6DE5DD0BB5418B9BC4DC17</key>
 		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
+			<key>buildActionMask</key>
+			<string>2147483647</string>
+			<key>files</key>
+			<array>
+				<string>26875D0F47584443BD9E803B</string>
+				<string>4AAB756BEE4F48C1A6D5C835</string>
+				<string>135A8EB00F584FEBB418D477</string>
+				<string>92ED0800CA944B1D98F1AE4B</string>
+				<string>60B65FD0E54D4EEF88A6F599</string>
+				<string>2960630E9F5F4030B2FDA3C8</string>
+			</array>
 			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>text.plist.xml</string>
-			<key>path</key>
-			<string>Pods-GymBud-acknowledgements.plist</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
+			<string>PBXSourcesBuildPhase</string>
+			<key>runOnlyForDeploymentPostprocessing</key>
+			<string>0</string>
 		</dict>
-		<key>F560F697351543478D56AC5A</key>
-		<dict>
-			<key>isa</key>
-			<string>PBXTargetDependency</string>
-			<key>target</key>
-			<string>91E604CC724A455B95BB4738</string>
-			<key>targetProxy</key>
-			<string>84084B0EFDF145518FF53958</string>
-		</dict>
-		<key>F5D7392F679747B0B6D7CB2C</key>
-		<dict>
-			<key>fileRef</key>
-			<string>4FDB52D197524C81915C3E88</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>F6BA0BE1CF5A4A50832F491D</key>
+		<key>E5DF015A9B7149888FDCEBE2</key>
 		<dict>
 			<key>baseConfigurationReference</key>
-			<string>C8B08D8B4ED3485B892AF1D9</string>
+			<string>366D514689DE40758E707327</string>
 			<key>buildSettings</key>
 			<dict>
 				<key>ALWAYS_SEARCH_USER_PATHS</key>
 				<string>NO</string>
 				<key>COPY_PHASE_STRIP</key>
-				<string>YES</string>
+				<string>NO</string>
 				<key>DSTROOT</key>
 				<string>/tmp/xcodeproj.dst</string>
 				<key>GCC_C_LANGUAGE_STANDARD</key>
 				<string>gnu99</string>
+				<key>GCC_DYNAMIC_NO_PIC</key>
+				<string>NO</string>
+				<key>GCC_OPTIMIZATION_LEVEL</key>
+				<string>0</string>
 				<key>GCC_PRECOMPILE_PREFIX_HEADER</key>
 				<string>YES</string>
+				<key>GCC_PREPROCESSOR_DEFINITIONS</key>
+				<array>
+					<string>DEBUG=1</string>
+					<string>$(inherited)</string>
+				</array>
+				<key>GCC_SYMBOLS_PRIVATE_EXTERN</key>
+				<string>NO</string>
 				<key>GCC_VERSION</key>
 				<string>com.apple.compilers.llvm.clang.1_0</string>
 				<key>INSTALL_PATH</key>
 				<string>$(BUILT_PRODUCTS_DIR)</string>
 				<key>IPHONEOS_DEPLOYMENT_TARGET</key>
 				<string>7.0</string>
-				<key>OTHER_CFLAGS</key>
-				<array>
-					<string>-DNS_BLOCK_ASSERTIONS=1</string>
-					<string>$(inherited)</string>
-				</array>
-				<key>OTHER_CPLUSPLUSFLAGS</key>
-				<array>
-					<string>-DNS_BLOCK_ASSERTIONS=1</string>
-					<string>$(inherited)</string>
-				</array>
 				<key>OTHER_LDFLAGS</key>
 				<string></string>
 				<key>PRODUCT_NAME</key>
@@ -1215,31 +1190,56 @@
 				<string>iphoneos</string>
 				<key>SKIP_INSTALL</key>
 				<string>YES</string>
-				<key>VALIDATE_PRODUCT</key>
-				<string>YES</string>
 			</dict>
 			<key>isa</key>
 			<string>XCBuildConfiguration</string>
 			<key>name</key>
-			<string>Release</string>
+			<string>Debug</string>
 		</dict>
-		<key>F774D3DD4BE14F949E93367A</key>
+		<key>EA73FC865EDC46119E8C9CEE</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>wrapper.framework</string>
+			<key>name</key>
+			<string>QuartzCore.framework</string>
+			<key>path</key>
+			<string>Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS7.1.sdk/System/Library/Frameworks/QuartzCore.framework</string>
+			<key>sourceTree</key>
+			<string>DEVELOPER_DIR</string>
+		</dict>
+		<key>ED538DB5A8734F0FBBA142B9</key>
+		<dict>
+			<key>children</key>
+			<array>
+				<string>914D04587F2B429DBE5A3AFB</string>
+				<string>A7871C9CE90747399F9BD494</string>
+				<string>D7164E2992A14A92B36740C4</string>
+				<string>087A6147488E439F8FFFAFF7</string>
+			</array>
+			<key>isa</key>
+			<string>PBXGroup</string>
+			<key>name</key>
+			<string>Support Files</string>
+			<key>sourceTree</key>
+			<string>SOURCE_ROOT</string>
+		</dict>
+		<key>FAB7DEE918DB4100B3940362</key>
 		<dict>
 			<key>includeInIndex</key>
 			<string>1</string>
 			<key>isa</key>
 			<string>PBXFileReference</string>
 			<key>lastKnownFileType</key>
-			<string>sourcecode.c.objc</string>
-			<key>name</key>
-			<string>RSDFDatePickerMonthHeader.m</string>
+			<string>sourcecode.c.h</string>
 			<key>path</key>
-			<string>RSDayFlow/RSDFDatePickerMonthHeader.m</string>
+			<string>Pods-GymBud-environment.h</string>
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
 		</dict>
 	</dict>
 	<key>rootObject</key>
-	<string>90C8FCD4C6524768AF1F448F</string>
+	<string>945B5D7413DE43A18F56E80E</string>
 </dict>
 </plist>

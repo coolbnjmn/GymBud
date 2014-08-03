@@ -9,7 +9,7 @@
 #import "SettingsVC.h"
 #import "EditProfileTVC.h"
 #import "LoginViewController.h"
-
+#import "RSDatePickerVC.h"
 
 @interface SettingsVC ()
 
@@ -69,6 +69,11 @@
     } else {
         [[UIApplication sharedApplication] unregisterForRemoteNotifications];
     }
+}
+
+-(IBAction)showCalendarPressed:(id)sender {
+    RSDatePickerVC *datePickerVC = [RSDatePickerVC new];
+    [self.navigationController pushViewController:datePickerVC animated:YES];
 }
 
 @end
