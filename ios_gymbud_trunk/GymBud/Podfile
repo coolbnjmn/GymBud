@@ -1,0 +1,13 @@
+# Uncomment this line to define a global platform for your project
+platform :ios, "7.0"
+
+target "GymBud" do
+
+pod 'RSDayFlow', '~> 0.1.2'
+
+end
+
+target "GymBudTests" do
+
+end
+
