@@ -35,8 +35,10 @@ static NSString * const reuseIdentifier = @"goActivityCell";
     // self.clearsSelectionOnViewWillAppear = NO;
     
     // Register cell classes
-    [self.collectionView registerClass:[GoActivityCVCell class] forCellWithReuseIdentifier:reuseIdentifier];
-    
+//    [self.collectionView registerClass:[GoActivityCVCell class] forCellWithReuseIdentifier:reuseIdentifier];
+    [self.collectionView registerNib:[UINib nibWithNibName:@"GoActivityCVCell" bundle:[NSBundle mainBundle]] forCellWithReuseIdentifier:reuseIdentifier];
+    self.collectionView.backgroundColor = [UIColor redColor];
+    self.navigationItem.title = @"GO";
     // Do any additional setup after loading the view.
 }
 
@@ -67,7 +69,6 @@ static NSString * const reuseIdentifier = @"goActivityCell";
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
-    NSLog(@"collectionView count %d", [kGymBudActivityMapIcons count]);
     return [kGymBudActivityMapIcons count];
 }
 
@@ -76,7 +77,7 @@ static NSString * const reuseIdentifier = @"goActivityCell";
     NSLog(@"cell being called, indexpath is: %@", indexPath);
     GoActivityCVCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:reuseIdentifier forIndexPath:indexPath];
     
-    int index = indexPath.row;
+    NSInteger index = indexPath.row;
     cell.goActivityPictureImaveView.image = [UIImage imageNamed:[kGymBudActivityIconMapping objectForKey:[kGymBudActivities objectAtIndex:index]]];
     cell.goActivityTextLabel.text = [kGymBudActivities objectAtIndex:index];
     

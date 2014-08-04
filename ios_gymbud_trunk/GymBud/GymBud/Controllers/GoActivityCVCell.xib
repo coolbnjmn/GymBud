@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6154.21" systemVersion="13D65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
+        <deployment defaultVersion="1792" identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6153.13"/>
     </dependencies>
     <objects>
@@ -14,10 +15,10 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="lVF-E0-vTZ">
-                        <rect key="frame" x="25" y="20" width="100" height="100"/>
+                        <rect key="frame" x="13" y="3" width="124" height="124"/>
                     </imageView>
                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Bd1-JE-fLx">
-                        <rect key="frame" x="25" y="118" width="100" height="12"/>
+                        <rect key="frame" x="25" y="130" width="100" height="14.5"/>
                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                         <nil key="highlightedColor"/>
@@ -30,7 +31,7 @@
                 <outlet property="goActivityPictureImaveView" destination="lVF-E0-vTZ" id="NDS-Tz-3Ui"/>
                 <outlet property="goActivityTextLabel" destination="Bd1-JE-fLx" id="YZw-99-4Xe"/>
             </connections>
-            <point key="canvasLocation" x="256" y="274"/>
+            <point key="canvasLocation" x="247" y="229"/>
         </collectionViewCell>
     </objects>
 </document>
