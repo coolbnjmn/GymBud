@@ -11,6 +11,8 @@
 		77FE647B198EF296008724CC /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 77FE647A198EF296008724CC /* Social.framework */; };
 		77FE6480198F4FE1008724CC /* GoActivityCVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 77FE647F198F4FE1008724CC /* GoActivityCVC.m */; };
 		77FE6483198F5D36008724CC /* GoActivity.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 77FE6482198F5D36008724CC /* GoActivity.storyboard */; };
+		77FE6487198F715C008724CC /* GoActivityCVCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 77FE6486198F715C008724CC /* GoActivityCVCell.m */; };
+		77FE6489198F71F7008724CC /* GoActivityCVCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 77FE6488198F71F7008724CC /* GoActivityCVCell.xib */; };
 		B29774111980D5EF000AD7B6 /* SettingsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = B297740F1980D5EF000AD7B6 /* SettingsVC.m */; };
 		B29774121980D5EF000AD7B6 /* SettingsVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = B29774101980D5EF000AD7B6 /* SettingsVC.xib */; };
 		B297741519820C4C000AD7B6 /* mapView.png in Resources */ = {isa = PBXBuildFile; fileRef = B297741319820C4C000AD7B6 /* mapView.png */; };
@@ -115,6 +117,9 @@
 		77FE647F198F4FE1008724CC /* GoActivityCVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GoActivityCVC.m; path = GymBud/Controllers/GoActivityCVC.m; sourceTree = "<group>"; };
 		77FE6482198F5D36008724CC /* GoActivity.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = GoActivity.storyboard; path = GymBud/Views/GoActivity.storyboard; sourceTree = "<group>"; };
 		77FE6484198F5D43008724CC /* GymBudConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GymBudConstants.h; path = GymBud/Models/GymBudConstants.h; sourceTree = "<group>"; };
+		77FE6485198F715C008724CC /* GoActivityCVCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GoActivityCVCell.h; path = GymBud/Controllers/GoActivityCVCell.h; sourceTree = "<group>"; };
+		77FE6486198F715C008724CC /* GoActivityCVCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GoActivityCVCell.m; path = GymBud/Controllers/GoActivityCVCell.m; sourceTree = "<group>"; };
+		77FE6488198F71F7008724CC /* GoActivityCVCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GoActivityCVCell.xib; sourceTree = "<group>"; };
 		B297740E1980D5EF000AD7B6 /* SettingsVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SettingsVC.h; path = GymBud/Controllers/SettingsVC.h; sourceTree = "<group>"; };
 		B297740F1980D5EF000AD7B6 /* SettingsVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SettingsVC.m; path = GymBud/Controllers/SettingsVC.m; sourceTree = "<group>"; };
 		B29774101980D5EF000AD7B6 /* SettingsVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = SettingsVC.xib; path = GymBud/Controllers/SettingsVC.xib; sourceTree = "<group>"; };
@@ -402,6 +407,9 @@
 				77F13146198EEE0000576708 /* RSDatePickerVC.m */,
 				77FE647E198F4FE1008724CC /* GoActivityCVC.h */,
 				77FE647F198F4FE1008724CC /* GoActivityCVC.m */,
+				77FE6485198F715C008724CC /* GoActivityCVCell.h */,
+				77FE6486198F715C008724CC /* GoActivityCVCell.m */,
+				77FE6488198F71F7008724CC /* GoActivityCVCell.xib */,
 			);
 			name = Controllers;
 			path = ..;
@@ -543,6 +551,7 @@
 				B29774441985F085000AD7B6 /* mapTabBar.png in Resources */,
 				B2C39D6B197E191C00039F90 /* Map.png in Resources */,
 				B29774241984BF68000AD7B6 /* swimmingMap.png in Resources */,
+				77FE6489198F71F7008724CC /* GoActivityCVCell.xib in Resources */,
 				B2C39D67197E191C00039F90 /* grayBubble.png in Resources */,
 				B297741519820C4C000AD7B6 /* mapView.png in Resources */,
 				B29774201984BF68000AD7B6 /* aerobicsMap.png in Resources */,
@@ -636,6 +645,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B2C39D8C197E194F00039F90 /* MessageUserVC.m in Sources */,
+				77FE6487198F715C008724CC /* GoActivityCVCell.m in Sources */,
 				B297742A1984C195000AD7B6 /* PostCreateTVC.m in Sources */,
 				B2C39D88197E194F00039F90 /* EditProfileTVC.m in Sources */,
 				B2C39D89197E194F00039F90 /* EPInterestVC.m in Sources */,

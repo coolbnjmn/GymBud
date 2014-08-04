@@ -7,6 +7,8 @@
 //
 
 #import "GoActivityCVC.h"
+#import "GoActivityCVCell.h"
+#import "GymBudConstants.h"
 
 @interface GoActivityCVC () <UICollectionViewDelegateFlowLayout>
 
@@ -14,7 +16,7 @@
 
 @implementation GoActivityCVC
 
-static NSString * const reuseIdentifier = @"Cell";
+static NSString * const reuseIdentifier = @"goActivityCell";
 
 - (instancetype)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -33,7 +35,7 @@ static NSString * const reuseIdentifier = @"Cell";
     // self.clearsSelectionOnViewWillAppear = NO;
     
     // Register cell classes
-    [self.collectionView registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:reuseIdentifier];
+    [self.collectionView registerClass:[GoActivityCVCell class] forCellWithReuseIdentifier:reuseIdentifier];
     
     // Do any additional setup after loading the view.
 }
@@ -65,16 +67,20 @@ static NSString * const reuseIdentifier = @"Cell";
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
-    return 7;
+    NSLog(@"collectionView count %d", [kGymBudActivityMapIcons count]);
+    return [kGymBudActivityMapIcons count];
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:reuseIdentifier forIndexPath:indexPath];
+    NSLog(@"cell being called, indexpath is: %@", indexPath);
+    GoActivityCVCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:reuseIdentifier forIndexPath:indexPath];
     
-    cell.backgroundColor = [UIColor redColor];
-    // Configure the cell
+    int index = indexPath.row;
+    cell.goActivityPictureImaveView.image = [UIImage imageNamed:[kGymBudActivityIconMapping objectForKey:[kGymBudActivities objectAtIndex:index]]];
+    cell.goActivityTextLabel.text = [kGymBudActivities objectAtIndex:index];
     
+    cell.backgroundColor = [UIColor clearColor];
     return cell;
 }
 
