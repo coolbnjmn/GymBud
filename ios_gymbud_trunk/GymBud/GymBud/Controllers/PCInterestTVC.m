@@ -7,15 +7,14 @@
 //
 
 #import "PCInterestTVC.h"
+#import "GymBudConstants.h"
+
 
 @interface PCInterestTVC ()
 
-@property (nonatomic, strong) NSMutableArray *interests;
 @end
 
 @implementation PCInterestTVC
-
-@synthesize interests;
 
 - (instancetype)initWithStyle:(UITableViewStyle)style
 {
@@ -29,15 +28,6 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
-    interests = [[NSMutableArray alloc] init];
-    [interests addObject:@"Aerobics"];
-    [interests addObject:@"Basketball"];
-    [interests addObject:@"Crossfit"];
-    [interests addObject:@"Running"];
-    [interests addObject:@"Swimming"];
-    [interests addObject:@"Weightlifting"];
-    [interests addObject:@"Yoga"];
 }
 
 
@@ -60,7 +50,7 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     // Return the number of rows in the section.
-    return [interests count];
+    return [kGymBudActivities count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -68,7 +58,7 @@
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"interest" forIndexPath:indexPath];
     
     // Configure the cell...
-    cell.textLabel.text = [interests objectAtIndex:indexPath.row];
+    cell.textLabel.text = [kGymBudActivities objectAtIndex:indexPath.row];
     
     return cell;
 }

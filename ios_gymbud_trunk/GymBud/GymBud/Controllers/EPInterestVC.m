@@ -7,16 +7,15 @@
 //
 
 #import "EPInterestVC.h"
+#import "GymBudConstants.h"
 
 @interface EPInterestVC ()
 
-@property (strong, nonatomic) NSMutableArray *interests;
 @property int interestNumber;
 
 @end
 
 @implementation EPInterestVC
-@synthesize interests;
 @synthesize interestNumber;
 
 - (void) setCurrentInterest: (int) interest {
@@ -35,14 +34,6 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    interests = [[NSMutableArray alloc] init];
-    [interests addObject:@"Aerobics"];
-    [interests addObject:@"Basketball"];
-    [interests addObject:@"Crossfit"];
-    [interests addObject:@"Running"];
-    [interests addObject:@"Swimming"];
-    [interests addObject:@"Weightlifting"];
-    [interests addObject:@"Yoga"];
     NSLog(@"view did load epinterestvc delegate is: %@", _delegate);
 
 }
@@ -66,7 +57,7 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     // Return the number of rows in the section.
-    return [interests count];
+    return [kGymBudActivities count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -74,7 +65,7 @@
  UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"interest" forIndexPath:indexPath];
  
  // Configure the cell...
-     cell.textLabel.text = [interests objectAtIndex:indexPath.row];
+     cell.textLabel.text = [kGymBudActivities objectAtIndex:indexPath.row];
  
  return cell;
  }

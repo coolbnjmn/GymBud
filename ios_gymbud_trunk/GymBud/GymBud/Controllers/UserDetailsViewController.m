@@ -2,6 +2,7 @@
 #import <QuartzCore/QuartzCore.h>
 #import "PAWPost.h"
 #import "MessageUserVC.h"
+#import "GymBudConstants.h"
 
 @implementation UserDetailsViewController
 @synthesize annotation;
@@ -38,23 +39,9 @@
         [[post user] fetchIfNeeded];
         [self updateProfileForUser: [post user]];
     }
-    
-    UIImage *pictureLogo;
-    if([post.activity isEqualToString:@"Aerobics"]) {
-        pictureLogo = [UIImage imageNamed:@"aerobicsIcon.png"];
-    } else if([post.activity isEqualToString:@"Basketball"]) {
-        pictureLogo = [UIImage imageNamed:@"basketballIcon.png"];
-    } else if([post.activity isEqualToString:@"Crossfit"]) {
-        pictureLogo = [UIImage imageNamed:@"crossfitIcon.png"];
-    } else if([post.activity isEqualToString:@"Running"]) {
-        pictureLogo = [UIImage imageNamed:@"runningIcon.png"];
-    } else if([post.activity isEqualToString:@"Swimming"]) {
-        pictureLogo = [UIImage imageNamed:@"swimmingIcon.png"];
-    } else if([post.activity isEqualToString:@"Weightlifting"]) {
-        pictureLogo = [UIImage imageNamed:@"weightliftingIcon.png"];
-    } else {
-        pictureLogo = [UIImage imageNamed:@"yogaIcon.png"];
-    }
+        
+    UIImage *pictureLogo = [UIImage imageNamed:[kGymBudActivityIconMapping objectForKey:post.activity]];
+
     self.headerPictureLogo.image = pictureLogo;
     self.headerCheckinMessage.text = post.title;
 }

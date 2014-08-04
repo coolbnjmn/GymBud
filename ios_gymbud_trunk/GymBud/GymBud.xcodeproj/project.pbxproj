@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		77F13147198EEE0000576708 /* RSDatePickerVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 77F13146198EEE0000576708 /* RSDatePickerVC.m */; };
 		77FE647B198EF296008724CC /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 77FE647A198EF296008724CC /* Social.framework */; };
+		77FE6480198F4FE1008724CC /* GoActivityCVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 77FE647F198F4FE1008724CC /* GoActivityCVC.m */; };
+		77FE6483198F5D36008724CC /* GoActivity.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 77FE6482198F5D36008724CC /* GoActivity.storyboard */; };
 		B29774111980D5EF000AD7B6 /* SettingsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = B297740F1980D5EF000AD7B6 /* SettingsVC.m */; };
 		B29774121980D5EF000AD7B6 /* SettingsVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = B29774101980D5EF000AD7B6 /* SettingsVC.xib */; };
 		B297741519820C4C000AD7B6 /* mapView.png in Resources */ = {isa = PBXBuildFile; fileRef = B297741319820C4C000AD7B6 /* mapView.png */; };
@@ -109,6 +111,10 @@
 		77F13145198EEE0000576708 /* RSDatePickerVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RSDatePickerVC.h; path = GymBud/Controllers/RSDatePickerVC.h; sourceTree = "<group>"; };
 		77F13146198EEE0000576708 /* RSDatePickerVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RSDatePickerVC.m; path = GymBud/Controllers/RSDatePickerVC.m; sourceTree = "<group>"; };
 		77FE647A198EF296008724CC /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
+		77FE647E198F4FE1008724CC /* GoActivityCVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GoActivityCVC.h; path = GymBud/Controllers/GoActivityCVC.h; sourceTree = "<group>"; };
+		77FE647F198F4FE1008724CC /* GoActivityCVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GoActivityCVC.m; path = GymBud/Controllers/GoActivityCVC.m; sourceTree = "<group>"; };
+		77FE6482198F5D36008724CC /* GoActivity.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = GoActivity.storyboard; path = GymBud/Views/GoActivity.storyboard; sourceTree = "<group>"; };
+		77FE6484198F5D43008724CC /* GymBudConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GymBudConstants.h; path = GymBud/Models/GymBudConstants.h; sourceTree = "<group>"; };
 		B297740E1980D5EF000AD7B6 /* SettingsVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SettingsVC.h; path = GymBud/Controllers/SettingsVC.h; sourceTree = "<group>"; };
 		B297740F1980D5EF000AD7B6 /* SettingsVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SettingsVC.m; path = GymBud/Controllers/SettingsVC.m; sourceTree = "<group>"; };
 		B29774101980D5EF000AD7B6 /* SettingsVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = SettingsVC.xib; path = GymBud/Controllers/SettingsVC.xib; sourceTree = "<group>"; };
@@ -394,6 +400,8 @@
 				B29774101980D5EF000AD7B6 /* SettingsVC.xib */,
 				77F13145198EEE0000576708 /* RSDatePickerVC.h */,
 				77F13146198EEE0000576708 /* RSDatePickerVC.m */,
+				77FE647E198F4FE1008724CC /* GoActivityCVC.h */,
+				77FE647F198F4FE1008724CC /* GoActivityCVC.m */,
 			);
 			name = Controllers;
 			path = ..;
@@ -404,6 +412,7 @@
 			children = (
 				B2C39D98197E197E00039F90 /* PAWPost.h */,
 				B2C39D99197E197E00039F90 /* PAWPost.m */,
+				77FE6484198F5D43008724CC /* GymBudConstants.h */,
 			);
 			name = Models;
 			path = ..;
@@ -414,6 +423,7 @@
 			children = (
 				B2D0CAD7197E2EAE00B17D32 /* TableHeaderView.xib */,
 				B297742C1984C1BF000AD7B6 /* PostCreateTVC.storyboard */,
+				77FE6482198F5D36008724CC /* GoActivity.storyboard */,
 			);
 			name = Views;
 			path = ..;
@@ -555,6 +565,7 @@
 				B297745419864133000AD7B6 /* centeredGear.png in Resources */,
 				B297743D198582A5000AD7B6 /* weightliftingIcon.png in Resources */,
 				B2D0CACA197E272400B17D32 /* login-button-small-pressed.png in Resources */,
+				77FE6483198F5D36008724CC /* GoActivity.storyboard in Resources */,
 				B2977439198582A5000AD7B6 /* basketballIcon.png in Resources */,
 				B297744919861B9D000AD7B6 /* mapTableToggle1.png in Resources */,
 				B2C39DBB197E1B5D00039F90 /* Main.storyboard in Resources */,
@@ -635,6 +646,7 @@
 				B2C39D8A197E194F00039F90 /* LoginViewController.m in Sources */,
 				B2C39D8E197E194F00039F90 /* PAWWallPostCreateViewController.m in Sources */,
 				B2C39D93197E194F00039F90 /* UserDetailsViewController.m in Sources */,
+				77FE6480198F4FE1008724CC /* GoActivityCVC.m in Sources */,
 				B2C39D90197E194F00039F90 /* PAWWallPostsTableViewController.m in Sources */,
 				B2C39D91197E194F00039F90 /* PAWWallViewController.m in Sources */,
 				77F13147198EEE0000576708 /* RSDatePickerVC.m in Sources */,

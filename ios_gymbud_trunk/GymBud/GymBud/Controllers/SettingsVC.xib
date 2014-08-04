@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6154.21" systemVersion="13D65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
-        <deployment defaultVersion="1792" identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6153.13"/>
     </dependencies>
     <objects>
@@ -44,6 +43,16 @@
                         <action selector="editProfile:" destination="-1" eventType="touchUpInside" id="whA-vT-Bkf"/>
                     </connections>
                 </button>
+                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LK3-Uo-7Wj">
+                    <rect key="frame" x="20" y="235" width="280" height="51"/>
+                    <fontDescription key="fontDescription" type="boldSystem" pointSize="32"/>
+                    <state key="normal" title="Show Calendar">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="showCalendarPressed:" destination="-1" eventType="touchUpInside" id="wXy-KP-HO1"/>
+                    </connections>
+                </button>
                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Enable Push?" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sZ1-y2-EBM">
                     <rect key="frame" x="20" y="183" width="197" height="44"/>
                     <fontDescription key="fontDescription" type="system" pointSize="32"/>
@@ -60,14 +69,14 @@
                         <action selector="enablePushOrNot:" destination="-1" eventType="valueChanged" id="YsD-vW-MZG"/>
                     </connections>
                 </segmentedControl>
-                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LK3-Uo-7Wj">
-                    <rect key="frame" x="20" y="235" width="280" height="51"/>
+                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fXx-Ox-dep">
+                    <rect key="frame" x="20" y="294" width="280" height="51"/>
                     <fontDescription key="fontDescription" type="boldSystem" pointSize="32"/>
-                    <state key="normal" title="Show Calendar">
+                    <state key="normal" title="Show GO Page">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                     <connections>
-                        <action selector="showCalendarPressed:" destination="-1" eventType="touchUpInside" id="wXy-KP-HO1"/>
+                        <action selector="showGoPage:" destination="-1" eventType="touchUpInside" id="Pcu-wO-nWK"/>
                     </connections>
                 </button>
             </subviews>

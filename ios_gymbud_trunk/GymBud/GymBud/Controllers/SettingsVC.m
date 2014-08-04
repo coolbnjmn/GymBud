@@ -10,6 +10,7 @@
 #import "EditProfileTVC.h"
 #import "LoginViewController.h"
 #import "RSDatePickerVC.h"
+#import "GoActivityCVC.h"
 
 @interface SettingsVC ()
 
@@ -76,4 +77,10 @@
     [self.navigationController pushViewController:datePickerVC animated:YES];
 }
 
+- (IBAction)showGoPage:(id)sender {
+    UIStoryboard *sb = [UIStoryboard storyboardWithName:@"GoActivity" bundle:nil];
+    GoActivityCVC *vc = [sb instantiateViewControllerWithIdentifier:@"GoActivity"];
+    vc.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
+    [self.navigationController pushViewController:vc animated:YES];
+}
 @end

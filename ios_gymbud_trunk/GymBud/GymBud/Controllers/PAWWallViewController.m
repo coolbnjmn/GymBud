@@ -14,6 +14,7 @@
 #import "MessageInboxTVC.h"
 #import "PostCreateTVC.h"
 #import "AppDelegate.h"
+#import "GymBudConstants.h"
 
 #import <CoreLocation/CoreLocation.h>
 
@@ -271,25 +272,9 @@
         else {
             pinView.annotation = annotation;
         }
-        
-        UIImage *tmp;
-        NSString *activity = ((PAWPost *)annotation).activity;
-        
-        if([activity isEqualToString:@"Basketball"]) {
-            tmp = [UIImage imageNamed:@"basketballMap.png"];
-        } else if([activity isEqualToString:@"Aerobics"]) {
-            tmp = [UIImage imageNamed:@"aerobicsMap.png"];
-        } else if([activity isEqualToString:@"Crossfit"]) {
-            tmp = [UIImage imageNamed:@"crossfitMap.png"];
-        } else if([activity isEqualToString:@"Running"]) {
-            tmp = [UIImage imageNamed:@"runningMap.png"];
-        } else if([activity isEqualToString:@"Swimming"]) {
-            tmp = [UIImage imageNamed:@"swimmingMap.png"];
-        } else if([activity isEqualToString:@"Weightlifting"]) {
-            tmp = [UIImage imageNamed:@"weightliftingMap.png"];
-        } else {
-            tmp = [UIImage imageNamed:@"yogaMap.png"];
-        }
+
+        UIImage *tmp = [UIImage imageNamed:[kGymBudActivityMapIconMapping objectForKey:((PAWPost *)annotation).activity]];
+
         CGSize destinationSize = CGSizeMake(32, 52);
         UIGraphicsBeginImageContext(destinationSize);
         [tmp drawInRect:CGRectMake(0,0,destinationSize.width,destinationSize.height)];
