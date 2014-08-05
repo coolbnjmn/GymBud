@@ -50,21 +50,6 @@ static NSString * const reuseIdentifier = @"goActivityCell";
 }
 
 
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-    if([segue.identifier isEqualToString:@"activityChosen"]) {
-        GoActivityChosenVC *vc = [segue destinationViewController];
-        NSIndexPath *indexPath = [self.collectionView indexPathsForSelectedItems][0];
-        vc.activity = [kGymBudActivities objectAtIndex:indexPath.row];
-    }
-}
-
-
 #pragma mark <UICollectionViewDataSource>
 
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
@@ -97,8 +82,10 @@ static NSString * const reuseIdentifier = @"goActivityCell";
 {
     // TODO: Select Item
     NSLog(@"selected item at indexpath: %@", indexPath);
-    [self performSegueWithIdentifier:@"activityChosen" sender:self];
-    
+    UIStoryboard *sb = [UIStoryboard storyboardWithName:@"GoActivity" bundle:nil];
+    GoActivityChosenVC *vc = [sb instantiateViewControllerWithIdentifier:@"GoActivityChosenVC"];
+    vc.activity = [kGymBudActivities objectAtIndex:indexPath.row];
+    [self.navigationController pushViewController:vc animated:YES];
 }
 - (void)collectionView:(UICollectionView *)collectionView didDeselectItemAtIndexPath:(NSIndexPath *)indexPath {
     // TODO: Deselect item

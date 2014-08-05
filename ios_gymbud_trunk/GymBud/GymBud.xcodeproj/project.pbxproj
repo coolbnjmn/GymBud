@@ -14,6 +14,7 @@
 		77FE6487198F715C008724CC /* GoActivityCVCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 77FE6486198F715C008724CC /* GoActivityCVCell.m */; };
 		77FE648B199051E8008724CC /* GoActivityCVCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 77FE648A199051E8008724CC /* GoActivityCVCell.xib */; };
 		77FE648E1990545A008724CC /* GoActivityChosenVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 77FE648D1990545A008724CC /* GoActivityChosenVC.m */; };
+		77FE64911990A924008724CC /* GoActivityCreateEventVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 77FE64901990A924008724CC /* GoActivityCreateEventVC.m */; };
 		B29774111980D5EF000AD7B6 /* SettingsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = B297740F1980D5EF000AD7B6 /* SettingsVC.m */; };
 		B29774121980D5EF000AD7B6 /* SettingsVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = B29774101980D5EF000AD7B6 /* SettingsVC.xib */; };
 		B297741519820C4C000AD7B6 /* mapView.png in Resources */ = {isa = PBXBuildFile; fileRef = B297741319820C4C000AD7B6 /* mapView.png */; };
@@ -123,6 +124,8 @@
 		77FE648A199051E8008724CC /* GoActivityCVCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = GoActivityCVCell.xib; path = GymBud/Controllers/GoActivityCVCell.xib; sourceTree = "<group>"; };
 		77FE648C1990545A008724CC /* GoActivityChosenVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GoActivityChosenVC.h; path = GymBud/Controllers/GoActivityChosenVC.h; sourceTree = "<group>"; };
 		77FE648D1990545A008724CC /* GoActivityChosenVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GoActivityChosenVC.m; path = GymBud/Controllers/GoActivityChosenVC.m; sourceTree = "<group>"; };
+		77FE648F1990A924008724CC /* GoActivityCreateEventVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GoActivityCreateEventVC.h; path = GymBud/Controllers/GoActivityCreateEventVC.h; sourceTree = "<group>"; };
+		77FE64901990A924008724CC /* GoActivityCreateEventVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GoActivityCreateEventVC.m; path = GymBud/Controllers/GoActivityCreateEventVC.m; sourceTree = "<group>"; };
 		B297740E1980D5EF000AD7B6 /* SettingsVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SettingsVC.h; path = GymBud/Controllers/SettingsVC.h; sourceTree = "<group>"; };
 		B297740F1980D5EF000AD7B6 /* SettingsVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SettingsVC.m; path = GymBud/Controllers/SettingsVC.m; sourceTree = "<group>"; };
 		B29774101980D5EF000AD7B6 /* SettingsVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = SettingsVC.xib; path = GymBud/Controllers/SettingsVC.xib; sourceTree = "<group>"; };
@@ -415,6 +418,8 @@
 				77FE648A199051E8008724CC /* GoActivityCVCell.xib */,
 				77FE648C1990545A008724CC /* GoActivityChosenVC.h */,
 				77FE648D1990545A008724CC /* GoActivityChosenVC.m */,
+				77FE648F1990A924008724CC /* GoActivityCreateEventVC.h */,
+				77FE64901990A924008724CC /* GoActivityCreateEventVC.m */,
 			);
 			name = Controllers;
 			path = ..;
@@ -651,6 +656,7 @@
 			files = (
 				B2C39D8C197E194F00039F90 /* MessageUserVC.m in Sources */,
 				77FE6487198F715C008724CC /* GoActivityCVCell.m in Sources */,
+				77FE64911990A924008724CC /* GoActivityCreateEventVC.m in Sources */,
 				B297742A1984C195000AD7B6 /* PostCreateTVC.m in Sources */,
 				B2C39D88197E194F00039F90 /* EditProfileTVC.m in Sources */,
 				B2C39D89197E194F00039F90 /* EPInterestVC.m in Sources */,
