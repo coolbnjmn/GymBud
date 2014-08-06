@@ -7,11 +7,13 @@
 //
 
 #import "GoActivityCreateEventVC.h"
+#import "GymBudConstants.h"
+#import <MLPAutoCompleteTextField/MLPAutoCompleteTextField.h>
 
-@interface GoActivityCreateEventVC ()
+@interface GoActivityCreateEventVC () <MLPAutoCompleteTextFieldDelegate, MLPAutoCompleteTextFieldDataSource>
 
 @property (weak, nonatomic) IBOutlet UIDatePicker *timePicker;
-@property (weak, nonatomic) IBOutlet UITextField *locationTextField;
+@property (weak, nonatomic) IBOutlet MLPAutoCompleteTextField *locationTextField;
 @property (weak, nonatomic) IBOutlet UITextView *namesTextView;
 
 @end
@@ -34,6 +36,8 @@
     NSLog(@"create event and activity is: %@", self.activity);
     UIBarButtonItem *createEventButton = [[UIBarButtonItem alloc] initWithTitle:@"Create Event" style:UIBarButtonItemStyleBordered target:self action:@selector(createEventButtonHandler:)];
     self.navigationItem.rightBarButtonItem = createEventButton;
+    self.locationTextField.autoCompleteTableAppearsAsKeyboardAccessory = YES;
+    self.locationTextField.autoCompleteTableBackgroundColor = [UIColor whiteColor];
 }
 
 - (void)didReceiveMemoryWarning
@@ -57,4 +61,9 @@
 }
 */
 
+#pragma mark - Auto Complete Data Source / Delegate
+- (NSArray *)autoCompleteTextField:(MLPAutoCompleteTextField *)textField
+      possibleCompletionsForString:(NSString *)string {
+    return kGymBudActivities;
+}
 @end

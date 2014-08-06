@@ -4,6 +4,7 @@ platform :ios, "7.0"
 target "GymBud" do
 
 pod 'RSDayFlow', '~> 0.1.2'
+pod 'MLPAutoCompleteTextField', '~> 1.5'
 
 end
 

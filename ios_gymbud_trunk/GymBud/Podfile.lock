@@ -1,10 +1,13 @@
 PODS:
+  - MLPAutoCompleteTextField (1.5)
   - RSDayFlow (0.1.2)
 
 DEPENDENCIES:
+  - MLPAutoCompleteTextField (~> 1.5)
   - RSDayFlow (~> 0.1.2)
 
 SPEC CHECKSUMS:
+  MLPAutoCompleteTextField: 5e440aa7b139258f779db3375dd486421959be15
   RSDayFlow: 03f2ed762b7ed199323770650597a499ef39112a
 
 COCOAPODS: 0.33.1
