@@ -57,7 +57,7 @@
     NSArray *users = [userQuery findObjects];
     self.names = [[NSMutableArray alloc] init];
     for(PFUser *user in users) {
-        [self.names addObject:[[user objectForKey:@"profile"] objectForKey:@"name"]];
+        [self.names addObject:[user objectForKey:@"user_fb_name"]];
     }
 }
 
@@ -67,10 +67,7 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (void)createEventButtonHandler:(id) sender {
-    // need to parse out all the elements into a parse object
-    // and return to a special page.
-}
+
 /*
 #pragma mark - Navigation
 
@@ -85,13 +82,87 @@
 - (IBAction)addPersonButtonHandler:(id)sender {
     if([self.namesTextView.text isEqualToString:@""]) {
         self.namesTextView.text = self.namesTextField.text;
-    } else {
-        self.namesTextView.text = [[self.namesTextView.text stringByAppendingString:@", "] stringByAppendingString:self.namesTextField.text];
+    } else if([self.namesTextView.text rangeOfString:self.namesTextField.text].location == NSNotFound) {
+        self.namesTextView.text = [[self.namesTextView.text stringByAppendingString:@", "]stringByAppendingString:self.namesTextField.text];
     }
 }
 
 - (IBAction)removeAllPeopleButtonHandler:(id)sender {
     self.namesTextView.text = @"";
+}
+
+- (void)createEventButtonHandler:(id) sender {
+    // need to parse out all the elements into a parse object
+    // and return to a special page.
+    
+    
+    
+    // now for the location
+    NSURL *url = [NSURL URLWithString:@"https://maps.googleapis.com/maps/api/geocode/"];
+    NSLog(@"%@", [[self.locationTextField.text stringByReplacingOccurrencesOfString:@", " withString:@"+"] stringByReplacingOccurrencesOfString:@" " withString:@"+"]);
+    NSDictionary *params = @{@"address" : [[self.locationTextField.text stringByReplacingOccurrencesOfString:@", " withString:@"+"] stringByReplacingOccurrencesOfString:@" " withString:@"+"],
+                             @"sensor" : @"true",
+                             @"key" : kGoogleApiKey};
+    
+    AFHTTPSessionManager *httpSessionManager = [[AFHTTPSessionManager alloc] initWithBaseURL:url];
+    [httpSessionManager GET:@"json" parameters:params success:^(NSURLSessionDataTask *task, id responseObject) {
+//        NSLog(@"\n============= Entity Saved Success ===\n%@",responseObject);
+        NSLog(@"%@", responseObject[@"results"][1][@"geometry"][@"location"][@"lat"]);
+        NSString *latStr = responseObject[@"results"][1][@"geometry"][@"location"][@"lat"];
+        NSString *lngStr = responseObject[@"results"][1][@"geometry"][@"location"][@"lng"];
+        CLLocationDegrees lat = [latStr doubleValue];
+        CLLocationDegrees lng = [lngStr doubleValue];
+        PFGeoPoint *eventLocation = [PFGeoPoint geoPointWithLatitude:lat longitude:lng];
+        
+        PFObject *eventObject = [PFObject objectWithClassName:@"Event"];
+        [eventObject setObject:[PFUser currentUser] forKey:@"organizer"];
+        
+        [eventObject setObject:eventLocation forKey:@"location"];
+        
+        NSArray *userNames = [self.namesTextView.text componentsSeparatedByString:@", "];
+        NSLog(@"%@", userNames);
+        NSMutableArray *eventUsers = [[NSMutableArray alloc] init];
+        for(NSString *userName in userNames) {
+            if([userName isEqualToString:@""]) {
+                continue;
+            }
+            PFQuery *userQuery = [PFUser query];
+            [userQuery whereKey:@"user_fb_name" equalTo:userName];
+            PFObject *namedUser = [userQuery getFirstObject];
+            [eventUsers addObject:namedUser];
+        }
+        [eventObject setObject:eventUsers forKey:@"attendees"];
+        [eventObject setObject:self.timePicker.date forKey:@"time"];
+        [eventObject setObject:@"YES" forKey:@"isVisible"];
+        
+        [eventObject setObject:self.activity forKey:@"activity"];
+        
+        // Use PFACL to restrict future modifications to this object.
+        PFACL *readOnlyACL = [PFACL ACL];
+        [readOnlyACL setPublicReadAccess:YES];
+        [readOnlyACL setPublicWriteAccess:NO];
+        [eventObject setACL:readOnlyACL];
+        [eventObject saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+            if (error) {
+                NSLog(@"Couldn't save!");
+                NSLog(@"%@", error);
+                UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:[[error userInfo] objectForKey:@"error"] message:nil delegate:self cancelButtonTitle:nil otherButtonTitles:@"Ok", nil];
+                [alertView show];
+                return;
+            }
+            if (succeeded) {
+                NSLog(@"Successfully saved!");
+                NSLog(@"%@", eventObject);
+                //            dispatch_async(dispatch_get_main_queue(), ^{
+                //                [[NSNotificationCenter defaultCenter] postNotificationName:@"CreatePostNotification" object:nil];
+                //            });
+            } else {
+                NSLog(@"Failed to save.");
+            }
+        }];
+    } failure:^(NSURLSessionDataTask *task, NSError *error) {
+        NSLog(@"\n============== ERROR ====\n%@",error.userInfo);
+    }];
 }
 
 #pragma mark - Auto Complete Data Source / Delegate

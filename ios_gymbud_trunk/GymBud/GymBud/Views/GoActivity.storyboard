@@ -94,7 +94,7 @@
         <scene sceneID="Nz8-4D-ZRQ">
             <objects>
                 <tableViewController storyboardIdentifier="GoActivityCreateEventVC" id="QRa-dW-cGG" customClass="GoActivityCreateEventVC" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" alwaysBounceVertical="YES" pagingEnabled="YES" dataMode="static" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="r9p-tF-1BL">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" showsHorizontalScrollIndicator="NO" keyboardDismissMode="interactive" dataMode="static" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="r9p-tF-1BL">
                         <rect key="frame" x="0.0" y="64" width="320" height="455"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>

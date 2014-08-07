@@ -104,6 +104,7 @@
             }
             
             [[PFUser currentUser] setObject:userProfile forKey:@"profile"];
+            [[PFUser currentUser] setObject:userData[@"name"] forKey:@"user_fb_name"];
             [[PFUser currentUser] saveInBackground];
             
         } else if ([[[[error userInfo] objectForKey:@"error"] objectForKey:@"type"]
