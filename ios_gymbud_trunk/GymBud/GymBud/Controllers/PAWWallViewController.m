@@ -15,6 +15,7 @@
 #import "PostCreateTVC.h"
 #import "AppDelegate.h"
 #import "GymBudConstants.h"
+#import "GymBudEventModel.h"
 
 #import <CoreLocation/CoreLocation.h>
 
@@ -288,6 +289,42 @@
         pinView.rightCalloutAccessoryView = infoButton;
         NSLog(@"pinView is now: %@", pinView);
         return pinView;
+    } else if([annotation isKindOfClass:[GymBudEventModel class]]) {
+        // Try to dequeue an existing pin view first.
+        MKPinAnnotationView *pinView = (MKPinAnnotationView*)[aMapView dequeueReusableAnnotationViewWithIdentifier:pinIdentifier];
+        
+        if (!pinView)
+        {
+            // If an existing pin view was not available, create one.
+            pinView = [[MKPinAnnotationView alloc] initWithAnnotation:annotation
+                                                      reuseIdentifier:pinIdentifier];
+        }
+        else {
+            pinView.annotation = annotation;
+        }
+        
+        UIImage *tmp = [UIImage imageNamed:[kGymBudActivityMapIconMapping objectForKey:((GymBudEventModel *)annotation).activity]];
+        
+        CGSize destinationSize = CGSizeMake(32, 52);
+        UIGraphicsBeginImageContext(destinationSize);
+        [tmp drawInRect:CGRectMake(0,0,destinationSize.width,destinationSize.height)];
+        UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
+        UIGraphicsEndImageContext();
+        pinView.image = newImage;
+        pinView.canShowCallout = YES;
+        
+        UIButton *infoButton = [UIButton buttonWithType:UIButtonTypeDetailDisclosure];
+        UIImage *leftImage = [UIImage imageNamed:((GymBudEventModel *)annotation).pictureLogo];
+        CGSize destinationSizeLogo = CGSizeMake(40, 40);
+        UIGraphicsBeginImageContext(destinationSizeLogo);
+        [leftImage drawInRect:CGRectMake(0,0,destinationSizeLogo.width,destinationSizeLogo.height)];
+        UIImage *finalLeftImage = UIGraphicsGetImageFromCurrentImageContext();
+        UIGraphicsEndImageContext();
+
+        pinView.leftCalloutAccessoryView = [[UIImageView alloc] initWithImage:finalLeftImage];
+        pinView.rightCalloutAccessoryView = infoButton;
+        NSLog(@"pinView is now: %@", pinView);
+        return pinView;
     }
     
 	return nil;
@@ -351,7 +388,56 @@
 }
 
 #pragma mark - Fetch map pins
+- (void)queryForAllEvents {
+    PFQuery *query = [PFQuery queryWithClassName:@"Event"];
+    
+    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+        if (error) {
+            NSLog(@"error in events geo query!"); // todo why is this ever happening?
+        } else {
+            // We need to make new post objects from objects,
+            // and update allPosts and the map to reflect this new array.
+            // But we don't want to remove all annotations from the mapview blindly,
+            // so let's do some work to figure out what's new and what needs removing.
+            NSLog(@"event geo query was successful!");
+            // 1. Find genuinely new posts:
+            NSMutableArray *newEvents = [[NSMutableArray alloc] initWithCapacity:1000];
+            // (Cache the objects we make for the search in step 2:)
+            NSMutableArray *allNewEvents = [[NSMutableArray alloc] initWithCapacity:1000];
+            for (PFObject *object in objects) {
+                GymBudEventModel *newEvent = [[GymBudEventModel alloc] initWithPFObject:object];
+                [allNewEvents addObject:newEvent];
+                BOOL found = NO;
+                for (GymBudEventModel *currEvent in allPosts) {
+                    if ([newEvent equalToEvent:currEvent]) {
+                        found = YES;
+                    }
+                }
+                if (!found) {
+                    [newEvents addObject:newEvent];
+                }
+            }
+            // newPosts now contains our new objects.
 
+            // 3. Configure our new posts; these are about to go onto the map.
+            for (GymBudEventModel *newEvent in newEvents) {
+                // if this post is outside the filter distance, don't show the regular callout.
+                [newEvent setTitleAndSubtitle];
+                // Animate all pins after the initial load:
+                newEvent.animatesDrop = mapPinsPlaced;
+            }
+            
+            // At this point, newAllPosts contains a new list of post objects.
+            // We should add everything in newPosts to the map, remove everything in postsToRemove,
+            // and add newPosts to allPosts.
+            NSLog(@"posts to add: %@", newEvents);
+            [mapView addAnnotations:newEvents];
+            [allPosts addObjectsFromArray:newEvents];
+            self.mapPinsPlaced = YES;
+        }
+    }];
+    
+}
 - (void)queryForAllPostsNearLocation:(CLLocation *)currentLocation withNearbyDistance:(CLLocationAccuracy)nearbyDistance {
     NSLog(@"query for all posts near location");
 	PFQuery *query = [PFQuery queryWithClassName:self.className];
@@ -443,20 +529,20 @@
 
 // When we update the search filter distance, we need to update our pins' titles to match.
 - (void)updatePostsForLocation:(CLLocation *)currentLocation withNearbyDistance:(CLLocationAccuracy) nearbyDistance {
-    for (PAWPost *post in allPosts) {
-        CLLocation *objectLocation = [[CLLocation alloc] initWithLatitude:post.coordinate.latitude longitude:post.coordinate.longitude];
-        // if this post is outside the filter distance, don't show the regular callout.
-        CLLocationDistance distanceFromCurrent = [currentLocation distanceFromLocation:objectLocation];
-        if (distanceFromCurrent > nearbyDistance) { // Outside search radius
-            [post setTitleAndSubtitleOutsideDistance:YES];
-            [mapView viewForAnnotation:post];
-            [(MKPinAnnotationView *) [mapView viewForAnnotation:post] setPinColor:post.pinColor];
-        } else {
-            [post setTitleAndSubtitleOutsideDistance:NO]; // Inside search radius
-            [mapView viewForAnnotation:post];
-            [(MKPinAnnotationView *) [mapView viewForAnnotation:post] setPinColor:post.pinColor];
-        }
-    }
+//    for (PAWPost *post in allPosts) {
+//        CLLocation *objectLocation = [[CLLocation alloc] initWithLatitude:post.coordinate.latitude longitude:post.coordinate.longitude];
+//        // if this post is outside the filter distance, don't show the regular callout.
+//        CLLocationDistance distanceFromCurrent = [currentLocation distanceFromLocation:objectLocation];
+//        if (distanceFromCurrent > nearbyDistance) { // Outside search radius
+//            [post setTitleAndSubtitleOutsideDistance:YES];
+//            [mapView viewForAnnotation:post];
+//            [(MKPinAnnotationView *) [mapView viewForAnnotation:post] setPinColor:post.pinColor];
+//        } else {
+//            [post setTitleAndSubtitleOutsideDistance:NO]; // Inside search radius
+//            [mapView viewForAnnotation:post];
+//            [(MKPinAnnotationView *) [mapView viewForAnnotation:post] setPinColor:post.pinColor];
+//        }
+//    }
 }
 
 
@@ -492,8 +578,9 @@
     AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
     
     // Update the map with new pins:
-    [self queryForAllPostsNearLocation:appDelegate.currentLocation
-                    withNearbyDistance:appDelegate.filterDistance];
+    [self queryForAllEvents];
+//    [self queryForAllPostsNearLocation:appDelegate.currentLocation
+//                    withNearbyDistance:appDelegate.filterDistance];
     // And update the existing pins to reflect any changes in filter distance:
     [self updatePostsForLocation:appDelegate.currentLocation
               withNearbyDistance:appDelegate.filterDistance];

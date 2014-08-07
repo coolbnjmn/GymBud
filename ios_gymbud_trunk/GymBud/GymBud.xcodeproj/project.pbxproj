@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		77F13147198EEE0000576708 /* RSDatePickerVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 77F13146198EEE0000576708 /* RSDatePickerVC.m */; };
+		77FD41C51993EEF20017E8D5 /* GymBudEventModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 77FD41C41993EEF20017E8D5 /* GymBudEventModel.m */; };
 		77FE647B198EF296008724CC /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 77FE647A198EF296008724CC /* Social.framework */; };
 		77FE6480198F4FE1008724CC /* GoActivityCVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 77FE647F198F4FE1008724CC /* GoActivityCVC.m */; };
 		77FE6483198F5D36008724CC /* GoActivity.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 77FE6482198F5D36008724CC /* GoActivity.storyboard */; };
@@ -114,6 +115,8 @@
 		77F13143198EEDDD00576708 /* libPods-GymBud-RSDayFlow.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libPods-GymBud-RSDayFlow.a"; path = "Pods/build/Debug-iphoneos/libPods-GymBud-RSDayFlow.a"; sourceTree = "<group>"; };
 		77F13145198EEE0000576708 /* RSDatePickerVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RSDatePickerVC.h; path = GymBud/Controllers/RSDatePickerVC.h; sourceTree = "<group>"; };
 		77F13146198EEE0000576708 /* RSDatePickerVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RSDatePickerVC.m; path = GymBud/Controllers/RSDatePickerVC.m; sourceTree = "<group>"; };
+		77FD41C31993EEF20017E8D5 /* GymBudEventModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GymBudEventModel.h; path = GymBud/Models/GymBudEventModel.h; sourceTree = "<group>"; };
+		77FD41C41993EEF20017E8D5 /* GymBudEventModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GymBudEventModel.m; path = GymBud/Models/GymBudEventModel.m; sourceTree = "<group>"; };
 		77FE647A198EF296008724CC /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
 		77FE647E198F4FE1008724CC /* GoActivityCVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GoActivityCVC.h; path = GymBud/Controllers/GoActivityCVC.h; sourceTree = "<group>"; };
 		77FE647F198F4FE1008724CC /* GoActivityCVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GoActivityCVC.m; path = GymBud/Controllers/GoActivityCVC.m; sourceTree = "<group>"; };
@@ -428,9 +431,11 @@
 		B2C39D97197E197400039F90 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				77FE6484198F5D43008724CC /* GymBudConstants.h */,
 				B2C39D98197E197E00039F90 /* PAWPost.h */,
 				B2C39D99197E197E00039F90 /* PAWPost.m */,
-				77FE6484198F5D43008724CC /* GymBudConstants.h */,
+				77FD41C31993EEF20017E8D5 /* GymBudEventModel.h */,
+				77FD41C41993EEF20017E8D5 /* GymBudEventModel.m */,
 			);
 			name = Models;
 			path = ..;
@@ -654,6 +659,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				77FD41C51993EEF20017E8D5 /* GymBudEventModel.m in Sources */,
 				B2C39D8C197E194F00039F90 /* MessageUserVC.m in Sources */,
 				77FE6487198F715C008724CC /* GoActivityCVCell.m in Sources */,
 				77FE64911990A924008724CC /* GoActivityCreateEventVC.m in Sources */,
