@@ -44,7 +44,6 @@
     self.organizer = [anObject objectForKey:@"organizer"];
     
     self.activity = [anObject objectForKey:@"activity"];
-    [self.organizer fetchIfNeeded];
     [anObject fetchIfNeeded];
     CLLocationCoordinate2D aCoordinate = CLLocationCoordinate2DMake(self.geopoint.latitude, self.geopoint.longitude);
     NSString *aTitle = [anObject objectForKey:@"activity"];

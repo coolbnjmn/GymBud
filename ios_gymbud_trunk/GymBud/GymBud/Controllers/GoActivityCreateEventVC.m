@@ -22,6 +22,7 @@
 
 @property (nonatomic, strong) NSMutableArray *places;
 @property (nonatomic, strong) NSMutableArray *names;
+@property (nonatomic, strong) NSMutableArray *users;
 
 @end
 
@@ -54,11 +55,19 @@
     self.places = [[NSMutableArray alloc] init];
     
     PFQuery *userQuery = [PFUser query];
-    NSArray *users = [userQuery findObjects];
-    self.names = [[NSMutableArray alloc] init];
-    for(PFUser *user in users) {
-        [self.names addObject:[user objectForKey:@"user_fb_name"]];
-    }
+//    NSArray *users = [userQuery findObjectsIn];
+//    self.names = [[NSMutableArray alloc] init];
+//    for(PFUser *user in users) {
+//        [self.names addObject:[user objectForKey:@"user_fb_name"]];
+//    }
+    [userQuery findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error){
+        self.names = [[NSMutableArray alloc] init];
+        self.users = [[NSMutableArray alloc] init];
+        for(PFUser *user in objects) {
+            [self.names addObject:[user objectForKey:@"user_fb_name"]];
+            [self.users addObject:user];
+        }
+    }];
 }
 
 - (void)didReceiveMemoryWarning
@@ -106,10 +115,17 @@
     
     AFHTTPSessionManager *httpSessionManager = [[AFHTTPSessionManager alloc] initWithBaseURL:url];
     [httpSessionManager GET:@"json" parameters:params success:^(NSURLSessionDataTask *task, id responseObject) {
-//        NSLog(@"\n============= Entity Saved Success ===\n%@",responseObject);
-        NSLog(@"%@", responseObject[@"results"][1][@"geometry"][@"location"][@"lat"]);
-        NSString *latStr = responseObject[@"results"][1][@"geometry"][@"location"][@"lat"];
-        NSString *lngStr = responseObject[@"results"][1][@"geometry"][@"location"][@"lng"];
+        NSLog(@"\n============= Entity Saved Success ===\n%@",responseObject);
+        NSString *latStr;
+        NSString *lngStr;
+        for(id object in responseObject[@"results"]) {
+            NSLog(@"%@", object);
+            if([object objectForKey:@"geometry"]) {
+                latStr = object[@"geometry"][@"location"][@"lat"];
+                lngStr = object[@"geometry"][@"location"][@"lng"];
+            }
+        }
+
         CLLocationDegrees lat = [latStr doubleValue];
         CLLocationDegrees lng = [lngStr doubleValue];
         PFGeoPoint *eventLocation = [PFGeoPoint geoPointWithLatitude:lat longitude:lng];
@@ -126,10 +142,12 @@
             if([userName isEqualToString:@""]) {
                 continue;
             }
-            PFQuery *userQuery = [PFUser query];
-            [userQuery whereKey:@"user_fb_name" equalTo:userName];
-            PFObject *namedUser = [userQuery getFirstObject];
-            [eventUsers addObject:namedUser];
+            for(PFUser *user in self.users) {
+                if([userName isEqualToString:[user objectForKey:@"user_fb_name"]]) {
+                    [eventUsers addObject:user];
+                    break;
+                }
+            }
         }
         [eventObject setObject:eventUsers forKey:@"attendees"];
         [eventObject setObject:self.timePicker.date forKey:@"time"];
@@ -156,6 +174,12 @@
                 //            dispatch_async(dispatch_get_main_queue(), ^{
                 //                [[NSNotificationCenter defaultCenter] postNotificationName:@"CreatePostNotification" object:nil];
                 //            });
+                [self.navigationController popToRootViewControllerAnimated:YES];
+                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, NSEC_PER_SEC / 2), dispatch_get_main_queue(), ^{
+                    NSLog(@"selftabbarcontroller setselectedindex 0");
+                    [self.tabBarController setSelectedIndex:0];
+                });
+                
             } else {
                 NSLog(@"Failed to save.");
             }
