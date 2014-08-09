@@ -1,6 +1,6 @@
 #import "UserDetailsViewController.h"
 #import <QuartzCore/QuartzCore.h>
-#import "PAWPost.h"
+#import "GymBudEventModel.h"
 #import "MessageUserVC.h"
 #import "GymBudConstants.h"
 
@@ -12,7 +12,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.title = @"Profile";
+    self.title = @"Organizer";
     self.tableView.backgroundColor = [UIColor colorWithRed:44/255.0f green:62/255.0f blue:80/255.0f alpha:1.0f];
     
     UIBarButtonItem *messageButton = [[UIBarButtonItem alloc] initWithTitle:@"Message User" style:UIBarButtonItemStyleBordered target:self action:@selector(messageUser:)];
@@ -28,31 +28,28 @@
     // Set default values for the table row data
     self.rowDataArray = [@[@"N/A", @"N/A", @"N/A", @"N/A", @"N/A", @"N/A", @"N/A", @"N/A", @"N/A"] mutableCopy];
     
-    // If the user is already logged in, display any previously cached values before we get the latest from Facebook.
-//    if ([PFUser currentUser]) {
-//        [self updateProfile];
-//    }
     NSLog(@"annotation is: ");
     NSLog(@"%@", annotation);
-    PAWPost *post = (PAWPost *) annotation;
-    if([post user]) {
-        [[post user] fetchIfNeeded];
-        [self updateProfileForUser: [post user]];
+    GymBudEventModel *event = (GymBudEventModel *) annotation;
+    if([event organizer]) {
+        [[event organizer] fetchIfNeededInBackgroundWithBlock:^(PFObject *object, NSError *error){
+            [self updateProfileForUser:(PFUser *)object];
+        }];
     }
         
-    UIImage *pictureLogo = [UIImage imageNamed:[kGymBudActivityIconMapping objectForKey:post.activity]];
+    UIImage *pictureLogo = [UIImage imageNamed:[kGymBudActivityIconMapping objectForKey:event.activity]];
 
     self.headerPictureLogo.image = pictureLogo;
-    self.headerCheckinMessage.text = post.title;
+    self.headerCheckinMessage.text = event.title;
 }
 
 -(void)messageUser:(id) sender {
     // about to message user
-    PAWPost *post = (PAWPost *) annotation;
+    GymBudEventModel *event = (GymBudEventModel *) annotation;
 
     NSLog(@"about to message user");
     MessageUserVC *controller = [[MessageUserVC alloc] initWithNibName:nil bundle:nil];
-    controller.user = [post user];
+    controller.user = [event organizer];
     [self.navigationController pushViewController:controller animated:YES]; // or use presentViewController if you're using modals
 }
 
