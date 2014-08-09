@@ -30,7 +30,9 @@
 @property (nonatomic, readonly, strong) PFObject *object;
 @property (nonatomic, readonly, strong) PFGeoPoint *geopoint;
 @property (nonatomic, readonly, strong) PFUser *organizer;
+@property (nonatomic, readonly, strong) NSDate *eventDate;
 @property (nonatomic, assign) BOOL animatesDrop;
+@property (nonatomic, assign) NSNumber* isVisible;
 @property (nonatomic, readonly) MKPinAnnotationColor pinColor;
 
 // Designated initializer.

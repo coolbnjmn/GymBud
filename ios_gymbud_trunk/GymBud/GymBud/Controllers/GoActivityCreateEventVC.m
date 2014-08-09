@@ -125,9 +125,15 @@
                 lngStr = object[@"geometry"][@"location"][@"lng"];
             }
         }
-
+        
         CLLocationDegrees lat = [latStr doubleValue];
         CLLocationDegrees lng = [lngStr doubleValue];
+        
+        if(lat == 0 || lng == 0) {
+            AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
+            lat = appDelegate.currentLocation.coordinate.latitude;
+            lng = appDelegate.currentLocation.coordinate.longitude;
+        }
         PFGeoPoint *eventLocation = [PFGeoPoint geoPointWithLatitude:lat longitude:lng];
         
         PFObject *eventObject = [PFObject objectWithClassName:@"Event"];
@@ -151,15 +157,10 @@
         }
         [eventObject setObject:eventUsers forKey:@"attendees"];
         [eventObject setObject:self.timePicker.date forKey:@"time"];
-        [eventObject setObject:@"YES" forKey:@"isVisible"];
+        [eventObject setObject:[NSNumber numberWithBool:YES] forKey:@"isVisible"];
         
         [eventObject setObject:self.activity forKey:@"activity"];
         
-        // Use PFACL to restrict future modifications to this object.
-        PFACL *readOnlyACL = [PFACL ACL];
-        [readOnlyACL setPublicReadAccess:YES];
-        [readOnlyACL setPublicWriteAccess:NO];
-        [eventObject setACL:readOnlyACL];
         [eventObject saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
             if (error) {
                 NSLog(@"Couldn't save!");

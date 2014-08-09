@@ -34,6 +34,7 @@
 
 // posts:
 @property (nonatomic, strong) NSMutableArray *allPosts;
+@property (nonatomic, strong) NSMutableArray *allEvents;
 
 - (void)startStandardUpdates;
 
@@ -61,6 +62,7 @@
 @synthesize annotations;
 @synthesize className;
 @synthesize allPosts;
+@synthesize allEvents;
 @synthesize mapPinsPlaced;
 @synthesize mapPannedSinceLocationUpdate;
 
@@ -70,6 +72,7 @@
 		self.title = @"GymBud";
 		annotations = [[NSMutableArray alloc] initWithCapacity:10];
 		allPosts = [[NSMutableArray alloc] initWithCapacity:10];
+        allEvents = [[NSMutableArray alloc] initWithCapacity:10];
 	}
 	return self;
 }
@@ -287,7 +290,6 @@
         UIButton *infoButton = [UIButton buttonWithType:UIButtonTypeDetailDisclosure];
         pinView.leftCalloutAccessoryView = [[UIImageView alloc] initWithImage:[UIImage imageWithData:[NSData dataWithContentsOfURL:[((PAWPost *) annotation) pictureURL]] scale:6]];
         pinView.rightCalloutAccessoryView = infoButton;
-        NSLog(@"pinView is now: %@", pinView);
         return pinView;
     } else if([annotation isKindOfClass:[GymBudEventModel class]]) {
         // Try to dequeue an existing pin view first.
@@ -323,7 +325,6 @@
 
         pinView.leftCalloutAccessoryView = [[UIImageView alloc] initWithImage:finalLeftImage];
         pinView.rightCalloutAccessoryView = infoButton;
-        NSLog(@"pinView is now: %@", pinView);
         return pinView;
     }
     
@@ -375,7 +376,6 @@
         }
         CGRect endFrame = aV.frame;
         
-        NSLog(@"aV is now: %@", aV);
         aV.frame = CGRectMake(aV.frame.origin.x, aV.frame.origin.y - 230.0, aV.frame.size.width, aV.frame.size.height);
         
         [UIView beginAnimations:nil context:NULL];
@@ -391,6 +391,7 @@
 - (void)queryForAllEvents {
     PFQuery *query = [PFQuery queryWithClassName:@"Event"];
     
+    [query whereKey:@"isVisible" equalTo:[NSNumber numberWithBool:YES]];
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
         if (error) {
             NSLog(@"error in events geo query!"); // todo why is this ever happening?
@@ -406,10 +407,19 @@
             NSMutableArray *allNewEvents = [[NSMutableArray alloc] initWithCapacity:1000];
             for (PFObject *object in objects) {
                 GymBudEventModel *newEvent = [[GymBudEventModel alloc] initWithPFObject:object];
+                if([[NSDate date] compare:newEvent.eventDate] == NSOrderedDescending) {
+                    // if NSDate date is later than newEvent.eventDate, go into this if
+                    NSLog(@"%@", newEvent.eventDate);
+                    NSLog(@"%@", [NSDate date]);
+                    NSLog(@"NSOrderedDescending");
+                    [object setObject:[NSNumber numberWithBool:NO] forKey:@"isVisible"];
+                    [object saveInBackground];
+                    continue;
+                }
                 [allNewEvents addObject:newEvent];
                 BOOL found = NO;
-                for (GymBudEventModel *currEvent in allPosts) {
-                    if ([newEvent equalToEvent:currEvent]) {
+                for (GymBudEventModel *currentEvent in allEvents) {
+                    if ([newEvent equalToEvent:currentEvent]) {
                         found = YES;
                     }
                 }
@@ -417,8 +427,24 @@
                     [newEvents addObject:newEvent];
                 }
             }
-            // newPosts now contains our new objects.
-
+            // newEvents now contains our new objects.
+            
+            // 2. Find posts in allEvents that didn't make the cut.
+            NSMutableArray *eventsToRemove = [[NSMutableArray alloc] initWithCapacity:1000];
+            for (GymBudEventModel *currentEvent in allEvents) {
+                BOOL found = NO;
+                // Use our object cache from the first loop to save some work.
+                for (GymBudEventModel *allNewEvent in allNewEvents) {
+                    if ([currentEvent equalToEvent:allNewEvent]) {
+                        found = YES;
+                    }
+                }
+                if (!found) {
+                    [eventsToRemove addObject:currentEvent];
+                }
+            }
+            // eventsToRemove has objects that didn't come in with our new results.
+            
             // 3. Configure our new posts; these are about to go onto the map.
             for (GymBudEventModel *newEvent in newEvents) {
                 // if this post is outside the filter distance, don't show the regular callout.
@@ -430,9 +456,12 @@
             // At this point, newAllPosts contains a new list of post objects.
             // We should add everything in newPosts to the map, remove everything in postsToRemove,
             // and add newPosts to allPosts.
-            NSLog(@"posts to add: %@", newEvents);
+            [mapView removeAnnotations:eventsToRemove];
+            NSLog(@"events to add: %@", newEvents);
             [mapView addAnnotations:newEvents];
-            [allPosts addObjectsFromArray:newEvents];
+            [allEvents addObjectsFromArray:newEvents];
+            [allEvents removeObjectsInArray:eventsToRemove];
+            
             self.mapPinsPlaced = YES;
         }
     }];

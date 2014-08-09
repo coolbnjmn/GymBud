@@ -22,6 +22,7 @@
 @property (nonatomic, strong) PFObject *object;
 @property (nonatomic, strong) PFGeoPoint *geopoint;
 @property (nonatomic, strong) PFUser *organizer;
+@property (nonatomic, strong) NSDate *eventDate;
 @property (nonatomic, assign) MKPinAnnotationColor pinColor;
 
 @end
@@ -44,6 +45,8 @@
     self.organizer = [anObject objectForKey:@"organizer"];
     
     self.activity = [anObject objectForKey:@"activity"];
+    self.isVisible = [anObject objectForKey:@"isVisible"];
+    self.eventDate = [anObject objectForKey:@"time"];
     [anObject fetchIfNeeded];
     CLLocationCoordinate2D aCoordinate = CLLocationCoordinate2DMake(self.geopoint.latitude, self.geopoint.longitude);
     NSString *aTitle = [anObject objectForKey:@"activity"];
