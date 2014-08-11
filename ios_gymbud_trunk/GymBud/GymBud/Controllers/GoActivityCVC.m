@@ -38,7 +38,7 @@ static NSString * const reuseIdentifier = @"goActivityCell";
     // Register cell classes
 //    [self.collectionView registerClass:[GoActivityCVCell class] forCellWithReuseIdentifier:reuseIdentifier];
     [self.collectionView registerNib:[UINib nibWithNibName:@"GoActivityCVCell" bundle:[NSBundle mainBundle]] forCellWithReuseIdentifier:reuseIdentifier];
-    self.collectionView.backgroundColor = [UIColor redColor];
+    self.collectionView.backgroundColor = [UIColor whiteColor];
     self.navigationItem.title = @"GO";
     // Do any additional setup after loading the view.
 }
