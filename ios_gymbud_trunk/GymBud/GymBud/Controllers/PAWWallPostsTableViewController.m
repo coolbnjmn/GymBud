@@ -9,6 +9,8 @@
 #import "PAWWallPostsTableViewController.h"
 #import "PAWWallPostCreateViewController.h"
 #import "UserDetailsViewController.h"
+#import "GymBudConstants.h"
+#import "GymBudEventModel.h"
 #import "AppDelegate.h"
 
 static CGFloat const kPAWWallPostTableViewFontSize = 12.f;
@@ -19,7 +21,6 @@ static CGFloat const kPAWCellPaddingTop = 5.0f;
 static CGFloat const kPAWCellPaddingBottom = 1.0f;
 static CGFloat const kPAWCellPaddingSides = 0.0f;
 static CGFloat const kPAWCellTextPaddingTop = 6.0f;
-static CGFloat const kPAWCellTextPaddingBottom = 5.0f;
 static CGFloat const kPAWCellTextPaddingSides = 5.0f;
 
 static CGFloat const kPAWCellUsernameHeight = 15.0f;
@@ -48,7 +49,6 @@ static NSUInteger const kPAWTableViewMainSection = 0;
 @implementation PAWWallPostsTableViewController
 
 - (void)dealloc {
-//	[[NSNotificationCenter defaultCenter] removeObserver:self name:kPAWFilterDistanceChangeNotification object:nil];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:@"LocationChangeNotification" object:nil];
 	[[NSNotificationCenter defaultCenter] removeObserver:self name:@"CreatePostNotification" object:nil];
 }
@@ -59,7 +59,7 @@ static NSUInteger const kPAWTableViewMainSection = 0;
 		// Customize the table:
 
 		// The className to query on
-		self.parseClassName = @"Posts";
+		self.parseClassName = @"Event";
 
 		// The key of the PFObject to display in the label of the default cell style
 		self.textKey = @"text";
@@ -110,7 +110,6 @@ static NSUInteger const kPAWTableViewMainSection = 0;
     UIBarButtonItem *mapToTableViewButton = [[UIBarButtonItem alloc] initWithImage:[buttonImage imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal] style:UIBarButtonItemStyleBordered target:self.navigationController.viewControllers[self.navigationController.viewControllers.count - 2] action:@selector(toggleMapTable:)];
     self.navigationItem.rightBarButtonItem = mapToTableViewButton;
     
-//    self.navigationController.tabBarItem.image = [UIImage imageNamed:@"menu.png"];
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
@@ -156,8 +155,8 @@ static NSUInteger const kPAWTableViewMainSection = 0;
 
 	// And set the query to look by location
 	PFGeoPoint *point = [PFGeoPoint geoPointWithLatitude:currentLocation.coordinate.latitude longitude:currentLocation.coordinate.longitude];
-	[query whereKey:@"location" nearGeoPoint:point withinKilometers:100];
-	[query includeKey:@"user"];
+//	[query whereKey:@"location" nearGeoPoint:point withinKilometers:100];
+	[query includeKey:@"organizer"];
 
 	return query;
 }
@@ -171,7 +170,7 @@ static NSUInteger const kPAWTableViewMainSection = 0;
 	static NSString *LeftCellIdentifier = @"LeftCell";
 
 	// Try to reuse a cell
-	BOOL cellIsRight = [[[object objectForKey:@"user"] objectForKey:@"username"] isEqualToString:[[PFUser currentUser] username]];
+	BOOL cellIsRight = [[[object objectForKey:@"organizer"] objectForKey:kFacebookUsername] isEqualToString:[[PFUser currentUser] objectForKey:kFacebookUsername]];
 	UITableViewCell *cell;
 	if (cellIsRight) { // User's post so create blue bubble
 		cell = [tableView dequeueReusableCellWithIdentifier:RightCellIdentifier];
@@ -211,14 +210,14 @@ static NSUInteger const kPAWTableViewMainSection = 0;
 	
 	// Configure the cell content
 	UILabel *textLabel = (UILabel*) [cell.contentView viewWithTag:kPAWCellTextLabelTag];
-	textLabel.text = [object objectForKey:@"text"];
+	textLabel.text = [object objectForKey:@"activity"];
 	textLabel.lineBreakMode = UILineBreakModeWordWrap;
 	textLabel.numberOfLines = 0;
 	textLabel.font = [UIFont systemFontOfSize:kPAWWallPostTableViewFontSize];
 	textLabel.textColor = [UIColor whiteColor];
 	textLabel.backgroundColor = [UIColor clearColor];
 	
-    NSString *username = [NSString stringWithFormat:@"- %@",[[[object objectForKey:@"user"] objectForKey:@"profile"] objectForKey:@"name"]];
+    NSString *username = [NSString stringWithFormat:@"- %@",[[object objectForKey:@"organizer"] objectForKey:kFacebookUsername]];
 	UILabel *nameLabel = (UILabel*) [cell.contentView viewWithTag:kPAWCellNameLabelTag];
 	nameLabel.text = username;
 	nameLabel.font = [UIFont systemFontOfSize:kPAWWallPostTableViewFontSize];
@@ -237,7 +236,7 @@ static NSUInteger const kPAWTableViewMainSection = 0;
 	
 	// Move cell content to the right position
 	// Calculate the size of the post's text and username
-	CGSize textSize = [[object objectForKey:@"text"] sizeWithFont:[UIFont systemFontOfSize:kPAWWallPostTableViewFontSize] constrainedToSize:CGSizeMake(kPAWWallPostTableViewCellWidth, FLT_MAX) lineBreakMode:UILineBreakModeWordWrap];
+	CGSize textSize = [[object objectForKey:@"activity"] sizeWithFont:[UIFont systemFontOfSize:kPAWWallPostTableViewFontSize] constrainedToSize:CGSizeMake(kPAWWallPostTableViewCellWidth, FLT_MAX) lineBreakMode:UILineBreakModeWordWrap];
 	CGSize nameSize = [username sizeWithFont:[UIFont systemFontOfSize:kPAWWallPostTableViewFontSize] forWidth:kPAWWallPostTableViewCellWidth lineBreakMode:UILineBreakModeTailTruncation];
 	
 	
@@ -295,13 +294,14 @@ static NSUInteger const kPAWTableViewMainSection = 0;
     UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
     
     PFQuery *query = [PFQuery queryWithClassName:@"Posts"];
-    [query includeKey:@"user"];
-    [query whereKey:@"text" containsString:((UILabel *)(cell.contentView.subviews[1])).text];
+    [query includeKey:@"organizer"];
+    [query whereKey:@"activity" containsString:((UILabel *)(cell.contentView.subviews[1])).text];
     
-    NSArray *objects = [query findObjects];
-    PAWPost *post = [[PAWPost alloc] initWithPFObject:[objects objectAtIndex:0]];
-    controller.annotation = post;
-    [self.navigationController pushViewController:controller animated:YES]; // or use presentViewController if you're using modals
+    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error){
+        GymBudEventModel *post = [[GymBudEventModel alloc] initWithPFObject:[objects objectAtIndex:0]];
+        controller.annotation = post;
+        [self.navigationController pushViewController:controller animated:YES]; // or use presentViewController if you're using modals
+    }];
 	[tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
@@ -313,9 +313,9 @@ static NSUInteger const kPAWTableViewMainSection = 0;
 
 	// Retrieve the text and username for this row:
 	PFObject *object = [self.objects objectAtIndex:indexPath.row];
-	PAWPost *postFromObject = [[PAWPost alloc] initWithPFObject:object];
+	GymBudEventModel *postFromObject = [[GymBudEventModel alloc] initWithPFObject:object];
 	NSString *text = postFromObject.title;
-	NSString *username = postFromObject.user.username;
+	NSString *username = [postFromObject.organizer objectForKey:kFacebookUsername];
 	
 	// Calculate what the frame to fit the post text and the username
 	CGSize textSize = [text sizeWithFont:[UIFont systemFontOfSize:kPAWWallPostTableViewFontSize] constrainedToSize:CGSizeMake(kPAWWallPostTableViewCellWidth, FLT_MAX) lineBreakMode:UILineBreakModeWordWrap];
