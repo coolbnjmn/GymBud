@@ -35,8 +35,6 @@ static NSInteger kPAWCellNameLabelTag = 4;
 
 static NSUInteger const kPAWTableViewMainSection = 0;
 
-
-
 @interface PAWWallPostsTableViewController ()
 
 // NSNotification callbacks
@@ -293,10 +291,9 @@ static NSUInteger const kPAWTableViewMainSection = 0;
                                                                                         bundle:nil];
     UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
     
-    PFQuery *query = [PFQuery queryWithClassName:@"Posts"];
+    PFQuery *query = [PFQuery queryWithClassName:self.parseClassName];
     [query includeKey:@"organizer"];
     [query whereKey:@"activity" containsString:((UILabel *)(cell.contentView.subviews[1])).text];
-    
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error){
         GymBudEventModel *post = [[GymBudEventModel alloc] initWithPFObject:[objects objectAtIndex:0]];
         controller.annotation = post;
