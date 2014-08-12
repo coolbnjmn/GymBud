@@ -30,7 +30,6 @@
 @property (nonatomic, strong) PAWWallPostsTableViewController *wallPostsTableViewController;
 @property (nonatomic, assign) BOOL mapPinsPlaced;
 @property (nonatomic, assign) BOOL mapPannedSinceLocationUpdate;
-@property (nonatomic, assign) BOOL isShowingTable;
 
 // posts:
 @property (nonatomic, strong) NSMutableArray *allPosts;

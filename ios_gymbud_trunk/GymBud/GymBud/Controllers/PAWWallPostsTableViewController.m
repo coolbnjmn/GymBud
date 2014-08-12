@@ -294,10 +294,12 @@ static NSUInteger const kPAWTableViewMainSection = 0;
     PFQuery *query = [PFQuery queryWithClassName:self.parseClassName];
     [query includeKey:@"organizer"];
     [query whereKey:@"activity" containsString:((UILabel *)(cell.contentView.subviews[1])).text];
-    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error){
-        GymBudEventModel *post = [[GymBudEventModel alloc] initWithPFObject:[objects objectAtIndex:0]];
-        controller.annotation = post;
-        [self.navigationController pushViewController:controller animated:YES]; // or use presentViewController if you're using modals
+    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+        if(self.navigationController.topViewController == self) {
+            GymBudEventModel *post = [[GymBudEventModel alloc] initWithPFObject:[objects objectAtIndex:0]];
+            controller.annotation = post;
+            [self.navigationController pushViewController:controller animated:YES]; // or use presentViewController if you're using modals
+        }
     }];
 	[tableView deselectRowAtIndexPath:indexPath animated:YES];
 }

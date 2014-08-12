@@ -8,6 +8,7 @@
 
 #import "GoActivityChosenVC.h"
 #import "GoActivityCreateEventVC.h"
+#import "PAWWallPostsTableViewController.h"
 
 @interface GoActivityChosenVC ()
 
@@ -38,6 +39,14 @@
 }
 
 - (IBAction)findOthersPressed:(id)sender {
+    UINavigationController *nvc = [self.tabBarController.viewControllers objectAtIndex:0];
+    if([nvc.viewControllers count] == 1) {
+        PAWWallPostsTableViewController *dvc = [[PAWWallPostsTableViewController alloc] init];
+        [nvc pushViewController:dvc animated:NO];
+        PAWWallViewController *rvc = [nvc.viewControllers objectAtIndex:0];
+        rvc.isShowingTable = YES;
+    }
+    [self.tabBarController setSelectedIndex:0];
 }
 
 - (IBAction)createEventPressed:(id)sender {
