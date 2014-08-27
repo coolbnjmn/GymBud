@@ -13,16 +13,17 @@
 #import <AFNetworking/AFNetworking.h>
 
 
-@interface GoActivityCreateEventVC () <MLPAutoCompleteTextFieldDelegate, MLPAutoCompleteTextFieldDataSource, UITextFieldDelegate>
+@interface GoActivityCreateEventVC () <MLPAutoCompleteTextFieldDelegate, MLPAutoCompleteTextFieldDataSource, UITextFieldDelegate, UIPickerViewDataSource, UIPickerViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UIDatePicker *timePicker;
 @property (weak, nonatomic) IBOutlet MLPAutoCompleteTextField *locationTextField;
-@property (weak, nonatomic) IBOutlet UITextView *namesTextView;
-@property (weak, nonatomic) IBOutlet MLPAutoCompleteTextField *namesTextField;
+@property (weak, nonatomic) IBOutlet UIPickerView *countPicker;
+
 
 @property (nonatomic, strong) NSMutableArray *places;
 @property (nonatomic, strong) NSMutableArray *names;
 @property (nonatomic, strong) NSMutableArray *users;
+@property int count;
 
 @end
 
@@ -48,11 +49,10 @@
     self.locationTextField.autoCompleteTableBackgroundColor = [UIColor whiteColor];
     self.locationTextField.delegate = self;
     
-    self.namesTextField.autoCompleteTableAppearsAsKeyboardAccessory = YES;
-    self.namesTextField.autoCompleteTableBackgroundColor = [UIColor whiteColor];
-    self.namesTextField.delegate = self;
-    
     self.places = [[NSMutableArray alloc] init];
+    
+    self.countPicker.delegate = self;
+    self.countPicker.dataSource = self;
     
     PFQuery *userQuery = [PFUser query];
 //    NSArray *users = [userQuery findObjectsIn];
@@ -87,19 +87,30 @@
     // Pass the selected object to the new view controller.
 }
 */
+
+#pragma mark - UIPickerView Data Source & Delegate
+
+// returns the number of 'columns' to display.
+- (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView {
+    return 1;
+}
+
+// returns the # of rows in each component..
+- (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent: (NSInteger)component {
+    return [kGymBudCountArray count];
+}
+
+-(NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row   forComponent:(NSInteger)component
+{
+    return [kGymBudCountArray objectAtIndex:row];
+}
+- (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row   inComponent:(NSInteger)component
+{
+    // do nothing here, we just get the selected index on the way out
+}
+
+
 #pragma mark - Button Handlers
-- (IBAction)addPersonButtonHandler:(id)sender {
-    if([self.namesTextView.text isEqualToString:@""]) {
-        self.namesTextView.text = self.namesTextField.text;
-    } else if([self.namesTextView.text rangeOfString:self.namesTextField.text].location == NSNotFound) {
-        self.namesTextView.text = [[self.namesTextView.text stringByAppendingString:@", "]stringByAppendingString:self.namesTextField.text];
-    }
-}
-
-- (IBAction)removeAllPeopleButtonHandler:(id)sender {
-    self.namesTextView.text = @"";
-}
-
 - (void)createEventButtonHandler:(id) sender {
     // need to parse out all the elements into a parse object
     // and return to a special page.
@@ -141,25 +152,14 @@
         
         [eventObject setObject:eventLocation forKey:@"location"];
         
-        NSArray *userNames = [self.namesTextView.text componentsSeparatedByString:@", "];
-        NSLog(@"%@", userNames);
-        NSMutableArray *eventUsers = [[NSMutableArray alloc] init];
-        for(NSString *userName in userNames) {
-            if([userName isEqualToString:@""]) {
-                continue;
-            }
-            for(PFUser *user in self.users) {
-                if([userName isEqualToString:[user objectForKey:@"user_fb_name"]]) {
-                    [eventUsers addObject:user];
-                    break;
-                }
-            }
-        }
-        [eventObject setObject:eventUsers forKey:@"attendees"];
         [eventObject setObject:self.timePicker.date forKey:@"time"];
         [eventObject setObject:[NSNumber numberWithBool:YES] forKey:@"isVisible"];
         
         [eventObject setObject:self.activity forKey:@"activity"];
+        
+        int selectedRow = [self.countPicker selectedRowInComponent:0];
+        // add 1 because it is 0 based indexing.
+        [eventObject setObject:[NSNumber numberWithInt:selectedRow+1] forKey:@"count"];
         
         [eventObject saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
             if (error) {
@@ -229,8 +229,6 @@
       possibleCompletionsForString:(NSString *)string {
     if([textField isEqual:self.locationTextField]) {
         return self.places;
-    } else if([textField isEqual:self.namesTextField]) {
-        return self.names;
     } else return [NSArray new];
 }
 @end
