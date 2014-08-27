@@ -43,11 +43,15 @@
     UINavigationController *nvc = [self.tabBarController.viewControllers objectAtIndex:0];
     if([nvc.viewControllers count] == 1) {
         GymBudEventsTVC *dvc = [[GymBudEventsTVC alloc] init];
+        dvc.activityFilter = self.activity;
         [nvc pushViewController:dvc animated:NO];
         PAWWallViewController *rvc = [nvc.viewControllers objectAtIndex:0];
         rvc.isShowingTable = YES;
     }
     [self.tabBarController setSelectedIndex:0];
+    UINavigationController *goNVC = [self.tabBarController.viewControllers objectAtIndex:3];
+    // TODO: will need to change this based on new index of GO page...
+    [goNVC popToRootViewControllerAnimated:NO];
 }
 
 - (IBAction)createEventPressed:(id)sender {

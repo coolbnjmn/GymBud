@@ -86,7 +86,6 @@
     UIImage *buttonImage = [UIImage imageNamed:@"mapTableToggle1.png"];
     UIBarButtonItem *mapToTableViewButton = [[UIBarButtonItem alloc] initWithImage:[buttonImage imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal] style:UIBarButtonItemStyleBordered target:self.navigationController.viewControllers[self.navigationController.viewControllers.count - 2] action:@selector(toggleMapTable:)];
     self.navigationItem.rightBarButtonItem = mapToTableViewButton;
-    
 
 }
 
@@ -137,6 +136,9 @@
     [query includeKey:@"organizer"];
     [query whereKey:@"isVisible" equalTo:[NSNumber numberWithBool:YES]];
     [query orderByAscending:@"time"];
+    if(self.activityFilter != nil) {
+        [query whereKey:@"activity" equalTo:self.activityFilter];
+    }
     return query;
 }
 

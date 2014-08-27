@@ -11,4 +11,6 @@
 
 @interface GymBudEventsTVC : PFQueryTableViewController
 
+@property (nonatomic, strong) NSString *activityFilter;
+
 @end

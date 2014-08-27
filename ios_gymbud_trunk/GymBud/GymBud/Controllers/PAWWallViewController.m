@@ -594,7 +594,7 @@
         // Create the table view controller
         self.wallPostsTableViewController =
         [[GymBudEventsTVC alloc] init];
-
+        self.wallPostsTableViewController.activityFilter = nil;
         [self.navigationController pushViewController:self.wallPostsTableViewController animated:YES];
         self.isShowingTable = YES;
     }
