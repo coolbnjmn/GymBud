@@ -136,7 +136,7 @@
     //	[query whereKey:@"location" nearGeoPoint:point withinKilometers:100];
     [query includeKey:@"organizer"];
     [query whereKey:@"isVisible" equalTo:[NSNumber numberWithBool:YES]];
-
+    [query orderByAscending:@"time"];
     return query;
 }
 
