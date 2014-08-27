@@ -13,5 +13,6 @@
 @property (weak, nonatomic) IBOutlet UILabel *capacityTextLabel;
 @property (weak, nonatomic) IBOutlet UILabel *startTimeTextLabel;
 @property (weak, nonatomic) IBOutlet UILabel *nameTextLabel;
+@property (weak, nonatomic) IBOutlet UILabel *activityTextLabel;
 @property (weak, nonatomic) IBOutlet UIImageView *logoImageView;
 @end

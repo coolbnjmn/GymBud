@@ -52,9 +52,10 @@
     NSString *aTitle = [anObject objectForKey:@"activity"];
     NSDate *time = [anObject objectForKey:@"time"];
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-    [formatter setTimeStyle:NSDateFormatterShortStyle];
-    [formatter setDateStyle:NSDateFormatterNoStyle];
-    NSString *aSubtitle = [NSString stringWithFormat:@"Tap to join this Event! @ %@", [formatter stringFromDate:time]];
+//    [formatter setTimeStyle:NSDateFormatterShortStyle];
+//    [formatter setDateStyle:NSDateFormatterShortStyle];
+    [formatter setDateFormat:@"HH:mm 'on' MM/dd"];
+    NSString *aSubtitle = [NSString stringWithFormat:@"@ %@", [formatter stringFromDate:time]];
     
     return [self initWithCoordinate:aCoordinate andTitle:aTitle andSubtitle:aSubtitle];
 }
@@ -87,9 +88,8 @@
     self.title = [self.object objectForKey:@"activity"];
     NSDate *time = [self.object objectForKey:@"time"];
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-    [formatter setTimeStyle:NSDateFormatterShortStyle];
-    [formatter setDateStyle:NSDateFormatterNoStyle];
-    self.subtitle = [NSString stringWithFormat:@"Tap to join this Event! @ %@", [formatter stringFromDate:time]];
+    [formatter setDateFormat:@"HH:mm 'on' MM/dd"];
+    self.subtitle = [NSString stringWithFormat:@"@ %@", [formatter stringFromDate:time]];
     self.pinColor = MKPinAnnotationColorRed;
     self.pictureLogo = [kGymBudActivityIconMapping objectForKey:[self.object objectForKey:@"activity"]];
     self.activity = [self.object objectForKey:@"activity"];

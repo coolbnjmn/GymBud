@@ -155,10 +155,11 @@
     
     NSDate *eventStartTime = [object objectForKey:@"time"];
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-    [formatter setTimeStyle:NSDateFormatterShortStyle];
-    [formatter setDateStyle:NSDateFormatterNoStyle];
+//    [formatter setTimeStyle:NSDateFormatterShortStyle];
+//    [formatter setDateStyle:NSDateFormatterShortStyle];
+    [formatter setDateFormat:@"HH:mm 'on' MM/dd"];
     cell.startTimeTextLabel.text = [formatter stringFromDate:eventStartTime];
-    
+    cell.activityTextLabel.text = [object objectForKey:@"activity"];
     cell.backgroundColor = [UIColor grayColor];
     cell.logoImageView.image = [UIImage imageNamed:[kGymBudActivityIconMapping objectForKey:[object objectForKey:@"activity"]]];
     
@@ -171,18 +172,18 @@
     [super tableView:tableView didSelectRowAtIndexPath:indexPath];
     UserDetailsViewController *controller = [[UserDetailsViewController alloc] initWithNibName:nil
                                                                                         bundle:nil];
-    UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+    GymBudEventsCell *cell = (GymBudEventsCell *)[tableView cellForRowAtIndexPath:indexPath];
     
-//    PFQuery *query = [PFQuery queryWithClassName:self.parseClassName];
-//    [query includeKey:@"organizer"];
-//    [query whereKey:@"activity" containsString:((UILabel *)(cell.contentView.subviews[1])).text];
-//    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
-//        if(self.navigationController.topViewController == self) {
-//            GymBudEventModel *post = [[GymBudEventModel alloc] initWithPFObject:[objects objectAtIndex:0]];
-//            controller.annotation = post;
-//            [self.navigationController pushViewController:controller animated:YES]; // or use presentViewController if you're using modals
-//        }
-//    }];
+    PFQuery *query = [PFQuery queryWithClassName:self.parseClassName];
+    [query includeKey:@"organizer"];
+    [query whereKey:@"activity" containsString:cell.activityTextLabel.text];
+    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+        if(self.navigationController.topViewController == self) {
+            GymBudEventModel *post = [[GymBudEventModel alloc] initWithPFObject:[objects objectAtIndex:0]];
+            controller.annotation = post;
+            [self.navigationController pushViewController:controller animated:YES]; // or use presentViewController if you're using modals
+        }
+    }];
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
