@@ -246,6 +246,7 @@
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+                    <size key="freeformSize" width="320" height="568"/>
                     <connections>
                         <outlet property="locationTextField" destination="YNy-gj-PAl" id="6WA-U9-QTG"/>
                         <outlet property="namesTextField" destination="xgG-ok-7lm" id="Tfg-Su-ept"/>

@@ -10,6 +10,7 @@
 #import "PAWWallPostsTableViewController.h"
 #import "PAWWallPostCreateViewController.h"
 #import "UserDetailsViewController.h"
+#import "GymBudEventsTVC.h"
 #import "EditProfileTVC.h"
 #import "MessageInboxTVC.h"
 #import "PostCreateTVC.h"
@@ -27,7 +28,7 @@
 //@property (nonatomic, strong) PAWCircleView *circleView;
 @property (nonatomic, strong) NSMutableArray *annotations;
 @property (nonatomic, copy) NSString *className;
-@property (nonatomic, strong) PAWWallPostsTableViewController *wallPostsTableViewController;
+@property (nonatomic, strong) GymBudEventsTVC *wallPostsTableViewController;
 @property (nonatomic, assign) BOOL mapPinsPlaced;
 @property (nonatomic, assign) BOOL mapPannedSinceLocationUpdate;
 
@@ -343,7 +344,6 @@
 	id<MKAnnotation> annotation = [view annotation];
 	if ([annotation isKindOfClass:[PAWPost class]]) {
 		PAWPost *post = [view annotation];
-		[self.wallPostsTableViewController highlightCellForPost:post];
 	} else if ([annotation isKindOfClass:[MKUserLocation class]]) {
 		// Center the map on the user's current location:
 		AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
@@ -358,7 +358,6 @@
 	id<MKAnnotation> annotation = [view annotation];
 	if ([annotation isKindOfClass:[PAWPost class]]) {
 		PAWPost *post = [view annotation];
-		[self.wallPostsTableViewController unhighlightCellForPost:post];
 	}
 }
 
@@ -594,7 +593,7 @@
     } else {
         // Create the table view controller
         self.wallPostsTableViewController =
-        [[PAWWallPostsTableViewController alloc] init];
+        [[GymBudEventsTVC alloc] init];
 
         [self.navigationController pushViewController:self.wallPostsTableViewController animated:YES];
         self.isShowingTable = YES;
