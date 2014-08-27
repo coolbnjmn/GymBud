@@ -585,7 +585,7 @@
 }
 
 - (void)toggleMapTable:(id)sender {
-    
+    NSLog(@"toggle map table");
     if(self.isShowingTable) {
         // show map
         [self.navigationController popViewControllerAnimated:YES];

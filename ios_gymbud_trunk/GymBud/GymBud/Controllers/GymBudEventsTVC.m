@@ -32,7 +32,6 @@
         // The className to query on
         self.parseClassName = @"Event";
         self.reuseId = @"GymBudEventsCell";
-        [self.tableView registerNib:[UINib nibWithNibName:@"GymBudEventsCell" bundle:nil] forCellReuseIdentifier:self.reuseId];
         
         // The key of the PFObject to display in the label of the default cell style
         self.title = @"GymBud";
@@ -71,6 +70,8 @@
         self.pullToRefreshEnabled = NO;
     }
     
+    [self.tableView registerNib:[UINib nibWithNibName:@"GymBudEventsCell" bundle:nil] forCellReuseIdentifier:self.reuseId];
+
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(postWasCreated:) name:@"CreatePostNotification" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(locationDidChange:) name:@"LocationChangeNotification" object:nil];
     

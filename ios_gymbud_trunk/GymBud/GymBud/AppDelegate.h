@@ -13,6 +13,7 @@
 #import "PAWWallViewController.h"
 #import "MessageInboxTVC.h"
 #import "SettingsVC.h"
+#import "GoActivityCVC.h"
 
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate>

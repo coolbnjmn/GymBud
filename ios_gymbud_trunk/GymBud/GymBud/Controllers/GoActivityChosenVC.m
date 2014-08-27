@@ -9,6 +9,7 @@
 #import "GoActivityChosenVC.h"
 #import "GoActivityCreateEventVC.h"
 #import "PAWWallPostsTableViewController.h"
+#import "GymBudEventsTVC.h"
 
 @interface GoActivityChosenVC ()
 
@@ -29,7 +30,7 @@
 {
     [super viewDidLoad];
     NSLog(@"view did load with activity : %@" , self.activity);
-    // Do any additional setup after loading the view.
+    self.navigationItem.title = self.activity;
 }
 
 - (void)didReceiveMemoryWarning
@@ -41,7 +42,7 @@
 - (IBAction)findOthersPressed:(id)sender {
     UINavigationController *nvc = [self.tabBarController.viewControllers objectAtIndex:0];
     if([nvc.viewControllers count] == 1) {
-        PAWWallPostsTableViewController *dvc = [[PAWWallPostsTableViewController alloc] init];
+        GymBudEventsTVC *dvc = [[GymBudEventsTVC alloc] init];
         [nvc pushViewController:dvc animated:NO];
         PAWWallViewController *rvc = [nvc.viewControllers objectAtIndex:0];
         rvc.isShowingTable = YES;
