@@ -18,6 +18,7 @@
 @property (weak, nonatomic) IBOutlet UIDatePicker *timePicker;
 @property (weak, nonatomic) IBOutlet MLPAutoCompleteTextField *locationTextField;
 @property (weak, nonatomic) IBOutlet UIPickerView *countPicker;
+@property (weak, nonatomic) IBOutlet UIPickerView *durationPicker;
 
 
 @property (nonatomic, strong) NSMutableArray *places;
@@ -53,6 +54,9 @@
     
     self.countPicker.delegate = self;
     self.countPicker.dataSource = self;
+    
+    self.durationPicker.delegate = self;
+    self.durationPicker.dataSource = self;
     
     PFQuery *userQuery = [PFUser query];
 //    NSArray *users = [userQuery findObjectsIn];
@@ -92,17 +96,33 @@
 
 // returns the number of 'columns' to display.
 - (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView {
-    return 1;
+    if(pickerView == self.countPicker) {
+        return 1;
+    } else if(pickerView == self.durationPicker) {
+        return 2;
+    } else return 0;
 }
 
 // returns the # of rows in each component..
 - (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent: (NSInteger)component {
-    return [kGymBudCountArray count];
+    if(pickerView == self.countPicker) {
+        return [kGymBudCountArray count];
+    } else if(pickerView == self.durationPicker && component == 0) {
+        return [kGymBudDurationHourArray count];
+    } else if(pickerView == self.durationPicker && component == 1) {
+        return [kGymBudDurationMinuteArray count];
+    } else return 0;
 }
 
 -(NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row   forComponent:(NSInteger)component
 {
-    return [kGymBudCountArray objectAtIndex:row];
+    if(pickerView == self.countPicker) {
+        return [kGymBudCountArray objectAtIndex:row];
+    } else if(pickerView == self.durationPicker && component == 0) {
+        return [kGymBudDurationHourArray objectAtIndex:row];
+    } else if(pickerView == self.durationPicker && component == 1) {
+        return [kGymBudDurationMinuteArray objectAtIndex:row];
+    } else return @"N/A";
 }
 - (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row   inComponent:(NSInteger)component
 {
@@ -157,9 +177,16 @@
         
         [eventObject setObject:self.activity forKey:@"activity"];
         
-        int selectedRow = [self.countPicker selectedRowInComponent:0];
+        int selectedCountRow = (int) [self.countPicker selectedRowInComponent:0];
         // add 1 because it is 0 based indexing.
-        [eventObject setObject:[NSNumber numberWithInt:selectedRow+1] forKey:@"count"];
+        [eventObject setObject:[NSNumber numberWithInt:selectedCountRow+1] forKey:@"count"];
+        
+        int selectedDurationHourRow = (int) [self.durationPicker selectedRowInComponent:0];
+        int selectedDurationMinuteRow = (int) [self.durationPicker selectedRowInComponent:1];
+        int numHours = [[kGymBudDurationHourArray objectAtIndex:selectedDurationHourRow] integerValue];
+        int numMinutes = [[kGymBudDurationMinuteArray objectAtIndex:selectedDurationMinuteRow] integerValue];
+        int totalMinutes = numHours * 60 + numMinutes;
+        [eventObject setObject:[NSNumber numberWithInt:totalMinutes] forKey:@"duration"];
         
         [eventObject saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
             if (error) {

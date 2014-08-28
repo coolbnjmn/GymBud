@@ -23,6 +23,8 @@
 @property (nonatomic, strong) PFGeoPoint *geopoint;
 @property (nonatomic, strong) PFUser *organizer;
 @property (nonatomic, strong) NSDate *eventDate;
+@property (nonatomic, strong) NSNumber *duration;
+@property (nonatomic, strong) NSNumber *count;
 @property (nonatomic, assign) MKPinAnnotationColor pinColor;
 
 @end
@@ -47,13 +49,13 @@
     self.activity = [anObject objectForKey:@"activity"];
     self.isVisible = [anObject objectForKey:@"isVisible"];
     self.eventDate = [anObject objectForKey:@"time"];
+    self.duration = [anObject objectForKey:@"duration"];
+    self.count = [anObject objectForKey:@"count"];
     [anObject fetchIfNeeded];
     CLLocationCoordinate2D aCoordinate = CLLocationCoordinate2DMake(self.geopoint.latitude, self.geopoint.longitude);
     NSString *aTitle = [anObject objectForKey:@"activity"];
     NSDate *time = [anObject objectForKey:@"time"];
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-//    [formatter setTimeStyle:NSDateFormatterShortStyle];
-//    [formatter setDateStyle:NSDateFormatterShortStyle];
     [formatter setDateFormat:@"HH:mm 'on' MM/dd"];
     NSString *aSubtitle = [NSString stringWithFormat:@"@ %@", [formatter stringFromDate:time]];
     

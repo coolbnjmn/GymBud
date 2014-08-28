@@ -405,7 +405,8 @@
             NSMutableArray *allNewEvents = [[NSMutableArray alloc] initWithCapacity:1000];
             for (PFObject *object in objects) {
                 GymBudEventModel *newEvent = [[GymBudEventModel alloc] initWithPFObject:object];
-                if([[NSDate date] compare:newEvent.eventDate] == NSOrderedDescending) {
+                NSDate *finalTime = [newEvent.eventDate  dateByAddingTimeInterval:[newEvent.duration integerValue]*60];
+                if([[NSDate date] compare:finalTime] == NSOrderedDescending) {
                     // if NSDate date is later than newEvent.eventDate, go into this if
                     NSLog(@"%@", newEvent.eventDate);
                     NSLog(@"%@", [NSDate date]);

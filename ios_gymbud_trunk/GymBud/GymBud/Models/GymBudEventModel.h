@@ -31,6 +31,8 @@
 @property (nonatomic, readonly, strong) PFGeoPoint *geopoint;
 @property (nonatomic, readonly, strong) PFUser *organizer;
 @property (nonatomic, readonly, strong) NSDate *eventDate;
+@property (nonatomic, readonly, strong) NSNumber *duration;
+@property (nonatomic, readonly, strong) NSNumber *count;
 @property (nonatomic, assign) BOOL animatesDrop;
 @property (nonatomic, assign) NSNumber* isVisible;
 @property (nonatomic, readonly) MKPinAnnotationColor pinColor;
