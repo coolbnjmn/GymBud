@@ -157,13 +157,16 @@
     
     NSDate *eventStartTime = [object objectForKey:@"time"];
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-//    [formatter setTimeStyle:NSDateFormatterShortStyle];
-//    [formatter setDateStyle:NSDateFormatterShortStyle];
-    [formatter setDateFormat:@"HH:mm 'on' MM/dd"];
+    [formatter setDateFormat:@"HH:mm"];
     cell.startTimeTextLabel.text = [formatter stringFromDate:eventStartTime];
     cell.activityTextLabel.text = [object objectForKey:@"activity"];
     cell.backgroundColor = [UIColor grayColor];
     cell.logoImageView.image = [UIImage imageNamed:[kGymBudActivityIconMapping objectForKey:[object objectForKey:@"activity"]]];
+    NSDateFormatter *formatter2 = [[NSDateFormatter alloc] init];
+    [formatter2 setDateFormat:@"MM/dd"];
+    cell.startDateTextLabel.text = [formatter2 stringFromDate:eventStartTime];
+    cell.locationTextLabel.text = [object objectForKey:@"locationName"];
+
     
     return cell;
 }

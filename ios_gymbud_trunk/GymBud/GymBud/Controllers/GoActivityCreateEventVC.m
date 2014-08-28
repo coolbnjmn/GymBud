@@ -172,6 +172,7 @@
         [eventObject setObject:[PFUser currentUser] forKey:@"organizer"];
         
         [eventObject setObject:eventLocation forKey:@"location"];
+        [eventObject setObject:self.locationTextField.text forKey:@"locationName"];
         
         [eventObject setObject:self.timePicker.date forKey:@"time"];
         [eventObject setObject:[NSNumber numberWithBool:YES] forKey:@"isVisible"];
