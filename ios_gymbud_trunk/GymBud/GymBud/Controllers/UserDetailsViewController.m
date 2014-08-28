@@ -40,7 +40,7 @@
     UIImage *pictureLogo = [UIImage imageNamed:[kGymBudActivityIconMapping objectForKey:event.activity]];
 
     self.headerPictureLogo.image = pictureLogo;
-    self.headerCheckinMessage.text = event.title;
+    self.headerCheckinMessage.text = [[event.title stringByAppendingString:@". "] stringByAppendingString:event.description];
 }
 
 -(void)messageUser:(id) sender {

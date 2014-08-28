@@ -19,6 +19,7 @@
 @property (weak, nonatomic) IBOutlet MLPAutoCompleteTextField *locationTextField;
 @property (weak, nonatomic) IBOutlet UIPickerView *countPicker;
 @property (weak, nonatomic) IBOutlet UIPickerView *durationPicker;
+@property (weak, nonatomic) IBOutlet UITextView *descriptionTextView;
 
 
 @property (nonatomic, strong) NSMutableArray *places;
@@ -183,10 +184,14 @@
         
         int selectedDurationHourRow = (int) [self.durationPicker selectedRowInComponent:0];
         int selectedDurationMinuteRow = (int) [self.durationPicker selectedRowInComponent:1];
-        int numHours = [[kGymBudDurationHourArray objectAtIndex:selectedDurationHourRow] integerValue];
-        int numMinutes = [[kGymBudDurationMinuteArray objectAtIndex:selectedDurationMinuteRow] integerValue];
+        int numHours = (int) [[kGymBudDurationHourArray objectAtIndex:selectedDurationHourRow] integerValue];
+        int numMinutes = (int) [[kGymBudDurationMinuteArray objectAtIndex:selectedDurationMinuteRow] integerValue];
         int totalMinutes = numHours * 60 + numMinutes;
         [eventObject setObject:[NSNumber numberWithInt:totalMinutes] forKey:@"duration"];
+        
+        if(![self.descriptionTextView.text isEqualToString:@""]) {
+            [eventObject setObject:self.descriptionTextView.text forKey:@"description"];
+        }
         
         [eventObject saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
             if (error) {

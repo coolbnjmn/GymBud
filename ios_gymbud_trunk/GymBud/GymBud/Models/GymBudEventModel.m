@@ -25,6 +25,7 @@
 @property (nonatomic, strong) NSDate *eventDate;
 @property (nonatomic, strong) NSNumber *duration;
 @property (nonatomic, strong) NSNumber *count;
+@property (nonatomic, strong) NSString *description;
 @property (nonatomic, assign) MKPinAnnotationColor pinColor;
 
 @end
@@ -51,6 +52,11 @@
     self.eventDate = [anObject objectForKey:@"time"];
     self.duration = [anObject objectForKey:@"duration"];
     self.count = [anObject objectForKey:@"count"];
+    self.description = [anObject objectForKey:@"description"];
+    if(!self.description) {
+        self.description = @"No Description Provided";
+    }
+    
     [anObject fetchIfNeeded];
     CLLocationCoordinate2D aCoordinate = CLLocationCoordinate2DMake(self.geopoint.latitude, self.geopoint.longitude);
     NSString *aTitle = [anObject objectForKey:@"activity"];
