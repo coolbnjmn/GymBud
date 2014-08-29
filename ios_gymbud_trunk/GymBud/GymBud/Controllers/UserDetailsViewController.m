@@ -41,6 +41,7 @@
         for(PFUser *attendee in [event attendees]) {
             if([[attendee objectId] isEqualToString:[[PFUser currentUser] objectId]]) {
                 self.headerJoinButton.hidden = YES;
+                break;
             }
         }
     }

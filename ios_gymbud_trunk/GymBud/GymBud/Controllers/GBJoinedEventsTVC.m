@@ -11,6 +11,7 @@
 #import "GymBudEventModel.h"
 #import "UserDetailsViewController.h"
 #import "GymBudConstants.h"
+#import "NSDate+Utilities.h"
 
 #define kCellHeight 100
 
@@ -76,11 +77,6 @@
     
     self.tableView.backgroundColor = [UIColor whiteColor];
     self.tableView.separatorColor = [UIColor clearColor];
-    
-#pragma GCC diagnostic ignored "-Wundeclared-selector"    
-    UIImage *buttonImage = [UIImage imageNamed:@"mapTableToggle1.png"];
-    UIBarButtonItem *mapToTableViewButton = [[UIBarButtonItem alloc] initWithImage:[buttonImage imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal] style:UIBarButtonItemStyleBordered target:self.navigationController.viewControllers[self.navigationController.viewControllers.count - 2] action:@selector(toggleMapTable:)];
-    self.navigationItem.rightBarButtonItem = mapToTableViewButton;
     
 }
 
@@ -148,9 +144,18 @@
     cell.activityTextLabel.text = [object objectForKey:@"activity"];
     cell.backgroundColor = [UIColor grayColor];
     cell.logoImageView.image = [UIImage imageNamed:[kGymBudActivityIconMapping objectForKey:[object objectForKey:@"activity"]]];
-    NSDateFormatter *formatter2 = [[NSDateFormatter alloc] init];
-    [formatter2 setDateFormat:@"MM/dd"];
-    cell.startDateTextLabel.text = [formatter2 stringFromDate:eventStartTime];
+//    NSDateFormatter *formatter2 = [[NSDateFormatter alloc] init];
+//    [formatter2 setDateFormat:@"MM/dd"];
+//    cell.startDateTextLabel.text = [formatter2 stringFromDate:eventStartTime];
+    if([eventStartTime isToday]) {
+        cell.startDateTextLabel.text = @"Today";
+    } else if([eventStartTime isTomorrow]) {
+        cell.startDateTextLabel.text = @"Tomorrow";
+    } else {
+        NSDateFormatter *formatter2 = [[NSDateFormatter alloc] init];
+        [formatter2 setDateFormat:@"MM/dd"];
+        cell.startDateTextLabel.text = [formatter2 stringFromDate:eventStartTime];
+    }
     cell.locationTextLabel.text = [object objectForKey:@"locationName"];
     
     

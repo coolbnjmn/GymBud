@@ -12,6 +12,7 @@
 #import "UserDetailsViewController.h"
 #import "AppDelegate.h"
 #import "GymBudConstants.h"
+#import "NSDate+Utilities.h"
 
 #define kCellHeight 100
 
@@ -162,11 +163,17 @@
     cell.activityTextLabel.text = [object objectForKey:@"activity"];
     cell.backgroundColor = [UIColor grayColor];
     cell.logoImageView.image = [UIImage imageNamed:[kGymBudActivityIconMapping objectForKey:[object objectForKey:@"activity"]]];
-    NSDateFormatter *formatter2 = [[NSDateFormatter alloc] init];
-    [formatter2 setDateFormat:@"MM/dd"];
-    cell.startDateTextLabel.text = [formatter2 stringFromDate:eventStartTime];
-    cell.locationTextLabel.text = [object objectForKey:@"locationName"];
 
+    if([eventStartTime isToday]) {
+        cell.startDateTextLabel.text = @"Today";
+    } else if([eventStartTime isTomorrow]) {
+        cell.startDateTextLabel.text = @"Tomorrow";
+    } else {
+        NSDateFormatter *formatter2 = [[NSDateFormatter alloc] init];
+        [formatter2 setDateFormat:@"MM/dd"];
+        cell.startDateTextLabel.text = [formatter2 stringFromDate:eventStartTime];
+    }
+    cell.locationTextLabel.text = [object objectForKey:@"locationName"];
     
     return cell;
 }
