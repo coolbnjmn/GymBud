@@ -157,7 +157,11 @@
         cell.startDateTextLabel.text = [formatter2 stringFromDate:eventStartTime];
     }
     cell.locationTextLabel.text = [object objectForKey:@"locationName"];
-    
+    NSString *countOverCapacity;
+    NSString *count = [NSString stringWithFormat:@"%d", [((NSArray *)[object objectForKey:@"attendees"]) count]];
+    NSString *capacity = [NSString stringWithFormat:@"%d", [[object objectForKey:@"count"] integerValue]];
+    countOverCapacity = [[count stringByAppendingString:@"/"] stringByAppendingString:capacity];
+    cell.capacityTextLabel.text = countOverCapacity;
     
     return cell;
 }
