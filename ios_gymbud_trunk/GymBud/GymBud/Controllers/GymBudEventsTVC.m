@@ -13,6 +13,7 @@
 #import "AppDelegate.h"
 #import "GymBudConstants.h"
 #import "NSDate+Utilities.h"
+#import "UIImageView+AFNetworking.h"
 
 #define kCellHeight 100
 
@@ -162,8 +163,22 @@
     cell.startTimeTextLabel.text = [formatter stringFromDate:eventStartTime];
     cell.activityTextLabel.text = [object objectForKey:@"activity"];
     cell.backgroundColor = [UIColor grayColor];
-    cell.logoImageView.image = [UIImage imageNamed:[kGymBudActivityIconMapping objectForKey:[object objectForKey:@"activity"]]];
+        
+    NSURL *url = [NSURL URLWithString:[[[object objectForKey:@"organizer"] objectForKey:@"profile"] objectForKey:@"pictureURL"]];
+    NSURLRequest *request = [NSURLRequest requestWithURL:url];
+    UIImage *placeholderImage = [UIImage imageNamed:[kGymBudActivityIconMapping objectForKey:[object objectForKey:@"activity"]]];
+    
+    __weak GymBudEventsCell *weakCell = cell;
+    
+    [cell.logoImageView setImageWithURLRequest:request
+                          placeholderImage:placeholderImage
+                                   success:^(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *image) {
+                                       // do we want rounded corners on the image?
+                                       weakCell.logoImageView.image = image;
+                                       [weakCell setNeedsLayout];
+                                   } failure:nil];
 
+    
     if([eventStartTime isToday]) {
         cell.startDateTextLabel.text = @"Today";
     } else if([eventStartTime isTomorrow]) {
@@ -176,8 +191,8 @@
     cell.locationTextLabel.text = [object objectForKey:@"locationName"];
     
     NSString *countOverCapacity;
-    NSString *count = [NSString stringWithFormat:@"%d", [((NSArray *)[object objectForKey:@"attendees"]) count]];
-    NSString *capacity = [NSString stringWithFormat:@"%d", [[object objectForKey:@"count"] integerValue]];
+    NSString *count = [NSString stringWithFormat:@"%lu", (unsigned long)[((NSArray *)[object objectForKey:@"attendees"]) count]];
+    NSString *capacity = [NSString stringWithFormat:@"%ld", (long)[[object objectForKey:@"count"] integerValue]];
     countOverCapacity = [[count stringByAppendingString:@"/"] stringByAppendingString:capacity];
     cell.capacityTextLabel.text = countOverCapacity;
     return cell;
