@@ -14,6 +14,7 @@
 #import "MessageInboxTVC.h"
 #import "SettingsVC.h"
 #import "GoActivityCVC.h"
+#import "GBJoinedEventsTVC.h"
 
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate>

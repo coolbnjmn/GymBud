@@ -4,6 +4,7 @@
 #import "MessageInboxTVC.h"
 #import "SettingsVC.h"
 #import "GoActivityCVC.h"
+#import "GBJoinedEventsTVC.h"
 
 
 #import <Parse/Parse.h>
@@ -36,11 +37,13 @@
     UIStoryboard *goSB = [UIStoryboard storyboardWithName:@"GoActivity" bundle:nil];
     GoActivityCVC *goVC = [goSB instantiateViewControllerWithIdentifier:@"GoActivity"];
     goVC.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
+    GBJoinedEventsTVC *joinedVC = [[GBJoinedEventsTVC alloc] init];
     
     UINavigationController *nvc1 = [[UINavigationController alloc] initWithRootViewController:mapVC];
     UINavigationController *nvc2 = [[UINavigationController alloc] initWithRootViewController:inboxVC];
     UINavigationController *nvc3 = [[UINavigationController alloc] initWithRootViewController:settingsVC];
     UINavigationController *nvc4 = [[UINavigationController alloc] initWithRootViewController:goVC];
+    UINavigationController *nvc5 = [[UINavigationController alloc] initWithRootViewController:joinedVC];
     nvc1.navigationBar.tintColor= [UIColor colorWithRed:44/255.0f green:62/255.0f blue:80/255.0f alpha:1.0f];
     nvc1.navigationBar.barTintColor = [UIColor colorWithRed:60/255.0f green:151/255.0f blue:211/255.0f alpha:1.0f];
     nvc2.navigationBar.tintColor= [UIColor colorWithRed:44/255.0f green:62/255.0f blue:80/255.0f alpha:1.0f];
@@ -49,6 +52,8 @@
     nvc3.navigationBar.barTintColor = [UIColor colorWithRed:60/255.0f green:151/255.0f blue:211/255.0f alpha:1.0f];
     nvc4.navigationBar.tintColor= [UIColor colorWithRed:44/255.0f green:62/255.0f blue:80/255.0f alpha:1.0f];
     nvc4.navigationBar.barTintColor = [UIColor colorWithRed:60/255.0f green:151/255.0f blue:211/255.0f alpha:1.0f];
+    nvc5.navigationBar.tintColor= [UIColor colorWithRed:44/255.0f green:62/255.0f blue:80/255.0f alpha:1.0f];
+    nvc5.navigationBar.barTintColor = [UIColor colorWithRed:60/255.0f green:151/255.0f blue:211/255.0f alpha:1.0f];
     
     nvc1.tabBarItem.title = nil;
     nvc1.tabBarItem.image = [UIImage imageNamed:@"centeredPeople.png"];
@@ -58,8 +63,10 @@
     nvc3.tabBarItem.image = [UIImage imageNamed:@"centeredGear.png"];
     nvc4.tabBarItem.title = @"GO";
     nvc4.tabBarItem.image = nil;
+    nvc5.tabBarItem.title = @"Joined";
+    nvc5.tabBarItem.image = nil;
     
-    NSMutableArray *tbcArray = [[NSMutableArray alloc] initWithObjects:nvc1, nvc2, nvc3, nvc4, nil];
+    NSMutableArray *tbcArray = [[NSMutableArray alloc] initWithObjects:nvc1, nvc2, nvc4, nvc5, nvc3, nil];
     tbc.tabBar.tintColor = [UIColor colorWithRed:44/255.0f green:62/255.0f blue:80/255.0f alpha:1.0f];
     
     [[UITabBarItem appearance] setTitleTextAttributes:@{NSFontAttributeName : [UIFont fontWithName:@"HelveticaNeue-Bold" size:10.0f],
