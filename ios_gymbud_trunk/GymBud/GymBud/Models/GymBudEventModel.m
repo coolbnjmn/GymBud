@@ -22,6 +22,7 @@
 @property (nonatomic, strong) PFObject *object;
 @property (nonatomic, strong) PFGeoPoint *geopoint;
 @property (nonatomic, strong) PFUser *organizer;
+@property (nonatomic, strong) NSArray *attendees;
 @property (nonatomic, strong) NSDate *eventDate;
 @property (nonatomic, strong) NSNumber *duration;
 @property (nonatomic, strong) NSNumber *count;
@@ -53,6 +54,8 @@
     self.duration = [anObject objectForKey:@"duration"];
     self.count = [anObject objectForKey:@"count"];
     self.description = [anObject objectForKey:@"description"];
+    self.attendees = [anObject objectForKey:@"attendees"];
+    
     if(!self.description) {
         self.description = @"No Description Provided";
     }

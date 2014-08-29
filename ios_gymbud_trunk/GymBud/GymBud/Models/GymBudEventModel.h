@@ -30,6 +30,7 @@
 @property (nonatomic, readonly, strong) PFObject *object;
 @property (nonatomic, readonly, strong) PFGeoPoint *geopoint;
 @property (nonatomic, readonly, strong) PFUser *organizer;
+@property (nonatomic, readonly, strong) NSArray *attendees;
 @property (nonatomic, readonly, strong) NSDate *eventDate;
 @property (nonatomic, readonly, strong) NSNumber *duration;
 @property (nonatomic, readonly, strong) NSNumber *count;

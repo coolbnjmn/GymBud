@@ -36,7 +36,14 @@
             [self updateProfileForUser:(PFUser *)object];
         }];
     }
-        
+    
+    if([event attendees]) {
+        for(PFUser *attendee in [event attendees]) {
+            if([[attendee objectId] isEqualToString:[[PFUser currentUser] objectId]]) {
+                self.headerJoinButton.hidden = YES;
+            }
+        }
+    }
     UIImage *pictureLogo = [UIImage imageNamed:[kGymBudActivityIconMapping objectForKey:event.activity]];
 
     self.headerPictureLogo.image = pictureLogo;
@@ -283,6 +290,33 @@
             NSLog(@"Failed to download picture");
         }
     }
+}
+
+- (IBAction)headerJoinButtonPressed:(id)sender
+{
+    // join event from here
+    GymBudEventModel *event = (GymBudEventModel *) annotation;
+    
+    PFQuery *queryForEvent = [PFQuery queryWithClassName:@"Event"];
+    [queryForEvent includeKey:@"organizer"];
+    [queryForEvent includeKey:@"attendees"];
+    [queryForEvent whereKey:@"time" equalTo:event.eventDate];
+    [queryForEvent whereKey:@"organizer" equalTo:event.organizer];
+    [queryForEvent whereKey:@"description" equalTo:event.description];
+    
+    [queryForEvent findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+        PFObject *eventObject = [objects objectAtIndex:0];
+        NSMutableArray *attendees = [eventObject objectForKey:@"attendees"];
+        if(!attendees) {
+            attendees = [[NSMutableArray alloc] init];
+        }
+        [attendees addObject:[PFUser currentUser]];
+        [eventObject setObject:attendees forKey:@"attendees"];
+        [eventObject saveInBackground];
+    }];
+    NSLog(@"attendees: %@", event.attendees);
+    self.headerJoinButton.enabled = NO;
+    [self.headerJoinButton setHidden:YES];
 }
 
 @end

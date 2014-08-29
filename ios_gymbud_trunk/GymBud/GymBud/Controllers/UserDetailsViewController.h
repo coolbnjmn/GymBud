@@ -9,6 +9,7 @@
 @property (nonatomic, strong) IBOutlet UIImageView *headerImageView;
 @property (nonatomic, strong) IBOutlet UIImageView *headerPictureLogo;
 @property (weak, nonatomic) IBOutlet UITextView *headerCheckinMessage;
+@property (weak, nonatomic) IBOutlet UIButton *headerJoinButton;
 
 // UITableView row data properties
 @property (nonatomic, strong) NSArray *rowTitleArray;
