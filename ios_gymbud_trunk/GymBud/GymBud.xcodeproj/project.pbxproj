@@ -19,6 +19,7 @@
 		B2722DD919AD832900FEC2AF /* GymBudEventsTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = B2722DD819AD832900FEC2AF /* GymBudEventsTVC.m */; };
 		B2722DE219AD86F800FEC2AF /* GymBudEventsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B2722DE019AD86F800FEC2AF /* GymBudEventsCell.m */; };
 		B2722DE319AD86F800FEC2AF /* GymBudEventsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B2722DE119AD86F800FEC2AF /* GymBudEventsCell.xib */; };
+		B27AF67019B0417300FDBF0F /* GBJoinedEventsTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = B27AF66F19B0417300FDBF0F /* GBJoinedEventsTVC.m */; };
 		B29774111980D5EF000AD7B6 /* SettingsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = B297740F1980D5EF000AD7B6 /* SettingsVC.m */; };
 		B29774121980D5EF000AD7B6 /* SettingsVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = B29774101980D5EF000AD7B6 /* SettingsVC.xib */; };
 		B297741519820C4C000AD7B6 /* mapView.png in Resources */ = {isa = PBXBuildFile; fileRef = B297741319820C4C000AD7B6 /* mapView.png */; };
@@ -137,6 +138,8 @@
 		B2722DDF19AD86F800FEC2AF /* GymBudEventsCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GymBudEventsCell.h; path = GymBud/Views/GymBudEventsCell.h; sourceTree = "<group>"; };
 		B2722DE019AD86F800FEC2AF /* GymBudEventsCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GymBudEventsCell.m; path = GymBud/Views/GymBudEventsCell.m; sourceTree = "<group>"; };
 		B2722DE119AD86F800FEC2AF /* GymBudEventsCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = GymBudEventsCell.xib; path = GymBud/Views/GymBudEventsCell.xib; sourceTree = "<group>"; };
+		B27AF66E19B0417300FDBF0F /* GBJoinedEventsTVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GBJoinedEventsTVC.h; path = GymBud/Controllers/GBJoinedEventsTVC.h; sourceTree = "<group>"; };
+		B27AF66F19B0417300FDBF0F /* GBJoinedEventsTVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GBJoinedEventsTVC.m; path = GymBud/Controllers/GBJoinedEventsTVC.m; sourceTree = "<group>"; };
 		B297740E1980D5EF000AD7B6 /* SettingsVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SettingsVC.h; path = GymBud/Controllers/SettingsVC.h; sourceTree = "<group>"; };
 		B297740F1980D5EF000AD7B6 /* SettingsVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SettingsVC.m; path = GymBud/Controllers/SettingsVC.m; sourceTree = "<group>"; };
 		B29774101980D5EF000AD7B6 /* SettingsVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = SettingsVC.xib; path = GymBud/Controllers/SettingsVC.xib; sourceTree = "<group>"; };
@@ -407,6 +410,8 @@
 				B297742F1984C34E000AD7B6 /* PCInterestTVC.m */,
 				B2C39D7D197E194F00039F90 /* PAWWallPostsTableViewController.h */,
 				B2C39D7E197E194F00039F90 /* PAWWallPostsTableViewController.m */,
+				B27AF66E19B0417300FDBF0F /* GBJoinedEventsTVC.h */,
+				B27AF66F19B0417300FDBF0F /* GBJoinedEventsTVC.m */,
 				B2722DD719AD832900FEC2AF /* GymBudEventsTVC.h */,
 				B2722DD819AD832900FEC2AF /* GymBudEventsTVC.m */,
 				B2C39D7F197E194F00039F90 /* PAWWallViewController.h */,
@@ -681,6 +686,7 @@
 				B2C39D88197E194F00039F90 /* EditProfileTVC.m in Sources */,
 				B2C39D89197E194F00039F90 /* EPInterestVC.m in Sources */,
 				B2C39D8B197E194F00039F90 /* MessageInboxTVC.m in Sources */,
+				B27AF67019B0417300FDBF0F /* GBJoinedEventsTVC.m in Sources */,
 				B2C39D3B197E172600039F90 /* AppDelegate.m in Sources */,
 				B29774301984C34E000AD7B6 /* PCInterestTVC.m in Sources */,
 				77FE648E1990545A008724CC /* GoActivityChosenVC.m in Sources */,
