@@ -95,8 +95,8 @@
 	self.mapPannedSinceLocationUpdate = NO;
 	[self startStandardUpdates];
     
-    UIBarButtonItem *checkInButton = [[UIBarButtonItem alloc] initWithTitle:@"Check In" style:UIBarButtonItemStyleBordered target:self action:@selector(checkInButtonTouchHandler:)];
-    self.navigationItem.leftBarButtonItem = checkInButton;
+//    UIBarButtonItem *checkInButton = [[UIBarButtonItem alloc] initWithTitle:@"Check In" style:UIBarButtonItemStyleBordered target:self action:@selector(checkInButtonTouchHandler:)];
+//    self.navigationItem.leftBarButtonItem = checkInButton;
     
     UIImage *buttonImage = [UIImage imageNamed:@"mapTableToggle2.png"];
     UIBarButtonItem *mapToTableViewButton = [[UIBarButtonItem alloc] initWithImage:[buttonImage imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal] style:UIBarButtonItemStyleBordered target:self action:@selector(toggleMapTable:)];

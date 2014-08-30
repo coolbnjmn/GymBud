@@ -302,10 +302,18 @@
     [queryForEvent includeKey:@"organizer"];
     [queryForEvent includeKey:@"attendees"];
     [queryForEvent whereKey:@"time" equalTo:event.eventDate];
+    [queryForEvent whereKey:@"duration" equalTo:event.duration];
+    [queryForEvent whereKey:@"activity" equalTo:event.activity];
+    [queryForEvent whereKey:@"count" equalTo:event.count];
     [queryForEvent whereKey:@"organizer" equalTo:event.organizer];
-    [queryForEvent whereKey:@"description" equalTo:event.description];
+    if(![event.description isEqualToString:@"No Description Provided"]) {
+        [queryForEvent whereKey:@"description" equalTo:event.description];
+    }
     
     [queryForEvent findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+        if([objects count] == 0 || [objects count] > 1) {
+            return;
+        }
         PFObject *eventObject = [objects objectAtIndex:0];
         NSMutableArray *attendees = [eventObject objectForKey:@"attendees"];
         if(!attendees) {

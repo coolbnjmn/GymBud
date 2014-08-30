@@ -27,6 +27,7 @@
 @property (nonatomic, strong) NSNumber *duration;
 @property (nonatomic, strong) NSNumber *count;
 @property (nonatomic, strong) NSString *description;
+@property (nonatomic, strong) NSString *locationName;
 @property (nonatomic, assign) MKPinAnnotationColor pinColor;
 
 @end
@@ -47,7 +48,7 @@
     self.object = anObject;
     self.geopoint = [anObject objectForKey:@"location"];
     self.organizer = [anObject objectForKey:@"organizer"];
-    
+    self.locationName = [anObject objectForKey:@"locatioName"];
     self.activity = [anObject objectForKey:@"activity"];
     self.isVisible = [anObject objectForKey:@"isVisible"];
     self.eventDate = [anObject objectForKey:@"time"];

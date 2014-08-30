@@ -101,8 +101,8 @@ static NSUInteger const kPAWTableViewMainSection = 0;
 	self.tableView.separatorColor = [UIColor clearColor];
     
 #pragma GCC diagnostic ignored "-Wundeclared-selector"
-    UIBarButtonItem *checkInButton = [[UIBarButtonItem alloc] initWithTitle:@"Check In" style:UIBarButtonItemStyleBordered target:self.navigationController.viewControllers[self.navigationController.viewControllers.count - 2] action:@selector(checkInButtonTouchHandler:)];
-    self.navigationItem.leftBarButtonItem = checkInButton;
+//    UIBarButtonItem *checkInButton = [[UIBarButtonItem alloc] initWithTitle:@"Check In" style:UIBarButtonItemStyleBordered target:self.navigationController.viewControllers[self.navigationController.viewControllers.count - 2] action:@selector(checkInButtonTouchHandler:)];
+//    self.navigationItem.leftBarButtonItem = checkInButton;
     
     UIImage *buttonImage = [UIImage imageNamed:@"mapTableToggle1.png"];
     UIBarButtonItem *mapToTableViewButton = [[UIBarButtonItem alloc] initWithImage:[buttonImage imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal] style:UIBarButtonItemStyleBordered target:self.navigationController.viewControllers[self.navigationController.viewControllers.count - 2] action:@selector(toggleMapTable:)];
