@@ -22,6 +22,15 @@
 		B2784D8719B14F620042A188 /* loadingLogo.png in Resources */ = {isa = PBXBuildFile; fileRef = B2784D8619B14F620042A188 /* loadingLogo.png */; };
 		B2784D8A19B17AF00042A188 /* go.png in Resources */ = {isa = PBXBuildFile; fileRef = B2784D8819B17AF00042A188 /* go.png */; };
 		B2784D8B19B17AF00042A188 /* join.png in Resources */ = {isa = PBXBuildFile; fileRef = B2784D8919B17AF00042A188 /* join.png */; };
+		B2784D9519B18D010042A188 /* load1.png in Resources */ = {isa = PBXBuildFile; fileRef = B2784D8C19B18D010042A188 /* load1.png */; };
+		B2784D9619B18D010042A188 /* load2.png in Resources */ = {isa = PBXBuildFile; fileRef = B2784D8D19B18D010042A188 /* load2.png */; };
+		B2784D9719B18D010042A188 /* load3.png in Resources */ = {isa = PBXBuildFile; fileRef = B2784D8E19B18D010042A188 /* load3.png */; };
+		B2784D9819B18D010042A188 /* load4.png in Resources */ = {isa = PBXBuildFile; fileRef = B2784D8F19B18D010042A188 /* load4.png */; };
+		B2784D9919B18D010042A188 /* load5.png in Resources */ = {isa = PBXBuildFile; fileRef = B2784D9019B18D010042A188 /* load5.png */; };
+		B2784D9A19B18D010042A188 /* load6.png in Resources */ = {isa = PBXBuildFile; fileRef = B2784D9119B18D010042A188 /* load6.png */; };
+		B2784D9B19B18D010042A188 /* load7.png in Resources */ = {isa = PBXBuildFile; fileRef = B2784D9219B18D010042A188 /* load7.png */; };
+		B2784D9C19B18D010042A188 /* load8.png in Resources */ = {isa = PBXBuildFile; fileRef = B2784D9319B18D010042A188 /* load8.png */; };
+		B2784D9D19B18D010042A188 /* load9.png in Resources */ = {isa = PBXBuildFile; fileRef = B2784D9419B18D010042A188 /* load9.png */; };
 		B27AF67019B0417300FDBF0F /* GBJoinedEventsTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = B27AF66F19B0417300FDBF0F /* GBJoinedEventsTVC.m */; };
 		B27AF67319B0D00700FDBF0F /* NSDate+Utilities.m in Sources */ = {isa = PBXBuildFile; fileRef = B27AF67219B0D00700FDBF0F /* NSDate+Utilities.m */; };
 		B29774111980D5EF000AD7B6 /* SettingsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = B297740F1980D5EF000AD7B6 /* SettingsVC.m */; };
@@ -145,6 +154,15 @@
 		B2784D8619B14F620042A188 /* loadingLogo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = loadingLogo.png; path = GymBud/Assets/loadingLogo.png; sourceTree = "<group>"; };
 		B2784D8819B17AF00042A188 /* go.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = go.png; path = GymBud/Assets/go.png; sourceTree = "<group>"; };
 		B2784D8919B17AF00042A188 /* join.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = join.png; path = GymBud/Assets/join.png; sourceTree = "<group>"; };
+		B2784D8C19B18D010042A188 /* load1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = load1.png; path = GymBud/Assets/load1.png; sourceTree = "<group>"; };
+		B2784D8D19B18D010042A188 /* load2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = load2.png; path = GymBud/Assets/load2.png; sourceTree = "<group>"; };
+		B2784D8E19B18D010042A188 /* load3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = load3.png; path = GymBud/Assets/load3.png; sourceTree = "<group>"; };
+		B2784D8F19B18D010042A188 /* load4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = load4.png; path = GymBud/Assets/load4.png; sourceTree = "<group>"; };
+		B2784D9019B18D010042A188 /* load5.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = load5.png; path = GymBud/Assets/load5.png; sourceTree = "<group>"; };
+		B2784D9119B18D010042A188 /* load6.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = load6.png; path = GymBud/Assets/load6.png; sourceTree = "<group>"; };
+		B2784D9219B18D010042A188 /* load7.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = load7.png; path = GymBud/Assets/load7.png; sourceTree = "<group>"; };
+		B2784D9319B18D010042A188 /* load8.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = load8.png; path = GymBud/Assets/load8.png; sourceTree = "<group>"; };
+		B2784D9419B18D010042A188 /* load9.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = load9.png; path = GymBud/Assets/load9.png; sourceTree = "<group>"; };
 		B27AF66E19B0417300FDBF0F /* GBJoinedEventsTVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GBJoinedEventsTVC.h; path = GymBud/Controllers/GBJoinedEventsTVC.h; sourceTree = "<group>"; };
 		B27AF66F19B0417300FDBF0F /* GBJoinedEventsTVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GBJoinedEventsTVC.m; path = GymBud/Controllers/GBJoinedEventsTVC.m; sourceTree = "<group>"; };
 		B27AF67119B0D00700FDBF0F /* NSDate+Utilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSDate+Utilities.h"; path = "GymBud/Models/NSDate+Utilities.h"; sourceTree = "<group>"; };
@@ -351,6 +369,15 @@
 		B2C39D6D197E193000039F90 /* Assets */ = {
 			isa = PBXGroup;
 			children = (
+				B2784D8C19B18D010042A188 /* load1.png */,
+				B2784D8D19B18D010042A188 /* load2.png */,
+				B2784D8E19B18D010042A188 /* load3.png */,
+				B2784D8F19B18D010042A188 /* load4.png */,
+				B2784D9019B18D010042A188 /* load5.png */,
+				B2784D9119B18D010042A188 /* load6.png */,
+				B2784D9219B18D010042A188 /* load7.png */,
+				B2784D9319B18D010042A188 /* load8.png */,
+				B2784D9419B18D010042A188 /* load9.png */,
 				B2784D8819B17AF00042A188 /* go.png */,
 				B2784D8919B17AF00042A188 /* join.png */,
 				B2784D8619B14F620042A188 /* loadingLogo.png */,
@@ -592,20 +619,24 @@
 				B297743E198582A5000AD7B6 /* yogaIcon.png in Resources */,
 				B29774251984BF68000AD7B6 /* weightliftingMap.png in Resources */,
 				B297741819843EC9000AD7B6 /* sampleMapPin.png in Resources */,
+				B2784D9719B18D010042A188 /* load3.png in Resources */,
 				77FE648B199051E8008724CC /* GoActivityCVCell.xib in Resources */,
 				B2D0CAD8197E2EAE00B17D32 /* TableHeaderView.xib in Resources */,
 				B2D0CAC5197E267D00B17D32 /* LoginViewController.xib in Resources */,
 				B29774211984BF68000AD7B6 /* basketballMap.png in Resources */,
+				B2784D9919B18D010042A188 /* load5.png in Resources */,
 				B29774441985F085000AD7B6 /* mapTabBar.png in Resources */,
 				B2C39D6B197E191C00039F90 /* Map.png in Resources */,
 				B2784D8719B14F620042A188 /* loadingLogo.png in Resources */,
 				B29774241984BF68000AD7B6 /* swimmingMap.png in Resources */,
 				B2C39D67197E191C00039F90 /* grayBubble.png in Resources */,
+				B2784D9619B18D010042A188 /* load2.png in Resources */,
 				B297741519820C4C000AD7B6 /* mapView.png in Resources */,
 				B29774201984BF68000AD7B6 /* aerobicsMap.png in Resources */,
 				B2C39D43197E172600039F90 /* Images.xcassets in Resources */,
 				B29774231984BF68000AD7B6 /* runningMap.png in Resources */,
 				B29774431985F085000AD7B6 /* inbox.png in Resources */,
+				B2784D9C19B18D010042A188 /* load8.png in Resources */,
 				B29774261984BF68000AD7B6 /* yogaMap.png in Resources */,
 				B29774221984BF68000AD7B6 /* crossfitMap.png in Resources */,
 				B2C39D92197E194F00039F90 /* PAWWallViewController.xib in Resources */,
@@ -614,8 +645,10 @@
 				B2D0CACD197E272400B17D32 /* login-button-small@2x.png in Resources */,
 				B2C39D65197E191C00039F90 /* blueBubble.png in Resources */,
 				B297744A19861B9D000AD7B6 /* mapTableToggle2.png in Resources */,
+				B2784D9519B18D010042A188 /* load1.png in Resources */,
 				B29774451985F085000AD7B6 /* menu.png in Resources */,
 				B2C39D95197E194F00039F90 /* ViewMessageVC.xib in Resources */,
+				B2784D9B19B18D010042A188 /* load7.png in Resources */,
 				B2784D8B19B17AF00042A188 /* join.png in Resources */,
 				B297741619820C4C000AD7B6 /* tableView.png in Resources */,
 				B297743C198582A5000AD7B6 /* swimmingIcon.png in Resources */,
@@ -638,10 +671,13 @@
 				B297745619864133000AD7B6 /* centeredPeople.png in Resources */,
 				B297743A198582A5000AD7B6 /* crossfitIcon.png in Resources */,
 				B297745519864133000AD7B6 /* centeredInbox.png in Resources */,
+				B2784D9819B18D010042A188 /* load4.png in Resources */,
 				B2977450198629A3000AD7B6 /* people.png in Resources */,
+				B2784D9D19B18D010042A188 /* load9.png in Resources */,
 				B2C39D8D197E194F00039F90 /* MessageUserVC.xib in Resources */,
 				B2C39D69197E191C00039F90 /* just_background.png in Resources */,
 				B297742D1984C1BF000AD7B6 /* PostCreateTVC.storyboard in Resources */,
+				B2784D9A19B18D010042A188 /* load6.png in Resources */,
 				B2C39D8F197E194F00039F90 /* PAWWallPostCreateViewController.xib in Resources */,
 				B2C39D66197E191C00039F90 /* blueBubble@2x.png in Resources */,
 				B2C39D68197E191C00039F90 /* grayBubble@2x.png in Resources */,

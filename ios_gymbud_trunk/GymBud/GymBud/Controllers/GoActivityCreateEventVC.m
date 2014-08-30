@@ -139,14 +139,19 @@
     
     self.HUD = [[MBProgressHUD alloc] initWithView:self.view];
     [self.view addSubview:self.HUD];
-    UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 200, 55)];
-    imageView.image = [UIImage imageNamed:kLoadingLogoName];
+    UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 200, 138)];
+    imageView.image = [UIImage imageNamed:@"load1.png"];
+    //Add more images which will be used for the animation
+    imageView.animationImages = kLoadingImagesArray;
+    
+    //Set the duration of the animation (play with it
+    //until it looks nice for you)
+    imageView.animationDuration = 0.9;
+    [imageView startAnimating];
     imageView.contentMode = UIViewContentModeScaleToFill;
     self.HUD.customView = imageView;
     self.HUD.mode = MBProgressHUDModeCustomView;
-    self.HUD.labelText = @"Saving";
     self.HUD.color = [UIColor whiteColor];
-    self.HUD.labelColor = [UIColor colorWithRed:60/255.0f green:151/255.0f blue:211/255.0f alpha:1.0f];
     [self.HUD show:YES];
     
     // now for the location

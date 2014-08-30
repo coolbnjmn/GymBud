@@ -8,12 +8,15 @@
 
 #import "FindUserTVC.h"
 #import "MessageUserVC.h"
+#import "MBProgressHUD.h"
+#import "GymBudConstants.h"
 
 @interface FindUserTVC () <UISearchDisplayDelegate, UISearchBarDelegate>
 
 @property (nonatomic, strong) UISearchBar *searchBar;
 @property (nonatomic, strong) UISearchDisplayController *searchController;
 @property (nonatomic, strong) NSMutableArray *searchResults;
+@property (nonatomic, strong) MBProgressHUD *HUD;
 
 @end
 
@@ -103,14 +106,33 @@
     
     PFQuery *query = [PFUser query];
     [query setCachePolicy:kPFCachePolicyNetworkOnly];
+    
+    self.HUD = [[MBProgressHUD alloc] initWithView:self.view];
+    [self.view addSubview:self.HUD];
+    UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 200, 138)];
+    imageView.image = [UIImage imageNamed:@"load1.png"];
+    //Add more images which will be used for the animation
+    imageView.animationImages = kLoadingImagesArray;
+    
+    //Set the duration of the animation (play with it
+    //until it looks nice for you)
+    imageView.animationDuration = 0.9;
+    [imageView startAnimating];
+    imageView.contentMode = UIViewContentModeScaleToFill;
+    self.HUD.customView = imageView;
+    self.HUD.mode = MBProgressHUDModeCustomView;
+    self.HUD.color = [UIColor whiteColor];
+    
+    [self.HUD show:YES];
+    [self setLoadingViewEnabled:NO];
     return query;
 }
 
 - (void)objectsDidLoad:(NSError *)error {
     
     NSLog(@"objectsDidLoad Find User TVC");
-   
     [super objectsDidLoad:error];
+    [self.HUD hide:YES];
 
 }
 

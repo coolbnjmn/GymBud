@@ -9,10 +9,13 @@
 #import "MessageInboxTVC.h"
 #import "ViewMessageVC.h"
 #import "FindUserTVC.h"
+#import "GymBudConstants.h"
+#import "MBProgressHUD.h"
 
 @interface MessageInboxTVC ()
 
 @property (weak, nonatomic) NSDate *lastRefresh;
+@property (strong, nonatomic) MBProgressHUD *HUD;
 @end
 
 @implementation MessageInboxTVC
@@ -27,7 +30,6 @@
     
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     UIBarButtonItem *messageButton = [[UIBarButtonItem alloc] initWithTitle:@"Send Message" style:UIBarButtonItemStyleBordered target:self action:@selector(sendMessage:)];
-    
     
     self.navigationItem.rightBarButtonItem = messageButton;
 }
@@ -64,12 +66,31 @@
     [query orderByDescending:@"createdAt"];
     
     [query setCachePolicy:kPFCachePolicyNetworkOnly];
+    
+    self.HUD = [[MBProgressHUD alloc] initWithView:self.view];
+    [self.view addSubview:self.HUD];
+    UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 200, 138)];
+    imageView.image = [UIImage imageNamed:@"load1.png"];
+    //Add more images which will be used for the animation
+    imageView.animationImages = kLoadingImagesArray;
+    
+    //Set the duration of the animation (play with it
+    //until it looks nice for you)
+    imageView.animationDuration = 0.9;
+    [imageView startAnimating];
+    imageView.contentMode = UIViewContentModeScaleToFill;
+    self.HUD.customView = imageView;
+    self.HUD.mode = MBProgressHUDModeCustomView;
+    self.HUD.color = [UIColor whiteColor];
+
+    [self.HUD show:YES];
+    [self setLoadingViewEnabled:NO];
     return query;
 }
 
 - (void)objectsDidLoad:(NSError *)error {
     [super objectsDidLoad:error];
-    
+    [self.HUD hide:YES];
     lastRefresh = [NSDate date];
 //    [[NSUserDefaults standardUserDefaults] setObject:lastRefresh forKey:kPAPUserDefaultsActivityFeedViewControllerLastRefreshKey];
 //    [[NSUserDefaults standardUserDefaults] synchronize];

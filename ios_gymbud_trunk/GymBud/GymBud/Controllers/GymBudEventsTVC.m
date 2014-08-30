@@ -14,12 +14,14 @@
 #import "GymBudConstants.h"
 #import "NSDate+Utilities.h"
 #import "UIImageView+AFNetworking.h"
+#import "MBProgressHUD.h"
 
 #define kCellHeight 100
 
 @interface GymBudEventsTVC ()
 
 @property NSString *reuseId;
+@property MBProgressHUD *HUD;
 
 @end
 
@@ -101,7 +103,7 @@
 
 - (void)objectsDidLoad:(NSError *)error {
     [super objectsDidLoad:error];
-    
+    [self.HUD hide:YES];
     NSLog(@"objectsDidLoad GymBudEventsTVC");
     // This method is called every time objects are loaded from Parse via the PFQuery
     if (NSClassFromString(@"UIRefreshControl")) {
@@ -141,6 +143,25 @@
     if(self.activityFilter != nil) {
         [query whereKey:@"activity" equalTo:self.activityFilter];
     }
+    
+    self.HUD = [[MBProgressHUD alloc] initWithView:self.view];
+    [self.view addSubview:self.HUD];
+    UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 200, 138)];
+    imageView.image = [UIImage imageNamed:@"load1.png"];
+    //Add more images which will be used for the animation
+    imageView.animationImages = kLoadingImagesArray;
+    
+    //Set the duration of the animation (play with it
+    //until it looks nice for you)
+    imageView.animationDuration = 0.9;
+    [imageView startAnimating];
+    imageView.contentMode = UIViewContentModeScaleToFill;
+    self.HUD.customView = imageView;
+    self.HUD.mode = MBProgressHUDModeCustomView;
+    self.HUD.color = [UIColor whiteColor];
+    
+    [self.HUD show:YES];
+    [self setLoadingViewEnabled:NO];
     return query;
 }
 
