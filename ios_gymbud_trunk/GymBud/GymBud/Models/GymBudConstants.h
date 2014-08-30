@@ -21,5 +21,10 @@
 
 #define kFacebookUsername @"user_fb_name"
 
+// Loading Animation Stuff
+#define kLoadingAnimationHeight 138
+#define kLoadingAnimationWidth 200
+#define kLoadingAnimationDuration 0.9
 #define kLoadingLogoName @"loadingLogo"
-#define kLoadingImagesArray [NSArray arrayWithObjects:[UIImage imageNamed:@"load1.png"],[UIImage imageNamed:@"load2.png"],[UIImage imageNamed:@"load3.png"],[UIImage imageNamed:@"load4.png"],[UIImage imageNamed:@"load5.png"],[UIImage imageNamed:@"load6.png"],[UIImage imageNamed:@"load7.png"],[UIImage imageNamed:@"load8.png"],[UIImage imageNamed:@"load9.png"],nil]
+#define kLoadingImageFirst @"load9.png"
+#define kLoadingImagesArray [NSArray arrayWithObjects:[UIImage imageNamed:@"load9.png"],[UIImage imageNamed:@"load8.png"],[UIImage imageNamed:@"load7.png"],[UIImage imageNamed:@"load6.png"],[UIImage imageNamed:@"load5.png"],[UIImage imageNamed:@"load4.png"],[UIImage imageNamed:@"load3.png"],[UIImage imageNamed:@"load2.png"],[UIImage imageNamed:@"load1.png"],nil]
