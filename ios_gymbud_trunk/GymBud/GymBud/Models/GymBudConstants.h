@@ -20,3 +20,5 @@
 #define kGoogleApiKey @"AIzaSyBYOIc_oRgl8ridepQWCR3mG9IkfEODe8A"
 
 #define kFacebookUsername @"user_fb_name"
+
+#define kLoadingLogoName @"loadingLogo"

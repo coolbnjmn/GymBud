@@ -6,43 +6,53 @@
 	<dict>
 		<key>Pods-GymBud-AFNetworking.xcscheme</key>
 		<dict>
-			<key>orderHint</key>
-			<integer>2</integer>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>Pods-GymBud-MBProgressHUD.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
 		</dict>
 		<key>Pods-GymBud-MLPAutoCompleteTextField.xcscheme</key>
 		<dict>
-			<key>orderHint</key>
-			<integer>3</integer>
+			<key>isShown</key>
+			<false/>
 		</dict>
 		<key>Pods-GymBud-RSDayFlow.xcscheme</key>
 		<dict>
-			<key>orderHint</key>
-			<integer>4</integer>
+			<key>isShown</key>
+			<false/>
 		</dict>
 		<key>Pods-GymBud.xcscheme</key>
 		<dict>
-			<key>orderHint</key>
-			<integer>1</integer>
+			<key>isShown</key>
+			<false/>
 		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>71917E6F27E64E4FA83DEA07</key>
+		<key>0F2033D3C0A14D869178AEBF</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>82F40C98F76F4438A4FA7E38</key>
+		<key>47EE5CEE1875499A956DAE5B</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>D2350ABA4DF740AFB22E1344</key>
+		<key>8FACEAE97DC246F7A9C85A0F</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>EFD07A9EBEB1432EB6D143CF</key>
+		<key>AA4F50CF4CB848F7B943DEC6</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>EBEF2E3171C04E99B3EB594D</key>
 		<dict>
 			<key>primary</key>
 			<true/>

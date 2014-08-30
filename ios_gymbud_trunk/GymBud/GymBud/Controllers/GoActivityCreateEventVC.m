@@ -26,6 +26,7 @@
 @property (nonatomic, strong) NSMutableArray *names;
 @property (nonatomic, strong) NSMutableArray *users;
 @property int count;
+@property MBProgressHUD *HUD;
 
 @end
 
@@ -136,7 +137,15 @@
     // need to parse out all the elements into a parse object
     // and return to a special page.
     
-    
+    self.HUD = [[MBProgressHUD alloc] initWithView:self.view];
+    [self.view addSubview:self.HUD];
+    UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 200, 55)];
+    imageView.image = [UIImage imageNamed:kLoadingLogoName];
+    imageView.contentMode = UIViewContentModeScaleToFill;
+    self.HUD.customView = imageView;
+    self.HUD.mode = MBProgressHUDModeCustomView;
+    self.HUD.labelText = @"Saving";
+    [self.HUD show:YES];
     
     // now for the location
     NSURL *url = [NSURL URLWithString:@"https://maps.googleapis.com/maps/api/geocode/"];
@@ -198,12 +207,14 @@
             if (error) {
                 NSLog(@"Couldn't save!");
                 NSLog(@"%@", error);
+                [self.HUD hide:NO];
                 UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:[[error userInfo] objectForKey:@"error"] message:nil delegate:self cancelButtonTitle:nil otherButtonTitles:@"Ok", nil];
                 [alertView show];
                 return;
             }
             if (succeeded) {
                 NSLog(@"Successfully saved!");
+                [self.HUD hide:YES];
                 NSLog(@"%@", eventObject);
                 //            dispatch_async(dispatch_get_main_queue(), ^{
                 //                [[NSNotificationCenter defaultCenter] postNotificationName:@"CreatePostNotification" object:nil];

@@ -5,7 +5,7 @@
 #import "SettingsVC.h"
 #import "GoActivityCVC.h"
 #import "GBJoinedEventsTVC.h"
-
+#import "GymBudConstants.h"
 
 #import <Parse/Parse.h>
 
@@ -142,7 +142,8 @@
 
     // Login PFUser using facebook
     [PFFacebookUtils logInWithPermissions:permissionsArray block:^(PFUser *user, NSError *error) {
-        [_activityIndicator stopAnimating]; // Hide loading indicator
+//        [_activityIndicator stopAnimating]; // Hide loading indicator
+        [self.HUD hide:YES];
         
         if (!user) {
             if (!error) {
@@ -163,7 +164,16 @@
         }
     }];
     
-    [_activityIndicator startAnimating]; // Show loading indicator until login is finished
+//    [_activityIndicator startAnimating]; // Show loading indicator until login is finished
+    self.HUD = [[MBProgressHUD alloc] initWithView:self.view];
+    [self.view addSubview:self.HUD];
+    UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 200, 55)];
+    imageView.image = [UIImage imageNamed:kLoadingLogoName];
+    imageView.contentMode = UIViewContentModeScaleToFill;
+    self.HUD.customView = imageView;
+    self.HUD.mode = MBProgressHUDModeCustomView;
+    self.HUD.labelText = @"Loading";
+    [self.HUD show:YES];
 }
 
 - (void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {

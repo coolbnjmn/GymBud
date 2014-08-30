@@ -8,11 +8,12 @@
 
 #import <UIKit/UIKit.h>
 #import "PAWWallViewController.h"
-
+#import "MBProgressHUD.h"
 
 @interface LoginViewController : UIViewController
 
 @property (nonatomic, strong) IBOutlet UIActivityIndicatorView *activityIndicator;
+@property (nonatomic, strong) MBProgressHUD *HUD;
 
 - (IBAction)loginButtonTouchHandler:(id)sender;
 
