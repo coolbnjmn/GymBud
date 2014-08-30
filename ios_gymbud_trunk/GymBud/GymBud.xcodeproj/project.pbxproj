@@ -20,6 +20,8 @@
 		B2722DE219AD86F800FEC2AF /* GymBudEventsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B2722DE019AD86F800FEC2AF /* GymBudEventsCell.m */; };
 		B2722DE319AD86F800FEC2AF /* GymBudEventsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B2722DE119AD86F800FEC2AF /* GymBudEventsCell.xib */; };
 		B2784D8719B14F620042A188 /* loadingLogo.png in Resources */ = {isa = PBXBuildFile; fileRef = B2784D8619B14F620042A188 /* loadingLogo.png */; };
+		B2784D8A19B17AF00042A188 /* go.png in Resources */ = {isa = PBXBuildFile; fileRef = B2784D8819B17AF00042A188 /* go.png */; };
+		B2784D8B19B17AF00042A188 /* join.png in Resources */ = {isa = PBXBuildFile; fileRef = B2784D8919B17AF00042A188 /* join.png */; };
 		B27AF67019B0417300FDBF0F /* GBJoinedEventsTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = B27AF66F19B0417300FDBF0F /* GBJoinedEventsTVC.m */; };
 		B27AF67319B0D00700FDBF0F /* NSDate+Utilities.m in Sources */ = {isa = PBXBuildFile; fileRef = B27AF67219B0D00700FDBF0F /* NSDate+Utilities.m */; };
 		B29774111980D5EF000AD7B6 /* SettingsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = B297740F1980D5EF000AD7B6 /* SettingsVC.m */; };
@@ -141,6 +143,8 @@
 		B2722DE019AD86F800FEC2AF /* GymBudEventsCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GymBudEventsCell.m; path = GymBud/Views/GymBudEventsCell.m; sourceTree = "<group>"; };
 		B2722DE119AD86F800FEC2AF /* GymBudEventsCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = GymBudEventsCell.xib; path = GymBud/Views/GymBudEventsCell.xib; sourceTree = "<group>"; };
 		B2784D8619B14F620042A188 /* loadingLogo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = loadingLogo.png; path = GymBud/Assets/loadingLogo.png; sourceTree = "<group>"; };
+		B2784D8819B17AF00042A188 /* go.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = go.png; path = GymBud/Assets/go.png; sourceTree = "<group>"; };
+		B2784D8919B17AF00042A188 /* join.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = join.png; path = GymBud/Assets/join.png; sourceTree = "<group>"; };
 		B27AF66E19B0417300FDBF0F /* GBJoinedEventsTVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GBJoinedEventsTVC.h; path = GymBud/Controllers/GBJoinedEventsTVC.h; sourceTree = "<group>"; };
 		B27AF66F19B0417300FDBF0F /* GBJoinedEventsTVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GBJoinedEventsTVC.m; path = GymBud/Controllers/GBJoinedEventsTVC.m; sourceTree = "<group>"; };
 		B27AF67119B0D00700FDBF0F /* NSDate+Utilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSDate+Utilities.h"; path = "GymBud/Models/NSDate+Utilities.h"; sourceTree = "<group>"; };
@@ -347,6 +351,8 @@
 		B2C39D6D197E193000039F90 /* Assets */ = {
 			isa = PBXGroup;
 			children = (
+				B2784D8819B17AF00042A188 /* go.png */,
+				B2784D8919B17AF00042A188 /* join.png */,
 				B2784D8619B14F620042A188 /* loadingLogo.png */,
 				B297745119864133000AD7B6 /* centeredGear.png */,
 				B297745219864133000AD7B6 /* centeredInbox.png */,
@@ -610,6 +616,7 @@
 				B297744A19861B9D000AD7B6 /* mapTableToggle2.png in Resources */,
 				B29774451985F085000AD7B6 /* menu.png in Resources */,
 				B2C39D95197E194F00039F90 /* ViewMessageVC.xib in Resources */,
+				B2784D8B19B17AF00042A188 /* join.png in Resources */,
 				B297741619820C4C000AD7B6 /* tableView.png in Resources */,
 				B297743C198582A5000AD7B6 /* swimmingIcon.png in Resources */,
 				B2D0CACB197E272400B17D32 /* login-button-small-pressed@2x.png in Resources */,
@@ -618,6 +625,7 @@
 				B297743D198582A5000AD7B6 /* weightliftingIcon.png in Resources */,
 				B2D0CACA197E272400B17D32 /* login-button-small-pressed.png in Resources */,
 				77FE6483198F5D36008724CC /* GoActivity.storyboard in Resources */,
+				B2784D8A19B17AF00042A188 /* go.png in Resources */,
 				B2977439198582A5000AD7B6 /* basketballIcon.png in Resources */,
 				B297744919861B9D000AD7B6 /* mapTableToggle1.png in Resources */,
 				B2C39DBB197E1B5D00039F90 /* Main.storyboard in Resources */,

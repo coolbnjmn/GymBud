@@ -67,10 +67,10 @@
         nvc2.tabBarItem.image = [UIImage imageNamed:@"centeredInbox.png"];
         nvc3.tabBarItem.title = nil;
         nvc3.tabBarItem.image = [UIImage imageNamed:@"centeredGear.png"];
-        nvc4.tabBarItem.title = @"GO";
-        nvc4.tabBarItem.image = nil;
-        nvc5.tabBarItem.title = @"Joined";
-        nvc5.tabBarItem.image = nil;
+        nvc4.tabBarItem.title = nil;
+        nvc4.tabBarItem.image = [UIImage imageNamed:@"go.png"];
+        nvc5.tabBarItem.title = nil;
+        nvc5.tabBarItem.image = [UIImage imageNamed:@"join.png"];
         
         NSMutableArray *tbcArray = [[NSMutableArray alloc] initWithObjects:nvc1, nvc2, nvc4, nvc5, nvc3, nil];
         tbc.tabBar.tintColor = [UIColor colorWithRed:44/255.0f green:62/255.0f blue:80/255.0f alpha:1.0f];

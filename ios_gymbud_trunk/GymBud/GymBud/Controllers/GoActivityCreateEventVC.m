@@ -145,6 +145,8 @@
     self.HUD.customView = imageView;
     self.HUD.mode = MBProgressHUDModeCustomView;
     self.HUD.labelText = @"Saving";
+    self.HUD.color = [UIColor whiteColor];
+    self.HUD.labelColor = [UIColor colorWithRed:60/255.0f green:151/255.0f blue:211/255.0f alpha:1.0f];
     [self.HUD show:YES];
     
     // now for the location
