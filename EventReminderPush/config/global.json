@@ -1,0 +1,14 @@
+{
+    "applications": {
+        "GymBud": {
+            "applicationId": "DXeaM3NWJz1Lca9cjOyry5lusEhYw8nwuOyI8ene", 
+            "masterKey": "PFMIrcZP4iI5FsR4mglrLxRPnVAbQEanPqCFyKZ3"
+        }, 
+        "_default": {
+            "link": "GymBud"
+        }
+    }, 
+    "global": {
+        "parseVersion": "1.2.19"
+    }
+}
