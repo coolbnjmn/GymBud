@@ -17,4 +17,9 @@
 @property (weak, nonatomic) IBOutlet UIImageView *logoImageView;
 @property (weak, nonatomic) IBOutlet UILabel *startDateTextLabel;
 @property (weak, nonatomic) IBOutlet UILabel *locationTextLabel;
+@property (weak, nonatomic) IBOutlet UIImageView *subLogoImageView1;
+@property (weak, nonatomic) IBOutlet UIImageView *subLogoImageView2;
+@property (weak, nonatomic) IBOutlet UIImageView *subLogoImageView3;
+@property (weak, nonatomic) IBOutlet UIImageView *subLogoImageView4;
+
 @end

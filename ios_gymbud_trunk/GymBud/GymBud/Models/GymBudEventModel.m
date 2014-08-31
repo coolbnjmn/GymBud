@@ -28,6 +28,8 @@
 @property (nonatomic, strong) NSNumber *count;
 @property (nonatomic, strong) NSString *description;
 @property (nonatomic, strong) NSString *locationName;
+@property (nonatomic, strong) NSArray *detailLogoIndices;
+
 @property (nonatomic, assign) MKPinAnnotationColor pinColor;
 
 @end
@@ -56,7 +58,7 @@
     self.count = [anObject objectForKey:@"count"];
     self.description = [anObject objectForKey:@"description"];
     self.attendees = [anObject objectForKey:@"attendees"];
-    
+    self.detailLogoIndices = [anObject objectForKey:@"detailLogoIndices"];
     if(!self.description) {
         self.description = @"No Description Provided";
     }

@@ -1,22 +1,22 @@
 //
-//  GoActivityCVC.m
+//  GBBodyPartCVC.m
 //  GymBud
 //
-//  Created by Benjamin Hendricks on 8/3/14.
+//  Created by Benjamin Hendricks on 8/30/14.
 //  Copyright (c) 2014 GymBud. All rights reserved.
 //
 
-#import "GoActivityCVC.h"
+#import "GBBodyPartCVC.h"
 #import "GoActivityCVCell.h"
 #import "GymBudConstants.h"
 #import "GoActivityChosenVC.h"
-#import "GBBodyPartCVC.h"
 
-@interface GoActivityCVC () <UICollectionViewDelegateFlowLayout>
+@interface GBBodyPartCVC ()
 
+@property (nonatomic, strong) NSMutableArray *selectedBodyParts;
 @end
 
-@implementation GoActivityCVC
+@implementation GBBodyPartCVC
 
 static NSString * const reuseIdentifier = @"goActivityCell";
 
@@ -37,11 +37,16 @@ static NSString * const reuseIdentifier = @"goActivityCell";
     // self.clearsSelectionOnViewWillAppear = NO;
     
     // Register cell classes
-//    [self.collectionView registerClass:[GoActivityCVCell class] forCellWithReuseIdentifier:reuseIdentifier];
     [self.collectionView registerNib:[UINib nibWithNibName:@"GoActivityCVCell" bundle:[NSBundle mainBundle]] forCellWithReuseIdentifier:reuseIdentifier];
     self.collectionView.backgroundColor = [UIColor whiteColor];
-    self.navigationItem.title = @"GO";
+    self.navigationItem.title = @"Body Part";
+    [self.collectionView setAllowsMultipleSelection:YES];
+    self.selectedBodyParts = [[NSMutableArray alloc] init];
+    
+    UIBarButtonItem *continueButton = [[UIBarButtonItem alloc] initWithTitle:@"Next" style:UIBarButtonItemStyleBordered target:self action:@selector(continueWithBodyParts:)];
+    self.navigationItem.rightBarButtonItem = continueButton;
     // Do any additional setup after loading the view.
+    
 }
 
 - (void)didReceiveMemoryWarning
@@ -50,6 +55,16 @@ static NSString * const reuseIdentifier = @"goActivityCell";
     // Dispose of any resources that can be recreated.
 }
 
+/*
+#pragma mark - Navigation
+
+// In a storyboard-based application, you will often want to do a little preparation before navigation
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    // Get the new view controller using [segue destinationViewController].
+    // Pass the selected object to the new view controller.
+}
+*/
 
 #pragma mark <UICollectionViewDataSource>
 
@@ -61,46 +76,38 @@ static NSString * const reuseIdentifier = @"goActivityCell";
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
-    return [kGymBudActivityMapIcons count];
+    return [kGBBodyPartArray count];
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSLog(@"cell being called, indexpath is: %@", indexPath);
     GoActivityCVCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:reuseIdentifier forIndexPath:indexPath];
     
-    NSInteger index = indexPath.row;
-    cell.goActivityPictureImaveView.image = [UIImage imageNamed:[kGymBudActivityIconMapping objectForKey:[kGymBudActivities objectAtIndex:index]]];
-    cell.goActivityTextLabel.text = [kGymBudActivities objectAtIndex:index];
-    
-    cell.backgroundColor = [UIColor clearColor];
+    // Configure the cell
+    cell.goActivityPictureImaveView.image = [kLoadingImagesArray objectAtIndex:indexPath.row];
+    cell.goActivityTextLabel.text = [kGBBodyPartArray objectAtIndex:indexPath.row];
+    cell.backgroundColor = [UIColor whiteColor];
     return cell;
 }
 
-#pragma mark <UICollectionViewDelegate>
-
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    // TODO: Select Item
-    NSLog(@"selected item at indexpath: %@", indexPath);
-    NSString *activityChosen = [kGymBudActivities objectAtIndex:indexPath.row];
-    UIStoryboard *sb = [UIStoryboard storyboardWithName:@"GoActivity" bundle:nil];
-    // 5 is hte index of weightlifting in the current kGymBudActivities, might need to change this
-    // TODO: remove magic number
-    if([activityChosen isEqualToString:kGymBudActivities[5]]) {
-        // equal to weightlifting, do something special::
-        GBBodyPartCVC *vc = [sb instantiateViewControllerWithIdentifier:@"GBBodyPartCVC"];
-        [self.navigationController pushViewController:vc animated:YES];
+    if([self.selectedBodyParts count] < 4) {
+        [self.selectedBodyParts addObject:indexPath];
+        GoActivityCVCell *cell = (GoActivityCVCell *)[collectionView cellForItemAtIndexPath:indexPath];
+        cell.backgroundColor = [UIColor redColor];
     } else {
-        GoActivityChosenVC *vc = [sb instantiateViewControllerWithIdentifier:@"GoActivityChosenVC"];
-        vc.activity = activityChosen;
-        [self.navigationController pushViewController:vc animated:YES];
+        // DO nothing, we don't want to select more than 4
     }
-    
 }
 - (void)collectionView:(UICollectionView *)collectionView didDeselectItemAtIndexPath:(NSIndexPath *)indexPath {
     // TODO: Deselect item
+    [self.selectedBodyParts removeObject:indexPath];
+    GoActivityCVCell *cell = (GoActivityCVCell *)[collectionView cellForItemAtIndexPath:indexPath];
+    cell.backgroundColor = [UIColor whiteColor];
 }
+
+#pragma mark <UICollectionViewDelegate>
 
 /*
 // Uncomment this method to specify if the specified item should be highlighted during tracking
@@ -147,4 +154,11 @@ static NSString * const reuseIdentifier = @"goActivityCell";
     return UIEdgeInsetsMake(10, 5, 10, 5);
 }
 
+- (void) continueWithBodyParts:(id)sender {
+    UIStoryboard *sb = [UIStoryboard storyboardWithName:@"GoActivity" bundle:nil];
+    GoActivityChosenVC *vc = [sb instantiateViewControllerWithIdentifier:@"GoActivityChosenVC"];
+    vc.activity = [kGymBudActivities objectAtIndex:5]; // TODO: fix hard coded for Weightlifting
+    vc.bodyPartIndices = self.selectedBodyParts;
+    [self.navigationController pushViewController:vc animated:YES];
+}
 @end

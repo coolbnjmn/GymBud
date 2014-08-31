@@ -195,6 +195,12 @@
         
         [eventObject setObject:self.activity forKey:@"activity"];
         
+        NSMutableArray *indices = [[NSMutableArray alloc] init];
+        for(NSIndexPath *indexPath in self.bodyPartIndices) {
+            [indices addObject:[NSNumber numberWithInteger:indexPath.row]];
+        }
+        [eventObject setObject:indices forKey:@"detailLogoIndices"];
+        
         int selectedCountRow = (int) [self.countPicker selectedRowInComponent:0];
         // add 1 because it is 0 based indexing.
         [eventObject setObject:[NSNumber numberWithInt:selectedCountRow+1] forKey:@"count"];

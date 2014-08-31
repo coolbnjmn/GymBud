@@ -216,6 +216,21 @@
     NSString *capacity = [NSString stringWithFormat:@"%ld", (long)[[object objectForKey:@"count"] integerValue]];
     countOverCapacity = [[count stringByAppendingString:@"/"] stringByAppendingString:capacity];
     cell.capacityTextLabel.text = countOverCapacity;
+    
+    NSArray *subLogoIndices = [object objectForKey:@"detailLogoIndices"];
+    int subLogoIndex = 0;
+    for(NSNumber *index in subLogoIndices) {
+        if(subLogoIndex == 0) {
+            cell.subLogoImageView1.image = [kLoadingImagesArray objectAtIndex:[index integerValue]];
+        } else if(subLogoIndex == 1) {
+            cell.subLogoImageView2.image = [kLoadingImagesArray objectAtIndex:[index integerValue]];
+        } else if(subLogoIndex == 2) {
+            cell.subLogoImageView3.image = [kLoadingImagesArray objectAtIndex:[index integerValue]];
+        } else {
+            cell.subLogoImageView4.image = [kLoadingImagesArray objectAtIndex:[index integerValue]];
+        }
+        subLogoIndex++;
+    }
     return cell;
 }
 
@@ -230,6 +245,7 @@
     PFQuery *query = [PFQuery queryWithClassName:self.parseClassName];
     [query includeKey:@"organizer"];
     [query whereKey:@"activity" containsString:cell.activityTextLabel.text];
+    [query whereKey:@"locationName" containsString:cell.locationTextLabel.text];
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
         if(self.navigationController.topViewController == self) {
             GymBudEventModel *post = [[GymBudEventModel alloc] initWithPFObject:[objects objectAtIndex:0]];

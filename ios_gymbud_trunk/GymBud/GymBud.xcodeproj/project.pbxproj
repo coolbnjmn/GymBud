@@ -31,6 +31,7 @@
 		B2784D9B19B18D010042A188 /* load7.png in Resources */ = {isa = PBXBuildFile; fileRef = B2784D9219B18D010042A188 /* load7.png */; };
 		B2784D9C19B18D010042A188 /* load8.png in Resources */ = {isa = PBXBuildFile; fileRef = B2784D9319B18D010042A188 /* load8.png */; };
 		B2784D9D19B18D010042A188 /* load9.png in Resources */ = {isa = PBXBuildFile; fileRef = B2784D9419B18D010042A188 /* load9.png */; };
+		B2784DA019B2B34E0042A188 /* GBBodyPartCVC.m in Sources */ = {isa = PBXBuildFile; fileRef = B2784D9F19B2B34E0042A188 /* GBBodyPartCVC.m */; };
 		B27AF67019B0417300FDBF0F /* GBJoinedEventsTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = B27AF66F19B0417300FDBF0F /* GBJoinedEventsTVC.m */; };
 		B27AF67319B0D00700FDBF0F /* NSDate+Utilities.m in Sources */ = {isa = PBXBuildFile; fileRef = B27AF67219B0D00700FDBF0F /* NSDate+Utilities.m */; };
 		B29774111980D5EF000AD7B6 /* SettingsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = B297740F1980D5EF000AD7B6 /* SettingsVC.m */; };
@@ -163,6 +164,8 @@
 		B2784D9219B18D010042A188 /* load7.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = load7.png; path = GymBud/Assets/load7.png; sourceTree = "<group>"; };
 		B2784D9319B18D010042A188 /* load8.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = load8.png; path = GymBud/Assets/load8.png; sourceTree = "<group>"; };
 		B2784D9419B18D010042A188 /* load9.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = load9.png; path = GymBud/Assets/load9.png; sourceTree = "<group>"; };
+		B2784D9E19B2B34E0042A188 /* GBBodyPartCVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GBBodyPartCVC.h; path = GymBud/Controllers/GBBodyPartCVC.h; sourceTree = "<group>"; };
+		B2784D9F19B2B34E0042A188 /* GBBodyPartCVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GBBodyPartCVC.m; path = GymBud/Controllers/GBBodyPartCVC.m; sourceTree = "<group>"; };
 		B27AF66E19B0417300FDBF0F /* GBJoinedEventsTVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GBJoinedEventsTVC.h; path = GymBud/Controllers/GBJoinedEventsTVC.h; sourceTree = "<group>"; };
 		B27AF66F19B0417300FDBF0F /* GBJoinedEventsTVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GBJoinedEventsTVC.m; path = GymBud/Controllers/GBJoinedEventsTVC.m; sourceTree = "<group>"; };
 		B27AF67119B0D00700FDBF0F /* NSDate+Utilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSDate+Utilities.h"; path = "GymBud/Models/NSDate+Utilities.h"; sourceTree = "<group>"; };
@@ -470,9 +473,8 @@
 				77F13146198EEE0000576708 /* RSDatePickerVC.m */,
 				77FE647E198F4FE1008724CC /* GoActivityCVC.h */,
 				77FE647F198F4FE1008724CC /* GoActivityCVC.m */,
-				77FE6485198F715C008724CC /* GoActivityCVCell.h */,
-				77FE6486198F715C008724CC /* GoActivityCVCell.m */,
-				77FE648A199051E8008724CC /* GoActivityCVCell.xib */,
+				B2784D9E19B2B34E0042A188 /* GBBodyPartCVC.h */,
+				B2784D9F19B2B34E0042A188 /* GBBodyPartCVC.m */,
 				77FE648C1990545A008724CC /* GoActivityChosenVC.h */,
 				77FE648D1990545A008724CC /* GoActivityChosenVC.m */,
 				77FE648F1990A924008724CC /* GoActivityCreateEventVC.h */,
@@ -506,6 +508,9 @@
 				B2722DDF19AD86F800FEC2AF /* GymBudEventsCell.h */,
 				B2722DE019AD86F800FEC2AF /* GymBudEventsCell.m */,
 				B2722DE119AD86F800FEC2AF /* GymBudEventsCell.xib */,
+				77FE6485198F715C008724CC /* GoActivityCVCell.h */,
+				77FE6486198F715C008724CC /* GoActivityCVCell.m */,
+				77FE648A199051E8008724CC /* GoActivityCVCell.xib */,
 			);
 			name = Views;
 			path = ..;
@@ -755,6 +760,7 @@
 				B2C39D91197E194F00039F90 /* PAWWallViewController.m in Sources */,
 				77F13147198EEE0000576708 /* RSDatePickerVC.m in Sources */,
 				B29774111980D5EF000AD7B6 /* SettingsVC.m in Sources */,
+				B2784DA019B2B34E0042A188 /* GBBodyPartCVC.m in Sources */,
 				B2C39D94197E194F00039F90 /* ViewMessageVC.m in Sources */,
 				B2C39D9A197E197E00039F90 /* PAWPost.m in Sources */,
 				B2D0CAD1197E2BB700B17D32 /* FindUserTVC.m in Sources */,

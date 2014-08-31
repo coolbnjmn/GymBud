@@ -11,5 +11,6 @@
 @interface GoActivityChosenVC : UIViewController
 
 @property (nonatomic, strong) NSString *activity;
+@property (nonatomic, strong) NSArray *bodyPartIndices;
 
 @end

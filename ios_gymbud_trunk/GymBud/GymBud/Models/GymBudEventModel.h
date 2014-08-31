@@ -36,6 +36,7 @@
 @property (nonatomic, readonly, strong) NSNumber *count;
 @property (nonatomic, readonly, strong) NSString *description;
 @property (nonatomic, readonly, strong) NSString *locationName;
+@property (nonatomic, readonly, strong) NSArray *detailLogoIndices;
 @property (nonatomic, assign) BOOL animatesDrop;
 @property (nonatomic, assign) NSNumber* isVisible;
 @property (nonatomic, readonly) MKPinAnnotationColor pinColor;

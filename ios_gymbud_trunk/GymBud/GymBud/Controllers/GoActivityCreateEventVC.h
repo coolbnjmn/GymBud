@@ -11,5 +11,6 @@
 @interface GoActivityCreateEventVC : UITableViewController
 
 @property (nonatomic, strong) NSString *activity;
+@property (nonatomic, strong) NSArray *bodyPartIndices;
 
 @end
