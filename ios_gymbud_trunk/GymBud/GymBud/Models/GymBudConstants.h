@@ -35,3 +35,6 @@
 
 // Body Parrt Stuff
 #define kGBBodyPartArray [NSArray arrayWithObjects:@"Full Body", @"Chest", @"Back", @"Legs", @"Shoulders", @"Arms", @"Abs", nil]
+#define kGBBodyPartImagesArray [NSArray arrayWithObjects: @"body.png", @"chest.png", @"back.png", @"legs.png", @"shoulders.png", @"arms.png", @"abs.png", nil]
+#define kGBBodyPartMapping [NSDictionary dictionaryWithObjects:kGBBodyPartImagesArray forKeys:kGBBodyPartArray]
+

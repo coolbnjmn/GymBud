@@ -199,13 +199,13 @@
     int subLogoIndex = 0;
     for(NSNumber *index in subLogoIndices) {
         if(subLogoIndex == 0) {
-            cell.subLogoImageView1.image = [kLoadingImagesArray objectAtIndex:[index integerValue]];
+            cell.subLogoImageView1.image = [UIImage imageNamed:[kGBBodyPartImagesArray objectAtIndex:[index integerValue]]];
         } else if(subLogoIndex == 1) {
-            cell.subLogoImageView2.image = [kLoadingImagesArray objectAtIndex:[index integerValue]];
+            cell.subLogoImageView2.image = [UIImage imageNamed:[kGBBodyPartImagesArray objectAtIndex:[index integerValue]]];
         } else if(subLogoIndex == 2) {
-            cell.subLogoImageView3.image = [kLoadingImagesArray objectAtIndex:[index integerValue]];
+            cell.subLogoImageView3.image = [UIImage imageNamed:[kGBBodyPartImagesArray objectAtIndex:[index integerValue]]];
         } else {
-            cell.subLogoImageView4.image = [kLoadingImagesArray objectAtIndex:[index integerValue]];
+            cell.subLogoImageView4.image = [UIImage imageNamed:[kGBBodyPartImagesArray objectAtIndex:[index integerValue]]];
         }
         subLogoIndex++;
     }

@@ -84,7 +84,7 @@ static NSString * const reuseIdentifier = @"goActivityCell";
     GoActivityCVCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:reuseIdentifier forIndexPath:indexPath];
     
     // Configure the cell
-    cell.goActivityPictureImaveView.image = [kLoadingImagesArray objectAtIndex:indexPath.row];
+    cell.goActivityPictureImaveView.image = [UIImage imageNamed:[kGBBodyPartImagesArray objectAtIndex:indexPath.row]];
     cell.goActivityTextLabel.text = [kGBBodyPartArray objectAtIndex:indexPath.row];
     cell.backgroundColor = [UIColor whiteColor];
     return cell;

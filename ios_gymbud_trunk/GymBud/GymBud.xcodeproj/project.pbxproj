@@ -32,6 +32,13 @@
 		B2784D9C19B18D010042A188 /* load8.png in Resources */ = {isa = PBXBuildFile; fileRef = B2784D9319B18D010042A188 /* load8.png */; };
 		B2784D9D19B18D010042A188 /* load9.png in Resources */ = {isa = PBXBuildFile; fileRef = B2784D9419B18D010042A188 /* load9.png */; };
 		B2784DA019B2B34E0042A188 /* GBBodyPartCVC.m in Sources */ = {isa = PBXBuildFile; fileRef = B2784D9F19B2B34E0042A188 /* GBBodyPartCVC.m */; };
+		B2784DA619B412AB0042A188 /* abs.png in Resources */ = {isa = PBXBuildFile; fileRef = B2784DA119B412AB0042A188 /* abs.png */; };
+		B2784DA719B412AB0042A188 /* arms.png in Resources */ = {isa = PBXBuildFile; fileRef = B2784DA219B412AB0042A188 /* arms.png */; };
+		B2784DA819B412AB0042A188 /* back.png in Resources */ = {isa = PBXBuildFile; fileRef = B2784DA319B412AB0042A188 /* back.png */; };
+		B2784DA919B412AB0042A188 /* body.png in Resources */ = {isa = PBXBuildFile; fileRef = B2784DA419B412AB0042A188 /* body.png */; };
+		B2784DAA19B412AB0042A188 /* chest.png in Resources */ = {isa = PBXBuildFile; fileRef = B2784DA519B412AB0042A188 /* chest.png */; };
+		B2784DAD19B412B90042A188 /* legs.png in Resources */ = {isa = PBXBuildFile; fileRef = B2784DAB19B412B90042A188 /* legs.png */; };
+		B2784DAE19B412B90042A188 /* shoulders.png in Resources */ = {isa = PBXBuildFile; fileRef = B2784DAC19B412B90042A188 /* shoulders.png */; };
 		B27AF67019B0417300FDBF0F /* GBJoinedEventsTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = B27AF66F19B0417300FDBF0F /* GBJoinedEventsTVC.m */; };
 		B27AF67319B0D00700FDBF0F /* NSDate+Utilities.m in Sources */ = {isa = PBXBuildFile; fileRef = B27AF67219B0D00700FDBF0F /* NSDate+Utilities.m */; };
 		B29774111980D5EF000AD7B6 /* SettingsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = B297740F1980D5EF000AD7B6 /* SettingsVC.m */; };
@@ -166,6 +173,13 @@
 		B2784D9419B18D010042A188 /* load9.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = load9.png; path = GymBud/Assets/load9.png; sourceTree = "<group>"; };
 		B2784D9E19B2B34E0042A188 /* GBBodyPartCVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GBBodyPartCVC.h; path = GymBud/Controllers/GBBodyPartCVC.h; sourceTree = "<group>"; };
 		B2784D9F19B2B34E0042A188 /* GBBodyPartCVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GBBodyPartCVC.m; path = GymBud/Controllers/GBBodyPartCVC.m; sourceTree = "<group>"; };
+		B2784DA119B412AB0042A188 /* abs.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = abs.png; path = GymBud/Assets/abs.png; sourceTree = "<group>"; };
+		B2784DA219B412AB0042A188 /* arms.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = arms.png; path = GymBud/Assets/arms.png; sourceTree = "<group>"; };
+		B2784DA319B412AB0042A188 /* back.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = back.png; path = GymBud/Assets/back.png; sourceTree = "<group>"; };
+		B2784DA419B412AB0042A188 /* body.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = body.png; path = GymBud/Assets/body.png; sourceTree = "<group>"; };
+		B2784DA519B412AB0042A188 /* chest.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = chest.png; path = GymBud/Assets/chest.png; sourceTree = "<group>"; };
+		B2784DAB19B412B90042A188 /* legs.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = legs.png; path = GymBud/Assets/legs.png; sourceTree = "<group>"; };
+		B2784DAC19B412B90042A188 /* shoulders.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = shoulders.png; path = GymBud/Assets/shoulders.png; sourceTree = "<group>"; };
 		B27AF66E19B0417300FDBF0F /* GBJoinedEventsTVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GBJoinedEventsTVC.h; path = GymBud/Controllers/GBJoinedEventsTVC.h; sourceTree = "<group>"; };
 		B27AF66F19B0417300FDBF0F /* GBJoinedEventsTVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GBJoinedEventsTVC.m; path = GymBud/Controllers/GBJoinedEventsTVC.m; sourceTree = "<group>"; };
 		B27AF67119B0D00700FDBF0F /* NSDate+Utilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSDate+Utilities.h"; path = "GymBud/Models/NSDate+Utilities.h"; sourceTree = "<group>"; };
@@ -372,6 +386,13 @@
 		B2C39D6D197E193000039F90 /* Assets */ = {
 			isa = PBXGroup;
 			children = (
+				B2784DAB19B412B90042A188 /* legs.png */,
+				B2784DAC19B412B90042A188 /* shoulders.png */,
+				B2784DA119B412AB0042A188 /* abs.png */,
+				B2784DA219B412AB0042A188 /* arms.png */,
+				B2784DA319B412AB0042A188 /* back.png */,
+				B2784DA419B412AB0042A188 /* body.png */,
+				B2784DA519B412AB0042A188 /* chest.png */,
 				B2784D8C19B18D010042A188 /* load1.png */,
 				B2784D8D19B18D010042A188 /* load2.png */,
 				B2784D8E19B18D010042A188 /* load3.png */,
@@ -638,6 +659,7 @@
 				B2784D9619B18D010042A188 /* load2.png in Resources */,
 				B297741519820C4C000AD7B6 /* mapView.png in Resources */,
 				B29774201984BF68000AD7B6 /* aerobicsMap.png in Resources */,
+				B2784DAE19B412B90042A188 /* shoulders.png in Resources */,
 				B2C39D43197E172600039F90 /* Images.xcassets in Resources */,
 				B29774231984BF68000AD7B6 /* runningMap.png in Resources */,
 				B29774431985F085000AD7B6 /* inbox.png in Resources */,
@@ -654,16 +676,21 @@
 				B29774451985F085000AD7B6 /* menu.png in Resources */,
 				B2C39D95197E194F00039F90 /* ViewMessageVC.xib in Resources */,
 				B2784D9B19B18D010042A188 /* load7.png in Resources */,
+				B2784DAA19B412AB0042A188 /* chest.png in Resources */,
 				B2784D8B19B17AF00042A188 /* join.png in Resources */,
 				B297741619820C4C000AD7B6 /* tableView.png in Resources */,
 				B297743C198582A5000AD7B6 /* swimmingIcon.png in Resources */,
+				B2784DA819B412AB0042A188 /* back.png in Resources */,
 				B2D0CACB197E272400B17D32 /* login-button-small-pressed@2x.png in Resources */,
 				B297745419864133000AD7B6 /* centeredGear.png in Resources */,
 				B2722DE319AD86F800FEC2AF /* GymBudEventsCell.xib in Resources */,
 				B297743D198582A5000AD7B6 /* weightliftingIcon.png in Resources */,
 				B2D0CACA197E272400B17D32 /* login-button-small-pressed.png in Resources */,
 				77FE6483198F5D36008724CC /* GoActivity.storyboard in Resources */,
+				B2784DA619B412AB0042A188 /* abs.png in Resources */,
+				B2784DA919B412AB0042A188 /* body.png in Resources */,
 				B2784D8A19B17AF00042A188 /* go.png in Resources */,
+				B2784DAD19B412B90042A188 /* legs.png in Resources */,
 				B2977439198582A5000AD7B6 /* basketballIcon.png in Resources */,
 				B297744919861B9D000AD7B6 /* mapTableToggle1.png in Resources */,
 				B2C39DBB197E1B5D00039F90 /* Main.storyboard in Resources */,
@@ -685,6 +712,7 @@
 				B2784D9A19B18D010042A188 /* load6.png in Resources */,
 				B2C39D8F197E194F00039F90 /* PAWWallPostCreateViewController.xib in Resources */,
 				B2C39D66197E191C00039F90 /* blueBubble@2x.png in Resources */,
+				B2784DA719B412AB0042A188 /* arms.png in Resources */,
 				B2C39D68197E191C00039F90 /* grayBubble@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
