@@ -31,6 +31,7 @@
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     UIBarButtonItem *messageButton = [[UIBarButtonItem alloc] initWithTitle:@"Send Message" style:UIBarButtonItemStyleBordered target:self action:@selector(sendMessage:)];
     
+    self.navigationItem.title = @"Inbox";
     self.navigationItem.rightBarButtonItem = messageButton;
 }
 
@@ -122,8 +123,13 @@
         cell = [[PFTableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"MessageCell"];
     }
     
-    cell.textLabel.text = [[[object objectForKey:@"fromUser"] objectForKey:@"profile"] objectForKey:@"name"];
-    cell.detailTextLabel.text = [object objectForKey:@"content"];
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateStyle:NSDateFormatterMediumStyle];
+    [dateFormatter setTimeStyle:NSDateFormatterShortStyle];
+    
+    NSString *when = [dateFormatter stringFromDate:[object createdAt]];
+    cell.detailTextLabel.text = [[[[[object objectForKey:@"fromUser"] objectForKey:@"profile"] objectForKey:@"name"] stringByAppendingString:@" : "] stringByAppendingString:when];
+    cell.textLabel.text = [object objectForKey:@"content"];
     return cell;
 }
 

@@ -80,6 +80,7 @@
     
     self.tableView.backgroundColor = [UIColor whiteColor];
     self.tableView.separatorColor = [UIColor clearColor];
+    self.navigationItem.title = @"Joined Events";
     
 }
 

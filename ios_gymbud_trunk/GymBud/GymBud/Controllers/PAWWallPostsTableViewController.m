@@ -107,6 +107,8 @@ static NSUInteger const kPAWTableViewMainSection = 0;
     UIImage *buttonImage = [UIImage imageNamed:@"mapTableToggle1.png"];
     UIBarButtonItem *mapToTableViewButton = [[UIBarButtonItem alloc] initWithImage:[buttonImage imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal] style:UIBarButtonItemStyleBordered target:self.navigationController.viewControllers[self.navigationController.viewControllers.count - 2] action:@selector(toggleMapTable:)];
     self.navigationItem.rightBarButtonItem = mapToTableViewButton;
+    self.navigationItem.title = @"Local GymBuds";
+
     
 }
 

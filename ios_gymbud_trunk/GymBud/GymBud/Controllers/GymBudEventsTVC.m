@@ -81,6 +81,7 @@
     
     self.tableView.backgroundColor = [UIColor whiteColor];
     self.tableView.separatorColor = [UIColor clearColor];
+    self.navigationItem.title = @"Local GymBuds";
     
 #pragma GCC diagnostic ignored "-Wundeclared-selector"
     // TODO: Remove Check in button

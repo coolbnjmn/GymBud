@@ -7,7 +7,6 @@
 //
 
 #import "PAWWallViewController.h"
-#import "PAWWallPostsTableViewController.h"
 #import "PAWWallPostCreateViewController.h"
 #import "UserDetailsViewController.h"
 #import "GymBudEventsTVC.h"
@@ -107,7 +106,7 @@
     self.navigationController.navigationBar.barTintColor = [UIColor colorWithRed:60/255.0f green:151/255.0f blue:211/255.0f alpha:1.0f];
     
 //    self.tabBarItem.image = [UIImage imageNamed:@"mapTabBar.png"];
-
+    self.navigationItem.title = @"Local GymBuds";
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(locationDidChange:) name:@"LocationChangeNotification" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(postWasCreated:) name:@"CreatePostNotification" object:nil];

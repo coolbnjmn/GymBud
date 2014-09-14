@@ -74,6 +74,7 @@
                                                         } forState:UIControlStateNormal];
     tbc.tabBar.barTintColor = [UIColor colorWithRed:60/255.0f green:151/255.0f blue:211/255.0f alpha:1.0f];
     tbc.viewControllers = tbcArray;
+    tbc.selectedIndex = 2;
 
     
     // Send request to Facebook
