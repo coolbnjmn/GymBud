@@ -22,6 +22,7 @@
 
 @property NSString *reuseId;
 @property MBProgressHUD *HUD;
+@property (strong,nonatomic) UIViewController *modal;
 
 @end
 
@@ -85,6 +86,9 @@
     
     UIImage *buttonImage = [UIImage imageNamed:@"mapTableToggle1.png"];
     UIBarButtonItem *mapToTableViewButton = [[UIBarButtonItem alloc] initWithImage:[buttonImage imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal] style:UIBarButtonItemStyleBordered target:self action:@selector(toggleMapTable:)];
+    
+    UIBarButtonItem *filterModalViewButton = [[UIBarButtonItem alloc] initWithTitle:@"Filter" style:UIBarButtonItemStyleBordered target:self action:@selector(toggleHalfModal:)];
+    self.navigationItem.leftBarButtonItem = filterModalViewButton;
     self.navigationItem.rightBarButtonItem = mapToTableViewButton;
     self.navigationItem.hidesBackButton = YES;
     
@@ -290,6 +294,29 @@
         self.isShowingMap = NO;
     }
     
+}
+
+- (IBAction)toggleHalfModal:(id)sender {
+    if (self.childViewControllers.count == 0) {
+        UIStoryboard *sb = [UIStoryboard storyboardWithName:@"FilterStoryboard" bundle:nil];
+        self.modal = [sb instantiateViewControllerWithIdentifier:@"FilterViewController"];
+        [self addChildViewController:self.modal];
+        self.modal.view.frame = CGRectMake(0, 568, 320, 284);
+        [self.view addSubview:self.modal.view];
+        [UIView animateWithDuration:1 animations:^{
+            self.modal.view.frame = CGRectMake(0, 284, 320, 284);;
+        } completion:^(BOOL finished) {
+            [self.modal didMoveToParentViewController:self];
+        }];
+    }else{
+        [UIView animateWithDuration:1 animations:^{
+            self.modal.view.frame = CGRectMake(0, 568, 320, 284);
+        } completion:^(BOOL finished) {
+            [self.modal.view removeFromSuperview];
+            [self.modal removeFromParentViewController];
+            self.modal = nil;
+        }];
+    }
 }
 
 @end

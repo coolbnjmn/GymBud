@@ -16,6 +16,7 @@
 		77FE648B199051E8008724CC /* GoActivityCVCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 77FE648A199051E8008724CC /* GoActivityCVCell.xib */; };
 		77FE648E1990545A008724CC /* GoActivityChosenVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 77FE648D1990545A008724CC /* GoActivityChosenVC.m */; };
 		77FE64911990A924008724CC /* GoActivityCreateEventVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 77FE64901990A924008724CC /* GoActivityCreateEventVC.m */; };
+		B2011D1119C8019300D65275 /* FilterStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B2011D1019C8019300D65275 /* FilterStoryboard.storyboard */; };
 		B2722DD919AD832900FEC2AF /* GymBudEventsTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = B2722DD819AD832900FEC2AF /* GymBudEventsTVC.m */; };
 		B2722DE219AD86F800FEC2AF /* GymBudEventsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B2722DE019AD86F800FEC2AF /* GymBudEventsCell.m */; };
 		B2722DE319AD86F800FEC2AF /* GymBudEventsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B2722DE119AD86F800FEC2AF /* GymBudEventsCell.xib */; };
@@ -154,6 +155,7 @@
 		77FE648D1990545A008724CC /* GoActivityChosenVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GoActivityChosenVC.m; path = GymBud/Controllers/GoActivityChosenVC.m; sourceTree = "<group>"; };
 		77FE648F1990A924008724CC /* GoActivityCreateEventVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GoActivityCreateEventVC.h; path = GymBud/Controllers/GoActivityCreateEventVC.h; sourceTree = "<group>"; };
 		77FE64901990A924008724CC /* GoActivityCreateEventVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GoActivityCreateEventVC.m; path = GymBud/Controllers/GoActivityCreateEventVC.m; sourceTree = "<group>"; };
+		B2011D1019C8019300D65275 /* FilterStoryboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = FilterStoryboard.storyboard; path = GymBud/Views/FilterStoryboard.storyboard; sourceTree = "<group>"; };
 		B2722DD719AD832900FEC2AF /* GymBudEventsTVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GymBudEventsTVC.h; path = GymBud/Controllers/GymBudEventsTVC.h; sourceTree = "<group>"; };
 		B2722DD819AD832900FEC2AF /* GymBudEventsTVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GymBudEventsTVC.m; path = GymBud/Controllers/GymBudEventsTVC.m; sourceTree = "<group>"; };
 		B2722DDF19AD86F800FEC2AF /* GymBudEventsCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GymBudEventsCell.h; path = GymBud/Views/GymBudEventsCell.h; sourceTree = "<group>"; };
@@ -532,6 +534,7 @@
 				77FE6485198F715C008724CC /* GoActivityCVCell.h */,
 				77FE6486198F715C008724CC /* GoActivityCVCell.m */,
 				77FE648A199051E8008724CC /* GoActivityCVCell.xib */,
+				B2011D1019C8019300D65275 /* FilterStoryboard.storyboard */,
 			);
 			name = Views;
 			path = ..;
@@ -674,6 +677,7 @@
 				B297744A19861B9D000AD7B6 /* mapTableToggle2.png in Resources */,
 				B2784D9519B18D010042A188 /* load1.png in Resources */,
 				B29774451985F085000AD7B6 /* menu.png in Resources */,
+				B2011D1119C8019300D65275 /* FilterStoryboard.storyboard in Resources */,
 				B2C39D95197E194F00039F90 /* ViewMessageVC.xib in Resources */,
 				B2784D9B19B18D010042A188 /* load7.png in Resources */,
 				B2784DAA19B412AB0042A188 /* chest.png in Resources */,
