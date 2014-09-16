@@ -91,9 +91,12 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OzU-Zz-dxe">
-                                <rect key="frame" x="11" y="304" width="298" height="55"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OzU-Zz-dxe">
+                                <rect key="frame" x="11" y="294" width="298" height="55"/>
                                 <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="55" id="3Ij-en-Fya"/>
+                                </constraints>
                                 <state key="normal" title="Find Others">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -102,9 +105,12 @@
                                     <action selector="findOthersPressed:" destination="PFK-Dv-RBa" eventType="touchUpInside" id="Eil-6U-5oT"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bAi-G7-l9Z">
-                                <rect key="frame" x="11" y="381" width="298" height="55"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bAi-G7-l9Z">
+                                <rect key="frame" x="11" y="363" width="298" height="55"/>
                                 <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="55" id="AhB-Sf-t2u"/>
+                                </constraints>
                                 <state key="normal" title="Create Event">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -113,27 +119,49 @@
                                     <action selector="createEventPressed:" destination="PFK-Dv-RBa" eventType="touchUpInside" id="diJ-il-9FW"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pMP-PE-51a">
-                                <rect key="frame" x="20" y="254" width="289" height="50"/>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pMP-PE-51a">
+                                <rect key="frame" x="15" y="259" width="290" height="21"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="290" id="wuE-lm-6XK"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <datePicker contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="5" translatesAutoresizingMaskIntoConstraints="NO" id="jir-5c-bmp">
+                            <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="5" translatesAutoresizingMaskIntoConstraints="NO" id="jir-5c-bmp">
                                 <rect key="frame" x="0.0" y="95" width="320" height="162"/>
                                 <date key="date" timeIntervalSinceReferenceDate="428911718.95648402">
                                     <!--2014-08-05 06:08:38 +0000-->
                                 </date>
                             </datePicker>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Starting when?" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2bg-OS-EN3">
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Starting when?" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2bg-OS-EN3">
                                 <rect key="frame" x="11" y="66" width="116" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="21" id="nli-gK-JUm"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="OzU-Zz-dxe" secondAttribute="trailing" constant="11" id="09w-Jo-G29"/>
+                            <constraint firstAttribute="trailing" secondItem="jir-5c-bmp" secondAttribute="trailing" id="6vd-yi-RCb"/>
+                            <constraint firstItem="pMP-PE-51a" firstAttribute="leading" secondItem="q6x-UN-zzd" secondAttribute="leading" constant="15" id="8bK-ij-u6B"/>
+                            <constraint firstItem="2bg-OS-EN3" firstAttribute="leading" secondItem="q6x-UN-zzd" secondAttribute="leading" constant="11" id="AV5-DD-heo"/>
+                            <constraint firstItem="jir-5c-bmp" firstAttribute="top" secondItem="2bg-OS-EN3" secondAttribute="bottom" constant="8" id="EES-h7-V6K"/>
+                            <constraint firstItem="jir-5c-bmp" firstAttribute="leading" secondItem="q6x-UN-zzd" secondAttribute="leading" id="MTJ-Oj-DVp"/>
+                            <constraint firstItem="OzU-Zz-dxe" firstAttribute="leading" secondItem="q6x-UN-zzd" secondAttribute="leading" constant="11" id="RCu-sJ-h6e"/>
+                            <constraint firstAttribute="trailing" secondItem="bAi-G7-l9Z" secondAttribute="trailing" constant="11" id="SrI-cD-xe5"/>
+                            <constraint firstItem="bAi-G7-l9Z" firstAttribute="leading" secondItem="q6x-UN-zzd" secondAttribute="leading" constant="11" id="UdR-8q-IEI"/>
+                            <constraint firstItem="2bg-OS-EN3" firstAttribute="top" secondItem="hFP-BV-t9d" secondAttribute="bottom" constant="46" id="bLI-1y-pQV"/>
+                            <constraint firstAttribute="trailing" secondItem="2bg-OS-EN3" secondAttribute="trailing" constant="193" id="bbe-ex-yjv"/>
+                            <constraint firstItem="bAi-G7-l9Z" firstAttribute="top" secondItem="OzU-Zz-dxe" secondAttribute="bottom" constant="14" id="gkV-HI-66r"/>
+                            <constraint firstItem="pMP-PE-51a" firstAttribute="top" secondItem="jir-5c-bmp" secondAttribute="bottom" constant="2" id="hTY-8d-6gc"/>
+                            <constraint firstItem="OzU-Zz-dxe" firstAttribute="top" secondItem="pMP-PE-51a" secondAttribute="bottom" constant="14" id="khJ-GN-RzT"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="2VT-k0-V2A"/>
                     <connections>
