@@ -14,6 +14,7 @@
 
 @interface GoActivityChosenVC ()
 
+@property (weak, nonatomic) IBOutlet UIDatePicker *startTimePicker;
 @property (weak, nonatomic) IBOutlet UILabel *bodyPartLabel;
 @end
 
@@ -50,12 +51,12 @@
     if([nvc.viewControllers count] == 1) {
         GymBudEventsTVC *dvc = [[GymBudEventsTVC alloc] init];
         dvc.activityFilter = self.activity;
+        dvc.timeFiler = self.startTimePicker.date;
+        dvc.isShowingMap = NO;
         [nvc pushViewController:dvc animated:NO];
-        PAWWallViewController *rvc = [nvc.viewControllers objectAtIndex:0];
-        rvc.isShowingTable = YES;
     }
     [self.tabBarController setSelectedIndex:0];
-    UINavigationController *goNVC = [self.tabBarController.viewControllers objectAtIndex:3];
+    UINavigationController *goNVC = [self.tabBarController.viewControllers objectAtIndex:2];
     // TODO: will need to change this based on new index of GO page...
     [goNVC popToRootViewControllerAnimated:NO];
 }
@@ -65,6 +66,7 @@
     GoActivityCreateEventVC *vc = [sb instantiateViewControllerWithIdentifier:@"GoActivityCreateEventVC"];
     vc.activity = self.activity;
     vc.bodyPartIndices = self.bodyPartIndices;
+    vc.timePickerValue = self.startTimePicker.date;
     [self.navigationController pushViewController:vc animated:YES];
 }
 

@@ -15,8 +15,6 @@
 @interface PAWWallViewController : UIViewController <MKMapViewDelegate, CLLocationManagerDelegate>
 
 @property (nonatomic, strong) IBOutlet MKMapView *mapView;
-@property (weak, nonatomic) IBOutlet UIButton *editProfileButton;
-@property (nonatomic, assign) BOOL isShowingTable;
 
 @end
 

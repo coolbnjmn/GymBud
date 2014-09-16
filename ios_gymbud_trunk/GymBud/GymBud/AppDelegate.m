@@ -23,6 +23,7 @@
     // Override point for customization after application launch.
     [Parse setApplicationId:@"DXeaM3NWJz1Lca9cjOyry5lusEhYw8nwuOyI8ene" clientKey:@"j39bl4eu3iaLj2kbEbHGDx6nGcfhWWQA2IlxGx79"];
     
+//    [TestFlight takeOff:@"4b49f863-25be-417b-b74b-d63985d08b5f"];
     [PFFacebookUtils initializeFacebook];
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     
@@ -37,7 +38,7 @@
     if (currentUser) {
         UITabBarController *tbc = [[UITabBarController alloc] init];
         
-        PAWWallViewController *mapVC = [[PAWWallViewController alloc] init];
+        GymBudEventsTVC *mapVC = [[GymBudEventsTVC alloc] init];
         MessageInboxTVC *inboxVC = [[MessageInboxTVC alloc] init];
         SettingsVC *settingsVC = [[SettingsVC alloc] init];
         UIStoryboard *goSB = [UIStoryboard storyboardWithName:@"GoActivity" bundle:nil];

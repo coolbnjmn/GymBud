@@ -12,5 +12,6 @@
 
 @property (nonatomic, strong) NSString *activity;
 @property (nonatomic, strong) NSArray *bodyPartIndices;
+@property (nonatomic, strong) NSDate *timePickerValue;
 
 @end

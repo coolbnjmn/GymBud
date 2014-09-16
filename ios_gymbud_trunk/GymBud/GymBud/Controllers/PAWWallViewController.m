@@ -98,22 +98,25 @@
 //    self.navigationItem.leftBarButtonItem = checkInButton;
     
     UIImage *buttonImage = [UIImage imageNamed:@"mapTableToggle2.png"];
-    UIBarButtonItem *mapToTableViewButton = [[UIBarButtonItem alloc] initWithImage:[buttonImage imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal] style:UIBarButtonItemStyleBordered target:self action:@selector(toggleMapTable:)];
+#pragma GCC diagnostic ignored "-Wundeclared-selector"
+    UIBarButtonItem *mapToTableViewButton = [[UIBarButtonItem alloc] initWithImage:[buttonImage imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal] style:UIBarButtonItemStyleBordered target:self.navigationController.viewControllers[self.navigationController.viewControllers.count - 2] action:@selector(toggleMapTable:)];
     self.navigationItem.rightBarButtonItem = mapToTableViewButton;
-    self.isShowingTable = NO;
     
-    self.navigationController.navigationBar.tintColor= [UIColor colorWithRed:44/255.0f green:62/255.0f blue:80/255.0f alpha:1.0f];
+    self.navigationController.navigationBar.tintColor = [UIColor colorWithRed:44/255.0f green:62/255.0f blue:80/255.0f alpha:1.0f];
     self.navigationController.navigationBar.barTintColor = [UIColor colorWithRed:60/255.0f green:151/255.0f blue:211/255.0f alpha:1.0f];
     
-//    self.tabBarItem.image = [UIImage imageNamed:@"mapTabBar.png"];
     self.navigationItem.title = @"Local GymBuds";
-    
+    self.navigationItem.hidesBackButton = YES;
+
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(locationDidChange:) name:@"LocationChangeNotification" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(postWasCreated:) name:@"CreatePostNotification" object:nil];
 
 
 }
 
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+}
 - (void)viewWillAppear:(BOOL)animated {
 	[locationManager startUpdatingLocation];
 	[super viewWillAppear:animated];
@@ -584,22 +587,6 @@
     [self.navigationController pushViewController:vc animated:YES];
 }
 
-- (void)toggleMapTable:(id)sender {
-    NSLog(@"toggle map table");
-    if(self.isShowingTable) {
-        // show map
-        [self.navigationController popViewControllerAnimated:YES];
-        self.isShowingTable = NO;
-    } else {
-        // Create the table view controller
-        self.wallPostsTableViewController =
-        [[GymBudEventsTVC alloc] init];
-        self.wallPostsTableViewController.activityFilter = nil;
-        [self.navigationController pushViewController:self.wallPostsTableViewController animated:YES];
-        self.isShowingTable = YES;
-    }
-    
-}
 - (void)locationDidChange:(NSNotification *)note {
     NSLog(@"location Did change in view controller");
     AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];

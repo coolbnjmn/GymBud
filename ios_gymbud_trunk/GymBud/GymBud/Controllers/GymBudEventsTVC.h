@@ -12,5 +12,8 @@
 @interface GymBudEventsTVC : PFQueryTableViewController
 
 @property (nonatomic, strong) NSString *activityFilter;
+@property (nonatomic, strong) NSDate *timeFiler;
+
+@property (nonatomic, assign) BOOL isShowingMap;
 
 @end

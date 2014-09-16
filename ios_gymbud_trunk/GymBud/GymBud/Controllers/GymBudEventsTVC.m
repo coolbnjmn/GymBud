@@ -83,14 +83,12 @@
     self.tableView.separatorColor = [UIColor clearColor];
     self.navigationItem.title = @"Local GymBuds";
     
-#pragma GCC diagnostic ignored "-Wundeclared-selector"
-    // TODO: Remove Check in button
-//    UIBarButtonItem *checkInButton = [[UIBarButtonItem alloc] initWithTitle:@"Check In" style:UIBarButtonItemStyleBordered target:self.navigationController.viewControllers[self.navigationController.viewControllers.count - 2] action:@selector(checkInButtonTouchHandler:)];
-//    self.navigationItem.leftBarButtonItem = checkInButton;
-//    
     UIImage *buttonImage = [UIImage imageNamed:@"mapTableToggle1.png"];
-    UIBarButtonItem *mapToTableViewButton = [[UIBarButtonItem alloc] initWithImage:[buttonImage imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal] style:UIBarButtonItemStyleBordered target:self.navigationController.viewControllers[self.navigationController.viewControllers.count - 2] action:@selector(toggleMapTable:)];
+    UIBarButtonItem *mapToTableViewButton = [[UIBarButtonItem alloc] initWithImage:[buttonImage imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal] style:UIBarButtonItemStyleBordered target:self action:@selector(toggleMapTable:)];
     self.navigationItem.rightBarButtonItem = mapToTableViewButton;
+    self.navigationItem.hidesBackButton = YES;
+    
+    self.isShowingMap = NO;
 
 }
 
@@ -143,6 +141,9 @@
     [query orderByAscending:@"time"];
     if(self.activityFilter != nil) {
         [query whereKey:@"activity" equalTo:self.activityFilter];
+    }
+    if(self.timeFiler != nil) {
+        [query whereKey:@"time" greaterThan:self.timeFiler];
     }
     
     self.HUD = [[MBProgressHUD alloc] initWithView:self.view];
@@ -275,6 +276,20 @@
 
 - (void)refreshControlValueChanged:(UIRefreshControl *)refreshControl {
     [self loadObjects];
+}
+
+- (void)toggleMapTable:(id)sender {
+    NSLog(@"toggle map table");
+    if(!self.isShowingMap) {
+        // show map
+        PAWWallViewController *wvc = [[PAWWallViewController alloc] init];
+        [self.navigationController pushViewController:wvc animated:YES];
+        self.isShowingMap = YES;
+    } else {
+        [self.navigationController popViewControllerAnimated:YES];
+        self.isShowingMap = NO;
+    }
+    
 }
 
 @end

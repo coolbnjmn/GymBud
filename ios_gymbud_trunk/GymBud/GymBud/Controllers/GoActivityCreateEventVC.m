@@ -15,7 +15,6 @@
 
 @interface GoActivityCreateEventVC () <MLPAutoCompleteTextFieldDelegate, MLPAutoCompleteTextFieldDataSource, UITextFieldDelegate, UIPickerViewDataSource, UIPickerViewDelegate>
 
-@property (weak, nonatomic) IBOutlet UIDatePicker *timePicker;
 @property (weak, nonatomic) IBOutlet MLPAutoCompleteTextField *locationTextField;
 @property (weak, nonatomic) IBOutlet UIPickerView *countPicker;
 @property (weak, nonatomic) IBOutlet UIPickerView *durationPicker;
@@ -190,7 +189,7 @@
         [eventObject setObject:eventLocation forKey:@"location"];
         [eventObject setObject:self.locationTextField.text forKey:@"locationName"];
         
-        [eventObject setObject:self.timePicker.date forKey:@"time"];
+        [eventObject setObject:self.timePickerValue forKey:@"time"];
         [eventObject setObject:[NSNumber numberWithBool:YES] forKey:@"isVisible"];
         
         [eventObject setObject:self.activity forKey:@"activity"];

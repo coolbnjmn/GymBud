@@ -10,7 +10,7 @@
 #import <Parse/Parse.h>
 #import <FacebookSDK/FacebookSDK.h>
 #import "LoginViewController.h"
-#import "PAWWallViewController.h"
+#import "GymBudEventsTVC.h"
 #import "MessageInboxTVC.h"
 #import "SettingsVC.h"
 #import "GoActivityCVC.h"
