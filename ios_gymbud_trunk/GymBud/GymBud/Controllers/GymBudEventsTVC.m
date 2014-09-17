@@ -337,7 +337,12 @@
         for(NSIndexPath *path in indexOfActivies) {
             [actualActivities addObject:[kGymBudActivities objectAtIndex:path.row]];
         }
-        self.activityFilters = actualActivities;
+        
+        if([actualActivities count] == 0) {
+            self.activityFilters = nil;
+        } else {
+            self.activityFilters = actualActivities;
+        }
         
         [self loadObjects];
         [UIView animateWithDuration:1 animations:^{

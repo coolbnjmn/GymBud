@@ -23,7 +23,7 @@
     self.tableView.tableHeaderView = self.headerView;
     
     // Create array for table row titles
-    self.rowTitleArray = @[@"Location", @"Gender", @"Date of Birth", @"Interest1", @"Interest2", @"Interest3", @"Background", @"Achievements", @"Goals"];
+    self.rowTitleArray = @[@"Location", @"Gender", @"Age", @"Interest1", @"Interest2", @"Interest3", @"Background", @"Achievements", @"Goals"];
     
     // Set default values for the table row data
     self.rowDataArray = [@[@"N/A", @"N/A", @"N/A", @"N/A", @"N/A", @"N/A", @"N/A", @"N/A", @"N/A"] mutableCopy];
@@ -181,8 +181,8 @@
         [self.rowDataArray replaceObjectAtIndex:1 withObject:[user objectForKey:@"profile"][@"gender"]];
     }
     
-    if ([user objectForKey:@"profile"][@"birthday"]) {
-        [self.rowDataArray replaceObjectAtIndex:2 withObject:[user objectForKey:@"profile"][@"birthday"]];
+    if ([user objectForKey:@"profile"][@"age"]) {
+        [self.rowDataArray replaceObjectAtIndex:2 withObject:[user objectForKey:@"profile"][@"age"]];
     }
     
     if ([user objectForKey:@"gymbudProfile"][@"interest1"]) {
@@ -242,8 +242,8 @@
         [self.rowDataArray replaceObjectAtIndex:1 withObject:[[PFUser currentUser] objectForKey:@"profile"][@"gender"]];
     }
     
-    if ([[PFUser currentUser] objectForKey:@"profile"][@"birthday"]) {
-        [self.rowDataArray replaceObjectAtIndex:2 withObject:[[PFUser currentUser] objectForKey:@"profile"][@"birthday"]];
+    if ([[PFUser currentUser] objectForKey:@"profile"][@"age"]) {
+        [self.rowDataArray replaceObjectAtIndex:2 withObject:[[PFUser currentUser] objectForKey:@"profile"][@"age"]];
     }
     
     if ([[PFUser currentUser] objectForKey:@"gymbudProfile"][@"interest1"]) {

@@ -110,6 +110,16 @@
             
             if (userData[@"birthday"]) {
                 userProfile[@"birthday"] = userData[@"birthday"];
+                NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+                [dateFormatter setDateFormat:@"MM/dd/yyyy"];
+                NSDate *birthday = [dateFormatter dateFromString:userData[@"birthday"]];
+                NSDateComponents* ageComponents = [[NSCalendar currentCalendar]
+                                                   components:NSYearCalendarUnit
+                                                   fromDate:birthday
+                                                   toDate:[NSDate date]
+                                                   options:0];
+                NSInteger age = [ageComponents year];
+                userProfile[@"age"] = [[NSNumber numberWithInt:age] stringValue];
             }
             
             if (userData[@"relationship_status"]) {
