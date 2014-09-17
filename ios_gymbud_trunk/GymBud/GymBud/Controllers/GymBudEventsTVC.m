@@ -23,6 +23,7 @@
 @property NSString *reuseId;
 @property MBProgressHUD *HUD;
 @property (strong,nonatomic) UIViewController *modal;
+@property (strong, nonatomic) UIView *opaqueView;
 
 @end
 
@@ -298,6 +299,10 @@
 
 - (IBAction)toggleHalfModal:(id)sender {
     if (self.childViewControllers.count == 0) {
+        self.opaqueView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 568)];
+        self.opaqueView.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.75];
+        
+        [self.view addSubview:self.opaqueView];
         UIStoryboard *sb = [UIStoryboard storyboardWithName:@"FilterStoryboard" bundle:nil];
         self.modal = [sb instantiateViewControllerWithIdentifier:@"FilterViewController"];
         [self addChildViewController:self.modal];
@@ -309,6 +314,7 @@
             [self.modal didMoveToParentViewController:self];
         }];
     }else{
+        [self.opaqueView removeFromSuperview];
         [UIView animateWithDuration:1 animations:^{
             self.modal.view.frame = CGRectMake(0, 568, 320, 284);
         } completion:^(BOOL finished) {

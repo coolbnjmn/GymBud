@@ -4,10 +4,10 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--Events Filter View Controller-->
         <scene sceneID="ZX7-Ir-IfE">
             <objects>
-                <viewController storyboardIdentifier="FilterViewController" id="FcC-2y-FZ9" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="FilterViewController" id="FcC-2y-FZ9" customClass="GBEventsFilterViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="O78-7l-tiH"/>
                         <viewControllerLayoutGuide type="bottom" id="iMV-Dx-gxq"/>
@@ -16,15 +16,47 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="SOMETHING HERE" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="q2t-iR-49V">
-                                <rect key="frame" x="90" y="41" width="152" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="highlightedColor"/>
-                            </label>
+                            <collectionView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" minimumZoomScale="0.0" maximumZoomScale="0.0" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="4Cn-zJ-OIE">
+                                <rect key="frame" x="0.0" y="36" width="320" height="100"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <color key="backgroundColor" red="1" green="0.41093279370000002" blue="0.1917121611" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="100" id="Msu-kJ-sKu"/>
+                                </constraints>
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="xWy-Wx-8lJ">
+                                    <size key="itemSize" width="100" height="100"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="goActivityCell" id="hmG-Tt-rUo" customClass="GoActivityCVCell">
+                                        <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                            <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        </view>
+                                    </collectionViewCell>
+                                </cells>
+                                <connections>
+                                    <outlet property="dataSource" destination="FcC-2y-FZ9" id="lb6-ks-TpO"/>
+                                    <outlet property="delegate" destination="FcC-2y-FZ9" id="96B-F1-MgB"/>
+                                </connections>
+                            </collectionView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="4Cn-zJ-OIE" secondAttribute="trailing" id="ggd-6n-m3Z"/>
+                            <constraint firstItem="4Cn-zJ-OIE" firstAttribute="leading" secondItem="KWF-A9-PD4" secondAttribute="leading" id="olG-pc-pt2"/>
+                            <constraint firstItem="4Cn-zJ-OIE" firstAttribute="top" secondItem="O78-7l-tiH" secondAttribute="bottom" constant="16" id="ySY-17-qG5"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <outlet property="activityCollectionView" destination="4Cn-zJ-OIE" id="b9Q-u3-F9m"/>
+                        <outlet property="activityCollectionViewFlowLayout" destination="xWy-Wx-8lJ" id="7r9-2z-RQW"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jXd-r1-rr9" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
