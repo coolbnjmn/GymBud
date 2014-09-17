@@ -321,12 +321,14 @@
         UIBarButtonItem *filterModalViewButton = [[UIBarButtonItem alloc] initWithTitle:@"Done" style:UIBarButtonItemStyleBordered target:self action:@selector(toggleHalfModal:)];
         self.navigationItem.leftBarButtonItem = filterModalViewButton;
 
-        
-        [UIView animateWithDuration:1 animations:^{
-            self.modal.view.frame = CGRectMake(0, 284, 320, 284);;
-        } completion:^(BOOL finished) {
-            [self.modal didMoveToParentViewController:self];
-        }];
+        [UIView animateWithDuration:1.0
+                              delay:0.0
+                            options:UIViewAnimationOptionCurveEaseOut
+                         animations:^{
+                             self.modal.view.frame = CGRectMake(0, 284, 320, 284);
+                         } completion:^(BOOL finished) {
+                             [self.modal didMoveToParentViewController:self];
+                         }];
     } else {
         UIBarButtonItem *filterModalViewButton = [[UIBarButtonItem alloc] initWithTitle:@"Filter" style:UIBarButtonItemStyleBordered target:self action:@selector(toggleHalfModal:)];
         self.navigationItem.leftBarButtonItem = filterModalViewButton;
@@ -345,13 +347,17 @@
         }
         
         [self loadObjects];
-        [UIView animateWithDuration:1 animations:^{
-            self.modal.view.frame = CGRectMake(0, 568, 320, 284);
-        } completion:^(BOOL finished) {
-            [self.modal.view removeFromSuperview];
-            [self.modal removeFromParentViewController];
-            self.modal = nil;
-        }];
+        [UIView animateWithDuration:1.0
+                              delay:0.0
+                            options:UIViewAnimationOptionCurveEaseIn
+                         animations:^{
+                             self.modal.view.frame = CGRectMake(0, 568, 320, 284);
+                         } completion:^(BOOL finished) {
+                             [self.modal.view removeFromSuperview];
+                             [self.modal removeFromParentViewController];
+                             self.modal = nil;
+                         }];
+
     }
 }
 
