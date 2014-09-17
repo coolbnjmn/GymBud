@@ -15,6 +15,7 @@
 @property (weak, nonatomic) IBOutlet UICollectionView *activityCollectionView;
 @property (weak, nonatomic) IBOutlet UICollectionViewFlowLayout *activityCollectionViewFlowLayout;
 
+
 @end
 
 static NSString * const reuseIdentifier = @"goActivityCell";
@@ -38,7 +39,8 @@ static NSString * const reuseIdentifier = @"goActivityCell";
     self.activityCollectionView.delegate = self;
     [self.activityCollectionViewFlowLayout setScrollDirection:UICollectionViewScrollDirectionHorizontal];
     [self.activityCollectionView registerNib:[UINib nibWithNibName:@"GoActivityCVCell" bundle:[NSBundle mainBundle]] forCellWithReuseIdentifier:reuseIdentifier];
-
+    self.selectedActivities = [[NSMutableArray alloc] initWithCapacity:[kGymBudActivities count]];
+    [self.activityCollectionView setAllowsMultipleSelection:YES];
 
 }
 
@@ -65,8 +67,15 @@ static NSString * const reuseIdentifier = @"goActivityCell";
     NSInteger index = indexPath.row;
     cell.goActivityPictureImaveView.image = [UIImage imageNamed:[kGymBudActivityIconMapping objectForKey:[kGymBudActivities objectAtIndex:index]]];
     cell.goActivityTextLabel.text = [kGymBudActivities objectAtIndex:index];
-    
     cell.backgroundColor = [UIColor clearColor];
+
+    for(NSIndexPath *path in self.selectedActivities) {
+        if([path isEqual:indexPath]) {
+            cell.backgroundColor = [UIColor blueColor];
+            break;
+        }
+    }
+    
     return cell;
 }
 
@@ -74,7 +83,19 @@ static NSString * const reuseIdentifier = @"goActivityCell";
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
-
+    if([self.selectedActivities count] < 4) {
+        [self.selectedActivities addObject:indexPath];
+        GoActivityCVCell *cell = (GoActivityCVCell *)[collectionView cellForItemAtIndexPath:indexPath];
+        cell.backgroundColor = [UIColor blueColor];
+    } else {
+        // DO nothing, we don't want to select more than 4
+    }
+}
+- (void)collectionView:(UICollectionView *)collectionView didDeselectItemAtIndexPath:(NSIndexPath *)indexPath {
+    // TODO: Deselect item
+    [self.selectedActivities removeObject:indexPath];
+    GoActivityCVCell *cell = (GoActivityCVCell *)[collectionView cellForItemAtIndexPath:indexPath];
+    cell.backgroundColor = [UIColor clearColor];
 }
 
 #pragma mark – UICollectionViewDelegateFlowLayout

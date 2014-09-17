@@ -15,6 +15,7 @@
 #import "NSDate+Utilities.h"
 #import "UIImageView+AFNetworking.h"
 #import "MBProgressHUD.h"
+#import "GBEventsFilterViewController.h"
 
 #define kCellHeight 100
 
@@ -24,6 +25,7 @@
 @property MBProgressHUD *HUD;
 @property (strong,nonatomic) UIViewController *modal;
 @property (strong, nonatomic) UIView *opaqueView;
+@property (nonatomic, strong) NSArray *activityFilters;
 
 @end
 
@@ -97,6 +99,9 @@
 
 }
 
+- (void) viewDidDisappear:(BOOL)animated {
+    self.activityFilters = nil;
+}
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
@@ -149,6 +154,10 @@
     }
     if(self.timeFiler != nil) {
         [query whereKey:@"time" greaterThan:self.timeFiler];
+    }
+    
+    if(self.activityFilters != nil) {
+        [query whereKey:@"activity" containedIn:self.activityFilters];
     }
     
     self.HUD = [[MBProgressHUD alloc] initWithView:self.view];
@@ -308,13 +317,29 @@
         [self addChildViewController:self.modal];
         self.modal.view.frame = CGRectMake(0, 568, 320, 284);
         [self.view addSubview:self.modal.view];
+        
+        UIBarButtonItem *filterModalViewButton = [[UIBarButtonItem alloc] initWithTitle:@"Done" style:UIBarButtonItemStyleBordered target:self action:@selector(toggleHalfModal:)];
+        self.navigationItem.leftBarButtonItem = filterModalViewButton;
+
+        
         [UIView animateWithDuration:1 animations:^{
             self.modal.view.frame = CGRectMake(0, 284, 320, 284);;
         } completion:^(BOOL finished) {
             [self.modal didMoveToParentViewController:self];
         }];
-    }else{
+    } else {
+        UIBarButtonItem *filterModalViewButton = [[UIBarButtonItem alloc] initWithTitle:@"Filter" style:UIBarButtonItemStyleBordered target:self action:@selector(toggleHalfModal:)];
+        self.navigationItem.leftBarButtonItem = filterModalViewButton;
         [self.opaqueView removeFromSuperview];
+        GBEventsFilterViewController *vc = (GBEventsFilterViewController *)self.modal;
+        NSArray *indexOfActivies = vc.selectedActivities;
+        NSMutableArray *actualActivities = [[NSMutableArray alloc] initWithCapacity:[indexOfActivies count]];
+        for(NSIndexPath *path in indexOfActivies) {
+            [actualActivities addObject:[kGymBudActivities objectAtIndex:path.row]];
+        }
+        self.activityFilters = actualActivities;
+        
+        [self loadObjects];
         [UIView animateWithDuration:1 animations:^{
             self.modal.view.frame = CGRectMake(0, 568, 320, 284);
         } completion:^(BOOL finished) {

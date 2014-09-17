@@ -10,4 +10,6 @@
 
 @interface GBEventsFilterViewController : UIViewController
 
+@property (nonatomic, strong) NSMutableArray *selectedActivities;
+
 @end
