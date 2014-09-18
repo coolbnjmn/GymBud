@@ -177,11 +177,17 @@
     /*
      self.rowTitleArray = @[@"Gender", @"Age", @"Interest1", @"Interest2", @"Interest3", @"Goals", @"Achievements", @"Organizations", @"About"];
 */
-    if ([user objectForKey:@"profile"][@"gender"]) {
+    if([user objectForKey:@"gymbudProfile"][@"gender"]) {
+        [self.rowDataArray replaceObjectAtIndex:0 withObject:[user objectForKey:@"gymbudProfile"][@"gender"]];
+
+    } else if ([user objectForKey:@"profile"][@"gender"]) {
         [self.rowDataArray replaceObjectAtIndex:0 withObject:[user objectForKey:@"profile"][@"gender"]];
     }
     
-    if ([user objectForKey:@"profile"][@"age"]) {
+    if([user objectForKey:@"gymbudProfile"][@"age"]) {
+        [self.rowDataArray replaceObjectAtIndex:1 withObject:[user objectForKey:@"gymbudProfile"][@"age"]];
+        
+    } else if ([user objectForKey:@"profile"][@"age"]) {
         [self.rowDataArray replaceObjectAtIndex:1 withObject:[user objectForKey:@"profile"][@"age"]];
     }
     
@@ -215,7 +221,10 @@
     [self.tableView reloadData];
     
     // Set the name in the header view label
-    if ([user objectForKey:@"profile"][@"name"]) {
+    if([user objectForKey:@"gymbudProfile"][@"name"]) {
+        self.headerNameLabel.text = [user objectForKey:@"gymbudProfile"][@"name"];
+        
+    } else if ([user objectForKey:@"profile"][@"name"]) {
         self.headerNameLabel.text = [user objectForKey:@"profile"][@"name"];
     }
     
