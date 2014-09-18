@@ -8,8 +8,9 @@
 
 #import "EditProfileTVC.h"
 #import "EPInterestVC.h"
+#import <MobileCoreServices/MobileCoreServices.h>
 
-@interface EditProfileTVC ()
+@interface EditProfileTVC () <UINavigationControllerDelegate, UIImagePickerControllerDelegate>
 @property (weak, nonatomic) IBOutlet UILabel *interest1;
 @property (weak, nonatomic) IBOutlet UILabel *interest2;
 @property (weak, nonatomic) IBOutlet UILabel *interest3;
@@ -107,17 +108,26 @@
         self.profileGender.text = [currentUser objectForKey:@"profile"][@"gender"];
     }
     
-    if ([currentUser objectForKey:@"profile"][@"pictureURL"]) {
-        self.imageData = [[NSMutableData alloc] init]; // the data will be loaded in here
-        NSURL *pictureURL = [NSURL URLWithString:[currentUser objectForKey:@"profile"][@"pictureURL"]];
-        
-        NSMutableURLRequest *urlRequest = [NSMutableURLRequest requestWithURL:pictureURL
-                                                                  cachePolicy:NSURLRequestUseProtocolCachePolicy
-                                                              timeoutInterval:2.0f];
-        // Run network request asynchronously
-        NSURLConnection *urlConnection = [[NSURLConnection alloc] initWithRequest:urlRequest delegate:self];
-        if (!urlConnection) {
-            NSLog(@"Failed to download picture");
+    if ([currentUser objectForKey:@"gymbudProfile"][@"profilePicture"]) {
+        PFFile *theImage = [currentUser objectForKey:@"gymbudProfile"][@"profilePicture"];
+        NSData *imageData = [theImage getData];
+        self.profilePicture.image = [UIImage imageWithData:imageData];
+        // Add a nice corner radius to the image
+        self.profilePicture.layer.cornerRadius = 8.0f;
+        self.profilePicture.layer.masksToBounds = YES;
+    } else {
+        if ([currentUser objectForKey:@"profile"][@"pictureURL"]) {
+            self.imageData = [[NSMutableData alloc] init]; // the data will be loaded in here
+            NSURL *pictureURL = [NSURL URLWithString:[currentUser objectForKey:@"profile"][@"pictureURL"]];
+            
+            NSMutableURLRequest *urlRequest = [NSMutableURLRequest requestWithURL:pictureURL
+                                                                      cachePolicy:NSURLRequestUseProtocolCachePolicy
+                                                                  timeoutInterval:2.0f];
+            // Run network request asynchronously
+            NSURLConnection *urlConnection = [[NSURLConnection alloc] initWithRequest:urlRequest delegate:self];
+            if (!urlConnection) {
+                NSLog(@"Failed to download picture");
+            }
         }
     }
 }
@@ -145,6 +155,10 @@
     NSLog(@"update profile");
     NSMutableDictionary *userProfile = [NSMutableDictionary dictionaryWithCapacity:7];
 
+    if([self.profileGoals.text length] > 150 || [self.profileAchievements.text length] > 250 || [self.profileOrgs.text length] > 100 || [self.profileAbout.text length] > 300) {
+        // show view here
+        return;
+    }
     userProfile[@"interest1"] = self.interest1.text;
     userProfile[@"interest2"] = self.interest2.text;
     userProfile[@"interest3"] = self.interest3.text;
@@ -152,6 +166,11 @@
     userProfile[@"achievements"] = self.profileAchievements.text;
     userProfile[@"organizations"] = self.profileOrgs.text;
     userProfile[@"about"] = self.profileAbout.text;
+    
+    NSData *imageData = UIImageJPEGRepresentation(self.profilePicture.image, 0.05f);
+    PFFile *imageFile = [PFFile fileWithName:@"profilePicture.jpg" data:imageData];
+    
+    userProfile[@"profilePicture"] = imageFile;
     
     [[PFUser currentUser] setObject:userProfile forKey:@"gymbudProfile"];
     [[PFUser currentUser] saveInBackground];
@@ -255,8 +274,52 @@
 }
 
 - (IBAction)editProfilePicture:(id)sender {
-}
-- (IBAction)editUserInfo:(id)sender {
+    UIImagePickerController *imagePicker =
+    [[UIImagePickerController alloc] init];
+    
+    imagePicker.delegate = self;
+    
+    imagePicker.sourceType =
+//    UIImagePickerControllerSourceTypeCamera;
+    UIImagePickerControllerSourceTypePhotoLibrary;
+    
+    imagePicker.mediaTypes = [[NSArray alloc] initWithObjects: (NSString *)kUTTypeImage, nil];
+    
+    imagePicker.allowsEditing = NO;
+    [self presentViewController:imagePicker
+                       animated:YES completion:nil];
 }
 
+- (IBAction)editUserInfo:(id)sender {
+    
+}
+
+#pragma mark - ImagePicker Controller Delegate
+-(void)imagePickerController:(UIImagePickerController *)picker
+didFinishPickingMediaWithInfo:(NSDictionary *)info
+{
+    NSString *mediaType = [info
+                           objectForKey:UIImagePickerControllerMediaType];
+    [self dismissViewControllerAnimated:YES completion:nil];
+    if ([mediaType isEqualToString:(NSString *)kUTTypeImage]) {
+        UIImage *image = [info
+                          objectForKey:UIImagePickerControllerOriginalImage];
+        
+        self.profilePicture.image = image;
+    }
+}
+
+-(void)image:(UIImage *)image
+finishedSavingWithError:(NSError *)error
+ contextInfo:(void *)contextInfo
+{
+    if (error) {
+        //Right some error related code...
+    }
+}
+
+-(void)imagePickerControllerDidCancel:(UIImagePickerController *)picker
+{
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
 @end
