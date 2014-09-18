@@ -192,11 +192,13 @@
 - (void)locationManager:(CLLocationManager *)manager didChangeAuthorizationStatus:(CLAuthorizationStatus)status {
 	NSLog(@"%s", __PRETTY_FUNCTION__);
 	switch (status) {
+        case kCLAuthorizationStatusAuthorizedWhenInUse:
 		case kCLAuthorizationStatusAuthorized:
 			NSLog(@"kCLAuthorizationStatusAuthorized");
 			// Re-enable the post button if it was disabled before.
 			self.navigationItem.rightBarButtonItem.enabled = YES;
 			[locationManager startUpdatingLocation];
+            [locationManager requestWhenInUseAuthorization];
             [self startStandardUpdates];
 			break;
 		case kCLAuthorizationStatusDenied:
@@ -209,6 +211,7 @@
 			}}
 			break;
 		case kCLAuthorizationStatusNotDetermined:
+            [manager requestAlwaysAuthorization];
 			NSLog(@"kCLAuthorizationStatusNotDetermined");
 			break;
 		case kCLAuthorizationStatusRestricted:

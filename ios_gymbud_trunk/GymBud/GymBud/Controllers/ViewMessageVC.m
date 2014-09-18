@@ -40,7 +40,17 @@
     if(!activity) {
         NSLog(@"something went wrong");
     } else {
-        fromImage.image = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:[[[activity objectForKey:@"fromUser"] objectForKey:@"profile"] objectForKey:@"pictureURL"]]]];
+        if([activity objectForKey:@"fromUser"][@"gymbudProfile"][@"profilePicture"]) {
+            PFFile *theImage = [activity objectForKey:@"fromUser"][@"gymbudProfile"][@"profilePicture"];
+            __weak ViewMessageVC *weakSelf = self;
+            [theImage getDataInBackgroundWithBlock:^(NSData *data, NSError *error){
+                NSLog(@"+++++++++ Loading image view with real data ++++++++");
+                weakSelf.fromImage.image = [UIImage imageWithData:data];
+            }];
+        } else {
+            fromImage.image = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:[[[activity objectForKey:@"fromUser"] objectForKey:@"profile"] objectForKey:@"pictureURL"]]]];
+        }
+        
         self.navigationItem.title = [[[activity objectForKey:@"fromUser"] objectForKey:@"profile"] objectForKey:@"name"];
         
         NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
