@@ -124,6 +124,7 @@
 		B2D0CACD197E272400B17D32 /* login-button-small@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B2D0CAC9197E272400B17D32 /* login-button-small@2x.png */; };
 		B2D0CAD1197E2BB700B17D32 /* FindUserTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = B2D0CACF197E2BB700B17D32 /* FindUserTVC.m */; };
 		B2D0CAD8197E2EAE00B17D32 /* TableHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = B2D0CAD7197E2EAE00B17D32 /* TableHeaderView.xib */; };
+		B2FCFBE919CAC15C0078C68D /* EPBasicInfoVC.m in Sources */ = {isa = PBXBuildFile; fileRef = B2FCFBE819CAC15C0078C68D /* EPBasicInfoVC.m */; };
 		D6179B487D9E4DCAA95C19B3 /* libPods-GymBud.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 48EE337A63E5439BA42E30F1 /* libPods-GymBud.a */; };
 /* End PBXBuildFile section */
 
@@ -290,6 +291,8 @@
 		B2D0CACE197E2BB700B17D32 /* FindUserTVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FindUserTVC.h; path = GymBud/Controllers/FindUserTVC.h; sourceTree = "<group>"; };
 		B2D0CACF197E2BB700B17D32 /* FindUserTVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FindUserTVC.m; path = GymBud/Controllers/FindUserTVC.m; sourceTree = "<group>"; };
 		B2D0CAD7197E2EAE00B17D32 /* TableHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = TableHeaderView.xib; path = GymBud/Views/TableHeaderView.xib; sourceTree = "<group>"; };
+		B2FCFBE719CAC15C0078C68D /* EPBasicInfoVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EPBasicInfoVC.h; path = GymBud/Controllers/EPBasicInfoVC.h; sourceTree = "<group>"; };
+		B2FCFBE819CAC15C0078C68D /* EPBasicInfoVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EPBasicInfoVC.m; path = GymBud/Controllers/EPBasicInfoVC.m; sourceTree = "<group>"; };
 		E5F4F985088842DBBF422DE7 /* Pods-GymBud.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GymBud.xcconfig"; path = "Pods/Pods-GymBud.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -457,6 +460,8 @@
 			isa = PBXGroup;
 			children = (
 				B2C39D6E197E194F00039F90 /* EditProfile.storyboard */,
+				B2FCFBE719CAC15C0078C68D /* EPBasicInfoVC.h */,
+				B2FCFBE819CAC15C0078C68D /* EPBasicInfoVC.m */,
 				B2C39D6F197E194F00039F90 /* EditProfileTVC.h */,
 				B2C39D70197E194F00039F90 /* EditProfileTVC.m */,
 				B2C39D71197E194F00039F90 /* EPInterestVC.h */,
@@ -789,6 +794,7 @@
 				77FE648E1990545A008724CC /* GoActivityChosenVC.m in Sources */,
 				B2C39D38197E172600039F90 /* main.m in Sources */,
 				B2C39D8A197E194F00039F90 /* LoginViewController.m in Sources */,
+				B2FCFBE919CAC15C0078C68D /* EPBasicInfoVC.m in Sources */,
 				B2C39D8E197E194F00039F90 /* PAWWallPostCreateViewController.m in Sources */,
 				B2722DD919AD832900FEC2AF /* GymBudEventsTVC.m in Sources */,
 				B2C39D93197E194F00039F90 /* UserDetailsViewController.m in Sources */,

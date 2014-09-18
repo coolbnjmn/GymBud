@@ -7,7 +7,6 @@
 //
 
 #import "EditProfileTVC.h"
-#import "EPInterestVC.h"
 #import <MobileCoreServices/MobileCoreServices.h>
 
 @interface EditProfileTVC () <UINavigationControllerDelegate, UIImagePickerControllerDelegate>
@@ -110,9 +109,12 @@
     
     if ([currentUser objectForKey:@"gymbudProfile"][@"profilePicture"]) {
         PFFile *theImage = [currentUser objectForKey:@"gymbudProfile"][@"profilePicture"];
-        NSData *imageData = [theImage getData];
-        self.profilePicture.image = [UIImage imageWithData:imageData];
-        // Add a nice corner radius to the image
+        __weak EditProfileTVC *weakSelf = self;
+        [theImage getDataInBackgroundWithBlock:^(NSData *data, NSError *error){
+            NSLog(@"+++++++++ Loading image view with real data ++++++++");
+            weakSelf.profilePicture.image = [UIImage imageWithData:data];
+        }];
+        //        self.headerImageView.image = [UIImage imageWithData:imageData];
         self.profilePicture.layer.cornerRadius = 8.0f;
         self.profilePicture.layer.masksToBounds = YES;
     } else {
@@ -145,6 +147,13 @@
     [self.navigationController popViewControllerAnimated:YES];
 }
 
+- (void)editProfileBasicInfoViewController:(EPBasicInfoVC *)vc didSetValues:(NSString *)name age:(NSString *)age andGender:(NSString *)gender {
+    NSLog(@"delegate worked: stuff is here");
+    self.profileName.text = name;
+    self.profileAge.text = age;
+    self.profileGender.text = gender;
+    [self.navigationController popViewControllerAnimated:YES];
+}
 
 - (void)cancelButtonHandler:(id)sender {
     NSLog(@"cancel update profile");
@@ -166,6 +175,9 @@
     userProfile[@"achievements"] = self.profileAchievements.text;
     userProfile[@"organizations"] = self.profileOrgs.text;
     userProfile[@"about"] = self.profileAbout.text;
+    userProfile[@"name"] = self.profileName.text;
+    userProfile[@"age"] = self.profileAge.text;
+    userProfile[@"gender"] = self.profileGender.text;
     
     NSData *imageData = UIImageJPEGRepresentation(self.profilePicture.image, 0.05f);
     PFFile *imageFile = [PFFile fileWithName:@"profilePicture.jpg" data:imageData];
@@ -291,7 +303,12 @@
 }
 
 - (IBAction)editUserInfo:(id)sender {
-    
+    UIStoryboard *sb = [UIStoryboard storyboardWithName:@"EditProfile" bundle:nil];
+    EPBasicInfoVC *vc = [sb instantiateViewControllerWithIdentifier:@"EPBasicInfoVC"];
+    vc.delegate = self;
+    [self.navigationController pushViewController:vc animated:YES];
+    [vc setCurrentValues:self.profileName.text age:self.profileAge.text andGender:self.profileGender.text];
+
 }
 
 #pragma mark - ImagePicker Controller Delegate

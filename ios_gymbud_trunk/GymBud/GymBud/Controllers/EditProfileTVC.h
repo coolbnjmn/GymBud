@@ -9,7 +9,8 @@
 #import <UIKit/UIKit.h>
 #import <Parse/Parse.h>
 #import "EPInterestVC.h"
+#import "EPBasicInfoVC.h"
 
-@interface EditProfileTVC : UITableViewController <EPInterestVCDelegate>
+@interface EditProfileTVC : UITableViewController <EPInterestVCDelegate, EPBasicInfoDelegate>
 
 @end
