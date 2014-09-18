@@ -13,10 +13,17 @@
 @property (weak, nonatomic) IBOutlet UILabel *interest1;
 @property (weak, nonatomic) IBOutlet UILabel *interest2;
 @property (weak, nonatomic) IBOutlet UILabel *interest3;
-@property (weak, nonatomic) IBOutlet UITextView *backgroundTextView;
-@property (weak, nonatomic) IBOutlet UITextView *achievementsTextView;
-@property (weak, nonatomic) IBOutlet UITextView *goalsTextView;
+@property (weak, nonatomic) IBOutlet UIImageView *profilePicture;
+@property (weak, nonatomic) IBOutlet UILabel *profileName;
+@property (weak, nonatomic) IBOutlet UILabel *profileAge;
+@property (weak, nonatomic) IBOutlet UILabel *profileGender;
+@property (weak, nonatomic) IBOutlet UITextView *profileGoals;
+@property (weak, nonatomic) IBOutlet UITextView *profileAchievements;
+@property (weak, nonatomic) IBOutlet UITextView *profileOrgs;
+@property (weak, nonatomic) IBOutlet UITextView *profileAbout;
 
+
+@property (strong, nonatomic) NSMutableData* imageData;
 @end
 
 @implementation EditProfileTVC
@@ -28,6 +35,20 @@
         // Custom initialization
     }
     return self;
+}
+
+- (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data {
+    // As chuncks of the image are received, we build our data file
+    [self.imageData appendData:data];
+}
+
+- (void)connectionDidFinishLoading:(NSURLConnection *)connection {
+    // All data has been downloaded, now we can set the image in the header image view
+    self.profilePicture.image = [UIImage imageWithData:self.imageData];
+    
+    // Add a nice corner radius to the image
+    self.profilePicture.layer.cornerRadius = 8.0f;
+    self.profilePicture.layer.masksToBounds = YES;
 }
 
 - (void)viewDidLoad
@@ -58,18 +79,48 @@
     if ([currentUser objectForKey:@"gymbudProfile"][@"interest3"]) {
         self.interest3.text = [currentUser objectForKey:@"gymbudProfile"][@"interest3"];
     }
-    
-    if ([currentUser objectForKey:@"gymbudProfile"][@"background"]) {
-        self.backgroundTextView.text = [currentUser objectForKey:@"gymbudProfile"][@"background"];
+
+    if ([currentUser objectForKey:@"gymbudProfile"][@"goals"]) {
+        self.profileGoals.text = [currentUser objectForKey:@"gymbudProfile"][@"goals"];
     }
     
     if ([currentUser objectForKey:@"gymbudProfile"][@"achievements"]) {
-        self.achievementsTextView.text = [currentUser objectForKey:@"gymbudProfile"][@"achievements"];
+        self.profileAchievements.text = [currentUser objectForKey:@"gymbudProfile"][@"achievements"];
     }
     
-    if ([currentUser objectForKey:@"gymbudProfile"][@"goals"]) {
-        self.goalsTextView.text = [currentUser objectForKey:@"gymbudProfile"][@"goals"];
-    }}
+    if ([currentUser objectForKey:@"gymbudProfile"][@"organizations"]) {
+        self.profileOrgs.text = [currentUser objectForKey:@"gymbudProfile"][@"organizations"];
+    }
+    
+    if([currentUser objectForKey:@"gymbudProfile"][@"about"]) {
+        self.profileAbout.text = [currentUser objectForKey:@"gymbudProfile"][@"about"];
+    }
+    if ([currentUser objectForKey:@"profile"][@"name"]) {
+        self.profileName.text = [currentUser objectForKey:@"profile"][@"name"];
+    }
+    
+    if ([currentUser objectForKey:@"profile"][@"age"]) {
+        self.profileAge.text = [currentUser objectForKey:@"profile"][@"age"];
+    }
+    
+    if ([currentUser objectForKey:@"profile"][@"gender"]) {
+        self.profileGender.text = [currentUser objectForKey:@"profile"][@"gender"];
+    }
+    
+    if ([currentUser objectForKey:@"profile"][@"pictureURL"]) {
+        self.imageData = [[NSMutableData alloc] init]; // the data will be loaded in here
+        NSURL *pictureURL = [NSURL URLWithString:[currentUser objectForKey:@"profile"][@"pictureURL"]];
+        
+        NSMutableURLRequest *urlRequest = [NSMutableURLRequest requestWithURL:pictureURL
+                                                                  cachePolicy:NSURLRequestUseProtocolCachePolicy
+                                                              timeoutInterval:2.0f];
+        // Run network request asynchronously
+        NSURLConnection *urlConnection = [[NSURLConnection alloc] initWithRequest:urlRequest delegate:self];
+        if (!urlConnection) {
+            NSLog(@"Failed to download picture");
+        }
+    }
+}
 
 - (void) editProfileInterestViewController:(EPInterestVC *)vc didAddInterest:(NSString *)interest forInterest:(int) interestNumber {
     NSLog(@"delgate worked: interest is %@", interest);
@@ -93,14 +144,14 @@
 - (void)updateProfileButtonHandler:(id)sender {
     NSLog(@"update profile");
     NSMutableDictionary *userProfile = [NSMutableDictionary dictionaryWithCapacity:7];
-    
+
     userProfile[@"interest1"] = self.interest1.text;
     userProfile[@"interest2"] = self.interest2.text;
     userProfile[@"interest3"] = self.interest3.text;
-    userProfile[@"background"] = self.backgroundTextView.text;
-    userProfile[@"achievements"] = self.achievementsTextView.text;
-    userProfile[@"goals"] = self.goalsTextView.text;
-
+    userProfile[@"goals"] = self.profileGoals.text;
+    userProfile[@"achievements"] = self.profileAchievements.text;
+    userProfile[@"organizations"] = self.profileOrgs.text;
+    userProfile[@"about"] = self.profileAbout.text;
     
     [[PFUser currentUser] setObject:userProfile forKey:@"gymbudProfile"];
     [[PFUser currentUser] saveInBackground];
@@ -201,6 +252,11 @@
         EPInterestVC *destVC = [segue destinationViewController];
         destVC.delegate = self;
     }
+}
+
+- (IBAction)editProfilePicture:(id)sender {
+}
+- (IBAction)editUserInfo:(id)sender {
 }
 
 @end
