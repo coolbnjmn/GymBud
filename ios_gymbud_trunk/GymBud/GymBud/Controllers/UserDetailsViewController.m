@@ -23,7 +23,7 @@
     self.tableView.tableHeaderView = self.headerView;
     
     // Create array for table row titles
-    self.rowTitleArray = @[@"Location", @"Gender", @"Age", @"Interest1", @"Interest2", @"Interest3", @"Background", @"Achievements", @"Goals"];
+    self.rowTitleArray = @[@"Gender", @"Age", @"Interest1", @"Interest2", @"Interest3", @"Goals", @"Achievements", @"Organizations", @"About"];
     
     // Set default values for the table row data
     self.rowDataArray = [@[@"N/A", @"N/A", @"N/A", @"N/A", @"N/A", @"N/A", @"N/A", @"N/A", @"N/A"] mutableCopy];
@@ -48,7 +48,7 @@
     UIImage *pictureLogo = [UIImage imageNamed:[kGymBudActivityIconMapping objectForKey:event.activity]];
 
     self.headerPictureLogo.image = pictureLogo;
-    self.headerCheckinMessage.text = [[event.title stringByAppendingString:@". "] stringByAppendingString:event.description];
+    self.headerCheckinMessage.text = [[event.title stringByAppendingString:@". "] stringByAppendingString:event.eventDescription];
 }
 
 -(void)messageUser:(id) sender {
@@ -90,7 +90,7 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if(indexPath.row < 6) {
+    if(indexPath.row < 5) {
         return 44.0f;
     } else {
         return 180.0f;
@@ -101,13 +101,13 @@
     static NSString *BigCellIdentifier = @"BigCell";
     
     UITableViewCell *cell;
-    if(indexPath.row < 6) {
+    if(indexPath.row < 5) {
         cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     } else {
         cell = [tableView dequeueReusableCellWithIdentifier:BigCellIdentifier];
     }
     
-    if (cell == nil && indexPath.row < 6) {
+    if (cell == nil && indexPath.row < 5) {
         // Create the cell and add the labels
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
         UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake( 0.0f, 0.0f, 120.0f, 44.0f)];
@@ -147,7 +147,7 @@
     
     // Access labels in the cell using the tag #
     UILabel *titleLabel = (UILabel *)[cell viewWithTag:1];
-    if(indexPath.row < 6) {
+    if(indexPath.row < 5) {
         UILabel *dataLabel = (UILabel *)[cell viewWithTag:2];
         dataLabel.text = [self.rowDataArray objectAtIndex:indexPath.row];
     } else {
@@ -174,40 +174,43 @@
 
 // Set received values if they are not nil and reload the table
 - (void)updateProfileForUser: (PFUser *) user {
-    if ([user objectForKey:@"profile"][@"location"]) {
-        [self.rowDataArray replaceObjectAtIndex:0 withObject:[user objectForKey:@"profile"][@"location"]];
-    }
-    
+    /*
+     self.rowTitleArray = @[@"Gender", @"Age", @"Interest1", @"Interest2", @"Interest3", @"Goals", @"Achievements", @"Organizations", @"About"];
+*/
     if ([user objectForKey:@"profile"][@"gender"]) {
-        [self.rowDataArray replaceObjectAtIndex:1 withObject:[user objectForKey:@"profile"][@"gender"]];
+        [self.rowDataArray replaceObjectAtIndex:0 withObject:[user objectForKey:@"profile"][@"gender"]];
     }
     
     if ([user objectForKey:@"profile"][@"age"]) {
-        [self.rowDataArray replaceObjectAtIndex:2 withObject:[user objectForKey:@"profile"][@"age"]];
+        [self.rowDataArray replaceObjectAtIndex:1 withObject:[user objectForKey:@"profile"][@"age"]];
     }
     
     if ([user objectForKey:@"gymbudProfile"][@"interest1"]) {
-        [self.rowDataArray replaceObjectAtIndex:3 withObject:[user objectForKey:@"gymbudProfile"][@"interest1"]];
+        [self.rowDataArray replaceObjectAtIndex:2 withObject:[user objectForKey:@"gymbudProfile"][@"interest1"]];
     }
     
     if ([user objectForKey:@"gymbudProfile"][@"interest2"]) {
-        [self.rowDataArray replaceObjectAtIndex:4 withObject:[user objectForKey:@"gymbudProfile"][@"interest2"]];
+        [self.rowDataArray replaceObjectAtIndex:3 withObject:[user objectForKey:@"gymbudProfile"][@"interest2"]];
     }
     
     if ([user objectForKey:@"gymbudProfile"][@"interest3"]) {
-        [self.rowDataArray replaceObjectAtIndex:5 withObject:[user objectForKey:@"gymbudProfile"][@"interest3"]];
-    }
-    
-    if ([user objectForKey:@"gymbudProfile"][@"background"]) {
-        [self.rowDataArray replaceObjectAtIndex:6 withObject:[user objectForKey:@"gymbudProfile"][@"background"]];
-    }
-    
-    if ([user objectForKey:@"gymbudProfile"][@"achievements"]) {
-        [self.rowDataArray replaceObjectAtIndex:7 withObject:[user objectForKey:@"gymbudProfile"][@"achievements"]];
+        [self.rowDataArray replaceObjectAtIndex:4 withObject:[user objectForKey:@"gymbudProfile"][@"interest3"]];
     }
     
     if ([user objectForKey:@"gymbudProfile"][@"goals"]) {
-        [self.rowDataArray replaceObjectAtIndex:8 withObject:[user objectForKey:@"gymbudProfile"][@"goals"]];
+        [self.rowDataArray replaceObjectAtIndex:5 withObject:[user objectForKey:@"gymbudProfile"][@"goals"]];
+    }
+    
+    if ([user objectForKey:@"gymbudProfile"][@"achievements"]) {
+        [self.rowDataArray replaceObjectAtIndex:6 withObject:[user objectForKey:@"gymbudProfile"][@"achievements"]];
+    }
+    
+    if ([user objectForKey:@"gymbudProfile"][@"organizations"]) {
+        [self.rowDataArray replaceObjectAtIndex:7 withObject:[user objectForKey:@"gymbudProfile"][@"organizations"]];
+    }
+    
+    if ([user objectForKey:@"gymbudProfile"][@"about"]) {
+        [self.rowDataArray replaceObjectAtIndex:8 withObject:[user objectForKey:@"gymbudProfile"][@"about"]];
     }
     [self.tableView reloadData];
     
@@ -219,16 +222,30 @@
     // Download the user's facebook profile picture
     self.imageData = [[NSMutableData alloc] init]; // the data will be loaded in here
     
-    if ([user objectForKey:@"profile"][@"pictureURL"]) {
-        NSURL *pictureURL = [NSURL URLWithString:[user objectForKey:@"profile"][@"pictureURL"]];
-        
-        NSMutableURLRequest *urlRequest = [NSMutableURLRequest requestWithURL:pictureURL
-                                                                  cachePolicy:NSURLRequestUseProtocolCachePolicy
-                                                              timeoutInterval:2.0f];
-        // Run network request asynchronously
-        NSURLConnection *urlConnection = [[NSURLConnection alloc] initWithRequest:urlRequest delegate:self];
-        if (!urlConnection) {
-            NSLog(@"Failed to download picture");
+    if ([user objectForKey:@"gymbudProfile"][@"profilePicture"]) {
+        PFFile *theImage = [user objectForKey:@"gymbudProfile"][@"profilePicture"];
+        __weak UserDetailsViewController *weakSelf = self;
+        [theImage getDataInBackgroundWithBlock:^(NSData *data, NSError *error){
+            NSLog(@"+++++++++ Loading image view with real data ++++++++");
+            weakSelf.headerImageView.image = [UIImage imageWithData:data];
+        }];
+//        self.headerImageView.image = [UIImage imageWithData:imageData];
+        // Add a nice corner radius to the image
+        self.headerImageView.layer.cornerRadius = 8.0f;
+        self.headerImageView.layer.masksToBounds = YES;
+    } else {
+        if ([user objectForKey:@"profile"][@"pictureURL"]) {
+            self.imageData = [[NSMutableData alloc] init]; // the data will be loaded in here
+            NSURL *pictureURL = [NSURL URLWithString:[user objectForKey:@"profile"][@"pictureURL"]];
+            
+            NSMutableURLRequest *urlRequest = [NSMutableURLRequest requestWithURL:pictureURL
+                                                                      cachePolicy:NSURLRequestUseProtocolCachePolicy
+                                                                  timeoutInterval:2.0f];
+            // Run network request asynchronously
+            NSURLConnection *urlConnection = [[NSURLConnection alloc] initWithRequest:urlRequest delegate:self];
+            if (!urlConnection) {
+                NSLog(@"Failed to download picture");
+            }
         }
     }
 }
@@ -307,8 +324,8 @@
     [queryForEvent whereKey:@"activity" equalTo:event.activity];
     [queryForEvent whereKey:@"count" equalTo:event.count];
     [queryForEvent whereKey:@"organizer" equalTo:event.organizer];
-    if(![event.description isEqualToString:@"No Description Provided"]) {
-        [queryForEvent whereKey:@"description" equalTo:event.description];
+    if(![event.eventDescription isEqualToString:@"No Description Provided"]) {
+        [queryForEvent whereKey:@"description" equalTo:event.eventDescription];
     }
     
     [queryForEvent findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {

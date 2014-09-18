@@ -34,7 +34,7 @@
 @property (nonatomic, readonly, strong) NSDate *eventDate;
 @property (nonatomic, readonly, strong) NSNumber *duration;
 @property (nonatomic, readonly, strong) NSNumber *count;
-@property (nonatomic, readonly, strong) NSString *description;
+@property (nonatomic, readonly, strong) NSString *eventDescription;
 @property (nonatomic, readonly, strong) NSString *locationName;
 @property (nonatomic, readonly, strong) NSArray *detailLogoIndices;
 @property (nonatomic, assign) BOOL animatesDrop;

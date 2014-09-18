@@ -166,19 +166,29 @@
     cell.startTimeTextLabel.text = [formatter stringFromDate:eventStartTime];
     cell.activityTextLabel.text = [object objectForKey:@"activity"];
     cell.backgroundColor = [UIColor grayColor];
-    NSURL *url = [NSURL URLWithString:[[[object objectForKey:@"organizer"] objectForKey:@"profile"] objectForKey:@"pictureURL"]];
-    NSURLRequest *request = [NSURLRequest requestWithURL:url];
-    UIImage *placeholderImage = [UIImage imageNamed:[kGymBudActivityIconMapping objectForKey:[object objectForKey:@"activity"]]];
+    
+    PFFile *theImage = [object objectForKey:@"organizer"][@"gymbudProfile"][@"profilePicture"];
+    cell.logoImageView.image = [UIImage imageNamed:[kGymBudActivityIconMapping objectForKey:[object objectForKey:@"activity"]]];
     
     __weak GymBudEventsCell *weakCell = cell;
-    
-    [cell.logoImageView setImageWithURLRequest:request
-                              placeholderImage:placeholderImage
-                                       success:^(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *image) {
-                                           // do we want rounded corners on the image?
-                                           weakCell.logoImageView.image = image;
-                                           [weakCell setNeedsLayout];
-                                       } failure:nil];
+    [theImage getDataInBackgroundWithBlock:^(NSData *data, NSError *error){
+        NSLog(@"+++++++++ Loading image view with real data ++++++++");
+        weakCell.logoImageView.image = [UIImage imageWithData:data];
+        [weakCell setNeedsLayout];
+    }];
+//    NSURL *url = [NSURL URLWithString:[[[object objectForKey:@"organizer"] objectForKey:@"profile"] objectForKey:@"pictureURL"]];
+//    NSURLRequest *request = [NSURLRequest requestWithURL:url];
+//    UIImage *placeholderImage = [UIImage imageNamed:[kGymBudActivityIconMapping objectForKey:[object objectForKey:@"activity"]]];
+//    
+//    __weak GymBudEventsCell *weakCell = cell;
+//    
+//    [cell.logoImageView setImageWithURLRequest:request
+//                              placeholderImage:placeholderImage
+//                                       success:^(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *image) {
+//                                           // do we want rounded corners on the image?
+//                                           weakCell.logoImageView.image = image;
+//                                           [weakCell setNeedsLayout];
+//                                       } failure:nil];
     
     if([eventStartTime isToday]) {
         cell.startDateTextLabel.text = @"Today";

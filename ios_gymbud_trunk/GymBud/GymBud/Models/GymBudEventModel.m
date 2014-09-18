@@ -26,7 +26,7 @@
 @property (nonatomic, strong) NSDate *eventDate;
 @property (nonatomic, strong) NSNumber *duration;
 @property (nonatomic, strong) NSNumber *count;
-@property (nonatomic, strong) NSString *description;
+@property (nonatomic, strong) NSString *eventDescription;
 @property (nonatomic, strong) NSString *locationName;
 @property (nonatomic, strong) NSArray *detailLogoIndices;
 
@@ -56,11 +56,11 @@
     self.eventDate = [anObject objectForKey:@"time"];
     self.duration = [anObject objectForKey:@"duration"];
     self.count = [anObject objectForKey:@"count"];
-    self.description = [anObject objectForKey:@"description"];
+    self.eventDescription = [anObject objectForKey:@"description"];
     self.attendees = [anObject objectForKey:@"attendees"];
     self.detailLogoIndices = [anObject objectForKey:@"detailLogoIndices"];
-    if(!self.description) {
-        self.description = @"No Description Provided";
+    if(!self.eventDescription) {
+        self.eventDescription = @"No Description Provided";
     }
     
     [anObject fetchIfNeeded];
