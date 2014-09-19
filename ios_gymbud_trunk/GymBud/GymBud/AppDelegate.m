@@ -32,7 +32,13 @@
 //     UIRemoteNotificationTypeBadge |
 //     UIRemoteNotificationTypeAlert |
 //     UIRemoteNotificationTypeSound];
-    [[UIApplication sharedApplication] registerForRemoteNotificationTypes:UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeAlert | UIRemoteNotificationTypeSound];
+    if ([application respondsToSelector:@selector(registerUserNotificationSettings:)]) {
+        // use registerUserNotificationSettings
+        [[UIApplication sharedApplication] registerUserNotificationSettings:[UIUserNotificationSettings settingsForTypes:(UIUserNotificationTypeSound | UIUserNotificationTypeAlert | UIUserNotificationTypeBadge) categories:nil]];
+    } else {
+        // use registerForRemoteNotifications
+        [[UIApplication sharedApplication] registerForRemoteNotificationTypes:UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeAlert | UIRemoteNotificationTypeSound];
+    }
     
     PFUser *currentUser = [PFUser currentUser];
     if (currentUser) {
@@ -93,6 +99,11 @@
     return YES;
 }
 
+// needed for ios8
+- (void)application:(UIApplication *)application didRegisterUserNotificationSettings:(UIUserNotificationSettings *)notificationSettings {
+    NSLog(@"register user notification settings: %@", notificationSettings);
+    [application registerForRemoteNotifications];
+}
 
 - (void)application:(UIApplication *)application
 didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)newDeviceToken {

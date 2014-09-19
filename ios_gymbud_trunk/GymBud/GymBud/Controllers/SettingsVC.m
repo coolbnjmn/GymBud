@@ -65,7 +65,13 @@
 - (IBAction)enablePushOrNot:(id)sender {
     NSInteger yesOrNo = [sender selectedSegmentIndex];
     if(yesOrNo == 0) {
-        [[UIApplication sharedApplication] registerForRemoteNotificationTypes:UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeAlert | UIRemoteNotificationTypeSound];
+        if ([[UIApplication sharedApplication] respondsToSelector:@selector(registerUserNotificationSettings:)]) {
+            // use registerUserNotificationSettings
+            [[UIApplication sharedApplication] registerUserNotificationSettings:[UIUserNotificationSettings settingsForTypes:(UIUserNotificationTypeSound | UIUserNotificationTypeAlert | UIUserNotificationTypeBadge) categories:nil]];
+        } else {
+            // use registerForRemoteNotifications
+            [[UIApplication sharedApplication] registerForRemoteNotificationTypes:UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeAlert | UIRemoteNotificationTypeSound];
+        }
     } else {
         [[UIApplication sharedApplication] unregisterForRemoteNotifications];
     }
