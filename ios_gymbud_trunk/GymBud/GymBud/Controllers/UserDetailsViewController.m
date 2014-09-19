@@ -259,66 +259,66 @@
     }
 }
 
-// Set received values if they are not nil and reload the table
-- (void)updateProfile {
-    if ([[PFUser currentUser] objectForKey:@"profile"][@"location"]) {
-        [self.rowDataArray replaceObjectAtIndex:0 withObject:[[PFUser currentUser] objectForKey:@"profile"][@"location"]];
-    }
-    
-    if ([[PFUser currentUser] objectForKey:@"profile"][@"gender"]) {
-        [self.rowDataArray replaceObjectAtIndex:1 withObject:[[PFUser currentUser] objectForKey:@"profile"][@"gender"]];
-    }
-    
-    if ([[PFUser currentUser] objectForKey:@"profile"][@"age"]) {
-        [self.rowDataArray replaceObjectAtIndex:2 withObject:[[PFUser currentUser] objectForKey:@"profile"][@"age"]];
-    }
-    
-    if ([[PFUser currentUser] objectForKey:@"gymbudProfile"][@"interest1"]) {
-        [self.rowDataArray replaceObjectAtIndex:3 withObject:[[PFUser currentUser] objectForKey:@"gymbudProfile"][@"interest1"]];
-    }
-    
-    if ([[PFUser currentUser] objectForKey:@"gymbudProfile"][@"interest2"]) {
-        [self.rowDataArray replaceObjectAtIndex:4 withObject:[[PFUser currentUser] objectForKey:@"gymbudProfile"][@"interest2"]];
-    }
-    
-    if ([[PFUser currentUser] objectForKey:@"gymbudProfile"][@"interest3"]) {
-        [self.rowDataArray replaceObjectAtIndex:5 withObject:[[PFUser currentUser] objectForKey:@"gymbudProfile"][@"interest3"]];
-    }
-    
-    if ([[PFUser currentUser] objectForKey:@"gymbudProfile"][@"background"]) {
-        [self.rowDataArray replaceObjectAtIndex:6 withObject:[[PFUser currentUser] objectForKey:@"gymbudProfile"][@"background"]];
-    }
-    
-    if ([[PFUser currentUser] objectForKey:@"gymbudProfile"][@"achievements"]) {
-        [self.rowDataArray replaceObjectAtIndex:7 withObject:[[PFUser currentUser] objectForKey:@"gymbudProfile"][@"achievements"]];
-    }
-    
-    if ([[PFUser currentUser] objectForKey:@"gymbudProfile"][@"goals"]) {
-        [self.rowDataArray replaceObjectAtIndex:8 withObject:[[PFUser currentUser] objectForKey:@"gymbudProfile"][@"goals"]];
-    }
-    [self.tableView reloadData];
-    
-    // Set the name in the header view label
-    if ([[PFUser currentUser] objectForKey:@"profile"][@"name"]) {
-        self.headerNameLabel.text = [[PFUser currentUser] objectForKey:@"profile"][@"name"];
-    }
-    
-    // Download the user's facebook profile picture
-    self.imageData = [[NSMutableData alloc] init]; // the data will be loaded in here
-    
-    if ([[PFUser currentUser] objectForKey:@"profile"][@"pictureURL"]) {
-        NSURL *pictureURL = [NSURL URLWithString:[[PFUser currentUser] objectForKey:@"profile"][@"pictureURL"]];
-        
-        NSMutableURLRequest *urlRequest = [NSMutableURLRequest requestWithURL:pictureURL
-                                                                  cachePolicy:NSURLRequestUseProtocolCachePolicy
-                                                              timeoutInterval:2.0f];
-        // Run network request asynchronously
-        NSURLConnection *urlConnection = [[NSURLConnection alloc] initWithRequest:urlRequest delegate:self];
-        if (!urlConnection) {
-            NSLog(@"Failed to download picture");
-        }
-    }
-}
+//// Set received values if they are not nil and reload the table
+//- (void)updateProfile {
+//    if ([[PFUser currentUser] objectForKey:@"profile"][@"location"]) {
+//        [self.rowDataArray replaceObjectAtIndex:0 withObject:[[PFUser currentUser] objectForKey:@"profile"][@"location"]];
+//    }
+//    
+//    if ([[PFUser currentUser] objectForKey:@"profile"][@"gender"]) {
+//        [self.rowDataArray replaceObjectAtIndex:1 withObject:[[PFUser currentUser] objectForKey:@"profile"][@"gender"]];
+//    }
+//    
+//    if ([[PFUser currentUser] objectForKey:@"profile"][@"age"]) {
+//        [self.rowDataArray replaceObjectAtIndex:2 withObject:[[PFUser currentUser] objectForKey:@"profile"][@"age"]];
+//    }
+//    
+//    if ([[PFUser currentUser] objectForKey:@"gymbudProfile"][@"interest1"]) {
+//        [self.rowDataArray replaceObjectAtIndex:3 withObject:[[PFUser currentUser] objectForKey:@"gymbudProfile"][@"interest1"]];
+//    }
+//    
+//    if ([[PFUser currentUser] objectForKey:@"gymbudProfile"][@"interest2"]) {
+//        [self.rowDataArray replaceObjectAtIndex:4 withObject:[[PFUser currentUser] objectForKey:@"gymbudProfile"][@"interest2"]];
+//    }
+//    
+//    if ([[PFUser currentUser] objectForKey:@"gymbudProfile"][@"interest3"]) {
+//        [self.rowDataArray replaceObjectAtIndex:5 withObject:[[PFUser currentUser] objectForKey:@"gymbudProfile"][@"interest3"]];
+//    }
+//    
+//    if ([[PFUser currentUser] objectForKey:@"gymbudProfile"][@"background"]) {
+//        [self.rowDataArray replaceObjectAtIndex:6 withObject:[[PFUser currentUser] objectForKey:@"gymbudProfile"][@"background"]];
+//    }
+//    
+//    if ([[PFUser currentUser] objectForKey:@"gymbudProfile"][@"achievements"]) {
+//        [self.rowDataArray replaceObjectAtIndex:7 withObject:[[PFUser currentUser] objectForKey:@"gymbudProfile"][@"achievements"]];
+//    }
+//    
+//    if ([[PFUser currentUser] objectForKey:@"gymbudProfile"][@"goals"]) {
+//        [self.rowDataArray replaceObjectAtIndex:8 withObject:[[PFUser currentUser] objectForKey:@"gymbudProfile"][@"goals"]];
+//    }
+//    [self.tableView reloadData];
+//    
+//    // Set the name in the header view label
+//    if ([[PFUser currentUser] objectForKey:@"profile"][@"name"]) {
+//        self.headerNameLabel.text = [[PFUser currentUser] objectForKey:@"profile"][@"name"];
+//    }
+//    
+//    // Download the user's facebook profile picture
+//    self.imageData = [[NSMutableData alloc] init]; // the data will be loaded in here
+//    
+//    if ([[PFUser currentUser] objectForKey:@"profile"][@"pictureURL"]) {
+//        NSURL *pictureURL = [NSURL URLWithString:[[PFUser currentUser] objectForKey:@"profile"][@"pictureURL"]];
+//        
+//        NSMutableURLRequest *urlRequest = [NSMutableURLRequest requestWithURL:pictureURL
+//                                                                  cachePolicy:NSURLRequestUseProtocolCachePolicy
+//                                                              timeoutInterval:2.0f];
+//        // Run network request asynchronously
+//        NSURLConnection *urlConnection = [[NSURLConnection alloc] initWithRequest:urlRequest delegate:self];
+//        if (!urlConnection) {
+//            NSLog(@"Failed to download picture");
+//        }
+//    }
+//}
 
 - (IBAction)headerJoinButtonPressed:(id)sender
 {

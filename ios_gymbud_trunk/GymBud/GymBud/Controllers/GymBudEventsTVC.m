@@ -191,7 +191,13 @@
         cell = [[GymBudEventsCell alloc] init];
     }
     
-    cell.nameTextLabel.text = [[object objectForKey:@"organizer"] objectForKey:kFacebookUsername];
+    NSString *name;
+    if([object objectForKey:@"organizer"][@"gymbudProfile"][@"name"]) {
+        name = [object objectForKey:@"organizer"][@"gymbudProfile"][@"name"];
+    } else {
+        name = [[object objectForKey:@"organizer"] objectForKey:kFacebookUsername];
+    }
+    cell.nameTextLabel.text = name;
     cell.capacityTextLabel.text = @"TBD";
     
     NSDate *eventStartTime = [object objectForKey:@"time"];

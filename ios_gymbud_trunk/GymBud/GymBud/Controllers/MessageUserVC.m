@@ -106,7 +106,14 @@
     // Send the notification.
     PFPush *push = [[PFPush alloc] init];
     [push setQuery:query];
-    [push setMessage:[NSString stringWithFormat:@"Message From: %@", [currentUser objectForKey:@"profile"][@"name"]]];
+    
+    NSString *name;
+    if([currentUser objectForKey:@"gymbudProfile"][@"name"]) {
+        name = [currentUser objectForKey:@"gymbudProfile"][@"name"];
+    } else {
+        name = [currentUser objectForKey:@"profile"][@"name"];
+    }
+    [push setMessage:[NSString stringWithFormat:@"Message From: %@", name]];
     [push sendPushInBackground];
     
     

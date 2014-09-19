@@ -113,16 +113,30 @@
     if([currentUser objectForKey:@"gymbudProfile"][@"about"]) {
         self.profileAbout.text = [currentUser objectForKey:@"gymbudProfile"][@"about"];
     }
-    if ([currentUser objectForKey:@"profile"][@"name"]) {
-        self.profileName.text = [currentUser objectForKey:@"profile"][@"name"];
+    
+    if ([currentUser objectForKey:@"gymbudProfile"][@"name"]) {
+        self.profileName.text = [currentUser objectForKey:@"gymbudProfile"][@"name"];
+    } else {
+        if ([currentUser objectForKey:@"profile"][@"name"]) {
+            self.profileName.text = [currentUser objectForKey:@"profile"][@"name"];
+        }
+    }
+
+    
+    if ([currentUser objectForKey:@"gymbudProfile"][@"age"]) {
+        self.profileAge.text = [currentUser objectForKey:@"gymbudProfile"][@"age"];
+    } else {
+        if ([currentUser objectForKey:@"profile"][@"age"]) {
+            self.profileAge.text = [currentUser objectForKey:@"profile"][@"age"];
+        }
     }
     
-    if ([currentUser objectForKey:@"profile"][@"age"]) {
-        self.profileAge.text = [currentUser objectForKey:@"profile"][@"age"];
-    }
-    
-    if ([currentUser objectForKey:@"profile"][@"gender"]) {
-        self.profileGender.text = [currentUser objectForKey:@"profile"][@"gender"];
+    if ([currentUser objectForKey:@"gymbudProfile"][@"gender"]) {
+        self.profileGender.text = [currentUser objectForKey:@"gymbudProfile"][@"gender"];
+    } else {
+        if ([currentUser objectForKey:@"profile"][@"gender"]) {
+            self.profileGender.text = [currentUser objectForKey:@"profile"][@"gender"];
+        }
     }
     
     if ([currentUser objectForKey:@"gymbudProfile"][@"profilePicture"]) {
@@ -243,15 +257,6 @@
                                                   self.errorToast = nil;
                                               }];
                          }];
-        /*
-        [UIView animateWithDuration:1.0
-                              delay:0.0
-                            options:UIViewAnimationOptionCurveEaseOut
-                         animations:^{
-                             self.modal.view.frame = CGRectMake(0, 284, 320, 284);
-                         } completion:^(BOOL finished) {
-                             [self.modal didMoveToParentViewController:self];
-                         }];*/
         return;
     }
     userProfile[@"interest1"] = self.interest1.text;

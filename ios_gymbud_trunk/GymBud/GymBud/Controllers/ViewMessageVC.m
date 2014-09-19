@@ -51,7 +51,13 @@
             fromImage.image = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:[[[activity objectForKey:@"fromUser"] objectForKey:@"profile"] objectForKey:@"pictureURL"]]]];
         }
         
-        self.navigationItem.title = [[[activity objectForKey:@"fromUser"] objectForKey:@"profile"] objectForKey:@"name"];
+        NSString *name;
+        if([[[activity objectForKey:@"fromUser"] objectForKey:@"gymbudProfile"] objectForKey:@"name"]) {
+            name = [[[activity objectForKey:@"fromUser"] objectForKey:@"gymbudProfile"] objectForKey:@"name"];
+        } else {
+            name = [[[activity objectForKey:@"fromUser"] objectForKey:@"profile"] objectForKey:@"name"];
+        }
+        self.navigationItem.title = name;
         
         NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
         [dateFormatter setDateStyle:NSDateFormatterMediumStyle];

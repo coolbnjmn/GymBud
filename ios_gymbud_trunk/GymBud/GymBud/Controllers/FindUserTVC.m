@@ -58,7 +58,12 @@
     NSMutableArray *actualResults = [[NSMutableArray alloc] initWithCapacity:10];
     
     for (PFUser *user in results) {
-        NSString *name = [[user objectForKey:@"profile"] objectForKey:@"name"];
+        NSString *name;
+        if([[user objectForKey:@"gymbudProfile"] objectForKey:@"name"]) {
+            name = [[user objectForKey:@"gymbudProfile"] objectForKey:@"name"];
+        } else {
+            name = [[user objectForKey:@"profile"] objectForKey:@"name"];
+        }
         if ([name rangeOfString:searchTerm].location == NSNotFound) {
         } else {
             [actualResults addObject:user];
@@ -159,11 +164,19 @@
     }
 
     if (tableView != self.searchDisplayController.searchResultsTableView) {
-        cell.textLabel.text = [[object objectForKey:@"profile"] objectForKey:@"name"];
+        if([[object objectForKey:@"gymbudProfile"] objectForKey:@"name"]) {
+            cell.textLabel.text = [[object objectForKey:@"gymbudProfile"] objectForKey:@"name"];
+        } else {
+            cell.textLabel.text = [[object objectForKey:@"profile"] objectForKey:@"name"];
+        }
     }
     if ([tableView isEqual:self.searchDisplayController.searchResultsTableView]) {
         PFUser *obj2 = [self.searchResults objectAtIndex:indexPath.row];
-        cell.textLabel.text = [[obj2 objectForKey:@"profile"] objectForKey:@"name"];
+        if([[obj2 objectForKey:@"gymbudProfile"] objectForKey:@"name"]) {
+            cell.textLabel.text = [[obj2 objectForKey:@"gymbudProfile"] objectForKey:@"name"];
+        } else {
+            cell.textLabel.text = [[obj2 objectForKey:@"profile"] objectForKey:@"name"];
+        }
     }
     return cell;
 

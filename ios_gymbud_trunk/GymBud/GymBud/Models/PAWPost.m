@@ -81,7 +81,14 @@
 
 - (void)setTitleAndSubtitleOutsideDistance:(BOOL)outside {
     self.title = [self.object objectForKey:@"text"];
-    self.subtitle = [[[self.object objectForKey:@"user"] objectForKey:@"profile"] objectForKey:@"name"];
+    
+    NSString *name;
+    if([[[self.object objectForKey:@"user"] objectForKey:@"gymbudProfile"] objectForKey:@"name"]) {
+        name = [[[self.object objectForKey:@"user"] objectForKey:@"gymbudProfile"] objectForKey:@"name"];
+    } else {
+        name = [[[self.object objectForKey:@"user"] objectForKey:@"profile"] objectForKey:@"name"];
+    }
+    self.subtitle = name;
     self.pinColor = MKPinAnnotationColorRed;
     self.pictureURL = [NSURL URLWithString:[[[self.object objectForKey:@"user"] objectForKey:@"profile"] objectForKey:@"pictureURL"]];
     self.activity = [self.object objectForKey:@"activity"];

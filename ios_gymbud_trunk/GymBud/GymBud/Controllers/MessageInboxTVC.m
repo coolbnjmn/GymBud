@@ -128,7 +128,11 @@
     [dateFormatter setTimeStyle:NSDateFormatterShortStyle];
     
     NSString *when = [dateFormatter stringFromDate:[object createdAt]];
-    cell.detailTextLabel.text = [[[[[object objectForKey:@"fromUser"] objectForKey:@"profile"] objectForKey:@"name"] stringByAppendingString:@" : "] stringByAppendingString:when];
+    if([[[object objectForKey:@"fromUser"] objectForKey:@"gymbudProfile"] objectForKey:@"name"]) {
+        cell.detailTextLabel.text = [[[[[object objectForKey:@"fromUser"] objectForKey:@"gymbudProfile"] objectForKey:@"name"] stringByAppendingString:@" : "] stringByAppendingString:when];
+    } else {
+        cell.detailTextLabel.text = [[[[[object objectForKey:@"fromUser"] objectForKey:@"profile"] objectForKey:@"name"] stringByAppendingString:@" : "] stringByAppendingString:when];
+    }
     cell.textLabel.text = [object objectForKey:@"content"];
     return cell;
 }
