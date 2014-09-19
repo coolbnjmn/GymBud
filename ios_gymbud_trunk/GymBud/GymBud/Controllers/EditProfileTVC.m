@@ -23,7 +23,10 @@
 @property (weak, nonatomic) IBOutlet UITextView *profileAbout;
 
 
+@property (assign, nonatomic) BOOL isKeyboardShowing;
+@property (assign, nonatomic) CGRect keyboardFrame;
 @property (strong, nonatomic) NSMutableData* imageData;
+@property (strong, nonatomic) UIView *errorToast;
 @end
 
 @implementation EditProfileTVC
@@ -51,12 +54,27 @@
     self.profilePicture.layer.masksToBounds = YES;
 }
 
+- (void)keyboardDidChangeFrame:(id)sender {
+    self.isKeyboardShowing = self.isKeyboardShowing ? NO : YES;
+    NSLog(@"%@", sender);
+    NSLog(@"%@", [sender userInfo]);
+    self.keyboardFrame = [[sender userInfo][UIKeyboardFrameEndUserInfoKey] CGRectValue];
+}
+
+- (void) dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardDidChangeFrameNotification object:nil];
+}
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(keyboardDidChangeFrame:)
+                                                 name:UIKeyboardDidChangeFrameNotification
+                                               object:nil];
     
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
@@ -164,8 +182,76 @@
     NSLog(@"update profile");
     NSMutableDictionary *userProfile = [NSMutableDictionary dictionaryWithCapacity:7];
 
-    if([self.profileGoals.text length] > 150 || [self.profileAchievements.text length] > 250 || [self.profileOrgs.text length] > 100 || [self.profileAbout.text length] > 300) {
+    if([self.profileGoals.text length] > 150 || [self.profileAchievements.text length] > 250 || [self.profileOrgs.text length] > 100 || [self.profileAbout.text length] > 300 || [self.profileName.text isEqualToString:@""] || [self.profileAge.text isEqualToString:@""] || [self.profileGender.text isEqualToString:@""] || (![self.profileGender.text.lowercaseString isEqualToString:@"male"] && ![self.profileGender.text.lowercaseString isEqualToString:@"female"]) || [self.profileGoals.text isEqualToString:@""] || [self.profileGoals.text isEqualToString:@"Placeholder text here..."]) {
         // show view here
+        NSString *toastMessage = @"";
+        if([self.profileGoals.text length] > 150) {
+            toastMessage = [toastMessage stringByAppendingString:@"Goals max is 150 char. "];
+        }
+        if([self.profileAchievements.text length] > 250) {
+            toastMessage = [toastMessage stringByAppendingString:@"Achievements max is 250 char. "];
+        }
+        if([self.profileOrgs.text length] > 100) {
+            toastMessage = [toastMessage stringByAppendingString:@"Organizations max is 100 char. "];
+        }
+        if([self.profileAbout.text length] > 300) {
+            toastMessage = [toastMessage stringByAppendingString:@"About max is 300 char. "];
+        }
+        if([self.profileName.text isEqualToString:@""]) {
+            toastMessage = [toastMessage stringByAppendingString:@"Name must not be empty. "];
+        }
+        if([self.profileAge.text isEqualToString:@""]) {
+            toastMessage = [toastMessage stringByAppendingString:@"You need an age! "];
+        }
+        if([self.profileGender.text isEqualToString:@""] || (![self.profileGender.text.lowercaseString isEqualToString:@"male"] && ![self.profileGender.text.lowercaseString isEqualToString:@"female"])) {
+            toastMessage = [toastMessage stringByAppendingString:@"Invalid Gender. "];
+        }
+        if([self.profileGoals.text isEqualToString:@""] || [self.profileGoals.text isEqualToString:@"Placeholder text here..."]) {
+            toastMessage = [toastMessage stringByAppendingString:@"Goals is mandatory. "];
+        }
+        
+        
+        self.errorToast = [[UIView alloc] initWithFrame:CGRectMake(0, self.view.bounds.size.height, self.view.bounds.size.width, 40)];
+        self.errorToast.backgroundColor = [UIColor orangeColor];
+        UILabel *textLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, 40)];
+        textLabel.text = toastMessage;
+        textLabel.textAlignment = NSTextAlignmentCenter;
+        NSLog(@"textLabel text is: %@", textLabel.text);
+        [self.errorToast addSubview:textLabel];
+        UIApplication *app = [UIApplication sharedApplication];
+        [app.keyWindow addSubview:self.errorToast];
+
+        [UIView animateWithDuration:1.0
+                              delay:0.0
+                            options:UIViewAnimationOptionCurveEaseIn
+                         animations:^{
+                             if(self.keyboardFrame.origin.y == self.view.window.bounds.size.height || self.keyboardFrame.origin.y == 0) {
+                                 self.errorToast.frame = CGRectMake(0, self.view.bounds.size.height - 40 - self.tabBarController.tabBar.bounds.size.height, self.view.bounds.size.width, 40);
+                             } else {
+                                 self.errorToast.frame = CGRectMake(0, self.view.bounds.size.height - 40 - self.keyboardFrame.size.height, self.view.bounds.size.width, 40);
+                             }
+                         }
+                         completion:^(BOOL finished) {
+                             [UIView animateWithDuration:2.0
+                                                   delay:5.0
+                                                 options:UIViewAnimationOptionCurveEaseOut
+                                              animations:^{
+                                                  self.errorToast.alpha = 0.0f;
+                                              }
+                                              completion:^(BOOL finished) {
+                                                  [self.errorToast removeFromSuperview];
+                                                  self.errorToast = nil;
+                                              }];
+                         }];
+        /*
+        [UIView animateWithDuration:1.0
+                              delay:0.0
+                            options:UIViewAnimationOptionCurveEaseOut
+                         animations:^{
+                             self.modal.view.frame = CGRectMake(0, 284, 320, 284);
+                         } completion:^(BOOL finished) {
+                             [self.modal didMoveToParentViewController:self];
+                         }];*/
         return;
     }
     userProfile[@"interest1"] = self.interest1.text;

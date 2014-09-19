@@ -193,7 +193,7 @@
                             </tableViewSection>
                             <tableViewSection headerTitle="Goals" id="F2O-aT-1oP">
                                 <cells>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="80" id="DOc-YF-NA5">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" rowHeight="80" id="DOc-YF-NA5">
                                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="DOc-YF-NA5" id="TU3-jB-C5B">
@@ -218,7 +218,7 @@
                             </tableViewSection>
                             <tableViewSection headerTitle="Achievements (optional)" id="qEf-Tc-cQI">
                                 <cells>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="100" id="uY7-ur-26u">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" rowHeight="100" id="uY7-ur-26u">
                                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="uY7-ur-26u" id="TiS-pA-taE">
@@ -243,7 +243,7 @@
                             </tableViewSection>
                             <tableViewSection headerTitle="On Campus Organizations (optional)" id="Tip-JW-hg5">
                                 <cells>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="70" id="jZn-f4-vnU">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" rowHeight="70" id="jZn-f4-vnU">
                                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="jZn-f4-vnU" id="OSB-19-evS">
@@ -268,7 +268,7 @@
                             </tableViewSection>
                             <tableViewSection headerTitle="About Me (optional)" id="p5r-p6-VtO">
                                 <cells>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="100" id="FNM-iU-46i">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" rowHeight="100" id="FNM-iU-46i">
                                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="FNM-iU-46i" id="Av2-sA-lQt">
@@ -322,7 +322,7 @@
                         <sections>
                             <tableViewSection headerTitle="Name" id="hue-bT-bu9">
                                 <cells>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="49" id="btU-lq-Lm5">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" rowHeight="49" id="btU-lq-Lm5">
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="btU-lq-Lm5" id="o0c-71-0WU">
                                             <autoresizingMask key="autoresizingMask"/>
@@ -345,7 +345,7 @@
                             </tableViewSection>
                             <tableViewSection headerTitle="Age" id="LuW-2V-OTQ">
                                 <cells>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="49" id="a4j-u8-Fke">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" rowHeight="49" id="a4j-u8-Fke">
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="a4j-u8-Fke" id="uQP-tc-cld">
                                             <autoresizingMask key="autoresizingMask"/>
@@ -368,7 +368,7 @@
                             </tableViewSection>
                             <tableViewSection headerTitle="Gender" id="OT2-US-QnE">
                                 <cells>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="49" id="sKM-zF-Fai">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" rowHeight="49" id="sKM-zF-Fai">
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="sKM-zF-Fai" id="IMm-Pf-m0x">
                                             <autoresizingMask key="autoresizingMask"/>
