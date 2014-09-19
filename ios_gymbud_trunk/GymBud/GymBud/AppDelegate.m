@@ -83,8 +83,6 @@
         tbc.viewControllers = tbcArray;
         tbc.selectedIndex = 2;
         self.window.rootViewController = tbc;
-        
-        
     } else {
         LoginViewController *loginViewController = [[LoginViewController alloc] init];
         self.window.rootViewController = loginViewController;
