@@ -133,7 +133,12 @@
     } else {
         cell.detailTextLabel.text = [[[[[object objectForKey:@"fromUser"] objectForKey:@"profile"] objectForKey:@"name"] stringByAppendingString:@" : "] stringByAppendingString:when];
     }
-    cell.textLabel.text = [object objectForKey:@"content"];
+    
+    if([[object objectForKey:@"unread"] boolValue]) {
+        cell.textLabel.text = [@"(1) " stringByAppendingString:[object objectForKey:@"content"]];
+    } else {
+        cell.textLabel.text = [object objectForKey:@"content"];
+    }
     return cell;
 }
 

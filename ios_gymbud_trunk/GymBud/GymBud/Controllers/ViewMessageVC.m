@@ -36,6 +36,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    self.navigationController.navigationBar.translucent = NO;
     // Do any additional setup after loading the view from its nib.
     if(!activity) {
         NSLog(@"something went wrong");
@@ -66,6 +67,8 @@
         whenLabel.text = [dateFormatter stringFromDate:[activity createdAt]];
         NSLog(@"%@", activity);
         messageContents.text = [activity objectForKey:@"content"];
+        [activity setObject:[NSNumber numberWithBool:NO] forKey:@"unread"];
+        [activity saveInBackground];
     }
     
     // set up reply and back buttons here

@@ -65,12 +65,7 @@
     [activityObject setObject:user forKey:@"toUser"];
     [activityObject setObject:@"message" forKey:@"type"];
     [activityObject setObject:textView.text forKey:@"content"];
-
-    // Use PFACL to restrict future modifications to this object.
-    PFACL *readOnlyACL = [PFACL ACL];
-    [readOnlyACL setPublicReadAccess:YES];
-    [readOnlyACL setPublicWriteAccess:NO];
-    [activityObject setACL:readOnlyACL];
+    [activityObject setObject:[NSNumber numberWithBool:YES] forKey:@"unread"];
     [activityObject saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
         if (error) {
             NSLog(@"Couldn't save!");
