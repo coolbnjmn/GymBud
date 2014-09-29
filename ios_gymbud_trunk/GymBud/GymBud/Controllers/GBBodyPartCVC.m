@@ -38,7 +38,8 @@ static NSString * const reuseIdentifier = @"goActivityCell";
     
     // Register cell classes
     [self.collectionView registerNib:[UINib nibWithNibName:@"GoActivityCVCell" bundle:[NSBundle mainBundle]] forCellWithReuseIdentifier:reuseIdentifier];
-    self.collectionView.backgroundColor = [UIColor whiteColor];
+    UIColor * color = [UIColor colorWithRed:178/255.0f green:168/255.0f blue:151/255.0f alpha:1.0f];
+    self.collectionView.backgroundColor = color;
     self.navigationItem.title = @"Body Part";
     [self.collectionView setAllowsMultipleSelection:YES];
     self.selectedBodyParts = [[NSMutableArray alloc] init];

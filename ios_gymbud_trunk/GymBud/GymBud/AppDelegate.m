@@ -57,16 +57,75 @@
         UINavigationController *nvc3 = [[UINavigationController alloc] initWithRootViewController:settingsVC];
         UINavigationController *nvc4 = [[UINavigationController alloc] initWithRootViewController:goVC];
         UINavigationController *nvc5 = [[UINavigationController alloc] initWithRootViewController:joinedVC];
-        nvc1.navigationBar.tintColor= [UIColor colorWithRed:44/255.0f green:62/255.0f blue:80/255.0f alpha:1.0f];
-        nvc1.navigationBar.barTintColor = [UIColor colorWithRed:60/255.0f green:151/255.0f blue:211/255.0f alpha:1.0f];
-        nvc2.navigationBar.tintColor= [UIColor colorWithRed:44/255.0f green:62/255.0f blue:80/255.0f alpha:1.0f];
-        nvc2.navigationBar.barTintColor = [UIColor colorWithRed:60/255.0f green:151/255.0f blue:211/255.0f alpha:1.0f];
-        nvc3.navigationBar.tintColor= [UIColor colorWithRed:44/255.0f green:62/255.0f blue:80/255.0f alpha:1.0f];
-        nvc3.navigationBar.barTintColor = [UIColor colorWithRed:60/255.0f green:151/255.0f blue:211/255.0f alpha:1.0f];
-        nvc4.navigationBar.tintColor= [UIColor colorWithRed:44/255.0f green:62/255.0f blue:80/255.0f alpha:1.0f];
-        nvc4.navigationBar.barTintColor = [UIColor colorWithRed:60/255.0f green:151/255.0f blue:211/255.0f alpha:1.0f];
-        nvc5.navigationBar.tintColor= [UIColor colorWithRed:44/255.0f green:62/255.0f blue:80/255.0f alpha:1.0f];
-        nvc5.navigationBar.barTintColor = [UIColor colorWithRed:60/255.0f green:151/255.0f blue:211/255.0f alpha:1.0f];
+//        nvc1.navigationBar.tintColor= [UIColor colorWithRed:44/255.0f green:62/255.0f blue:80/255.0f alpha:1.0f];
+//        nvc1.navigationBar.barTintColor = [UIColor colorWithRed:60/255.0f green:151/255.0f blue:211/255.0f alpha:1.0f];
+        nvc1.navigationBar.tintColor = [UIColor colorWithRed:255/255.0f green:255/255.0f blue:255/255.0f alpha:1.0f];
+        [nvc1.navigationBar setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:
+                                                    [UIColor whiteColor],
+                                                    NSForegroundColorAttributeName,
+                                                    [UIColor whiteColor],
+                                                    NSForegroundColorAttributeName,
+                                                    [NSValue valueWithUIOffset:UIOffsetMake(0, -1)],
+                                                    NSForegroundColorAttributeName,
+                                                    [UIFont fontWithName:@"Helvetica-Bold" size:24.0],
+                                                    NSFontAttributeName,
+                                                    nil]];
+        nvc1.navigationBar.barTintColor = [UIColor colorWithRed:34/255.0f green:49/255.0f blue:66/255.0f alpha:1.0f];
+//        nvc2.navigationBar.tintColor= [UIColor colorWithRed:44/255.0f green:62/255.0f blue:80/255.0f alpha:1.0f];
+//        nvc2.navigationBar.barTintColor = [UIColor colorWithRed:60/255.0f green:151/255.0f blue:211/255.0f alpha:1.0f];
+        nvc2.navigationBar.tintColor = [UIColor colorWithRed:255/255.0f green:255/255.0f blue:255/255.0f alpha:1.0f];
+        [nvc2.navigationBar setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:
+                                                    [UIColor whiteColor],
+                                                    NSForegroundColorAttributeName,
+                                                    [UIColor whiteColor],
+                                                    NSForegroundColorAttributeName,
+                                                    [NSValue valueWithUIOffset:UIOffsetMake(0, -1)],
+                                                    NSForegroundColorAttributeName,
+                                                    [UIFont fontWithName:@"Helvetica-Bold" size:24.0],
+                                                    NSFontAttributeName,
+                                                    nil]];
+        nvc2.navigationBar.barTintColor = [UIColor colorWithRed:34/255.0f green:49/255.0f blue:66/255.0f alpha:1.0f];
+//        nvc3.navigationBar.tintColor= [UIColor colorWithRed:44/255.0f green:62/255.0f blue:80/255.0f alpha:1.0f];
+//        nvc3.navigationBar.barTintColor = [UIColor colorWithRed:60/255.0f green:151/255.0f blue:211/255.0f alpha:1.0f];
+        nvc3.navigationBar.tintColor = [UIColor colorWithRed:255/255.0f green:255/255.0f blue:255/255.0f alpha:1.0f];
+        [nvc3.navigationBar setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:
+                                                    [UIColor whiteColor],
+                                                    NSForegroundColorAttributeName,
+                                                    [UIColor whiteColor],
+                                                    NSForegroundColorAttributeName,
+                                                    [NSValue valueWithUIOffset:UIOffsetMake(0, -1)],
+                                                    NSForegroundColorAttributeName,
+                                                    [UIFont fontWithName:@"Helvetica-Bold" size:24.0],
+                                                    NSFontAttributeName,
+                                                    nil]];
+        nvc3.navigationBar.barTintColor = [UIColor colorWithRed:34/255.0f green:49/255.0f blue:66/255.0f alpha:1.0f];
+        
+        nvc4.navigationBar.tintColor = [UIColor colorWithRed:255/255.0f green:255/255.0f blue:255/255.0f alpha:1.0f];
+        [nvc4.navigationBar setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:
+                                                   [UIColor whiteColor],
+                                                   NSForegroundColorAttributeName,
+                                                   [UIColor whiteColor],
+                                                   NSForegroundColorAttributeName,
+                                                   [NSValue valueWithUIOffset:UIOffsetMake(0, -1)],
+                                                   NSForegroundColorAttributeName,
+                                                   [UIFont fontWithName:@"Helvetica-Bold" size:24.0],
+                                                   NSFontAttributeName,
+                                                    nil]];
+        nvc4.navigationBar.barTintColor = [UIColor colorWithRed:34/255.0f green:49/255.0f blue:66/255.0f alpha:1.0f];
+//        nvc5.navigationBar.tintColor= [UIColor colorWithRed:44/255.0f green:62/255.0f blue:80/255.0f alpha:1.0f];
+//        nvc5.navigationBar.barTintColor = [UIColor colorWithRed:60/255.0f green:151/255.0f blue:211/255.0f alpha:1.0f];
+        nvc5.navigationBar.tintColor = [UIColor colorWithRed:255/255.0f green:255/255.0f blue:255/255.0f alpha:1.0f];
+        [nvc5.navigationBar setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:
+                                                    [UIColor whiteColor],
+                                                    NSForegroundColorAttributeName,
+                                                    [UIColor whiteColor],
+                                                    NSForegroundColorAttributeName,
+                                                    [NSValue valueWithUIOffset:UIOffsetMake(0, -1)],
+                                                    NSForegroundColorAttributeName,
+                                                    [UIFont fontWithName:@"Helvetica-Bold" size:24.0],
+                                                    NSFontAttributeName,
+                                                    nil]];
+        nvc5.navigationBar.barTintColor = [UIColor colorWithRed:34/255.0f green:49/255.0f blue:66/255.0f alpha:1.0f];
         
         nvc1.tabBarItem.title = nil;
         nvc1.tabBarItem.image = [UIImage imageNamed:@"centeredPeople.png"];
@@ -80,12 +139,14 @@
         nvc5.tabBarItem.image = [UIImage imageNamed:@"join.png"];
         
         NSMutableArray *tbcArray = [[NSMutableArray alloc] initWithObjects:nvc1, nvc2, nvc4, nvc5, nvc3, nil];
-        tbc.tabBar.tintColor = [UIColor colorWithRed:44/255.0f green:62/255.0f blue:80/255.0f alpha:1.0f];
-
+//        tbc.tabBar.tintColor = [UIColor colorWithRed:44/255.0f green:62/255.0f blue:80/255.0f alpha:1.0f];
+        tbc.tabBar.tintColor = [UIColor colorWithRed:229/255.0f green:116/255.0f blue:34/255.0f alpha:1.0f];;
         [[UITabBarItem appearance] setTitleTextAttributes:@{NSFontAttributeName : [UIFont fontWithName:@"HelveticaNeue-Bold" size:10.0f],
                                                             NSForegroundColorAttributeName : [UIColor colorWithRed:44/255.0f green:62/255.0f blue:80/255.0f alpha:1.0f]
                                                             } forState:UIControlStateNormal];
-        tbc.tabBar.barTintColor = [UIColor colorWithRed:60/255.0f green:151/255.0f blue:211/255.0f alpha:1.0f];
+//        tbc.tabBar.barTintColor = [UIColor colorWithRed:9/255.0f green:17/255.0f blue:127/255.0f alpha:1.0f];
+        //        tbc.tabBar.barTintColor = [UIColor colorWithRed:60/255.0f green:151/255.0f blue:211/255.0f alpha:1.0f];
+        tbc.tabBar.barTintColor = [UIColor colorWithRed:34/255.0f green:49/255.0f blue:66/255.0f alpha:1.0f];
         tbc.viewControllers = tbcArray;
         tbc.selectedIndex = 2;
         self.window.rootViewController = tbc;

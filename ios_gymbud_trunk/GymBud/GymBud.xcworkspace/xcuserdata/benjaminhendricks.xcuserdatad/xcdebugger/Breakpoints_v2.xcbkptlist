@@ -36,11 +36,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "GymBud/Controllers/LoginViewController.m"
-            timestampString = "432626437.188896"
+            timestampString = "433657607.481559"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "121"
-            endingLineNumber = "121"
+            startingLineNumber = "183"
+            endingLineNumber = "183"
             landmarkName = "-setUpTabBar"
             landmarkType = "5">
          </BreakpointContent>
@@ -61,22 +61,6 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "GymBud/Controllers/PAWWallViewController.m"
-            timestampString = "432761613.605255"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "197"
-            endingLineNumber = "197"
-            landmarkName = "-locationManager:didChangeAuthorizationStatus:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
             filePath = "GymBud/Controllers/EditProfileTVC.m"
             timestampString = "432793362.790376"
             startingColumnNumber = "9223372036854775807"
@@ -84,6 +68,22 @@
             startingLineNumber = "236"
             endingLineNumber = "236"
             landmarkName = "-updateProfileButtonHandler:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "GymBud/Controllers/GymBudEventsTVC.m"
+            timestampString = "433657785.519506"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "302"
+            endingLineNumber = "302"
+            landmarkName = "-toggleMapTable:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
