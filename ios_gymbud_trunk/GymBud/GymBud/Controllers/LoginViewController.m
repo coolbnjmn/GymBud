@@ -5,7 +5,7 @@
 #import "SettingsVC.h"
 #import "GoActivityCVC.h"
 #import "GBJoinedEventsTVC.h"
-#import "GymBudEventsTVC.h"
+#import "GymBudTVC.h"
 #import "GymBudConstants.h"
 
 #import <Parse/Parse.h>
@@ -32,7 +32,7 @@
     
     UITabBarController *tbc = [[UITabBarController alloc] init];
     
-    GymBudEventsTVC *mapVC = [[GymBudEventsTVC alloc] init];
+    GymBudTVC *mapVC = [[GymBudTVC alloc] init];
     MessageInboxTVC *inboxVC = [[MessageInboxTVC alloc] init];
     SettingsVC *settingsVC = [[SettingsVC alloc] init];
     UIStoryboard *goSB = [UIStoryboard storyboardWithName:@"GoActivity" bundle:nil];

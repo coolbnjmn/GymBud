@@ -9,6 +9,7 @@
 #import <MBProgressHUD/MBProgressHUD.h>
 #import "GymBudBasicCell.h"
 #import "GymBudConstants.h"
+#import "GymBudDetailsVC.h"
 #import "GymBudTVC.h"
 
 @interface GymBudTVC ()
@@ -65,6 +66,7 @@
         UIRefreshControl *refreshControl = [[UIRefreshControl alloc] init];
         self.refreshControl = refreshControl;
         self.refreshControl.tintColor = [UIColor colorWithRed:118.0f/255.0f green:117.0f/255.0f blue:117.0f/255.0f alpha:1.0f];
+        [self.refreshControl addTarget:self action:@selector(refreshControlValueChanged:) forControlEvents:UIControlEventValueChanged];
         self.pullToRefreshEnabled = NO;
     }
     
@@ -121,8 +123,8 @@
     if ([self.objects count] == 0) {
         query.cachePolicy = kPFCachePolicyCacheThenNetwork;
     }
-
     
+    [query whereKey:@"objectId" notEqualTo:[[PFUser currentUser] objectId]];
     
     self.HUD = [[MBProgressHUD alloc] initWithView:self.view];
     [self.view addSubview:self.HUD];
@@ -208,7 +210,13 @@
 
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    GymBudDetailsVC *detailsVC = [[GymBudDetailsVC alloc] init];
+    detailsVC.user = [self.objects objectAtIndex:indexPath.row];
+    [self.navigationController pushViewController:detailsVC animated:YES];
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
+- (void)refreshControlValueChanged:(UIRefreshControl *)refreshControl {
+    [self loadObjects];
+}
 @end

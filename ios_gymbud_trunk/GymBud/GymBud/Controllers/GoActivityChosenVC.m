@@ -47,18 +47,23 @@
 }
 
 - (IBAction)findOthersPressed:(id)sender {
-    UINavigationController *nvc = [self.tabBarController.viewControllers objectAtIndex:0];
-    if([nvc.viewControllers count] == 1) {
-        GymBudEventsTVC *dvc = [[GymBudEventsTVC alloc] init];
-        dvc.activityFilter = self.activity;
-        dvc.timeFiler = self.startTimePicker.date;
-        dvc.isShowingMap = NO;
-        [nvc pushViewController:dvc animated:NO];
-    }
-    [self.tabBarController setSelectedIndex:0];
-    UINavigationController *goNVC = [self.tabBarController.viewControllers objectAtIndex:2];
-    // TODO: will need to change this based on new index of GO page...
-    [goNVC popToRootViewControllerAnimated:NO];
+    GymBudEventsTVC *dvc = [[GymBudEventsTVC alloc] init];
+    dvc.activityFilter = self.activity;
+    dvc.timeFiler = self.startTimePicker.date;
+    dvc.isShowingMap = NO;
+    [self.navigationController pushViewController:dvc animated:YES];
+//    UINavigationController *nvc = [self.tabBarController.viewControllers objectAtIndex:0];
+//    if([nvc.viewControllers count] == 1) {
+//        GymBudEventsTVC *dvc = [[GymBudEventsTVC alloc] init];
+//        dvc.activityFilter = self.activity;
+//        dvc.timeFiler = self.startTimePicker.date;
+//        dvc.isShowingMap = NO;
+//        [nvc pushViewController:dvc animated:NO];
+//    }
+//    [self.tabBarController setSelectedIndex:0];
+//    UINavigationController *goNVC = [self.tabBarController.viewControllers objectAtIndex:2];
+//    // TODO: will need to change this based on new index of GO page...
+//    [goNVC popToRootViewControllerAnimated:NO];
 }
 
 - (IBAction)createEventPressed:(id)sender {
