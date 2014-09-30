@@ -7,9 +7,9 @@
 //
 
 // Activities
-#define kGymBudActivities [NSArray arrayWithObjects: @"Aerobics", @"Basketball", @"Crossfit", @"Running", @"Swimming", @"Weightlifting", @"Yoga", nil]
-#define kGymBudActivityMapIcons [NSArray arrayWithObjects: @"aerobicsMap.png", @"basketballMap.png", @"crossfitMap.png", @"runningMap.png", @"swimmingMap.png", @"weightliftingMap.png", @"yogaMap.png", nil]
-#define kGymBudActivityIcons [NSArray arrayWithObjects: @"aerobicsIcon.png", @"basketballIcon.png", @"crossfitIcon.png", @"runningIcon.png", @"swimmingIcon.png", @"weightliftingIcon.png", @"yogaIcon.png", nil]
+#define kGymBudActivities [NSArray arrayWithObjects: @"Aerobics", @"Crossfit", @"Running", @"Swimming", @"Sports", @"Strength Training", @"Other", nil]
+#define kGymBudActivityMapIcons [NSArray arrayWithObjects: @"aerobicsMap.png", @"crossfitMap.png", @"runningMap.png", @"swimmingMap.png", @"yogaMap.png", @"weightliftingMap.png", @"basketballMap.png", nil]
+#define kGymBudActivityIcons [NSArray arrayWithObjects: @"aerobicsIcon.png", @"crossfitIcon.png", @"runningIcon.png", @"swimmingIcon.png", @"sports.png", @"weightliftingIcon.png", @"other.png", nil]
 
 // Count Stuff
 #define kGymBudCountArray [NSArray arrayWithObjects: @"1", @"2", @"3", @"4", @"5", @"6", @"7", @"8", @"9", @"10", @"11", @"12", @"13", @"14", nil]
