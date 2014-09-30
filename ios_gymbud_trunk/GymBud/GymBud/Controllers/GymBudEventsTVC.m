@@ -96,7 +96,7 @@
     self.navigationItem.hidesBackButton = YES;
     
     self.isShowingMap = NO;
-
+    
 }
 
 - (void) viewDidDisappear:(BOOL)animated {

@@ -7,6 +7,7 @@
 //
 
 #import "AppDelegate.h"
+#import "GymBudTVC.h"
 
 @interface AppDelegate ()
 
@@ -44,7 +45,7 @@
     if (currentUser) {
         UITabBarController *tbc = [[UITabBarController alloc] init];
         
-        GymBudEventsTVC *mapVC = [[GymBudEventsTVC alloc] init];
+        GymBudTVC *mapVC = [[GymBudTVC alloc] init];
         MessageInboxTVC *inboxVC = [[MessageInboxTVC alloc] init];
         SettingsVC *settingsVC = [[SettingsVC alloc] init];
         UIStoryboard *goSB = [UIStoryboard storyboardWithName:@"GoActivity" bundle:nil];
