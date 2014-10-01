@@ -82,6 +82,8 @@
 		B2B8DC3719DB214B00BED65D /* GymBudHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = B2B8DC3619DB214B00BED65D /* GymBudHeaderView.xib */; };
 		B2B8DC3A19DB361B00BED65D /* other.png in Resources */ = {isa = PBXBuildFile; fileRef = B2B8DC3819DB361B00BED65D /* other.png */; };
 		B2B8DC3B19DB361B00BED65D /* sports.png in Resources */ = {isa = PBXBuildFile; fileRef = B2B8DC3919DB361B00BED65D /* sports.png */; };
+		B2B8DC3E19DB5CCD00BED65D /* othermap.png in Resources */ = {isa = PBXBuildFile; fileRef = B2B8DC3C19DB5CCD00BED65D /* othermap.png */; };
+		B2B8DC3F19DB5CCD00BED65D /* sportsmap.png in Resources */ = {isa = PBXBuildFile; fileRef = B2B8DC3D19DB5CCD00BED65D /* sportsmap.png */; };
 		B2C39D38197E172600039F90 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = B2C39D37197E172600039F90 /* main.m */; };
 		B2C39D3B197E172600039F90 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = B2C39D3A197E172600039F90 /* AppDelegate.m */; };
 		B2C39D43197E172600039F90 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B2C39D42197E172600039F90 /* Images.xcassets */; };
@@ -242,6 +244,8 @@
 		B2B8DC3619DB214B00BED65D /* GymBudHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = GymBudHeaderView.xib; path = GymBud/Views/GymBudHeaderView.xib; sourceTree = "<group>"; };
 		B2B8DC3819DB361B00BED65D /* other.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = other.png; path = GymBud/Assets/other.png; sourceTree = "<group>"; };
 		B2B8DC3919DB361B00BED65D /* sports.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = sports.png; path = GymBud/Assets/sports.png; sourceTree = "<group>"; };
+		B2B8DC3C19DB5CCD00BED65D /* othermap.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = othermap.png; path = GymBud/Assets/othermap.png; sourceTree = "<group>"; };
+		B2B8DC3D19DB5CCD00BED65D /* sportsmap.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = sportsmap.png; path = GymBud/Assets/sportsmap.png; sourceTree = "<group>"; };
 		B2C39D32197E172600039F90 /* GymBud.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GymBud.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B2C39D36197E172600039F90 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B2C39D37197E172600039F90 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -411,6 +415,8 @@
 		B2C39D6D197E193000039F90 /* Assets */ = {
 			isa = PBXGroup;
 			children = (
+				B2B8DC3C19DB5CCD00BED65D /* othermap.png */,
+				B2B8DC3D19DB5CCD00BED65D /* sportsmap.png */,
 				B2B8DC3819DB361B00BED65D /* other.png */,
 				B2B8DC3919DB361B00BED65D /* sports.png */,
 				B2784DAB19B412B90042A188 /* legs.png */,
@@ -683,6 +689,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B2B8DC3F19DB5CCD00BED65D /* sportsmap.png in Resources */,
 				B297743E198582A5000AD7B6 /* yogaIcon.png in Resources */,
 				B29774251984BF68000AD7B6 /* weightliftingMap.png in Resources */,
 				B297741819843EC9000AD7B6 /* sampleMapPin.png in Resources */,
@@ -702,6 +709,7 @@
 				B2B8DC3219DA160A00BED65D /* GymBudBasicCell.xib in Resources */,
 				B29774201984BF68000AD7B6 /* aerobicsMap.png in Resources */,
 				B2784DAE19B412B90042A188 /* shoulders.png in Resources */,
+				B2B8DC3E19DB5CCD00BED65D /* othermap.png in Resources */,
 				B2C39D43197E172600039F90 /* Images.xcassets in Resources */,
 				B29774231984BF68000AD7B6 /* runningMap.png in Resources */,
 				B29774431985F085000AD7B6 /* inbox.png in Resources */,

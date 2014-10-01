@@ -60,12 +60,18 @@
 //        return query;
 //    }
     
-    PFQuery *query = [PFQuery queryWithClassName:@"Activity"];
-    [query whereKey:@"toUser" equalTo:[PFUser currentUser]];
-    [query includeKey:@"fromUser"];
-    [query whereKey:@"type" equalTo:@"message"];
-    [query orderByDescending:@"createdAt"];
+    PFQuery *toUserQuery = [PFQuery queryWithClassName:@"Activity"];
+    [toUserQuery whereKey:@"toUser" equalTo:[PFUser currentUser]];
+    [toUserQuery whereKey:@"type" equalTo:@"message"];
     
+    PFQuery *fromUserQuery = [PFQuery queryWithClassName:@"Activity"];
+    [fromUserQuery whereKey:@"fromUser" equalTo:[PFUser currentUser]];
+    [fromUserQuery whereKey:@"type" equalTo:@"message"];
+    
+    PFQuery *query = [PFQuery orQueryWithSubqueries:[NSArray arrayWithObjects:toUserQuery,fromUserQuery,nil]];
+    [query orderByDescending:@"createdAt"];
+    [query includeKey:@"fromUser"];
+    [query includeKey:@"toUser"];
     [query setCachePolicy:kPFCachePolicyNetworkOnly];
     
     self.HUD = [[MBProgressHUD alloc] initWithView:self.view];
@@ -126,19 +132,33 @@
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     [dateFormatter setDateStyle:NSDateFormatterMediumStyle];
     [dateFormatter setTimeStyle:NSDateFormatterShortStyle];
-    
     NSString *when = [dateFormatter stringFromDate:[object createdAt]];
-    if([[[object objectForKey:@"fromUser"] objectForKey:@"gymbudProfile"] objectForKey:@"name"]) {
-        cell.detailTextLabel.text = [[[[[object objectForKey:@"fromUser"] objectForKey:@"gymbudProfile"] objectForKey:@"name"] stringByAppendingString:@" : "] stringByAppendingString:when];
+    
+    BOOL isYouMessage = ![[[object objectForKey:@"fromUser"] objectId] isEqualToString:[[PFUser currentUser] objectId]];
+    
+    if(isYouMessage) {
+        if([[[object objectForKey:@"fromUser"] objectForKey:@"gymbudProfile"] objectForKey:@"name"]) {
+            cell.detailTextLabel.text = [[[[[object objectForKey:@"fromUser"] objectForKey:@"gymbudProfile"] objectForKey:@"name"] stringByAppendingString:@" : "] stringByAppendingString:when];
+        } else {
+            cell.detailTextLabel.text = [[[[[object objectForKey:@"fromUser"] objectForKey:@"profile"] objectForKey:@"name"] stringByAppendingString:@" : "] stringByAppendingString:when];
+        }
+        
+        if([[object objectForKey:@"unread"] boolValue]) {
+            cell.textLabel.text = [@"(1) " stringByAppendingString:[object objectForKey:@"content"]];
+        } else {
+            cell.textLabel.text = [object objectForKey:@"content"];
+        }
     } else {
-        cell.detailTextLabel.text = [[[[[object objectForKey:@"fromUser"] objectForKey:@"profile"] objectForKey:@"name"] stringByAppendingString:@" : "] stringByAppendingString:when];
+        if([[[object objectForKey:@"toUser"] objectForKey:@"gymbudProfile"] objectForKey:@"name"]) {
+            cell.textLabel.attributedText = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"Sent to: %@", [[[object objectForKey:@"toUser"] objectForKey:@"gymbudProfile"] objectForKey:@"name"]]  attributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIFont boldSystemFontOfSize:13], NSFontAttributeName, nil]];
+            
+        } else {
+            cell.textLabel.attributedText = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"Sent to: %@", [[[object objectForKey:@"toUser"] objectForKey:@"profile"] objectForKey:@"name"]]  attributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIFont boldSystemFontOfSize:13], NSFontAttributeName, nil]];
+        }
+        
+        cell.detailTextLabel.text = [object objectForKey:@"content"];
     }
     
-    if([[object objectForKey:@"unread"] boolValue]) {
-        cell.textLabel.text = [@"(1) " stringByAppendingString:[object objectForKey:@"content"]];
-    } else {
-        cell.textLabel.text = [object objectForKey:@"content"];
-    }
     return cell;
 }
 
