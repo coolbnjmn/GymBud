@@ -11,7 +11,7 @@
 #import "GymBudConstants.h"
 #import "GymBudBasicCell.h"
 
-@interface GymBudConversationTVC ()
+@interface GymBudConversationTVC () <UITextFieldDelegate>
 
 @property (strong, nonatomic) MBProgressHUD *HUD;
 @property NSString *reuseId;
@@ -41,15 +41,26 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     // Return the number of sections.
-    return 1;
+    return 2;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     // Return the number of rows in the section.
-    return [self.objects count];
+    if(section == 0) {
+        return [self.objects count];
+    } else {
+        return 1;
+    }
 }
 
 #pragma mark - PFQueryTableViewController
+- (PFObject *)objectAtIndexPath:(NSIndexPath *)indexPath {
+    if(indexPath.section == 0) {
+        return [self.objects objectAtIndex:indexPath.row];
+    } else {
+        return [[PFObject alloc] initWithClassName:@"MessageBox"];
+    }
+}
 
 - (PFQuery *)queryForTable {
     
@@ -70,7 +81,7 @@
     [fromUserQuery whereKey:@"type" equalTo:@"message"];
     
     PFQuery *query = [PFQuery orQueryWithSubqueries:[NSArray arrayWithObjects:toUserQuery,fromUserQuery,nil]];
-    [query orderByDescending:@"createdAt"];
+    [query orderByAscending:@"createdAt"];
     [query includeKey:@"fromUser"];
     [query includeKey:@"toUser"];
     [query setCachePolicy:kPFCachePolicyNetworkOnly];
@@ -93,15 +104,21 @@
     
     [self.HUD show:YES];
     [self setLoadingViewEnabled:NO];
+    NSLog(@"returning query for GymBudConversationTVC");
     return query;
 }
 
 - (void)objectsDidLoad:(NSError *)error {
     [super objectsDidLoad:error];
     [self.HUD hide:YES];
-    
+    NSLog(@"objectsDidLoad GymBudConversationTVC");
     self.tableView.tableHeaderView = nil;
     self.tableView.scrollEnabled = YES;
+    
+    for(PFObject *i in self.objects) {
+        [i setObject:[NSNumber numberWithBool:NO] forKey:@"unread"];
+        [i saveInBackground];
+    }
 }
 
 
@@ -110,50 +127,149 @@
 }
 - (PFTableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath object:(PFObject *)object
 {
-    GymBudBasicCell *cell = [tableView dequeueReusableCellWithIdentifier:self.reuseId forIndexPath:indexPath];
-    
-    
-    if(cell == nil) {
-        cell = [[GymBudBasicCell alloc] init];
-    }
-
-    cell.pictureImageView.image = [UIImage imageNamed:@"yogaIcon.png"];
-
-    if([[object objectForKey:@"fromUser"][@"profile"][@"name"] isEqualToString:[PFUser currentUser][@"profile"][@"name"]]) {
-        cell.text1.text = @"You";
-        cell.text2.text = [object objectForKey:@"content"];
+    if(indexPath.section == 0) {
+        GymBudBasicCell *cell = [tableView dequeueReusableCellWithIdentifier:self.reuseId forIndexPath:indexPath];
         
-        PFFile *theImage = [object objectForKey:@"fromUser"][@"gymbudProfile"][@"profilePicture"];
-        __weak GymBudBasicCell *weakCell = cell;
-        [theImage getDataInBackgroundWithBlock:^(NSData *data, NSError *error){
-            NSLog(@"+++++++++ Loading image view with real data ++++++++");
-            weakCell.pictureImageView.image = [UIImage imageWithData:data];
-        }];
-    } else {
-        if([object objectForKey:@"fromUser"][@"gymbudProfile"]) {
-            cell.text1.text = [object objectForKey:@"fromUser"][@"gymbudProfile"][@"name"];
-        } else {
-            cell.text1.text = [object objectForKey:@"fromUser"][@"profile"][@"name"];
+        
+        if(cell == nil) {
+            cell = [[GymBudBasicCell alloc] init];
         }
-        cell.text2.text = [object objectForKey:@"content"];
         
-        PFFile *theImage = [object objectForKey:@"fromUser"][@"gymbudProfile"][@"profilePicture"];
-        __weak GymBudBasicCell *weakCell = cell;
-        [theImage getDataInBackgroundWithBlock:^(NSData *data, NSError *error){
-            NSLog(@"+++++++++ Loading image view with real data ++++++++");
-            weakCell.pictureImageView.image = [UIImage imageWithData:data];
-        }];
+        cell.pictureImageView.image = [UIImage imageNamed:@"yogaIcon.png"];
+        
+        if([[object objectForKey:@"fromUser"][@"profile"][@"name"] isEqualToString:[PFUser currentUser][@"profile"][@"name"]]) {
+            cell.text1.text = @"You";
+            cell.text2.text = [object objectForKey:@"content"];
+            
+            PFFile *theImage = [object objectForKey:@"fromUser"][@"gymbudProfile"][@"profilePicture"];
+            __weak GymBudBasicCell *weakCell = cell;
+            [theImage getDataInBackgroundWithBlock:^(NSData *data, NSError *error){
+                NSLog(@"+++++++++ Loading image view with real data ++++++++");
+                weakCell.pictureImageView.image = [UIImage imageWithData:data];
+            }];
+        } else {
+            if([object objectForKey:@"fromUser"][@"gymbudProfile"]) {
+                cell.text1.text = [object objectForKey:@"fromUser"][@"gymbudProfile"][@"name"];
+            } else {
+                cell.text1.text = [object objectForKey:@"fromUser"][@"profile"][@"name"];
+            }
+            cell.text2.text = [object objectForKey:@"content"];
+            
+            PFFile *theImage = [object objectForKey:@"fromUser"][@"gymbudProfile"][@"profilePicture"];
+            __weak GymBudBasicCell *weakCell = cell;
+            [theImage getDataInBackgroundWithBlock:^(NSData *data, NSError *error){
+                NSLog(@"+++++++++ Loading image view with real data ++++++++");
+                weakCell.pictureImageView.image = [UIImage imageWithData:data];
+            }];
+        }
+        cell.backgroundColor = [UIColor grayColor];
+        cell.text3.text = @"";
+        
+        cell.pictureImageView.layer.cornerRadius = 8.0f;
+        cell.pictureImageView.layer.masksToBounds = YES;
+        
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        return cell;
+    } else {
+        PFTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"BigCell"];
+        
+        if(!cell) {
+            cell = [[PFTableViewCell alloc] init];
+        }
+        
+        UITextField *textField = [[UITextField alloc] initWithFrame:CGRectMake(8, 8, cell.frame.size.width-16, cell.frame.size.height)];
+        cell.backgroundColor = [UIColor grayColor];
+        [cell addSubview:textField];
+        [textField setReturnKeyType:UIReturnKeySend];
+        textField.delegate = self;
+        
+        textField.backgroundColor = [UIColor whiteColor];
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+
+        return cell;
     }
-    cell.backgroundColor = [UIColor grayColor];
-    cell.text3.text = @"";
     
-    cell.pictureImageView.layer.cornerRadius = 8.0f;
-    cell.pictureImageView.layer.masksToBounds = YES;
-    return cell;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     return 80.0f;
+}
+
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
+    return YES;
+}
+
+-(BOOL)textFieldShouldReturn:(UITextField *)textField {
+    // Resign first responder to dismiss the keyboard and capture in-flight autocorrect suggestions
+    [textField resignFirstResponder];
+    
+    PFUser *currentUser = [PFUser currentUser];
+    
+    // Stitch together a postObject and send this async to Parse
+    PFObject *activityObject = [PFObject objectWithClassName:@"Activity"];
+    // Activity has the following fields:
+    /*
+     Activity
+     
+     fromUser : User
+     toUser : User
+     type : String
+     content : String
+     */
+    [activityObject setObject:currentUser forKey:@"fromUser"];
+    [activityObject setObject:self.toUser forKey:@"toUser"];
+    [activityObject setObject:@"message" forKey:@"type"];
+    [activityObject setObject:textField.text forKey:@"content"];
+    [activityObject setObject:[NSNumber numberWithBool:YES] forKey:@"unread"];
+    [activityObject saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+        if (error) {
+            NSLog(@"Couldn't save!");
+            NSLog(@"%@", error);
+            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:[[error userInfo] objectForKey:@"error"] message:nil delegate:self cancelButtonTitle:nil otherButtonTitles:@"Ok", nil];
+            [alertView show];
+            return;
+        }
+        if (succeeded) {
+            NSLog(@"Successfully saved!");
+            NSLog(@"%@", activityObject);
+            [self loadObjects];
+            [self.tableView reloadData];
+            //            dispatch_async(dispatch_get_main_queue(), ^{
+            //                [[NSNotificationCenter defaultCenter] postNotificationName:@"CreatePostNotification" object:nil];
+            //            });
+        } else {
+            NSLog(@"Failed to save.");
+        }
+    }];
+    
+    PFQuery *innerQuery = [PFUser query];
+    
+    [innerQuery whereKey:@"username" equalTo:[self.toUser objectForKey:@"username"]];
+    NSLog(@"%@", self.toUser);
+    NSLog(@"about to push");
+    
+    NSLog(@"%@", innerQuery);
+    PFQuery *query = [PFInstallation query];
+    
+    // only return Installations that belong to a User that
+    // matches the innerQuery
+    [query whereKey:@"user" matchesQuery:innerQuery];
+    
+    // Send the notification.
+    PFPush *push = [[PFPush alloc] init];
+    [push setQuery:query];
+    
+    NSString *name;
+    if([currentUser objectForKey:@"gymbudProfile"][@"name"]) {
+        name = [currentUser objectForKey:@"gymbudProfile"][@"name"];
+    } else {
+        name = [currentUser objectForKey:@"profile"][@"name"];
+    }
+    [push setMessage:[NSString stringWithFormat:@"Message From: %@", name]];
+    [push sendPushInBackground];
+    
+
+    return NO;
 }
 
 @end
