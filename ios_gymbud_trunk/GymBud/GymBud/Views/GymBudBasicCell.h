@@ -7,8 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <Parse/Parse.h>
 
-@interface GymBudBasicCell : UITableViewCell
+@interface GymBudBasicCell : PFTableViewCell
 @property (weak, nonatomic) IBOutlet UIImageView *pictureImageView;
 @property (weak, nonatomic) IBOutlet UILabel *text1;
 @property (weak, nonatomic) IBOutlet UILabel *text2;

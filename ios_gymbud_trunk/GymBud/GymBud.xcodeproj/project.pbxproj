@@ -84,6 +84,7 @@
 		B2B8DC3B19DB361B00BED65D /* sports.png in Resources */ = {isa = PBXBuildFile; fileRef = B2B8DC3919DB361B00BED65D /* sports.png */; };
 		B2B8DC3E19DB5CCD00BED65D /* othermap.png in Resources */ = {isa = PBXBuildFile; fileRef = B2B8DC3C19DB5CCD00BED65D /* othermap.png */; };
 		B2B8DC3F19DB5CCD00BED65D /* sportsmap.png in Resources */ = {isa = PBXBuildFile; fileRef = B2B8DC3D19DB5CCD00BED65D /* sportsmap.png */; };
+		B2B8DC4219DCA9A800BED65D /* GymBudConversationTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = B2B8DC4119DCA9A800BED65D /* GymBudConversationTVC.m */; };
 		B2C39D38197E172600039F90 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = B2C39D37197E172600039F90 /* main.m */; };
 		B2C39D3B197E172600039F90 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = B2C39D3A197E172600039F90 /* AppDelegate.m */; };
 		B2C39D43197E172600039F90 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B2C39D42197E172600039F90 /* Images.xcassets */; };
@@ -246,6 +247,8 @@
 		B2B8DC3919DB361B00BED65D /* sports.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = sports.png; path = GymBud/Assets/sports.png; sourceTree = "<group>"; };
 		B2B8DC3C19DB5CCD00BED65D /* othermap.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = othermap.png; path = GymBud/Assets/othermap.png; sourceTree = "<group>"; };
 		B2B8DC3D19DB5CCD00BED65D /* sportsmap.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = sportsmap.png; path = GymBud/Assets/sportsmap.png; sourceTree = "<group>"; };
+		B2B8DC4019DCA9A800BED65D /* GymBudConversationTVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GymBudConversationTVC.h; path = GymBud/Controllers/GymBudConversationTVC.h; sourceTree = "<group>"; };
+		B2B8DC4119DCA9A800BED65D /* GymBudConversationTVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GymBudConversationTVC.m; path = GymBud/Controllers/GymBudConversationTVC.m; sourceTree = "<group>"; };
 		B2C39D32197E172600039F90 /* GymBud.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GymBud.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B2C39D36197E172600039F90 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B2C39D37197E172600039F90 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -496,6 +499,8 @@
 				B2D0CAC4197E267D00B17D32 /* LoginViewController.xib */,
 				B2C39D75197E194F00039F90 /* MessageInboxTVC.h */,
 				B2C39D76197E194F00039F90 /* MessageInboxTVC.m */,
+				B2B8DC4019DCA9A800BED65D /* GymBudConversationTVC.h */,
+				B2B8DC4119DCA9A800BED65D /* GymBudConversationTVC.m */,
 				B2C39D77197E194F00039F90 /* MessageUserVC.h */,
 				B2C39D78197E194F00039F90 /* MessageUserVC.m */,
 				B2C39D79197E194F00039F90 /* MessageUserVC.xib */,
@@ -822,6 +827,7 @@
 				B2C39D8C197E194F00039F90 /* MessageUserVC.m in Sources */,
 				77FE6487198F715C008724CC /* GoActivityCVCell.m in Sources */,
 				B2B8DC2D19D9208800BED65D /* GymBudTVC.m in Sources */,
+				B2B8DC4219DCA9A800BED65D /* GymBudConversationTVC.m in Sources */,
 				77FE64911990A924008724CC /* GoActivityCreateEventVC.m in Sources */,
 				B27AF67319B0D00700FDBF0F /* NSDate+Utilities.m in Sources */,
 				B297742A1984C195000AD7B6 /* PostCreateTVC.m in Sources */,

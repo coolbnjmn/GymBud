@@ -11,6 +11,7 @@
 #import "FindUserTVC.h"
 #import "GymBudConstants.h"
 #import "MBProgressHUD.h"
+#import "GymBudConversationTVC.h"
 
 @interface MessageInboxTVC ()
 
@@ -64,11 +65,11 @@
     [toUserQuery whereKey:@"toUser" equalTo:[PFUser currentUser]];
     [toUserQuery whereKey:@"type" equalTo:@"message"];
     
-    PFQuery *fromUserQuery = [PFQuery queryWithClassName:@"Activity"];
-    [fromUserQuery whereKey:@"fromUser" equalTo:[PFUser currentUser]];
-    [fromUserQuery whereKey:@"type" equalTo:@"message"];
-    
-    PFQuery *query = [PFQuery orQueryWithSubqueries:[NSArray arrayWithObjects:toUserQuery,fromUserQuery,nil]];
+//    PFQuery *fromUserQuery = [PFQuery queryWithClassName:@"Activity"];
+//    [fromUserQuery whereKey:@"fromUser" equalTo:[PFUser currentUser]];
+//    [fromUserQuery whereKey:@"type" equalTo:@"message"];
+//    
+    PFQuery *query = [PFQuery orQueryWithSubqueries:[NSArray arrayWithObjects:toUserQuery,nil]];
     [query orderByDescending:@"createdAt"];
     [query includeKey:@"fromUser"];
     [query includeKey:@"toUser"];
@@ -134,9 +135,9 @@
     [dateFormatter setTimeStyle:NSDateFormatterShortStyle];
     NSString *when = [dateFormatter stringFromDate:[object createdAt]];
     
-    BOOL isYouMessage = ![[[object objectForKey:@"fromUser"] objectId] isEqualToString:[[PFUser currentUser] objectId]];
+//    BOOL isYouMessage = ![[[object objectForKey:@"fromUser"] objectId] isEqualToString:[[PFUser currentUser] objectId]];
     
-    if(isYouMessage) {
+//    if(isYouMessage) {
         if([[[object objectForKey:@"fromUser"] objectForKey:@"gymbudProfile"] objectForKey:@"name"]) {
             cell.detailTextLabel.text = [[[[[object objectForKey:@"fromUser"] objectForKey:@"gymbudProfile"] objectForKey:@"name"] stringByAppendingString:@" : "] stringByAppendingString:when];
         } else {
@@ -148,16 +149,17 @@
         } else {
             cell.textLabel.text = [object objectForKey:@"content"];
         }
-    } else {
-        if([[[object objectForKey:@"toUser"] objectForKey:@"gymbudProfile"] objectForKey:@"name"]) {
-            cell.textLabel.attributedText = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"Sent to: %@", [[[object objectForKey:@"toUser"] objectForKey:@"gymbudProfile"] objectForKey:@"name"]]  attributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIFont boldSystemFontOfSize:13], NSFontAttributeName, nil]];
-            
-        } else {
-            cell.textLabel.attributedText = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"Sent to: %@", [[[object objectForKey:@"toUser"] objectForKey:@"profile"] objectForKey:@"name"]]  attributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIFont boldSystemFontOfSize:13], NSFontAttributeName, nil]];
-        }
-        
-        cell.detailTextLabel.text = [object objectForKey:@"content"];
-    }
+//    }
+//    else {
+//        if([[[object objectForKey:@"toUser"] objectForKey:@"gymbudProfile"] objectForKey:@"name"]) {
+//            cell.textLabel.attributedText = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"Sent to: %@", [[[object objectForKey:@"toUser"] objectForKey:@"gymbudProfile"] objectForKey:@"name"]]  attributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIFont boldSystemFontOfSize:13], NSFontAttributeName, nil]];
+//            
+//        } else {
+//            cell.textLabel.attributedText = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"Sent to: %@", [[[object objectForKey:@"toUser"] objectForKey:@"profile"] objectForKey:@"name"]]  attributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIFont boldSystemFontOfSize:13], NSFontAttributeName, nil]];
+//        }
+//        
+//        cell.detailTextLabel.text = [object objectForKey:@"content"];
+//    }
     
     return cell;
 }
@@ -209,12 +211,16 @@
 {
     // Navigation logic may go here, for example:
     // Create the next view controller.
-    ViewMessageVC *detailViewController = [[ViewMessageVC alloc] init];
+//    ViewMessageVC *detailViewController = [[ViewMessageVC alloc] init];
+//    
+//    // Pass the selected object to the new view controller.
+//    detailViewController.activity = [[super objects] objectAtIndex:indexPath.row];
+//    // Push the view controller.
+    GymBudConversationTVC *convoTVC = [[GymBudConversationTVC alloc] init];
+    convoTVC.fromUser = [[self.objects objectAtIndex:indexPath.row] objectForKey:@"fromUser"];
+    convoTVC.toUser = [[self.objects objectAtIndex:indexPath.row] objectForKey:@"toUser"];
     
-    // Pass the selected object to the new view controller.
-    detailViewController.activity = [[super objects] objectAtIndex:indexPath.row];
-    // Push the view controller.
-    [self.navigationController pushViewController:detailViewController animated:YES];
+    [self.navigationController pushViewController:convoTVC animated:YES];
 }
 
 
