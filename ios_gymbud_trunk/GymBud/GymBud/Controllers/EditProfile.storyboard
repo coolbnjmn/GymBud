@@ -17,16 +17,13 @@
                         <sections>
                             <tableViewSection headerTitle="Basic Information" id="Luw-2k-eTI">
                                 <cells>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" rowHeight="120" id="vBY-Jt-bcF">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" rowHeight="140" id="vBY-Jt-bcF">
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="vBY-Jt-bcF" id="xuj-be-O68">
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="yU3-eZ-okr">
-                                                    <rect key="frame" x="8" y="8" width="65" height="65"/>
-                                                </imageView>
                                                 <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="rf7-bd-o5o">
-                                                    <rect key="frame" x="81" y="10" width="231" height="102"/>
+                                                    <rect key="frame" x="81" y="8" width="231" height="122"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Name:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eCx-ko-R33">
                                                             <rect key="frame" x="8" y="8" width="51" height="21"/>
@@ -41,19 +38,19 @@
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="21" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xoa-Qq-U5e">
-                                                            <rect key="frame" x="51" y="37" width="170" height="21"/>
+                                                            <rect key="frame" x="51" y="93" width="97" height="21"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="male" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ik2-XG-gmJ">
-                                                            <rect key="frame" x="78" y="66" width="70" height="21"/>
+                                                            <rect key="frame" x="78" y="66" width="143" height="21"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Age:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="f6q-VU-rgN">
-                                                            <rect key="frame" x="8" y="37" width="35" height="21"/>
+                                                            <rect key="frame" x="8" y="93" width="35" height="21"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                             <nil key="highlightedColor"/>
@@ -65,7 +62,7 @@
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wW2-Dm-C19">
-                                                            <rect key="frame" x="156" y="65" width="65" height="22"/>
+                                                            <rect key="frame" x="156" y="92" width="65" height="22"/>
                                                             <color key="backgroundColor" red="1" green="0.41093279370000002" blue="0.1917121611" alpha="1" colorSpace="calibratedRGB"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="11"/>
                                                             <state key="normal" title="Edit Info">
@@ -75,11 +72,23 @@
                                                                 <action selector="editUserInfo:" destination="I6p-ZC-jqB" eventType="touchUpInside" id="ysm-Mn-4ZO"/>
                                                             </connections>
                                                         </button>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Preferred:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HuE-jv-jvS">
+                                                            <rect key="frame" x="8" y="38" width="76" height="21"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="afternoon" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Fq1-Cn-BNb">
+                                                            <rect key="frame" x="86" y="37" width="135" height="21"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
                                                     </subviews>
                                                     <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                                 </view>
                                                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Pp2-4c-6BT">
-                                                    <rect key="frame" x="8" y="81" width="65" height="20"/>
+                                                    <rect key="frame" x="8" y="96" width="65" height="20"/>
                                                     <color key="backgroundColor" red="1" green="0.41093279370000002" blue="0.1917121611" alpha="1" colorSpace="calibratedRGB"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="11"/>
                                                     <state key="normal" title="Edit Picture">
@@ -89,6 +98,9 @@
                                                         <action selector="editProfilePicture:" destination="I6p-ZC-jqB" eventType="touchUpInside" id="rKh-uR-F6b"/>
                                                     </connections>
                                                 </button>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="yU3-eZ-okr">
+                                                    <rect key="frame" x="8" y="16" width="65" height="65"/>
+                                                </imageView>
                                             </subviews>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -116,7 +128,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Weightlifting" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QbH-V1-o7d">
-                                                    <rect key="frame" x="20" y="9" width="95" height="21"/>
+                                                    <rect key="frame" x="20" y="9" width="259" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                     <nil key="highlightedColor"/>
@@ -147,7 +159,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Weightlifting" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WeO-Cg-27V">
-                                                    <rect key="frame" x="20" y="9" width="95" height="21"/>
+                                                    <rect key="frame" x="20" y="9" width="259" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                     <nil key="highlightedColor"/>
@@ -178,7 +190,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Weightlifting" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UCp-N9-ZTO">
-                                                    <rect key="frame" x="20" y="9" width="95" height="21"/>
+                                                    <rect key="frame" x="20" y="9" width="259" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                     <nil key="highlightedColor"/>
@@ -305,6 +317,7 @@
                         <outlet property="profileName" destination="DLq-tV-HAc" id="zkR-4c-JzS"/>
                         <outlet property="profileOrgs" destination="pYj-fS-063" id="gfn-Q6-pmA"/>
                         <outlet property="profilePicture" destination="yU3-eZ-okr" id="lRC-F1-Wqt"/>
+                        <outlet property="profilePreferred" destination="Fq1-Cn-BNb" id="3cX-H7-EnW"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="OE2-ad-5UK" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -389,6 +402,25 @@
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
+                            <tableViewSection headerTitle="Preferred Workout Time" id="hwV-ZF-Doc">
+                                <cells>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" rowHeight="49" id="fS1-pf-LjB">
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="fS1-pf-LjB" id="bFT-uP-vNm">
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <pickerView contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="bdR-ua-6QN">
+                                                    <rect key="frame" x="0.0" y="-56" width="320" height="162"/>
+                                                    <connections>
+                                                        <outlet property="dataSource" destination="stK-zW-NjM" id="l1T-OF-E0W"/>
+                                                        <outlet property="delegate" destination="stK-zW-NjM" id="BCg-wX-67a"/>
+                                                    </connections>
+                                                </pickerView>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </cells>
+                            </tableViewSection>
                         </sections>
                         <connections>
                             <outlet property="dataSource" destination="stK-zW-NjM" id="2Q7-77-pmg"/>
@@ -399,6 +431,7 @@
                         <outlet property="ageTextField" destination="3Iy-Tn-Wwx" id="iOc-KR-Bt0"/>
                         <outlet property="genderTextField" destination="igA-CP-kLw" id="QmB-XO-vdh"/>
                         <outlet property="nameTextField" destination="xr2-YB-wMt" id="eWw-j5-e6C"/>
+                        <outlet property="preferredPickerView" destination="bdR-ua-6QN" id="pOS-4u-iZB"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="a2x-Q8-qne" userLabel="First Responder" sceneMemberID="firstResponder"/>

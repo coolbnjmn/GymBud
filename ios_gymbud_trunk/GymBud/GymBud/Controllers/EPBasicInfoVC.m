@@ -7,27 +7,43 @@
 //
 
 #import "EPBasicInfoVC.h"
+#import "GymBudConstants.h"
 
-@interface EPBasicInfoVC ()
+@interface EPBasicInfoVC () <UIPickerViewDataSource, UIPickerViewDelegate>
 
 @property (strong, nonatomic) IBOutlet UITextField *nameTextField;
 @property (strong, nonatomic) IBOutlet UITextField *ageTextField;
 @property (strong, nonatomic) IBOutlet UITextField *genderTextField;
+@property (weak, nonatomic) IBOutlet UIPickerView *preferredPickerView;
 
 @property (weak, nonatomic) NSString *name;
 @property (weak, nonatomic) NSString *age;
 @property (weak, nonatomic) NSString *gender;
+@property (nonatomic) int preferred;
 
 @end
 
 @implementation EPBasicInfoVC
 
-- (void) setCurrentValues:(NSString *)name age:(NSString *)age andGender:(NSString *)gender {
+-(NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component {
+    return [kPreferredTimes count];
+}
+
+-(NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView {
+    return 1;
+}
+
+-(NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component {
+    return [kPreferredTimes objectAtIndex:row];
+}
+
+- (void) setCurrentValues:(NSString *)name age:(NSString *)age andGender:(NSString *)gender andPreferred:(int)index {
     self.name = name;
     self.age = age;
     self.gender = gender;
-    
+    self.preferred = index;
 }
+
 - (instancetype)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -45,11 +61,12 @@
     self.nameTextField.text = self.name;
     self.ageTextField.text = self.age;
     self.genderTextField.text = self.gender;
+    [self.preferredPickerView selectRow:self.preferred inComponent:0 animated:YES];
     
 }
 
 - (void)tellDelegate:(id)sender {
-    [self.delegate editProfileBasicInfoViewController:self didSetValues:self.nameTextField.text age:self.ageTextField.text andGender:self.genderTextField.text];
+    [self.delegate editProfileBasicInfoViewController:self didSetValues:self.nameTextField.text age:self.ageTextField.text andGender:self.genderTextField.text andPreferred:[self.preferredPickerView selectedRowInComponent:0]];
 }
 
 

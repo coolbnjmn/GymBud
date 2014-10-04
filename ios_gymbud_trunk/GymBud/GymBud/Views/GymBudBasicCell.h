@@ -14,5 +14,8 @@
 @property (weak, nonatomic) IBOutlet UILabel *text1;
 @property (weak, nonatomic) IBOutlet UILabel *text2;
 @property (weak, nonatomic) IBOutlet UILabel *text3;
+@property (weak, nonatomic) IBOutlet UIImageView *logo1;
+@property (weak, nonatomic) IBOutlet UIImageView *logo2;
+@property (weak, nonatomic) IBOutlet UIImageView *logo3;
 
 @end

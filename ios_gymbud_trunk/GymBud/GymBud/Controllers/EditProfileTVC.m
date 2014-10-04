@@ -8,6 +8,7 @@
 
 #import "EditProfileTVC.h"
 #import <MobileCoreServices/MobileCoreServices.h>
+#import "GymBudConstants.h"
 
 @interface EditProfileTVC () <UINavigationControllerDelegate, UIImagePickerControllerDelegate>
 @property (weak, nonatomic) IBOutlet UILabel *interest1;
@@ -17,6 +18,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *profileName;
 @property (weak, nonatomic) IBOutlet UILabel *profileAge;
 @property (weak, nonatomic) IBOutlet UILabel *profileGender;
+@property (weak, nonatomic) IBOutlet UILabel *profilePreferred;
 @property (weak, nonatomic) IBOutlet UITextView *profileGoals;
 @property (weak, nonatomic) IBOutlet UITextView *profileAchievements;
 @property (weak, nonatomic) IBOutlet UITextView *profileOrgs;
@@ -28,6 +30,8 @@
 @property (strong, nonatomic) NSMutableData* imageData;
 @property (strong, nonatomic) UIView *errorToast;
 @end
+
+#define kUnspecifiedString @"Unspecified"
 
 @implementation EditProfileTVC
 
@@ -122,7 +126,11 @@
         }
     }
 
-    
+    if ([currentUser objectForKey:@"gymbudProfile"][@"preferred"]) {
+        self.profilePreferred.text = [currentUser objectForKey:@"gymbudProfile"][@"preferred"];
+    } else {
+        self.profilePreferred.text = kUnspecifiedString;
+    }
     if ([currentUser objectForKey:@"gymbudProfile"][@"age"]) {
         self.profileAge.text = [currentUser objectForKey:@"gymbudProfile"][@"age"];
     } else {
@@ -179,11 +187,12 @@
     [self.navigationController popViewControllerAnimated:YES];
 }
 
-- (void)editProfileBasicInfoViewController:(EPBasicInfoVC *)vc didSetValues:(NSString *)name age:(NSString *)age andGender:(NSString *)gender {
+- (void)editProfileBasicInfoViewController:(EPBasicInfoVC *)vc didSetValues:(NSString *)name age:(NSString *)age andGender:(NSString *)gender andPreferred:(int)index {
     NSLog(@"delegate worked: stuff is here");
     self.profileName.text = name;
     self.profileAge.text = age;
     self.profileGender.text = gender;
+    self.profilePreferred.text = [kPreferredTimes objectAtIndex:index];
     [self.navigationController popViewControllerAnimated:YES];
 }
 
@@ -196,7 +205,7 @@
     NSLog(@"update profile");
     NSMutableDictionary *userProfile = [NSMutableDictionary dictionaryWithCapacity:7];
 
-    if([self.profileGoals.text length] > 150 || [self.profileAchievements.text length] > 250 || [self.profileOrgs.text length] > 100 || [self.profileAbout.text length] > 300 || [self.profileName.text isEqualToString:@""] || [self.profileAge.text isEqualToString:@""] || [self.profileGender.text isEqualToString:@""] || (![self.profileGender.text.lowercaseString isEqualToString:@"male"] && ![self.profileGender.text.lowercaseString isEqualToString:@"female"]) || [self.profileGoals.text isEqualToString:@""] || [self.profileGoals.text isEqualToString:@"Placeholder text here..."]) {
+    if([self.profileGoals.text length] > 150 || [self.profileAchievements.text length] > 250 || [self.profileOrgs.text length] > 100 || [self.profileAbout.text length] > 300 || [self.profileName.text isEqualToString:@""] || [self.profileAge.text isEqualToString:@""] || [self.profileGender.text isEqualToString:@""] || (![self.profileGender.text.lowercaseString isEqualToString:@"male"] && ![self.profileGender.text.lowercaseString isEqualToString:@"female"]) || [self.profileGoals.text isEqualToString:@""] || [self.profileGoals.text isEqualToString:@"Placeholder text here..."] || [self.profilePreferred.text isEqualToString:@""] || [self.profilePreferred.text isEqualToString: kUnspecifiedString]) {
         // show view here
         NSString *toastMessage = @"";
         if([self.profileGoals.text length] > 150) {
@@ -210,6 +219,9 @@
         }
         if([self.profileAbout.text length] > 300) {
             toastMessage = [toastMessage stringByAppendingString:@"About max is 300 char. "];
+        }
+        if([self.profilePreferred.text isEqualToString:@""] || [self.profilePreferred.text isEqualToString:kUnspecifiedString]) {
+            toastMessage = [toastMessage stringByAppendingString:@"Preference required. "];
         }
         if([self.profileName.text isEqualToString:@""]) {
             toastMessage = [toastMessage stringByAppendingString:@"Name must not be empty. "];
@@ -269,6 +281,7 @@
     userProfile[@"name"] = self.profileName.text;
     userProfile[@"age"] = self.profileAge.text;
     userProfile[@"gender"] = self.profileGender.text;
+    userProfile[@"preferred"] = self.profilePreferred.text;
     
     NSData *imageData = UIImageJPEGRepresentation(self.profilePicture.image, 0.05f);
     PFFile *imageFile = [PFFile fileWithName:@"profilePicture.jpg" data:imageData];
@@ -398,7 +411,7 @@
     EPBasicInfoVC *vc = [sb instantiateViewControllerWithIdentifier:@"EPBasicInfoVC"];
     vc.delegate = self;
     [self.navigationController pushViewController:vc animated:YES];
-    [vc setCurrentValues:self.profileName.text age:self.profileAge.text andGender:self.profileGender.text];
+    [vc setCurrentValues:self.profileName.text age:self.profileAge.text andGender:self.profileGender.text andPreferred:[kPreferredTimes indexOfObject:self.profilePreferred.text]];
 
 }
 

@@ -173,7 +173,7 @@
                                               ) {
                               NSLog(@"result is :%@ for user: %@", result[@"context"][@"mutual_friends"][@"data"], object[@"profile"][@"facebookId"]);
                               NSLog(@"result count is : %lu", (unsigned long)[result[@"context"][@"mutual_friends"][@"data"] count]);
-                              cell.text3.text = [NSString stringWithFormat:@"%lu", [result[@"context"][@"mutual_friends"][@"data"] count]];
+                              cell.text3.text = [NSString stringWithFormat:@"Mutual Friends: %lu", [result[@"context"][@"mutual_friends"][@"data"] count]];
                           }];
     
     if(object[@"gymbudProfile"][@"name"]) {
@@ -190,7 +190,15 @@
         interests = [interests stringByAppendingString:@" "];
         interests = [interests stringByAppendingString:object[@"gymbudProfile"][@"interest3"]];
     }
-    cell.text2.text = interests;
+    cell.logo1.image = [UIImage imageNamed:[kGymBudActivityIconMapping objectForKey:object[@"gymbudProfile"][@"interest1"]]];
+    cell.logo2.image = [UIImage imageNamed:[kGymBudActivityIconMapping objectForKey:object[@"gymbudProfile"][@"interest2"]]];
+    cell.logo3.image = [UIImage imageNamed:[kGymBudActivityIconMapping objectForKey:object[@"gymbudProfile"][@"interest3"]]];
+    
+    if(object[@"gymbudProfile"][@"preferred"]) {
+        cell.text2.text = object[@"gymbudProfile"][@"preferred"];
+    } else {
+        cell.text2.text = @"Unspecified";
+    }
     
     cell.backgroundColor = [UIColor grayColor];
     

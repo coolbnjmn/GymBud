@@ -11,7 +11,7 @@
 @class EPBasicInfoVC;
 
 @protocol EPBasicInfoDelegate <NSObject>
-- (void) editProfileBasicInfoViewController:(EPBasicInfoVC *)vc didSetValues:(NSString *)name age:(NSString *)age andGender:(NSString *)gender;
+- (void) editProfileBasicInfoViewController:(EPBasicInfoVC *)vc didSetValues:(NSString *)name age:(NSString *)age andGender:(NSString *)gender andPreferred:(int)index;
 
 @end
 
@@ -20,7 +20,7 @@
 @property (nonatomic, weak) id <EPBasicInfoDelegate> delegate;
 
 
-- (void) setCurrentValues:(NSString *)name age:(NSString *)age andGender:(NSString *)gender;
+- (void) setCurrentValues:(NSString *)name age:(NSString *)age andGender:(NSString *)gender andPreferred:(int)index;
 
 
 @end
