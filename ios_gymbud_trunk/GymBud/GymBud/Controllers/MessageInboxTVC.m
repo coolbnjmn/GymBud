@@ -17,6 +17,10 @@
 
 @property (weak, nonatomic) NSDate *lastRefresh;
 @property (strong, nonatomic) MBProgressHUD *HUD;
+
+@property (nonatomic, retain) NSMutableDictionary *sections;
+@property (nonatomic, retain) NSMutableDictionary *sectionToConversationMap;
+
 @end
 
 @implementation MessageInboxTVC
@@ -31,7 +35,9 @@
     
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     UIBarButtonItem *messageButton = [[UIBarButtonItem alloc] initWithTitle:@"Send Message" style:UIBarButtonItemStyleBordered target:self action:@selector(sendMessage:)];
-    
+    self.sections = [NSMutableDictionary dictionary];
+    self.sectionToConversationMap = [NSMutableDictionary dictionary];
+
     self.navigationItem.title = @"Inbox";
     self.navigationItem.rightBarButtonItem = messageButton;
 }
@@ -52,6 +58,10 @@
 }
 
 #pragma mark - PFQueryTableViewController
+- (NSString *)sportTypeForSection:(int)section {
+    return [self.sectionToConversationMap objectForKey:[NSNumber numberWithInt:section]];
+}
+
 
 - (PFQuery *)queryForTable {
     
@@ -96,7 +106,41 @@
     return query;
 }
 
+- (PFObject *)objectAtIndexPath:(NSIndexPath *)indexPath {
+    NSString *hash = [self sportTypeForSection:indexPath.section];
+    
+    NSArray *rowIndecesInSection = [self.sections objectForKey:hash];
+    
+    NSNumber *rowIndex = [rowIndecesInSection objectAtIndex:indexPath.row];
+    return [self.objects objectAtIndex:[rowIndex intValue]];
+}
+
 - (void)objectsDidLoad:(NSError *)error {
+    // This method is called every time objects are loaded from Parse via the PFQuery
+    
+    [self.sections removeAllObjects];
+    [self.sectionToConversationMap removeAllObjects];
+    
+    NSInteger section = 0;
+    NSInteger rowIndex = 0;
+    for (PFObject *object in self.objects) {
+        PFUser *toUser = [object objectForKey:@"toUser"];
+        PFUser *fromUser = [object objectForKey:@"fromUser"];
+        
+//        NSUInteger userHash = ((NSString *)toUser[@"username"]).hash + ((NSString *)fromUser[@"username"]).hash;
+        NSString *hash = [[toUser[kFacebookUsername] stringByAppendingString:@" "] stringByAppendingString:fromUser[kFacebookUsername]];
+        NSMutableArray *objectsInSection = [self.sections objectForKey:hash];
+        if (!objectsInSection) {
+            objectsInSection = [NSMutableArray array];
+            
+            // this is the first time we see this sportType - increment the section index
+            [self.sectionToConversationMap setObject:hash forKey:[NSNumber numberWithInt:section++]];
+            [objectsInSection addObject:[NSNumber numberWithInt:rowIndex]];
+        }
+        rowIndex++;
+        [self.sections setObject:objectsInSection forKey:hash];
+    }
+    
     [super objectsDidLoad:error];
     [self.HUD hide:YES];
     lastRefresh = [NSDate date];
@@ -118,10 +162,24 @@
 //    } else {
 //        self.navigationController.tabBarItem.badgeValue = nil;
 //    }
+    [self.tableView reloadData];
 }
 
 
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    NSString *hash = [self sportTypeForSection:section];
+    NSArray *rowIndecesInSection = [self.sections objectForKey:hash];
+    return rowIndecesInSection.count;
+}
 
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
+    NSString *sportType = [self sportTypeForSection:section];
+    return sportType;
+}
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    return self.sections.allKeys.count;
+}
 - (PFTableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath object:(PFObject *)object
 {
     PFTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"MessageCell"];
@@ -216,9 +274,15 @@
 //    // Pass the selected object to the new view controller.
 //    detailViewController.activity = [[super objects] objectAtIndex:indexPath.row];
 //    // Push the view controller.
+    NSString *hash = [self sportTypeForSection:indexPath.section];
+    
+    NSArray *rowIndecesInSection = [self.sections objectForKey:hash];
+    
+    NSNumber *rowIndex = [rowIndecesInSection objectAtIndex:indexPath.row];
+    
     GymBudConversationTVC *convoTVC = [[GymBudConversationTVC alloc] init];
-    convoTVC.fromUser = [[self.objects objectAtIndex:indexPath.row] objectForKey:@"fromUser"];
-    convoTVC.toUser = [[self.objects objectAtIndex:indexPath.row] objectForKey:@"toUser"];
+    convoTVC.fromUser = [[self.objects objectAtIndex:[rowIndex intValue]] objectForKey:@"fromUser"];
+    convoTVC.toUser = [[self.objects objectAtIndex:[rowIndex intValue]] objectForKey:@"toUser"];
     
     [self.navigationController pushViewController:convoTVC animated:YES];
 }

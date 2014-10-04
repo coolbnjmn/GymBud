@@ -217,7 +217,7 @@
      content : String
      */
     [activityObject setObject:currentUser forKey:@"fromUser"];
-    [activityObject setObject:self.toUser forKey:@"toUser"];
+    [activityObject setObject:self.fromUser forKey:@"toUser"];
     [activityObject setObject:@"message" forKey:@"type"];
     [activityObject setObject:textField.text forKey:@"content"];
     [activityObject setObject:[NSNumber numberWithBool:YES] forKey:@"unread"];
@@ -244,7 +244,7 @@
     
     PFQuery *innerQuery = [PFUser query];
     
-    [innerQuery whereKey:@"username" equalTo:[self.toUser objectForKey:@"username"]];
+    [innerQuery whereKey:@"username" equalTo:[self.fromUser objectForKey:@"username"]];
     NSLog(@"%@", self.toUser);
     NSLog(@"about to push");
     
