@@ -29,10 +29,9 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
-    
+
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     UIBarButtonItem *messageButton = [[UIBarButtonItem alloc] initWithTitle:@"Send Message" style:UIBarButtonItemStyleBordered target:self action:@selector(sendMessage:)];
     self.sections = [NSMutableDictionary dictionary];
@@ -40,6 +39,25 @@
 
     self.navigationItem.title = @"Inbox";
     self.navigationItem.rightBarButtonItem = messageButton;
+    
+//    UIView *editToast = [[UIView alloc] initWithFrame:CGRectMake(0, self.window.bounds.size.height - 40, self.window.bounds.size.width, 40)];
+//    editToast.backgroundColor = [UIColor orangeColor];
+//    UILabel *textLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, self.window.bounds.size.width, 40)];
+//    textLabel.text = @"Edit profile (from Settings tab) now!";
+//    textLabel.textAlignment = NSTextAlignmentCenter;
+//    [editToast addSubview:textLabel];
+//    UIApplication *app = [UIApplication sharedApplication];
+//    editToast.frame = CGRectMake(0, self.window.bounds.size.height - 40 - tbc.tabBar.bounds.size.height, self.window.bounds.size.width, 40);
+//    [app.keyWindow addSubview:editToast];
+    //        [UIView animateWithDuration:1.0
+    //                              delay:0.0
+    //                            options:UIViewAnimationOptionCurveEaseIn
+    //                         animations:^{
+    //                            editToast.frame = CGRectMake(0, self.window.bounds.size.height - 40 - tbc.tabBar.bounds.size.height, self.window.bounds.size.width, 40);
+    //                         }
+    //                         completion:^(BOOL finished) {
+    //                                // register the field in notification center.
+    //                         }];
 }
 
 -(void)sendMessage:(id) sender {

@@ -19,7 +19,7 @@
 
 @end
 
-#define kCellHeight 80
+#define kCellHeight 90
 
 @implementation GymBudTVC
 
@@ -194,11 +194,14 @@
     cell.logo2.image = [UIImage imageNamed:[kGymBudActivityIconMapping objectForKey:object[@"gymbudProfile"][@"interest2"]]];
     cell.logo3.image = [UIImage imageNamed:[kGymBudActivityIconMapping objectForKey:object[@"gymbudProfile"][@"interest3"]]];
     
+    NSString *text2Text = @"";
     if(object[@"gymbudProfile"][@"preferred"]) {
-        cell.text2.text = object[@"gymbudProfile"][@"preferred"];
+        text2Text = [[text2Text stringByAppendingString:@"Preferred Time: "] stringByAppendingString:object[@"gymbudProfile"][@"preferred"]];
     } else {
-        cell.text2.text = @"Unspecified";
+        text2Text = @"Workout Time Unspecified";
     }
+    
+    cell.text2.text = text2Text;
     
     cell.backgroundColor = [UIColor grayColor];
     
