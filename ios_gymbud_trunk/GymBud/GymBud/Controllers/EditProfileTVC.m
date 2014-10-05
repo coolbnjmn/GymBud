@@ -10,7 +10,7 @@
 #import <MobileCoreServices/MobileCoreServices.h>
 #import "GymBudConstants.h"
 
-@interface EditProfileTVC () <UINavigationControllerDelegate, UIImagePickerControllerDelegate>
+@interface EditProfileTVC () <UINavigationControllerDelegate, UIImagePickerControllerDelegate, UITextViewDelegate>
 @property (weak, nonatomic) IBOutlet UILabel *interest1;
 @property (weak, nonatomic) IBOutlet UILabel *interest2;
 @property (weak, nonatomic) IBOutlet UILabel *interest3;
@@ -172,6 +172,11 @@
             }
         }
     }
+    
+    self.profileGoals.delegate = self;
+    self.profileAchievements.delegate = self;
+    self.profileOrgs.delegate = self;
+    self.profileAbout.delegate = self;
 }
 
 - (void) editProfileInterestViewController:(EPInterestVC *)vc didAddInterest:(NSString *)interest forInterest:(int) interestNumber {
@@ -275,9 +280,9 @@
     userProfile[@"interest2"] = self.interest2.text;
     userProfile[@"interest3"] = self.interest3.text;
     userProfile[@"goals"] = self.profileGoals.text;
-    userProfile[@"achievements"] = self.profileAchievements.text;
-    userProfile[@"organizations"] = self.profileOrgs.text;
-    userProfile[@"about"] = self.profileAbout.text;
+    userProfile[@"achievements"] = [self.profileAchievements.text length] > 4 && [[self.profileAchievements.text substringFromIndex:4] isEqualToString:@"character limit"] ? @"" : self.profileAchievements.text;
+    userProfile[@"organizations"] =  [self.profileOrgs.text length] > 4 && [[self.profileOrgs.text substringFromIndex:4] isEqualToString:@"character limit"] ? @"" : self.profileOrgs.text;
+    userProfile[@"about"] =  [self.profileAbout.text length] > 4 && [[self.profileAbout.text substringFromIndex:4] isEqualToString:@"character limit"] ? @"" :self.profileAbout.text;
     userProfile[@"name"] = self.profileName.text;
     userProfile[@"age"] = self.profileAge.text;
     userProfile[@"gender"] = self.profileGender.text;
@@ -443,4 +448,27 @@ finishedSavingWithError:(NSError *)error
 {
     [self dismissViewControllerAnimated:YES completion:nil];
 }
+
+- (void)textViewDidBeginEditing:(UITextView *)textView {
+    if ([textView.text length] > 4 && [[textView.text substringFromIndex:4] isEqualToString:@"character limit"]) {
+        textView.text = @"";
+    }
+    [textView becomeFirstResponder];
+}
+
+- (void)textViewDidEndEditing:(UITextView *)textView {
+    if ([textView.text isEqualToString:@""]) {
+        if([textView isEqual:self.profileGoals]) {
+            textView.text = @"150 character limit";
+        } else if([textView isEqual:self.profileAbout]) {
+            textView.text = @"300 character limit";
+        } else if([textView isEqual:self.profileOrgs]) {
+            textView.text = @"100 character limit";
+        } else {
+            textView.text = @"250 character limit";
+        }
+    }
+    [textView resignFirstResponder];
+}
+
 @end

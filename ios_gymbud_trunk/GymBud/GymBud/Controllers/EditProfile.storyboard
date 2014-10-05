@@ -203,7 +203,7 @@
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
-                            <tableViewSection headerTitle="Goals [150]" id="F2O-aT-1oP">
+                            <tableViewSection headerTitle="Goals" id="F2O-aT-1oP">
                                 <cells>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" rowHeight="80" id="DOc-YF-NA5">
                                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -211,7 +211,7 @@
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="DOc-YF-NA5" id="TU3-jB-C5B">
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="Placeholder text here...(150 char max)" translatesAutoresizingMaskIntoConstraints="NO" id="pPl-hv-YO2">
+                                                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="150 character limit" translatesAutoresizingMaskIntoConstraints="NO" id="pPl-hv-YO2">
                                                     <rect key="frame" x="8" y="8" width="304" height="63.5"/>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -228,7 +228,7 @@
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
-                            <tableViewSection headerTitle="Achievements [250] (optional)" id="qEf-Tc-cQI">
+                            <tableViewSection headerTitle="Achievements (optional)" id="qEf-Tc-cQI">
                                 <cells>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" rowHeight="100" id="uY7-ur-26u">
                                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -236,7 +236,7 @@
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="uY7-ur-26u" id="TiS-pA-taE">
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="Placeholder text here...(250 char max)" translatesAutoresizingMaskIntoConstraints="NO" id="1DX-QP-lik">
+                                                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="250 character limit" translatesAutoresizingMaskIntoConstraints="NO" id="1DX-QP-lik">
                                                     <rect key="frame" x="8" y="8" width="304" height="83.5"/>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -253,7 +253,7 @@
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
-                            <tableViewSection headerTitle="On Campus Organizations [100] (optional)" id="Tip-JW-hg5">
+                            <tableViewSection headerTitle="On Campus Organizations (optional)" id="Tip-JW-hg5">
                                 <cells>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" rowHeight="70" id="jZn-f4-vnU">
                                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -261,7 +261,7 @@
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="jZn-f4-vnU" id="OSB-19-evS">
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="Placeholder text here... (100 char max)" translatesAutoresizingMaskIntoConstraints="NO" id="pYj-fS-063">
+                                                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="100 character limit" translatesAutoresizingMaskIntoConstraints="NO" id="pYj-fS-063">
                                                     <rect key="frame" x="8" y="8" width="304" height="53.5"/>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -278,7 +278,7 @@
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
-                            <tableViewSection headerTitle="About Me [300] (optional)" id="p5r-p6-VtO">
+                            <tableViewSection headerTitle="About Me (optional)" id="p5r-p6-VtO">
                                 <cells>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" rowHeight="100" id="FNM-iU-46i">
                                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -286,7 +286,7 @@
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="FNM-iU-46i" id="Av2-sA-lQt">
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="Placeholder text here... (300 char max)" translatesAutoresizingMaskIntoConstraints="NO" id="2vV-bv-2HG">
+                                                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="300 character limit" translatesAutoresizingMaskIntoConstraints="NO" id="2vV-bv-2HG">
                                                     <rect key="frame" x="8" y="8" width="304" height="83.5"/>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
