@@ -196,7 +196,7 @@
     
     NSString *text2Text = @"";
     if(object[@"gymbudProfile"][@"preferred"]) {
-        text2Text = [[text2Text stringByAppendingString:@"Preferred Time: "] stringByAppendingString:object[@"gymbudProfile"][@"preferred"]];
+        text2Text = [[text2Text stringByAppendingString:@"Preferred Time: "] stringByAppendingString:[kPreferredTimesShort objectAtIndex:[kPreferredTimes indexOfObject:object[@"gymbudProfile"][@"preferred"]]]];
     } else {
         text2Text = @"Workout Time Unspecified";
     }

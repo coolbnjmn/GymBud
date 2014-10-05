@@ -40,3 +40,4 @@
 
 
 #define kPreferredTimes [NSArray arrayWithObjects: @"Morning (6AM-Noon)", @"Afternoon (Noon-5PM)", @"Evening (5PM-Midnight)", nil]
+#define kPreferredTimesShort [NSArray arrayWithObjects: @"Morning", @"Afternoon", @"Evening", nil]
