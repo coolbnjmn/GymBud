@@ -39,4 +39,4 @@
 #define kGBBodyPartMapping [NSDictionary dictionaryWithObjects:kGBBodyPartImagesArray forKeys:kGBBodyPartArray]
 
 
-#define kPreferredTimes [NSArray arrayWithObjects: @"Morning", @"Afternoon", @"Night", nil]
+#define kPreferredTimes [NSArray arrayWithObjects: @"Morning (6AM-Noon)", @"Afternoon (Noon-5PM)", @"Evening (5PM-Midnight)", nil]

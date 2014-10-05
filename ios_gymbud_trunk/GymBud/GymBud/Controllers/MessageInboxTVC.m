@@ -128,7 +128,8 @@
         PFUser *fromUser = [object objectForKey:@"fromUser"];
         
 //        NSUInteger userHash = ((NSString *)toUser[@"username"]).hash + ((NSString *)fromUser[@"username"]).hash;
-        NSString *hash = [[toUser[kFacebookUsername] stringByAppendingString:@" "] stringByAppendingString:fromUser[kFacebookUsername]];
+//        NSString *hash = [[toUser[kFacebookUsername] stringByAppendingString:@" "] stringByAppendingString:fromUser[kFacebookUsername]];
+        NSString *hash = fromUser[@"gymbudProfile"][@"name"] ? : fromUser[kFacebookUsername];
         NSMutableArray *objectsInSection = [self.sections objectForKey:hash];
         if (!objectsInSection) {
             objectsInSection = [NSMutableArray array];
