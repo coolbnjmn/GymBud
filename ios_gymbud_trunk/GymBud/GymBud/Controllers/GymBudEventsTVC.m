@@ -153,7 +153,8 @@
         [query whereKey:@"activity" equalTo:self.activityFilter];
     }
     if(self.timeFiler != nil) {
-        [query whereKey:@"time" greaterThan:self.timeFiler];
+        //NSDate *newDate = [oldDate dateByAddingTimeInterval:-60*15];
+        [query whereKey:@"time" greaterThanOrEqualTo:[self.timeFiler dateByAddingTimeInterval:-5*60]];
     }
     
     if(self.activityFilters != nil) {
