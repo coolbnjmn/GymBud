@@ -41,3 +41,7 @@
 
 #define kPreferredTimes [NSArray arrayWithObjects: @"Morning (6AM-Noon)", @"Afternoon (Noon-5PM)", @"Evening (5PM-Midnight)", nil]
 #define kPreferredTimesShort [NSArray arrayWithObjects: @"Morning", @"Afternoon", @"Evening", nil]
+
+#define kGBSports [NSArray arrayWithObjects:@"Football", @"Baseball", @"Basketball", @"Hockey", @"Golf", @"Soccer", @"Tennis", @"Boxing", @"Olympic Sports", @"Lacrosse", @"Rugby", @"Cricket", @"Martial Arts", nil]
+
+#define kGBOther [NSArray arrayWithObjcts:@"

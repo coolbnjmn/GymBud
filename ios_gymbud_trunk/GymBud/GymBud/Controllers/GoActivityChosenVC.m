@@ -15,7 +15,10 @@
 @interface GoActivityChosenVC ()
 
 @property (weak, nonatomic) IBOutlet UIDatePicker *startTimePicker;
+@property (weak, nonatomic) IBOutlet UITextField *additionalTextField;
 @property (weak, nonatomic) IBOutlet UILabel *bodyPartLabel;
+
+@property (strong, nonatomic) NSMutableArray *additionalContent;
 @end
 
 @implementation GoActivityChosenVC
@@ -37,6 +40,19 @@
     self.bodyPartLabel.text = @"";
     for (NSIndexPath *indexPath in self.bodyPartIndices) {
         self.bodyPartLabel.text = [[self.bodyPartLabel.text stringByAppendingString:[kGBBodyPartArray objectAtIndex:indexPath.row]] stringByAppendingString:@" "];
+    }
+    if(!([self.activity isEqualToString:@"Sports"] || [self.activity isEqualToString:@"Other"])) {
+        self.additionalTextField.hidden = YES;
+    } else {
+        self.additionalTextField.hidden = NO;
+        self.additionalContent = [[NSMutableArray alloc] init];
+        if([self.activity isEqualToString:@"Sports"]) {
+            self.bodyPartLabel.text = @"Enter a sport:";
+            self.bodyPartLabel.textAlignment = NSTextAlignmentLeft;
+        } else if([self.activity isEqualToString:@"Other"]) {
+            self.bodyPartLabel.text = @"Enter an activity:";
+            self.bodyPartLabel.textAlignment = NSTextAlignmentLeft;
+        }
     }
 }
 
