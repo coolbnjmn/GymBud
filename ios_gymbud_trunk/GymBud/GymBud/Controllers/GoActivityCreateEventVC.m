@@ -188,7 +188,7 @@
         
         [eventObject setObject:eventLocation forKey:@"location"];
         [eventObject setObject:self.locationTextField.text forKey:@"locationName"];
-        
+        [eventObject setObject:self.additionalValue forKey:@"additional"];
         [eventObject setObject:self.timePickerValue forKey:@"time"];
         [eventObject setObject:[NSNumber numberWithBool:YES] forKey:@"isVisible"];
         

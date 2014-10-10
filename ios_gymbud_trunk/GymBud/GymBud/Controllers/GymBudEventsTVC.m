@@ -161,6 +161,10 @@
         [query whereKey:@"activity" containedIn:self.activityFilters];
     }
     
+    if(self.additionalFilter != nil && ![self.additionalFilter isEqualToString:@""]) {
+        [query whereKey:@"additional" equalTo:self.additionalFilter];
+    }
+    
     self.HUD = [[MBProgressHUD alloc] initWithView:self.view];
     [self.view addSubview:self.HUD];
     UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, kLoadingAnimationWidth, kLoadingAnimationHeight)];
@@ -205,7 +209,7 @@
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
     [formatter setDateFormat:@"HH:mm"];
     cell.startTimeTextLabel.text = [formatter stringFromDate:eventStartTime];
-    cell.activityTextLabel.text = [object objectForKey:@"activity"];
+    cell.activityTextLabel.text = object[@"additional"] ? [[[object objectForKey:@"activity"] stringByAppendingString:@" - "] stringByAppendingString:object[@"additional"]] : object[@"activity"];
     cell.backgroundColor = [UIColor grayColor];
         
     PFFile *theImage = [object objectForKey:@"organizer"][@"gymbudProfile"][@"profilePicture"];

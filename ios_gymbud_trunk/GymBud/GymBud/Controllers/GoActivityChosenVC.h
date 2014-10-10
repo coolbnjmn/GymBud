@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface GoActivityChosenVC : UIViewController
+@interface GoActivityChosenVC : UITableViewController
 
 @property (nonatomic, strong) NSString *activity;
 @property (nonatomic, strong) NSArray *bodyPartIndices;

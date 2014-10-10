@@ -13,7 +13,7 @@
 
 @property (nonatomic, strong) NSString *activityFilter;
 @property (nonatomic, strong) NSDate *timeFiler;
-
+@property (nonatomic, strong) NSString *additionalFilter;
 @property (nonatomic, assign) BOOL isShowingMap;
 
 @end

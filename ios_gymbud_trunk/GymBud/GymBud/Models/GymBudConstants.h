@@ -44,4 +44,9 @@
 
 #define kGBSports [NSArray arrayWithObjects:@"Football", @"Baseball", @"Basketball", @"Hockey", @"Golf", @"Soccer", @"Tennis", @"Boxing", @"Olympic Sports", @"Lacrosse", @"Rugby", @"Cricket", @"Martial Arts", nil]
 
-#define kGBOther [NSArray arrayWithObjcts:@"
+#define kGBOther [NSArray arrayWithObjects:@"Jump Rope", nil]
+
+#define kGBMileTimes [NSArray arrayWithObjects:@"Under 5min", @"5 minute", @"6 minute", @"7 minute", @"8 minute", @"9 minute", @"10 minute", @"11 minute", @"Above 11 minute", nil]
+
+
+
