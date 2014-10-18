@@ -267,12 +267,12 @@
     
     PFQuery *query = [PFQuery queryWithClassName:self.parseClassName];
     [query includeKey:@"organizer"];
-    [query whereKey:@"activity" containsString:cell.activityTextLabel.text];
-    [query whereKey:@"locationName" containsString:cell.locationTextLabel.text];
-    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+    [query whereKey:@"objectId" equalTo:[[self.objects objectAtIndex:indexPath.row] objectId]];
+    
+    [query findObjectsInBackgroundWithBlock:^(NSArray *events, NSError *error) {
         if(self.navigationController.topViewController == self) {
-            GymBudEventModel *post = [[GymBudEventModel alloc] initWithPFObject:[objects objectAtIndex:0]];
-            controller.annotation = post;
+//            GymBudEventModel *post = [[GymBudEventModel alloc] initWithPFObject:[objects objectAtIndex:0]];
+            controller.annotation = [events objectAtIndex:0];
             [self.navigationController pushViewController:controller animated:YES]; // or use presentViewController if you're using modals
         }
     }];

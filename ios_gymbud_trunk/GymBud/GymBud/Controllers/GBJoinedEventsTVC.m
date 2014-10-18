@@ -112,19 +112,23 @@
 // Override to customize what kind of query to perform on the class. The default is to query for
 // all objects ordered by createdAt descending.
 - (PFQuery *)queryForTable {
-    PFQuery *query = [PFQuery queryWithClassName:self.parseClassName];
+//    PFQuery *query = [PFQuery queryWithClassName:self.parseClassName];
+    // Query for posts near our current location.
+    PFQuery *attendeeQuery = [PFQuery queryWithClassName:self.parseClassName];
+    PFQuery *organizerQuery = [PFQuery queryWithClassName:self.parseClassName];
     
+    PFQuery *query = [PFQuery orQueryWithSubqueries:@[attendeeQuery, organizerQuery]];
+
     // If no objects are loaded in memory, we look to the cache first to fill the table
     // and then subsequently do a query against the network.
     if ([self.objects count] == 0) {
         query.cachePolicy = kPFCachePolicyCacheThenNetwork;
     }
-    
-    // Query for posts near our current location.
+    [attendeeQuery whereKey:@"attendees" containsAllObjectsInArray:[NSArray arrayWithObjects:[PFUser currentUser], nil]];
+    [organizerQuery whereKey:@"organizer" equalTo:[PFUser currentUser]];
     
     [query includeKey:@"organizer"];
     [query whereKey:@"isVisible" equalTo:[NSNumber numberWithBool:YES]];
-    [query whereKey:@"attendees" containsAllObjectsInArray:[NSArray arrayWithObjects:[PFUser currentUser], nil]];
     [query orderByAscending:@"time"];
     
     self.HUD = [[MBProgressHUD alloc] initWithView:self.view];

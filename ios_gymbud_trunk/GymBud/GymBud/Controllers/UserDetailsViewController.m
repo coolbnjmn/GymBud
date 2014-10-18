@@ -30,25 +30,48 @@
     
     NSLog(@"annotation is: ");
     NSLog(@"%@", annotation);
-    GymBudEventModel *event = (GymBudEventModel *) annotation;
-    if([event organizer]) {
-        [[event organizer] fetchIfNeededInBackgroundWithBlock:^(PFObject *object, NSError *error){
+    PFObject *event = (PFObject *) annotation;
+    if([event objectForKey:@"organizer"]) {
+        [event[@"organizer"] fetchIfNeededInBackgroundWithBlock:^(PFObject *object, NSError *error){
             [self updateProfileForUser:(PFUser *)object];
+            if([[object objectId] isEqualToString:[[PFUser currentUser] objectId]]) {
+                self.headerJoinButton.hidden = YES;
+            }
         }];
+
     }
-    
-    if([event attendees]) {
-        for(PFUser *attendee in [event attendees]) {
+    if(event[@"attendees"]) {
+        for(PFUser *attendee in event[@"attendees"]) {
             if([[attendee objectId] isEqualToString:[[PFUser currentUser] objectId]]) {
                 self.headerJoinButton.hidden = YES;
                 break;
             }
         }
     }
-    UIImage *pictureLogo = [UIImage imageNamed:[kGymBudActivityIconMapping objectForKey:event.activity]];
 
+    UIImage *pictureLogo = [UIImage imageNamed:[kGymBudActivityIconMapping objectForKey:event[@"activity"]]];
+    
     self.headerPictureLogo.image = pictureLogo;
-    self.headerCheckinMessage.text = [[event.title stringByAppendingString:@". "] stringByAppendingString:event.eventDescription];
+    self.headerCheckinMessage.text = [[event[@"activity"] stringByAppendingString:@". "] stringByAppendingString:event[@"description"] ? : @"No Description Provided"];
+
+//    if([event organizer]) {
+//        [[event organizer] fetchIfNeededInBackgroundWithBlock:^(PFObject *object, NSError *error){
+//            [self updateProfileForUser:(PFUser *)object];
+//        }];
+//    }
+//    
+//    if([event attendees]) {
+//        for(PFUser *attendee in [event attendees]) {
+//            if([[attendee objectId] isEqualToString:[[PFUser currentUser] objectId]]) {
+//                self.headerJoinButton.hidden = YES;
+//                break;
+//            }
+//        }
+//    }
+//    UIImage *pictureLogo = [UIImage imageNamed:[kGymBudActivityIconMapping objectForKey:event.activity]];
+//
+//    self.headerPictureLogo.image = pictureLogo;
+//    self.headerCheckinMessage.text = [[event.title stringByAppendingString:@". "] stringByAppendingString:event.eventDescription];
 }
 
 -(void)messageUser:(id) sender {
@@ -287,6 +310,32 @@
         }
         [attendees addObject:[PFUser currentUser]];
         [eventObject setObject:attendees forKey:@"attendees"];
+        
+        PFQuery *innerQuery = [PFQuery queryWithClassName:@"Event"];
+        PFQuery *userQuery = [PFUser query];
+        
+        [innerQuery whereKey:@"organizer" equalTo:[eventObject objectForKey:@"organizer"]];
+        NSLog(@"%@", innerQuery);
+        [userQuery whereKey:@"organizer" matchesQuery:innerQuery];
+        PFQuery *query = [PFInstallation query];
+        
+        // only return Installations that belong to a User that
+        // matches the innerQuery
+        [query whereKey:@"user" matchesQuery:userQuery];
+        
+        // Send the notification.
+        PFPush *push = [[PFPush alloc] init];
+        [push setQuery:query];
+        
+        PFUser *currentUser = [PFUser currentUser];
+        NSString *name;
+        if([currentUser objectForKey:@"gymbudProfile"][@"name"]) {
+            name = [currentUser objectForKey:@"gymbudProfile"][@"name"];
+        } else {
+            name = [currentUser objectForKey:@"profile"][@"name"];
+        }
+        [push setMessage:[NSString stringWithFormat:@"%@ joined your event!", name]];
+        [push sendPushInBackground];
         [eventObject saveInBackground];
     }];
     NSLog(@"attendees: %@", event.attendees);
