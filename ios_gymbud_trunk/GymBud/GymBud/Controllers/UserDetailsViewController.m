@@ -285,19 +285,12 @@
 - (IBAction)headerJoinButtonPressed:(id)sender
 {
     // join event from here
-    GymBudEventModel *event = (GymBudEventModel *) annotation;
+    PFObject *event = annotation;
     
     PFQuery *queryForEvent = [PFQuery queryWithClassName:@"Event"];
     [queryForEvent includeKey:@"organizer"];
     [queryForEvent includeKey:@"attendees"];
-    [queryForEvent whereKey:@"time" equalTo:event.eventDate];
-    [queryForEvent whereKey:@"duration" equalTo:event.duration];
-    [queryForEvent whereKey:@"activity" equalTo:event.activity];
-    [queryForEvent whereKey:@"count" equalTo:event.count];
-    [queryForEvent whereKey:@"organizer" equalTo:event.organizer];
-    if(![event.eventDescription isEqualToString:@"No Description Provided"]) {
-        [queryForEvent whereKey:@"description" equalTo:event.eventDescription];
-    }
+    [queryForEvent whereKey:@"objectId" equalTo:[event objectId]];
     
     [queryForEvent findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
         if([objects count] == 0 || [objects count] > 1) {
@@ -311,17 +304,11 @@
         [attendees addObject:[PFUser currentUser]];
         [eventObject setObject:attendees forKey:@"attendees"];
         
-        PFQuery *innerQuery = [PFQuery queryWithClassName:@"Event"];
-        PFQuery *userQuery = [PFUser query];
-        
-        [innerQuery whereKey:@"organizer" equalTo:[eventObject objectForKey:@"organizer"]];
-        NSLog(@"%@", innerQuery);
-        [userQuery whereKey:@"organizer" matchesQuery:innerQuery];
         PFQuery *query = [PFInstallation query];
         
+        [query whereKey:@"user" equalTo:[eventObject objectForKey:@"organizer"]];
         // only return Installations that belong to a User that
         // matches the innerQuery
-        [query whereKey:@"user" matchesQuery:userQuery];
         
         // Send the notification.
         PFPush *push = [[PFPush alloc] init];
@@ -338,7 +325,6 @@
         [push sendPushInBackground];
         [eventObject saveInBackground];
     }];
-    NSLog(@"attendees: %@", event.attendees);
     self.headerJoinButton.enabled = NO;
     [self.headerJoinButton setHidden:YES];
 }
