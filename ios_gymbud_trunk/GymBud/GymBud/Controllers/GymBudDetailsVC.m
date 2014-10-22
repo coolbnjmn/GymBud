@@ -135,7 +135,7 @@
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
     if(section == 0) {
-        return @"Mutual Friends";
+        return @"Mutual GymBuds";
     } else {
         return @"Profile";
     }

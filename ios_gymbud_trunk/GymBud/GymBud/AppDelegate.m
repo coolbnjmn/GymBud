@@ -8,6 +8,7 @@
 
 #import "AppDelegate.h"
 #import "GymBudTVC.h"
+#import "EditProfileTVC.h"
 
 @interface AppDelegate ()
 
@@ -153,33 +154,9 @@
             tbc.selectedIndex = 2;
         } else {
             tbc.selectedIndex = 4;
-            UIView *editToast = [[UIView alloc] initWithFrame:CGRectMake(0, nvc4.view.bounds.size.height, nvc4.view.bounds.size.width, 40)];
-            editToast.backgroundColor = [UIColor orangeColor];
-            UILabel *textLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, nvc4.view.bounds.size.width, 40)];
-            textLabel.text = @"Edit your profile now!";
-            textLabel.textAlignment = NSTextAlignmentCenter;
-            [editToast addSubview:textLabel];
-            UIApplication *app = [UIApplication sharedApplication];
-            [app.keyWindow addSubview:editToast];
-
-            [UIView animateWithDuration:1.0
-                                  delay:0.0
-                                options:UIViewAnimationOptionCurveEaseIn
-                             animations:^{
-                                     editToast.frame = CGRectMake(0, nvc4.view.bounds.size.height - 40 - tbc.tabBar.bounds.size.height, nvc4.view.bounds.size.width, 40);
-                             }
-                             completion:^(BOOL finished) {
-                                 [UIView animateWithDuration:2.0
-                                                       delay:5.0
-                                                     options:UIViewAnimationOptionCurveEaseOut
-                                                  animations:^{
-                                                      editToast.alpha = 0.0f;
-                                                  }
-                                                  completion:^(BOOL finished) {
-                                                      [editToast removeFromSuperview];
-                                    }];
-            }];
-            
+            UIStoryboard *sb = [UIStoryboard storyboardWithName:@"EditProfile" bundle:nil];
+            EditProfileTVC *vc = [sb instantiateViewControllerWithIdentifier:@"EditProfile"];
+            [nvc3 pushViewController:vc animated:NO];
         }
         self.window.rootViewController = tbc;
     } else {

@@ -117,15 +117,18 @@
     PFQuery *attendeeQuery = [PFQuery queryWithClassName:self.parseClassName];
     PFQuery *organizerQuery = [PFQuery queryWithClassName:self.parseClassName];
     
-    PFQuery *query = [PFQuery orQueryWithSubqueries:@[attendeeQuery, organizerQuery]];
 
+
+    [attendeeQuery whereKey:@"attendees" containsAllObjectsInArray:[NSArray arrayWithObjects:[PFUser currentUser], nil]];
+    [organizerQuery whereKey:@"organizer" equalTo:[PFUser currentUser]];
+    
+    PFQuery *query = [PFQuery orQueryWithSubqueries:@[attendeeQuery, organizerQuery]];
+    
     // If no objects are loaded in memory, we look to the cache first to fill the table
     // and then subsequently do a query against the network.
     if ([self.objects count] == 0) {
         query.cachePolicy = kPFCachePolicyCacheThenNetwork;
     }
-    [attendeeQuery whereKey:@"attendees" containsAllObjectsInArray:[NSArray arrayWithObjects:[PFUser currentUser], nil]];
-    [organizerQuery whereKey:@"organizer" equalTo:[PFUser currentUser]];
     
     [query includeKey:@"organizer"];
     [query whereKey:@"isVisible" equalTo:[NSNumber numberWithBool:YES]];
@@ -168,7 +171,8 @@
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
     [formatter setDateFormat:@"HH:mm"];
     cell.startTimeTextLabel.text = [formatter stringFromDate:eventStartTime];
-    cell.activityTextLabel.text = [object objectForKey:@"activity"];
+//    cell.activityTextLabel.text = [object objectForKey:@"activity"];
+    cell.activityTextLabel.text = object[@"additional"] ? [[[object objectForKey:@"activity"] stringByAppendingString:@" - "] stringByAppendingString:object[@"additional"]] : object[@"activity"];
     cell.backgroundColor = [UIColor grayColor];
     
     PFFile *theImage = [object objectForKey:@"organizer"][@"gymbudProfile"][@"profilePicture"];
@@ -237,12 +241,12 @@
     
     PFQuery *query = [PFQuery queryWithClassName:self.parseClassName];
     [query includeKey:@"organizer"];
-    [query whereKey:@"activity" containsString:cell.activityTextLabel.text];
-    [query whereKey:@"locationName" containsString:cell.locationTextLabel.text];
-    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+    [query whereKey:@"objectId" equalTo:[[self.objects objectAtIndex:indexPath.row] objectId]];
+
+    [query findObjectsInBackgroundWithBlock:^(NSArray *events, NSError *error) {
         if(self.navigationController.topViewController == self) {
-            GymBudEventModel *post = [[GymBudEventModel alloc] initWithPFObject:[objects objectAtIndex:0]];
-            controller.annotation = post;
+//            GymBudEventModel *post = [[GymBudEventModel alloc] initWithPFObject:[objects objectAtIndex:0]];
+            controller.annotation = [events objectAtIndex:0];
             [self.navigationController pushViewController:controller animated:YES]; // or use presentViewController if you're using modals
         }
     }];

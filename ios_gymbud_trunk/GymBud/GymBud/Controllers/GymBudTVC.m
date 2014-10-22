@@ -173,7 +173,7 @@
                                               ) {
                               NSLog(@"result is :%@ for user: %@", result[@"context"][@"mutual_friends"][@"data"], object[@"profile"][@"facebookId"]);
                               NSLog(@"result count is : %lu", (unsigned long)[result[@"context"][@"mutual_friends"][@"data"] count]);
-                              cell.text3.text = [NSString stringWithFormat:@"Mutual Friends: %lu", [result[@"context"][@"mutual_friends"][@"data"] count]];
+                              cell.text3.text = [NSString stringWithFormat:@"Mutual GymBuds: %lu", [result[@"context"][@"mutual_friends"][@"data"] count]];
                           }];
     
     if(object[@"gymbudProfile"][@"name"]) {
