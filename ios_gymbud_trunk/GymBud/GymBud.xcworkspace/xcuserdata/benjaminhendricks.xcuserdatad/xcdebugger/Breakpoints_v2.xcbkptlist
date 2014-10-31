@@ -20,11 +20,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "GymBud/Controllers/GymBudEventsTVC.m"
-            timestampString = "436467863.972633"
+            timestampString = "436477768.786633"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "248"
-            endingLineNumber = "248"
+            startingLineNumber = "249"
+            endingLineNumber = "249"
             landmarkName = "-tableView:cellForRowAtIndexPath:object:"
             landmarkType = "5">
          </BreakpointContent>
@@ -46,11 +46,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "GymBud/Controllers/GymBudEventsTVC.m"
-            timestampString = "436467863.972633"
+            timestampString = "436477768.786633"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "313"
-            endingLineNumber = "313"
+            startingLineNumber = "314"
+            endingLineNumber = "314"
             landmarkName = "-toggleMapTable:"
             landmarkType = "5">
          </BreakpointContent>
@@ -62,11 +62,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "GymBud/Controllers/GymBudEventsTVC.m"
-            timestampString = "436467863.972633"
+            timestampString = "436477768.786633"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "158"
-            endingLineNumber = "158"
+            startingLineNumber = "159"
+            endingLineNumber = "159"
             landmarkName = "-queryForTable"
             landmarkType = "5">
          </BreakpointContent>
@@ -94,11 +94,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "GymBud/Controllers/GymBudEventsTVC.m"
-            timestampString = "436467863.972633"
+            timestampString = "436477768.786633"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "278"
-            endingLineNumber = "278"
+            startingLineNumber = "279"
+            endingLineNumber = "279"
             landmarkName = "-tableView:didSelectRowAtIndexPath:"
             landmarkType = "5">
          </BreakpointContent>

@@ -88,7 +88,7 @@ static NSString * const reuseIdentifier = @"goActivityCell";
     // Configure the cell
     cell.goActivityPictureImaveView.image = [UIImage imageNamed:[kGBBodyPartImagesArray objectAtIndex:indexPath.row]];
     cell.goActivityTextLabel.text = [kGBBodyPartArray objectAtIndex:indexPath.row];
-    cell.backgroundColor = [UIColor whiteColor];
+    cell.backgroundColor = [UIColor clearColor];
     return cell;
 }
 
@@ -102,11 +102,12 @@ static NSString * const reuseIdentifier = @"goActivityCell";
         // DO nothing, we don't want to select more than 4
     }
 }
+
 - (void)collectionView:(UICollectionView *)collectionView didDeselectItemAtIndexPath:(NSIndexPath *)indexPath {
     // TODO: Deselect item
     [self.selectedBodyParts removeObject:indexPath];
     GoActivityCVCell *cell = (GoActivityCVCell *)[collectionView cellForItemAtIndexPath:indexPath];
-    cell.backgroundColor = [UIColor whiteColor];
+    cell.backgroundColor = [UIColor clearColor];
 }
 
 #pragma mark <UICollectionViewDelegate>

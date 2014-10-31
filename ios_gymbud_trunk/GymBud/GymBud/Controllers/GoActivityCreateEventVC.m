@@ -14,10 +14,10 @@
 #import "Mixpanel.h"
 
 
-@interface GoActivityCreateEventVC () <MLPAutoCompleteTextFieldDelegate, MLPAutoCompleteTextFieldDataSource, UITextFieldDelegate, UIPickerViewDataSource, UIPickerViewDelegate>
+@interface GoActivityCreateEventVC () <UITextFieldDelegate, UIPickerViewDataSource, UIPickerViewDelegate>
 
-@property (weak, nonatomic) IBOutlet MLPAutoCompleteTextField *locationTextField;
-@property (weak, nonatomic) IBOutlet UIPickerView *countPicker;
+@property (weak, nonatomic) IBOutlet UITextField *locationTextField;
+//@property (weak, nonatomic) IBOutlet UIPickerView *countPicker;
 @property (weak, nonatomic) IBOutlet UIPickerView *durationPicker;
 @property (weak, nonatomic) IBOutlet UITextView *descriptionTextView;
 
@@ -48,14 +48,14 @@
     NSLog(@"create event and activity is: %@", self.activity);
     UIBarButtonItem *createEventButton = [[UIBarButtonItem alloc] initWithTitle:@"Create Event" style:UIBarButtonItemStyleBordered target:self action:@selector(createEventButtonHandler:)];
     self.navigationItem.rightBarButtonItem = createEventButton;
-    self.locationTextField.autoCompleteTableAppearsAsKeyboardAccessory = YES;
-    self.locationTextField.autoCompleteTableBackgroundColor = [UIColor whiteColor];
+//    self.locationTextField.autoCompleteTableAppearsAsKeyboardAccessory = YES;
+//    self.locationTextField.autoCompleteTableBackgroundColor = [UIColor whiteColor];
     self.locationTextField.delegate = self;
     
     self.places = [[NSMutableArray alloc] init];
     
-    self.countPicker.delegate = self;
-    self.countPicker.dataSource = self;
+//    self.countPicker.delegate = self;
+//    self.countPicker.dataSource = self;
     
     self.durationPicker.delegate = self;
     self.durationPicker.dataSource = self;
@@ -98,18 +98,20 @@
 
 // returns the number of 'columns' to display.
 - (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView {
-    if(pickerView == self.countPicker) {
-        return 1;
-    } else if(pickerView == self.durationPicker) {
+//    if(pickerView == self.countPicker) {
+//        return 1;
+//    } else
+        if(pickerView == self.durationPicker) {
         return 2;
     } else return 0;
 }
 
 // returns the # of rows in each component..
 - (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent: (NSInteger)component {
-    if(pickerView == self.countPicker) {
-        return [kGymBudCountArray count];
-    } else if(pickerView == self.durationPicker && component == 0) {
+//    if(pickerView == self.countPicker) {
+//        return [kGymBudCountArray count];
+//    } else
+        if(pickerView == self.durationPicker && component == 0) {
         return [kGymBudDurationHourArray count];
     } else if(pickerView == self.durationPicker && component == 1) {
         return [kGymBudDurationMinuteArray count];
@@ -118,9 +120,10 @@
 
 -(NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row   forComponent:(NSInteger)component
 {
-    if(pickerView == self.countPicker) {
-        return [kGymBudCountArray objectAtIndex:row];
-    } else if(pickerView == self.durationPicker && component == 0) {
+//    if(pickerView == self.countPicker) {
+//        return [kGymBudCountArray objectAtIndex:row];
+//    } else
+    if(pickerView == self.durationPicker && component == 0) {
         return [kGymBudDurationHourArray objectAtIndex:row];
     } else if(pickerView == self.durationPicker && component == 1) {
         return [kGymBudDurationMinuteArray objectAtIndex:row];
@@ -187,8 +190,9 @@
         PFObject *eventObject = [PFObject objectWithClassName:@"Event"];
         [eventObject setObject:[PFUser currentUser] forKey:@"organizer"];
         
-        [eventObject setObject:eventLocation forKey:@"location"];
+//        [eventObject setObject:eventLocation forKey:@"location"];
         [eventObject setObject:self.locationTextField.text forKey:@"locationName"];
+        [eventObject setObject:eventLocation forKey:@"location"];
         [eventObject setObject:self.additionalValue forKey:@"additional"];
         [eventObject setObject:self.timePickerValue forKey:@"time"];
         [eventObject setObject:[NSNumber numberWithBool:YES] forKey:@"isVisible"];
@@ -201,9 +205,9 @@
         }
         [eventObject setObject:indices forKey:@"detailLogoIndices"];
         
-        int selectedCountRow = (int) [self.countPicker selectedRowInComponent:0];
+//        int selectedCountRow = (int) [self.countPicker selectedRowInComponent:0];
         // add 1 because it is 0 based indexing.
-        [eventObject setObject:[NSNumber numberWithInt:selectedCountRow+1] forKey:@"count"];
+        [eventObject setObject:[NSNumber numberWithInt:1] forKey:@"count"];
         
         int selectedDurationHourRow = (int) [self.durationPicker selectedRowInComponent:0];
         int selectedDurationMinuteRow = (int) [self.durationPicker selectedRowInComponent:1];
@@ -252,44 +256,44 @@
 }
 
 #pragma mark - Auto Complete Data Source / Delegate
-- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
-    if([textField isEqual:self.locationTextField]) {
-        if(textField.text.length < 2) {
-            return YES;
-        }
-        NSLog(@"textField text is: %@", textField.text);
-        NSURL *url = [NSURL URLWithString:@"https://maps.googleapis.com/maps/api/place/autocomplete/"];
-        
-        AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
-        CLLocation *currentLocation = appDelegate.currentLocation;
-        
-        NSDictionary *params = @{@"input" : [textField.text stringByReplacingOccurrencesOfString:@" " withString:@"+"],
-                                 @"location" : [NSString stringWithFormat:@"%f,%f", currentLocation.coordinate.latitude, currentLocation.coordinate.longitude],
-                                 @"sensor" : @"true",
-                                 @"key" : kGoogleApiKey};
-        
-        AFHTTPSessionManager *httpSessionManager = [[AFHTTPSessionManager alloc] initWithBaseURL:url];
-        [httpSessionManager GET:@"json" parameters:params success:^(NSURLSessionDataTask *task, id responseObject) {
-            //        NSLog(@"\n============= Entity Saved Success ===\n%@",responseObject);
-            [self.places removeAllObjects];
-            for(id description in responseObject[@"predictions"]) {
-                NSLog(@"%@", description[@"description"]);
-                [self.places addObject:description[@"description"]];
-            }
-        } failure:^(NSURLSessionDataTask *task, NSError *error) {
-            NSLog(@"\n============== ERROR ====\n%@",error.userInfo);
-        }];
-        
-        return YES;
-    } else return YES;
-    
-}
-
-
-- (NSArray *)autoCompleteTextField:(MLPAutoCompleteTextField *)textField
-      possibleCompletionsForString:(NSString *)string {
-    if([textField isEqual:self.locationTextField]) {
-        return self.places;
-    } else return [NSArray new];
-}
+//- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
+//    if([textField isEqual:self.locationTextField]) {
+//        if(textField.text.length < 2) {
+//            return YES;
+//        }
+//        NSLog(@"textField text is: %@", textField.text);
+//        NSURL *url = [NSURL URLWithString:@"https://maps.googleapis.com/maps/api/place/autocomplete/"];
+//        
+//        AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
+//        CLLocation *currentLocation = appDelegate.currentLocation;
+//        
+//        NSDictionary *params = @{@"input" : [textField.text stringByReplacingOccurrencesOfString:@" " withString:@"+"],
+//                                 @"location" : [NSString stringWithFormat:@"%f,%f", currentLocation.coordinate.latitude, currentLocation.coordinate.longitude],
+//                                 @"sensor" : @"true",
+//                                 @"key" : kGoogleApiKey};
+//        
+//        AFHTTPSessionManager *httpSessionManager = [[AFHTTPSessionManager alloc] initWithBaseURL:url];
+//        [httpSessionManager GET:@"json" parameters:params success:^(NSURLSessionDataTask *task, id responseObject) {
+//            //        NSLog(@"\n============= Entity Saved Success ===\n%@",responseObject);
+//            [self.places removeAllObjects];
+//            for(id description in responseObject[@"predictions"]) {
+//                NSLog(@"%@", description[@"description"]);
+//                [self.places addObject:description[@"description"]];
+//            }
+//        } failure:^(NSURLSessionDataTask *task, NSError *error) {
+//            NSLog(@"\n============== ERROR ====\n%@",error.userInfo);
+//        }];
+//        
+//        return YES;
+//    } else return YES;
+//    
+//}
+//
+//
+//- (NSArray *)autoCompleteTextField:(MLPAutoCompleteTextField *)textField
+//      possibleCompletionsForString:(NSString *)string {
+//    if([textField isEqual:self.locationTextField]) {
+//        return self.places;
+//    } else return [NSArray new];
+//}
 @end

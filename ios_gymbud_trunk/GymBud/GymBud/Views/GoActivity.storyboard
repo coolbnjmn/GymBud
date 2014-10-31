@@ -305,44 +305,11 @@
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="YNy-gj-PAl" customClass="MLPAutoCompleteTextField">
+                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="YNy-gj-PAl">
                                                     <rect key="frame" x="20" y="0.0" width="280" height="30"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <textInputTraits key="textInputTraits"/>
-                                                    <connections>
-                                                        <outlet property="autoCompleteDataSource" destination="QRa-dW-cGG" id="fs3-B2-oDe"/>
-                                                        <outlet property="autoCompleteDelegate" destination="QRa-dW-cGG" id="yoc-pX-Z6r"/>
-                                                    </connections>
                                                 </textField>
-                                            </subviews>
-                                        </tableViewCellContentView>
-                                    </tableViewCell>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="ROG-sE-1GM">
-                                        <rect key="frame" x="0.0" y="282" width="320" height="44"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="ROG-sE-1GM" id="O9H-CG-5DH">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="With How Many Other People?" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GmH-yj-2tq">
-                                                    <rect key="frame" x="20" y="11" width="237" height="21"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                            </subviews>
-                                        </tableViewCellContentView>
-                                    </tableViewCell>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="150" id="xe1-RC-eeg">
-                                        <rect key="frame" x="0.0" y="326" width="320" height="150"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="xe1-RC-eeg" id="xWc-Hf-Q0a">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="150"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <pickerView contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gkS-GH-KvD">
-                                                    <rect key="frame" x="0.0" y="-32" width="320" height="162"/>
-                                                </pickerView>
                                             </subviews>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -402,7 +369,6 @@
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="320" height="568"/>
                     <connections>
-                        <outlet property="countPicker" destination="gkS-GH-KvD" id="fBh-Mc-6PT"/>
                         <outlet property="descriptionTextView" destination="u8G-IT-mlt" id="cIl-Xh-jJQ"/>
                         <outlet property="durationPicker" destination="eYf-di-RSt" id="22c-kV-bV6"/>
                         <outlet property="locationTextField" destination="YNy-gj-PAl" id="6WA-U9-QTG"/>

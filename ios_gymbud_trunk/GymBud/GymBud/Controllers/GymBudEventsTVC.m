@@ -92,9 +92,10 @@
     UIBarButtonItem *mapToTableViewButton = [[UIBarButtonItem alloc] initWithImage:[buttonImage imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal] style:UIBarButtonItemStyleBordered target:self action:@selector(toggleMapTable:)];
     
     UIBarButtonItem *filterModalViewButton = [[UIBarButtonItem alloc] initWithTitle:@"Filter" style:UIBarButtonItemStyleBordered target:self action:@selector(toggleHalfModal:)];
-    self.navigationItem.leftBarButtonItem = filterModalViewButton;
-    self.navigationItem.rightBarButtonItem = mapToTableViewButton;
-    self.navigationItem.hidesBackButton = YES;
+//    self.navigationItem.leftBarButtonItem = filterModalViewButton;
+    self.navigationItem.rightBarButtonItem = filterModalViewButton;
+//    self.navigationItem.rightBarButtonItem = mapToTableViewButton;
+//    self.navigationItem.hidesBackButton = YES;
     
     self.isShowingMap = NO;
     
