@@ -7,6 +7,7 @@
 #import "GBJoinedEventsTVC.h"
 #import "GymBudTVC.h"
 #import "GymBudConstants.h"
+#import "GBBodyPartCVC.h"
 
 #import <Parse/Parse.h>
 
@@ -35,8 +36,11 @@
     GymBudTVC *mapVC = [[GymBudTVC alloc] init];
     MessageInboxTVC *inboxVC = [[MessageInboxTVC alloc] init];
     SettingsVC *settingsVC = [[SettingsVC alloc] init];
+//    UIStoryboard *goSB = [UIStoryboard storyboardWithName:@"GoActivity" bundle:nil];
+//    GoActivityCVC *goVC = [goSB instantiateViewControllerWithIdentifier:@"GoActivity"];
     UIStoryboard *goSB = [UIStoryboard storyboardWithName:@"GoActivity" bundle:nil];
-    GoActivityCVC *goVC = [goSB instantiateViewControllerWithIdentifier:@"GoActivity"];
+    GBBodyPartCVC *goVC = [goSB instantiateViewControllerWithIdentifier:@"GBBodyPartCVC"];
+
     goVC.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
     GBJoinedEventsTVC *joinedVC = [[GBJoinedEventsTVC alloc] init];
     

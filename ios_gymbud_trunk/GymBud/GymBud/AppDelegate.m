@@ -8,7 +8,11 @@
 
 #import "AppDelegate.h"
 #import "GymBudTVC.h"
+#import "GBBodyPartCVC.h"
 #import "EditProfileTVC.h"
+#import "Mixpanel.h"
+
+#define MIXPANEL_TOKEN @"079a199396a3f6b60e57782e3b79d25f"
 
 @interface AppDelegate ()
 
@@ -28,6 +32,10 @@
 //    [TestFlight takeOff:@"4b49f863-25be-417b-b74b-d63985d08b5f"];
     [PFFacebookUtils initializeFacebook];
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    
+    // Initialize the library with your
+    // Mixpanel project token, MIXPANEL_TOKEN
+    [Mixpanel sharedInstanceWithToken:MIXPANEL_TOKEN];
     
     // Register for push notifications
 //    [application registerForRemoteNotificationTypes:
@@ -50,7 +58,9 @@
         MessageInboxTVC *inboxVC = [[MessageInboxTVC alloc] init];
         SettingsVC *settingsVC = [[SettingsVC alloc] init];
         UIStoryboard *goSB = [UIStoryboard storyboardWithName:@"GoActivity" bundle:nil];
-        GoActivityCVC *goVC = [goSB instantiateViewControllerWithIdentifier:@"GoActivity"];
+//        GoActivityCVC *goVC = [goSB instantiateViewControllerWithIdentifier:@"GoActivity"];
+        GBBodyPartCVC *goVC = [goSB instantiateViewControllerWithIdentifier:@"GBBodyPartCVC"];
+            
         goVC.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
         GBJoinedEventsTVC *joinedVC = [[GBJoinedEventsTVC alloc] init];
         

@@ -8,6 +8,7 @@
 
 #import "ViewMessageVC.h"
 #import "MessageUserVC.h"
+#import "Mixpanel.h"
 
 @interface ViewMessageVC ()
 @property (weak, nonatomic) IBOutlet UIImageView *fromImage;
@@ -82,6 +83,9 @@
     MessageUserVC *controller = [[MessageUserVC alloc] initWithNibName:nil bundle:nil];
     controller.user = [activity objectForKey:@"fromUser"];
     [self.navigationController pushViewController:controller animated:YES]; // or use presentViewController if you're using modals
+    Mixpanel *mixpanel = [Mixpanel sharedInstance];
+    [mixpanel track:@"ViewMessageVC ReplyToMessage" properties:@{
+                                                           }];
 }
 
 - (void)didReceiveMemoryWarning

@@ -60,6 +60,12 @@
 #define COCOAPODS_VERSION_MINOR_MLPAutoCompleteTextField 5
 #define COCOAPODS_VERSION_PATCH_MLPAutoCompleteTextField 0
 
+// Mixpanel
+#define COCOAPODS_POD_AVAILABLE_Mixpanel
+#define COCOAPODS_VERSION_MAJOR_Mixpanel 2
+#define COCOAPODS_VERSION_MINOR_Mixpanel 5
+#define COCOAPODS_VERSION_PATCH_Mixpanel 4
+
 // RSDayFlow
 #define COCOAPODS_POD_AVAILABLE_RSDayFlow
 #define COCOAPODS_VERSION_MAJOR_RSDayFlow 0

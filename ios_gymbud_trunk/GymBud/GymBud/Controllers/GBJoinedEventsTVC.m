@@ -14,6 +14,7 @@
 #import "NSDate+Utilities.h"
 #import "UIImageView+AFNetworking.h"
 #import "MBProgressHUD.h"
+#import "Mixpanel.h"
 
 #define kCellHeight 100
 
@@ -169,7 +170,9 @@
     
     NSDate *eventStartTime = [object objectForKey:@"time"];
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-    [formatter setDateFormat:@"HH:mm"];
+//    [formatter setDateFormat:@"HH:mm"];
+    [formatter setDateStyle:NSDateFormatterNoStyle];
+    [formatter setTimeStyle:NSDateFormatterShortStyle];
     cell.startTimeTextLabel.text = [formatter stringFromDate:eventStartTime];
 //    cell.activityTextLabel.text = [object objectForKey:@"activity"];
     cell.activityTextLabel.text = object[@"additional"] ? [[[object objectForKey:@"activity"] stringByAppendingString:@" - "] stringByAppendingString:object[@"additional"]] : object[@"activity"];
@@ -248,6 +251,9 @@
 //            GymBudEventModel *post = [[GymBudEventModel alloc] initWithPFObject:[objects objectAtIndex:0]];
             controller.annotation = [events objectAtIndex:0];
             [self.navigationController pushViewController:controller animated:YES]; // or use presentViewController if you're using modals
+            Mixpanel *mixpanel = [Mixpanel sharedInstance];
+            [mixpanel track:@"GBJoinedEventsTVC SelectedRow" properties:@{
+                                                                   }];
         }
     }];
     [tableView deselectRowAtIndexPath:indexPath animated:YES];

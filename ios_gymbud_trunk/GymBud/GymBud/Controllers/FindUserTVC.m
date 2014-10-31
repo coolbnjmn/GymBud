@@ -10,6 +10,7 @@
 #import "MessageUserVC.h"
 #import "MBProgressHUD.h"
 #import "GymBudConstants.h"
+#import "Mixpanel.h"
 
 @interface FindUserTVC () <UISearchDisplayDelegate, UISearchBarDelegate>
 
@@ -202,6 +203,9 @@
     }
     // Push the view controller.
     [self.navigationController pushViewController:detailViewController animated:YES];
+    Mixpanel *mixpanel = [Mixpanel sharedInstance];
+    [mixpanel track:@"FindUserTVC SelectedRow" properties:@{
+                                                           }];
 }
 
 

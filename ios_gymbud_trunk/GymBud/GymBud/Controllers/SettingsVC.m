@@ -11,6 +11,7 @@
 #import "LoginViewController.h"
 #import "RSDatePickerVC.h"
 #import "GBJoinedEventsTVC.h"
+#import "Mixpanel.h"
 
 @interface SettingsVC ()
 
@@ -49,6 +50,11 @@
     EditProfileTVC *vc = [sb instantiateViewControllerWithIdentifier:@"EditProfile"];
     vc.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
     [self.navigationController pushViewController:vc animated:YES];
+    Mixpanel *mixpanel = [Mixpanel sharedInstance];
+    [mixpanel track:@"SettingsVC EditProfile" properties:@{
+    }];
+    
+
     
 }
 
@@ -60,6 +66,9 @@
     // Return to login view controller
     LoginViewController *lvc = [[LoginViewController alloc] init];
     [self presentViewController:lvc animated:YES completion:nil];
+    Mixpanel *mixpanel = [Mixpanel sharedInstance];
+    [mixpanel track:@"SettingsVC Logout" properties:@{
+                                                           }];
 }
 
 - (IBAction)enablePushOrNot:(id)sender {
@@ -75,6 +84,9 @@
     } else {
         [[UIApplication sharedApplication] unregisterForRemoteNotifications];
     }
+    Mixpanel *mixpanel = [Mixpanel sharedInstance];
+    [mixpanel track:@"SettingsVC TogglePush" properties:@{
+                                                           }];
 }
 
 -(IBAction)showCalendarPressed:(id)sender {

@@ -10,6 +10,7 @@
 #import "GoActivityCVCell.h"
 #import "GymBudConstants.h"
 #import "GoActivityChosenVC.h"
+#import "Mixpanel.h"
 
 @interface GBBodyPartCVC ()
 
@@ -161,5 +162,8 @@ static NSString * const reuseIdentifier = @"goActivityCell";
     vc.activity = [kGymBudActivities objectAtIndex:5]; // TODO: fix hard coded for Weightlifting
     vc.bodyPartIndices = self.selectedBodyParts;
     [self.navigationController pushViewController:vc animated:YES];
+    Mixpanel *mixpanel = [Mixpanel sharedInstance];
+    [mixpanel track:@"GBBodyPartCVC Next" properties:@{
+                                                  }];
 }
 @end

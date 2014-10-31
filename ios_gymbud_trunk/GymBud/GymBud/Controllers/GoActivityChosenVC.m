@@ -12,6 +12,7 @@
 #import "PAWWallPostsTableViewController.h"
 #import "GymBudEventsTVC.h"
 #import "GymBudConstants.h"
+#import "Mixpanel.h"
 
 @interface GoActivityChosenVC () <MLPAutoCompleteTextFieldDataSource, MLPAutoCompleteTextFieldDelegate, UITextFieldDelegate>
 
@@ -91,6 +92,10 @@
 //    UINavigationController *goNVC = [self.tabBarController.viewControllers objectAtIndex:2];
 //    // TODO: will need to change this based on new index of GO page...
 //    [goNVC popToRootViewControllerAnimated:NO];
+    Mixpanel *mixpanel = [Mixpanel sharedInstance];
+    [mixpanel track:@"GoActivityChosenVC FindOthers" properties:@{
+                                                       }];
+
 }
 
 - (IBAction)createEventPressed:(id)sender {
@@ -101,6 +106,10 @@
     vc.timePickerValue = self.startTimePicker.date;
     vc.additionalValue = self.additionalTextField.text;
     [self.navigationController pushViewController:vc animated:YES];
+    Mixpanel *mixpanel = [Mixpanel sharedInstance];
+    [mixpanel track:@"GoActivityChosenVC CreateEvent" properties:@{
+                                                                  }];
+
 }
 
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {

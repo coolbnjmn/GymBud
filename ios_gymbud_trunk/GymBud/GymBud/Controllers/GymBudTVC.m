@@ -11,6 +11,7 @@
 #import "GymBudConstants.h"
 #import "GymBudDetailsVC.h"
 #import "GymBudTVC.h"
+#import "Mixpanel.h"
 
 @interface GymBudTVC ()
 
@@ -225,6 +226,9 @@
     detailsVC.user = [self.objects objectAtIndex:indexPath.row];
     [self.navigationController pushViewController:detailsVC animated:YES];
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    Mixpanel *mixpanel = [Mixpanel sharedInstance];
+    [mixpanel track:@"GymBudTVC SelectedRow" properties:@{
+                                                           }];
 }
 
 - (void)refreshControlValueChanged:(UIRefreshControl *)refreshControl {

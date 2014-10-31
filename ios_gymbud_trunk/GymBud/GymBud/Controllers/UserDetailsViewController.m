@@ -3,6 +3,7 @@
 #import "GymBudEventModel.h"
 #import "MessageUserVC.h"
 #import "GymBudConstants.h"
+#import "Mixpanel.h"
 
 @implementation UserDetailsViewController
 @synthesize annotation;
@@ -82,6 +83,9 @@
     MessageUserVC *controller = [[MessageUserVC alloc] initWithNibName:nil bundle:nil];
     controller.user = [event organizer];
     [self.navigationController pushViewController:controller animated:YES]; // or use presentViewController if you're using modals
+    Mixpanel *mixpanel = [Mixpanel sharedInstance];
+    [mixpanel track:@"UserDetails MessageUser" properties:@{
+                                                           }];
 }
 
 #pragma mark - NSURLConnectionDataDelegate

@@ -11,6 +11,7 @@
 #import "GymBudConstants.h"
 #import <MLPAutoCompleteTextField/MLPAutoCompleteTextField.h>
 #import <AFNetworking/AFNetworking.h>
+#import "Mixpanel.h"
 
 
 @interface GoActivityCreateEventVC () <MLPAutoCompleteTextFieldDelegate, MLPAutoCompleteTextFieldDataSource, UITextFieldDelegate, UIPickerViewDataSource, UIPickerViewDelegate>
@@ -235,6 +236,10 @@
                 dispatch_after(dispatch_time(DISPATCH_TIME_NOW, NSEC_PER_SEC / 2), dispatch_get_main_queue(), ^{
                     NSLog(@"selftabbarcontroller setselectedindex 0");
                     [self.tabBarController setSelectedIndex:0];
+                    Mixpanel *mixpanel = [Mixpanel sharedInstance];
+                    [mixpanel track:@"GoActivityCreateEventVC CreateEvent" properties:@{
+                                                                                  }];
+
                 });
                 
             } else {
