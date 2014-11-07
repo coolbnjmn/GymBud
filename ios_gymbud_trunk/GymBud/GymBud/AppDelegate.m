@@ -160,7 +160,7 @@
         //        tbc.tabBar.barTintColor = [UIColor colorWithRed:60/255.0f green:151/255.0f blue:211/255.0f alpha:1.0f];
         tbc.tabBar.barTintColor = [UIColor colorWithRed:34/255.0f green:49/255.0f blue:66/255.0f alpha:1.0f];
         tbc.viewControllers = tbcArray;
-        if (currentUser[@"gymbudProfile"]) {
+        if (currentUser[@"gymbudProfile"] != nil) {
             tbc.selectedIndex = 2;
         } else {
             tbc.selectedIndex = 4;

@@ -12,6 +12,7 @@
 #import "RSDatePickerVC.h"
 #import "GBJoinedEventsTVC.h"
 #import "Mixpanel.h"
+#import "GymBudConstants.h"
 
 @interface SettingsVC ()
 
@@ -56,6 +57,59 @@
     
 
     
+}
+
+- (IBAction)inviteAFriend:(id)sender {
+    Mixpanel *mixpanel = [Mixpanel sharedInstance];
+    [mixpanel track:@"SettingsVC InviteAFriendPressed" properties:@{
+                                                           }];
+    // Email Subject
+    NSString *emailTitle = [NSString stringWithFormat:@"%@ wants to workout with you!", [PFUser currentUser][kFacebookUsername]];
+    // Email Content
+    NSString *messageBody = [NSString stringWithFormat:@"<h1>%@ has invited you to a workout. </h1><h2> Download GymBud to join them! <a href=\"https:\/\/itunes.apple.com/us/app/gymbuducla/id935537048?ls=1&mt=8\"> Go to App Store </a></h2>", [PFUser currentUser][kFacebookUsername]]; // Change the message body to HTML
+    // To address
+    NSArray *toRecipents = [NSArray arrayWithObject:@""];
+    MFMailComposeViewController *mc = [[MFMailComposeViewController alloc] init];
+    mc.mailComposeDelegate = self;
+    [mc setSubject:emailTitle];
+    [mc setMessageBody:messageBody isHTML:YES];
+    [mc setToRecipients:toRecipents];
+    
+    // Present mail view controller on screen
+    [self presentViewController:mc animated:YES completion:NULL];
+}
+
+- (void) mailComposeController:(MFMailComposeViewController *)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError *)error
+{
+    Mixpanel *mixpanel = [Mixpanel sharedInstance];
+    switch (result)
+    {
+        case MFMailComposeResultCancelled:
+            NSLog(@"Mail cancelled");
+            [mixpanel track:@"SettingsVC MailCancelled" properties:@{
+                                                                   }];
+            break;
+        case MFMailComposeResultSaved:
+            NSLog(@"Mail saved");
+            [mixpanel track:@"SettingsVC MailSaved" properties:@{
+                                                                   }];
+            break;
+        case MFMailComposeResultSent:
+            NSLog(@"Mail sent");
+            [mixpanel track:@"SettingsVC MailSent" properties:@{
+                                                                   }];
+            break;
+        case MFMailComposeResultFailed:
+            NSLog(@"Mail sent failure: %@", [error localizedDescription]);
+            [mixpanel track:@"SettingsVC MailError" properties:@{
+                                                                   }];
+            break;
+        default:
+            break;
+    }
+    
+    // Close the Mail Interface
+    [self dismissViewControllerAnimated:YES completion:NULL];
 }
 
 - (IBAction)logout:(id)sender {

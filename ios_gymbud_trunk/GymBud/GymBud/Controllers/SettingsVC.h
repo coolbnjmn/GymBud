@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <MessageUI/MessageUI.h>
 
-@interface SettingsVC : UIViewController
+@interface SettingsVC : UIViewController <MFMailComposeViewControllerDelegate>
 
 @end

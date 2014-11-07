@@ -18,6 +18,7 @@
 		77FE64911990A924008724CC /* GoActivityCreateEventVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 77FE64901990A924008724CC /* GoActivityCreateEventVC.m */; };
 		B2011D1119C8019300D65275 /* FilterStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B2011D1019C8019300D65275 /* FilterStoryboard.storyboard */; };
 		B2011D1419C91C3500D65275 /* GBEventsFilterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B2011D1319C91C3500D65275 /* GBEventsFilterViewController.m */; };
+		B2081ECC1A0D4E5A00D18F9B /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B2081ECB1A0D4E5A00D18F9B /* MessageUI.framework */; };
 		B2722DD919AD832900FEC2AF /* GymBudEventsTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = B2722DD819AD832900FEC2AF /* GymBudEventsTVC.m */; };
 		B2722DE219AD86F800FEC2AF /* GymBudEventsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B2722DE019AD86F800FEC2AF /* GymBudEventsCell.m */; };
 		B2722DE319AD86F800FEC2AF /* GymBudEventsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B2722DE119AD86F800FEC2AF /* GymBudEventsCell.xib */; };
@@ -170,6 +171,7 @@
 		B2011D1019C8019300D65275 /* FilterStoryboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = FilterStoryboard.storyboard; path = GymBud/Views/FilterStoryboard.storyboard; sourceTree = "<group>"; };
 		B2011D1219C91C3500D65275 /* GBEventsFilterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GBEventsFilterViewController.h; path = GymBud/Controllers/GBEventsFilterViewController.h; sourceTree = "<group>"; };
 		B2011D1319C91C3500D65275 /* GBEventsFilterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GBEventsFilterViewController.m; path = GymBud/Controllers/GBEventsFilterViewController.m; sourceTree = "<group>"; };
+		B2081ECB1A0D4E5A00D18F9B /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		B2722DD719AD832900FEC2AF /* GymBudEventsTVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GymBudEventsTVC.h; path = GymBud/Controllers/GymBudEventsTVC.h; sourceTree = "<group>"; };
 		B2722DD819AD832900FEC2AF /* GymBudEventsTVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GymBudEventsTVC.m; path = GymBud/Controllers/GymBudEventsTVC.m; sourceTree = "<group>"; };
 		B2722DDF19AD86F800FEC2AF /* GymBudEventsCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GymBudEventsCell.h; path = GymBud/Views/GymBudEventsCell.h; sourceTree = "<group>"; };
@@ -325,6 +327,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B2081ECC1A0D4E5A00D18F9B /* MessageUI.framework in Frameworks */,
 				D6179B487D9E4DCAA95C19B3 /* libPods-GymBud.a in Frameworks */,
 				B2C39DA2197E1A7100039F90 /* UIKit.framework in Frameworks */,
 				B2C39DB6197E1ADB00039F90 /* SystemConfiguration.framework in Frameworks */,
@@ -591,6 +594,7 @@
 		B2C39DA0197E19B300039F90 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				B2081ECB1A0D4E5A00D18F9B /* MessageUI.framework */,
 				77FE647A198EF296008724CC /* Social.framework */,
 				77F13143198EEDDD00576708 /* libPods-GymBud-RSDayFlow.a */,
 				B2C39DB5197E1ADB00039F90 /* SystemConfiguration.framework */,
