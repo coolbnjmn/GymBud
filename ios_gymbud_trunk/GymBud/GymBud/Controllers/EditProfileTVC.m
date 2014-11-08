@@ -416,7 +416,7 @@
     EPBasicInfoVC *vc = [sb instantiateViewControllerWithIdentifier:@"EPBasicInfoVC"];
     vc.delegate = self;
     [self.navigationController pushViewController:vc animated:YES];
-    [vc setCurrentValues:self.profileName.text age:self.profileAge.text andGender:self.profileGender.text andPreferred:[kPreferredTimes indexOfObject:self.profilePreferred.text]];
+    [vc setCurrentValues:self.profileName.text age:self.profileAge.text andGender:self.profileGender.text andPreferred:[kPreferredTimes indexOfObject:self.profilePreferred.text] > 0 ? : 1];
 
 }
 
