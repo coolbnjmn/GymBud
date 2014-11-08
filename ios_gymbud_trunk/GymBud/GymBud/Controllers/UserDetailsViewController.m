@@ -77,11 +77,11 @@
 
 -(void)messageUser:(id) sender {
     // about to message user
-    GymBudEventModel *event = (GymBudEventModel *) annotation;
+    PFObject *event = (PFObject *) annotation;
 
     NSLog(@"about to message user");
     MessageUserVC *controller = [[MessageUserVC alloc] initWithNibName:nil bundle:nil];
-    controller.user = [event organizer];
+    controller.user = event[@"organizer"];
     [self.navigationController pushViewController:controller animated:YES]; // or use presentViewController if you're using modals
     Mixpanel *mixpanel = [Mixpanel sharedInstance];
     [mixpanel track:@"UserDetails MessageUser" properties:@{
