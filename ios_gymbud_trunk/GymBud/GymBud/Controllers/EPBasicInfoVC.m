@@ -8,6 +8,7 @@
 
 #import "EPBasicInfoVC.h"
 #import "GymBudConstants.h"
+#import "Mixpanel.h"
 
 @interface EPBasicInfoVC () <UIPickerViewDataSource, UIPickerViewDelegate>
 
@@ -66,6 +67,8 @@
 }
 
 - (void)tellDelegate:(id)sender {
+    Mixpanel *mixpanel = [Mixpanel sharedInstance];
+    [mixpanel track:@"EPBasicInfoVC DoneEditingBasicInfo" properties:@{}];
     [self.delegate editProfileBasicInfoViewController:self didSetValues:self.nameTextField.text age:self.ageTextField.text andGender:self.genderTextField.text andPreferred:[self.preferredPickerView selectedRowInComponent:0]];
 }
 

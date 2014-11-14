@@ -48,7 +48,7 @@
 - (IBAction)editProfile:(id)sender {
     // show edit profile page here...
     UIStoryboard *sb = [UIStoryboard storyboardWithName:@"EditProfile" bundle:nil];
-    EditProfileTVC *vc = [sb instantiateViewControllerWithIdentifier:@"EditProfile"];
+    EditProfileTVC *vc = [sb instantiateViewControllerWithIdentifier:@"EPOnboarding"];
     vc.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
     [self.navigationController pushViewController:vc animated:YES];
     Mixpanel *mixpanel = [Mixpanel sharedInstance];
