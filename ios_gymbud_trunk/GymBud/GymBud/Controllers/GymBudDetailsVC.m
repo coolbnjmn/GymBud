@@ -23,10 +23,10 @@
     self.tableView.tableHeaderView = self.headerView;
 
     // Create array for table row titles
-    self.rowTitleArray = @[@"Interest1", @"Interest2", @"Interest3", @"Goals", @"Achievements", @"Organizations", @"About"];
+    self.rowTitleArray = @[@"Goals", @"Times"];
     
     // Set default values for the table row data
-    self.rowDataArray = [@[@"N/A", @"N/A", @"N/A", @"N/A", @"N/A", @"N/A", @"N/A"] mutableCopy];
+    self.rowDataArray = [@[@"N/A", @"N/A"] mutableCopy];
     
     if(self.user[@"gymbudProfile"]) {
         self.text1Label.text = self.user[@"gymbudProfile"][@"name"];
@@ -144,7 +144,7 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if(indexPath.section == 1) {
-        if(indexPath.row < 3) {
+        if(indexPath.row < 0) {
             return 44.0f;
         } else {
             return 180.0f;
@@ -171,13 +171,13 @@
     }
     
     // only get here if we are in section == 1
-    if(indexPath.row < 3) {
+    if(indexPath.row < 0) {
         cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     } else {
         cell = [tableView dequeueReusableCellWithIdentifier:BigCellIdentifier];
     }
     
-    if (cell == nil && indexPath.row < 3) {
+    if (cell == nil && indexPath.row < 0) {
         // Create the cell and add the labels
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
         UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake( 0.0f, 0.0f, 120.0f, 44.0f)];
@@ -217,7 +217,7 @@
     
     // Access labels in the cell using the tag #
     UILabel *titleLabel = (UILabel *)[cell viewWithTag:1];
-    if(indexPath.row < 3) {
+    if(indexPath.row < 0) {
         UILabel *dataLabel = (UILabel *)[cell viewWithTag:2];
         dataLabel.text = [self.rowDataArray objectAtIndex:indexPath.row];
     } else {
@@ -236,32 +236,12 @@
     /*
      self.rowTitleArray = @[@"Gender", @"Age", @"Interest1", @"Interest2", @"Interest3", @"Goals", @"Achievements", @"Organizations", @"About"];
      */
-    if ([user objectForKey:@"gymbudProfile"][@"interest1"]) {
-        [self.rowDataArray replaceObjectAtIndex:0 withObject:[user objectForKey:@"gymbudProfile"][@"interest1"]];
-    }
-    
-    if ([user objectForKey:@"gymbudProfile"][@"interest2"]) {
-        [self.rowDataArray replaceObjectAtIndex:1 withObject:[user objectForKey:@"gymbudProfile"][@"interest2"]];
-    }
-    
-    if ([user objectForKey:@"gymbudProfile"][@"interest3"]) {
-        [self.rowDataArray replaceObjectAtIndex:2 withObject:[user objectForKey:@"gymbudProfile"][@"interest3"]];
-    }
-    
     if ([user objectForKey:@"gymbudProfile"][@"goals"]) {
-        [self.rowDataArray replaceObjectAtIndex:3 withObject:[user objectForKey:@"gymbudProfile"][@"goals"]];
+        [self.rowDataArray replaceObjectAtIndex:0 withObject:[user objectForKey:@"gymbudProfile"][@"goals"]];
     }
     
-    if ([user objectForKey:@"gymbudProfile"][@"achievements"]) {
-        [self.rowDataArray replaceObjectAtIndex:4 withObject:[user objectForKey:@"gymbudProfile"][@"achievements"]];
-    }
-    
-    if ([user objectForKey:@"gymbudProfile"][@"organizations"]) {
-        [self.rowDataArray replaceObjectAtIndex:5 withObject:[user objectForKey:@"gymbudProfile"][@"organizations"]];
-    }
-    
-    if ([user objectForKey:@"gymbudProfile"][@"about"]) {
-        [self.rowDataArray replaceObjectAtIndex:6 withObject:[user objectForKey:@"gymbudProfile"][@"about"]];
+    if ([user objectForKey:@"gymbudProfile"][@"times"]) {
+        [self.rowDataArray replaceObjectAtIndex:1 withObject:[user objectForKey:@"gymbudProfile"][@"times"]];
     }
     [self.tableView reloadData];
     

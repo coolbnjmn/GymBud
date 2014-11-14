@@ -126,7 +126,7 @@
     }
     
     [query whereKey:@"objectId" notEqualTo:[[PFUser currentUser] objectId]];
-    
+//    [query orderByDescending:@"]
     self.HUD = [[MBProgressHUD alloc] initWithView:self.view];
     [self.view addSubview:self.HUD];
     UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, kLoadingAnimationWidth, kLoadingAnimationHeight)];
@@ -174,6 +174,9 @@
                                               ) {
                               NSLog(@"result is :%@ for user: %@", result[@"context"][@"mutual_friends"][@"data"], object[@"profile"][@"facebookId"]);
                               NSLog(@"result count is : %lu", (unsigned long)[result[@"context"][@"mutual_friends"][@"data"] count]);
+                              if((unsigned long)[result[@"context"][@"mutual_friends"][@"data"] count] > 0) {
+                                  NSLog(@"got here");
+                              }
                               cell.text3.text = [NSString stringWithFormat:@"Mutual GymBuds: %lu", [result[@"context"][@"mutual_friends"][@"data"] count]];
                           }];
     
@@ -183,14 +186,6 @@
         cell.text1.text = object[kFacebookUsername];
     }
     
-    NSString *interests = @"";
-    if(object[@"gymbudProfile"][@"interest1"]) {
-        interests = [interests stringByAppendingString:object[@"gymbudProfile"][@"interest1"]];
-        interests = [interests stringByAppendingString:@" "];
-        interests = [interests stringByAppendingString:object[@"gymbudProfile"][@"interest2"]];
-        interests = [interests stringByAppendingString:@" "];
-        interests = [interests stringByAppendingString:object[@"gymbudProfile"][@"interest3"]];
-    }
     cell.logo1.image = [UIImage imageNamed:[kGymBudActivityIconMapping objectForKey:object[@"gymbudProfile"][@"interest1"]]];
     cell.logo2.image = [UIImage imageNamed:[kGymBudActivityIconMapping objectForKey:object[@"gymbudProfile"][@"interest2"]]];
     cell.logo3.image = [UIImage imageNamed:[kGymBudActivityIconMapping objectForKey:object[@"gymbudProfile"][@"interest3"]]];
@@ -217,6 +212,12 @@
     //        self.headerImageView.image = [UIImage imageWithData:imageData];
     cell.pictureImageView.layer.cornerRadius = 8.0f;
     cell.pictureImageView.layer.masksToBounds = YES;
+    
+    NSDictionary *params2 = [NSDictionary dictionaryWithObjectsAndKeys:
+                            @"context.fields(mutual_friends)", @"fields",
+                            nil
+                            ];
+
     return cell;
 }
 
