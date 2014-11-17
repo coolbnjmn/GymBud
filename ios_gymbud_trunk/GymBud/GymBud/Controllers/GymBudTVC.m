@@ -17,6 +17,8 @@
 
 @property NSString *reuseId;
 @property MBProgressHUD *HUD;
+@property NSInteger obj1count;
+@property NSInteger obj2count;
 
 @end
 
@@ -104,7 +106,46 @@
     [super objectsDidLoad:error];
     [self.HUD hide:YES];
     NSLog(@"objectsDidLoad GymBudTVC");
-    // This method is called every time objects are loaded from Parse via the PFQuery
+    NSDictionary *params = [NSDictionary dictionaryWithObjectsAndKeys:
+                                                            @"context.fields(mutual_friends)", @"fields",
+                                                            nil
+                                                            ];
+    
+//    NSMutableArray *mutableObjects = [self.objects mutableCopy];
+//    [mutableObjects sortUsingComparator:^NSComparisonResult(id obj1, id obj2) {
+//        self.obj1count = -1;
+//        self.obj2count = -1;
+//        [FBRequestConnection startWithGraphPath:[NSString stringWithFormat:@"/%@", obj1[@"profile"][@"facebookId"]]
+//                                     parameters:params
+//                                     HTTPMethod:@"GET"
+//                              completionHandler:^(
+//                                                  FBRequestConnection *connection,
+//                                                  id result,
+//                                                  NSError *error
+//                                                  ) {
+//                                  self.obj1count = [((NSString *)result[@"context"][@"mutual_friends"][@"summary"][@"total_count"]) integerValue];
+//                              }];
+//        [FBRequestConnection startWithGraphPath:[NSString stringWithFormat:@"/%@", obj2[@"profile"][@"facebookId"]]
+//                                     parameters:params
+//                                     HTTPMethod:@"GET"
+//                              completionHandler:^(
+//                                                  FBRequestConnection *connection,
+//                                                  id result,
+//                                                  NSError *error
+//                                                  ) {
+//                                  self.obj2count = [((NSString *)result[@"context"][@"mutual_friends"][@"summary"][@"total_count"]) integerValue];
+//                              }];
+//        
+//        if(self.obj1count < self.obj2count) {
+//            return NSOrderedAscending;
+//        } else if(self.obj2count < self.obj1count) {
+//            return NSOrderedDescending;
+//        }
+//        return NSOrderedSame;
+//    }];
+    
+
+        // This method is called every time objects are loaded from Parse via the PFQuery
     if (NSClassFromString(@"UIRefreshControl")) {
         [self.refreshControl endRefreshing];
     }
@@ -126,7 +167,7 @@
     }
     
     [query whereKey:@"objectId" notEqualTo:[[PFUser currentUser] objectId]];
-//    [query orderByDescending:@"]
+    [query orderByDescending:@"mutual_friends"];
     self.HUD = [[MBProgressHUD alloc] initWithView:self.view];
     [self.view addSubview:self.HUD];
     UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, kLoadingAnimationWidth, kLoadingAnimationHeight)];
@@ -172,12 +213,11 @@
                                               id result,
                                               NSError *error
                                               ) {
-                              NSLog(@"result is :%@ for user: %@", result[@"context"][@"mutual_friends"][@"data"], object[@"profile"][@"facebookId"]);
-                              NSLog(@"result count is : %lu", (unsigned long)[result[@"context"][@"mutual_friends"][@"data"] count]);
-                              if((unsigned long)[result[@"context"][@"mutual_friends"][@"data"] count] > 0) {
-                                  NSLog(@"got here");
-                              }
-                              cell.text3.text = [NSString stringWithFormat:@"Mutual GymBuds: %lu", [result[@"context"][@"mutual_friends"][@"data"] count]];
+                              NSLog(@"result is :%@ for user: %@", result[@"context"][@"mutual_friends"][@"summary"][@"total_count"], object[@"profile"][@"facebookId"]);
+                              NSLog(@"result count is : %lu", (unsigned long)result[@"context"][@"mutual_friends"][@"summary"][@"total_count"]);
+                             
+                              cell.text3.text = [NSString stringWithFormat:@"Mutual GymBuds: %ld", (result[@"context"][@"mutual_friends"][@"summary"][@"total_count"] ? [((NSString*)result[@"context"][@"mutual_friends"][@"summary"][@"total_count"]) integerValue] : 0)];
+                              NSLog(@"cell.text3.text is: %@", cell.text3.text);
                           }];
     
     if(object[@"gymbudProfile"][@"name"]) {

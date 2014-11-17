@@ -174,7 +174,7 @@
         self.window.rootViewController = loginViewController;
     }
     
-    self.filterDistance = 1000;
+    self.filterDistance = 10;
     
     return YES;
 }
