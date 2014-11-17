@@ -312,6 +312,66 @@
         [push setMessage:[NSString stringWithFormat:@"%@ joined your event!", name]];
         [push sendPushInBackground];
         [eventObject saveInBackground];
+        
+        // Stitch together a postObject and send this async to Parse
+        PFObject *activityObject = [PFObject objectWithClassName:@"Activity"];
+        // Activity has the following fields:
+        /*
+         Activity
+         
+         fromUser : User
+         toUser : User
+         type : String
+         content : String
+         */
+        [activityObject setObject:[eventObject objectForKey:@"organizer"] forKey:@"fromUser"];
+        [activityObject setObject:currentUser forKey:@"toUser"];
+        [activityObject setObject:@"message" forKey:@"type"];
+        [activityObject setObject:@"You joined my event. Let's go lift!" forKey:@"content"];
+        [activityObject setObject:[NSNumber numberWithBool:YES] forKey:@"unread"];
+        [activityObject saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+            if (error) {
+                NSLog(@"Couldn't save!");
+                NSLog(@"%@", error);
+                UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:[[error userInfo] objectForKey:@"error"] message:nil delegate:self cancelButtonTitle:nil otherButtonTitles:@"Ok", nil];
+                [alertView show];
+                return;
+            }
+            if (succeeded) {
+                NSLog(@"Successfully saved!");
+                NSLog(@"%@", activityObject);
+                //            dispatch_async(dispatch_get_main_queue(), ^{
+                //                [[NSNotificationCenter defaultCenter] postNotificationName:@"CreatePostNotification" object:nil];
+                //            });
+            } else {
+                NSLog(@"Failed to save.");
+            }
+        }];
+        
+        PFQuery *innerQuery = [PFUser query];
+        
+        [innerQuery whereKey:@"username" equalTo:[currentUser objectForKey:@"username"]];
+        NSLog(@"about to push");
+        
+        NSLog(@"%@", innerQuery);
+        PFQuery *query2 = [PFInstallation query];
+        
+        // only return Installations that belong to a User that
+        // matches the innerQuery
+        [query2 whereKey:@"user" matchesQuery:innerQuery];
+        
+        // Send the notification.
+        PFPush *push2 = [[PFPush alloc] init];
+        [push2 setQuery:query2];
+        
+        NSString *name2;
+        if([[eventObject objectForKey:@"organizer"] objectForKey:@"gymbudProfile"][@"name"]) {
+            name2 = [[eventObject objectForKey:@"organizer"] objectForKey:@"gymbudProfile"][@"name"];
+        } else {
+            name2 = [[eventObject objectForKey:@"organizer"] objectForKey:@"profile"][@"name"];
+        }
+        [push2 setMessage:[NSString stringWithFormat:@"Message From: %@", name2]];
+        [push2 sendPushInBackground];
     }];
     self.headerJoinButton.enabled = NO;
     [self.headerJoinButton setHidden:YES];
