@@ -15,9 +15,13 @@
     
     self.title = @"Organizer";
     self.tableView.backgroundColor = [UIColor colorWithRed:44/255.0f green:62/255.0f blue:80/255.0f alpha:1.0f];
+    PFObject *event = (PFObject *) annotation;
+
+    if(![[[event objectForKey:@"organizer"] objectId] isEqual:[[PFUser currentUser] objectId]]) {
+        UIBarButtonItem *messageButton = [[UIBarButtonItem alloc] initWithTitle:@"Message User" style:UIBarButtonItemStyleBordered target:self action:@selector(messageUser:)];
+        self.navigationItem.rightBarButtonItem = messageButton;
+    }
     
-    UIBarButtonItem *messageButton = [[UIBarButtonItem alloc] initWithTitle:@"Message User" style:UIBarButtonItemStyleBordered target:self action:@selector(messageUser:)];
-    self.navigationItem.rightBarButtonItem = messageButton;
     
     // Load table header view from nib
     [[NSBundle mainBundle] loadNibNamed:@"TableHeaderView" owner:self options:nil];
@@ -31,7 +35,6 @@
     
     NSLog(@"annotation is: ");
     NSLog(@"%@", annotation);
-    PFObject *event = (PFObject *) annotation;
     if([event objectForKey:@"organizer"]) {
         [event[@"organizer"] fetchIfNeededInBackgroundWithBlock:^(PFObject *object, NSError *error){
             [self updateProfileForUser:(PFUser *)object];
