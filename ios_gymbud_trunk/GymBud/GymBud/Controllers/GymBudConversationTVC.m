@@ -9,7 +9,7 @@
 #import "GymBudConversationTVC.h"
 #import <MBProgressHUD/MBProgressHUD.h>
 #import "GymBudConstants.h"
-#import "GymBudBasicCell.h"
+#import "GymBudMessageCell.h"
 
 @interface GymBudConversationTVC () <UITextFieldDelegate>
 
@@ -22,14 +22,16 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.reuseId = @"GymBudBasicCell";
+    self.reuseId = @"GymBudMessageCell";
 
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
-    [self.tableView registerNib:[UINib nibWithNibName:@"GymBudBasicCell" bundle:nil] forCellReuseIdentifier:self.reuseId];
+    [self.tableView registerNib:[UINib nibWithNibName:@"GymBudMessageCell" bundle:nil] forCellReuseIdentifier:self.reuseId];
 
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    self.tableView.estimatedRowHeight = 80.0f;
+    self.tableView.rowHeight = UITableViewAutomaticDimension;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -128,24 +130,24 @@
 - (PFTableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath object:(PFObject *)object
 {
     if(indexPath.section == 0) {
-        GymBudBasicCell *cell = [tableView dequeueReusableCellWithIdentifier:self.reuseId forIndexPath:indexPath];
+        GymBudMessageCell *cell = [tableView dequeueReusableCellWithIdentifier:self.reuseId forIndexPath:indexPath];
         
         
         if(cell == nil) {
-            cell = [[GymBudBasicCell alloc] init];
+            cell = [[GymBudMessageCell alloc] init];
         }
         
-        cell.pictureImageView.image = [UIImage imageNamed:@"yogaIcon.png"];
+        cell.image.image = [UIImage imageNamed:@"yogaIcon.png"];
         
         if([[object objectForKey:@"fromUser"][@"profile"][@"name"] isEqualToString:[PFUser currentUser][@"profile"][@"name"]]) {
             cell.text1.text = @"You";
             cell.text2.text = [object objectForKey:@"content"];
             
             PFFile *theImage = [object objectForKey:@"fromUser"][@"gymbudProfile"][@"profilePicture"];
-            __weak GymBudBasicCell *weakCell = cell;
+            __weak GymBudMessageCell *weakCell = cell;
             [theImage getDataInBackgroundWithBlock:^(NSData *data, NSError *error){
                 NSLog(@"+++++++++ Loading image view with real data ++++++++");
-                weakCell.pictureImageView.image = [UIImage imageWithData:data];
+                weakCell.image.image = [UIImage imageWithData:data];
             }];
         } else {
             if([object objectForKey:@"fromUser"][@"gymbudProfile"]) {
@@ -156,17 +158,16 @@
             cell.text2.text = [object objectForKey:@"content"];
             
             PFFile *theImage = [object objectForKey:@"fromUser"][@"gymbudProfile"][@"profilePicture"];
-            __weak GymBudBasicCell *weakCell = cell;
+            __weak GymBudMessageCell *weakCell = cell;
             [theImage getDataInBackgroundWithBlock:^(NSData *data, NSError *error){
                 NSLog(@"+++++++++ Loading image view with real data ++++++++");
-                weakCell.pictureImageView.image = [UIImage imageWithData:data];
+                weakCell.image.image = [UIImage imageWithData:data];
             }];
         }
         cell.backgroundColor = [UIColor grayColor];
-        cell.text3.text = @"";
         
-        cell.pictureImageView.layer.cornerRadius = 8.0f;
-        cell.pictureImageView.layer.masksToBounds = YES;
+        cell.image.layer.cornerRadius = 8.0f;
+        cell.image.layer.masksToBounds = YES;
         
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         return cell;
@@ -191,9 +192,10 @@
     
 }
 
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return 80.0f;
-}
+//- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+//    CGFloat height = [((NSString *)[[self.objects objectAtIndex:indexPath.row] objectForKey:@"content"]) ].height;
+//    return 80.0f;
+//}
 
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
     return YES;

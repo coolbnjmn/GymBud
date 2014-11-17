@@ -93,7 +93,7 @@
     
     UIBarButtonItem *filterModalViewButton = [[UIBarButtonItem alloc] initWithTitle:@"Filter" style:UIBarButtonItemStyleBordered target:self action:@selector(toggleHalfModal:)];
 //    self.navigationItem.leftBarButtonItem = filterModalViewButton;
-    self.navigationItem.rightBarButtonItem = filterModalViewButton;
+//    self.navigationItem.rightBarButtonItem = filterModalViewButton;
 //    self.navigationItem.rightBarButtonItem = mapToTableViewButton;
 //    self.navigationItem.hidesBackButton = YES;
     
@@ -320,59 +320,59 @@
     
 }
 
-- (IBAction)toggleHalfModal:(id)sender {
-    if (self.childViewControllers.count == 0) {
-        self.opaqueView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 568)];
-        self.opaqueView.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.75];
-        
-        [self.view addSubview:self.opaqueView];
-        UIStoryboard *sb = [UIStoryboard storyboardWithName:@"FilterStoryboard" bundle:nil];
-        self.modal = [sb instantiateViewControllerWithIdentifier:@"FilterViewController"];
-        [self addChildViewController:self.modal];
-        self.modal.view.frame = CGRectMake(0, 568, 320, 284);
-        [self.view addSubview:self.modal.view];
-        
-        UIBarButtonItem *filterModalViewButton = [[UIBarButtonItem alloc] initWithTitle:@"Done" style:UIBarButtonItemStyleBordered target:self action:@selector(toggleHalfModal:)];
-        self.navigationItem.leftBarButtonItem = filterModalViewButton;
-
-        [UIView animateWithDuration:1.0
-                              delay:0.0
-                            options:UIViewAnimationOptionCurveEaseOut
-                         animations:^{
-                             self.modal.view.frame = CGRectMake(0, 284, 320, 284);
-                         } completion:^(BOOL finished) {
-                             [self.modal didMoveToParentViewController:self];
-                         }];
-    } else {
-        UIBarButtonItem *filterModalViewButton = [[UIBarButtonItem alloc] initWithTitle:@"Filter" style:UIBarButtonItemStyleBordered target:self action:@selector(toggleHalfModal:)];
-        self.navigationItem.leftBarButtonItem = filterModalViewButton;
-        [self.opaqueView removeFromSuperview];
-        GBEventsFilterViewController *vc = (GBEventsFilterViewController *)self.modal;
-        NSArray *indexOfActivies = vc.selectedActivities;
-        NSMutableArray *actualActivities = [[NSMutableArray alloc] initWithCapacity:[indexOfActivies count]];
-        for(NSIndexPath *path in indexOfActivies) {
-            [actualActivities addObject:[kGymBudActivities objectAtIndex:path.row]];
-        }
-        
-        if([actualActivities count] == 0) {
-            self.activityFilters = nil;
-        } else {
-            self.activityFilters = actualActivities;
-        }
-        
-        [self loadObjects];
-        [UIView animateWithDuration:1.0
-                              delay:0.0
-                            options:UIViewAnimationOptionCurveEaseIn
-                         animations:^{
-                             self.modal.view.frame = CGRectMake(0, 568, 320, 284);
-                         } completion:^(BOOL finished) {
-                             [self.modal.view removeFromSuperview];
-                             [self.modal removeFromParentViewController];
-                             self.modal = nil;
-                         }];
-
-    }
-}
+//- (IBAction)toggleHalfModal:(id)sender {
+//    if (self.childViewControllers.count == 0) {
+//        self.opaqueView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 568)];
+//        self.opaqueView.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.75];
+//        
+//        [self.view addSubview:self.opaqueView];
+//        UIStoryboard *sb = [UIStoryboard storyboardWithName:@"FilterStoryboard" bundle:nil];
+//        self.modal = [sb instantiateViewControllerWithIdentifier:@"FilterViewController"];
+//        [self addChildViewController:self.modal];
+//        self.modal.view.frame = CGRectMake(0, 568, 320, 284);
+//        [self.view addSubview:self.modal.view];
+//        
+//        UIBarButtonItem *filterModalViewButton = [[UIBarButtonItem alloc] initWithTitle:@"Done" style:UIBarButtonItemStyleBordered target:self action:@selector(toggleHalfModal:)];
+//        self.navigationItem.leftBarButtonItem = filterModalViewButton;
+//
+//        [UIView animateWithDuration:1.0
+//                              delay:0.0
+//                            options:UIViewAnimationOptionCurveEaseOut
+//                         animations:^{
+//                             self.modal.view.frame = CGRectMake(0, 284, 320, 284);
+//                         } completion:^(BOOL finished) {
+//                             [self.modal didMoveToParentViewController:self];
+//                         }];
+//    } else {
+//        UIBarButtonItem *filterModalViewButton = [[UIBarButtonItem alloc] initWithTitle:@"Filter" style:UIBarButtonItemStyleBordered target:self action:@selector(toggleHalfModal:)];
+//        self.navigationItem.leftBarButtonItem = filterModalViewButton;
+//        [self.opaqueView removeFromSuperview];
+//        GBEventsFilterViewController *vc = (GBEventsFilterViewController *)self.modal;
+//        NSArray *indexOfActivies = vc.selectedActivities;
+//        NSMutableArray *actualActivities = [[NSMutableArray alloc] initWithCapacity:[indexOfActivies count]];
+//        for(NSIndexPath *path in indexOfActivies) {
+//            [actualActivities addObject:[kGymBudActivities objectAtIndex:path.row]];
+//        }
+//        
+//        if([actualActivities count] == 0) {
+//            self.activityFilters = nil;
+//        } else {
+//            self.activityFilters = actualActivities;
+//        }
+//        
+//        [self loadObjects];
+//        [UIView animateWithDuration:1.0
+//                              delay:0.0
+//                            options:UIViewAnimationOptionCurveEaseIn
+//                         animations:^{
+//                             self.modal.view.frame = CGRectMake(0, 568, 320, 284);
+//                         } completion:^(BOOL finished) {
+//                             [self.modal.view removeFromSuperview];
+//                             [self.modal removeFromParentViewController];
+//                             self.modal = nil;
+//                         }];
+//
+//    }
+//}
 
 @end
