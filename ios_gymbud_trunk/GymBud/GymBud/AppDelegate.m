@@ -11,6 +11,7 @@
 #import "GBBodyPartCVC.h"
 #import "EditProfileTVC.h"
 #import "Mixpanel.h"
+#import "EPTVC.h"
 
 #define MIXPANEL_TOKEN @"079a199396a3f6b60e57782e3b79d25f"
 
@@ -165,7 +166,7 @@
         } else {
             tbc.selectedIndex = 4;
             UIStoryboard *sb = [UIStoryboard storyboardWithName:@"EditProfile" bundle:nil];
-            EditProfileTVC *vc = [sb instantiateViewControllerWithIdentifier:@"EditProfile"];
+            EPTVC *vc = [sb instantiateViewControllerWithIdentifier:@"EPOnboarding"];
             [nvc3 pushViewController:vc animated:NO];
         }
         self.window.rootViewController = tbc;

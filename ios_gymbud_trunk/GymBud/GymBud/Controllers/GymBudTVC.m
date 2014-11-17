@@ -258,8 +258,8 @@
     
 //    cell.text3.text = [NSString stringWithFormat:@"Mutual Friends: %d", [mutual_friends_count intValue]];
     cell.text2.text = text2Text;
-    cell.backgroundColor = [UIColor grayColor];
-    
+    UIColor * color = [UIColor colorWithRed:178/255.0f green:168/255.0f blue:151/255.0f alpha:1.0f];
+    cell.backgroundColor = color;
     cell.pictureImageView.image = [UIImage imageNamed:@"yogaIcon.png"];
 
     PFFile *theImage = [object objectForKey:@"gymbudProfile"][@"profilePicture"];

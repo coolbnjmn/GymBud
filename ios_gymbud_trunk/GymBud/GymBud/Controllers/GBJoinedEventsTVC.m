@@ -176,7 +176,8 @@
     cell.startTimeTextLabel.text = [formatter stringFromDate:eventStartTime];
 //    cell.activityTextLabel.text = [object objectForKey:@"activity"];
     cell.activityTextLabel.text = ![object[@"additional"] isEqualToString:@""] ? [[[object objectForKey:@"activity"] stringByAppendingString:@" - "] stringByAppendingString:object[@"additional"]] : object[@"activity"];
-    cell.backgroundColor = [UIColor grayColor];
+    UIColor * color = [UIColor colorWithRed:178/255.0f green:168/255.0f blue:151/255.0f alpha:1.0f];
+    cell.backgroundColor = color;
     
     PFFile *theImage = [object objectForKey:@"organizer"][@"gymbudProfile"][@"profilePicture"];
     cell.logoImageView.image = [UIImage imageNamed:[kGymBudActivityIconMapping objectForKey:[object objectForKey:@"activity"]]];

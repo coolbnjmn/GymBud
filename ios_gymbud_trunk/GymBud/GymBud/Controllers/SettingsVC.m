@@ -7,7 +7,7 @@
 //
 
 #import "SettingsVC.h"
-#import "EditProfileTVC.h"
+#import "EPTVC.h"
 #import "LoginViewController.h"
 #import "RSDatePickerVC.h"
 #import "GBJoinedEventsTVC.h"
@@ -18,6 +18,7 @@
 
 @property (weak, nonatomic) IBOutlet UIButton *logoutButton;
 @property (weak, nonatomic) IBOutlet UIButton *editProfileButton;
+@property (weak, nonatomic) IBOutlet UIButton *inviteAFriendButton;
 @property (weak, nonatomic) IBOutlet UISegmentedControl *enablePushSegmentedControl;
 @end
 
@@ -37,6 +38,14 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     self.navigationItem.title = @"Settings";
+    UIColor * color = [UIColor colorWithRed:178/255.0f green:168/255.0f blue:151/255.0f alpha:1.0f];
+    self.view.backgroundColor = color;
+
+    self.logoutButton.backgroundColor = [UIColor colorWithRed:34/255.0f green:49/255.0f blue:66/255.0f alpha:1.0f];
+    self.editProfileButton.backgroundColor = [UIColor colorWithRed:34/255.0f green:49/255.0f blue:66/255.0f alpha:1.0f];
+    self.inviteAFriendButton.backgroundColor = [UIColor colorWithRed:34/255.0f green:49/255.0f blue:66/255.0f alpha:1.0f];
+    
+
 }
 
 - (void)didReceiveMemoryWarning
@@ -48,7 +57,7 @@
 - (IBAction)editProfile:(id)sender {
     // show edit profile page here...
     UIStoryboard *sb = [UIStoryboard storyboardWithName:@"EditProfile" bundle:nil];
-    EditProfileTVC *vc = [sb instantiateViewControllerWithIdentifier:@"EPOnboarding"];
+    EPTVC *vc = [sb instantiateViewControllerWithIdentifier:@"EPOnboarding"];
     vc.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
     [self.navigationController pushViewController:vc animated:YES];
     Mixpanel *mixpanel = [Mixpanel sharedInstance];

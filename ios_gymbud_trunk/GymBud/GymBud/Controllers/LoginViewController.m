@@ -8,7 +8,7 @@
 #import "GymBudTVC.h"
 #import "GymBudConstants.h"
 #import "GBBodyPartCVC.h"
-#import "EditProfileTVC.h"
+#import "EPTVC.h"
 
 #import <Parse/Parse.h>
 
@@ -173,7 +173,7 @@
                                               }];
                          }];
         UIStoryboard *sb = [UIStoryboard storyboardWithName:@"EditProfile" bundle:nil];
-        EditProfileTVC *vc = [sb instantiateViewControllerWithIdentifier:@"EditProfile"];
+        EPTVC *vc = [sb instantiateViewControllerWithIdentifier:@"EPOnboarding"];
         [nvc3 pushViewController:vc animated:NO];
     }
     

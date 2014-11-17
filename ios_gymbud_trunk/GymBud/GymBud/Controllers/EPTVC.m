@@ -120,6 +120,7 @@
     }
     
     self.profileGoals.delegate = self;
+    self.profileTimes.delegate = self;
 }
 
 - (void) dealloc {
@@ -372,7 +373,7 @@ finishedSavingWithError:(NSError *)error
 }
 
 - (void)textViewDidBeginEditing:(UITextView *)textView {
-    if ([[textView.text substringFromIndex:4] isEqualToString:@"Answer here..."]) {
+    if ([textView.text isEqualToString:@"Answer here..."]) {
         textView.text = @"";
     }
     [textView becomeFirstResponder];
