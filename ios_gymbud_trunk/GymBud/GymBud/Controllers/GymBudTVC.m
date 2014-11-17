@@ -17,8 +17,7 @@
 
 @property NSString *reuseId;
 @property MBProgressHUD *HUD;
-@property NSInteger obj1count;
-@property NSInteger obj2count;
+@property NSMutableArray *sortedByMutualFriendsObjects;
 
 @end
 
@@ -104,18 +103,21 @@
 
 - (void)objectsDidLoad:(NSError *)error {
     [super objectsDidLoad:error];
-    [self.HUD hide:YES];
     NSLog(@"objectsDidLoad GymBudTVC");
-    NSDictionary *params = [NSDictionary dictionaryWithObjectsAndKeys:
-                                                            @"context.fields(mutual_friends)", @"fields",
-                                                            nil
-                                                            ];
+  if (NSClassFromString(@"UIRefreshControl")) {
+      [self.refreshControl endRefreshing];
+  }
+  [self.HUD hide:YES];
+
+//    NSDictionary *params = [NSDictionary dictionaryWithObjectsAndKeys:
+//                                                            @"context.fields(mutual_friends)", @"fields",
+//                                                            nil
+//                                                            ];
+//    
+//    self.sortedByMutualFriendsObjects = [[NSMutableArray alloc] init];
     
-//    NSMutableArray *mutableObjects = [self.objects mutableCopy];
-//    [mutableObjects sortUsingComparator:^NSComparisonResult(id obj1, id obj2) {
-//        self.obj1count = -1;
-//        self.obj2count = -1;
-//        [FBRequestConnection startWithGraphPath:[NSString stringWithFormat:@"/%@", obj1[@"profile"][@"facebookId"]]
+//    for(int i = 0; i < [self.objects count]; i++) {
+//        [FBRequestConnection startWithGraphPath:[NSString stringWithFormat:@"/%@", self.objects[i][@"profile"][@"facebookId"]]
 //                                     parameters:params
 //                                     HTTPMethod:@"GET"
 //                              completionHandler:^(
@@ -123,32 +125,33 @@
 //                                                  id result,
 //                                                  NSError *error
 //                                                  ) {
-//                                  self.obj1count = [((NSString *)result[@"context"][@"mutual_friends"][@"summary"][@"total_count"]) integerValue];
+//                                  NSLog(@"result count is : %lu", (unsigned long)result[@"context"][@"mutual_friends"][@"summary"][@"total_count"]);
+//                                  
+//                                  NSMutableDictionary *tuple = [[NSMutableDictionary alloc] init];
+//                                  [tuple setObject:[NSNumber numberWithInt:i] forKey:@"objectsIndex"];
+//                                  [tuple setObject:[NSNumber numberWithInt:[((NSString*)result[@"context"][@"mutual_friends"][@"summary"][@"total_count"]) integerValue]] forKey:@"mutual_friends_count"];
+//                                  [self.sortedByMutualFriendsObjects addObject:tuple];
+//                                  NSLog(@"added tuple");
+//                                  if([self.sortedByMutualFriendsObjects count] == [self.objects count]) {
+//                                      [self.sortedByMutualFriendsObjects sortUsingComparator:^NSComparisonResult(id obj1, id obj2) {
+//                                          return (obj1[@"mutual_friends_count"] < obj2[@"mutual_friends_count"] ?  NSOrderedDescending :  NSOrderedAscending);
+//                                      }];
+//                                      NSLog(@"helloooo");
+//                                      NSLog(@"%@", self.sortedByMutualFriendsObjects);
+//                                      // This method is called every time objects are loaded from Parse via the PFQuery
+//                                      if (NSClassFromString(@"UIRefreshControl")) {
+//                                          [self.refreshControl endRefreshing];
+//                                      }
+//                                      [self.tableView reloadData];
+//                                      [self.HUD hide:YES];
+//
+//                                  }
 //                              }];
-//        [FBRequestConnection startWithGraphPath:[NSString stringWithFormat:@"/%@", obj2[@"profile"][@"facebookId"]]
-//                                     parameters:params
-//                                     HTTPMethod:@"GET"
-//                              completionHandler:^(
-//                                                  FBRequestConnection *connection,
-//                                                  id result,
-//                                                  NSError *error
-//                                                  ) {
-//                                  self.obj2count = [((NSString *)result[@"context"][@"mutual_friends"][@"summary"][@"total_count"]) integerValue];
-//                              }];
-//        
-//        if(self.obj1count < self.obj2count) {
-//            return NSOrderedAscending;
-//        } else if(self.obj2count < self.obj1count) {
-//            return NSOrderedDescending;
-//        }
-//        return NSOrderedSame;
-//    }];
+//
+//    }
     
 
-        // This method is called every time objects are loaded from Parse via the PFQuery
-    if (NSClassFromString(@"UIRefreshControl")) {
-        [self.refreshControl endRefreshing];
-    }
+
 }
 
 - (void)objectsWillLoad {
@@ -167,7 +170,6 @@
     }
     
     [query whereKey:@"objectId" notEqualTo:[[PFUser currentUser] objectId]];
-    [query orderByDescending:@"mutual_friends"];
     self.HUD = [[MBProgressHUD alloc] initWithView:self.view];
     [self.view addSubview:self.HUD];
     UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, kLoadingAnimationWidth, kLoadingAnimationHeight)];
@@ -193,6 +195,8 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     return kCellHeight;
 }
+
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath object:(PFObject *)object {
     GymBudBasicCell *cell = [tableView dequeueReusableCellWithIdentifier:self.reuseId forIndexPath:indexPath];
     
@@ -200,6 +204,8 @@
     if(cell == nil) {
         cell = [[GymBudBasicCell alloc] init];
     }
+    
+    
     
     NSDictionary *params = [NSDictionary dictionaryWithObjectsAndKeys:
                             @"context.fields(mutual_friends)", @"fields",
@@ -214,21 +220,34 @@
                                               NSError *error
                                               ) {
                               NSLog(@"result is :%@ for user: %@", result[@"context"][@"mutual_friends"][@"summary"][@"total_count"], object[@"profile"][@"facebookId"]);
-                              NSLog(@"result count is : %lu", (unsigned long)result[@"context"][@"mutual_friends"][@"summary"][@"total_count"]);
                              
                               cell.text3.text = [NSString stringWithFormat:@"Mutual GymBuds: %ld", (result[@"context"][@"mutual_friends"][@"summary"][@"total_count"] ? [((NSString*)result[@"context"][@"mutual_friends"][@"summary"][@"total_count"]) integerValue] : 0)];
                               NSLog(@"cell.text3.text is: %@", cell.text3.text);
                           }];
+//    NSLog(@"sortedMutualFriends count: %ld", [self.sortedByMutualFriendsObjects count]);
+//    PFObject *theObject;
+//    NSNumber *mutual_friends_count;
+//    
+//    if([self.sortedByMutualFriendsObjects count] < [self.objects count]) {
+//        theObject = object;
+//    } else {
+//        NSNumber *actualIndex = [self.sortedByMutualFriendsObjects objectAtIndex:indexPath.row][@"objectsIndex"];
+//        NSLog(@"the actual index is : %d", [actualIndex intValue]);
+//        theObject = [self.objects objectAtIndex:[actualIndex intValue]];
+//        mutual_friends_count = [self.sortedByMutualFriendsObjects objectAtIndex:indexPath.row][@"mutual_friends_count"];
+//
+//    }
     
+//    PFObject *theObject = [self.objects objectAtIndex:actualIndex];
     if(object[@"gymbudProfile"][@"name"]) {
         cell.text1.text = object[@"gymbudProfile"][@"name"];
     } else {
         cell.text1.text = object[kFacebookUsername];
     }
     
-    cell.logo1.image = [UIImage imageNamed:[kGymBudActivityIconMapping objectForKey:object[@"gymbudProfile"][@"interest1"]]];
-    cell.logo2.image = [UIImage imageNamed:[kGymBudActivityIconMapping objectForKey:object[@"gymbudProfile"][@"interest2"]]];
-    cell.logo3.image = [UIImage imageNamed:[kGymBudActivityIconMapping objectForKey:object[@"gymbudProfile"][@"interest3"]]];
+//    cell.logo1.image = [UIImage imageNamed:[kGymBudActivityIconMapping objectForKey:object[@"gymbudProfile"][@"interest1"]]];
+//    cell.logo2.image = [UIImage imageNamed:[kGymBudActivityIconMapping objectForKey:object[@"gymbudProfile"][@"interest2"]]];
+//    cell.logo3.image = [UIImage imageNamed:[kGymBudActivityIconMapping objectForKey:object[@"gymbudProfile"][@"interest3"]]];
     
     NSString *text2Text = @"";
     if(object[@"gymbudProfile"][@"preferred"]) {
@@ -237,8 +256,8 @@
         text2Text = @"Workout Time Unspecified";
     }
     
+//    cell.text3.text = [NSString stringWithFormat:@"Mutual Friends: %d", [mutual_friends_count intValue]];
     cell.text2.text = text2Text;
-    
     cell.backgroundColor = [UIColor grayColor];
     
     cell.pictureImageView.image = [UIImage imageNamed:@"yogaIcon.png"];
@@ -252,11 +271,6 @@
     //        self.headerImageView.image = [UIImage imageWithData:imageData];
     cell.pictureImageView.layer.cornerRadius = 8.0f;
     cell.pictureImageView.layer.masksToBounds = YES;
-    
-    NSDictionary *params2 = [NSDictionary dictionaryWithObjectsAndKeys:
-                            @"context.fields(mutual_friends)", @"fields",
-                            nil
-                            ];
 
     return cell;
 }
@@ -264,7 +278,11 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     GymBudDetailsVC *detailsVC = [[GymBudDetailsVC alloc] init];
-    detailsVC.user = [self.objects objectAtIndex:indexPath.row];
+//    if([self.sortedByMutualFriendsObjects count] == [self.objects count]) {
+//        detailsVC.user = [self.objects objectAtIndex:[[self.sortedByMutualFriendsObjects objectAtIndex:indexPath.row][@"objectsIndex"] intValue]];
+//    } else {
+        detailsVC.user = [self.objects objectAtIndex:indexPath.row];
+//    }
     [self.navigationController pushViewController:detailsVC animated:YES];
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     Mixpanel *mixpanel = [Mixpanel sharedInstance];

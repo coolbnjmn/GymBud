@@ -175,7 +175,7 @@
     [formatter setTimeStyle:NSDateFormatterShortStyle];
     cell.startTimeTextLabel.text = [formatter stringFromDate:eventStartTime];
 //    cell.activityTextLabel.text = [object objectForKey:@"activity"];
-    cell.activityTextLabel.text = object[@"additional"] ? [[[object objectForKey:@"activity"] stringByAppendingString:@" - "] stringByAppendingString:object[@"additional"]] : object[@"activity"];
+    cell.activityTextLabel.text = ![object[@"additional"] isEqualToString:@""] ? [[[object objectForKey:@"activity"] stringByAppendingString:@" - "] stringByAppendingString:object[@"additional"]] : object[@"activity"];
     cell.backgroundColor = [UIColor grayColor];
     
     PFFile *theImage = [object objectForKey:@"organizer"][@"gymbudProfile"][@"profilePicture"];

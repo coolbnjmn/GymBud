@@ -8,6 +8,7 @@
 #import "GymBudTVC.h"
 #import "GymBudConstants.h"
 #import "GBBodyPartCVC.h"
+#import "EditProfileTVC.h"
 
 #import <Parse/Parse.h>
 
@@ -141,33 +142,42 @@
     tbc.tabBar.barTintColor = [UIColor colorWithRed:34/255.0f green:49/255.0f blue:66/255.0f alpha:1.0f];
     tbc.viewControllers = tbcArray;
     
-    tbc.selectedIndex = 4;
-    UIView *editToast = [[UIView alloc] initWithFrame:CGRectMake(0, nvc4.view.bounds.size.height, nvc4.view.bounds.size.width, 40)];
-    editToast.backgroundColor = [UIColor orangeColor];
-    UILabel *textLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, nvc4.view.bounds.size.width, 40)];
-    textLabel.text = @"Edit your profile now!";
-    textLabel.textAlignment = NSTextAlignmentCenter;
-    [editToast addSubview:textLabel];
-    UIApplication *app = [UIApplication sharedApplication];
-    [app.keyWindow addSubview:editToast];
+    if ([PFUser currentUser][@"gymbudProfile"] != nil) {
+        tbc.selectedIndex = 2;
+    } else {
+        tbc.selectedIndex = 4;
+        UIView *editToast = [[UIView alloc] initWithFrame:CGRectMake(0, nvc4.view.bounds.size.height, nvc4.view.bounds.size.width, 40)];
+        editToast.backgroundColor = [UIColor orangeColor];
+        UILabel *textLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, nvc4.view.bounds.size.width, 40)];
+        textLabel.text = @"Edit your profile now!";
+        textLabel.textAlignment = NSTextAlignmentCenter;
+        [editToast addSubview:textLabel];
+        UIApplication *app = [UIApplication sharedApplication];
+        [app.keyWindow addSubview:editToast];
+        
+        [UIView animateWithDuration:1.0
+                              delay:0.0
+                            options:UIViewAnimationOptionCurveEaseIn
+                         animations:^{
+                             editToast.frame = CGRectMake(0, nvc4.view.bounds.size.height - 40 - tbc.tabBar.bounds.size.height, nvc4.view.bounds.size.width, 40);
+                         }
+                         completion:^(BOOL finished) {
+                             [UIView animateWithDuration:2.0
+                                                   delay:5.0
+                                                 options:UIViewAnimationOptionCurveEaseOut
+                                              animations:^{
+                                                  editToast.alpha = 0.0f;
+                                              }
+                                              completion:^(BOOL finished) {
+                                                  [editToast removeFromSuperview];
+                                              }];
+                         }];
+        UIStoryboard *sb = [UIStoryboard storyboardWithName:@"EditProfile" bundle:nil];
+        EditProfileTVC *vc = [sb instantiateViewControllerWithIdentifier:@"EditProfile"];
+        [nvc3 pushViewController:vc animated:NO];
+    }
     
-    [UIView animateWithDuration:1.0
-                          delay:0.0
-                        options:UIViewAnimationOptionCurveEaseIn
-                     animations:^{
-                         editToast.frame = CGRectMake(0, nvc4.view.bounds.size.height - 40 - tbc.tabBar.bounds.size.height, nvc4.view.bounds.size.width, 40);
-                     }
-                     completion:^(BOOL finished) {
-                         [UIView animateWithDuration:2.0
-                                               delay:5.0
-                                             options:UIViewAnimationOptionCurveEaseOut
-                                          animations:^{
-                                              editToast.alpha = 0.0f;
-                                          }
-                                          completion:^(BOOL finished) {
-                                              [editToast removeFromSuperview];
-                                          }];
-                     }];
+    
 
     
     // Send request to Facebook
