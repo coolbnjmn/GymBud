@@ -30,8 +30,8 @@
 
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
-    self.tableView.estimatedRowHeight = 80.0f;
-    self.tableView.rowHeight = UITableViewAutomaticDimension;
+//    self.tableView.estimatedRowHeight = 80.0f;
+//    self.tableView.rowHeight = UITableViewAutomaticDimension;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -127,6 +127,25 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:NO];
 }
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    if([self.objects count] != 0) {
+        PFObject *message = [self.objects objectAtIndex:indexPath.row];
+        NSString *tmp = message[@"content"];
+        
+        CGSize constraintSize = CGSizeMake(tableView.bounds.size.width, tableView.bounds.size.height);
+        CGSize labelSize = [tmp sizeWithFont:[UIFont systemFontOfSize:13] constrainedToSize:constraintSize lineBreakMode:UILineBreakModeWordWrap];
+        
+        
+        if (indexPath.section == 0) {
+            return labelSize.height + 100;
+        } else {
+            return 80;
+        }
+    } else return 0;
+    
+}
+
 - (PFTableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath object:(PFObject *)object
 {
     if(indexPath.section == 0) {

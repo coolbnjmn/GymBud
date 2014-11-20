@@ -50,13 +50,16 @@
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
     NSLog(@"viewDidLoad ONBOARDING HAPPENING");
-    UIBarButtonItem *cancelButton = [[UIBarButtonItem alloc] initWithTitle:@"Cancel" style:UIBarButtonItemStyleBordered target:self action:@selector(cancelButtonHandler:)];
-    self.navigationItem.leftBarButtonItem = cancelButton;
-    
+    PFUser *currentUser = [PFUser currentUser];
+
+    if(currentUser[@"gymbudProfile"]) {
+        UIBarButtonItem *cancelButton = [[UIBarButtonItem alloc] initWithTitle:@"Cancel" style:UIBarButtonItemStyleBordered target:self action:@selector(cancelButtonHandler:)];
+        self.navigationItem.leftBarButtonItem = cancelButton;
+    }
+ 
     UIBarButtonItem *saveButton = [[UIBarButtonItem alloc] initWithTitle:@"Save" style:UIBarButtonItemStyleBordered target:self action:@selector(updateProfileButtonHandler:)];
     self.navigationItem.rightBarButtonItem = saveButton;
     
-    PFUser *currentUser = [PFUser currentUser];
     if ([currentUser objectForKey:@"gymbudProfile"][@"goals"]) {
         self.profileGoals.text = [currentUser objectForKey:@"gymbudProfile"][@"goals"];
     }

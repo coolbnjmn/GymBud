@@ -65,6 +65,16 @@
             self.additionalContent = [NSMutableArray arrayWithArray:kGBMileTimes];
         }
     }
+    
+    self.startTimePicker.minimumDate = [NSDate date];
+    
+    NSCalendar *calendar = [NSCalendar autoupdatingCurrentCalendar];
+    NSDateComponents *components = [calendar components:NSYearCalendarUnit
+                                    | NSMonthCalendarUnit | NSDayCalendarUnit
+                                               fromDate:[NSDate date]];
+    components.day += 5;
+    NSDate *date = [calendar dateFromComponents:components];
+    self.startTimePicker.maximumDate = date;
 }
 
 - (void)didReceiveMemoryWarning
