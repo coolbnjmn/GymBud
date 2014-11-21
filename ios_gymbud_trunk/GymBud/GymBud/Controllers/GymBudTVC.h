@@ -6,6 +6,7 @@
 //  Copyright (c) 2014 GymBud. All rights reserved.
 //
 
+#import <ParseUI/ParseUI.h>
 #import <Parse/Parse.h>
 
 @interface GymBudTVC : PFQueryTableViewController

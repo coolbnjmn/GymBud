@@ -12,6 +12,7 @@
 #import "GymBudDetailsVC.h"
 #import "GymBudTVC.h"
 #import "Mixpanel.h"
+#import <ParseFacebookUtils/PFFacebookUtils.h>
 
 @interface GymBudTVC ()
 

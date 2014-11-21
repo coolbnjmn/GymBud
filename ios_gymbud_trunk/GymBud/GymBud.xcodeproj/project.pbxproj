@@ -22,6 +22,9 @@
 		B21086C51A16739E0057EC6A /* EPTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = B21086C41A16739E0057EC6A /* EPTVC.m */; };
 		B223AD9B1A199F60000C7FB1 /* GymBudMessageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B223AD991A199F60000C7FB1 /* GymBudMessageCell.m */; };
 		B223AD9C1A199F60000C7FB1 /* GymBudMessageCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B223AD9A1A199F60000C7FB1 /* GymBudMessageCell.xib */; };
+		B240D9A31A1F153B00374713 /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B2C39D9D197E19A900039F90 /* Parse.framework */; };
+		B240D9A81A1F153B00374713 /* ParseFacebookUtils.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B240D9A51A1F153B00374713 /* ParseFacebookUtils.framework */; };
+		B240D9A91A1F153B00374713 /* ParseUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B240D9A61A1F153B00374713 /* ParseUI.framework */; };
 		B2722DD919AD832900FEC2AF /* GymBudEventsTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = B2722DD819AD832900FEC2AF /* GymBudEventsTVC.m */; };
 		B2722DE219AD86F800FEC2AF /* GymBudEventsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B2722DE019AD86F800FEC2AF /* GymBudEventsCell.m */; };
 		B2722DE319AD86F800FEC2AF /* GymBudEventsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B2722DE119AD86F800FEC2AF /* GymBudEventsCell.xib */; };
@@ -117,8 +120,6 @@
 		B2C39D94197E194F00039F90 /* ViewMessageVC.m in Sources */ = {isa = PBXBuildFile; fileRef = B2C39D85197E194F00039F90 /* ViewMessageVC.m */; };
 		B2C39D95197E194F00039F90 /* ViewMessageVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = B2C39D86197E194F00039F90 /* ViewMessageVC.xib */; };
 		B2C39D9A197E197E00039F90 /* PAWPost.m in Sources */ = {isa = PBXBuildFile; fileRef = B2C39D99197E197E00039F90 /* PAWPost.m */; };
-		B2C39D9E197E19A900039F90 /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B2C39D9C197E19A900039F90 /* FacebookSDK.framework */; };
-		B2C39D9F197E19A900039F90 /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B2C39D9D197E19A900039F90 /* Parse.framework */; };
 		B2C39DA2197E1A7100039F90 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B2C39DA1197E1A7100039F90 /* UIKit.framework */; };
 		B2C39DA4197E1A7C00039F90 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B2C39DA3197E1A7C00039F90 /* QuartzCore.framework */; };
 		B2C39DA6197E1A9000039F90 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B2C39DA5197E1A9000039F90 /* StoreKit.framework */; };
@@ -138,6 +139,7 @@
 		B2D0CACD197E272400B17D32 /* login-button-small@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B2D0CAC9197E272400B17D32 /* login-button-small@2x.png */; };
 		B2D0CAD1197E2BB700B17D32 /* FindUserTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = B2D0CACF197E2BB700B17D32 /* FindUserTVC.m */; };
 		B2D0CAD8197E2EAE00B17D32 /* TableHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = B2D0CAD7197E2EAE00B17D32 /* TableHeaderView.xib */; };
+		B2D607151A1F1BF400F19B34 /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B2C39D9C197E19A900039F90 /* FacebookSDK.framework */; };
 		B2FCFBE919CAC15C0078C68D /* EPBasicInfoVC.m in Sources */ = {isa = PBXBuildFile; fileRef = B2FCFBE819CAC15C0078C68D /* EPBasicInfoVC.m */; };
 		D6179B487D9E4DCAA95C19B3 /* libPods-GymBud.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 48EE337A63E5439BA42E30F1 /* libPods-GymBud.a */; };
 /* End PBXBuildFile section */
@@ -180,6 +182,9 @@
 		B223AD981A199F60000C7FB1 /* GymBudMessageCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GymBudMessageCell.h; path = GymBud/Views/GymBudMessageCell.h; sourceTree = "<group>"; };
 		B223AD991A199F60000C7FB1 /* GymBudMessageCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GymBudMessageCell.m; path = GymBud/Views/GymBudMessageCell.m; sourceTree = "<group>"; };
 		B223AD9A1A199F60000C7FB1 /* GymBudMessageCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = GymBudMessageCell.xib; path = GymBud/Views/GymBudMessageCell.xib; sourceTree = "<group>"; };
+		B240D9A41A1F153B00374713 /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Bolts.framework; path = GymBud/Frameworks/Bolts.framework; sourceTree = "<group>"; };
+		B240D9A51A1F153B00374713 /* ParseFacebookUtils.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ParseFacebookUtils.framework; path = GymBud/Frameworks/ParseFacebookUtils.framework; sourceTree = "<group>"; };
+		B240D9A61A1F153B00374713 /* ParseUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ParseUI.framework; path = GymBud/Frameworks/ParseUI.framework; sourceTree = "<group>"; };
 		B2722DD719AD832900FEC2AF /* GymBudEventsTVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GymBudEventsTVC.h; path = GymBud/Controllers/GymBudEventsTVC.h; sourceTree = "<group>"; };
 		B2722DD819AD832900FEC2AF /* GymBudEventsTVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GymBudEventsTVC.m; path = GymBud/Controllers/GymBudEventsTVC.m; sourceTree = "<group>"; };
 		B2722DDF19AD86F800FEC2AF /* GymBudEventsCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GymBudEventsCell.h; path = GymBud/Views/GymBudEventsCell.h; sourceTree = "<group>"; };
@@ -348,8 +353,10 @@
 				77FE647B198EF296008724CC /* Social.framework in Frameworks */,
 				B2C39DA8197E1A9B00039F90 /* CoreLocation.framework in Frameworks */,
 				B2C39DA6197E1A9000039F90 /* StoreKit.framework in Frameworks */,
-				B2C39D9E197E19A900039F90 /* FacebookSDK.framework in Frameworks */,
-				B2C39D9F197E19A900039F90 /* Parse.framework in Frameworks */,
+				B2D607151A1F1BF400F19B34 /* FacebookSDK.framework in Frameworks */,
+				B240D9A81A1F153B00374713 /* ParseFacebookUtils.framework in Frameworks */,
+				B240D9A91A1F153B00374713 /* ParseUI.framework in Frameworks */,
+				B240D9A31A1F153B00374713 /* Parse.framework in Frameworks */,
 				B2C39DA4197E1A7C00039F90 /* QuartzCore.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -607,6 +614,9 @@
 		B2C39DA0197E19B300039F90 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				B240D9A41A1F153B00374713 /* Bolts.framework */,
+				B240D9A51A1F153B00374713 /* ParseFacebookUtils.framework */,
+				B240D9A61A1F153B00374713 /* ParseUI.framework */,
 				B2081ECB1A0D4E5A00D18F9B /* MessageUI.framework */,
 				77FE647A198EF296008724CC /* Social.framework */,
 				77F13143198EEDDD00576708 /* libPods-GymBud-RSDayFlow.a */,

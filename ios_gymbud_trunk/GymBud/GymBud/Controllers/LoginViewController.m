@@ -11,6 +11,8 @@
 #import "EPTVC.h"
 
 #import <Parse/Parse.h>
+#import <ParseUI/ParseUI.h>
+#import <ParseFacebookUtils/PFFacebookUtils.h>
 
 @implementation LoginViewController
 

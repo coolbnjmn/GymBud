@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import <Parse/Parse.h>
+#import <ParseUI/ParseUI.h>
 
 @interface GymBudBasicCell : PFTableViewCell
 @property (weak, nonatomic) IBOutlet UIImageView *pictureImageView;

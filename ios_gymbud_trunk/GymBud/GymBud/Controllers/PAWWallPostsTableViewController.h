@@ -10,6 +10,8 @@
 #import <Parse/Parse.h>
 #import "PAWPost.h"
 #import "PAWWallViewController.h"
+#import <ParseUI/ParseUI.h>
+
 
 @interface PAWWallPostsTableViewController : PFQueryTableViewController <PAWWallViewControllerHighlight>
 

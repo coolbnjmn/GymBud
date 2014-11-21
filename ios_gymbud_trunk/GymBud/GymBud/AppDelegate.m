@@ -12,6 +12,7 @@
 #import "EditProfileTVC.h"
 #import "Mixpanel.h"
 #import "EPTVC.h"
+#import <ParseFacebookUtils/PFFacebookUtils.h>
 
 #define MIXPANEL_TOKEN @"079a199396a3f6b60e57782e3b79d25f"
 
