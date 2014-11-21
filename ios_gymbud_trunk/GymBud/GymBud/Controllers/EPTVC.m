@@ -55,6 +55,8 @@
     if(currentUser[@"gymbudProfile"]) {
         UIBarButtonItem *cancelButton = [[UIBarButtonItem alloc] initWithTitle:@"Cancel" style:UIBarButtonItemStyleBordered target:self action:@selector(cancelButtonHandler:)];
         self.navigationItem.leftBarButtonItem = cancelButton;
+    } else {
+        self.navigationItem.hidesBackButton = YES;
     }
  
     UIBarButtonItem *saveButton = [[UIBarButtonItem alloc] initWithTitle:@"Save" style:UIBarButtonItemStyleBordered target:self action:@selector(updateProfileButtonHandler:)];
