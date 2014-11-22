@@ -1,5 +1,5 @@
 #include "Pods-GymBud-MBProgressHUD.xcconfig"
 GCC_PREPROCESSOR_DEFINITIONS = COCOAPODS=1
-HEADER_SEARCH_PATHS = "${PODS_ROOT}/BuildHeaders" "${PODS_ROOT}/BuildHeaders/MBProgressHUD" "${PODS_ROOT}/Headers" "${PODS_ROOT}/Headers/AFNetworking" "${PODS_ROOT}/Headers/MBProgressHUD" "${PODS_ROOT}/Headers/MLPAutoCompleteTextField" "${PODS_ROOT}/Headers/Mixpanel" "${PODS_ROOT}/Headers/RSDayFlow"
+HEADER_SEARCH_PATHS = "${PODS_ROOT}/BuildHeaders" "${PODS_ROOT}/BuildHeaders/MBProgressHUD" "${PODS_ROOT}/Headers" "${PODS_ROOT}/Headers/AFNetworking" "${PODS_ROOT}/Headers/AXRatingView" "${PODS_ROOT}/Headers/MBProgressHUD" "${PODS_ROOT}/Headers/MLPAutoCompleteTextField" "${PODS_ROOT}/Headers/Mixpanel" "${PODS_ROOT}/Headers/RSDayFlow" "${PODS_ROOT}/Headers/UIAlertView-Blocks"
 OTHER_LDFLAGS = -ObjC ${PODS_GYMBUD_MBPROGRESSHUD_OTHER_LDFLAGS}
 PODS_ROOT = ${SRCROOT}

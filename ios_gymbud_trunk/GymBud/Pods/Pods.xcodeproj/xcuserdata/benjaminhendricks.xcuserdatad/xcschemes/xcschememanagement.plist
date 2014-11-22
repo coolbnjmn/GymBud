@@ -9,6 +9,11 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>Pods-GymBud-AXRatingView.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>Pods-GymBud-MBProgressHUD.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -29,6 +34,11 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>Pods-GymBud-UIAlertView-Blocks.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>Pods-GymBud.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -37,32 +47,42 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>30413681C7EC418D93BAAEBD</key>
+		<key>0A78029018F44036B58BC8D0</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>77D8D8AC7E234B8F9969A24F</key>
+		<key>21269011644847F9AEFA6693</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>848D3EEECB0F4153989E9098</key>
+		<key>239DA99D350742638806DF89</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>ACB04EB93904466288B3BDA5</key>
+		<key>29AF810EABA24CFABF5659A3</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>D309DBDC7AB54A3CBFA10555</key>
+		<key>5EC04BA80944452BA4640242</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>D9FD18FD773144C19C93A138</key>
+		<key>6D288D4F3C2547BE9060CD30</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>80087594E3764F0EB9A50C0E</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>E1EF8EE7862F4A48B0FDCED0</key>
 		<dict>
 			<key>primary</key>
 			<true/>

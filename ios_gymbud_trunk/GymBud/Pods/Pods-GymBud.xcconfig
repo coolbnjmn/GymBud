@@ -1,5 +1,5 @@
 GCC_PREPROCESSOR_DEFINITIONS = $(inherited) COCOAPODS=1
-HEADER_SEARCH_PATHS = "${PODS_ROOT}/Headers" "${PODS_ROOT}/Headers/AFNetworking" "${PODS_ROOT}/Headers/MBProgressHUD" "${PODS_ROOT}/Headers/MLPAutoCompleteTextField" "${PODS_ROOT}/Headers/Mixpanel" "${PODS_ROOT}/Headers/RSDayFlow"
-OTHER_CFLAGS = $(inherited) -isystem "${PODS_ROOT}/Headers" -isystem "${PODS_ROOT}/Headers/AFNetworking" -isystem "${PODS_ROOT}/Headers/MBProgressHUD" -isystem "${PODS_ROOT}/Headers/MLPAutoCompleteTextField" -isystem "${PODS_ROOT}/Headers/Mixpanel" -isystem "${PODS_ROOT}/Headers/RSDayFlow"
+HEADER_SEARCH_PATHS = "${PODS_ROOT}/Headers" "${PODS_ROOT}/Headers/AFNetworking" "${PODS_ROOT}/Headers/AXRatingView" "${PODS_ROOT}/Headers/MBProgressHUD" "${PODS_ROOT}/Headers/MLPAutoCompleteTextField" "${PODS_ROOT}/Headers/Mixpanel" "${PODS_ROOT}/Headers/RSDayFlow" "${PODS_ROOT}/Headers/UIAlertView-Blocks"
+OTHER_CFLAGS = $(inherited) -isystem "${PODS_ROOT}/Headers" -isystem "${PODS_ROOT}/Headers/AFNetworking" -isystem "${PODS_ROOT}/Headers/AXRatingView" -isystem "${PODS_ROOT}/Headers/MBProgressHUD" -isystem "${PODS_ROOT}/Headers/MLPAutoCompleteTextField" -isystem "${PODS_ROOT}/Headers/Mixpanel" -isystem "${PODS_ROOT}/Headers/RSDayFlow" -isystem "${PODS_ROOT}/Headers/UIAlertView-Blocks"
 OTHER_LDFLAGS = -ObjC -licucore -framework Accelerate -framework CoreGraphics -framework CoreTelephony -framework Foundation -framework MobileCoreServices -framework QuartzCore -framework Security -framework SystemConfiguration -framework UIKit
 PODS_ROOT = ${SRCROOT}/Pods

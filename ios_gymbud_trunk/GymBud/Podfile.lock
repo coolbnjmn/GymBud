@@ -20,23 +20,29 @@ PODS:
   - AFNetworking/UIKit (2.3.1):
     - AFNetworking/NSURLConnection
     - AFNetworking/NSURLSession
+  - AXRatingView (1.0.3)
   - MBProgressHUD (0.9)
   - Mixpanel (2.5.4)
   - MLPAutoCompleteTextField (1.5)
   - RSDayFlow (0.1.2)
+  - UIAlertView-Blocks (1.0)
 
 DEPENDENCIES:
   - AFNetworking (~> 2.0)
+  - AXRatingView
   - MBProgressHUD (~> 0.8)
   - Mixpanel
   - MLPAutoCompleteTextField (~> 1.5)
   - RSDayFlow (~> 0.1.2)
+  - UIAlertView-Blocks
 
 SPEC CHECKSUMS:
   AFNetworking: 6d7b76aa5d04c8c37daad3eef4b7e3f2a7620da3
+  AXRatingView: 4f6d6c96f6d0efc1deaa6cf493dbb1ffcfa79e55
   MBProgressHUD: 2038dbcf3dce73215abed6001657043d53aa79a8
   Mixpanel: 87167a0b0a74f11f0ee3787f291357494730617c
   MLPAutoCompleteTextField: 5e440aa7b139258f779db3375dd486421959be15
   RSDayFlow: 03f2ed762b7ed199323770650597a499ef39112a
+  UIAlertView-Blocks: f3271e84372beb97aea115cd1fb26ae66457f12f
 
 COCOAPODS: 0.33.1

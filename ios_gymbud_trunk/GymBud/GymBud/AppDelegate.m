@@ -13,8 +13,11 @@
 #import "Mixpanel.h"
 #import "EPTVC.h"
 #import <ParseFacebookUtils/PFFacebookUtils.h>
+#import "GymBudEventCompletionView.h"
+#import <UIAlertView+Blocks.h>
 
 #define MIXPANEL_TOKEN @"079a199396a3f6b60e57782e3b79d25f"
+#define kGymBudEventCompletionHeight 154
 
 @interface AppDelegate ()
 
@@ -178,6 +181,15 @@
     
     self.filterDistance = 10;
     
+    // Extract the notification data
+    NSDictionary *notificationPayload = launchOptions[UIApplicationLaunchOptionsRemoteNotificationKey];
+    
+    if(notificationPayload != nil) {
+        GymBudEventCompletionView *eventCompletionView = [[GymBudEventCompletionView alloc] initWithFrame:CGRectMake(0, self.window.bounds.size.height-kGymBudEventCompletionHeight, self.window.bounds.size.width, kGymBudEventCompletionHeight)];
+        eventCompletionView.event = notificationPayload [@"eventObjectId"];
+        [self.window.rootViewController.view addSubview:eventCompletionView];
+    }
+
     return YES;
 }
 
@@ -199,9 +211,56 @@ didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)newDeviceToken {
     [currentInstallation saveInBackground];
 }
 
+- (void)alertView:(UIAlertView *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
+    if(buttonIndex == 1) {
+        // bring up modal here...
+        UIViewController * vc = self.window.rootViewController;
+        // You need to set the identifier from the Interface
+        // Builder for the following line to work
+        //        CarFinderViewController *pvc = [vc.storyboard instantiateViewControllerWithIdentifier:@"CarFinderViewController"];
+        //        GBEventCompletionView
+        GymBudEventCompletionView *eventCompletionView = [[GymBudEventCompletionView alloc] initWithFrame:CGRectMake(0, self.window.bounds.size.height/2, self.window.bounds.size.width, self.window.bounds.size.height/2)];
+        eventCompletionView.event = actionSheet.title;
+        [self.window.rootViewController.view addSubview:eventCompletionView];
+        
+    }
+}
+
 - (void)application:(UIApplication *)application
 didReceiveRemoteNotification:(NSDictionary *)userInfo {
-    [PFPush handlePush:userInfo];
+    if ([userInfo objectForKey:@"aps"] && [[userInfo objectForKey:@"aps"][@"alert"] isEqualToString:@"How was your GymBud?"]) {
+        NSString *message = [userInfo objectForKey:@"aps"][@"alert"];
+        
+        RIButtonItem *cancelItem = [RIButtonItem itemWithLabel:@"Dismiss" action:^{
+            // this is the code that will be executed when the user taps "No"
+            // this is optional... if you leave the action as nil, it won't do anything
+            // but here, I'm showing a block just to show that you can use one if you want to.
+        }];
+        
+        RIButtonItem *goodItem = [RIButtonItem itemWithLabel:@"Good" action:^{
+            // You need to set the identifier from the Interface
+            // Builder for the following line to work
+            //        CarFinderViewController *pvc = [vc.storyboard instantiateViewControllerWithIdentifier:@"CarFinderViewController"];
+            //        GBEventCompletionView
+            GymBudEventCompletionView *eventCompletionView = [[GymBudEventCompletionView alloc] initWithFrame:CGRectMake(0, self.window.bounds.size.height-kGymBudEventCompletionHeight, self.window.bounds.size.width, kGymBudEventCompletionHeight)];
+            eventCompletionView.event = userInfo[@"eventObjectId"];
+            [self.window.rootViewController.view addSubview:eventCompletionView];
+        }];
+        
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle: message
+                                                        message: nil
+                                               cancelButtonItem:cancelItem
+                                               otherButtonItems:goodItem, nil];
+        [alert show];
+    } else  {
+        [PFPush handlePush:userInfo];
+       
+    }
+    
+    if ([userInfo objectForKey:@"badge"]) { // TODO: for now we have no badge number, will get to this.
+        NSInteger badgeNumber = [[userInfo objectForKey:@"badge"] integerValue];
+        [application setApplicationIconBadgeNumber:badgeNumber];
+    }
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application {

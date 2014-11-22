@@ -8,6 +8,8 @@ pod 'MLPAutoCompleteTextField', '~> 1.5'
 pod 'AFNetworking', '~> 2.0'
 pod 'MBProgressHUD', '~> 0.8'
 pod 'Mixpanel'
+pod 'AXRatingView'
+pod 'UIAlertView-Blocks'
 
 end
 

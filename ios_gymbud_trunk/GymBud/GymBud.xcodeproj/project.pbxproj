@@ -140,6 +140,8 @@
 		B2D0CAD1197E2BB700B17D32 /* FindUserTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = B2D0CACF197E2BB700B17D32 /* FindUserTVC.m */; };
 		B2D0CAD8197E2EAE00B17D32 /* TableHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = B2D0CAD7197E2EAE00B17D32 /* TableHeaderView.xib */; };
 		B2D607151A1F1BF400F19B34 /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B2C39D9C197E19A900039F90 /* FacebookSDK.framework */; };
+		B2D607181A2008A500F19B34 /* GymBudEventCompletionView.m in Sources */ = {isa = PBXBuildFile; fileRef = B2D607171A2008A500F19B34 /* GymBudEventCompletionView.m */; };
+		B2D6071A1A2009B600F19B34 /* GymBudEventCompletionView.xib in Resources */ = {isa = PBXBuildFile; fileRef = B2D607191A2009B600F19B34 /* GymBudEventCompletionView.xib */; };
 		B2FCFBE919CAC15C0078C68D /* EPBasicInfoVC.m in Sources */ = {isa = PBXBuildFile; fileRef = B2FCFBE819CAC15C0078C68D /* EPBasicInfoVC.m */; };
 		D6179B487D9E4DCAA95C19B3 /* libPods-GymBud.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 48EE337A63E5439BA42E30F1 /* libPods-GymBud.a */; };
 /* End PBXBuildFile section */
@@ -330,6 +332,9 @@
 		B2D0CACE197E2BB700B17D32 /* FindUserTVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FindUserTVC.h; path = GymBud/Controllers/FindUserTVC.h; sourceTree = "<group>"; };
 		B2D0CACF197E2BB700B17D32 /* FindUserTVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FindUserTVC.m; path = GymBud/Controllers/FindUserTVC.m; sourceTree = "<group>"; };
 		B2D0CAD7197E2EAE00B17D32 /* TableHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = TableHeaderView.xib; path = GymBud/Views/TableHeaderView.xib; sourceTree = "<group>"; };
+		B2D607161A2008A500F19B34 /* GymBudEventCompletionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GymBudEventCompletionView.h; path = GymBud/Views/GymBudEventCompletionView.h; sourceTree = "<group>"; };
+		B2D607171A2008A500F19B34 /* GymBudEventCompletionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GymBudEventCompletionView.m; path = GymBud/Views/GymBudEventCompletionView.m; sourceTree = "<group>"; };
+		B2D607191A2009B600F19B34 /* GymBudEventCompletionView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = GymBudEventCompletionView.xib; path = GymBud/Views/GymBudEventCompletionView.xib; sourceTree = "<group>"; };
 		B2FCFBE719CAC15C0078C68D /* EPBasicInfoVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EPBasicInfoVC.h; path = GymBud/Controllers/EPBasicInfoVC.h; sourceTree = "<group>"; };
 		B2FCFBE819CAC15C0078C68D /* EPBasicInfoVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EPBasicInfoVC.m; path = GymBud/Controllers/EPBasicInfoVC.m; sourceTree = "<group>"; };
 		E5F4F985088842DBBF422DE7 /* Pods-GymBud.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GymBud.xcconfig"; path = "Pods/Pods-GymBud.xcconfig"; sourceTree = "<group>"; };
@@ -606,6 +611,9 @@
 				B2B8DC2F19DA160A00BED65D /* GymBudBasicCell.m */,
 				B2B8DC3019DA160A00BED65D /* GymBudBasicCell.xib */,
 				B2B8DC3619DB214B00BED65D /* GymBudHeaderView.xib */,
+				B2D607161A2008A500F19B34 /* GymBudEventCompletionView.h */,
+				B2D607171A2008A500F19B34 /* GymBudEventCompletionView.m */,
+				B2D607191A2009B600F19B34 /* GymBudEventCompletionView.xib */,
 			);
 			name = Views;
 			path = ..;
@@ -794,6 +802,7 @@
 				B2977450198629A3000AD7B6 /* people.png in Resources */,
 				B2784D9D19B18D010042A188 /* load9.png in Resources */,
 				B2C39D8D197E194F00039F90 /* MessageUserVC.xib in Resources */,
+				B2D6071A1A2009B600F19B34 /* GymBudEventCompletionView.xib in Resources */,
 				B2C39D69197E191C00039F90 /* just_background.png in Resources */,
 				B297742D1984C1BF000AD7B6 /* PostCreateTVC.storyboard in Resources */,
 				B2784D9A19B18D010042A188 /* load6.png in Resources */,
@@ -851,6 +860,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B2D607181A2008A500F19B34 /* GymBudEventCompletionView.m in Sources */,
 				77FD41C51993EEF20017E8D5 /* GymBudEventModel.m in Sources */,
 				B2C39D8C197E194F00039F90 /* MessageUserVC.m in Sources */,
 				77FE6487198F715C008724CC /* GoActivityCVCell.m in Sources */,

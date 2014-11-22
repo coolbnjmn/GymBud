@@ -9,20 +9,15 @@ Parse.Cloud.define("hello", function(request, response) {
 Parse.Cloud.job("eventReminder", function(request, response) {
 	Parse.Cloud.useMasterKey();
 	var Event = Parse.Object.extend("Event");
-	console.log("Hello world!");
 	var query = new Parse.Query(Event);
 	query.equalTo("isVisible", true);
-	console.log("creating query: ");
 	query.each(function(eventObj) {
-	   console.log(eventObj.get("time"));
 	   var d = new Date();
 	   var currDate = Date.UTC(d.getFullYear(), d.getMonth(), d.getDate(), d.getHours(), d.getMinutes(), d.getSeconds()) + d.getTimezoneOffset()*60*1000;
 	   var eventDate = Date.parse(eventObj.get("time"));
 	   var duration = eventObj.get("duration");
 
-	   console.log(eventObj.get("activity"));
 	   var timeDiff = (eventDate + duration*60*1000) - currDate;
-	   console.log(timeDiff);
 
            if(timeDiff < 0) {
 	     // send a push for that event
@@ -39,10 +34,15 @@ Parse.Cloud.job("eventReminder", function(request, response) {
 	var query2 = new Parse.Query(Event);
 	query2.equalTo("isVisible", true);
 	query2.each(function(eventObj) {
-	   console.log(eventObj.get("time"));
 	   var d = new Date();
 	   var currDate = Date.UTC(d.getFullYear(), d.getMonth(), d.getDate(), d.getHours(), d.getMinutes(), d.getSeconds()) + d.getTimezoneOffset()*60*1000;
 	   var eventDate = Date.parse(eventObj.get("time"));
+	   var duration = eventObj.get("duration");
+
+	  // var end_date =  new Date(Date.parse(eventObj.get("time")).getTime() + eventObj.get("duration")*60000);
+	  var end_date = new Date(eventDate + duration * 60 * 1000);
+	  console.log("end date: ");
+	  console.log(end_date);
 
  		console.log("eventDate: ");
 	   console.log(eventDate);
@@ -50,9 +50,8 @@ Parse.Cloud.job("eventReminder", function(request, response) {
 	   console.log(currDate);
 
 	   var timeDiff = eventDate - currDate;
-	   console.log(timeDiff);
 
-           if(timeDiff < 15*60*1000 && timeDiff > 0) {
+           if(timeDiff < 15*60*1000 && timeDiff > -15*60*1000) {
 	     // send a push for that event
 	     console.log("sending push");
 	     var pushQuery = new Parse.Query(Parse.Installation);
@@ -67,13 +66,33 @@ Parse.Cloud.job("eventReminder", function(request, response) {
 	     Parse.Push.send({
 	       where: pushQuery, 
 	       data: {
-	         alert: "Your event is starting soon!"
+	         alert: "Your event is starting soon!",
+		  eventObjectId: eventObj.id,
+		  eventObj: attendeesAndOrganizer
 	       }
 	     }, {
 	       success: function() {
 	         response.success("pushed");
 	       }, error: function(error) {
 	         reponse.error("didn't push");
+	       }
+	     });
+	     
+	     console.log("Object ID: ");
+	     console.log(eventObj.id);
+	     Parse.Push.send({
+	        where: pushQuery, 
+		data: {
+		  alert: "How was your GymBud?",
+		  eventObjectId: eventObj.get("objectId"),
+		  eventObj: eventObj
+		},
+		push_time: end_date// end date
+	       }, {
+	        success: function() {
+		  response.success("scheduled end of event push");
+	       }, error: function(error) {
+	          reponse.error("didn't schedule the push")
 	       }
 	     });
 	   }
