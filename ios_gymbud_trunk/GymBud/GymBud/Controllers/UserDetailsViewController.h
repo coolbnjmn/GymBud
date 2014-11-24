@@ -16,6 +16,8 @@
 @property (nonatomic, strong) NSMutableArray *rowDataArray;
 @property (nonatomic, strong) NSMutableData *imageData;
 
+@property (nonatomic) bool attendeesPresent;
+@property (nonatomic, strong) NSMutableArray *attendees;
 @property (nonatomic, strong) PFObject* annotation;
 // UINavigationBar button touch handler
 - (void)logoutButtonTouchHandler:(id)sender;

@@ -15,6 +15,7 @@
 #import <ParseFacebookUtils/PFFacebookUtils.h>
 #import "GymBudEventCompletionView.h"
 #import <UIAlertView+Blocks.h>
+#import "SWRevealViewController.h"
 
 #define MIXPANEL_TOKEN @"079a199396a3f6b60e57782e3b79d25f"
 #define kGymBudEventCompletionHeight 154
@@ -29,7 +30,25 @@
 
 @synthesize currentLocation;
 
+#pragma mark - SWRevealViewDelegate
 
+//- (id <UIViewControllerAnimatedTransitioning>)revealController:(SWRevealViewController *)revealController animationControllerForOperation:(SWRevealControllerOperation)operation fromViewController:(UIViewController *)fromVC toViewController:(UIViewController *)toVC
+//{
+//    if ( operation != SWRevealControllerOperationReplaceRightController )
+//        return nil;
+//    
+//    if ( [toVC isKindOfClass:[RightViewController class]] )
+//    {
+//        if ( [(RightViewController*)toVC wantsCustomAnimation] )
+//        {
+//            id<UIViewControllerAnimatedTransitioning> animationController = [[CustomAnimationController alloc] init];
+//            return animationController;
+//        }
+//    }
+//    
+//    return nil;
+//}
+    
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
     [Parse setApplicationId:@"DXeaM3NWJz1Lca9cjOyry5lusEhYw8nwuOyI8ene" clientKey:@"j39bl4eu3iaLj2kbEbHGDx6nGcfhWWQA2IlxGx79"];
@@ -185,9 +204,88 @@
     NSDictionary *notificationPayload = launchOptions[UIApplicationLaunchOptionsRemoteNotificationKey];
     
     if(notificationPayload != nil) {
-        GymBudEventCompletionView *eventCompletionView = [[GymBudEventCompletionView alloc] initWithFrame:CGRectMake(0, self.window.bounds.size.height-kGymBudEventCompletionHeight, self.window.bounds.size.width, kGymBudEventCompletionHeight)];
-        eventCompletionView.event = notificationPayload [@"eventObjectId"];
-        [self.window.rootViewController.view addSubview:eventCompletionView];
+        if ([notificationPayload objectForKey:@"aps"] && [[notificationPayload objectForKey:@"aps"][@"alert"] isEqualToString:@"How was your GymBud?"]) {
+            NSString *message = [notificationPayload objectForKey:@"aps"][@"alert"];
+                GymBudEventCompletionView *eventCompletionView = [[GymBudEventCompletionView alloc] initWithFrame:CGRectMake(0, self.window.bounds.size.height-kGymBudEventCompletionHeight, self.window.bounds.size.width, kGymBudEventCompletionHeight)];
+                eventCompletionView.event = notificationPayload[@"eventObjectId"];
+                [self.window.rootViewController.view addSubview:eventCompletionView];
+            
+        } else if ([notificationPayload objectForKey:@"requestor"] != nil) {
+            NSString *message = [notificationPayload objectForKey:@"aps"][@"alert"];
+            
+            RIButtonItem *cancelItem = [RIButtonItem itemWithLabel:@"Deny" action:^{
+                // send a push to the requestor, saying he was denied
+                // leave the event open
+                PFQuery *pushQuery = [PFInstallation query];
+                [pushQuery whereKey:@"user" equalTo:[notificationPayload objectForKey:@"requestor"]];
+                PFPush *requestorPush = [[PFPush alloc] init];
+                NSMutableDictionary *data = [[NSMutableDictionary alloc] init];
+                NSString *name;
+                if([[[PFUser currentUser] objectForKey:@"gymbudProfile"] objectForKey:@"name"]) {
+                    name = [[[PFUser currentUser] objectForKey:@"gymbudProfile"] objectForKey:@"name"];
+                } else {
+                    name = [[[PFUser currentUser] objectForKey:@"profile"] objectForKey:@"name"];
+                }
+                [data setObject:[NSString stringWithFormat:@"%@ went with someone else. Create your own event?", name] forKey:@"alert"];
+                [data setObject:[notificationPayload objectForKey:@"eventObj"] forKey:@"eventObj"];
+                [data setObject:[NSNumber numberWithBool:YES] forKey:@"createEventPush"];
+                [requestorPush setData:data];
+                [requestorPush setQuery:pushQuery];
+                [requestorPush sendPushInBackground];
+            }];
+            
+            RIButtonItem *goodItem = [RIButtonItem itemWithLabel:@"Accept" action:^{
+                // send a push to the requestor, saying he was accepted
+                PFQuery *pushQuery = [PFInstallation query];
+                [pushQuery whereKey:@"user" equalTo:[notificationPayload objectForKey:@"requestor"]];
+                PFPush *requestorPush = [[PFPush alloc] init];
+                NSMutableDictionary *data = [[NSMutableDictionary alloc] init];
+                NSString *name;
+                if([[[PFUser currentUser] objectForKey:@"gymbudProfile"] objectForKey:@"name"]) {
+                    name = [[[PFUser currentUser] objectForKey:@"gymbudProfile"] objectForKey:@"name"];
+                } else {
+                    name = [[[PFUser currentUser] objectForKey:@"profile"] objectForKey:@"name"];
+                }
+                
+                [data setObject:[NSString stringWithFormat:@"%@ accepted. Let's go lift!", name] forKey:@"alert"];
+                [requestorPush setData:data];
+                [requestorPush setQuery:pushQuery];
+                [requestorPush sendPushInBackground];
+                
+                PFObject *eventObj = [notificationPayload objectForKey:@"eventObj"];
+                [eventObj setObject:[NSArray arrayWithObjects:[PFUser currentUser], nil] forKey:@"attendees"];
+                [eventObj saveInBackground];
+            }];
+            
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle: message
+                                                            message: nil
+                                                   cancelButtonItem:cancelItem
+                                                   otherButtonItems:goodItem, nil];
+            [alert show];
+        } else  if ([notificationPayload objectForKey:@"createEventPush"]) {
+            NSString *message = [notificationPayload objectForKey:@"aps"][@"alert"];
+            
+            RIButtonItem *cancelItem = [RIButtonItem itemWithLabel:@"No Thanks" action:^{
+            }];
+            
+            RIButtonItem *goodItem = [RIButtonItem itemWithLabel:@"Yes!" action:^{
+                [self.window rootViewController].tabBarController.selectedIndex = 2;
+                NSLog(@"create a workout!");
+            }];
+            
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle: message
+                                                            message: nil
+                                                   cancelButtonItem:cancelItem
+                                                   otherButtonItems:goodItem, nil];
+            [alert show];
+            
+        } else {
+            [PFPush handlePush:notificationPayload];
+        }
+
+//        GymBudEventCompletionView *eventCompletionView = [[GymBudEventCompletionView alloc] initWithFrame:CGRectMake(0, self.window.bounds.size.height-kGymBudEventCompletionHeight, self.window.bounds.size.width, kGymBudEventCompletionHeight)];
+//        eventCompletionView.event = notificationPayload[@"eventObjectId"];
+//        [self.window.rootViewController.view addSubview:eventCompletionView];
     }
 
     return YES;
@@ -214,7 +312,6 @@ didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)newDeviceToken {
 - (void)alertView:(UIAlertView *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
     if(buttonIndex == 1) {
         // bring up modal here...
-        UIViewController * vc = self.window.rootViewController;
         // You need to set the identifier from the Interface
         // Builder for the following line to work
         //        CarFinderViewController *pvc = [vc.storyboard instantiateViewControllerWithIdentifier:@"CarFinderViewController"];
@@ -252,9 +349,94 @@ didReceiveRemoteNotification:(NSDictionary *)userInfo {
                                                cancelButtonItem:cancelItem
                                                otherButtonItems:goodItem, nil];
         [alert show];
-    } else  {
+    } else if ([userInfo objectForKey:@"requestor"] != nil) {
+        NSString *message = [userInfo objectForKey:@"aps"][@"alert"];
+        
+        RIButtonItem *cancelItem = [RIButtonItem itemWithLabel:@"Deny" action:^{
+            // send a push to the requestor, saying he was denied
+            // leave the event open
+            PFQuery *pushQuery = [PFInstallation query];
+            PFQuery *innerQuery = [PFUser query];
+            [innerQuery whereKey:@"objectId" equalTo:[userInfo objectForKey:@"requestor"][@"objectId"]];
+            
+            [pushQuery whereKey:@"user" matchesQuery:innerQuery];
+            PFPush *requestorPush = [[PFPush alloc] init];
+            NSMutableDictionary *data = [[NSMutableDictionary alloc] init];
+            NSString *name;
+            if([[[PFUser currentUser] objectForKey:@"gymbudProfile"] objectForKey:@"name"]) {
+                name = [[[PFUser currentUser] objectForKey:@"gymbudProfile"] objectForKey:@"name"];
+            } else {
+                name = [[[PFUser currentUser] objectForKey:@"profile"] objectForKey:@"name"];
+            }
+            [data setObject:[NSString stringWithFormat:@"%@ went with someone else. Create your own event?", name] forKey:@"alert"];
+            [data setObject:[userInfo objectForKey:@"eventObj"] forKey:@"eventObj"];
+            [data setObject:[NSNumber numberWithBool:YES] forKey:@"createEventPush"];
+            [requestorPush setData:data];
+            [requestorPush setQuery:pushQuery];
+            [requestorPush sendPushInBackground];
+        }];
+        
+        RIButtonItem *goodItem = [RIButtonItem itemWithLabel:@"Accept" action:^{
+            // send a push to the requestor, saying he was accepted
+            PFQuery *pushQuery = [PFInstallation query];
+            PFQuery *innerQuery = [PFUser query];
+            [innerQuery whereKey:@"objectId" equalTo:[userInfo objectForKey:@"requestor"][@"objectId"]];
+            
+            [pushQuery whereKey:@"user" matchesQuery:innerQuery];
+//            [pushQuery whereKey:@"user" equalTo:[userInfo objectForKey:@"requestor"]];
+            PFPush *requestorPush = [[PFPush alloc] init];
+            NSMutableDictionary *data = [[NSMutableDictionary alloc] init];
+            NSString *name;
+            if([[[PFUser currentUser] objectForKey:@"gymbudProfile"] objectForKey:@"name"]) {
+                name = [[[PFUser currentUser] objectForKey:@"gymbudProfile"] objectForKey:@"name"];
+            } else {
+                name = [[[PFUser currentUser] objectForKey:@"profile"] objectForKey:@"name"];
+            }
+            
+            [data setObject:[NSString stringWithFormat:@"%@ accepted. Let's go lift!", name] forKey:@"alert"];
+            [requestorPush setData:data];
+            [requestorPush setQuery:pushQuery];
+            [requestorPush sendPushInBackground];
+            
+            PFQuery *eventQuery = [PFQuery queryWithClassName:@"Event"];
+            [eventQuery whereKey:@"objectId" equalTo:userInfo[@"eventObj"][@"objectId"]];
+            [eventQuery findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+                PFObject *eventObj = [objects objectAtIndex:0];
+                PFQuery *userQuery = [PFUser query];
+                [userQuery whereKey:@"objectId" equalTo:userInfo[@"requestor"][@"objectId"]];
+                [userQuery findObjectsInBackgroundWithBlock:^(NSArray *users, NSError *error2) {
+                    PFObject *userObj = [users objectAtIndex:0];
+                    [eventObj setObject:[NSArray arrayWithObjects:userObj, nil] forKey:@"attendees"];
+                    [eventObj saveInBackground];
+                }];
+            }];
+        }];
+        
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle: message
+                                                        message: nil
+                                               cancelButtonItem:cancelItem
+                                               otherButtonItems:goodItem, nil];
+        [alert show];
+    } else if ([userInfo objectForKey:@"createEventPush"]) {
+        NSString *message = [userInfo objectForKey:@"aps"][@"alert"];
+        
+        RIButtonItem *cancelItem = [RIButtonItem itemWithLabel:@"No Thanks" action:^{
+        }];
+        
+        RIButtonItem *goodItem = [RIButtonItem itemWithLabel:@"Yes!" action:^{
+            [self.window rootViewController].tabBarController.selectedIndex = 2;
+            [[[(UITabBarController *)[self.window rootViewController] viewControllers] objectAtIndex:2] popToRootViewControllerAnimated:YES];
+            NSLog(@"create a workout!");
+        }];
+        
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle: message
+                                                        message: nil
+                                               cancelButtonItem:cancelItem
+                                               otherButtonItems:goodItem, nil];
+        [alert show];
+
+    } else {
         [PFPush handlePush:userInfo];
-       
     }
     
     if ([userInfo objectForKey:@"badge"]) { // TODO: for now we have no badge number, will get to this.

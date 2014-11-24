@@ -237,8 +237,12 @@
     userProfile[@"preferred"] = self.profilePreferred.text;
     
     NSData *imageData = UIImageJPEGRepresentation(self.profilePicture.image, 0.05f);
-    PFFile *imageFile = [PFFile fileWithName:@"profilePicture.jpg" data:imageData];
+    if(imageData == nil) {
+        imageData = UIImageJPEGRepresentation([UIImage imageNamed:@"yogaIcon.png"], 0.05f);
+    }
     
+    PFFile *imageFile = [PFFile fileWithName:@"profilePicture.jpg" data:imageData];
+
     userProfile[@"profilePicture"] = imageFile;
     
     [[PFUser currentUser] setObject:userProfile forKey:@"gymbudProfile"];

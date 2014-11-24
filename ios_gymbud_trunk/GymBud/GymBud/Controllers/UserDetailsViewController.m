@@ -4,6 +4,7 @@
 #import "MessageUserVC.h"
 #import "GymBudConstants.h"
 #import "Mixpanel.h"
+#import "GymBudDetailsVC.h"
 
 @implementation UserDetailsViewController
 @synthesize annotation;
@@ -13,7 +14,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.title = @"Organizer";
+    self.title = @"";
     self.tableView.backgroundColor = [UIColor colorWithRed:44/255.0f green:62/255.0f blue:80/255.0f alpha:1.0f];
     PFObject *event = (PFObject *) annotation;
 
@@ -45,12 +46,16 @@
 
     }
     if(event[@"attendees"]) {
+        self.attendeesPresent = YES;
+        self.attendees = [NSMutableArray arrayWithArray:event[@"attendees"]];
         for(PFUser *attendee in event[@"attendees"]) {
             if([[attendee objectId] isEqualToString:[[PFUser currentUser] objectId]]) {
                 self.headerJoinButton.hidden = YES;
                 break;
             }
         }
+    } else {
+        self.attendeesPresent = NO;
     }
 
     UIImage *pictureLogo = [UIImage imageNamed:[kGymBudActivityIconMapping objectForKey:event[@"activity"]]];
@@ -112,18 +117,65 @@
 
 
 #pragma mark - UITableViewDataSource
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if(indexPath.section == 0 && self.attendeesPresent) {
+        GymBudDetailsVC *detailsVC = [[GymBudDetailsVC alloc] init];
+        //    if([self.sortedByMutualFriendsObjects count] == [self.objects count]) {
+        //        detailsVC.user = [self.objects objectAtIndex:[[self.sortedByMutualFriendsObjects objectAtIndex:indexPath.row][@"objectsIndex"] intValue]];
+        //    } else {
+        PFQuery *query = [PFUser query];
+        [query whereKey:@"objectId" equalTo:[[self.attendees objectAtIndex:indexPath.row] objectId]];
+        [query findObjectsInBackgroundWithBlock:^(NSArray *array, NSError *error) {
+            NSString *name;
+            PFUser *user = [array objectAtIndex:indexPath.row];
+            detailsVC.user = user;
+            [self.navigationController pushViewController:detailsVC animated:YES];
+            [tableView deselectRowAtIndexPath:indexPath animated:YES];
+            Mixpanel *mixpanel = [Mixpanel sharedInstance];
+            [mixpanel track:@"UserDetailsViewController tapAttendee" properties:@{
+                                                                  }];
+            return;
+            
+        }];
+    } else {
+        [tableView deselectRowAtIndexPath:indexPath animated:YES];
+        return;
+    }
+}
 
+
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
+    if(section == 0 && self.attendeesPresent) {
+        return @"Attendees: ";
+    } else {
+        return @"Organizer Profile";
+    }
+}
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    if(self.attendeesPresent) {
+        return 2;
+    } else return 1;
+}
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     // Return the number of rows in the section.
-    return self.rowTitleArray.count;
+    if(section == 0 && self.attendeesPresent) {
+        return [self.attendees count];
+    } else {
+        return self.rowTitleArray.count;
+    }
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if(indexPath.row < 2) {
-        return 44.0f;
+    if(indexPath.section == 0 && self.attendeesPresent) {
+        return 50.0f;
     } else {
-        return 180.0f;
+        if(indexPath.row < 2) {
+            return 44.0f;
+        } else {
+            return 180.0f;
+        }
     }
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -131,6 +183,30 @@
     static NSString *BigCellIdentifier = @"BigCell";
     
     UITableViewCell *cell;
+    
+    if(indexPath.section == 0 && self.attendeesPresent) {
+        cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+        
+        if(cell == nil) {
+            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+        }
+        
+        PFQuery *query = [PFUser query];
+        [query whereKey:@"objectId" equalTo:[[self.attendees objectAtIndex:indexPath.row] objectId]];
+        [query findObjectsInBackgroundWithBlock:^(NSArray *array, NSError *error) {
+            NSString *name;
+            PFUser *user = [array objectAtIndex:indexPath.row];
+            if([[user objectForKey:@"gymbudProfile"] objectForKey:@"name"]) {
+                name = [[user objectForKey:@"gymbudProfile"] objectForKey:@"name"];
+            } else {
+                name = [[user objectForKey:@"profile"] objectForKey:@"name"];
+            }
+            cell.textLabel.text = name;
+        }];
+        cell.textLabel.text = @"Joined person";
+        return cell;
+    }
+    
     if(indexPath.row < 2) {
         cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     } else {
@@ -281,98 +357,146 @@
     [queryForEvent whereKey:@"objectId" equalTo:[event objectId]];
     
     [queryForEvent findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
-        if([objects count] == 0 || [objects count] > 1) {
+        if(([objects count] == 0) || ([objects count] > 1)) {
             return;
         }
-        PFObject *eventObject = [objects objectAtIndex:0];
-        NSMutableArray *attendees = [eventObject objectForKey:@"attendees"];
-        if(!attendees) {
-            attendees = [[NSMutableArray alloc] init];
-        }
-        [attendees addObject:[PFUser currentUser]];
-        [eventObject setObject:attendees forKey:@"attendees"];
         
-        PFQuery *query = [PFInstallation query];
+        // we need to create a join request for hitting the button.
+        PFObject *requestObject = [PFObject objectWithClassName:@"Request"];
+        [requestObject setObject:[objects objectAtIndex:0] forKey:@"event"];
+        [requestObject setObject:[PFUser currentUser] forKey:@"requestor"];
         
-        [query whereKey:@"user" equalTo:[eventObject objectForKey:@"organizer"]];
-        // only return Installations that belong to a User that
-        // matches the innerQuery
+        [requestObject saveInBackground];
         
-        // Send the notification.
+        UIAlertView * alertView =[[UIAlertView alloc ] initWithTitle:@"Join request received"
+                                                         message:@"The organizer will contact you soon"
+                                                        delegate:self
+                                               cancelButtonTitle:@"Ok"
+                                               otherButtonTitles: nil];
+        [alertView show];
+        
+//        UIAlertController * alert=   [UIAlertController
+//                                      alertControllerWithTitle:@"Join request received"
+//                                      message:@"The organizer will contact you soon"
+//                                      preferredStyle:UIAlertControllerStyleAlert];
+//        
+//        UIViewController *rootViewController = [UIApplication sharedApplication].keyWindow.rootViewController;
+//        [rootViewController presentViewController: alert animated: YES completion: nil];
+        
+        PFUser *organizer = [objects objectAtIndex:0][@"organizer"];
         PFPush *push = [[PFPush alloc] init];
-        [push setQuery:query];
+        PFQuery *query = [PFInstallation query];
+        [query whereKey:@"user" equalTo:organizer];
         
-        PFUser *currentUser = [PFUser currentUser];
         NSString *name;
+        PFUser *currentUser = [PFUser currentUser];
         if([currentUser objectForKey:@"gymbudProfile"][@"name"]) {
             name = [currentUser objectForKey:@"gymbudProfile"][@"name"];
         } else {
             name = [currentUser objectForKey:@"profile"][@"name"];
         }
-        [push setMessage:[NSString stringWithFormat:@"%@ joined your event!", name]];
+        [push setMessage:[NSString stringWithFormat:@"%@ wants to join, accept?", name]];
+        NSMutableDictionary *data = [[NSMutableDictionary alloc] init];
+        [data setObject:[NSString stringWithFormat:@"%@ wants to join, accept?", name] forKey:@"alert"];
+        [data setObject:[objects objectAtIndex:0] forKey:@"eventObj"];
+        [data setObject:currentUser forKey:@"requestor"];
+        [push setData:data];
+        [push setQuery:query];
         [push sendPushInBackground];
-        [eventObject saveInBackground];
-        
-        // Stitch together a postObject and send this async to Parse
-        PFObject *activityObject = [PFObject objectWithClassName:@"Activity"];
-        // Activity has the following fields:
-        /*
-         Activity
-         
-         fromUser : User
-         toUser : User
-         type : String
-         content : String
-         */
-        [activityObject setObject:[eventObject objectForKey:@"organizer"] forKey:@"fromUser"];
-        [activityObject setObject:currentUser forKey:@"toUser"];
-        [activityObject setObject:@"message" forKey:@"type"];
-        [activityObject setObject:@"You joined my event. Let's go lift!" forKey:@"content"];
-        [activityObject setObject:[NSNumber numberWithBool:YES] forKey:@"unread"];
-        [activityObject saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
-            if (error) {
-                NSLog(@"Couldn't save!");
-                NSLog(@"%@", error);
-                UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:[[error userInfo] objectForKey:@"error"] message:nil delegate:self cancelButtonTitle:nil otherButtonTitles:@"Ok", nil];
-                [alertView show];
-                return;
-            }
-            if (succeeded) {
-                NSLog(@"Successfully saved!");
-                NSLog(@"%@", activityObject);
-                //            dispatch_async(dispatch_get_main_queue(), ^{
-                //                [[NSNotificationCenter defaultCenter] postNotificationName:@"CreatePostNotification" object:nil];
-                //            });
-            } else {
-                NSLog(@"Failed to save.");
-            }
-        }];
-        
-        PFQuery *innerQuery = [PFUser query];
-        
-        [innerQuery whereKey:@"username" equalTo:[currentUser objectForKey:@"username"]];
-        NSLog(@"about to push");
-        
-        NSLog(@"%@", innerQuery);
-        PFQuery *query2 = [PFInstallation query];
-        
-        // only return Installations that belong to a User that
-        // matches the innerQuery
-        [query2 whereKey:@"user" matchesQuery:innerQuery];
-        
-        // Send the notification.
-        PFPush *push2 = [[PFPush alloc] init];
-        [push2 setQuery:query2];
-        
-        NSString *name2;
-        if([[eventObject objectForKey:@"organizer"] objectForKey:@"gymbudProfile"][@"name"]) {
-            name2 = [[eventObject objectForKey:@"organizer"] objectForKey:@"gymbudProfile"][@"name"];
-        } else {
-            name2 = [[eventObject objectForKey:@"organizer"] objectForKey:@"profile"][@"name"];
-        }
-        [push2 setMessage:[NSString stringWithFormat:@"Message From: %@", name2]];
-        [push2 sendPushInBackground];
     }];
+//    [queryForEvent findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+//        if([objects count] == 0 || [objects count] > 1) {
+//            return;
+//        }
+//        PFObject *eventObject = [objects objectAtIndex:0];
+//        NSMutableArray *attendees = [eventObject objectForKey:@"attendees"];
+//        if(!attendees) {
+//            attendees = [[NSMutableArray alloc] init];
+//        }
+//        [attendees addObject:[PFUser currentUser]];
+//        [eventObject setObject:attendees forKey:@"attendees"];
+//        
+//        PFQuery *query = [PFInstallation query];
+//        
+//        [query whereKey:@"user" equalTo:[eventObject objectForKey:@"organizer"]];
+//        // only return Installations that belong to a User that
+//        // matches the innerQuery
+//        
+//        // Send the notification.
+//        PFPush *push = [[PFPush alloc] init];
+//        [push setQuery:query];
+//        
+//        PFUser *currentUser = [PFUser currentUser];
+//        NSString *name;
+//        if([currentUser objectForKey:@"gymbudProfile"][@"name"]) {
+//            name = [currentUser objectForKey:@"gymbudProfile"][@"name"];
+//        } else {
+//            name = [currentUser objectForKey:@"profile"][@"name"];
+//        }
+//        [push setMessage:[NSString stringWithFormat:@"%@ joined your event!", name]];
+//        [push sendPushInBackground];
+//        [eventObject saveInBackground];
+//        
+//        // Stitch together a postObject and send this async to Parse
+//        PFObject *activityObject = [PFObject objectWithClassName:@"Activity"];
+//        // Activity has the following fields:
+//        /*
+//         Activity
+//         
+//         fromUser : User
+//         toUser : User
+//         type : String
+//         content : String
+//         */
+//        [activityObject setObject:[eventObject objectForKey:@"organizer"] forKey:@"fromUser"];
+//        [activityObject setObject:currentUser forKey:@"toUser"];
+//        [activityObject setObject:@"message" forKey:@"type"];
+//        [activityObject setObject:@"You joined my event. Let's go lift!" forKey:@"content"];
+//        [activityObject setObject:[NSNumber numberWithBool:YES] forKey:@"unread"];
+//        [activityObject saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+//            if (error) {
+//                NSLog(@"Couldn't save!");
+//                NSLog(@"%@", error);
+//                UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:[[error userInfo] objectForKey:@"error"] message:nil delegate:self cancelButtonTitle:nil otherButtonTitles:@"Ok", nil];
+//                [alertView show];
+//                return;
+//            }
+//            if (succeeded) {
+//                NSLog(@"Successfully saved!");
+//                NSLog(@"%@", activityObject);
+//                //            dispatch_async(dispatch_get_main_queue(), ^{
+//                //                [[NSNotificationCenter defaultCenter] postNotificationName:@"CreatePostNotification" object:nil];
+//                //            });
+//            } else {
+//                NSLog(@"Failed to save.");
+//            }
+//        }];
+//        
+//        PFQuery *innerQuery = [PFUser query];
+//        
+//        [innerQuery whereKey:@"username" equalTo:[currentUser objectForKey:@"username"]];
+//        NSLog(@"about to push");
+//        
+//        NSLog(@"%@", innerQuery);
+//        PFQuery *query2 = [PFInstallation query];
+//        
+//        // only return Installations that belong to a User that
+//        // matches the innerQuery
+//        [query2 whereKey:@"user" matchesQuery:innerQuery];
+//        
+//        // Send the notification.
+//        PFPush *push2 = [[PFPush alloc] init];
+//        [push2 setQuery:query2];
+//        
+//        NSString *name2;
+//        if([[eventObject objectForKey:@"organizer"] objectForKey:@"gymbudProfile"][@"name"]) {
+//            name2 = [[eventObject objectForKey:@"organizer"] objectForKey:@"gymbudProfile"][@"name"];
+//        } else {
+//            name2 = [[eventObject objectForKey:@"organizer"] objectForKey:@"profile"][@"name"];
+//        }
+//        [push2 setMessage:[NSString stringWithFormat:@"Message From: %@", name2]];
+//        [push2 sendPushInBackground];
+//    }];
     self.headerJoinButton.enabled = NO;
     [self.headerJoinButton setHidden:YES];
 }

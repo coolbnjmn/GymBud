@@ -142,6 +142,7 @@
 		B2D607151A1F1BF400F19B34 /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B2C39D9C197E19A900039F90 /* FacebookSDK.framework */; };
 		B2D607181A2008A500F19B34 /* GymBudEventCompletionView.m in Sources */ = {isa = PBXBuildFile; fileRef = B2D607171A2008A500F19B34 /* GymBudEventCompletionView.m */; };
 		B2D6071A1A2009B600F19B34 /* GymBudEventCompletionView.xib in Resources */ = {isa = PBXBuildFile; fileRef = B2D607191A2009B600F19B34 /* GymBudEventCompletionView.xib */; };
+		B2D6071D1A21CD4500F19B34 /* SWRevealViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B2D6071C1A21CD4500F19B34 /* SWRevealViewController.m */; };
 		B2FCFBE919CAC15C0078C68D /* EPBasicInfoVC.m in Sources */ = {isa = PBXBuildFile; fileRef = B2FCFBE819CAC15C0078C68D /* EPBasicInfoVC.m */; };
 		D6179B487D9E4DCAA95C19B3 /* libPods-GymBud.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 48EE337A63E5439BA42E30F1 /* libPods-GymBud.a */; };
 /* End PBXBuildFile section */
@@ -335,6 +336,8 @@
 		B2D607161A2008A500F19B34 /* GymBudEventCompletionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GymBudEventCompletionView.h; path = GymBud/Views/GymBudEventCompletionView.h; sourceTree = "<group>"; };
 		B2D607171A2008A500F19B34 /* GymBudEventCompletionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GymBudEventCompletionView.m; path = GymBud/Views/GymBudEventCompletionView.m; sourceTree = "<group>"; };
 		B2D607191A2009B600F19B34 /* GymBudEventCompletionView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = GymBudEventCompletionView.xib; path = GymBud/Views/GymBudEventCompletionView.xib; sourceTree = "<group>"; };
+		B2D6071B1A21CD4500F19B34 /* SWRevealViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SWRevealViewController.h; path = GymBud/Controllers/SWRevealViewController.h; sourceTree = "<group>"; };
+		B2D6071C1A21CD4500F19B34 /* SWRevealViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SWRevealViewController.m; path = GymBud/Controllers/SWRevealViewController.m; sourceTree = "<group>"; };
 		B2FCFBE719CAC15C0078C68D /* EPBasicInfoVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EPBasicInfoVC.h; path = GymBud/Controllers/EPBasicInfoVC.h; sourceTree = "<group>"; };
 		B2FCFBE819CAC15C0078C68D /* EPBasicInfoVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EPBasicInfoVC.m; path = GymBud/Controllers/EPBasicInfoVC.m; sourceTree = "<group>"; };
 		E5F4F985088842DBBF422DE7 /* Pods-GymBud.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GymBud.xcconfig"; path = "Pods/Pods-GymBud.xcconfig"; sourceTree = "<group>"; };
@@ -571,6 +574,8 @@
 				77FE64901990A924008724CC /* GoActivityCreateEventVC.m */,
 				B2011D1219C91C3500D65275 /* GBEventsFilterViewController.h */,
 				B2011D1319C91C3500D65275 /* GBEventsFilterViewController.m */,
+				B2D6071B1A21CD4500F19B34 /* SWRevealViewController.h */,
+				B2D6071C1A21CD4500F19B34 /* SWRevealViewController.m */,
 			);
 			name = Controllers;
 			path = ..;
@@ -861,6 +866,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B2D607181A2008A500F19B34 /* GymBudEventCompletionView.m in Sources */,
+				B2D6071D1A21CD4500F19B34 /* SWRevealViewController.m in Sources */,
 				77FD41C51993EEF20017E8D5 /* GymBudEventModel.m in Sources */,
 				B2C39D8C197E194F00039F90 /* MessageUserVC.m in Sources */,
 				77FE6487198F715C008724CC /* GoActivityCVCell.m in Sources */,
