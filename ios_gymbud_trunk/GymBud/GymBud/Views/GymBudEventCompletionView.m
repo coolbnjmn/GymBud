@@ -81,9 +81,10 @@
     NSLog(@"submit review with : %lu", (unsigned long)self.axRView.value);
     
     PFQuery *eventQuery = [PFQuery queryWithClassName:@"Event"];
-    [eventQuery getObjectInBackgroundWithId:self.event block:^(PFObject *object, NSError *error) {
+    [eventQuery whereKey:@"objectId" equalTo:self.event];
+    [eventQuery findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
         PFObject *reviewObject = [PFObject objectWithClassName:@"Review"];
-        [reviewObject setObject:object forKey:@"event"];
+        [reviewObject setObject:[objects objectAtIndex:0] forKey:@"event"];
         [reviewObject setObject:[NSNumber numberWithFloat:self.axRView.value] forKey:@"value"];
         
         [reviewObject saveInBackground];
@@ -91,7 +92,19 @@
         [mixpanel track:@"EventCompletion SubmitReview" properties:@{}];
         
         [self removeFromSuperview];
+
     }];
+//    [eventQuery getObjectInBackgroundWithId:self.event block:^(PFObject *object, NSError *error) {
+//        PFObject *reviewObject = [PFObject objectWithClassName:@"Review"];
+//        [reviewObject setObject:object forKey:@"event"];
+//        [reviewObject setObject:[NSNumber numberWithFloat:self.axRView.value] forKey:@"value"];
+//        
+//        [reviewObject saveInBackground];
+//        Mixpanel *mixpanel = [Mixpanel sharedInstance];
+//        [mixpanel track:@"EventCompletion SubmitReview" properties:@{}];
+//        
+//        [self removeFromSuperview];
+//    }];
     
 }
 
