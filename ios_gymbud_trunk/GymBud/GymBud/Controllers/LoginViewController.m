@@ -176,6 +176,7 @@
                          }];
         UIStoryboard *sb = [UIStoryboard storyboardWithName:@"EditProfile" bundle:nil];
         EPTVC *vc = [sb instantiateViewControllerWithIdentifier:@"EPOnboarding"];
+        vc.hidesBottomBarWhenPushed = YES;
         [nvc3 pushViewController:vc animated:NO];
     }
     

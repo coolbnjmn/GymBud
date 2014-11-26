@@ -84,7 +84,7 @@ Parse.Cloud.job("eventReminder", function(request, response) {
 	        where: pushQuery, 
 		data: {
 		  alert: "How was your GymBud?",
-		  eventObjectId: eventObj.get("objectId"),
+		  eventObjectId: eventObj.id,
 		  eventObj: eventObj
 		},
 		push_time: end_date// end date

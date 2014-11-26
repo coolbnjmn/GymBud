@@ -58,6 +58,7 @@
     // show edit profile page here...
     UIStoryboard *sb = [UIStoryboard storyboardWithName:@"EditProfile" bundle:nil];
     EPTVC *vc = [sb instantiateViewControllerWithIdentifier:@"EPOnboarding"];
+    vc.hidesBottomBarWhenPushed = YES;
     vc.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
     [self.navigationController pushViewController:vc animated:YES];
     Mixpanel *mixpanel = [Mixpanel sharedInstance];
