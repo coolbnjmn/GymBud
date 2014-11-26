@@ -53,7 +53,6 @@
     self.objectsPerPage = 25;
     self.navigationItem.hidesBackButton = YES;
     
-    
 }
 
 

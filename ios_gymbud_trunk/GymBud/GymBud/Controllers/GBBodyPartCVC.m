@@ -97,7 +97,10 @@ static NSString * const reuseIdentifier = @"goActivityCell";
     if([self.selectedBodyParts count] < 4) {
         [self.selectedBodyParts addObject:indexPath];
         GoActivityCVCell *cell = (GoActivityCVCell *)[collectionView cellForItemAtIndexPath:indexPath];
-        cell.backgroundColor = [UIColor redColor];
+        cell.backgroundColor = kGymBudGold;
+        cell.layer.cornerRadius = 30;
+        cell.layer.masksToBounds = YES;
+
     } else {
         // DO nothing, we don't want to select more than 4
     }
@@ -108,6 +111,7 @@ static NSString * const reuseIdentifier = @"goActivityCell";
     [self.selectedBodyParts removeObject:indexPath];
     GoActivityCVCell *cell = (GoActivityCVCell *)[collectionView cellForItemAtIndexPath:indexPath];
     cell.backgroundColor = [UIColor clearColor];
+
 }
 
 #pragma mark <UICollectionViewDelegate>
