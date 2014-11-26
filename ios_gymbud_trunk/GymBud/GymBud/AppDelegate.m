@@ -172,16 +172,25 @@
         nvc5.navigationBar.barTintColor = kGymBudGold;
         
         nvc1.tabBarItem.title = nil;
-        nvc1.tabBarItem.image = [UIImage imageNamed:@"centeredPeople.png"];
+        nvc1.tabBarItem.image = [[UIImage imageNamed:@"centeredPeople.png"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+        nvc1.tabBarItem.selectedImage = [UIImage imageNamed:@"centeredPeople.png"];
         nvc2.tabBarItem.title = nil;
-        nvc2.tabBarItem.image = [UIImage imageNamed:@"centeredInbox.png"];
+        nvc2.tabBarItem.image = [[UIImage imageNamed:@"centeredInbox.png"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+        nvc2.tabBarItem.selectedImage = [UIImage imageNamed:@"centeredInbox.png"];
+
         nvc3.tabBarItem.title = nil;
-        nvc3.tabBarItem.image = [UIImage imageNamed:@"centeredGear.png"];
+        nvc3.tabBarItem.image = [[UIImage imageNamed:@"centeredGear.png"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+        nvc3.tabBarItem.selectedImage = [UIImage imageNamed:@"centeredGear.png"];
+
+
         nvc4.tabBarItem.title = nil;
-        nvc4.tabBarItem.image = [UIImage imageNamed:@"go.png"];
+        nvc4.tabBarItem.image = [[UIImage imageNamed:@"go.png"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+        nvc4.tabBarItem.selectedImage = [UIImage imageNamed:@"go.png"];
+
         nvc5.tabBarItem.title = nil;
-        nvc5.tabBarItem.image = [UIImage imageNamed:@"join.png"];
-        
+        nvc5.tabBarItem.image = [[UIImage imageNamed:@"join.png"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+        nvc5.tabBarItem.selectedImage = [UIImage imageNamed:@"join.png"];
+
         NSMutableArray *tbcArray = [[NSMutableArray alloc] initWithObjects:nvc1, nvc2, nvc4, nvc5, nvc3, nil];
 
 //        tbc.tabBar.tintColor = [UIColor colorWithRed:229/255.0f green:116/255.0f blue:34/255.0f alpha:1.0f];
@@ -191,15 +200,6 @@
                                                             } forState:UIControlStateNormal];
 //        tbc.tabBar.barTintColor = [UIColor colorWithRed:34/255.0f green:49/255.0f blue:66/255.0f alpha:1.0f];
         tbc.tabBar.barTintColor = kGymBudGold;
-        // Add this code to change StateNormal text Color,
-        [UITabBarItem.appearance setTitleTextAttributes:
-         @{NSForegroundColorAttributeName : [UIColor greenColor]}
-                                               forState:UIControlStateNormal];
-        
-        // then if StateSelected should be different, you should add this code
-        [UITabBarItem.appearance setTitleTextAttributes:
-         @{NSForegroundColorAttributeName : [UIColor purpleColor]}
-                                               forState:UIControlStateSelected];
         tbc.viewControllers = tbcArray;
         if (currentUser[@"gymbudProfile"] != nil) {
             tbc.selectedIndex = 2;
