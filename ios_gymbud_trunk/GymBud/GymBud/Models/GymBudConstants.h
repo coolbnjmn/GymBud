@@ -49,4 +49,8 @@
 #define kGBMileTimes [NSArray arrayWithObjects:@"Under 5min", @"5 minute", @"6 minute", @"7 minute", @"8 minute", @"9 minute", @"10 minute", @"11 minute", @"Above 11 minute", nil]
 
 
+#define kGymBudDarkBlue [UIColor colorWithRed:0/255.0f green:38/255.0f blue:242/255.0f alpha:1.0f]
+#define kGymBudLightBlue  [UIColor colorWithRed:0/255.0f green:134/255.0f blue:215/255.0f alpha:1.0f]
+#define kGymBudGold [UIColor colorWithRed:255/255.0f green:230/255.0f blue:13/255.0f alpha:1.0f]
+
 

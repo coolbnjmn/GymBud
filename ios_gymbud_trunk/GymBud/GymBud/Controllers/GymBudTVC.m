@@ -7,7 +7,6 @@
 //
 
 #import <MBProgressHUD/MBProgressHUD.h>
-#import "GymBudBasicCell.h"
 #import "GymBudConstants.h"
 #import "GymBudDetailsVC.h"
 #import "GymBudTVC.h"
@@ -22,38 +21,9 @@
 
 @end
 
-#define kCellHeight 90
+#define kCellHeight 70
 
 @implementation GymBudTVC
-
-- (instancetype)initWithStyle:(UITableViewStyle)style
-{
-    self = [super initWithStyle:style];
-    if (self) {
-        // Customize the table:
-        
-        // The className to query on
-        self.parseClassName = @"User";
-        self.reuseId = @"GymBudBasicCell";
-        
-        // The key of the PFObject to display in the label of the default cell style
-        self.title = @"GymBud";
-        
-        // Whether the built-in pull-to-refresh is enabled
-        if (NSClassFromString(@"UIRefreshControl")) {
-            self.pullToRefreshEnabled = NO;
-        } else {
-            self.pullToRefreshEnabled = YES;
-        }
-        
-        // Whether the built-in pagination is enabled
-        self.paginationEnabled = YES;
-        
-        // The number of objects to show per page
-        self.objectsPerPage = 100;
-    }
-    return self;
-}
 
 - (void)dealloc {
     [[NSNotificationCenter defaultCenter] removeObserver:self name:@"LocationChangeNotification" object:nil];
@@ -64,21 +34,23 @@
 {
     [super viewDidLoad];
     
+    // Do any additional setup after loading the view.
+    if ([self.tableView respondsToSelector:@selector(setSeparatorInset:)]) {
+        [self.tableView setSeparatorInset:UIEdgeInsetsZero];
+    }
+    
     if (NSClassFromString(@"UIRefreshControl")) {
         // Use the new iOS 6 refresh control.
         UIRefreshControl *refreshControl = [[UIRefreshControl alloc] init];
         self.refreshControl = refreshControl;
-        self.refreshControl.tintColor = [UIColor colorWithRed:118.0f/255.0f green:117.0f/255.0f blue:117.0f/255.0f alpha:1.0f];
+        self.refreshControl.tintColor = kGymBudGold;
         [self.refreshControl addTarget:self action:@selector(refreshControlValueChanged:) forControlEvents:UIControlEventValueChanged];
         self.pullToRefreshEnabled = NO;
     }
     
-    [self.tableView registerNib:[UINib nibWithNibName:@"GymBudBasicCell" bundle:nil] forCellReuseIdentifier:self.reuseId];
-    
-    self.tableView.backgroundColor = [UIColor whiteColor];
-    self.tableView.separatorColor = [UIColor clearColor];
+    self.tableView.separatorColor = kGymBudGold;
     self.navigationItem.title = @"Local GymBuds";
-    
+    self.objectsPerPage = 25;
     self.navigationItem.hidesBackButton = YES;
     
     
@@ -109,49 +81,6 @@
       [self.refreshControl endRefreshing];
   }
   [self.HUD hide:YES];
-
-//    NSDictionary *params = [NSDictionary dictionaryWithObjectsAndKeys:
-//                                                            @"context.fields(mutual_friends)", @"fields",
-//                                                            nil
-//                                                            ];
-//    
-//    self.sortedByMutualFriendsObjects = [[NSMutableArray alloc] init];
-    
-//    for(int i = 0; i < [self.objects count]; i++) {
-//        [FBRequestConnection startWithGraphPath:[NSString stringWithFormat:@"/%@", self.objects[i][@"profile"][@"facebookId"]]
-//                                     parameters:params
-//                                     HTTPMethod:@"GET"
-//                              completionHandler:^(
-//                                                  FBRequestConnection *connection,
-//                                                  id result,
-//                                                  NSError *error
-//                                                  ) {
-//                                  NSLog(@"result count is : %lu", (unsigned long)result[@"context"][@"mutual_friends"][@"summary"][@"total_count"]);
-//                                  
-//                                  NSMutableDictionary *tuple = [[NSMutableDictionary alloc] init];
-//                                  [tuple setObject:[NSNumber numberWithInt:i] forKey:@"objectsIndex"];
-//                                  [tuple setObject:[NSNumber numberWithInt:[((NSString*)result[@"context"][@"mutual_friends"][@"summary"][@"total_count"]) integerValue]] forKey:@"mutual_friends_count"];
-//                                  [self.sortedByMutualFriendsObjects addObject:tuple];
-//                                  NSLog(@"added tuple");
-//                                  if([self.sortedByMutualFriendsObjects count] == [self.objects count]) {
-//                                      [self.sortedByMutualFriendsObjects sortUsingComparator:^NSComparisonResult(id obj1, id obj2) {
-//                                          return (obj1[@"mutual_friends_count"] < obj2[@"mutual_friends_count"] ?  NSOrderedDescending :  NSOrderedAscending);
-//                                      }];
-//                                      NSLog(@"helloooo");
-//                                      NSLog(@"%@", self.sortedByMutualFriendsObjects);
-//                                      // This method is called every time objects are loaded from Parse via the PFQuery
-//                                      if (NSClassFromString(@"UIRefreshControl")) {
-//                                          [self.refreshControl endRefreshing];
-//                                      }
-//                                      [self.tableView reloadData];
-//                                      [self.HUD hide:YES];
-//
-//                                  }
-//                              }];
-//
-//    }
-    
-
 
 }
 
@@ -185,7 +114,7 @@
     imageView.contentMode = UIViewContentModeScaleToFill;
     self.HUD.customView = imageView;
     self.HUD.mode = MBProgressHUDModeCustomView;
-    self.HUD.color = [UIColor whiteColor];
+    self.HUD.color = [UIColor clearColor];
     
     [self.HUD show:YES];
     [self setLoadingViewEnabled:NO];
@@ -198,15 +127,43 @@
 }
 
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath object:(PFObject *)object {
-    GymBudBasicCell *cell = [tableView dequeueReusableCellWithIdentifier:self.reuseId forIndexPath:indexPath];
-    
-    
-    if(cell == nil) {
-        cell = [[GymBudBasicCell alloc] init];
+// Override to customize the look of the cell that allows the user to load the next page of objects.
+// The default implementation is a UITableViewCellStyleDefault cell with simple labels.
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForNextPageAtIndexPath:(NSIndexPath *)indexPath {
+    static NSString *CellIdentifier = @"NextPage";
+
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+
+    if (cell == nil) {
+    cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
     }
+
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    cell.textLabel.text = @"Load more...";
+    cell.imageView.image = [UIImage imageNamed:@"other.png"];
+    cell.imageView.layer.cornerRadius = 30.0f;
+    cell.imageView.layer.masksToBounds = YES;
+    CGSize itemSize = CGSizeMake(60, 60);
+    UIGraphicsBeginImageContextWithOptions(itemSize, NO, UIScreen.mainScreen.scale);
+    CGRect imageRect = CGRectMake(0.0, 0.0, itemSize.width, itemSize.height);
+    [cell.imageView.image drawInRect:imageRect];
+    cell.imageView.image = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    UIColor * color = kGymBudLightBlue;
+    cell.backgroundColor = color;
     
+    cell.textLabel.textColor = kGymBudGold;
+    cell.detailTextLabel.textColor = kGymBudGold;
     
+    return cell;
+
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath object:(PFObject *)object {
+    
+    UITableViewCell *cell;
+    cell = [self.tableView dequeueReusableCellWithIdentifier:@"friend"
+                                                forIndexPath:indexPath];
     
     NSDictionary *params = [NSDictionary dictionaryWithObjectsAndKeys:
                             @"context.fields(mutual_friends)", @"fields",
@@ -221,34 +178,18 @@
                                               NSError *error
                                               ) {
                               NSLog(@"result is :%@ for user: %@", result[@"context"][@"mutual_friends"][@"summary"][@"total_count"], object[@"profile"][@"facebookId"]);
-                             
-                              cell.text3.text = [NSString stringWithFormat:@"Mutual GymBuds: %ld", (result[@"context"][@"mutual_friends"][@"summary"][@"total_count"] ? [((NSString*)result[@"context"][@"mutual_friends"][@"summary"][@"total_count"]) integerValue] : 0)];
-                              NSLog(@"cell.text3.text is: %@", cell.text3.text);
+
+                              NSString *text3 = [NSString stringWithFormat:@"Mutual GymBuds: %ld", (result[@"context"][@"mutual_friends"][@"summary"][@"total_count"] ? [((NSString*)result[@"context"][@"mutual_friends"][@"summary"][@"total_count"]) integerValue] : 0)];
+                              NSLog(@"cell.text3.text is: %@", text3);
+                              cell.detailTextLabel.text = [NSString stringWithFormat:@"%@ \n"
+                                                           @"%@", cell.detailTextLabel.text, text3];
+                              [cell.detailTextLabel sizeToFit];
                           }];
-//    NSLog(@"sortedMutualFriends count: %ld", [self.sortedByMutualFriendsObjects count]);
-//    PFObject *theObject;
-//    NSNumber *mutual_friends_count;
-//    
-//    if([self.sortedByMutualFriendsObjects count] < [self.objects count]) {
-//        theObject = object;
-//    } else {
-//        NSNumber *actualIndex = [self.sortedByMutualFriendsObjects objectAtIndex:indexPath.row][@"objectsIndex"];
-//        NSLog(@"the actual index is : %d", [actualIndex intValue]);
-//        theObject = [self.objects objectAtIndex:[actualIndex intValue]];
-//        mutual_friends_count = [self.sortedByMutualFriendsObjects objectAtIndex:indexPath.row][@"mutual_friends_count"];
-//
-//    }
     
-//    PFObject *theObject = [self.objects objectAtIndex:actualIndex];
-    if(object[@"gymbudProfile"][@"name"]) {
-        cell.text1.text = object[@"gymbudProfile"][@"name"];
-    } else {
-        cell.text1.text = object[kFacebookUsername];
-    }
-    
-//    cell.logo1.image = [UIImage imageNamed:[kGymBudActivityIconMapping objectForKey:object[@"gymbudProfile"][@"interest1"]]];
-//    cell.logo2.image = [UIImage imageNamed:[kGymBudActivityIconMapping objectForKey:object[@"gymbudProfile"][@"interest2"]]];
-//    cell.logo3.image = [UIImage imageNamed:[kGymBudActivityIconMapping objectForKey:object[@"gymbudProfile"][@"interest3"]]];
+    if(object[@"gymbudProfile"][@"name"])
+        cell.textLabel.text = object[@"gymbudProfile"][@"name"];
+    else
+        cell.textLabel.text = object[kFacebookUsername];
     
     NSString *text2Text = @"";
     if(object[@"gymbudProfile"][@"preferred"]) {
@@ -256,42 +197,69 @@
     } else {
         text2Text = @"Workout Time Unspecified";
     }
-    
-//    cell.text3.text = [NSString stringWithFormat:@"Mutual Friends: %d", [mutual_friends_count intValue]];
-    cell.text2.text = text2Text;
-    UIColor * color = [UIColor colorWithRed:178/255.0f green:168/255.0f blue:151/255.0f alpha:1.0f];
-    cell.backgroundColor = color;
-    cell.pictureImageView.image = [UIImage imageNamed:@"yogaIcon.png"];
+    cell.detailTextLabel.numberOfLines = 2;
+    cell.detailTextLabel.text = [NSString stringWithFormat:@"%@", text2Text];
+    [cell.detailTextLabel sizeToFit];
 
+    UIColor * color = kGymBudLightBlue;
+    cell.backgroundColor = color;
+    cell.imageView.image = [UIImage imageNamed:@"yogaIcon.png"];
+
+    cell.textLabel.textColor = kGymBudGold;
+    cell.detailTextLabel.textColor = kGymBudGold;
     PFFile *theImage = [object objectForKey:@"gymbudProfile"][@"profilePicture"];
-    __weak GymBudBasicCell *weakCell = cell;
+    __weak UITableViewCell *weakCell = cell;
     [theImage getDataInBackgroundWithBlock:^(NSData *data, NSError *error){
         NSLog(@"+++++++++ Loading image view with real data ++++++++");
-        weakCell.pictureImageView.image = [UIImage imageWithData:data];
+        weakCell.imageView.image = [UIImage imageWithData:data];
+        weakCell.imageView.layer.cornerRadius = 30.0f;
+        weakCell.imageView.layer.masksToBounds = YES;
+        CGSize itemSize = CGSizeMake(60, 60);
+        UIGraphicsBeginImageContextWithOptions(itemSize, NO, UIScreen.mainScreen.scale);
+        CGRect imageRect = CGRectMake(0.0, 0.0, itemSize.width, itemSize.height);
+        [weakCell.imageView.image drawInRect:imageRect];
+        weakCell.imageView.image = UIGraphicsGetImageFromCurrentImageContext();
+        UIGraphicsEndImageContext();
     }];
-    //        self.headerImageView.image = [UIImage imageWithData:imageData];
-    cell.pictureImageView.layer.cornerRadius = 8.0f;
-    cell.pictureImageView.layer.masksToBounds = YES;
+
+    cell.imageView.layer.cornerRadius = 30.0f;
+    cell.imageView.layer.masksToBounds = YES;
+    CGSize itemSize = CGSizeMake(60, 60);
+    UIGraphicsBeginImageContextWithOptions(itemSize, NO, UIScreen.mainScreen.scale);
+    CGRect imageRect = CGRectMake(0.0, 0.0, itemSize.width, itemSize.height);
+    [cell.imageView.image drawInRect:imageRect];
+    cell.imageView.image = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
 
     return cell;
 }
 
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    GymBudDetailsVC *detailsVC = [[GymBudDetailsVC alloc] init];
-//    if([self.sortedByMutualFriendsObjects count] == [self.objects count]) {
-//        detailsVC.user = [self.objects objectAtIndex:[[self.sortedByMutualFriendsObjects objectAtIndex:indexPath.row][@"objectsIndex"] intValue]];
-//    } else {
+    
+    if(indexPath.row >= [self.objects count]) {
+        [self loadNextPage];
+        Mixpanel *mixpanel = [Mixpanel sharedInstance];
+        [mixpanel track:@"GymBudTVC SelectedRow LoadMore" properties:@{
+                                                                       }];
+
+    } else {
+        GymBudDetailsVC *detailsVC = [[GymBudDetailsVC alloc] init];
+        
         detailsVC.user = [self.objects objectAtIndex:indexPath.row];
-//    }
-    [self.navigationController pushViewController:detailsVC animated:YES];
-    [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    Mixpanel *mixpanel = [Mixpanel sharedInstance];
-    [mixpanel track:@"GymBudTVC SelectedRow" properties:@{
-                                                           }];
+        [self.navigationController pushViewController:detailsVC animated:YES];
+        [tableView deselectRowAtIndexPath:indexPath animated:YES];
+        Mixpanel *mixpanel = [Mixpanel sharedInstance];
+        [mixpanel track:@"GymBudTVC SelectedRow" properties:@{
+                                                              }];
+        
+    }
+    
 }
 
-- (void)refreshControlValueChanged:(UIRefreshControl *)refreshControl {
+- (void)refreshControlValueChanged:(UIRefreshControl *)refreshControl
+{
     [self loadObjects];
 }
+
 @end

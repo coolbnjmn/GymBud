@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		29DAA69D1A25438200264253 /* GymBudVC.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 29DAA69C1A25438200264253 /* GymBudVC.storyboard */; };
 		77F13147198EEE0000576708 /* RSDatePickerVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 77F13146198EEE0000576708 /* RSDatePickerVC.m */; };
 		77FD41C51993EEF20017E8D5 /* GymBudEventModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 77FD41C41993EEF20017E8D5 /* GymBudEventModel.m */; };
 		77FE647B198EF296008724CC /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 77FE647A198EF296008724CC /* Social.framework */; };
@@ -83,8 +84,6 @@
 		B297745519864133000AD7B6 /* centeredInbox.png in Resources */ = {isa = PBXBuildFile; fileRef = B297745219864133000AD7B6 /* centeredInbox.png */; };
 		B297745619864133000AD7B6 /* centeredPeople.png in Resources */ = {isa = PBXBuildFile; fileRef = B297745319864133000AD7B6 /* centeredPeople.png */; };
 		B2B8DC2D19D9208800BED65D /* GymBudTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = B2B8DC2C19D9208800BED65D /* GymBudTVC.m */; };
-		B2B8DC3119DA160A00BED65D /* GymBudBasicCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B2B8DC2F19DA160A00BED65D /* GymBudBasicCell.m */; };
-		B2B8DC3219DA160A00BED65D /* GymBudBasicCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B2B8DC3019DA160A00BED65D /* GymBudBasicCell.xib */; };
 		B2B8DC3519DB212300BED65D /* GymBudDetailsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = B2B8DC3419DB212300BED65D /* GymBudDetailsVC.m */; };
 		B2B8DC3719DB214B00BED65D /* GymBudHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = B2B8DC3619DB214B00BED65D /* GymBudHeaderView.xib */; };
 		B2B8DC3A19DB361B00BED65D /* other.png in Resources */ = {isa = PBXBuildFile; fileRef = B2B8DC3819DB361B00BED65D /* other.png */; };
@@ -158,6 +157,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		29DAA69C1A25438200264253 /* GymBudVC.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = GymBudVC.storyboard; sourceTree = "<group>"; };
 		48EE337A63E5439BA42E30F1 /* libPods-GymBud.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-GymBud.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		77F13143198EEDDD00576708 /* libPods-GymBud-RSDayFlow.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libPods-GymBud-RSDayFlow.a"; path = "Pods/build/Debug-iphoneos/libPods-GymBud-RSDayFlow.a"; sourceTree = "<group>"; };
 		77F13145198EEE0000576708 /* RSDatePickerVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RSDatePickerVC.h; path = GymBud/Controllers/RSDatePickerVC.h; sourceTree = "<group>"; };
@@ -255,9 +255,6 @@
 		B297745319864133000AD7B6 /* centeredPeople.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = centeredPeople.png; path = GymBud/Assets/centeredPeople.png; sourceTree = "<group>"; };
 		B2B8DC2B19D9208800BED65D /* GymBudTVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GymBudTVC.h; path = GymBud/Controllers/GymBudTVC.h; sourceTree = "<group>"; };
 		B2B8DC2C19D9208800BED65D /* GymBudTVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GymBudTVC.m; path = GymBud/Controllers/GymBudTVC.m; sourceTree = "<group>"; };
-		B2B8DC2E19DA160A00BED65D /* GymBudBasicCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GymBudBasicCell.h; path = GymBud/Views/GymBudBasicCell.h; sourceTree = "<group>"; };
-		B2B8DC2F19DA160A00BED65D /* GymBudBasicCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GymBudBasicCell.m; path = GymBud/Views/GymBudBasicCell.m; sourceTree = "<group>"; };
-		B2B8DC3019DA160A00BED65D /* GymBudBasicCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = GymBudBasicCell.xib; path = GymBud/Views/GymBudBasicCell.xib; sourceTree = "<group>"; };
 		B2B8DC3319DB212300BED65D /* GymBudDetailsVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GymBudDetailsVC.h; path = GymBud/Controllers/GymBudDetailsVC.h; sourceTree = "<group>"; };
 		B2B8DC3419DB212300BED65D /* GymBudDetailsVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GymBudDetailsVC.m; path = GymBud/Controllers/GymBudDetailsVC.m; sourceTree = "<group>"; };
 		B2B8DC3619DB214B00BED65D /* GymBudHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = GymBudHeaderView.xib; path = GymBud/Views/GymBudHeaderView.xib; sourceTree = "<group>"; };
@@ -576,6 +573,7 @@
 				B2011D1319C91C3500D65275 /* GBEventsFilterViewController.m */,
 				B2D6071B1A21CD4500F19B34 /* SWRevealViewController.h */,
 				B2D6071C1A21CD4500F19B34 /* SWRevealViewController.m */,
+				29DAA69C1A25438200264253 /* GymBudVC.storyboard */,
 			);
 			name = Controllers;
 			path = ..;
@@ -612,9 +610,6 @@
 				B223AD981A199F60000C7FB1 /* GymBudMessageCell.h */,
 				B223AD991A199F60000C7FB1 /* GymBudMessageCell.m */,
 				B223AD9A1A199F60000C7FB1 /* GymBudMessageCell.xib */,
-				B2B8DC2E19DA160A00BED65D /* GymBudBasicCell.h */,
-				B2B8DC2F19DA160A00BED65D /* GymBudBasicCell.m */,
-				B2B8DC3019DA160A00BED65D /* GymBudBasicCell.xib */,
 				B2B8DC3619DB214B00BED65D /* GymBudHeaderView.xib */,
 				B2D607161A2008A500F19B34 /* GymBudEventCompletionView.h */,
 				B2D607171A2008A500F19B34 /* GymBudEventCompletionView.m */,
@@ -706,6 +701,7 @@
 					};
 					B2C39D47197E172600039F90 = {
 						CreatedOnToolsVersion = 6.0;
+						DevelopmentTeam = 8E2G6A5GQK;
 						TestTargetID = B2C39D31197E172600039F90;
 					};
 				};
@@ -751,7 +747,6 @@
 				B2C39D67197E191C00039F90 /* grayBubble.png in Resources */,
 				B2784D9619B18D010042A188 /* load2.png in Resources */,
 				B297741519820C4C000AD7B6 /* mapView.png in Resources */,
-				B2B8DC3219DA160A00BED65D /* GymBudBasicCell.xib in Resources */,
 				B29774201984BF68000AD7B6 /* aerobicsMap.png in Resources */,
 				B2784DAE19B412B90042A188 /* shoulders.png in Resources */,
 				B2B8DC3E19DB5CCD00BED65D /* othermap.png in Resources */,
@@ -771,6 +766,7 @@
 				B29774451985F085000AD7B6 /* menu.png in Resources */,
 				B2011D1119C8019300D65275 /* FilterStoryboard.storyboard in Resources */,
 				B2C39D95197E194F00039F90 /* ViewMessageVC.xib in Resources */,
+				29DAA69D1A25438200264253 /* GymBudVC.storyboard in Resources */,
 				B2784D9B19B18D010042A188 /* load7.png in Resources */,
 				B2784DAA19B412AB0042A188 /* chest.png in Resources */,
 				B2784D8B19B17AF00042A188 /* join.png in Resources */,
@@ -891,7 +887,6 @@
 				B2722DD919AD832900FEC2AF /* GymBudEventsTVC.m in Sources */,
 				B2C39D93197E194F00039F90 /* UserDetailsViewController.m in Sources */,
 				77FE6480198F4FE1008724CC /* GoActivityCVC.m in Sources */,
-				B2B8DC3119DA160A00BED65D /* GymBudBasicCell.m in Sources */,
 				B2722DE219AD86F800FEC2AF /* GymBudEventsCell.m in Sources */,
 				B2C39D90197E194F00039F90 /* PAWWallPostsTableViewController.m in Sources */,
 				B2C39D91197E194F00039F90 /* PAWWallViewController.m in Sources */,
@@ -954,7 +949,8 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Hashim SHAFIQUE (XVHM3S3FH2)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Hashim SHAFIQUE (XVHM3S3FH2)";
 				COPY_PHASE_STRIP = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -995,7 +991,8 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Hashim SHAFIQUE (XVHM3S3FH2)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Hashim SHAFIQUE (XVHM3S3FH2)";
 				COPY_PHASE_STRIP = YES;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
