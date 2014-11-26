@@ -181,9 +181,14 @@
 
                               NSString *text3 = [NSString stringWithFormat:@"Mutual GymBuds: %ld", (result[@"context"][@"mutual_friends"][@"summary"][@"total_count"] ? [((NSString*)result[@"context"][@"mutual_friends"][@"summary"][@"total_count"]) integerValue] : 0)];
                               NSLog(@"cell.text3.text is: %@", text3);
-                              cell.detailTextLabel.text = [NSString stringWithFormat:@"%@ \n"
-                                                           @"%@", cell.detailTextLabel.text, text3];
-                              [cell.detailTextLabel sizeToFit];
+                              cell.detailTextLabel.numberOfLines = 2;
+                              NSUInteger numberOfOccurrences = [[cell.detailTextLabel.text componentsSeparatedByString:@"\n"] count] - 1;
+                              if (numberOfOccurrences==0)
+                              {
+                                  cell.detailTextLabel.text = [NSString stringWithFormat:@"%@\n"
+                                                               @"%@", cell.detailTextLabel.text, text3];
+                                  [cell.detailTextLabel sizeToFit];
+                              }
                           }];
     
     if(object[@"gymbudProfile"][@"name"])
