@@ -19,6 +19,8 @@
 @property (weak, nonatomic) IBOutlet UIDatePicker *startTimePicker;
 @property (weak, nonatomic) IBOutlet MLPAutoCompleteTextField *additionalTextField;
 @property (weak, nonatomic) IBOutlet UILabel *bodyPartLabel;
+@property (weak, nonatomic) IBOutlet UIButton *findOthersButton;
+@property (weak, nonatomic) IBOutlet UIButton *createEventButton;
 
 @property (strong, nonatomic) NSMutableArray *additionalContent;
 @end
@@ -75,6 +77,13 @@
     components.day += 5;
     NSDate *date = [calendar dateFromComponents:components];
     self.startTimePicker.maximumDate = date;
+    
+    self.findOthersButton.backgroundColor = kGymBudLightBlue;
+    self.findOthersButton.tintColor = kGymBudGold;
+    self.findOthersButton.layer.cornerRadius = 15;
+    self.createEventButton.backgroundColor = kGymBudLightBlue;
+    self.createEventButton.tintColor = kGymBudGold;
+    self.createEventButton.layer.cornerRadius = 15;
 }
 
 - (void)didReceiveMemoryWarning

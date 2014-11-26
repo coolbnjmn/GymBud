@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6250" systemVersion="14A389" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="5HB-g6-vDc">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6250" systemVersion="13F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="5HB-g6-vDc">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6244"/>
@@ -96,17 +96,6 @@
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="ebw-21-XgX" id="N2p-Rg-aJM">
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Starting when?" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2bg-OS-EN3">
-                                                    <rect key="frame" x="8" y="8" width="116" height="21"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="width" constant="116" id="aL5-Z7-BAm"/>
-                                                        <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="21" id="nZN-dm-yZK"/>
-                                                        <constraint firstAttribute="height" constant="21" id="nli-gK-JUm"/>
-                                                    </constraints>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
                                                 <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="5" translatesAutoresizingMaskIntoConstraints="NO" id="jir-5c-bmp">
                                                     <rect key="frame" x="0.0" y="37" width="320" height="162"/>
                                                     <constraints>
@@ -116,12 +105,24 @@
                                                         <!--2014-08-05 06:08:38 +0000-->
                                                     </date>
                                                 </datePicker>
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Starting when?" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2bg-OS-EN3">
+                                                    <rect key="frame" x="102" y="8" width="116" height="21"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="116" id="aL5-Z7-BAm"/>
+                                                        <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="21" id="nZN-dm-yZK"/>
+                                                        <constraint firstAttribute="height" constant="21" id="nli-gK-JUm"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="jir-5c-bmp" firstAttribute="top" secondItem="2bg-OS-EN3" secondAttribute="bottom" constant="8" id="8zQ-1w-pTU"/>
-                                                <constraint firstItem="2bg-OS-EN3" firstAttribute="leading" secondItem="N2p-Rg-aJM" secondAttribute="leadingMargin" id="PQl-LD-S33"/>
+                                                <constraint firstItem="2bg-OS-EN3" firstAttribute="leading" secondItem="N2p-Rg-aJM" secondAttribute="leadingMargin" constant="94" id="BC7-P7-Ane"/>
                                                 <constraint firstAttribute="trailingMargin" secondItem="jir-5c-bmp" secondAttribute="trailing" constant="-8" id="aMf-av-1j0"/>
                                                 <constraint firstItem="2bg-OS-EN3" firstAttribute="top" secondItem="N2p-Rg-aJM" secondAttribute="topMargin" id="bev-GB-dpf"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="2bg-OS-EN3" secondAttribute="trailing" constant="94" id="fKZ-LX-wOk"/>
                                                 <constraint firstItem="jir-5c-bmp" firstAttribute="leading" secondItem="N2p-Rg-aJM" secondAttribute="leadingMargin" constant="-8" id="r0f-RM-okC"/>
                                             </constraints>
                                         </tableViewCellContentView>
@@ -223,12 +224,14 @@
                     <connections>
                         <outlet property="additionalTextField" destination="nuy-NM-8gv" id="MZ3-0Z-Zaj"/>
                         <outlet property="bodyPartLabel" destination="pMP-PE-51a" id="npT-a4-uO6"/>
+                        <outlet property="createEventButton" destination="bAi-G7-l9Z" id="WU8-VZ-raZ"/>
+                        <outlet property="findOthersButton" destination="OzU-Zz-dxe" id="PXA-wb-2a9"/>
                         <outlet property="startTimePicker" destination="jir-5c-bmp" id="AG1-pa-CpT"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="TLf-7A-oqE" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="649" y="204"/>
+            <point key="canvasLocation" x="684" y="221"/>
         </scene>
         <!--Go Activity Create EventVC-->
         <scene sceneID="Nz8-4D-ZRQ">
