@@ -110,7 +110,7 @@
                                                     NSFontAttributeName,
                                                     nil]];
 //        nvc1.navigationBar.barTintColor = [UIColor colorWithRed:34/255.0f green:49/255.0f blue:66/255.0f alpha:1.0f];
-        nvc1.navigationBar.barTintColor = kGymBudGold;
+        nvc1.navigationBar.barTintColor = [UIColor whiteColor];
         
         nvc2.navigationBar.tintColor = kGymBudLightBlue;
         [nvc2.navigationBar setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:
@@ -124,7 +124,7 @@
                                                     NSFontAttributeName,
                                                     nil]];
 //        nvc2.navigationBar.barTintColor = [UIColor colorWithRed:34/255.0f green:49/255.0f blue:66/255.0f alpha:1.0f];
-        nvc2.navigationBar.barTintColor = kGymBudGold;
+        nvc2.navigationBar.barTintColor = [UIColor whiteColor];
         
         nvc3.navigationBar.tintColor = kGymBudLightBlue;
 //        nvc3.navigationBar.tintColor = [UIColor colorWithRed:255/255.0f green:255/255.0f blue:255/255.0f alpha:1.0f];
@@ -139,7 +139,7 @@
                                                     NSFontAttributeName,
                                                     nil]];
 //        nvc3.navigationBar.barTintColor = [UIColor colorWithRed:34/255.0f green:49/255.0f blue:66/255.0f alpha:1.0f];
-        nvc3.navigationBar.barTintColor = kGymBudGold;
+        nvc3.navigationBar.barTintColor = [UIColor whiteColor];
         
         nvc4.navigationBar.tintColor = kGymBudLightBlue;
 //        nvc4.navigationBar.tintColor = [UIColor colorWithRed:255/255.0f green:255/255.0f blue:255/255.0f alpha:1.0f];
@@ -154,7 +154,7 @@
                                                    NSFontAttributeName,
                                                     nil]];
 //        nvc4.navigationBar.barTintColor = [UIColor colorWithRed:34/255.0f green:49/255.0f blue:66/255.0f alpha:1.0f];
-        nvc4.navigationBar.barTintColor = kGymBudGold;
+        nvc4.navigationBar.barTintColor = [UIColor whiteColor];
         
         nvc5.navigationBar.tintColor = kGymBudLightBlue;
 //        nvc5.navigationBar.tintColor = [UIColor colorWithRed:255/255.0f green:255/255.0f blue:255/255.0f alpha:1.0f];
@@ -169,7 +169,7 @@
                                                     NSFontAttributeName,
                                                     nil]];
 //        nvc5.navigationBar.barTintColor = [UIColor colorWithRed:34/255.0f green:49/255.0f blue:66/255.0f alpha:1.0f];
-        nvc5.navigationBar.barTintColor = kGymBudGold;
+        nvc5.navigationBar.barTintColor = [UIColor whiteColor];
         
         nvc1.tabBarItem.title = nil;
         nvc1.tabBarItem.image = [[UIImage imageNamed:@"centeredPeople.png"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
@@ -199,7 +199,7 @@
                                                             NSForegroundColorAttributeName : kGymBudDarkBlue
                                                             } forState:UIControlStateNormal];
 //        tbc.tabBar.barTintColor = [UIColor colorWithRed:34/255.0f green:49/255.0f blue:66/255.0f alpha:1.0f];
-        tbc.tabBar.barTintColor = kGymBudGold;
+        tbc.tabBar.barTintColor = [UIColor whiteColor];
         tbc.viewControllers = tbcArray;
         if (currentUser[@"gymbudProfile"] != nil) {
             tbc.selectedIndex = 2;

@@ -51,6 +51,5 @@
 
 #define kGymBudDarkBlue [UIColor colorWithRed:0/255.0f green:38/255.0f blue:242/255.0f alpha:1.0f]
 #define kGymBudLightBlue  [UIColor colorWithRed:0/255.0f green:134/255.0f blue:215/255.0f alpha:1.0f]
-#define kGymBudGold [UIColor colorWithRed:255/255.0f green:230/255.0f blue:13/255.0f alpha:1.0f]
 
 

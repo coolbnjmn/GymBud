@@ -43,12 +43,12 @@
         // Use the new iOS 6 refresh control.
         UIRefreshControl *refreshControl = [[UIRefreshControl alloc] init];
         self.refreshControl = refreshControl;
-        self.refreshControl.tintColor = kGymBudGold;
+        self.refreshControl.tintColor = [UIColor whiteColor];
         [self.refreshControl addTarget:self action:@selector(refreshControlValueChanged:) forControlEvents:UIControlEventValueChanged];
         self.pullToRefreshEnabled = NO;
     }
     
-    self.tableView.separatorColor = kGymBudGold;
+    self.tableView.separatorColor = [UIColor whiteColor];
     self.navigationItem.title = @"Local GymBuds";
     self.objectsPerPage = 25;
     self.navigationItem.hidesBackButton = YES;
@@ -151,8 +151,8 @@
     UIColor * color = kGymBudLightBlue;
     cell.backgroundColor = color;
     
-    cell.textLabel.textColor = kGymBudGold;
-    cell.detailTextLabel.textColor = kGymBudGold;
+    cell.textLabel.textColor = [UIColor whiteColor];
+    cell.detailTextLabel.textColor = [UIColor whiteColor];
     
     return cell;
 
@@ -209,8 +209,8 @@
     cell.backgroundColor = color;
     cell.imageView.image = [UIImage imageNamed:@"yogaIcon.png"];
 
-    cell.textLabel.textColor = kGymBudGold;
-    cell.detailTextLabel.textColor = kGymBudGold;
+    cell.textLabel.textColor = [UIColor whiteColor];
+    cell.detailTextLabel.textColor = [UIColor whiteColor];
     PFFile *theImage = [object objectForKey:@"gymbudProfile"][@"profilePicture"];
     __weak UITableViewCell *weakCell = cell;
     [theImage getDataInBackgroundWithBlock:^(NSData *data, NSError *error){

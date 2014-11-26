@@ -97,7 +97,7 @@ static NSString * const reuseIdentifier = @"goActivityCell";
     if([self.selectedBodyParts count] < 4) {
         [self.selectedBodyParts addObject:indexPath];
         GoActivityCVCell *cell = (GoActivityCVCell *)[collectionView cellForItemAtIndexPath:indexPath];
-        cell.backgroundColor = kGymBudGold;
+        cell.backgroundColor = [UIColor whiteColor];
         cell.layer.cornerRadius = 30;
         cell.layer.masksToBounds = YES;
 

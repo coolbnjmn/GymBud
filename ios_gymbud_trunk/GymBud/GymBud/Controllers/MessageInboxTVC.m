@@ -40,6 +40,8 @@
     self.navigationItem.title = @"Inbox";
     self.navigationItem.rightBarButtonItem = messageButton;
     
+    
+    
 //    UIView *editToast = [[UIView alloc] initWithFrame:CGRectMake(0, self.window.bounds.size.height - 40, self.window.bounds.size.width, 40)];
 //    editToast.backgroundColor = [UIColor orangeColor];
 //    UILabel *textLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, self.window.bounds.size.width, 40)];
@@ -196,6 +198,17 @@
     return sportType;
 }
 
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
+    UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, tableView.bounds.size.width, 30)];
+    UILabel *labelHeader = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, tableView.bounds.size.width, 30)];
+    labelHeader.textColor = kGymBudLightBlue;
+    [headerView addSubview:labelHeader];
+    headerView.backgroundColor = [UIColor whiteColor];
+    labelHeader.text = [self sportTypeForSection:section];
+    return headerView;
+}
+
+
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return self.sections.allKeys.count;
 }
@@ -237,6 +250,10 @@
 //        
 //        cell.detailTextLabel.text = [object objectForKey:@"content"];
 //    }
+    
+    cell.backgroundColor = kGymBudLightBlue;
+    cell.textLabel.textColor = [UIColor whiteColor];
+    cell.detailTextLabel.textColor = [UIColor whiteColor];
     
     return cell;
 }
