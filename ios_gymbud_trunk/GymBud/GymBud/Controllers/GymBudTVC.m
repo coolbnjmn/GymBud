@@ -153,6 +153,10 @@
     
     cell.textLabel.textColor = [UIColor whiteColor];
     cell.detailTextLabel.textColor = [UIColor whiteColor];
+
+    cell.textLabel.font = [UIFont fontWithName:@"MagistralATT" size:18];
+    cell.detailTextLabel.font = [UIFont fontWithName:@"MagistralATT" size:12];
+
     
     return cell;
 
@@ -234,6 +238,18 @@
     [cell.imageView.image drawInRect:imageRect];
     cell.imageView.image = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
+    for (NSString* family in [UIFont familyNames])
+    {
+        NSLog(@"%@", family);
+        
+        for (NSString* name in [UIFont fontNamesForFamilyName: family])
+        {
+            NSLog(@"  %@", name);
+        }
+    }
+    cell.textLabel.font = [UIFont fontWithName:@"MagistralATT" size:18];
+    cell.detailTextLabel.font = [UIFont fontWithName:@"MagistralATT" size:12];
+
 
     return cell;
 }

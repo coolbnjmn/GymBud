@@ -21,6 +21,9 @@
 		B2011D1419C91C3500D65275 /* GBEventsFilterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B2011D1319C91C3500D65275 /* GBEventsFilterViewController.m */; };
 		B2081ECC1A0D4E5A00D18F9B /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B2081ECB1A0D4E5A00D18F9B /* MessageUI.framework */; };
 		B21086C51A16739E0057EC6A /* EPTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = B21086C41A16739E0057EC6A /* EPTVC.m */; };
+		B2232B7C1A265ECE00FBB97F /* MGS45__A.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B2232B791A265ECE00FBB97F /* MGS45__A.ttf */; };
+		B2232B7D1A265ECE00FBB97F /* MGS65__A.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B2232B7A1A265ECE00FBB97F /* MGS65__A.ttf */; };
+		B2232B7E1A265ECE00FBB97F /* MGS85__A.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B2232B7B1A265ECE00FBB97F /* MGS85__A.ttf */; };
 		B223AD9B1A199F60000C7FB1 /* GymBudMessageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B223AD991A199F60000C7FB1 /* GymBudMessageCell.m */; };
 		B223AD9C1A199F60000C7FB1 /* GymBudMessageCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B223AD9A1A199F60000C7FB1 /* GymBudMessageCell.xib */; };
 		B240D9A31A1F153B00374713 /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B2C39D9D197E19A900039F90 /* Parse.framework */; };
@@ -182,6 +185,9 @@
 		B2081ECB1A0D4E5A00D18F9B /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		B21086C31A16739E0057EC6A /* EPTVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EPTVC.h; path = GymBud/Controllers/EPTVC.h; sourceTree = "<group>"; };
 		B21086C41A16739E0057EC6A /* EPTVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EPTVC.m; path = GymBud/Controllers/EPTVC.m; sourceTree = "<group>"; };
+		B2232B791A265ECE00FBB97F /* MGS45__A.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = MGS45__A.ttf; path = Fonts/MGS45__A.ttf; sourceTree = "<group>"; };
+		B2232B7A1A265ECE00FBB97F /* MGS65__A.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = MGS65__A.ttf; path = Fonts/MGS65__A.ttf; sourceTree = "<group>"; };
+		B2232B7B1A265ECE00FBB97F /* MGS85__A.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = MGS85__A.ttf; path = Fonts/MGS85__A.ttf; sourceTree = "<group>"; };
 		B223AD981A199F60000C7FB1 /* GymBudMessageCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GymBudMessageCell.h; path = GymBud/Views/GymBudMessageCell.h; sourceTree = "<group>"; };
 		B223AD991A199F60000C7FB1 /* GymBudMessageCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GymBudMessageCell.m; path = GymBud/Views/GymBudMessageCell.m; sourceTree = "<group>"; };
 		B223AD9A1A199F60000C7FB1 /* GymBudMessageCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = GymBudMessageCell.xib; path = GymBud/Views/GymBudMessageCell.xib; sourceTree = "<group>"; };
@@ -376,11 +382,23 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		B2232B6C1A26582600FBB97F /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				B2232B791A265ECE00FBB97F /* MGS45__A.ttf */,
+				B2232B7A1A265ECE00FBB97F /* MGS65__A.ttf */,
+				B2232B7B1A265ECE00FBB97F /* MGS85__A.ttf */,
+			);
+			name = Fonts;
+			path = GymBud;
+			sourceTree = "<group>";
+		};
 		B2C39D29197E172600039F90 = {
 			isa = PBXGroup;
 			children = (
 				B2C39D34197E172600039F90 /* GymBud */,
 				B2C39D6D197E193000039F90 /* Assets */,
+				B2232B6C1A26582600FBB97F /* Fonts */,
 				B2C39D4B197E172600039F90 /* GymBudTests */,
 				B2C39D33197E172600039F90 /* Products */,
 				B2C39DA0197E19B300039F90 /* Frameworks */,
@@ -738,6 +756,7 @@
 				77FE648B199051E8008724CC /* GoActivityCVCell.xib in Resources */,
 				B2D0CAD8197E2EAE00B17D32 /* TableHeaderView.xib in Resources */,
 				B2D0CAC5197E267D00B17D32 /* LoginViewController.xib in Resources */,
+				B2232B7D1A265ECE00FBB97F /* MGS65__A.ttf in Resources */,
 				B29774211984BF68000AD7B6 /* basketballMap.png in Resources */,
 				B2784D9919B18D010042A188 /* load5.png in Resources */,
 				B29774441985F085000AD7B6 /* mapTabBar.png in Resources */,
@@ -772,6 +791,7 @@
 				B2784D8B19B17AF00042A188 /* join.png in Resources */,
 				B297741619820C4C000AD7B6 /* tableView.png in Resources */,
 				B297743C198582A5000AD7B6 /* swimmingIcon.png in Resources */,
+				B2232B7E1A265ECE00FBB97F /* MGS85__A.ttf in Resources */,
 				B2784DA819B412AB0042A188 /* back.png in Resources */,
 				B2D0CACB197E272400B17D32 /* login-button-small-pressed@2x.png in Resources */,
 				B297745419864133000AD7B6 /* centeredGear.png in Resources */,
@@ -781,6 +801,7 @@
 				77FE6483198F5D36008724CC /* GoActivity.storyboard in Resources */,
 				B2B8DC3719DB214B00BED65D /* GymBudHeaderView.xib in Resources */,
 				B2784DA619B412AB0042A188 /* abs.png in Resources */,
+				B2232B7C1A265ECE00FBB97F /* MGS45__A.ttf in Resources */,
 				B223AD9C1A199F60000C7FB1 /* GymBudMessageCell.xib in Resources */,
 				B2784DA919B412AB0042A188 /* body.png in Resources */,
 				B2B8DC3B19DB361B00BED65D /* sports.png in Resources */,

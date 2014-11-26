@@ -106,7 +106,7 @@
                                                     NSForegroundColorAttributeName,
                                                     [NSValue valueWithUIOffset:UIOffsetMake(0, -1)],
                                                     NSForegroundColorAttributeName,
-                                                    [UIFont fontWithName:@"Helvetica-Bold" size:24.0],
+                                                    [UIFont fontWithName:@"MagistralA-Bold" size:24.0],
                                                     NSFontAttributeName,
                                                     nil]];
 //        nvc1.navigationBar.barTintColor = [UIColor colorWithRed:34/255.0f green:49/255.0f blue:66/255.0f alpha:1.0f];
@@ -120,7 +120,7 @@
                                                     NSForegroundColorAttributeName,
                                                     [NSValue valueWithUIOffset:UIOffsetMake(0, -1)],
                                                     NSForegroundColorAttributeName,
-                                                    [UIFont fontWithName:@"Helvetica-Bold" size:24.0],
+                                                    [UIFont fontWithName:@"MagistralA-Bold" size:24.0],
                                                     NSFontAttributeName,
                                                     nil]];
 //        nvc2.navigationBar.barTintColor = [UIColor colorWithRed:34/255.0f green:49/255.0f blue:66/255.0f alpha:1.0f];
@@ -135,7 +135,7 @@
                                                     NSForegroundColorAttributeName,
                                                     [NSValue valueWithUIOffset:UIOffsetMake(0, -1)],
                                                     NSForegroundColorAttributeName,
-                                                    [UIFont fontWithName:@"Helvetica-Bold" size:24.0],
+                                                    [UIFont fontWithName:@"MagistralA-Bold" size:24.0],
                                                     NSFontAttributeName,
                                                     nil]];
 //        nvc3.navigationBar.barTintColor = [UIColor colorWithRed:34/255.0f green:49/255.0f blue:66/255.0f alpha:1.0f];
@@ -150,7 +150,7 @@
                                                    NSForegroundColorAttributeName,
                                                    [NSValue valueWithUIOffset:UIOffsetMake(0, -1)],
                                                    NSForegroundColorAttributeName,
-                                                   [UIFont fontWithName:@"Helvetica-Bold" size:24.0],
+                                                   [UIFont fontWithName:@"MagistralA-Bold" size:24.0],
                                                    NSFontAttributeName,
                                                     nil]];
 //        nvc4.navigationBar.barTintColor = [UIColor colorWithRed:34/255.0f green:49/255.0f blue:66/255.0f alpha:1.0f];
@@ -165,7 +165,7 @@
                                                     NSForegroundColorAttributeName,
                                                     [NSValue valueWithUIOffset:UIOffsetMake(0, -1)],
                                                     NSForegroundColorAttributeName,
-                                                    [UIFont fontWithName:@"Helvetica-Bold" size:24.0],
+                                                    [UIFont fontWithName:@"MagistralA-Bold" size:24.0],
                                                     NSFontAttributeName,
                                                     nil]];
 //        nvc5.navigationBar.barTintColor = [UIColor colorWithRed:34/255.0f green:49/255.0f blue:66/255.0f alpha:1.0f];
@@ -191,6 +191,16 @@
         nvc5.tabBarItem.image = [[UIImage imageNamed:@"join.png"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
         nvc5.tabBarItem.selectedImage = [UIImage imageNamed:@"join.png"];
 
+
+        for (NSString* family in [UIFont familyNames])
+        {
+            NSLog(@"%@", family);
+            
+            for (NSString* name in [UIFont fontNamesForFamilyName: family])
+            {
+                NSLog(@"  %@", name);
+            }
+        }
         NSMutableArray *tbcArray = [[NSMutableArray alloc] initWithObjects:nvc1, nvc2, nvc4, nvc5, nvc3, nil];
 
 //        tbc.tabBar.tintColor = [UIColor colorWithRed:229/255.0f green:116/255.0f blue:34/255.0f alpha:1.0f];
@@ -305,7 +315,7 @@
 //        eventCompletionView.event = notificationPayload[@"eventObjectId"];
 //        [self.window.rootViewController.view addSubview:eventCompletionView];
     }
-
+    
     return YES;
 }
 

@@ -37,6 +37,12 @@
 	<true/>
 	<key>NSLocationAlwaysUsageDescription</key>
 	<string>We want to be able to place your workouts on a map</string>
+	<key>UIAppFonts</key>
+	<array>
+		<string>MGS45__A.ttf</string>
+		<string>MGS65__A.ttf</string>
+		<string>MGS85__A.ttf</string>
+	</array>
 	<key>UIMainStoryboardFile</key>
 	<string>Main</string>
 	<key>UIRequiredDeviceCapabilities</key>
