@@ -2,7 +2,7 @@
 #import "LoginViewController.h"
 #import "UserDetailsViewController.h"
 #import "MessageInboxTVC.h"
-#import "SettingsVC.h"
+#import "SettingsTableViewController.h"
 #import "GoActivityCVC.h"
 #import "GBJoinedEventsTVC.h"
 #import "GymBudTVC.h"
@@ -40,7 +40,7 @@
     GymBudTVC *mapVC = [goBud instantiateViewControllerWithIdentifier:@"GymBudTVC"];
     //GymBudTVC *mapVC = [[GymBudTVC alloc] init];
     MessageInboxTVC *inboxVC = [[MessageInboxTVC alloc] init];
-    SettingsVC *settingsVC = [[SettingsVC alloc] init];
+    SettingsTableViewController *settingsVC = [[SettingsTableViewController alloc] init];
     UIStoryboard *goSB = [UIStoryboard storyboardWithName:@"GoActivity" bundle:nil];
     //        GoActivityCVC *goVC = [goSB instantiateViewControllerWithIdentifier:@"GoActivity"];
     GBBodyPartCVC *goVC = [goSB instantiateViewControllerWithIdentifier:@"GBBodyPartCVC"];

@@ -17,6 +17,7 @@
 #import <UIAlertView+Blocks.h>
 #import "SWRevealViewController.h"
 #import "GymBudConstants.h"
+#import "SettingsTableViewController.h"
 
 #define MIXPANEL_TOKEN @"079a199396a3f6b60e57782e3b79d25f"
 #define kGymBudEventCompletionHeight 154
@@ -83,7 +84,7 @@
         GymBudTVC *mapVC = [goBud instantiateViewControllerWithIdentifier:@"GymBudTVC"];
         //GymBudTVC *mapVC = [[GymBudTVC alloc] init];
         MessageInboxTVC *inboxVC = [[MessageInboxTVC alloc] init];
-        SettingsVC *settingsVC = [[SettingsVC alloc] init];
+        SettingsTableViewController *settingsVC = [[SettingsTableViewController alloc] init];
         UIStoryboard *goSB = [UIStoryboard storyboardWithName:@"GoActivity" bundle:nil];
 //        GoActivityCVC *goVC = [goSB instantiateViewControllerWithIdentifier:@"GoActivity"];
         GBBodyPartCVC *goVC = [goSB instantiateViewControllerWithIdentifier:@"GBBodyPartCVC"];

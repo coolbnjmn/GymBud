@@ -12,7 +12,6 @@
 #import "LoginViewController.h"
 #import "GymBudEventsTVC.h"
 #import "MessageInboxTVC.h"
-#import "SettingsVC.h"
 #import "GoActivityCVC.h"
 #import "GBJoinedEventsTVC.h"
 
