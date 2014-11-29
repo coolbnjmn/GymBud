@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		29512D6A1A2963250002C82E /* SettingsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 29512D681A2963250002C82E /* SettingsTableViewController.m */; };
+		29512D6B1A2963250002C82E /* SettingsTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 29512D691A2963250002C82E /* SettingsTableViewController.xib */; };
 		29DAA69D1A25438200264253 /* GymBudVC.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 29DAA69C1A25438200264253 /* GymBudVC.storyboard */; };
 		77F13147198EEE0000576708 /* RSDatePickerVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 77F13146198EEE0000576708 /* RSDatePickerVC.m */; };
 		77FD41C51993EEF20017E8D5 /* GymBudEventModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 77FD41C41993EEF20017E8D5 /* GymBudEventModel.m */; };
@@ -160,6 +162,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		29512D671A2963250002C82E /* SettingsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SettingsTableViewController.h; path = GymBud/Controllers/SettingsTableViewController.h; sourceTree = "<group>"; };
+		29512D681A2963250002C82E /* SettingsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SettingsTableViewController.m; path = GymBud/Controllers/SettingsTableViewController.m; sourceTree = "<group>"; };
+		29512D691A2963250002C82E /* SettingsTableViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = SettingsTableViewController.xib; path = GymBud/Controllers/SettingsTableViewController.xib; sourceTree = "<group>"; };
 		29DAA69C1A25438200264253 /* GymBudVC.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = GymBudVC.storyboard; sourceTree = "<group>"; };
 		48EE337A63E5439BA42E30F1 /* libPods-GymBud.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-GymBud.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		77F13143198EEDDD00576708 /* libPods-GymBud-RSDayFlow.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libPods-GymBud-RSDayFlow.a"; path = "Pods/build/Debug-iphoneos/libPods-GymBud-RSDayFlow.a"; sourceTree = "<group>"; };
@@ -528,6 +533,9 @@
 		B2C39D96197E195800039F90 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				29512D671A2963250002C82E /* SettingsTableViewController.h */,
+				29512D681A2963250002C82E /* SettingsTableViewController.m */,
+				29512D691A2963250002C82E /* SettingsTableViewController.xib */,
 				B2C39D6E197E194F00039F90 /* EditProfile.storyboard */,
 				B21086C31A16739E0057EC6A /* EPTVC.h */,
 				B21086C41A16739E0057EC6A /* EPTVC.m */,
@@ -797,6 +805,7 @@
 				B297745419864133000AD7B6 /* centeredGear.png in Resources */,
 				B2722DE319AD86F800FEC2AF /* GymBudEventsCell.xib in Resources */,
 				B297743D198582A5000AD7B6 /* weightliftingIcon.png in Resources */,
+				29512D6B1A2963250002C82E /* SettingsTableViewController.xib in Resources */,
 				B2D0CACA197E272400B17D32 /* login-button-small-pressed.png in Resources */,
 				77FE6483198F5D36008724CC /* GoActivity.storyboard in Resources */,
 				B2B8DC3719DB214B00BED65D /* GymBudHeaderView.xib in Resources */,
@@ -916,6 +925,7 @@
 				B2784DA019B2B34E0042A188 /* GBBodyPartCVC.m in Sources */,
 				B2C39D94197E194F00039F90 /* ViewMessageVC.m in Sources */,
 				B2B8DC3519DB212300BED65D /* GymBudDetailsVC.m in Sources */,
+				29512D6A1A2963250002C82E /* SettingsTableViewController.m in Sources */,
 				B2C39D9A197E197E00039F90 /* PAWPost.m in Sources */,
 				B21086C51A16739E0057EC6A /* EPTVC.m in Sources */,
 				B2D0CAD1197E2BB700B17D32 /* FindUserTVC.m in Sources */,

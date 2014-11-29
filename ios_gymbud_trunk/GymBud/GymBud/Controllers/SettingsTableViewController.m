@@ -37,6 +37,7 @@
 
 -(void)viewDidAppear:(BOOL)animated
 {
+    // refresh table
     [self.tableView reloadData];
 }
 
