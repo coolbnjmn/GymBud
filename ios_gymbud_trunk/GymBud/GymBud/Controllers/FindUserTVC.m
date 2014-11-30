@@ -128,7 +128,6 @@
     self.HUD.customView = imageView;
     self.HUD.mode = MBProgressHUDModeCustomView;
     self.HUD.color = [UIColor whiteColor];
-    
     [self.HUD show:YES];
     [self setLoadingViewEnabled:NO];
     return query;
