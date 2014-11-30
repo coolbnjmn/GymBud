@@ -97,9 +97,10 @@ static NSString * const reuseIdentifier = @"goActivityCell";
     if([self.selectedBodyParts count] < 4) {
         [self.selectedBodyParts addObject:indexPath];
         GoActivityCVCell *cell = (GoActivityCVCell *)[collectionView cellForItemAtIndexPath:indexPath];
-        cell.backgroundColor = [UIColor whiteColor];
-        cell.layer.cornerRadius = 30;
-        cell.layer.masksToBounds = YES;
+//        cell.backgroundColor = [UIColor whiteColor];
+//        cell.layer.cornerRadius = 30;
+//        cell.layer.masksToBounds = YES;
+        cell.goActivityPictureImaveView.image = [UIImage imageNamed:[kGBBodyPartImagesSelArray objectAtIndex:indexPath.row]];
 
     } else {
         // DO nothing, we don't want to select more than 4
@@ -110,8 +111,8 @@ static NSString * const reuseIdentifier = @"goActivityCell";
     // TODO: Deselect item
     [self.selectedBodyParts removeObject:indexPath];
     GoActivityCVCell *cell = (GoActivityCVCell *)[collectionView cellForItemAtIndexPath:indexPath];
-    cell.backgroundColor = [UIColor clearColor];
-
+//    cell.backgroundColor = [UIColor clearColor];
+    cell.goActivityPictureImaveView.image = [UIImage imageNamed:[kGBBodyPartImagesArray objectAtIndex:indexPath.row]];
 }
 
 #pragma mark <UICollectionViewDelegate>

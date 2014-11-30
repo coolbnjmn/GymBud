@@ -33,7 +33,7 @@
     // self.clearsSelectionOnViewWillAppear = NO;
 
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    UIBarButtonItem *messageButton = [[UIBarButtonItem alloc] initWithTitle:@"Send Message" style:UIBarButtonItemStyleBordered target:self action:@selector(sendMessage:)];
+    UIBarButtonItem *messageButton = [[UIBarButtonItem alloc] initWithTitle:@"Compose" style:UIBarButtonItemStyleBordered target:self action:@selector(sendMessage:)];
     self.sections = [NSMutableDictionary dictionary];
     self.sectionToConversationMap = [NSMutableDictionary dictionary];
 
