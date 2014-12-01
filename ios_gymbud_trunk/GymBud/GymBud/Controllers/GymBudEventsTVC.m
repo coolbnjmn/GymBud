@@ -181,7 +181,7 @@
     imageView.contentMode = UIViewContentModeScaleToFill;
     self.HUD.customView = imageView;
     self.HUD.mode = MBProgressHUDModeCustomView;
-    self.HUD.color = [UIColor whiteColor];
+    self.HUD.color = [UIColor clearColor];
     
     [self.HUD show:YES];
     [self setLoadingViewEnabled:NO];
