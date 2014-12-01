@@ -86,7 +86,11 @@ static NSString * const reuseIdentifier = @"goActivityCell";
     GoActivityCVCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:reuseIdentifier forIndexPath:indexPath];
     
     // Configure the cell
-    cell.goActivityPictureImaveView.image = [UIImage imageNamed:[kGBBodyPartImagesArray objectAtIndex:indexPath.row]];
+    if([self.selectedBodyParts containsObject:indexPath]) {
+        cell.goActivityPictureImaveView.image = [UIImage imageNamed:[kGBBodyPartImagesSelArray objectAtIndex:indexPath.row]];
+    } else {
+        cell.goActivityPictureImaveView.image = [UIImage imageNamed:[kGBBodyPartImagesArray objectAtIndex:indexPath.row]];
+    }
     cell.goActivityTextLabel.text = [kGBBodyPartArray objectAtIndex:indexPath.row];
     cell.backgroundColor = [UIColor clearColor];
     return cell;
@@ -104,11 +108,12 @@ static NSString * const reuseIdentifier = @"goActivityCell";
 
     } else {
         // DO nothing, we don't want to select more than 4
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Select up to 4 Body Parts" message:@"You have tried to select more than 4" delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil];
+        [alertView show];
     }
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didDeselectItemAtIndexPath:(NSIndexPath *)indexPath {
-    // TODO: Deselect item
     [self.selectedBodyParts removeObject:indexPath];
     GoActivityCVCell *cell = (GoActivityCVCell *)[collectionView cellForItemAtIndexPath:indexPath];
 //    cell.backgroundColor = [UIColor clearColor];

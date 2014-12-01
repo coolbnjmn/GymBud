@@ -129,6 +129,13 @@
     self.HUD.mode = MBProgressHUDModeCustomView;
     self.HUD.color = [UIColor clearColor];
     [self.HUD show:YES];
+    for (UIView *subview in self.view.subviews)
+    {
+        if ([subview class] == NSClassFromString(@"PFLoadingView"))
+        {
+            [subview removeFromSuperview];
+        }
+    }
     [self setLoadingViewEnabled:NO];
     return query;
 }

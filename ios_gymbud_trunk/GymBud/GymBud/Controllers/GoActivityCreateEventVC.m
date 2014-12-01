@@ -156,6 +156,13 @@
     self.HUD.mode = MBProgressHUDModeCustomView;
     self.HUD.color = [UIColor clearColor];
     [self.HUD show:YES];
+    for (UIView *subview in self.view.subviews)
+    {
+        if ([subview class] == NSClassFromString(@"PFLoadingView"))
+        {
+            [subview removeFromSuperview];
+        }
+    }
     
     // now for the location
     NSURL *url = [NSURL URLWithString:@"https://maps.googleapis.com/maps/api/geocode/"];
