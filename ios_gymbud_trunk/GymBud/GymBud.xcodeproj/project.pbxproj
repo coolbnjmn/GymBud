@@ -8,6 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		29DAA69D1A25438200264253 /* GymBudVC.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 29DAA69C1A25438200264253 /* GymBudVC.storyboard */; };
+		5E5559AF1A2D261E004A343E /* LGSimpleChat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E5559AD1A2D261E004A343E /* LGSimpleChat.swift */; };
+		5E5559B01A2D261E004A343E /* License in Resources */ = {isa = PBXBuildFile; fileRef = 5E5559AE1A2D261E004A343E /* License */; };
+		5EBF9FF11A2B00A000F1D8FF /* ChatView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5EBF9FF01A2B009F00F1D8FF /* ChatView.xib */; };
+		5EBF9FF41A2B04E300F1D8FF /* ChatViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5EBF9FF31A2B04E300F1D8FF /* ChatViewController.m */; };
 		77F13147198EEE0000576708 /* RSDatePickerVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 77F13146198EEE0000576708 /* RSDatePickerVC.m */; };
 		77FD41C51993EEF20017E8D5 /* GymBudEventModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 77FD41C41993EEF20017E8D5 /* GymBudEventModel.m */; };
 		77FE647B198EF296008724CC /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 77FE647A198EF296008724CC /* Social.framework */; };
@@ -162,6 +166,11 @@
 /* Begin PBXFileReference section */
 		29DAA69C1A25438200264253 /* GymBudVC.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = GymBudVC.storyboard; sourceTree = "<group>"; };
 		48EE337A63E5439BA42E30F1 /* libPods-GymBud.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-GymBud.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		5E5559AD1A2D261E004A343E /* LGSimpleChat.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LGSimpleChat.swift; sourceTree = "<group>"; };
+		5E5559AE1A2D261E004A343E /* License */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = License; sourceTree = "<group>"; };
+		5EBF9FF01A2B009F00F1D8FF /* ChatView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ChatView.xib; path = GymBud/Views/ChatView.xib; sourceTree = "<group>"; };
+		5EBF9FF21A2B04E300F1D8FF /* ChatViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ChatViewController.h; path = GymBud/Controllers/ChatViewController.h; sourceTree = "<group>"; };
+		5EBF9FF31A2B04E300F1D8FF /* ChatViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ChatViewController.m; path = GymBud/Controllers/ChatViewController.m; sourceTree = "<group>"; };
 		77F13143198EEDDD00576708 /* libPods-GymBud-RSDayFlow.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libPods-GymBud-RSDayFlow.a"; path = "Pods/build/Debug-iphoneos/libPods-GymBud-RSDayFlow.a"; sourceTree = "<group>"; };
 		77F13145198EEE0000576708 /* RSDatePickerVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RSDatePickerVC.h; path = GymBud/Controllers/RSDatePickerVC.h; sourceTree = "<group>"; };
 		77F13146198EEE0000576708 /* RSDatePickerVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RSDatePickerVC.m; path = GymBud/Controllers/RSDatePickerVC.m; sourceTree = "<group>"; };
@@ -179,6 +188,7 @@
 		77FE648D1990545A008724CC /* GoActivityChosenVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GoActivityChosenVC.m; path = GymBud/Controllers/GoActivityChosenVC.m; sourceTree = "<group>"; };
 		77FE648F1990A924008724CC /* GoActivityCreateEventVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GoActivityCreateEventVC.h; path = GymBud/Controllers/GoActivityCreateEventVC.h; sourceTree = "<group>"; };
 		77FE64901990A924008724CC /* GoActivityCreateEventVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GoActivityCreateEventVC.m; path = GymBud/Controllers/GoActivityCreateEventVC.m; sourceTree = "<group>"; };
+		86EF0246D4E39848AB0219F5 /* Pods-GymBud.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GymBud.release.xcconfig"; path = "Pods/Target Support Files/Pods-GymBud/Pods-GymBud.release.xcconfig"; sourceTree = "<group>"; };
 		B2011D1019C8019300D65275 /* FilterStoryboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = FilterStoryboard.storyboard; path = GymBud/Views/FilterStoryboard.storyboard; sourceTree = "<group>"; };
 		B2011D1219C91C3500D65275 /* GBEventsFilterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GBEventsFilterViewController.h; path = GymBud/Controllers/GBEventsFilterViewController.h; sourceTree = "<group>"; };
 		B2011D1319C91C3500D65275 /* GBEventsFilterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GBEventsFilterViewController.m; path = GymBud/Controllers/GBEventsFilterViewController.m; sourceTree = "<group>"; };
@@ -343,7 +353,7 @@
 		B2D6071C1A21CD4500F19B34 /* SWRevealViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SWRevealViewController.m; path = GymBud/Controllers/SWRevealViewController.m; sourceTree = "<group>"; };
 		B2FCFBE719CAC15C0078C68D /* EPBasicInfoVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EPBasicInfoVC.h; path = GymBud/Controllers/EPBasicInfoVC.h; sourceTree = "<group>"; };
 		B2FCFBE819CAC15C0078C68D /* EPBasicInfoVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EPBasicInfoVC.m; path = GymBud/Controllers/EPBasicInfoVC.m; sourceTree = "<group>"; };
-		E5F4F985088842DBBF422DE7 /* Pods-GymBud.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GymBud.xcconfig"; path = "Pods/Pods-GymBud.xcconfig"; sourceTree = "<group>"; };
+		C6B6D8D4A9FF6EC1BA31A679 /* Pods-GymBud.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GymBud.debug.xcconfig"; path = "Pods/Target Support Files/Pods-GymBud/Pods-GymBud.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -382,6 +392,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		5E5559AC1A2D261E004A343E /* LGSimpleChat */ = {
+			isa = PBXGroup;
+			children = (
+				5E5559AD1A2D261E004A343E /* LGSimpleChat.swift */,
+				5E5559AE1A2D261E004A343E /* License */,
+			);
+			name = LGSimpleChat;
+			path = GymBud/LGSimpleChat;
+			sourceTree = "<group>";
+		};
 		B2232B6C1A26582600FBB97F /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
@@ -402,7 +422,7 @@
 				B2C39D4B197E172600039F90 /* GymBudTests */,
 				B2C39D33197E172600039F90 /* Products */,
 				B2C39DA0197E19B300039F90 /* Frameworks */,
-				E5F4F985088842DBBF422DE7 /* Pods-GymBud.xcconfig */,
+				E5C3EBB35E24F3E50C9725E3 /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -528,6 +548,10 @@
 		B2C39D96197E195800039F90 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				5E5559AC1A2D261E004A343E /* LGSimpleChat */,
+				5EBF9FF21A2B04E300F1D8FF /* ChatViewController.h */,
+				5EBF9FF31A2B04E300F1D8FF /* ChatViewController.m */,
+				5EBF9FF01A2B009F00F1D8FF /* ChatView.xib */,
 				B2C39D6E197E194F00039F90 /* EditProfile.storyboard */,
 				B21086C31A16739E0057EC6A /* EPTVC.h */,
 				B21086C41A16739E0057EC6A /* EPTVC.m */,
@@ -664,6 +688,15 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		E5C3EBB35E24F3E50C9725E3 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				C6B6D8D4A9FF6EC1BA31A679 /* Pods-GymBud.debug.xcconfig */,
+				86EF0246D4E39848AB0219F5 /* Pods-GymBud.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -748,6 +781,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5E5559B01A2D261E004A343E /* License in Resources */,
 				B2B8DC3F19DB5CCD00BED65D /* sportsmap.png in Resources */,
 				B297743E198582A5000AD7B6 /* yogaIcon.png in Resources */,
 				B29774251984BF68000AD7B6 /* weightliftingMap.png in Resources */,
@@ -755,6 +789,7 @@
 				B2784D9719B18D010042A188 /* load3.png in Resources */,
 				77FE648B199051E8008724CC /* GoActivityCVCell.xib in Resources */,
 				B2D0CAD8197E2EAE00B17D32 /* TableHeaderView.xib in Resources */,
+				5EBF9FF11A2B00A000F1D8FF /* ChatView.xib in Resources */,
 				B2D0CAC5197E267D00B17D32 /* LoginViewController.xib in Resources */,
 				B2232B7D1A265ECE00FBB97F /* MGS65__A.ttf in Resources */,
 				B29774211984BF68000AD7B6 /* basketballMap.png in Resources */,
@@ -857,7 +892,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Pods-GymBud-resources.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-GymBud/Pods-GymBud-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		A56C540ABC91495D94309FAE /* Check Pods Manifest.lock */ = {
@@ -889,6 +924,7 @@
 				77FE6487198F715C008724CC /* GoActivityCVCell.m in Sources */,
 				B2B8DC2D19D9208800BED65D /* GymBudTVC.m in Sources */,
 				B2B8DC4219DCA9A800BED65D /* GymBudConversationTVC.m in Sources */,
+				5E5559AF1A2D261E004A343E /* LGSimpleChat.swift in Sources */,
 				77FE64911990A924008724CC /* GoActivityCreateEventVC.m in Sources */,
 				B27AF67319B0D00700FDBF0F /* NSDate+Utilities.m in Sources */,
 				B297742A1984C195000AD7B6 /* PostCreateTVC.m in Sources */,
@@ -914,6 +950,7 @@
 				77F13147198EEE0000576708 /* RSDatePickerVC.m in Sources */,
 				B29774111980D5EF000AD7B6 /* SettingsVC.m in Sources */,
 				B2784DA019B2B34E0042A188 /* GBBodyPartCVC.m in Sources */,
+				5EBF9FF41A2B04E300F1D8FF /* ChatViewController.m in Sources */,
 				B2C39D94197E194F00039F90 /* ViewMessageVC.m in Sources */,
 				B2B8DC3519DB212300BED65D /* GymBudDetailsVC.m in Sources */,
 				B2C39D9A197E197E00039F90 /* PAWPost.m in Sources */,
@@ -1033,7 +1070,7 @@
 		};
 		B2C39D53197E172600039F90 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = E5F4F985088842DBBF422DE7 /* Pods-GymBud.xcconfig */;
+			baseConfigurationReference = C6B6D8D4A9FF6EC1BA31A679 /* Pods-GymBud.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon2;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage2;
@@ -1058,7 +1095,7 @@
 		};
 		B2C39D54197E172600039F90 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = E5F4F985088842DBBF422DE7 /* Pods-GymBud.xcconfig */;
+			baseConfigurationReference = 86EF0246D4E39848AB0219F5 /* Pods-GymBud.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon2;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage2;
