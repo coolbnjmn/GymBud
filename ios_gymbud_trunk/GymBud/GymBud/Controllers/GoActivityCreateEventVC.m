@@ -12,7 +12,7 @@
 #import <MLPAutoCompleteTextField/MLPAutoCompleteTextField.h>
 #import <AFNetworking/AFNetworking.h>
 #import "Mixpanel.h"
-
+#import "MBProgressHUD.h"
 
 @interface GoActivityCreateEventVC () <UITextFieldDelegate, UIPickerViewDataSource, UIPickerViewDelegate>
 

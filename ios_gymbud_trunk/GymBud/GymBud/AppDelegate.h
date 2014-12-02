@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import <Parse/Parse.h>
 #import <FacebookSDK/FacebookSDK.h>
-#import "LoginViewController.h"
+#import "SettingsTableViewController.h"
 #import "GymBudEventsTVC.h"
 #import "MessageInboxTVC.h"
 #import "GoActivityCVC.h"

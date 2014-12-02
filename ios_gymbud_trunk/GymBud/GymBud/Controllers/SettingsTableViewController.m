@@ -10,8 +10,8 @@
 #import <Parse/Parse.h>
 #import "GymBudConstants.h"
 #import "Mixpanel.h"
-#import "LoginViewController.h"
 #import "EPTVC.h"
+#import "SignInViewController.h"
 
 @interface SettingsTableViewController ()
 @property (strong, nonatomic) NSMutableData* imageData;
@@ -27,6 +27,7 @@
     self.tableView.backgroundColor = kGymBudLightBlue;
     self.imageData = [[NSMutableData alloc] init];
     self.loadedImage = NO;
+    self.title = @"Settings";
     
     if ([self.tableView respondsToSelector:@selector(setSeparatorInset:)]) {
         [self.tableView setSeparatorInset:UIEdgeInsetsZero];
@@ -206,12 +207,22 @@
     // show edit profile page here...
     UIStoryboard *sb = [UIStoryboard storyboardWithName:@"EditProfile" bundle:nil];
     EPTVC *vc = [sb instantiateViewControllerWithIdentifier:@"EPOnboarding"];
+    // vc.navigationController.navigationItem.backBarButtonItem
     vc.hidesBottomBarWhenPushed = YES;
     vc.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
+    UIBarButtonItem *btn = [[UIBarButtonItem alloc] initWithTitle:@"< Back" style:UIBarButtonItemStyleBordered target:self action:@selector(backPressed:)];
+    vc.navigationItem.leftBarButtonItem = btn;
+    
+    vc.navigationItem.hidesBackButton = NO;
     [self.navigationController pushViewController:vc animated:YES];
     Mixpanel *mixpanel = [Mixpanel sharedInstance];
     [mixpanel track:@"SettingsVC EditProfile" properties:@{
                                                            }];
+}
+
+-(void)backPressed:(id)sender
+{
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 -(void) launchInviteFriend
@@ -275,7 +286,7 @@
     [PFUser logOut];
     
     // Return to login view controller
-    LoginViewController *lvc = [[LoginViewController alloc] init];
+    SignInViewController *lvc = [[SignInViewController alloc] init];
     [self presentViewController:lvc animated:YES completion:nil];
     Mixpanel *mixpanel = [Mixpanel sharedInstance];
     [mixpanel track:@"SettingsVC Logout" properties:@{

@@ -9,6 +9,11 @@
 /* Begin PBXBuildFile section */
 		29512D6A1A2963250002C82E /* SettingsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 29512D681A2963250002C82E /* SettingsTableViewController.m */; };
 		29512D6B1A2963250002C82E /* SettingsTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 29512D691A2963250002C82E /* SettingsTableViewController.xib */; };
+		296D73851A2BEE5A0067624B /* SignInViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 296D73841A2BEE5A0067624B /* SignInViewController.m */; };
+		296D73871A2BF87D0067624B /* SignIn.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 296D73861A2BF87D0067624B /* SignIn.storyboard */; };
+		296D73891A2BFEEA0067624B /* background.png in Resources */ = {isa = PBXBuildFile; fileRef = 296D73881A2BFEEA0067624B /* background.png */; };
+		296D738B1A2CA78A0067624B /* InitialView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 296D738A1A2CA78A0067624B /* InitialView.storyboard */; };
+		296D738E1A2D23870067624B /* SignUpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 296D738D1A2D23870067624B /* SignUpViewController.m */; };
 		29DAA69D1A25438200264253 /* GymBudVC.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 29DAA69C1A25438200264253 /* GymBudVC.storyboard */; };
 		77F13147198EEE0000576708 /* RSDatePickerVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 77F13146198EEE0000576708 /* RSDatePickerVC.m */; };
 		77FD41C51993EEF20017E8D5 /* GymBudEventModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 77FD41C41993EEF20017E8D5 /* GymBudEventModel.m */; };
@@ -56,8 +61,6 @@
 		B2784DAE19B412B90042A188 /* shoulders.png in Resources */ = {isa = PBXBuildFile; fileRef = B2784DAC19B412B90042A188 /* shoulders.png */; };
 		B27AF67019B0417300FDBF0F /* GBJoinedEventsTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = B27AF66F19B0417300FDBF0F /* GBJoinedEventsTVC.m */; };
 		B27AF67319B0D00700FDBF0F /* NSDate+Utilities.m in Sources */ = {isa = PBXBuildFile; fileRef = B27AF67219B0D00700FDBF0F /* NSDate+Utilities.m */; };
-		B29774111980D5EF000AD7B6 /* SettingsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = B297740F1980D5EF000AD7B6 /* SettingsVC.m */; };
-		B29774121980D5EF000AD7B6 /* SettingsVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = B29774101980D5EF000AD7B6 /* SettingsVC.xib */; };
 		B297741519820C4C000AD7B6 /* mapView.png in Resources */ = {isa = PBXBuildFile; fileRef = B297741319820C4C000AD7B6 /* mapView.png */; };
 		B297741619820C4C000AD7B6 /* tableView.png in Resources */ = {isa = PBXBuildFile; fileRef = B297741419820C4C000AD7B6 /* tableView.png */; };
 		B297741819843EC9000AD7B6 /* sampleMapPin.png in Resources */ = {isa = PBXBuildFile; fileRef = B297741719843EC9000AD7B6 /* sampleMapPin.png */; };
@@ -165,6 +168,13 @@
 		29512D671A2963250002C82E /* SettingsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SettingsTableViewController.h; path = GymBud/Controllers/SettingsTableViewController.h; sourceTree = "<group>"; };
 		29512D681A2963250002C82E /* SettingsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SettingsTableViewController.m; path = GymBud/Controllers/SettingsTableViewController.m; sourceTree = "<group>"; };
 		29512D691A2963250002C82E /* SettingsTableViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = SettingsTableViewController.xib; path = GymBud/Controllers/SettingsTableViewController.xib; sourceTree = "<group>"; };
+		296D73831A2BEE5A0067624B /* SignInViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SignInViewController.h; sourceTree = "<group>"; };
+		296D73841A2BEE5A0067624B /* SignInViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SignInViewController.m; sourceTree = "<group>"; };
+		296D73861A2BF87D0067624B /* SignIn.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = SignIn.storyboard; sourceTree = "<group>"; };
+		296D73881A2BFEEA0067624B /* background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = background.png; path = GymBud/background.png; sourceTree = "<group>"; };
+		296D738A1A2CA78A0067624B /* InitialView.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = InitialView.storyboard; sourceTree = "<group>"; };
+		296D738C1A2D23870067624B /* SignUpViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SignUpViewController.h; sourceTree = "<group>"; };
+		296D738D1A2D23870067624B /* SignUpViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SignUpViewController.m; sourceTree = "<group>"; };
 		29DAA69C1A25438200264253 /* GymBudVC.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = GymBudVC.storyboard; sourceTree = "<group>"; };
 		48EE337A63E5439BA42E30F1 /* libPods-GymBud.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-GymBud.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		77F13143198EEDDD00576708 /* libPods-GymBud-RSDayFlow.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libPods-GymBud-RSDayFlow.a"; path = "Pods/build/Debug-iphoneos/libPods-GymBud-RSDayFlow.a"; sourceTree = "<group>"; };
@@ -229,9 +239,6 @@
 		B27AF66F19B0417300FDBF0F /* GBJoinedEventsTVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GBJoinedEventsTVC.m; path = GymBud/Controllers/GBJoinedEventsTVC.m; sourceTree = "<group>"; };
 		B27AF67119B0D00700FDBF0F /* NSDate+Utilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSDate+Utilities.h"; path = "GymBud/Models/NSDate+Utilities.h"; sourceTree = "<group>"; };
 		B27AF67219B0D00700FDBF0F /* NSDate+Utilities.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSDate+Utilities.m"; path = "GymBud/Models/NSDate+Utilities.m"; sourceTree = "<group>"; };
-		B297740E1980D5EF000AD7B6 /* SettingsVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SettingsVC.h; path = GymBud/Controllers/SettingsVC.h; sourceTree = "<group>"; };
-		B297740F1980D5EF000AD7B6 /* SettingsVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SettingsVC.m; path = GymBud/Controllers/SettingsVC.m; sourceTree = "<group>"; };
-		B29774101980D5EF000AD7B6 /* SettingsVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = SettingsVC.xib; path = GymBud/Controllers/SettingsVC.xib; sourceTree = "<group>"; };
 		B297741319820C4C000AD7B6 /* mapView.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = mapView.png; path = GymBud/Assets/mapView.png; sourceTree = "<group>"; };
 		B297741419820C4C000AD7B6 /* tableView.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = tableView.png; path = GymBud/Assets/tableView.png; sourceTree = "<group>"; };
 		B297741719843EC9000AD7B6 /* sampleMapPin.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = sampleMapPin.png; path = GymBud/Assets/sampleMapPin.png; sourceTree = "<group>"; };
@@ -464,6 +471,7 @@
 		B2C39D6D197E193000039F90 /* Assets */ = {
 			isa = PBXGroup;
 			children = (
+				296D73881A2BFEEA0067624B /* background.png */,
 				B2B8DC3C19DB5CCD00BED65D /* othermap.png */,
 				B2B8DC3D19DB5CCD00BED65D /* sportsmap.png */,
 				B2B8DC3819DB361B00BED65D /* other.png */,
@@ -582,9 +590,6 @@
 				B2C39D86197E194F00039F90 /* ViewMessageVC.xib */,
 				B2D0CACE197E2BB700B17D32 /* FindUserTVC.h */,
 				B2D0CACF197E2BB700B17D32 /* FindUserTVC.m */,
-				B297740E1980D5EF000AD7B6 /* SettingsVC.h */,
-				B297740F1980D5EF000AD7B6 /* SettingsVC.m */,
-				B29774101980D5EF000AD7B6 /* SettingsVC.xib */,
 				77F13145198EEE0000576708 /* RSDatePickerVC.h */,
 				77F13146198EEE0000576708 /* RSDatePickerVC.m */,
 				77FE647E198F4FE1008724CC /* GoActivityCVC.h */,
@@ -600,6 +605,12 @@
 				B2D6071B1A21CD4500F19B34 /* SWRevealViewController.h */,
 				B2D6071C1A21CD4500F19B34 /* SWRevealViewController.m */,
 				29DAA69C1A25438200264253 /* GymBudVC.storyboard */,
+				296D73831A2BEE5A0067624B /* SignInViewController.h */,
+				296D738C1A2D23870067624B /* SignUpViewController.h */,
+				296D738D1A2D23870067624B /* SignUpViewController.m */,
+				296D73841A2BEE5A0067624B /* SignInViewController.m */,
+				296D73861A2BF87D0067624B /* SignIn.storyboard */,
+				296D738A1A2CA78A0067624B /* InitialView.storyboard */,
 			);
 			name = Controllers;
 			path = ..;
@@ -723,7 +734,7 @@
 				TargetAttributes = {
 					B2C39D31197E172600039F90 = {
 						CreatedOnToolsVersion = 6.0;
-						DevelopmentTeam = M6Y34M2A35;
+						DevelopmentTeam = 8E2G6A5GQK;
 					};
 					B2C39D47197E172600039F90 = {
 						CreatedOnToolsVersion = 6.0;
@@ -777,6 +788,7 @@
 				B29774201984BF68000AD7B6 /* aerobicsMap.png in Resources */,
 				B2784DAE19B412B90042A188 /* shoulders.png in Resources */,
 				B2B8DC3E19DB5CCD00BED65D /* othermap.png in Resources */,
+				296D73871A2BF87D0067624B /* SignIn.storyboard in Resources */,
 				B2C39D43197E172600039F90 /* Images.xcassets in Resources */,
 				B29774231984BF68000AD7B6 /* runningMap.png in Resources */,
 				B29774431985F085000AD7B6 /* inbox.png in Resources */,
@@ -800,6 +812,7 @@
 				B297741619820C4C000AD7B6 /* tableView.png in Resources */,
 				B297743C198582A5000AD7B6 /* swimmingIcon.png in Resources */,
 				B2232B7E1A265ECE00FBB97F /* MGS85__A.ttf in Resources */,
+				296D73891A2BFEEA0067624B /* background.png in Resources */,
 				B2784DA819B412AB0042A188 /* back.png in Resources */,
 				B2D0CACB197E272400B17D32 /* login-button-small-pressed@2x.png in Resources */,
 				B297745419864133000AD7B6 /* centeredGear.png in Resources */,
@@ -818,11 +831,11 @@
 				B2784DAD19B412B90042A188 /* legs.png in Resources */,
 				B2977439198582A5000AD7B6 /* basketballIcon.png in Resources */,
 				B297744919861B9D000AD7B6 /* mapTableToggle1.png in Resources */,
+				296D738B1A2CA78A0067624B /* InitialView.storyboard in Resources */,
 				B2B8DC3A19DB361B00BED65D /* other.png in Resources */,
 				B2C39DBB197E1B5D00039F90 /* Main.storyboard in Resources */,
 				B2C39D6A197E191C00039F90 /* just_background@2x.png in Resources */,
 				B2C39D6C197E191C00039F90 /* Map@2x.png in Resources */,
-				B29774121980D5EF000AD7B6 /* SettingsVC.xib in Resources */,
 				B2977438198582A5000AD7B6 /* aerobicsIcon.png in Resources */,
 				B2C39D87197E194F00039F90 /* EditProfile.storyboard in Resources */,
 				B29774461985F085000AD7B6 /* settings.png in Resources */,
@@ -891,6 +904,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				296D73851A2BEE5A0067624B /* SignInViewController.m in Sources */,
 				B2D607181A2008A500F19B34 /* GymBudEventCompletionView.m in Sources */,
 				B2D6071D1A21CD4500F19B34 /* SWRevealViewController.m in Sources */,
 				77FD41C51993EEF20017E8D5 /* GymBudEventModel.m in Sources */,
@@ -901,6 +915,7 @@
 				77FE64911990A924008724CC /* GoActivityCreateEventVC.m in Sources */,
 				B27AF67319B0D00700FDBF0F /* NSDate+Utilities.m in Sources */,
 				B297742A1984C195000AD7B6 /* PostCreateTVC.m in Sources */,
+				296D738E1A2D23870067624B /* SignUpViewController.m in Sources */,
 				B2C39D88197E194F00039F90 /* EditProfileTVC.m in Sources */,
 				B2C39D89197E194F00039F90 /* EPInterestVC.m in Sources */,
 				B2C39D8B197E194F00039F90 /* MessageInboxTVC.m in Sources */,
@@ -921,7 +936,6 @@
 				B2C39D90197E194F00039F90 /* PAWWallPostsTableViewController.m in Sources */,
 				B2C39D91197E194F00039F90 /* PAWWallViewController.m in Sources */,
 				77F13147198EEE0000576708 /* RSDatePickerVC.m in Sources */,
-				B29774111980D5EF000AD7B6 /* SettingsVC.m in Sources */,
 				B2784DA019B2B34E0042A188 /* GBBodyPartCVC.m in Sources */,
 				B2C39D94197E194F00039F90 /* ViewMessageVC.m in Sources */,
 				B2B8DC3519DB212300BED65D /* GymBudDetailsVC.m in Sources */,
@@ -1001,6 +1015,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
+				PROVISIONING_PROFILE = "853B7B3D-D768-4A8B-9F67-4CC7D1D18F15";
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -1036,6 +1051,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
+				PROVISIONING_PROFILE = "853B7B3D-D768-4A8B-9F67-4CC7D1D18F15";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -1047,8 +1063,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon2;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage2;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Hashim SHAFIQUE (XVHM3S3FH2)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Hashim SHAFIQUE (XVHM3S3FH2)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					/Users/benjaminhendricks/Developer/GymBud/ios_gymbud_trunk,
@@ -1062,7 +1078,7 @@
 					"$(PROJECT_DIR)/Pods/build/Debug-iphoneos",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "853B7B3D-D768-4A8B-9F67-4CC7D1D18F15";
 			};
 			name = Debug;
 		};
@@ -1072,8 +1088,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon2;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage2;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Hashim SHAFIQUE (XVHM3S3FH2)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Hashim SHAFIQUE (XVHM3S3FH2)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					/Users/benjaminhendricks/Developer/GymBud/ios_gymbud_trunk,
@@ -1087,7 +1103,7 @@
 					"$(PROJECT_DIR)/Pods/build/Debug-iphoneos",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "853B7B3D-D768-4A8B-9F67-4CC7D1D18F15";
 			};
 			name = Release;
 		};

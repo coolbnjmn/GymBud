@@ -17,6 +17,7 @@
 #import "MBProgressHUD.h"
 #import "GBEventsFilterViewController.h"
 #import "Mixpanel.h"
+#import "PAWWallViewController.h"
 
 #define kCellHeight 100
 
