@@ -118,6 +118,7 @@
     PFQuery *attendeeQuery = [PFQuery queryWithClassName:self.parseClassName];
     PFQuery *organizerQuery = [PFQuery queryWithClassName:self.parseClassName];
     
+    NSLog(@"current user is %@", [PFUser currentUser]);
     
     [attendeeQuery whereKey:@"attendees" containsAllObjectsInArray:[NSArray arrayWithObjects:[PFUser currentUser], nil]];
     

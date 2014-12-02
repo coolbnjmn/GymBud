@@ -18,6 +18,7 @@
 #import "SWRevealViewController.h"
 #import "GymBudConstants.h"
 #import "SettingsTableViewController.h"
+#import "SignInViewController.h"
 
 #define MIXPANEL_TOKEN @"079a199396a3f6b60e57782e3b79d25f"
 #define kGymBudEventCompletionHeight 154
@@ -34,40 +35,16 @@
 
 #pragma mark - SWRevealViewDelegate
 
-//- (id <UIViewControllerAnimatedTransitioning>)revealController:(SWRevealViewController *)revealController animationControllerForOperation:(SWRevealControllerOperation)operation fromViewController:(UIViewController *)fromVC toViewController:(UIViewController *)toVC
-//{
-//    if ( operation != SWRevealControllerOperationReplaceRightController )
-//        return nil;
-//    
-//    if ( [toVC isKindOfClass:[RightViewController class]] )
-//    {
-//        if ( [(RightViewController*)toVC wantsCustomAnimation] )
-//        {
-//            id<UIViewControllerAnimatedTransitioning> animationController = [[CustomAnimationController alloc] init];
-//            return animationController;
-//        }
-//    }
-//    
-//    return nil;
-//}
-    
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
     [Parse setApplicationId:@"DXeaM3NWJz1Lca9cjOyry5lusEhYw8nwuOyI8ene" clientKey:@"j39bl4eu3iaLj2kbEbHGDx6nGcfhWWQA2IlxGx79"];
     
-//    [TestFlight takeOff:@"4b49f863-25be-417b-b74b-d63985d08b5f"];
     [PFFacebookUtils initializeFacebook];
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     
     // Initialize the library with your
-    // Mixpanel project token, MIXPANEL_TOKEN
     [Mixpanel sharedInstanceWithToken:MIXPANEL_TOKEN];
     
-    // Register for push notifications
-//    [application registerForRemoteNotificationTypes:
-//     UIRemoteNotificationTypeBadge |
-//     UIRemoteNotificationTypeAlert |
-//     UIRemoteNotificationTypeSound];
     if ([application respondsToSelector:@selector(registerUserNotificationSettings:)]) {
         // use registerUserNotificationSettings
         [[UIApplication sharedApplication] registerUserNotificationSettings:[UIUserNotificationSettings settingsForTypes:(UIUserNotificationTypeSound | UIUserNotificationTypeAlert | UIUserNotificationTypeBadge) categories:nil]];
@@ -78,153 +55,37 @@
     
     PFUser *currentUser = [PFUser currentUser];
     if (currentUser) {
-        UITabBarController *tbc = [[UITabBarController alloc] init];
-        
-        UIStoryboard *goBud = [UIStoryboard storyboardWithName:@"GymBudVC" bundle:nil];
-        GymBudTVC *mapVC = [goBud instantiateViewControllerWithIdentifier:@"GymBudTVC"];
-        //GymBudTVC *mapVC = [[GymBudTVC alloc] init];
-        MessageInboxTVC *inboxVC = [[MessageInboxTVC alloc] init];
-        SettingsTableViewController *settingsVC = [[SettingsTableViewController alloc] init];
-        UIStoryboard *goSB = [UIStoryboard storyboardWithName:@"GoActivity" bundle:nil];
-//        GoActivityCVC *goVC = [goSB instantiateViewControllerWithIdentifier:@"GoActivity"];
-        GBBodyPartCVC *goVC = [goSB instantiateViewControllerWithIdentifier:@"GBBodyPartCVC"];
-            
-        goVC.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
-        GBJoinedEventsTVC *joinedVC = [[GBJoinedEventsTVC alloc] init];
-        
-        UINavigationController *nvc1 = [[UINavigationController alloc] initWithRootViewController:mapVC];
-        UINavigationController *nvc2 = [[UINavigationController alloc] initWithRootViewController:inboxVC];
-        UINavigationController *nvc3 = [[UINavigationController alloc] initWithRootViewController:settingsVC];
-        UINavigationController *nvc4 = [[UINavigationController alloc] initWithRootViewController:goVC];
-        UINavigationController *nvc5 = [[UINavigationController alloc] initWithRootViewController:joinedVC];
-//        nvc1.navigationBar.tintColor = [UIColor colorWithRed:255/255.0f green:255/255.0f blue:255/255.0f alpha:1.0f];
-        nvc1.navigationBar.tintColor = kGymBudLightBlue;
-        
-        [nvc1.navigationBar setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:
-                                                    kGymBudLightBlue,
-                                                    NSForegroundColorAttributeName,
-                                                    kGymBudLightBlue,
-                                                    NSForegroundColorAttributeName,
-                                                    [NSValue valueWithUIOffset:UIOffsetMake(0, -1)],
-                                                    NSForegroundColorAttributeName,
-                                                    [UIFont fontWithName:@"MagistralA-Bold" size:24.0],
-                                                    NSFontAttributeName,
-                                                    nil]];
-//        nvc1.navigationBar.barTintColor = [UIColor colorWithRed:34/255.0f green:49/255.0f blue:66/255.0f alpha:1.0f];
-        nvc1.navigationBar.barTintColor = [UIColor whiteColor];
-        
-        nvc2.navigationBar.tintColor = kGymBudLightBlue;
-        [nvc2.navigationBar setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:
-                                                    kGymBudLightBlue,
-                                                    NSForegroundColorAttributeName,
-                                                    kGymBudLightBlue,
-                                                    NSForegroundColorAttributeName,
-                                                    [NSValue valueWithUIOffset:UIOffsetMake(0, -1)],
-                                                    NSForegroundColorAttributeName,
-                                                    [UIFont fontWithName:@"MagistralA-Bold" size:24.0],
-                                                    NSFontAttributeName,
-                                                    nil]];
-//        nvc2.navigationBar.barTintColor = [UIColor colorWithRed:34/255.0f green:49/255.0f blue:66/255.0f alpha:1.0f];
-        nvc2.navigationBar.barTintColor = [UIColor whiteColor];
-        
-        nvc3.navigationBar.tintColor = kGymBudLightBlue;
-//        nvc3.navigationBar.tintColor = [UIColor colorWithRed:255/255.0f green:255/255.0f blue:255/255.0f alpha:1.0f];
-        [nvc3.navigationBar setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:
-                                                    kGymBudLightBlue,
-                                                    NSForegroundColorAttributeName,
-                                                    kGymBudLightBlue,
-                                                    NSForegroundColorAttributeName,
-                                                    [NSValue valueWithUIOffset:UIOffsetMake(0, -1)],
-                                                    NSForegroundColorAttributeName,
-                                                    [UIFont fontWithName:@"MagistralA-Bold" size:24.0],
-                                                    NSFontAttributeName,
-                                                    nil]];
-//        nvc3.navigationBar.barTintColor = [UIColor colorWithRed:34/255.0f green:49/255.0f blue:66/255.0f alpha:1.0f];
-        nvc3.navigationBar.barTintColor = [UIColor whiteColor];
-        
-        nvc4.navigationBar.tintColor = kGymBudLightBlue;
-//        nvc4.navigationBar.tintColor = [UIColor colorWithRed:255/255.0f green:255/255.0f blue:255/255.0f alpha:1.0f];
-        [nvc4.navigationBar setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:
-                                                   kGymBudLightBlue,
-                                                   NSForegroundColorAttributeName,
-                                                   kGymBudLightBlue,
-                                                   NSForegroundColorAttributeName,
-                                                   [NSValue valueWithUIOffset:UIOffsetMake(0, -1)],
-                                                   NSForegroundColorAttributeName,
-                                                   [UIFont fontWithName:@"MagistralA-Bold" size:24.0],
-                                                   NSFontAttributeName,
-                                                    nil]];
-//        nvc4.navigationBar.barTintColor = [UIColor colorWithRed:34/255.0f green:49/255.0f blue:66/255.0f alpha:1.0f];
-        nvc4.navigationBar.barTintColor = [UIColor whiteColor];
-        
-        nvc5.navigationBar.tintColor = kGymBudLightBlue;
-//        nvc5.navigationBar.tintColor = [UIColor colorWithRed:255/255.0f green:255/255.0f blue:255/255.0f alpha:1.0f];
-        [nvc5.navigationBar setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:
-                                                    kGymBudLightBlue,
-                                                    NSForegroundColorAttributeName,
-                                                    kGymBudLightBlue,
-                                                    NSForegroundColorAttributeName,
-                                                    [NSValue valueWithUIOffset:UIOffsetMake(0, -1)],
-                                                    NSForegroundColorAttributeName,
-                                                    [UIFont fontWithName:@"MagistralA-Bold" size:24.0],
-                                                    NSFontAttributeName,
-                                                    nil]];
-//        nvc5.navigationBar.barTintColor = [UIColor colorWithRed:34/255.0f green:49/255.0f blue:66/255.0f alpha:1.0f];
-        nvc5.navigationBar.barTintColor = [UIColor whiteColor];
-        
-        nvc1.tabBarItem.title = nil;
-        nvc1.tabBarItem.image = [[UIImage imageNamed:@"centeredPeople.png"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
-        nvc1.tabBarItem.selectedImage = [UIImage imageNamed:@"centeredPeople.png"];
-        nvc2.tabBarItem.title = nil;
-        nvc2.tabBarItem.image = [[UIImage imageNamed:@"centeredInbox.png"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
-        nvc2.tabBarItem.selectedImage = [UIImage imageNamed:@"centeredInbox.png"];
-
-        nvc3.tabBarItem.title = nil;
-        nvc3.tabBarItem.image = [[UIImage imageNamed:@"centeredGear.png"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
-        nvc3.tabBarItem.selectedImage = [UIImage imageNamed:@"centeredGear.png"];
-
-
-        nvc4.tabBarItem.title = nil;
-        nvc4.tabBarItem.image = [[UIImage imageNamed:@"go.png"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
-        nvc4.tabBarItem.selectedImage = [UIImage imageNamed:@"go.png"];
-
-        nvc5.tabBarItem.title = nil;
-        nvc5.tabBarItem.image = [[UIImage imageNamed:@"join.png"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
-        nvc5.tabBarItem.selectedImage = [UIImage imageNamed:@"join.png"];
-
-
-        for (NSString* family in [UIFont familyNames])
+        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"InitialView"
+                                                             bundle:[NSBundle mainBundle]];
+        UITabBarController *root2ViewController = [storyboard instantiateViewControllerWithIdentifier:@"tabbar"];
+        for (UIViewController *v in root2ViewController.viewControllers)
         {
-            NSLog(@"%@", family);
-            
-            for (NSString* name in [UIFont fontNamesForFamilyName: family])
+            UIViewController *vc = v;
+            if ([vc isKindOfClass:[UINavigationController class]])
             {
-                NSLog(@"  %@", name);
+                UINavigationController *nv = (UINavigationController*)vc;
+                NSLog(@"hit nav class");
+                [nv.navigationBar setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:
+                                                          kGymBudLightBlue,
+                                                          NSForegroundColorAttributeName,
+                                                          kGymBudLightBlue,
+                                                          NSForegroundColorAttributeName,
+                                                          [NSValue valueWithUIOffset:UIOffsetMake(0, -1)],
+                                                          NSForegroundColorAttributeName,
+                                                          [UIFont fontWithName:@"MagistralA-Bold" size:24.0],
+                                                          NSFontAttributeName,
+                                                          nil]];
+                nv.navigationBar.barTintColor = [UIColor whiteColor];
             }
+            else
+                NSLog(@"hit non nav class");
         }
-        NSMutableArray *tbcArray = [[NSMutableArray alloc] initWithObjects:nvc1, nvc2, nvc4, nvc5, nvc3, nil];
-
-//        tbc.tabBar.tintColor = [UIColor colorWithRed:229/255.0f green:116/255.0f blue:34/255.0f alpha:1.0f];
-        tbc.tabBar.tintColor = kGymBudLightBlue;
-        [[UITabBarItem appearance] setTitleTextAttributes:@{NSFontAttributeName : [UIFont fontWithName:@"HelveticaNeue-Bold" size:10.0f],
-                                                            NSForegroundColorAttributeName : kGymBudDarkBlue
-                                                            } forState:UIControlStateNormal];
-//        tbc.tabBar.barTintColor = [UIColor colorWithRed:34/255.0f green:49/255.0f blue:66/255.0f alpha:1.0f];
-        tbc.tabBar.barTintColor = [UIColor whiteColor];
-        tbc.viewControllers = tbcArray;
-        if (currentUser[@"gymbudProfile"] != nil) {
-            tbc.selectedIndex = 2;
-        } else {
-            tbc.selectedIndex = 4;
-            UIStoryboard *sb = [UIStoryboard storyboardWithName:@"EditProfile" bundle:nil];
-            EPTVC *vc = [sb instantiateViewControllerWithIdentifier:@"EPOnboarding"];
-            vc.hidesBottomBarWhenPushed = YES;
-            [nvc3 pushViewController:vc animated:NO];
-        }
-        self.window.rootViewController = tbc;
+        self.window.rootViewController = root2ViewController;
     } else {
-        LoginViewController *loginViewController = [[LoginViewController alloc] init];
-        self.window.rootViewController = loginViewController;
+        UIStoryboard *signin = [UIStoryboard storyboardWithName:@"SignIn" bundle:nil];
+        SignInViewController *goVC = [signin instantiateViewControllerWithIdentifier:@"SignInViewController"];
+
+        self.window.rootViewController = goVC;
     }
     
     self.filterDistance = 10;

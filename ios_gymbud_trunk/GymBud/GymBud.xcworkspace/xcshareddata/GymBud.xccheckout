@@ -10,29 +10,29 @@
 	<string>GymBud</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
-		<key>313A354F-5720-4B6E-850F-A0468A7B5D26</key>
+		<key>22451EC12145D67C9E6E2BFF2384413AF5945F19</key>
 		<string>https://github.com/coolbnjmn/GymBud.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
 	<string>ios_gymbud_trunk/GymBud/GymBud.xcworkspace</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
-		<key>313A354F-5720-4B6E-850F-A0468A7B5D26</key>
+		<key>22451EC12145D67C9E6E2BFF2384413AF5945F19</key>
 		<string>../../..</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
 	<string>https://github.com/coolbnjmn/GymBud.git</string>
 	<key>IDESourceControlProjectVersion</key>
-	<integer>110</integer>
+	<integer>111</integer>
 	<key>IDESourceControlProjectWCCIdentifier</key>
-	<string>313A354F-5720-4B6E-850F-A0468A7B5D26</string>
+	<string>22451EC12145D67C9E6E2BFF2384413AF5945F19</string>
 	<key>IDESourceControlProjectWCConfigurations</key>
 	<array>
 		<dict>
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>
 			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>313A354F-5720-4B6E-850F-A0468A7B5D26</string>
+			<string>22451EC12145D67C9E6E2BFF2384413AF5945F19</string>
 			<key>IDESourceControlWCCName</key>
 			<string>GymBud</string>
 		</dict>
