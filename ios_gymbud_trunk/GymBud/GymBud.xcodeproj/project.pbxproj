@@ -170,7 +170,6 @@
 		B2C39D87197E194F00039F90 /* EditProfile.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B2C39D6E197E194F00039F90 /* EditProfile.storyboard */; };
 		B2C39D88197E194F00039F90 /* EditProfileTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = B2C39D70197E194F00039F90 /* EditProfileTVC.m */; };
 		B2C39D89197E194F00039F90 /* EPInterestVC.m in Sources */ = {isa = PBXBuildFile; fileRef = B2C39D72197E194F00039F90 /* EPInterestVC.m */; };
-		B2C39D8A197E194F00039F90 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B2C39D74197E194F00039F90 /* LoginViewController.m */; };
 		B2C39D8B197E194F00039F90 /* MessageInboxTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = B2C39D76197E194F00039F90 /* MessageInboxTVC.m */; };
 		B2C39D8C197E194F00039F90 /* MessageUserVC.m in Sources */ = {isa = PBXBuildFile; fileRef = B2C39D78197E194F00039F90 /* MessageUserVC.m */; };
 		B2C39D8D197E194F00039F90 /* MessageUserVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = B2C39D79197E194F00039F90 /* MessageUserVC.xib */; };
@@ -195,7 +194,6 @@
 		B2C39DB4197E1AD300039F90 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B2C39DB3197E1AD300039F90 /* Security.framework */; };
 		B2C39DB6197E1ADB00039F90 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B2C39DB5197E1ADB00039F90 /* SystemConfiguration.framework */; };
 		B2C39DBB197E1B5D00039F90 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B2C39DB9197E1B5D00039F90 /* Main.storyboard */; };
-		B2D0CAC5197E267D00B17D32 /* LoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B2D0CAC4197E267D00B17D32 /* LoginViewController.xib */; };
 		B2D0CACA197E272400B17D32 /* login-button-small-pressed.png in Resources */ = {isa = PBXBuildFile; fileRef = B2D0CAC6197E272400B17D32 /* login-button-small-pressed.png */; };
 		B2D0CACB197E272400B17D32 /* login-button-small-pressed@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B2D0CAC7197E272400B17D32 /* login-button-small-pressed@2x.png */; };
 		B2D0CACC197E272400B17D32 /* login-button-small.png in Resources */ = {isa = PBXBuildFile; fileRef = B2D0CAC8197E272400B17D32 /* login-button-small.png */; };
@@ -432,8 +430,6 @@
 		B2C39D70197E194F00039F90 /* EditProfileTVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EditProfileTVC.m; path = GymBud/Controllers/EditProfileTVC.m; sourceTree = "<group>"; };
 		B2C39D71197E194F00039F90 /* EPInterestVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EPInterestVC.h; path = GymBud/Controllers/EPInterestVC.h; sourceTree = "<group>"; };
 		B2C39D72197E194F00039F90 /* EPInterestVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EPInterestVC.m; path = GymBud/Controllers/EPInterestVC.m; sourceTree = "<group>"; };
-		B2C39D73197E194F00039F90 /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LoginViewController.h; path = GymBud/Controllers/LoginViewController.h; sourceTree = "<group>"; };
-		B2C39D74197E194F00039F90 /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LoginViewController.m; path = GymBud/Controllers/LoginViewController.m; sourceTree = "<group>"; };
 		B2C39D75197E194F00039F90 /* MessageInboxTVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MessageInboxTVC.h; path = GymBud/Controllers/MessageInboxTVC.h; sourceTree = "<group>"; };
 		B2C39D76197E194F00039F90 /* MessageInboxTVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MessageInboxTVC.m; path = GymBud/Controllers/MessageInboxTVC.m; sourceTree = "<group>"; };
 		B2C39D77197E194F00039F90 /* MessageUserVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MessageUserVC.h; path = GymBud/Controllers/MessageUserVC.h; sourceTree = "<group>"; };
@@ -468,7 +464,6 @@
 		B2C39DB3197E1AD300039F90 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		B2C39DB5197E1ADB00039F90 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		B2C39DBA197E1B5D00039F90 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = GymBud/Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		B2D0CAC4197E267D00B17D32 /* LoginViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = LoginViewController.xib; path = GymBud/Controllers/LoginViewController.xib; sourceTree = "<group>"; };
 		B2D0CAC6197E272400B17D32 /* login-button-small-pressed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "login-button-small-pressed.png"; path = "GymBud/Assets/login-button-small-pressed.png"; sourceTree = "<group>"; };
 		B2D0CAC7197E272400B17D32 /* login-button-small-pressed@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "login-button-small-pressed@2x.png"; path = "GymBud/Assets/login-button-small-pressed@2x.png"; sourceTree = "<group>"; };
 		B2D0CAC8197E272400B17D32 /* login-button-small.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "login-button-small.png"; path = "GymBud/Assets/login-button-small.png"; sourceTree = "<group>"; };
@@ -761,9 +756,6 @@
 				B2C39D70197E194F00039F90 /* EditProfileTVC.m */,
 				B2C39D71197E194F00039F90 /* EPInterestVC.h */,
 				B2C39D72197E194F00039F90 /* EPInterestVC.m */,
-				B2C39D73197E194F00039F90 /* LoginViewController.h */,
-				B2C39D74197E194F00039F90 /* LoginViewController.m */,
-				B2D0CAC4197E267D00B17D32 /* LoginViewController.xib */,
 				B2C39D75197E194F00039F90 /* MessageInboxTVC.h */,
 				B2C39D76197E194F00039F90 /* MessageInboxTVC.m */,
 				B2B8DC4019DCA9A800BED65D /* GymBudConversationTVC.h */,
@@ -814,9 +806,9 @@
 				B2D6071C1A21CD4500F19B34 /* SWRevealViewController.m */,
 				29DAA69C1A25438200264253 /* GymBudVC.storyboard */,
 				296D73831A2BEE5A0067624B /* SignInViewController.h */,
+				296D73841A2BEE5A0067624B /* SignInViewController.m */,
 				296D738C1A2D23870067624B /* SignUpViewController.h */,
 				296D738D1A2D23870067624B /* SignUpViewController.m */,
-				296D73841A2BEE5A0067624B /* SignInViewController.m */,
 				296D73861A2BF87D0067624B /* SignIn.storyboard */,
 				296D738A1A2CA78A0067624B /* InitialView.storyboard */,
 			);
@@ -1230,7 +1222,6 @@
 				B29774301984C34E000AD7B6 /* PCInterestTVC.m in Sources */,
 				77FE648E1990545A008724CC /* GoActivityChosenVC.m in Sources */,
 				B2C39D38197E172600039F90 /* main.m in Sources */,
-				B2C39D8A197E194F00039F90 /* LoginViewController.m in Sources */,
 				B2FCFBE919CAC15C0078C68D /* EPBasicInfoVC.m in Sources */,
 				B2C39D8E197E194F00039F90 /* PAWWallPostCreateViewController.m in Sources */,
 				B2722DD919AD832900FEC2AF /* GymBudEventsTVC.m in Sources */,

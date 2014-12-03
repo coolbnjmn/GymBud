@@ -54,32 +54,29 @@
     }
     
     PFUser *currentUser = [PFUser currentUser];
-    if (currentUser) {
+    [currentUser fetch];
+    
+    NSLog(@"current user %@", currentUser);
+    
+    if (![[currentUser objectForKey:@"emailVerified"] boolValue] && currentUser)
+    {
+        // Refresh to make sure the user did not recently verify
+        if (![[currentUser objectForKey:@"emailVerified"] boolValue])
+        {
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Verify Email"
+                                                            message:@"Please verify your email before logging in"
+                                                           delegate:self
+                                                  cancelButtonTitle:@"OK"
+                                                  otherButtonTitles:nil];
+            [alert show];
+        }
+    }
+
+    else if (currentUser) {
         UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"InitialView"
                                                              bundle:[NSBundle mainBundle]];
         UITabBarController *root2ViewController = [storyboard instantiateViewControllerWithIdentifier:@"tabbar"];
-        for (UIViewController *v in root2ViewController.viewControllers)
-        {
-            UIViewController *vc = v;
-            if ([vc isKindOfClass:[UINavigationController class]])
-            {
-                UINavigationController *nv = (UINavigationController*)vc;
-                NSLog(@"hit nav class");
-                [nv.navigationBar setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:
-                                                          kGymBudLightBlue,
-                                                          NSForegroundColorAttributeName,
-                                                          kGymBudLightBlue,
-                                                          NSForegroundColorAttributeName,
-                                                          [NSValue valueWithUIOffset:UIOffsetMake(0, -1)],
-                                                          NSForegroundColorAttributeName,
-                                                          [UIFont fontWithName:@"MagistralA-Bold" size:24.0],
-                                                          NSFontAttributeName,
-                                                          nil]];
-                nv.navigationBar.barTintColor = [UIColor whiteColor];
-            }
-            else
-                NSLog(@"hit non nav class");
-        }
+        [self presentInitialViewController:root2ViewController];
         self.window.rootViewController = root2ViewController;
     } else {
         UIStoryboard *signin = [UIStoryboard storyboardWithName:@"SignIn" bundle:nil];
@@ -179,6 +176,69 @@
     }
     
     return YES;
+}
+
+-(void) presentInitialViewController:(UITabBarController*) tabBar;
+{
+    for (UIViewController *v in tabBar.viewControllers)
+    {
+        UIViewController *vc = v;
+        if ([vc isKindOfClass:[UINavigationController class]])
+        {
+            UINavigationController *nv = (UINavigationController*)vc;
+            NSLog(@"hit nav class");
+            [nv.navigationBar setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:
+                                                      kGymBudLightBlue,
+                                                      NSForegroundColorAttributeName,
+                                                      kGymBudLightBlue,
+                                                      NSForegroundColorAttributeName,
+                                                      [NSValue valueWithUIOffset:UIOffsetMake(0, -1)],
+                                                      NSForegroundColorAttributeName,
+                                                      [UIFont fontWithName:@"MagistralA-Bold" size:24.0],
+                                                      NSFontAttributeName,
+                                                      nil]];
+            nv.navigationBar.barTintColor = [UIColor whiteColor];
+        }
+        else
+            NSLog(@"hit non nav class");
+    }
+    if ([PFUser currentUser][@"gymbudProfile"] != nil)
+        tabBar.selectedIndex = 2;
+    else
+    {
+        UINavigationController *nvc4 = [[tabBar viewControllers] objectAtIndex:4];
+        tabBar.selectedIndex = 4;
+        UIView *editToast = [[UIView alloc] initWithFrame:CGRectMake(0, nvc4.view.bounds.size.height, nvc4.view.bounds.size.width, 40)];
+        editToast.backgroundColor = [UIColor orangeColor];
+        UILabel *textLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, nvc4.view.bounds.size.width, 40)];
+        textLabel.text = @"Edit your profile now!";
+        textLabel.textAlignment = NSTextAlignmentCenter;
+        [editToast addSubview:textLabel];
+        UIApplication *app = [UIApplication sharedApplication];
+        [app.keyWindow addSubview:editToast];
+        
+        [UIView animateWithDuration:1.0
+                              delay:0.0
+                            options:UIViewAnimationOptionCurveEaseIn
+                         animations:^{
+                             editToast.frame = CGRectMake(0, nvc4.view.bounds.size.height - 40 - tabBar.tabBar.bounds.size.height, nvc4.view.bounds.size.width, 40);
+                         }
+                         completion:^(BOOL finished) {
+                             [UIView animateWithDuration:2.0
+                                                   delay:5.0
+                                                 options:UIViewAnimationOptionCurveEaseOut
+                                              animations:^{
+                                                  editToast.alpha = 0.0f;
+                                              }
+                                              completion:^(BOOL finished) {
+                                                  [editToast removeFromSuperview];
+                                              }];
+                         }];
+        UIStoryboard *sb = [UIStoryboard storyboardWithName:@"EditProfile" bundle:nil];
+        EPTVC *vc = [sb instantiateViewControllerWithIdentifier:@"EPOnboarding"];
+        vc.hidesBottomBarWhenPushed = YES;
+        [nvc4 pushViewController:vc animated:NO];
+    }
 }
 
 // needed for ios8

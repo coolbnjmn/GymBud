@@ -21,6 +21,6 @@
 @property (strong, nonatomic) UIWindow *window;
 @property (nonatomic, strong) CLLocation *currentLocation;
 @property (nonatomic, assign) CLLocationAccuracy filterDistance;
-
+-(void) presentInitialViewController:(UITabBarController*) tabBar;
 @end
 

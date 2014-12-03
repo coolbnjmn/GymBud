@@ -27,7 +27,6 @@
     self.tableView.backgroundColor = kGymBudLightBlue;
     self.imageData = [[NSMutableData alloc] init];
     self.loadedImage = NO;
-    self.title = @"Settings";
     
     if ([self.tableView respondsToSelector:@selector(setSeparatorInset:)]) {
         [self.tableView setSeparatorInset:UIEdgeInsetsZero];
@@ -284,7 +283,6 @@
     NSLog(@"logoutbutton being pressed");
     // Logout user, this automatically clears the cache
     [PFUser logOut];
-    
     // Return to login view controller
     SignInViewController *lvc = [[SignInViewController alloc] init];
     [self presentViewController:lvc animated:YES completion:nil];

@@ -198,6 +198,9 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" id="k2M-zw-4wo"/>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="string" keyPath="Event" value="Location"/>
+                    </userDefinedRuntimeAttributes>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7UE-sB-9AO" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

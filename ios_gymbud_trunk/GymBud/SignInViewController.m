@@ -9,8 +9,10 @@
 #import "SignInViewController.h"
 #import "SignUpViewController.h"
 #import "GymBudConstants.h"
+#import <Parse/Parse.h>
+#import "AppDelegate.h"
 
-@interface SignInViewController () <PFSignUpViewControllerDelegate>
+@interface SignInViewController () <PFSignUpViewControllerDelegate, UIAlertViewDelegate>
 
 @end
 
@@ -44,33 +46,50 @@
 - (void)logInViewController:(PFLogInViewController *)logInController didLogInUser:(PFUser *)user
 {
     NSLog(@"successfully logged in");
+    // check verified email setting
+    
+    if (![[user objectForKey:@"emailVerified"] boolValue])
+    {
+        // Refresh to make sure the user did not recently verify
+        if (![[user objectForKey:@"emailVerified"] boolValue])
+        {
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Verify Email"
+                                                            message:@"Please verify your email before logging in"
+                                                           delegate:self
+                                                  cancelButtonTitle:@"OK"
+                                                  otherButtonTitles:nil];
+            [alert show];
+            return;
+        }
+    }
+    
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"InitialView"
                                                          bundle:[NSBundle mainBundle]];
+    
     UITabBarController *root2ViewController = [storyboard instantiateViewControllerWithIdentifier:@"tabbar"];
-    for (UIViewController *v in root2ViewController.viewControllers)
-    {
-        UIViewController *vc = v;
-        if ([vc isKindOfClass:[UINavigationController class]])
-        {
-            UINavigationController *nv = (UINavigationController*)vc;
-            NSLog(@"hit nav class");
-            [nv.navigationBar setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:
-                                                        kGymBudLightBlue,
-                                                        NSForegroundColorAttributeName,
-                                                        kGymBudLightBlue,
-                                                        NSForegroundColorAttributeName,
-                                                        [NSValue valueWithUIOffset:UIOffsetMake(0, -1)],
-                                                        NSForegroundColorAttributeName,
-                                                        [UIFont fontWithName:@"MagistralA-Bold" size:24.0],
-                                                        NSFontAttributeName,
-                                                        nil]];
-            nv.navigationBar.barTintColor = [UIColor whiteColor];
-        }
-        else
-            NSLog(@"hit non nav class");
-    }
+    
+    AppDelegate *appDelegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
+    
+    [appDelegate presentInitialViewController:root2ViewController];
+    
     [root2ViewController setModalPresentationStyle:UIModalPresentationFullScreen];
+
     [self presentViewController:root2ViewController animated:YES completion:nil];
+}
+
+// Sent to the delegate to determine whether the log in request should be submitted to the server.
+- (BOOL)logInViewController:(PFLogInViewController *)logInController shouldBeginLogInWithUsername:(NSString *)username password:(NSString *)password {
+    // Check if both fields are completed
+    if (username && password && username.length != 0 && password.length != 0) {
+        return YES; // Begin login process
+    }
+    
+    [[[UIAlertView alloc] initWithTitle:@"Missing Information"
+                                message:@"Make sure you fill out all of the information!"
+                               delegate:nil
+                      cancelButtonTitle:@"ok"
+                      otherButtonTitles:nil] show];
+    return NO; // Interrupt login process
 }
 
 // Sent to the delegate when the log in attempt fails.
@@ -88,13 +107,8 @@
     [self.logInView.passwordField setFrame:CGRectMake(0.0f, 265.0f, 360.0f, 50.0f)];
     [self.logInView.logInButton setFrame:CGRectMake(0.0f, 330.0f, self.view.frame.size.width, 50.0f)];
     [self.logInView.passwordForgottenButton setFrame:CGRectMake(0.0f, 380.0f, self.view.frame.size.width, 50.0f)];
+    [self.logInView.passwordForgottenButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     
-}
-
--(BOOL)signUpViewController:(PFSignUpViewController *)signUpController shouldBeginSignUp:(NSDictionary *)info
-{
-    NSLog(@"into preseignup check");
-    return YES;
 }
 
 // Sent to the delegate when a PFUser is signed up.
@@ -114,4 +128,43 @@
 {
     NSLog(@"User dismissed the signUpViewController");
 }
+
+// Sent to the delegate to determine whether the sign up request should be submitted to the server.
+- (BOOL)signUpViewController:(PFSignUpViewController *)signUpController shouldBeginSignUp:(NSDictionary *)info
+{
+    BOOL emailAddressIsValid = YES;
+    
+    // uncomment this code when the following parse bug has been addressed:
+    // https://github.com/ParsePlatform/ParseUI-iOS/pull/6
+    
+    /*
+    NSString *errorMsg;
+    
+    NSString *email = [info objectForKey:@"email"];
+    
+    // loop through all of the submitted data
+    for (id key in info) {
+        NSString *field = [info objectForKey:key];
+        NSLog(@"key = %@ value = %@", key, field);
+    }
+
+    NSLog(@"username is %@ %@", info, email);
+    if ([email rangeOfString:@"@ucla.edu"].location  == NSNotFound)
+    {
+        emailAddressIsValid = NO;
+        errorMsg = @"Currently GymBud is only deployed for UCLA faculty and students. Please use your UCLA email address for validation.";
+    }
+    // Display an alert if a field wasn't completed
+    if (!emailAddressIsValid)
+    {
+        [[[UIAlertView alloc] initWithTitle:@"Email Error"
+                                    message:errorMsg
+                                   delegate:nil
+                          cancelButtonTitle:@"ok"
+                          otherButtonTitles:nil] show];
+    }
+    */
+    return emailAddressIsValid;
+}
+
 @end
