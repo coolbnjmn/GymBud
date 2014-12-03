@@ -13,6 +13,9 @@
 		296D73891A2BFEEA0067624B /* background.png in Resources */ = {isa = PBXBuildFile; fileRef = 296D73881A2BFEEA0067624B /* background.png */; };
 		296D738B1A2CA78A0067624B /* InitialView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 296D738A1A2CA78A0067624B /* InitialView.storyboard */; };
 		296D738E1A2D23870067624B /* SignUpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 296D738D1A2D23870067624B /* SignUpViewController.m */; };
+		296D73931A2FA4830067624B /* Ps-x-button.png in Resources */ = {isa = PBXBuildFile; fileRef = 296D73921A2FA4830067624B /* Ps-x-button.png */; };
+		296D73951A2FA55F0067624B /* X-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 296D73941A2FA55F0067624B /* X-icon.png */; };
+		296D73971A2FA5E20067624B /* close.png in Resources */ = {isa = PBXBuildFile; fileRef = 296D73961A2FA5E20067624B /* close.png */; };
 		29DAA69D1A25438200264253 /* GymBudVC.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 29DAA69C1A25438200264253 /* GymBudVC.storyboard */; };
 		77F13147198EEE0000576708 /* RSDatePickerVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 77F13146198EEE0000576708 /* RSDatePickerVC.m */; };
 		77FD41C51993EEF20017E8D5 /* GymBudEventModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 77FD41C41993EEF20017E8D5 /* GymBudEventModel.m */; };
@@ -243,6 +246,9 @@
 		296D738A1A2CA78A0067624B /* InitialView.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = InitialView.storyboard; sourceTree = "<group>"; };
 		296D738C1A2D23870067624B /* SignUpViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SignUpViewController.h; sourceTree = "<group>"; };
 		296D738D1A2D23870067624B /* SignUpViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SignUpViewController.m; sourceTree = "<group>"; };
+		296D73921A2FA4830067624B /* Ps-x-button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Ps-x-button.png"; sourceTree = "<group>"; };
+		296D73941A2FA55F0067624B /* X-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "X-icon.png"; sourceTree = "<group>"; };
+		296D73961A2FA5E20067624B /* close.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = close.png; sourceTree = "<group>"; };
 		29DAA69C1A25438200264253 /* GymBudVC.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = GymBudVC.storyboard; sourceTree = "<group>"; };
 		48EE337A63E5439BA42E30F1 /* libPods-GymBud.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-GymBud.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		77F13143198EEDDD00576708 /* libPods-GymBud-RSDayFlow.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libPods-GymBud-RSDayFlow.a"; path = "Pods/build/Debug-iphoneos/libPods-GymBud-RSDayFlow.a"; sourceTree = "<group>"; };
@@ -692,6 +698,9 @@
 				B2787DD91A2AEE1F00DCACBF /* Loading Images */,
 				B2E9E8E31A2AEC6B00BB377F /* Body Parts */,
 				296D73881A2BFEEA0067624B /* background.png */,
+				296D73941A2FA55F0067624B /* X-icon.png */,
+				296D73961A2FA5E20067624B /* close.png */,
+				296D73921A2FA4830067624B /* Ps-x-button.png */,
 				B2B8DC3C19DB5CCD00BED65D /* othermap.png */,
 				B2B8DC3D19DB5CCD00BED65D /* sportsmap.png */,
 				B2B8DC3819DB361B00BED65D /* other.png */,
@@ -957,7 +966,7 @@
 				TargetAttributes = {
 					B2C39D31197E172600039F90 = {
 						CreatedOnToolsVersion = 6.0;
-						DevelopmentTeam = M6Y34M2A35;
+						DevelopmentTeam = 8E2G6A5GQK;
 					};
 					B2C39D47197E172600039F90 = {
 						CreatedOnToolsVersion = 6.0;
@@ -1001,9 +1010,9 @@
 				B29774251984BF68000AD7B6 /* weightliftingMap.png in Resources */,
 				B297741819843EC9000AD7B6 /* sampleMapPin.png in Resources */,
 				77FE648B199051E8008724CC /* GoActivityCVCell.xib in Resources */,
+				296D73971A2FA5E20067624B /* close.png in Resources */,
 				B2787E531A2AEE6000DCACBF /* 48.png in Resources */,
 				B2D0CAD8197E2EAE00B17D32 /* TableHeaderView.xib in Resources */,
-				B2D0CAC5197E267D00B17D32 /* LoginViewController.xib in Resources */,
 				B2787E2C1A2AEE6000DCACBF /* 9.png in Resources */,
 				B2787E631A2AEE6000DCACBF /* 64.png in Resources */,
 				B2787E601A2AEE6000DCACBF /* 61.png in Resources */,
@@ -1034,6 +1043,7 @@
 				B2C39D92197E194F00039F90 /* PAWWallViewController.xib in Resources */,
 				B2D0CACC197E272400B17D32 /* login-button-small.png in Resources */,
 				B2E9E8F41A2AEC7A00BB377F /* abs_sel.png in Resources */,
+				296D73951A2FA55F0067624B /* X-icon.png in Resources */,
 				B2787E4F1A2AEE6000DCACBF /* 44.png in Resources */,
 				B297743B198582A5000AD7B6 /* runningIcon.png in Resources */,
 				B2D0CACD197E272400B17D32 /* login-button-small@2x.png in Resources */,
@@ -1122,6 +1132,7 @@
 				B2787E441A2AEE6000DCACBF /* 33.png in Resources */,
 				B29774461985F085000AD7B6 /* settings.png in Resources */,
 				B2787E241A2AEE6000DCACBF /* 1.png in Resources */,
+				296D73931A2FA4830067624B /* Ps-x-button.png in Resources */,
 				B2787E281A2AEE6000DCACBF /* 5.png in Resources */,
 				B2787E561A2AEE6000DCACBF /* 51.png in Resources */,
 				B297745619864133000AD7B6 /* centeredPeople.png in Resources */,

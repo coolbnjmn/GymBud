@@ -102,11 +102,11 @@
     [super viewDidLayoutSubviews];
     
     // Set frame for elements
-    [self.logInView.signUpButton setFrame:CGRectMake(35.0f, 430.0f, 250.0f, 40.0f)];
-    [self.logInView.usernameField setFrame:CGRectMake(0.0f, 225.0f, 360.0f, 50.0f)];
-    [self.logInView.passwordField setFrame:CGRectMake(0.0f, 265.0f, 360.0f, 50.0f)];
-    [self.logInView.logInButton setFrame:CGRectMake(0.0f, 330.0f, self.view.frame.size.width, 50.0f)];
-    [self.logInView.passwordForgottenButton setFrame:CGRectMake(0.0f, 380.0f, self.view.frame.size.width, 50.0f)];
+    [self.logInView.usernameField setFrame:CGRectMake(0.0f, 285.0f, 360.0f, 50.0f)];
+    [self.logInView.passwordField setFrame:CGRectMake(0.0f, 325.0f, 360.0f, 50.0f)];
+    [self.logInView.logInButton setFrame:CGRectMake(0.0f, 385.0f, self.view.frame.size.width, 50.0f)];
+    [self.logInView.passwordForgottenButton setFrame:CGRectMake(0.0f, 445.0f, self.view.frame.size.width, 50.0f)];
+    [self.logInView.signUpButton setFrame:CGRectMake(35.0f, 490.0f, 250.0f, 40.0f)];
     [self.logInView.passwordForgottenButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     
 }
