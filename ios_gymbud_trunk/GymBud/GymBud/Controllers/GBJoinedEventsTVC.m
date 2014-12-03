@@ -27,34 +27,6 @@
 
 @implementation GBJoinedEventsTVC
 
-- (instancetype)initWithStyle:(UITableViewStyle)style
-{
-    self = [super initWithStyle:style];
-    if (self) {
-        // Customize the table:
-        
-        // The className to query on
-        self.parseClassName = @"Event";
-        self.reuseId = @"GymBudEventsCell";
-        
-        // The key of the PFObject to display in the label of the default cell style
-        self.title = @"GymBud";
-        
-        // Whether the built-in pull-to-refresh is enabled
-        if (NSClassFromString(@"UIRefreshControl")) {
-            self.pullToRefreshEnabled = NO;
-        } else {
-            self.pullToRefreshEnabled = YES;
-        }
-        
-        // Whether the built-in pagination is enabled
-        self.paginationEnabled = YES;
-        
-        // The number of objects to show per page
-        self.objectsPerPage = 100;
-    }
-    return self;
-}
 
 - (void)dealloc {
     [[NSNotificationCenter defaultCenter] removeObserver:self name:@"LocationChangeNotification" object:nil];
@@ -64,6 +36,25 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    self.reuseId = @"GymBudEventsCell";
+    // The className to query on
+    self.parseClassName = @"Event";
+    
+    // The key of the PFObject to display in the label of the default cell style
+    self.title = @"GymBud";
+    
+    // Whether the built-in pull-to-refresh is enabled
+    if (NSClassFromString(@"UIRefreshControl")) {
+        self.pullToRefreshEnabled = NO;
+    } else {
+        self.pullToRefreshEnabled = YES;
+    }
+    
+    // Whether the built-in pagination is enabled
+    self.paginationEnabled = YES;
+    
+    // The number of objects to show per page
+    self.objectsPerPage = 100;
     
     if (NSClassFromString(@"UIRefreshControl")) {
         // Use the new iOS 6 refresh control.
@@ -158,6 +149,7 @@
         if ([subview class] == NSClassFromString(@"PFLoadingView"))
         {
             [subview removeFromSuperview];
+            break;
         }
     }
     [self setLoadingViewEnabled:NO];
