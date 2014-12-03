@@ -39,6 +39,12 @@
 {
     // refresh table
     [self.tableView reloadData];
+    
+    if ([PFUser currentUser][@"gymbudProfile"] == nil)
+    {
+        [self launchEditProfile];
+    }
+
 }
 
 - (void)didReceiveMemoryWarning {
@@ -209,19 +215,13 @@
     // vc.navigationController.navigationItem.backBarButtonItem
     vc.hidesBottomBarWhenPushed = YES;
     vc.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
-    UIBarButtonItem *btn = [[UIBarButtonItem alloc] initWithTitle:@"< Back" style:UIBarButtonItemStyleBordered target:self action:@selector(backPressed:)];
-    vc.navigationItem.leftBarButtonItem = btn;
     
+    vc.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
     vc.navigationItem.hidesBackButton = NO;
     [self.navigationController pushViewController:vc animated:YES];
     Mixpanel *mixpanel = [Mixpanel sharedInstance];
     [mixpanel track:@"SettingsVC EditProfile" properties:@{
                                                            }];
-}
-
--(void)backPressed:(id)sender
-{
-    [self.navigationController popViewControllerAnimated:YES];
 }
 
 -(void) launchInviteFriend
