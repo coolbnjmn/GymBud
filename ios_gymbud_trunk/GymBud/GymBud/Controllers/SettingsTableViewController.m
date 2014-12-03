@@ -138,7 +138,7 @@
                 }
             }
 
-            cell.textLabel.text = [NSString stringWithFormat:@"%@", [PFUser currentUser][kFacebookUsername]];
+            cell.textLabel.text = [NSString stringWithFormat:@"%@", [PFUser currentUser][@"gymbudProfile"][@"name"]];
             cell.imageView.layer.cornerRadius = 30.0f;
             cell.imageView.layer.masksToBounds = YES;
             CGSize itemSize = CGSizeMake(60, 60);

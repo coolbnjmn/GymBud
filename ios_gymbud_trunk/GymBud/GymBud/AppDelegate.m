@@ -54,7 +54,7 @@
     }
     
     PFUser *currentUser = [PFUser currentUser];
-    [currentUser fetch];
+//    [currentUser fetch];
     
     NSLog(@"current user %@", currentUser);
     
