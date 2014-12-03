@@ -23,7 +23,7 @@
 #define MIXPANEL_TOKEN @"079a199396a3f6b60e57782e3b79d25f"
 #define kGymBudEventCompletionHeight 154
 
-@interface AppDelegate ()
+@interface AppDelegate () <UIAlertViewDelegate>
 
 
 
@@ -60,21 +60,13 @@
     
     if (![[currentUser objectForKey:@"emailVerified"] boolValue] && currentUser)
     {
-        // Refresh to make sure the user did not recently verify
-        if (![[currentUser objectForKey:@"emailVerified"] boolValue])
-        {
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Verify Email"
-                                                            message:@"Please verify your email before logging in"
-                                                           delegate:self
-                                                  cancelButtonTitle:@"OK"
-                                                  otherButtonTitles:nil];
-            [alert show];
-            UIStoryboard *signin = [UIStoryboard storyboardWithName:@"SignIn" bundle:nil];
-            SignInViewController *goVC = [signin instantiateViewControllerWithIdentifier:@"SignInViewController"];
-            
-            self.window.rootViewController = goVC;
-
-        }
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Verify Email"
+                                                        message:@"Please verify your email before logging in"
+                                                       delegate:self
+                                              cancelButtonTitle:@"OK"
+                                              otherButtonTitles:nil];
+        alert.tag = 10;
+        [alert show];
     }
 
     else if (currentUser) {
@@ -261,6 +253,14 @@ didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)newDeviceToken {
 }
 
 - (void)alertView:(UIAlertView *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
+    if (actionSheet.tag == 10)
+    {
+        UIStoryboard *signin = [UIStoryboard storyboardWithName:@"SignIn" bundle:nil];
+        SignInViewController *goVC = [signin instantiateViewControllerWithIdentifier:@"SignInViewController"];
+        
+        self.window.rootViewController = goVC;
+    }
+
     if(buttonIndex == 1) {
         // bring up modal here...
         // You need to set the identifier from the Interface
@@ -272,6 +272,7 @@ didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)newDeviceToken {
         [self.window.rootViewController.view addSubview:eventCompletionView];
         
     }
+    
 }
 
 - (void)application:(UIApplication *)application
