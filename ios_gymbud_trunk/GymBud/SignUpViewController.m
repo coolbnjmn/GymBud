@@ -14,13 +14,13 @@
 
 @implementation SignUpViewController
 
-- (void)viewDidLoad {
+- (void)viewDidLoad
+{
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.signUpView.logo.hidden = YES;
     self.view.layer.contents = (id)[UIImage imageNamed:@"background.png"].CGImage;
     self.signUpView.emailAsUsername = YES;
-
 }
 
 - (void)didReceiveMemoryWarning {
@@ -28,14 +28,12 @@
     // Dispose of any resources that can be recreated.
 }
 
-/*
-#pragma mark - Navigation
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+- (void)viewDidLayoutSubviews
+{
+    [super viewDidLayoutSubviews];
+    
+    // Set frame for elements
+    [self.signUpView.signUpButton setFrame:CGRectMake(35.0f, 430.0f, 250.0f, 40.0f)];
 }
-*/
-
 @end

@@ -27,12 +27,10 @@
 
 @implementation GBJoinedEventsTVC
 
-- (instancetype)initWithStyle:(UITableViewStyle)style
+-(id)initWithCoder:(NSCoder *)aDecoder
 {
-    self = [super initWithStyle:style];
-    if (self) {
-        // Customize the table:
-        
+    if(self = [super initWithCoder:aDecoder]) {
+        // Do something
         // The className to query on
         self.parseClassName = @"Event";
         self.reuseId = @"GymBudEventsCell";
@@ -52,6 +50,7 @@
         
         // The number of objects to show per page
         self.objectsPerPage = 100;
+        
     }
     return self;
 }
@@ -64,7 +63,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
+   
     if (NSClassFromString(@"UIRefreshControl")) {
         // Use the new iOS 6 refresh control.
         UIRefreshControl *refreshControl = [[UIRefreshControl alloc] init];
@@ -161,6 +160,7 @@
     return kCellHeight;
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath object:(PFObject *)object {
+    
     GymBudEventsCell *cell = [tableView dequeueReusableCellWithIdentifier:self.reuseId forIndexPath:indexPath];
     
     if(cell == nil) {
@@ -171,11 +171,9 @@
     
     NSDate *eventStartTime = [object objectForKey:@"time"];
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-//    [formatter setDateFormat:@"HH:mm"];
     [formatter setDateStyle:NSDateFormatterNoStyle];
     [formatter setTimeStyle:NSDateFormatterShortStyle];
     cell.startTimeTextLabel.text = [formatter stringFromDate:eventStartTime];
-//    cell.activityTextLabel.text = [object objectForKey:@"activity"];
     cell.activityTextLabel.text = ![object[@"additional"] isEqualToString:@""] ? [[[object objectForKey:@"activity"] stringByAppendingString:@" - "] stringByAppendingString:object[@"additional"]] : object[@"activity"];
     UIColor * color = [UIColor colorWithRed:178/255.0f green:168/255.0f blue:151/255.0f alpha:1.0f];
     cell.backgroundColor = color;
@@ -189,19 +187,6 @@
         weakCell.logoImageView.image = [UIImage imageWithData:data];
         [weakCell setNeedsLayout];
     }];
-//    NSURL *url = [NSURL URLWithString:[[[object objectForKey:@"organizer"] objectForKey:@"profile"] objectForKey:@"pictureURL"]];
-//    NSURLRequest *request = [NSURLRequest requestWithURL:url];
-//    UIImage *placeholderImage = [UIImage imageNamed:[kGymBudActivityIconMapping objectForKey:[object objectForKey:@"activity"]]];
-//    
-//    __weak GymBudEventsCell *weakCell = cell;
-//    
-//    [cell.logoImageView setImageWithURLRequest:request
-//                              placeholderImage:placeholderImage
-//                                       success:^(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *image) {
-//                                           // do we want rounded corners on the image?
-//                                           weakCell.logoImageView.image = image;
-//                                           [weakCell setNeedsLayout];
-//                                       } failure:nil];
     
     if([eventStartTime isToday]) {
         cell.startDateTextLabel.text = @"Today";
@@ -214,8 +199,8 @@
     }
     cell.locationTextLabel.text = [object objectForKey:@"locationName"];
     NSString *countOverCapacity;
-    NSString *count = [NSString stringWithFormat:@"%d", [((NSArray *)[object objectForKey:@"attendees"]) count]];
-    NSString *capacity = [NSString stringWithFormat:@"%d", [[object objectForKey:@"count"] integerValue]];
+    NSString *count = [NSString stringWithFormat:@"%ld", [((NSArray *)[object objectForKey:@"attendees"]) count]];
+    NSString *capacity = [NSString stringWithFormat:@"%ld", [[object objectForKey:@"count"] integerValue]];
     countOverCapacity = [[count stringByAppendingString:@"/"] stringByAppendingString:capacity];
     cell.capacityTextLabel.text = countOverCapacity;
     
@@ -242,15 +227,12 @@
     [super tableView:tableView didSelectRowAtIndexPath:indexPath];
     UserDetailsViewController *controller = [[UserDetailsViewController alloc] initWithNibName:nil
                                                                                         bundle:nil];
-    GymBudEventsCell *cell = (GymBudEventsCell *)[tableView cellForRowAtIndexPath:indexPath];
-    
     PFQuery *query = [PFQuery queryWithClassName:self.parseClassName];
     [query includeKey:@"organizer"];
     [query whereKey:@"objectId" equalTo:[[self.objects objectAtIndex:indexPath.row] objectId]];
 
     [query findObjectsInBackgroundWithBlock:^(NSArray *events, NSError *error) {
         if(self.navigationController.topViewController == self) {
-//            GymBudEventModel *post = [[GymBudEventModel alloc] initWithPFObject:[objects objectAtIndex:0]];
             controller.annotation = [events objectAtIndex:0];
             [self.navigationController pushViewController:controller animated:YES]; // or use presentViewController if you're using modals
             Mixpanel *mixpanel = [Mixpanel sharedInstance];
