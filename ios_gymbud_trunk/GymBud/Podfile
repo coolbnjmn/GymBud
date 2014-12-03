@@ -9,6 +9,7 @@ pod 'AFNetworking', '~> 2.0'
 pod 'MBProgressHUD', '~> 0.8'
 pod 'Mixpanel'
 pod 'AXRatingView'
+pod 'JSQMessagesViewController'
 pod 'UIAlertView-Blocks'
 
 end

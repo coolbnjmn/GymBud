@@ -11,6 +11,7 @@
 #import "FindUserTVC.h"
 #import "GymBudConstants.h"
 #import "MBProgressHUD.h"
+#import "BubbleChatTVC.h"
 #import "GymBudConversationTVC.h"
 
 @interface MessageInboxTVC ()
@@ -303,7 +304,8 @@
     
     NSNumber *rowIndex = [rowIndecesInSection objectAtIndex:indexPath.row];
     
-    GymBudConversationTVC *convoTVC = [[GymBudConversationTVC alloc] init];
+//    GymBudConversationTVC *convoTVC = [[GymBudConversationTVC alloc] init];
+    BubbleChatTVC *convoTVC = [[BubbleChatTVC alloc] init];
     convoTVC.fromUser = [[self.objects objectAtIndex:[rowIndex intValue]] objectForKey:@"fromUser"];
     convoTVC.toUser = [[self.objects objectAtIndex:[rowIndex intValue]] objectForKey:@"toUser"];
     
