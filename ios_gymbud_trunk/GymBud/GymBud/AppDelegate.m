@@ -69,6 +69,11 @@
                                                   cancelButtonTitle:@"OK"
                                                   otherButtonTitles:nil];
             [alert show];
+            UIStoryboard *signin = [UIStoryboard storyboardWithName:@"SignIn" bundle:nil];
+            SignInViewController *goVC = [signin instantiateViewControllerWithIdentifier:@"SignInViewController"];
+            
+            self.window.rootViewController = goVC;
+
         }
     }
 
