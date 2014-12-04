@@ -60,20 +60,6 @@
     self.durationPicker.delegate = self;
     self.durationPicker.dataSource = self;
     
-    PFQuery *userQuery = [PFUser query];
-//    NSArray *users = [userQuery findObjectsIn];
-//    self.names = [[NSMutableArray alloc] init];
-//    for(PFUser *user in users) {
-//        [self.names addObject:[user objectForKey:@"user_fb_name"]];
-//    }
-    [userQuery findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error){
-        self.names = [[NSMutableArray alloc] init];
-        self.users = [[NSMutableArray alloc] init];
-        for(PFUser *user in objects) {
-            [self.names addObject:[user objectForKey:@"user_fb_name"]];
-            [self.users addObject:user];
-        }
-    }];
 }
 
 - (void)didReceiveMemoryWarning
