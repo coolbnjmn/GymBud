@@ -12,8 +12,12 @@
 #import <Parse/Parse.h>
 #import "AppDelegate.h"
 
+#define SYSTEM_VERSION_GREATER_THAN(v)              ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] == NSOrderedDescending)
+#define SYSTEM_VERSION_LESS_THAN(v)                 ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] == NSOrderedAscending)
+
 @interface SignInViewController () <PFSignUpViewControllerDelegate, UIAlertViewDelegate>
 
+@property(nonatomic) int keyboardPresent;
 @end
 
 @implementation SignInViewController
@@ -26,6 +30,22 @@
     [self.logInView setLogo:[[UIImageView alloc] initWithImage:[UIImage imageNamed:@""]]];
     self.logInView.dismissButton.hidden = YES;
     self.logInView.usernameField.placeholder = @"Email";
+    self.keyboardPresent = 0;
+    
+    if (SYSTEM_VERSION_LESS_THAN(@"8.0"))
+    {
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(keyboardWillShow)
+                                                     name:UIKeyboardWillShowNotification
+                                                   object:nil];
+        
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(keyboardWillHide)
+                                                     name:UIKeyboardWillHideNotification
+                                                   object:nil];
+
+    }
+
     // Do any additional setup after loading the view.
     
     // Create the sign up view controller
@@ -34,6 +54,52 @@
     
     // Assign our sign up controller to be displayed from the login controller
     [self setSignUpController:signUpViewController];
+}
+
+-(void) viewDidAppear:(BOOL)animated
+{
+    [super viewDidLoad];
+    self.delegate = self;
+    self.view.layer.contents = (id)[UIImage imageNamed:@"background.png"].CGImage;
+    [self.logInView setLogo:[[UIImageView alloc] initWithImage:[UIImage imageNamed:@""]]];
+    self.logInView.dismissButton.hidden = YES;
+    self.logInView.usernameField.placeholder = @"Email";
+    self.keyboardPresent = 0;
+    
+    if (SYSTEM_VERSION_LESS_THAN(@"8.0"))
+    {
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(keyboardWillShow)
+                                                     name:UIKeyboardWillShowNotification
+                                                   object:nil];
+        
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(keyboardWillHide)
+                                                     name:UIKeyboardWillHideNotification
+                                                   object:nil];
+        
+    }
+    
+    // Do any additional setup after loading the view.
+    
+    // Create the sign up view controller
+    SignUpViewController *signUpViewController = [[SignUpViewController alloc] init];
+    [signUpViewController setDelegate:self]; // Set ourselves as the delegate
+    
+    // Assign our sign up controller to be displayed from the login controller
+    [self setSignUpController:signUpViewController];
+
+}
+
+-(void)keyboardWillShow
+{
+    self.keyboardPresent = 70;
+}
+
+-(void)keyboardWillHide
+{
+    self.keyboardPresent = 0;
+    [self viewDidLayoutSubviews];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -107,12 +173,12 @@
         if ([[UIScreen mainScreen] bounds].size.height >= 568)
         {
             //iphone 5
-            scalingFactor = 0;
+            scalingFactor = 0 + self.keyboardPresent;
         }
         else
         {
             //iphone 3.5 inch screen iphone 3g,4s
-            scalingFactor = 60;
+            scalingFactor = 60 + self.keyboardPresent;
         }
     }
     
