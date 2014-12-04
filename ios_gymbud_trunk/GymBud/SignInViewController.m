@@ -100,13 +100,28 @@
 
 - (void)viewDidLayoutSubviews {
     [super viewDidLayoutSubviews];
+    int scalingFactor;
+    
+    if([[UIDevice currentDevice]userInterfaceIdiom]==UIUserInterfaceIdiomPhone)
+    {
+        if ([[UIScreen mainScreen] bounds].size.height >= 568)
+        {
+            //iphone 5
+            scalingFactor = 0;
+        }
+        else
+        {
+            //iphone 3.5 inch screen iphone 3g,4s
+            scalingFactor = 60;
+        }
+    }
     
     // Set frame for elements
-    [self.logInView.usernameField setFrame:CGRectMake(0.0f, 285.0f, 360.0f, 50.0f)];
-    [self.logInView.passwordField setFrame:CGRectMake(0.0f, 325.0f, 360.0f, 50.0f)];
-    [self.logInView.logInButton setFrame:CGRectMake(0.0f, 385.0f, self.view.frame.size.width, 50.0f)];
-    [self.logInView.passwordForgottenButton setFrame:CGRectMake(0.0f, 445.0f, self.view.frame.size.width, 50.0f)];
-    [self.logInView.signUpButton setFrame:CGRectMake(35.0f, 490.0f, 250.0f, 40.0f)];
+    [self.logInView.usernameField setFrame:CGRectMake(0.0f, 285.0f-scalingFactor, 360.0f, 50.0f)];
+    [self.logInView.passwordField setFrame:CGRectMake(0.0f, 325.0f-scalingFactor, 360.0f, 50.0f)];
+    [self.logInView.logInButton setFrame:CGRectMake(0.0f, 385.0f-scalingFactor, self.view.frame.size.width, 50.0f)];
+    [self.logInView.passwordForgottenButton setFrame:CGRectMake(0.0f, 445.0f-scalingFactor, self.view.frame.size.width, 50.0f)];
+    [self.logInView.signUpButton setFrame:CGRectMake(35.0f, 490.0f-scalingFactor, 250.0f, 40.0f)];
     [self.logInView.passwordForgottenButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     
 }
