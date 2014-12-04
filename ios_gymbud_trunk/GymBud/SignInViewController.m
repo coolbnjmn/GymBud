@@ -56,39 +56,11 @@
     [self setSignUpController:signUpViewController];
 }
 
--(void) viewDidAppear:(BOOL)animated
+- (void) viewWillDisappear:(BOOL)animated
 {
-    [super viewDidLoad];
-    self.delegate = self;
-    self.view.layer.contents = (id)[UIImage imageNamed:@"background.png"].CGImage;
-    [self.logInView setLogo:[[UIImageView alloc] initWithImage:[UIImage imageNamed:@""]]];
-    self.logInView.dismissButton.hidden = YES;
-    self.logInView.usernameField.placeholder = @"Email";
-    self.keyboardPresent = 0;
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillShowNotification object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillHideNotification object:nil];
     
-    if (SYSTEM_VERSION_LESS_THAN(@"8.0"))
-    {
-        [[NSNotificationCenter defaultCenter] addObserver:self
-                                                 selector:@selector(keyboardWillShow)
-                                                     name:UIKeyboardWillShowNotification
-                                                   object:nil];
-        
-        [[NSNotificationCenter defaultCenter] addObserver:self
-                                                 selector:@selector(keyboardWillHide)
-                                                     name:UIKeyboardWillHideNotification
-                                                   object:nil];
-        
-    }
-    
-    // Do any additional setup after loading the view.
-    
-    // Create the sign up view controller
-    SignUpViewController *signUpViewController = [[SignUpViewController alloc] init];
-    [signUpViewController setDelegate:self]; // Set ourselves as the delegate
-    
-    // Assign our sign up controller to be displayed from the login controller
-    [self setSignUpController:signUpViewController];
-
 }
 
 -(void)keyboardWillShow
