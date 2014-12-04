@@ -22,7 +22,8 @@
     self.view.layer.contents = (id)[UIImage imageNamed:@"background.png"].CGImage;
     self.signUpView.emailAsUsername = YES;
     
-    [self.signUpView.dismissButton setImage:[UIImage imageNamed:@"close.png"] forState:UIControlStateNormal];
+
+//    [self.signUpView.dismissButton setImage:[UIImage imageNamed:@"close.png"] forState:UIControlStateNormal];
 }
 
 - (void)didReceiveMemoryWarning {
