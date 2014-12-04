@@ -63,6 +63,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
     self.reuseId = @"GymBudEventsCell";
     // The className to query on
     self.parseClassName = @"Event";
