@@ -20,6 +20,7 @@
 @property (nonatomic, strong) NSArray *objects;
 @property (nonatomic, strong) UIImage *fromUserAvatar;
 @property (nonatomic, strong) UIImage *toUserAvatar;
+@property (nonatomic) bool toUserIsSelf;
 @end
 
 @implementation BubbleChatTVC
@@ -27,11 +28,11 @@
 - (void)objectsDidLoad:(id)result {
     self.objects = [NSArray arrayWithArray:result];
     // set fromuser avatar and touseravatar
-    PFFile *theImage = [[self.objects objectAtIndex:0] objectForKey:@"fromUser"][@"gymbudProfile"][@"profilePicture"];
+    PFFile *theImage = self.fromUser[@"gymbudProfile"][@"profilePicture"];
     if(theImage != nil) {
         [theImage getDataInBackgroundWithBlock:^(NSData *data, NSError *error){
             self.fromUserAvatar = [UIImage imageWithData:data];
-            PFFile *theImage2 = [[self.objects objectAtIndex:0] objectForKey:@"toUser"][@"gymbudProfile"][@"profilePicture"];
+            PFFile *theImage2 = self.toUser[@"gymbudProfile"][@"profilePicture"];
             if(theImage2 != nil) {
                 [theImage2 getDataInBackgroundWithBlock:^(NSData *data, NSError *error){
                     self.toUserAvatar = [UIImage imageWithData:data];
@@ -45,7 +46,7 @@
         }];
     } else {
         self.fromUserAvatar = [UIImage imageNamed:@"yogaIcon.png"];
-        PFFile *theImage2 = [[self.objects objectAtIndex:0] objectForKey:@"toUser"][@"gymbudProfile"][@"profilePicture"];
+        PFFile *theImage2 = self.toUser[@"gymbudProfile"][@"profilePicture"];
         if(theImage2 != nil) {
             [theImage2 getDataInBackgroundWithBlock:^(NSData *data, NSError *error){
                 self.toUserAvatar = [UIImage imageWithData:data];
@@ -68,6 +69,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
 
+    
     self.inputToolbar.contentView.leftBarButtonItem = nil;
     /**
      *  You MUST set your senderId and display name
@@ -77,6 +79,13 @@
     self.senderId = [[PFUser currentUser] objectId];
     self.senderDisplayName = [[PFUser currentUser] objectForKey:@"gymbudProfile"][@"name"];
     
+    if([[[PFUser currentUser] objectId] isEqualToString:[self.toUser objectId]]) {
+        self.title = [self.fromUser objectForKey:@"gymbudProfile"][@"name"];
+        self.toUserIsSelf = YES;
+    } else {
+        self.title = [self.toUser objectForKey:@"gymbudProfile"][@"name"];
+        self.toUserIsSelf = NO;
+    }
     self.showLoadEarlierMessagesHeader = NO;
     
     PFQuery *toUserQuery = [PFQuery queryWithClassName:@"Activity"];
@@ -180,7 +189,7 @@
     
     PFObject *activity = [self.objects objectAtIndex:indexPath.row];
     
-    if (![[[PFUser currentUser] objectId] isEqualToString:[activity[@"fromUser"] objectId]]) { // blue
+    if ([[activity[@"fromUser"] objectId] isEqualToString:[self.fromUser objectId]] && self.toUserIsSelf) { // blue
         return [JSQMessagesAvatarImageFactory avatarImageWithPlaceholder:self.fromUserAvatar diameter:kJSQMessagesCollectionViewAvatarSizeDefault];
     } else {
         return [JSQMessagesAvatarImageFactory avatarImageWithPlaceholder:self.toUserAvatar diameter:kJSQMessagesCollectionViewAvatarSizeDefault];
