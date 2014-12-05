@@ -10,12 +10,59 @@
 #import <JSQMessagesViewController/JSQMessage.h>
 #import <JSQMessagesViewController/JSQMessagesBubbleImageFactory.h>
 #import <JSQMessagesViewController/JSQMessagesAvatarImageFactory.h>
+#import <MBProgressHUD/MBProgressHUD.h>
+#import "GymBudConstants.h"
+
 
 @interface BubbleChatTVC ()
 
+@property (nonatomic, strong) MBProgressHUD *HUD;
+@property (nonatomic, strong) NSArray *objects;
+@property (nonatomic, strong) UIImage *fromUserAvatar;
+@property (nonatomic, strong) UIImage *toUserAvatar;
 @end
 
 @implementation BubbleChatTVC
+
+- (void)objectsDidLoad:(id)result {
+    self.objects = [NSArray arrayWithArray:result];
+    // set fromuser avatar and touseravatar
+    PFFile *theImage = [[self.objects objectAtIndex:0] objectForKey:@"fromUser"][@"gymbudProfile"][@"profilePicture"];
+    if(theImage != nil) {
+        [theImage getDataInBackgroundWithBlock:^(NSData *data, NSError *error){
+            self.fromUserAvatar = [UIImage imageWithData:data];
+            PFFile *theImage2 = [[self.objects objectAtIndex:0] objectForKey:@"toUser"][@"gymbudProfile"][@"profilePicture"];
+            if(theImage2 != nil) {
+                [theImage2 getDataInBackgroundWithBlock:^(NSData *data, NSError *error){
+                    self.toUserAvatar = [UIImage imageWithData:data];
+                    [self.collectionView reloadData];
+                    [self.HUD hide:YES];
+                }];
+            } else {
+                self.toUserAvatar = [UIImage imageNamed:@"yogaIcon.png"];
+            }
+            
+        }];
+    } else {
+        self.fromUserAvatar = [UIImage imageNamed:@"yogaIcon.png"];
+        PFFile *theImage2 = [[self.objects objectAtIndex:0] objectForKey:@"toUser"][@"gymbudProfile"][@"profilePicture"];
+        if(theImage2 != nil) {
+            [theImage2 getDataInBackgroundWithBlock:^(NSData *data, NSError *error){
+                self.toUserAvatar = [UIImage imageWithData:data];
+                [self.collectionView reloadData];
+                [self.HUD hide:YES];
+            }];
+        } else {
+            self.toUserAvatar = [UIImage imageNamed:@"yogaIcon.png"];
+        }
+    }
+    
+    
+//
+//    [self.HUD hide:YES];
+//    [self.collectionView reloadData];
+
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -29,10 +76,45 @@
      */
 //    self.senderId = [self.fromUser objectId];
 //    self.senderDisplayName = self.fromUser[@"gymbudProfile"][@"name"];
-    self.senderId = @"Ben Hendricks";
-    self.senderDisplayName = @"Ben Hendricks2";
+    self.senderId = [[PFUser currentUser] objectId];
+    self.senderDisplayName = [[PFUser currentUser] objectForKey:@"gymbudProfile"][@"name"];
     
     self.showLoadEarlierMessagesHeader = YES;
+    
+    PFQuery *toUserQuery = [PFQuery queryWithClassName:@"Activity"];
+    [toUserQuery whereKey:@"toUser" equalTo:self.toUser];
+    [toUserQuery whereKey:@"fromUser" equalTo:self.fromUser];
+    [toUserQuery whereKey:@"type" equalTo:@"message"];
+    
+    PFQuery *fromUserQuery = [PFQuery queryWithClassName:@"Activity"];
+    [fromUserQuery whereKey:@"fromUser" equalTo:self.toUser];
+    [fromUserQuery whereKey:@"toUser" equalTo:self.fromUser];
+    [fromUserQuery whereKey:@"type" equalTo:@"message"];
+    
+    PFQuery *query = [PFQuery orQueryWithSubqueries:[NSArray arrayWithObjects:toUserQuery,fromUserQuery,nil]];
+    [query orderByAscending:@"createdAt"];
+    [query includeKey:@"fromUser"];
+    [query includeKey:@"toUser"];
+    [query setCachePolicy:kPFCachePolicyNetworkOnly];
+    
+    self.HUD = [[MBProgressHUD alloc] initWithView:self.view];
+    [self.view addSubview:self.HUD];
+    UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, kLoadingAnimationWidth, kLoadingAnimationHeight)];
+    imageView.image = [UIImage imageNamed:kLoadingImageFirst];
+    //Add more images which will be used for the animation
+    imageView.animationImages = kLoadingImagesArray;
+    
+    //Set the duration of the animation (play with it
+    //until it looks nice for you)
+    imageView.animationDuration = kLoadingAnimationDuration;
+    [imageView startAnimating];
+    imageView.contentMode = UIViewContentModeScaleToFill;
+    self.HUD.customView = imageView;
+    self.HUD.mode = MBProgressHUDModeCustomView;
+    self.HUD.color = [UIColor clearColor];
+    
+    [self.HUD show:YES];
+    [query findObjectsInBackgroundWithTarget:self selector:@selector(objectsDidLoad:)];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -44,10 +126,9 @@
 
 - (id<JSQMessageData>)collectionView:(JSQMessagesCollectionView *)collectionView messageDataForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    return [[JSQMessage alloc] initWithSenderId:self.senderId
-                              senderDisplayName:self.senderDisplayName
-                                           date:[NSDate distantPast]
-                                           text:@"It is simple, elegant, and easy to use. There are super sweet default settings, but you can customize like crazy."];
+    PFObject *activity = [self.objects objectAtIndex:indexPath.row];
+    NSString *name = activity[@"fromUser"][@"gymbudProfile"] ? activity[@"fromUser"][@"gymbudProfile"][@"name"] : activity[@"fromUser"][@"profile"][@"name"];
+    return [[JSQMessage alloc] initWithSenderId:[activity[@"fromUser"] objectId] senderDisplayName:name date:[activity createdAt] text:activity[@"content"]];
 }
 
 - (id<JSQMessageBubbleImageDataSource>)collectionView:(JSQMessagesCollectionView *)collectionView messageBubbleImageDataForItemAtIndexPath:(NSIndexPath *)indexPath
@@ -59,8 +140,10 @@
      *  Otherwise, return your previously created bubble image data objects.
      */
     JSQMessagesBubbleImageFactory *bubbleFactory = [[JSQMessagesBubbleImageFactory alloc] init];
-
-    if ([@"Ben Hendricks" isEqualToString:self.senderId]) { // blue
+    
+    PFObject *activity = [self.objects objectAtIndex:indexPath.row];
+    
+    if ([[[PFUser currentUser] objectId] isEqualToString:[activity[@"fromUser"] objectId]]) { // blue
         return [bubbleFactory outgoingMessagesBubbleImageWithColor:[UIColor colorWithHue:210.0f / 360.0f
                                                                               saturation:0.8f
                                                                               brightness:1.0f
@@ -95,22 +178,12 @@
      *
      *  Override the defaults in `viewDidLoad`
      */
-//    JSQMessage *message = [self.demoData.messages objectAtIndex:indexPath.item];
-//    
-//    if ([message.senderId isEqualToString:self.senderId]) {
-//        if (![NSUserDefaults outgoingAvatarSetting]) {
-//            return nil;
-//        }
-//    }
-//    else {
-//        if (![NSUserDefaults incomingAvatarSetting]) {
-//            return nil;
-//        }
-//    }
-//    
-//    
-//    return [self.demoData.avatars objectForKey:message.senderId];
-    return [JSQMessagesAvatarImageFactory avatarImageWithImage:[UIImage imageNamed:@"yogaIcon.png"] diameter:kJSQMessagesCollectionViewAvatarSizeDefault];
+    
+    if(indexPath.row % 2 == 0) {
+        return [JSQMessagesAvatarImageFactory avatarImageWithPlaceholder:self.fromUserAvatar diameter:kJSQMessagesCollectionViewAvatarSizeDefault];
+    } else {
+        return [JSQMessagesAvatarImageFactory avatarImageWithPlaceholder:self.toUserAvatar diameter:kJSQMessagesCollectionViewAvatarSizeDefault];
+    }
 }
 
 - (NSAttributedString *)collectionView:(JSQMessagesCollectionView *)collectionView attributedTextForCellTopLabelAtIndexPath:(NSIndexPath *)indexPath
@@ -132,26 +205,30 @@
 
 - (NSAttributedString *)collectionView:(JSQMessagesCollectionView *)collectionView attributedTextForMessageBubbleTopLabelAtIndexPath:(NSIndexPath *)indexPath
 {
-//    JSQMessage *message = [self.demoData.messages objectAtIndex:indexPath.item];
-//    
-//    /**
-//     *  iOS7-style sender name labels
-//     */
-//    if ([message.senderId isEqualToString:self.senderId]) {
-//        return nil;
-//    }
-//    
-//    if (indexPath.item - 1 > 0) {
-//        JSQMessage *previousMessage = [self.demoData.messages objectAtIndex:indexPath.item - 1];
-//        if ([[previousMessage senderId] isEqualToString:message.senderId]) {
-//            return nil;
-//        }
-//    }
-//    
-//    /**
-//     *  Don't specify attributes to use the defaults.
-//     */
-    return [[NSAttributedString alloc] initWithString:@"Benjamin Hendricks"];
+    PFObject *activity = [self.objects objectAtIndex:indexPath.row];
+    NSString *name = activity[@"fromUser"][@"gymbudProfile"] ? activity[@"fromUser"][@"gymbudProfile"][@"name"] : activity[@"fromUser"][@"profile"][@"name"];
+    JSQMessage *message =[[JSQMessage alloc] initWithSenderId:[activity[@"fromUser"] objectId] senderDisplayName:name date:[activity createdAt] text:activity[@"content"]];
+    /**
+     *  iOS7-style sender name labels
+     */
+    if ([message.senderId isEqualToString:self.senderId]) {
+        return nil;
+    }
+    
+    if (indexPath.item - 1 > 0) {
+        PFObject *activity2 = [self.objects objectAtIndex:indexPath.row-1];
+        NSString *name2 = activity2[@"fromUser"][@"gymbudProfile"] ? activity[@"fromUser"][@"gymbudProfile"][@"name"] : activity[@"fromUser"][@"profile"][@"name"];
+        JSQMessage *message2 =[[JSQMessage alloc] initWithSenderId:[activity2[@"fromUser"] objectId] senderDisplayName:name2 date:[activity2 createdAt] text:activity2[@"content"]];
+
+        if ([[message2 senderId] isEqualToString:message2.senderId]) {
+            return nil;
+        }
+    }
+    
+    return nil;
+    /**
+     *  Don't specify attributes to use the defaults.
+     */
 }
 
 - (NSAttributedString *)collectionView:(JSQMessagesCollectionView *)collectionView attributedTextForCellBottomLabelAtIndexPath:(NSIndexPath *)indexPath
@@ -163,7 +240,7 @@
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
-    return 5;
+    return [self.objects count];
 }
 
 - (UICollectionViewCell *)collectionView:(JSQMessagesCollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
@@ -187,10 +264,9 @@
      *  Instead, override the properties you want on `self.collectionView.collectionViewLayout` from `viewDidLoad`
      */
     
-    JSQMessage *msg = [[JSQMessage alloc] initWithSenderId:self.senderId
-                                         senderDisplayName:self.senderDisplayName
-                                                      date:[NSDate distantPast]
-                                                      text:@"It is simple, elegant, and easy to use. There are super sweet default settings, but you can customize like crazy."];
+    PFObject *activity = [self.objects objectAtIndex:indexPath.row];
+    NSString *name = activity[@"fromUser"][@"gymbudProfile"] ? activity[@"fromUser"][@"gymbudProfile"][@"name"] : activity[@"fromUser"][@"profile"][@"name"];
+    JSQMessage *msg =[[JSQMessage alloc] initWithSenderId:[activity[@"fromUser"] objectId] senderDisplayName:name date:[activity createdAt] text:activity[@"content"]];
     
     if (!msg.isMediaMessage) {
         
@@ -227,10 +303,10 @@
      *
      *  Show a timestamp for every 3rd message
      */
-    if (indexPath.item % 3 == 0) {
-        return kJSQMessagesCollectionViewCellLabelHeightDefault;
-    }
-    
+//    if (indexPath.item % 3 == 0) {
+//        return kJSQMessagesCollectionViewCellLabelHeightDefault;
+//    }
+//    
     return 0.0f;
 }
 
@@ -240,19 +316,20 @@
     /**
      *  iOS7-style sender name labels
      */
-    JSQMessage *currentMessage = [[JSQMessage alloc] initWithSenderId:self.senderId
-                                                    senderDisplayName:self.senderDisplayName
-                                                                 date:[NSDate distantPast]
-                                                                 text:@"It is simple, elegant, and easy to use. There are super sweet default settings, but you can customize like crazy."];
+    PFObject *activity = [self.objects objectAtIndex:indexPath.row];
+    NSString *name = activity[@"fromUser"][@"gymbudProfile"] ? activity[@"fromUser"][@"gymbudProfile"][@"name"] : activity[@"fromUser"][@"profile"][@"name"];
+    JSQMessage *currentMessage =[[JSQMessage alloc] initWithSenderId:[activity[@"fromUser"] objectId] senderDisplayName:name date:[activity createdAt] text:activity[@"content"]];
+
     if ([[currentMessage senderId] isEqualToString:self.senderId]) {
         return 0.0f;
     }
     
     if (indexPath.item - 1 > 0) {
-        JSQMessage *previousMessage = [[JSQMessage alloc] initWithSenderId:self.senderId
-                                                         senderDisplayName:self.senderDisplayName
-                                                                      date:[NSDate distantPast]
-                                                                      text:@"It is simple, elegant, and easy to use. There are super sweet default settings, but you can customize like crazy."];
+        PFObject *prevActivity = [self.objects objectAtIndex:indexPath.row-1];
+        NSString *name = activity[@"fromUser"][@"gymbudProfile"] ? activity[@"fromUser"][@"gymbudProfile"][@"name"] : activity[@"fromUser"][@"profile"][@"name"];
+        JSQMessage *previousMessage =[[JSQMessage alloc] initWithSenderId:[prevActivity[@"fromUser"] objectId] senderDisplayName:name date:[prevActivity createdAt] text:prevActivity[@"content"]];
+        
+
         if ([[previousMessage senderId] isEqualToString:[currentMessage senderId]]) {
             return 0.0f;
         }
