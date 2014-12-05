@@ -57,7 +57,7 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     // Return the number of rows in the section.
-    return 4;
+    return 6;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -89,6 +89,7 @@
     // Configure the cell...
     cell.backgroundColor = kGymBudLightBlue;
     cell.textLabel.textColor = [UIColor whiteColor];
+    cell.detailTextLabel.textColor = [UIColor whiteColor];
     cell.textLabel.font = [UIFont fontWithName:@"MagistralATT" size:18];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
 
@@ -152,7 +153,6 @@
             break;
         case 1:
         {
-            // edit profile
             cell.textLabel.text = @"Invite Friend";
         }
             break;
@@ -167,7 +167,16 @@
         }
             break;
         case 3:
-            // edit profile
+        {
+            cell.textLabel.text = [NSString stringWithFormat:@"About -- Version Number: %@", [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"]];
+        }
+            break;
+        case 4:
+        {
+            cell.textLabel.text = @"Leave Feedback";
+        }
+            break;
+        case 5:
             cell.textLabel.text = @"Sign Out";
             cell.textLabel.textAlignment = NSTextAlignmentCenter;
             break;
@@ -193,12 +202,43 @@
             [self launchInviteFriend];
             break;
         case 3:
+            [self launchAbout];
+            break;
+        case 4:
+            [self launchLeaveFeedback];
+            break;
+        case 5:
             [self launchSignout];
             break;
             
         default:
             break;
     }
+}
+
+-(void) launchLeaveFeedback {
+    Mixpanel *mixpanel = [Mixpanel sharedInstance];
+    [mixpanel track:@"SettingsVC LeaveFeedbackPressed" properties:@{
+                                                                    }];
+    // Email Subject
+    NSString *emailTitle = [NSString stringWithFormat:@"GymBud Feedback"];
+    // Email Content
+    NSString *messageBody = [NSString stringWithFormat:@"<br><br> <p> ======= Please leave your feedback above this line, the information below is to better respond to your comments ===== </p><p> objectId: %@ </p>", [[PFUser currentUser] objectId]]; // Change the message body to HTML
+    // To address
+    NSArray *toRecipents = [NSArray arrayWithObject:@"ben@gymbudapp.com"];
+    MFMailComposeViewController *mc = [[MFMailComposeViewController alloc] init];
+    mc.mailComposeDelegate = self;
+    [mc setSubject:emailTitle];
+    [mc setMessageBody:messageBody isHTML:YES];
+    [mc setToRecipients:toRecipents];
+    
+    // Present mail view controller on screen
+    [self presentViewController:mc animated:YES completion:NULL];
+
+}
+
+-(void) launchAbout {
+    
 }
 
 -(void) launchEditProfile
@@ -230,9 +270,9 @@
     [mixpanel track:@"SettingsVC InviteAFriendPressed" properties:@{
                                                                     }];
     // Email Subject
-    NSString *emailTitle = [NSString stringWithFormat:@"%@ wants to workout with you!", [PFUser currentUser][kFacebookUsername]];
+    NSString *emailTitle = [NSString stringWithFormat:@"%@ wants to workout with you!", [PFUser currentUser][@"gymbudProfile"][@"name"]];
     // Email Content
-    NSString *messageBody = [NSString stringWithFormat:@"<h1>%@ has invited you to a workout. </h1><h2> Download GymBud to join them! <a href=\"https://itunes.apple.com/us/app/gymbuducla/id935537048?ls=1&mt=8\"> Go to App Store </a></h2>", [PFUser currentUser][kFacebookUsername]]; // Change the message body to HTML
+    NSString *messageBody = [NSString stringWithFormat:@"<h1>%@ has invited you to a workout. </h1><h2> Download GymBud to join them! <a href=\"https://itunes.apple.com/us/app/gymbuducla/id935537048?ls=1&mt=8\"> Go to App Store </a></h2>", [PFUser currentUser][@"gymbudProfile"][@"name"]]; // Change the message body to HTML
     // To address
     NSArray *toRecipents = [NSArray arrayWithObject:@""];
     MFMailComposeViewController *mc = [[MFMailComposeViewController alloc] init];
