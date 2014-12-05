@@ -67,10 +67,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    [super viewDidLoad];
-    
-    self.title = @"JSQMessages";
-    
+
+    self.inputToolbar.contentView.leftBarButtonItem = nil;
     /**
      *  You MUST set your senderId and display name
      */
@@ -79,7 +77,7 @@
     self.senderId = [[PFUser currentUser] objectId];
     self.senderDisplayName = [[PFUser currentUser] objectForKey:@"gymbudProfile"][@"name"];
     
-    self.showLoadEarlierMessagesHeader = YES;
+    self.showLoadEarlierMessagesHeader = NO;
     
     PFQuery *toUserQuery = [PFQuery queryWithClassName:@"Activity"];
     [toUserQuery whereKey:@"toUser" equalTo:self.toUser];
@@ -179,7 +177,10 @@
      *  Override the defaults in `viewDidLoad`
      */
     
-    if(indexPath.row % 2 == 0) {
+    
+    PFObject *activity = [self.objects objectAtIndex:indexPath.row];
+    
+    if (![[[PFUser currentUser] objectId] isEqualToString:[activity[@"fromUser"] objectId]]) { // blue
         return [JSQMessagesAvatarImageFactory avatarImageWithPlaceholder:self.fromUserAvatar diameter:kJSQMessagesCollectionViewAvatarSizeDefault];
     } else {
         return [JSQMessagesAvatarImageFactory avatarImageWithPlaceholder:self.toUserAvatar diameter:kJSQMessagesCollectionViewAvatarSizeDefault];
@@ -271,10 +272,10 @@
     if (!msg.isMediaMessage) {
         
         if ([msg.senderId isEqualToString:self.senderId]) {
-            cell.textView.textColor = [UIColor blackColor];
+            cell.textView.textColor = [UIColor whiteColor];
         }
         else {
-            cell.textView.textColor = [UIColor whiteColor];
+            cell.textView.textColor = [UIColor blackColor];
         }
         
         cell.textView.linkTextAttributes = @{ NSForegroundColorAttributeName : cell.textView.textColor,
@@ -351,6 +352,76 @@
                       date:(NSDate *)date
 {
     NSLog(@"trying to send message with text: %@", text);
+    PFUser *currentUser = [PFUser currentUser];
+    
+    // Stitch together a postObject and send this async to Parse
+    PFObject *activityObject = [PFObject objectWithClassName:@"Activity"];
+    // Activity has the following fields:
+    /*
+     Activity
+     
+     fromUser : User
+     toUser : User
+     type : String
+     content : String
+     */
+    [activityObject setObject:currentUser forKey:@"fromUser"];
+    [activityObject setObject:self.fromUser forKey:@"toUser"];
+    [activityObject setObject:@"message" forKey:@"type"];
+    [activityObject setObject:text forKey:@"content"];
+    [activityObject setObject:[NSNumber numberWithBool:YES] forKey:@"unread"];
+    [activityObject saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+        if (error) {
+            NSLog(@"Couldn't save!");
+            NSLog(@"%@", error);
+            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:[[error userInfo] objectForKey:@"error"] message:nil delegate:self cancelButtonTitle:nil otherButtonTitles:@"Ok", nil];
+            [alertView show];
+            return;
+        }
+        if (succeeded) {
+            NSLog(@"Successfully saved!");
+            NSLog(@"%@", activityObject);
+            
+            NSMutableArray *tmp = [NSMutableArray arrayWithArray:self.objects];
+            [tmp addObject:activityObject];
+            self.objects = [NSArray arrayWithArray:tmp];
+            [self finishSendingMessage];
+
+            //            dispatch_async(dispatch_get_main_queue(), ^{
+            //                [[NSNotificationCenter defaultCenter] postNotificationName:@"CreatePostNotification" object:nil];
+            //            });
+        } else {
+            NSLog(@"Failed to save.");
+        }
+    }];
+
+    
+    PFQuery *innerQuery = [PFUser query];
+    
+    [innerQuery whereKey:@"username" equalTo:[self.fromUser objectForKey:@"username"]];
+    NSLog(@"%@", self.toUser);
+    NSLog(@"about to push");
+    
+    NSLog(@"%@", innerQuery);
+    PFQuery *query = [PFInstallation query];
+    
+    // only return Installations that belong to a User that
+    // matches the innerQuery
+    [query whereKey:@"user" matchesQuery:innerQuery];
+    
+    // Send the notification.
+    PFPush *push = [[PFPush alloc] init];
+    [push setQuery:query];
+    
+    NSString *name;
+    if([currentUser objectForKey:@"gymbudProfile"][@"name"]) {
+        name = [currentUser objectForKey:@"gymbudProfile"][@"name"];
+    } else {
+        name = [currentUser objectForKey:@"profile"][@"name"];
+    }
+    [push setMessage:[NSString stringWithFormat:@"Message From: %@", name]];
+    [push sendPushInBackground];
+
 }
 
 
