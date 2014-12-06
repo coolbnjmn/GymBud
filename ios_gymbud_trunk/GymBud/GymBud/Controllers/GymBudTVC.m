@@ -179,27 +179,27 @@
                             @"context.fields(mutual_friends)", @"fields",
                             nil
                             ];
-    [FBRequestConnection startWithGraphPath:[NSString stringWithFormat:@"/%@", object[@"profile"][@"facebookId"]]
-                                 parameters:params
-                                 HTTPMethod:@"GET"
-                          completionHandler:^(
-                                              FBRequestConnection *connection,
-                                              id result,
-                                              NSError *error
-                                              ) {
-                              NSLog(@"result is :%@ for user: %@", result[@"context"][@"mutual_friends"][@"summary"][@"total_count"], object[@"profile"][@"facebookId"]);
-
-                              NSString *text3 = [NSString stringWithFormat:@"Mutual GymBuds: %ld", (result[@"context"][@"mutual_friends"][@"summary"][@"total_count"] ? [((NSString*)result[@"context"][@"mutual_friends"][@"summary"][@"total_count"]) integerValue] : 0)];
-                              NSLog(@"cell.text3.text is: %@", text3);
-                              cell.detailTextLabel.numberOfLines = 2;
-                              NSUInteger numberOfOccurrences = [[cell.detailTextLabel.text componentsSeparatedByString:@"\n"] count] - 1;
-                              if (numberOfOccurrences==0)
-                              {
-                                  cell.detailTextLabel.text = [NSString stringWithFormat:@"%@\n"
-                                                               @"%@", cell.detailTextLabel.text, text3];
-                                  [cell.detailTextLabel sizeToFit];
-                              }
-                          }];
+//    [FBRequestConnection startWithGraphPath:[NSString stringWithFormat:@"/%@", object[@"profile"][@"facebookId"]]
+//                                 parameters:params
+//                                 HTTPMethod:@"GET"
+//                          completionHandler:^(
+//                                              FBRequestConnection *connection,
+//                                              id result,
+//                                              NSError *error
+//                                              ) {
+//                              NSLog(@"result is :%@ for user: %@", result[@"context"][@"mutual_friends"][@"summary"][@"total_count"], object[@"profile"][@"facebookId"]);
+//
+//                              NSString *text3 = [NSString stringWithFormat:@"Mutual GymBuds: %ld", (result[@"context"][@"mutual_friends"][@"summary"][@"total_count"] ? [((NSString*)result[@"context"][@"mutual_friends"][@"summary"][@"total_count"]) integerValue] : 0)];
+//                              NSLog(@"cell.text3.text is: %@", text3);
+//                              cell.detailTextLabel.numberOfLines = 2;
+//                              NSUInteger numberOfOccurrences = [[cell.detailTextLabel.text componentsSeparatedByString:@"\n"] count] - 1;
+//                              if (numberOfOccurrences==0)
+//                              {
+//                                  cell.detailTextLabel.text = [NSString stringWithFormat:@"%@\n"
+//                                                               @"%@", cell.detailTextLabel.text, text3];
+//                                  [cell.detailTextLabel sizeToFit];
+//                              }
+//                          }];
     
     if(object[@"gymbudProfile"][@"name"])
         cell.textLabel.text = object[@"gymbudProfile"][@"name"];
@@ -245,15 +245,6 @@
     [cell.imageView.image drawInRect:imageRect];
     cell.imageView.image = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
-    for (NSString* family in [UIFont familyNames])
-    {
-        NSLog(@"%@", family);
-        
-        for (NSString* name in [UIFont fontNamesForFamilyName: family])
-        {
-            NSLog(@"  %@", name);
-        }
-    }
     cell.textLabel.font = [UIFont fontWithName:@"MagistralATT" size:18];
     cell.detailTextLabel.font = [UIFont fontWithName:@"MagistralATT" size:12];
 
