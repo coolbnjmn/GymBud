@@ -9,9 +9,7 @@
 #import "AppDelegate.h"
 #import "GymBudTVC.h"
 #import "GBBodyPartCVC.h"
-#import "EditProfileTVC.h"
 #import "Mixpanel.h"
-#import "EPTVC.h"
 #import <ParseFacebookUtils/PFFacebookUtils.h>
 #import "GymBudEventCompletionView.h"
 #import <UIAlertView+Blocks.h>

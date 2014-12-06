@@ -10,7 +10,6 @@
 #import "PAWWallPostCreateViewController.h"
 #import "UserDetailsViewController.h"
 #import "GymBudEventsTVC.h"
-#import "EditProfileTVC.h"
 #import "MessageInboxTVC.h"
 #import "PostCreateTVC.h"
 #import "AppDelegate.h"

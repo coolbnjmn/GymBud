@@ -10,8 +10,8 @@
 #import <Parse/Parse.h>
 #import "GymBudConstants.h"
 #import "Mixpanel.h"
-#import "EPTVC.h"
 #import "SignInViewController.h"
+#import "EditProfileTableViewController.h"
 
 @interface SettingsTableViewController ()
 @property (strong, nonatomic) NSMutableData* imageData;
@@ -211,8 +211,7 @@
 {
     // show edit profile page here...
     UIStoryboard *sb = [UIStoryboard storyboardWithName:@"EditProfile" bundle:nil];
-    EPTVC *vc = [sb instantiateViewControllerWithIdentifier:@"EPOnboarding"];
-    // vc.navigationController.navigationItem.backBarButtonItem
+    EditProfileTableViewController *vc = [sb instantiateViewControllerWithIdentifier:@"EPOnboarding_2"];
     vc.hidesBottomBarWhenPushed = YES;
     vc.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
     
