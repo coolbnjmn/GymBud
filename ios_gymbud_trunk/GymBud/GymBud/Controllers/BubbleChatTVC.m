@@ -10,6 +10,7 @@
 #import <JSQMessagesViewController/JSQMessage.h>
 #import <JSQMessagesViewController/JSQMessagesBubbleImageFactory.h>
 #import <JSQMessagesViewController/JSQMessagesAvatarImageFactory.h>
+#import <JSQMessagesViewController/JSQMessagesTimestampFormatter.h>
 #import <MBProgressHUD/MBProgressHUD.h>
 #import "GymBudConstants.h"
 
@@ -209,13 +210,14 @@
      *
      *  Show a timestamp for every 3rd message
      */
+    if (indexPath.item % 3 == 0) {
+        PFObject *activity = [self.objects objectAtIndex:indexPath.row];
+        NSString *name = activity[@"fromUser"][@"gymbudProfile"] ? activity[@"fromUser"][@"gymbudProfile"][@"name"] : activity[@"fromUser"][@"profile"][@"name"];
+        JSQMessage *message =[[JSQMessage alloc] initWithSenderId:[activity[@"fromUser"] objectId] senderDisplayName:name date:[activity createdAt] text:activity[@"content"]];
+        return [[JSQMessagesTimestampFormatter sharedFormatter] attributedTimestampForDate:message.date];
+    }
+    
     return nil;
-//    if (indexPath.item % 3 == 0) {
-//        JSQMessage *message = [self.demoData.messages objectAtIndex:indexPath.item];
-//        return [[JSQMessagesTimestampFormatter sharedFormatter] attributedTimestampForDate:message.date];
-//    }
-//    
-//    return nil;
 }
 
 - (NSAttributedString *)collectionView:(JSQMessagesCollectionView *)collectionView attributedTextForMessageBubbleTopLabelAtIndexPath:(NSIndexPath *)indexPath
@@ -318,10 +320,10 @@
      *
      *  Show a timestamp for every 3rd message
      */
-//    if (indexPath.item % 3 == 0) {
-//        return kJSQMessagesCollectionViewCellLabelHeightDefault;
-//    }
-//    
+    if (indexPath.item % 3 == 0) {
+        return kJSQMessagesCollectionViewCellLabelHeightDefault;
+    }
+    
     return 0.0f;
 }
 

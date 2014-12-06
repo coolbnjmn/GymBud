@@ -172,7 +172,9 @@
     [self.tableView reloadData];
 }
 
-
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return 70.0f;
+}
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     NSString *hash = [self sportTypeForSection:section];
     NSArray *rowIndecesInSection = [self.sections objectForKey:hash];
@@ -180,18 +182,20 @@
 }
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
-    NSString *sportType = [self sportTypeForSection:section];
-    return sportType;
+//    NSString *sportType = [self sportTypeForSection:section];
+//    return sportType;
+    return @"";
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
-    UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, tableView.bounds.size.width, 30)];
-    UILabel *labelHeader = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, tableView.bounds.size.width, 30)];
-    labelHeader.textColor = kGymBudLightBlue;
-    [headerView addSubview:labelHeader];
-    headerView.backgroundColor = [UIColor whiteColor];
-    labelHeader.text = [self sportTypeForSection:section];
-    return headerView;
+//    UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, tableView.bounds.size.width, 30)];
+//    UILabel *labelHeader = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, tableView.bounds.size.width, 30)];
+//    labelHeader.textColor = kGymBudLightBlue;
+//    [headerView addSubview:labelHeader];
+//    headerView.backgroundColor = [UIColor whiteColor];
+//    labelHeader.text = [self sportTypeForSection:section];
+//    return headerView;
+    return nil;
 }
 
 
@@ -200,14 +204,16 @@
 }
 - (PFTableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath object:(PFObject *)object
 {
-    PFTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"MessageCell"];
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"message"];
     
     if(cell == nil) {
-        cell = [[PFTableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"MessageCell"];
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"message"];
     }
     
+    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+    
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-    [dateFormatter setDateStyle:NSDateFormatterMediumStyle];
+    [dateFormatter setDateStyle:NSDateFormatterNoStyle];
     [dateFormatter setTimeStyle:NSDateFormatterShortStyle];
     NSString *when = [dateFormatter stringFromDate:[object createdAt]];
     
@@ -215,33 +221,59 @@
     
 //    if(isYouMessage) {
         if([[[object objectForKey:@"fromUser"] objectForKey:@"gymbudProfile"] objectForKey:@"name"]) {
-            cell.detailTextLabel.text = [[[[[object objectForKey:@"fromUser"] objectForKey:@"gymbudProfile"] objectForKey:@"name"] stringByAppendingString:@" : "] stringByAppendingString:when];
+            cell.textLabel.text = [[[object objectForKey:@"fromUser"] objectForKey:@"gymbudProfile"] objectForKey:@"name"];
         } else {
-            cell.detailTextLabel.text = [[[[[object objectForKey:@"fromUser"] objectForKey:@"profile"] objectForKey:@"name"] stringByAppendingString:@" : "] stringByAppendingString:when];
+            cell.textLabel.text = [[[object objectForKey:@"fromUser"] objectForKey:@"profile"] objectForKey:@"name"];
         }
         
-        if([[object objectForKey:@"unread"] boolValue]) {
-            cell.textLabel.text = [@"(1) " stringByAppendingString:[object objectForKey:@"content"]];
-        } else {
-            cell.textLabel.text = [object objectForKey:@"content"];
-        }
-//    }
-//    else {
-//        if([[[object objectForKey:@"toUser"] objectForKey:@"gymbudProfile"] objectForKey:@"name"]) {
-//            cell.textLabel.attributedText = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"Sent to: %@", [[[object objectForKey:@"toUser"] objectForKey:@"gymbudProfile"] objectForKey:@"name"]]  attributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIFont boldSystemFontOfSize:13], NSFontAttributeName, nil]];
-//            
+//        if([[object objectForKey:@"unread"] boolValue]) {
+//            cell.detailTextLabel.text = [@"(1) " stringByAppendingString:[object objectForKey:@"content"]];
 //        } else {
-//            cell.textLabel.attributedText = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"Sent to: %@", [[[object objectForKey:@"toUser"] objectForKey:@"profile"] objectForKey:@"name"]]  attributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIFont boldSystemFontOfSize:13], NSFontAttributeName, nil]];
+//            cell.detailTextLabel.text = [object objectForKey:@"content"];
 //        }
-//        
-//        cell.detailTextLabel.text = [object objectForKey:@"content"];
-//    }
+    cell.detailTextLabel.numberOfLines = 2;
+    cell.detailTextLabel.text = [NSString stringWithFormat:@"%@\n%@", [object objectForKey:@"content"], when];
+    [cell.detailTextLabel sizeToFit];
+
+    if([[object objectForKey:@"unread"] boolValue]) {
+        cell.backgroundColor = kGymBudGold;
+        cell.textLabel.textColor = [UIColor blackColor];
+        cell.detailTextLabel.textColor = [UIColor blackColor];
+    } else {
+        cell.backgroundColor = kGymBudLightBlue;
+        cell.textLabel.textColor = [UIColor whiteColor];
+        cell.detailTextLabel.textColor = [UIColor whiteColor];
+
+    }
     
-    cell.backgroundColor = kGymBudLightBlue;
-    cell.textLabel.textColor = [UIColor whiteColor];
-    cell.detailTextLabel.textColor = [UIColor whiteColor];
-    
-    return cell;
+    PFFile *theImage = [object objectForKey:@"fromUser"][@"gymbudProfile"][@"profilePicture"];
+    __weak UITableViewCell *weakCell = cell;
+    [theImage getDataInBackgroundWithBlock:^(NSData *data, NSError *error){
+        NSLog(@"+++++++++ Loading image view with real data ++++++++");
+        weakCell.imageView.image = [UIImage imageWithData:data];
+        weakCell.imageView.layer.cornerRadius = 30.0f;
+        weakCell.imageView.layer.masksToBounds = YES;
+        CGSize itemSize = CGSizeMake(60, 60);
+        UIGraphicsBeginImageContextWithOptions(itemSize, NO, UIScreen.mainScreen.scale);
+        CGRect imageRect = CGRectMake(0.0, 0.0, itemSize.width, itemSize.height);
+        [weakCell.imageView.image drawInRect:imageRect];
+        weakCell.imageView.image = UIGraphicsGetImageFromCurrentImageContext();
+        UIGraphicsEndImageContext();
+    }];
+    cell.imageView.image = [UIImage imageNamed:@"yogaIcon.png"];
+    cell.imageView.layer.cornerRadius = 30.0f;
+    cell.imageView.layer.masksToBounds = YES;
+    CGSize itemSize = CGSizeMake(60, 60);
+    UIGraphicsBeginImageContextWithOptions(itemSize, NO, UIScreen.mainScreen.scale);
+    CGRect imageRect = CGRectMake(0.0, 0.0, itemSize.width, itemSize.height);
+    [cell.imageView.image drawInRect:imageRect];
+    cell.imageView.image = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+
+    cell.textLabel.font = [UIFont fontWithName:@"MagistralATT" size:18];
+    cell.detailTextLabel.font = [UIFont fontWithName:@"MagistralATT" size:12];
+
+    return (PFTableViewCell *)cell;
 }
 
 
