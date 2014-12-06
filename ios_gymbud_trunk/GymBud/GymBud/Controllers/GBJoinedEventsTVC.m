@@ -63,6 +63,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
     self.reuseId = @"GymBudEventsCell";
     // The className to query on
     self.parseClassName = @"Event";
@@ -194,7 +195,7 @@
         cell = [[GymBudEventsCell alloc] init];
     }
     
-    cell.nameTextLabel.text = [[object objectForKey:@"organizer"] objectForKey:kFacebookUsername];
+    cell.nameTextLabel.text = [object objectForKey:@"organizer"][@"gymbudProfile"][@"name"];
     
     NSDate *eventStartTime = [object objectForKey:@"time"];
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];

@@ -13,6 +13,9 @@
 		296D73891A2BFEEA0067624B /* background.png in Resources */ = {isa = PBXBuildFile; fileRef = 296D73881A2BFEEA0067624B /* background.png */; };
 		296D738B1A2CA78A0067624B /* InitialView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 296D738A1A2CA78A0067624B /* InitialView.storyboard */; };
 		296D738E1A2D23870067624B /* SignUpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 296D738D1A2D23870067624B /* SignUpViewController.m */; };
+		296D73931A2FA4830067624B /* Ps-x-button.png in Resources */ = {isa = PBXBuildFile; fileRef = 296D73921A2FA4830067624B /* Ps-x-button.png */; };
+		296D73951A2FA55F0067624B /* X-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 296D73941A2FA55F0067624B /* X-icon.png */; };
+		296D73971A2FA5E20067624B /* close.png in Resources */ = {isa = PBXBuildFile; fileRef = 296D73961A2FA5E20067624B /* close.png */; };
 		29DAA69D1A25438200264253 /* GymBudVC.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 29DAA69C1A25438200264253 /* GymBudVC.storyboard */; };
 		77F13147198EEE0000576708 /* RSDatePickerVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 77F13146198EEE0000576708 /* RSDatePickerVC.m */; };
 		77FD41C51993EEF20017E8D5 /* GymBudEventModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 77FD41C41993EEF20017E8D5 /* GymBudEventModel.m */; };
@@ -116,6 +119,10 @@
 		B2787E691A2AEE6000DCACBF /* 70.png in Resources */ = {isa = PBXBuildFile; fileRef = B2787E211A2AEE6000DCACBF /* 70.png */; };
 		B2787E6A1A2AEE6000DCACBF /* 71.png in Resources */ = {isa = PBXBuildFile; fileRef = B2787E221A2AEE6000DCACBF /* 71.png */; };
 		B2787E6B1A2AEE6000DCACBF /* 72.png in Resources */ = {isa = PBXBuildFile; fileRef = B2787E231A2AEE6000DCACBF /* 72.png */; };
+		B27996B81A2FCFCB00FDBA9F /* 73.png in Resources */ = {isa = PBXBuildFile; fileRef = B27996B41A2FCFCB00FDBA9F /* 73.png */; };
+		B27996B91A2FCFCB00FDBA9F /* 74.png in Resources */ = {isa = PBXBuildFile; fileRef = B27996B51A2FCFCB00FDBA9F /* 74.png */; };
+		B27996BA1A2FCFCB00FDBA9F /* 75.png in Resources */ = {isa = PBXBuildFile; fileRef = B27996B61A2FCFCB00FDBA9F /* 75.png */; };
+		B27996BB1A2FCFCB00FDBA9F /* 76.png in Resources */ = {isa = PBXBuildFile; fileRef = B27996B71A2FCFCB00FDBA9F /* 76.png */; };
 		B27AF67019B0417300FDBF0F /* GBJoinedEventsTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = B27AF66F19B0417300FDBF0F /* GBJoinedEventsTVC.m */; };
 		B27AF67319B0D00700FDBF0F /* NSDate+Utilities.m in Sources */ = {isa = PBXBuildFile; fileRef = B27AF67219B0D00700FDBF0F /* NSDate+Utilities.m */; };
 		B297741519820C4C000AD7B6 /* mapView.png in Resources */ = {isa = PBXBuildFile; fileRef = B297741319820C4C000AD7B6 /* mapView.png */; };
@@ -246,6 +253,9 @@
 		296D738A1A2CA78A0067624B /* InitialView.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = InitialView.storyboard; sourceTree = "<group>"; };
 		296D738C1A2D23870067624B /* SignUpViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SignUpViewController.h; sourceTree = "<group>"; };
 		296D738D1A2D23870067624B /* SignUpViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SignUpViewController.m; sourceTree = "<group>"; };
+		296D73921A2FA4830067624B /* Ps-x-button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Ps-x-button.png"; sourceTree = "<group>"; };
+		296D73941A2FA55F0067624B /* X-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "X-icon.png"; sourceTree = "<group>"; };
+		296D73961A2FA5E20067624B /* close.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = close.png; sourceTree = "<group>"; };
 		29DAA69C1A25438200264253 /* GymBudVC.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = GymBudVC.storyboard; sourceTree = "<group>"; };
 		48EE337A63E5439BA42E30F1 /* libPods-GymBud.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-GymBud.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		4BC2A9230B6CA001F1E15EB0 /* Pods-GymBud.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GymBud.debug.xcconfig"; path = "Pods/Target Support Files/Pods-GymBud/Pods-GymBud.debug.xcconfig"; sourceTree = "<group>"; };
@@ -367,6 +377,10 @@
 		B2787E211A2AEE6000DCACBF /* 70.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = 70.png; path = "GymBud/Assets/Loading Images/70.png"; sourceTree = "<group>"; };
 		B2787E221A2AEE6000DCACBF /* 71.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = 71.png; path = "GymBud/Assets/Loading Images/71.png"; sourceTree = "<group>"; };
 		B2787E231A2AEE6000DCACBF /* 72.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = 72.png; path = "GymBud/Assets/Loading Images/72.png"; sourceTree = "<group>"; };
+		B27996B41A2FCFCB00FDBA9F /* 73.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = 73.png; path = "GymBud/Assets/Loading Images/73.png"; sourceTree = "<group>"; };
+		B27996B51A2FCFCB00FDBA9F /* 74.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = 74.png; path = "GymBud/Assets/Loading Images/74.png"; sourceTree = "<group>"; };
+		B27996B61A2FCFCB00FDBA9F /* 75.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = 75.png; path = "GymBud/Assets/Loading Images/75.png"; sourceTree = "<group>"; };
+		B27996B71A2FCFCB00FDBA9F /* 76.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = 76.png; path = "GymBud/Assets/Loading Images/76.png"; sourceTree = "<group>"; };
 		B27AF66E19B0417300FDBF0F /* GBJoinedEventsTVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GBJoinedEventsTVC.h; path = GymBud/Controllers/GBJoinedEventsTVC.h; sourceTree = "<group>"; };
 		B27AF66F19B0417300FDBF0F /* GBJoinedEventsTVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GBJoinedEventsTVC.m; path = GymBud/Controllers/GBJoinedEventsTVC.m; sourceTree = "<group>"; };
 		B27AF67119B0D00700FDBF0F /* NSDate+Utilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSDate+Utilities.h"; path = "GymBud/Models/NSDate+Utilities.h"; sourceTree = "<group>"; };
@@ -564,6 +578,10 @@
 		B2787DD91A2AEE1F00DCACBF /* Loading Images */ = {
 			isa = PBXGroup;
 			children = (
+				B27996B41A2FCFCB00FDBA9F /* 73.png */,
+				B27996B51A2FCFCB00FDBA9F /* 74.png */,
+				B27996B61A2FCFCB00FDBA9F /* 75.png */,
+				B27996B71A2FCFCB00FDBA9F /* 76.png */,
 				B2787DDC1A2AEE6000DCACBF /* 1.png */,
 				B2787DDD1A2AEE6000DCACBF /* 2.png */,
 				B2787DDE1A2AEE6000DCACBF /* 3.png */,
@@ -709,6 +727,9 @@
 				B2787DD91A2AEE1F00DCACBF /* Loading Images */,
 				B2E9E8E31A2AEC6B00BB377F /* Body Parts */,
 				296D73881A2BFEEA0067624B /* background.png */,
+				296D73941A2FA55F0067624B /* X-icon.png */,
+				296D73961A2FA5E20067624B /* close.png */,
+				296D73921A2FA4830067624B /* Ps-x-button.png */,
 				B2B8DC3C19DB5CCD00BED65D /* othermap.png */,
 				B2B8DC3D19DB5CCD00BED65D /* sportsmap.png */,
 				B2B8DC3819DB361B00BED65D /* other.png */,
@@ -1022,9 +1043,11 @@
 				B29774251984BF68000AD7B6 /* weightliftingMap.png in Resources */,
 				B297741819843EC9000AD7B6 /* sampleMapPin.png in Resources */,
 				77FE648B199051E8008724CC /* GoActivityCVCell.xib in Resources */,
+				296D73971A2FA5E20067624B /* close.png in Resources */,
 				B2787E531A2AEE6000DCACBF /* 48.png in Resources */,
 				B2D0CAD8197E2EAE00B17D32 /* TableHeaderView.xib in Resources */,
 				B2787E2C1A2AEE6000DCACBF /* 9.png in Resources */,
+				B27996B91A2FCFCB00FDBA9F /* 74.png in Resources */,
 				B2787E631A2AEE6000DCACBF /* 64.png in Resources */,
 				B2787E601A2AEE6000DCACBF /* 61.png in Resources */,
 				B2787E471A2AEE6000DCACBF /* 36.png in Resources */,
@@ -1054,6 +1077,7 @@
 				B2C39D92197E194F00039F90 /* PAWWallViewController.xib in Resources */,
 				B2D0CACC197E272400B17D32 /* login-button-small.png in Resources */,
 				B2E9E8F41A2AEC7A00BB377F /* abs_sel.png in Resources */,
+				296D73951A2FA55F0067624B /* X-icon.png in Resources */,
 				B2787E4F1A2AEE6000DCACBF /* 44.png in Resources */,
 				B297743B198582A5000AD7B6 /* runningIcon.png in Resources */,
 				B2D0CACD197E272400B17D32 /* login-button-small@2x.png in Resources */,
@@ -1115,9 +1139,11 @@
 				B2787E3F1A2AEE6000DCACBF /* 28.png in Resources */,
 				B2787E2F1A2AEE6000DCACBF /* 12.png in Resources */,
 				B2B8DC3B19DB361B00BED65D /* sports.png in Resources */,
+				B27996BA1A2FCFCB00FDBA9F /* 75.png in Resources */,
 				B2784D8A19B17AF00042A188 /* go.png in Resources */,
 				B2977439198582A5000AD7B6 /* basketballIcon.png in Resources */,
 				B2787E5C1A2AEE6000DCACBF /* 57.png in Resources */,
+				B27996B81A2FCFCB00FDBA9F /* 73.png in Resources */,
 				B2A0C7081A294A8C0091E84B /* SettingsTableViewController.xib in Resources */,
 				B2787E311A2AEE6000DCACBF /* 14.png in Resources */,
 				B2787E671A2AEE6000DCACBF /* 68.png in Resources */,
@@ -1144,6 +1170,7 @@
 				B2787E441A2AEE6000DCACBF /* 33.png in Resources */,
 				B29774461985F085000AD7B6 /* settings.png in Resources */,
 				B2787E241A2AEE6000DCACBF /* 1.png in Resources */,
+				296D73931A2FA4830067624B /* Ps-x-button.png in Resources */,
 				B2787E281A2AEE6000DCACBF /* 5.png in Resources */,
 				B2787E561A2AEE6000DCACBF /* 51.png in Resources */,
 				B297745619864133000AD7B6 /* centeredPeople.png in Resources */,
@@ -1162,6 +1189,7 @@
 				B2D6071A1A2009B600F19B34 /* GymBudEventCompletionView.xib in Resources */,
 				B2787E381A2AEE6000DCACBF /* 21.png in Resources */,
 				B2787E361A2AEE6000DCACBF /* 19.png in Resources */,
+				B27996BB1A2FCFCB00FDBA9F /* 76.png in Resources */,
 				B2C39D69197E191C00039F90 /* just_background.png in Resources */,
 				B2787E291A2AEE6000DCACBF /* 6.png in Resources */,
 				B2787E351A2AEE6000DCACBF /* 18.png in Resources */,

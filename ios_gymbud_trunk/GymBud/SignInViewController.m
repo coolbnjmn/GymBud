@@ -12,8 +12,12 @@
 #import <Parse/Parse.h>
 #import "AppDelegate.h"
 
+#define SYSTEM_VERSION_GREATER_THAN(v)              ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] == NSOrderedDescending)
+#define SYSTEM_VERSION_LESS_THAN(v)                 ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] == NSOrderedAscending)
+
 @interface SignInViewController () <PFSignUpViewControllerDelegate, UIAlertViewDelegate>
 
+@property(nonatomic) int keyboardPresent;
 @end
 
 @implementation SignInViewController
@@ -26,6 +30,22 @@
     [self.logInView setLogo:[[UIImageView alloc] initWithImage:[UIImage imageNamed:@""]]];
     self.logInView.dismissButton.hidden = YES;
     self.logInView.usernameField.placeholder = @"Email";
+    self.keyboardPresent = 0;
+    
+    if (SYSTEM_VERSION_LESS_THAN(@"8.0"))
+    {
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(keyboardWillShow)
+                                                     name:UIKeyboardWillShowNotification
+                                                   object:nil];
+        
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(keyboardWillHide)
+                                                     name:UIKeyboardWillHideNotification
+                                                   object:nil];
+
+    }
+
     // Do any additional setup after loading the view.
     
     // Create the sign up view controller
@@ -34,6 +54,24 @@
     
     // Assign our sign up controller to be displayed from the login controller
     [self setSignUpController:signUpViewController];
+}
+
+- (void) viewWillDisappear:(BOOL)animated
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillShowNotification object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillHideNotification object:nil];
+    
+}
+
+-(void)keyboardWillShow
+{
+    self.keyboardPresent = 70;
+}
+
+-(void)keyboardWillHide
+{
+    self.keyboardPresent = 0;
+    [self viewDidLayoutSubviews];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -100,13 +138,28 @@
 
 - (void)viewDidLayoutSubviews {
     [super viewDidLayoutSubviews];
+    int scalingFactor;
+    
+    if([[UIDevice currentDevice]userInterfaceIdiom]==UIUserInterfaceIdiomPhone)
+    {
+        if ([[UIScreen mainScreen] bounds].size.height >= 568)
+        {
+            //iphone 5
+            scalingFactor = 0 + self.keyboardPresent;
+        }
+        else
+        {
+            //iphone 3.5 inch screen iphone 3g,4s
+            scalingFactor = 60 + self.keyboardPresent;
+        }
+    }
     
     // Set frame for elements
-    [self.logInView.signUpButton setFrame:CGRectMake(35.0f, 430.0f, 250.0f, 40.0f)];
-    [self.logInView.usernameField setFrame:CGRectMake(0.0f, 225.0f, 360.0f, 50.0f)];
-    [self.logInView.passwordField setFrame:CGRectMake(0.0f, 265.0f, 360.0f, 50.0f)];
-    [self.logInView.logInButton setFrame:CGRectMake(0.0f, 330.0f, self.view.frame.size.width, 50.0f)];
-    [self.logInView.passwordForgottenButton setFrame:CGRectMake(0.0f, 380.0f, self.view.frame.size.width, 50.0f)];
+    [self.logInView.usernameField setFrame:CGRectMake(0.0f, 285.0f-scalingFactor, 360.0f, 50.0f)];
+    [self.logInView.passwordField setFrame:CGRectMake(0.0f, 325.0f-scalingFactor, 360.0f, 50.0f)];
+    [self.logInView.logInButton setFrame:CGRectMake(0.0f, 385.0f-scalingFactor, self.view.frame.size.width, 50.0f)];
+    [self.logInView.passwordForgottenButton setFrame:CGRectMake(0.0f, 445.0f-scalingFactor, self.view.frame.size.width, 50.0f)];
+    [self.logInView.signUpButton setFrame:CGRectMake(35.0f, 490.0f-scalingFactor, 250.0f, 40.0f)];
     [self.logInView.passwordForgottenButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     
 }
