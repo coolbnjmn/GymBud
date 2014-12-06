@@ -165,9 +165,10 @@
         case 2:
         {
             // edit profile
-            cell.textLabel.text = @"Enable Text Messaging";
+            cell.textLabel.text = @"Enable Email Notifications";
             UISwitch *toggleNotifications = [[UISwitch alloc] init];
-            [toggleNotifications setOn:YES];
+            [toggleNotifications setOn:NO];
+            [toggleNotifications setEnabled:NO];
             [toggleNotifications addTarget:self action:@selector(pushToggled:) forControlEvents:UIControlEventValueChanged];
             cell.accessoryView = toggleNotifications;
         }
@@ -292,30 +293,31 @@
 
 - (void)pushToggled:(id)sender
 {
-    if ([sender isKindOfClass:[UISwitch class]])
-    {
-        UISwitch *pushNot = (UISwitch *) sender;
-        NSInteger yesOrNo = [pushNot isOn];
-        if(yesOrNo == 0)
-        {
-            if ([[UIApplication sharedApplication] respondsToSelector:@selector(registerUserNotificationSettings:)])
-            {
-                // use registerUserNotificationSettings
-                [[UIApplication sharedApplication] registerUserNotificationSettings:[UIUserNotificationSettings settingsForTypes:(UIUserNotificationTypeSound | UIUserNotificationTypeAlert | UIUserNotificationTypeBadge) categories:nil]];
-            } else
-            {
-                // use registerForRemoteNotifications
-                [[UIApplication sharedApplication] registerForRemoteNotificationTypes:UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeAlert | UIRemoteNotificationTypeSound];
-            }
-        }
-        else
-        {
-            [[UIApplication sharedApplication] unregisterForRemoteNotifications];
-        }
-        Mixpanel *mixpanel = [Mixpanel sharedInstance];
-        [mixpanel track:@"SettingsVC TogglePush" properties:@{
-                                                          }];
-    }
+    
+//    if ([sender isKindOfClass:[UISwitch class]])
+//    {
+//        UISwitch *pushNot = (UISwitch *) sender;
+//        NSInteger yesOrNo = [pushNot isOn];
+//        if(yesOrNo == 0)
+//        {
+//            if ([[UIApplication sharedApplication] respondsToSelector:@selector(registerUserNotificationSettings:)])
+//            {
+//                // use registerUserNotificationSettings
+//                [[UIApplication sharedApplication] registerUserNotificationSettings:[UIUserNotificationSettings settingsForTypes:(UIUserNotificationTypeSound | UIUserNotificationTypeAlert | UIUserNotificationTypeBadge) categories:nil]];
+//            } else
+//            {
+//                // use registerForRemoteNotifications
+//                [[UIApplication sharedApplication] registerForRemoteNotificationTypes:UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeAlert | UIRemoteNotificationTypeSound];
+//            }
+//        }
+//        else
+//        {
+//            [[UIApplication sharedApplication] unregisterForRemoteNotifications];
+//        }
+//        Mixpanel *mixpanel = [Mixpanel sharedInstance];
+//        [mixpanel track:@"SettingsVC TogglePush" properties:@{
+//                                                          }];
+//    }
 }
 
 - (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data {
