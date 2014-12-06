@@ -58,6 +58,11 @@
         }
     }
     
+    for(PFObject *i in self.objects) {
+        [i setObject:[NSNumber numberWithBool:NO] forKey:@"unread"];
+        [i saveInBackground];
+    }
+    
     
 //
 //    [self.HUD hide:YES];
@@ -428,7 +433,13 @@
     } else {
         name = [currentUser objectForKey:@"profile"][@"name"];
     }
-    [push setMessage:[NSString stringWithFormat:@"Message From: %@", name]];
+    
+    NSMutableDictionary *data = [[NSMutableDictionary alloc] init];
+    [data setObject:[NSString stringWithFormat:@"%@ messaged you, see now?", name] forKey:@"alert"];
+    [data setObject:[PFUser currentUser] forKey:@"fromUser"];
+    [push setData:data];
+
+//    [push setMessage:[NSString stringWithFormat:@"Message From: %@", name]];
     [push sendPushInBackground];
 
 }
