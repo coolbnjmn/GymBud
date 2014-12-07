@@ -43,6 +43,7 @@
     // Initialize the library with your
     [Mixpanel sharedInstanceWithToken:MIXPANEL_TOKEN];
     
+
     if ([application respondsToSelector:@selector(registerUserNotificationSettings:)]) {
         // use registerUserNotificationSettings
         [[UIApplication sharedApplication] registerUserNotificationSettings:[UIUserNotificationSettings settingsForTypes:(UIUserNotificationTypeSound | UIUserNotificationTypeAlert | UIUserNotificationTypeBadge) categories:nil]];
@@ -53,7 +54,13 @@
     
     PFUser *currentUser = [PFUser currentUser];
 //    [currentUser fetch];
-    
+    Mixpanel *mix = [Mixpanel sharedInstance];
+    [mix identify:[currentUser objectId]];
+    NSMutableDictionary *dictionary = [[NSMutableDictionary alloc] initWithDictionary:currentUser[@"gymbudProfile"]];
+    [dictionary removeObjectForKey:@"profilePicture"];
+    [dictionary setObject:currentUser[@"email"] forKey:@"$email"];
+    [[mix people] set:dictionary];
+
     NSLog(@"current user %@", currentUser);
     
     if (![[currentUser objectForKey:@"emailVerified"] boolValue] && currentUser)
@@ -161,6 +168,22 @@
                                                    otherButtonItems:goodItem, nil];
             [alert show];
             
+        } else if([notificationPayload objectForKey:@"fromUser"]) {
+            NSString *message = [notificationPayload objectForKey:@"aps"][@"alert"];
+            
+            RIButtonItem *cancelItem = [RIButtonItem itemWithLabel:@"Cancel" action:^{
+            }];
+            
+            RIButtonItem *goodItem = [RIButtonItem itemWithLabel:@"Show" action:^{
+                [self.window rootViewController].tabBarController.selectedIndex = 1;
+                [[self.window rootViewController].tabBarController.viewControllers[1] popToRootViewControllerAnimated:YES];
+            }];
+            
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle: message
+                                                            message: nil
+                                                   cancelButtonItem:cancelItem
+                                                   otherButtonItems:goodItem, nil];
+            [alert show];
         } else {
             [PFPush handlePush:notificationPayload];
         }
@@ -385,6 +408,22 @@ didReceiveRemoteNotification:(NSDictionary *)userInfo {
                                                otherButtonItems:goodItem, nil];
         [alert show];
 
+    } else if([userInfo objectForKey:@"fromUser"]) {
+        NSString *message = [userInfo objectForKey:@"aps"][@"alert"];
+        
+        RIButtonItem *cancelItem = [RIButtonItem itemWithLabel:@"Cancel" action:^{
+        }];
+        
+        RIButtonItem *goodItem = [RIButtonItem itemWithLabel:@"Show" action:^{
+            [self.window rootViewController].tabBarController.selectedIndex = 1;
+            [((UITabBarController *)[self.window rootViewController]).viewControllers[1] popToRootViewControllerAnimated:YES];
+        }];
+        
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle: message
+                                                        message: nil
+                                               cancelButtonItem:cancelItem
+                                               otherButtonItems:goodItem, nil];
+        [alert show];
     } else {
         [PFPush handlePush:userInfo];
     }

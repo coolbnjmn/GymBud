@@ -93,6 +93,9 @@ static NSString * const reuseIdentifier = @"goActivityCell";
     }
     cell.goActivityTextLabel.text = [kGBBodyPartArray objectAtIndex:indexPath.row];
     cell.backgroundColor = [UIColor clearColor];
+    cell.goActivityTextLabel.font = [UIFont fontWithName:@"MagistralATT-Bold" size:18];
+    cell.goActivityTextLabel.textColor = kGymBudGold;
+
     return cell;
 }
 

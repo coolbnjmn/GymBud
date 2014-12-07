@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "9B04769AC6E84E198D5F6744"
+               BlueprintIdentifier = "F7607560290FBB00929496E4"
                BuildableName = "libPods-GymBud-AXRatingView.a"
                BlueprintName = "Pods-GymBud-AXRatingView"
                ReferencedContainer = "container:Pods.xcodeproj">

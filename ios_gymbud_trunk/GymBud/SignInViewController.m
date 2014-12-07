@@ -11,6 +11,7 @@
 #import "GymBudConstants.h"
 #import <Parse/Parse.h>
 #import "AppDelegate.h"
+#import <Mixpanel/Mixpanel.h>
 
 #define SYSTEM_VERSION_GREATER_THAN(v)              ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] == NSOrderedDescending)
 #define SYSTEM_VERSION_LESS_THAN(v)                 ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] == NSOrderedAscending)
@@ -85,7 +86,8 @@
 {
     NSLog(@"successfully logged in");
     // check verified email setting
-    
+    Mixpanel *mix = [Mixpanel sharedInstance];
+    [mix identify:[user objectId]];
     if (![[user objectForKey:@"emailVerified"] boolValue])
     {
         // Refresh to make sure the user did not recently verify
@@ -105,6 +107,10 @@
                                                          bundle:[NSBundle mainBundle]];
     
     UITabBarController *root2ViewController = [storyboard instantiateViewControllerWithIdentifier:@"tabbar"];
+    NSMutableDictionary *dictionary = [[NSMutableDictionary alloc] initWithDictionary:user[@"gymbudProfile"]];
+    [dictionary removeObjectForKey:@"profilePicture"];
+    [dictionary setObject:user[@"email"] forKey:@"$email"];
+    [[mix people] set:dictionary];
     
     AppDelegate *appDelegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
     
@@ -190,7 +196,7 @@
     // uncomment this code when the following parse bug has been addressed:
     // https://github.com/ParsePlatform/ParseUI-iOS/pull/6
     
-    /*
+    
     NSString *errorMsg;
     
     NSString *email = [info objectForKey:@"email"];
@@ -216,7 +222,6 @@
                           cancelButtonTitle:@"ok"
                           otherButtonTitles:nil] show];
     }
-    */
     return emailAddressIsValid;
 }
 
