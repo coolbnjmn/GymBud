@@ -43,6 +43,7 @@
     // Initialize the library with your
     [Mixpanel sharedInstanceWithToken:MIXPANEL_TOKEN];
     
+
     if ([application respondsToSelector:@selector(registerUserNotificationSettings:)]) {
         // use registerUserNotificationSettings
         [[UIApplication sharedApplication] registerUserNotificationSettings:[UIUserNotificationSettings settingsForTypes:(UIUserNotificationTypeSound | UIUserNotificationTypeAlert | UIUserNotificationTypeBadge) categories:nil]];
@@ -53,7 +54,13 @@
     
     PFUser *currentUser = [PFUser currentUser];
 //    [currentUser fetch];
-    
+    Mixpanel *mix = [Mixpanel sharedInstance];
+    [mix identify:[currentUser objectId]];
+    NSMutableDictionary *dictionary = [[NSMutableDictionary alloc] initWithDictionary:currentUser[@"gymbudProfile"]];
+    [dictionary removeObjectForKey:@"profilePicture"];
+    [dictionary setObject:currentUser[@"email"] forKey:@"$email"];
+    [[mix people] set:dictionary];
+
     NSLog(@"current user %@", currentUser);
     
     if (![[currentUser objectForKey:@"emailVerified"] boolValue] && currentUser)
