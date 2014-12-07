@@ -14,6 +14,16 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>Pods-GymBud-JSQMessagesViewController.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>Pods-GymBud-JSQSystemSoundPlayer.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>Pods-GymBud-MBProgressHUD.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -47,42 +57,52 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>05027410373D4153917BC241</key>
+		<key>0C44638AD286CFF05DD06035</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>55D73907F52B4624B788535E</key>
+		<key>1227A1588A32726EE628A2CD</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>5C66BE63F0C94CE9A9DC8B59</key>
+		<key>2D289C1C8CEC523DE9332A6D</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>76F48587CB7348D1A072F763</key>
+		<key>36C15D53A3660497531DCDEB</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>773D91D3A58448ADB5383397</key>
+		<key>75687FEB84A745E2FCB9AC25</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>9204A055430C487E9B103182</key>
+		<key>8D94DA40B2316AF8CE97AF23</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>9B04769AC6E84E198D5F6744</key>
+		<key>C4B3AB13BA80ED73F52807D0</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>A5297884821A4C8F8234EFE8</key>
+		<key>D9F0041B18E5B65A62B17746</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>E97309F38504E431391B21E1</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>F7607560290FBB00929496E4</key>
 		<dict>
 			<key>primary</key>
 			<true/>

@@ -43,7 +43,7 @@
     [[UITabBarItem appearance] setTitleTextAttributes:@{NSFontAttributeName : [UIFont fontWithName:@"HelveticaNeue-Bold" size:10.0f],
                                                         NSForegroundColorAttributeName : [UIColor colorWithRed:44/255.0f green:62/255.0f blue:80/255.0f alpha:1.0f]
                                                         } forState:UIControlStateNormal];
-    self.searchBar.barTintColor = [UIColor colorWithRed:60/255.0f green:151/255.0f blue:211/255.0f alpha:1.0f];
+    self.searchBar.barTintColor = kGymBudDarkBlue;
 
     self.searchResults = [NSMutableArray array];
     [super viewDidLoad];
@@ -54,9 +54,9 @@
     [self.searchResults removeAllObjects];
     
     PFQuery *query = [PFUser query];
-    
+    [query setLimit:1000];
     NSArray *results  = [query findObjects];
-    NSMutableArray *actualResults = [[NSMutableArray alloc] initWithCapacity:10];
+    NSMutableArray *actualResults = [[NSMutableArray alloc] initWithCapacity:100];
     
     for (PFUser *user in results) {
         NSString *name;
@@ -112,7 +112,7 @@
     
     PFQuery *query = [PFUser query];
     [query setCachePolicy:kPFCachePolicyNetworkOnly];
-    
+    [query orderByDescending:@"updatedAt"];
     self.HUD = [[MBProgressHUD alloc] initWithView:self.view];
     [self.view addSubview:self.HUD];
     UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, kLoadingAnimationWidth, kLoadingAnimationHeight)];

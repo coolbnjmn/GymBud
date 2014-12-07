@@ -196,7 +196,7 @@
     // uncomment this code when the following parse bug has been addressed:
     // https://github.com/ParsePlatform/ParseUI-iOS/pull/6
     
-    /*
+    
     NSString *errorMsg;
     
     NSString *email = [info objectForKey:@"email"];
@@ -222,7 +222,6 @@
                           cancelButtonTitle:@"ok"
                           otherButtonTitles:nil] show];
     }
-    */
     return emailAddressIsValid;
 }
 

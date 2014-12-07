@@ -168,6 +168,22 @@
                                                    otherButtonItems:goodItem, nil];
             [alert show];
             
+        } else if([notificationPayload objectForKey:@"fromUser"]) {
+            NSString *message = [notificationPayload objectForKey:@"aps"][@"alert"];
+            
+            RIButtonItem *cancelItem = [RIButtonItem itemWithLabel:@"Cancel" action:^{
+            }];
+            
+            RIButtonItem *goodItem = [RIButtonItem itemWithLabel:@"Show" action:^{
+                [self.window rootViewController].tabBarController.selectedIndex = 1;
+                [[self.window rootViewController].tabBarController.viewControllers[1] popToRootViewControllerAnimated:YES];
+            }];
+            
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle: message
+                                                            message: nil
+                                                   cancelButtonItem:cancelItem
+                                                   otherButtonItems:goodItem, nil];
+            [alert show];
         } else {
             [PFPush handlePush:notificationPayload];
         }
@@ -392,6 +408,22 @@ didReceiveRemoteNotification:(NSDictionary *)userInfo {
                                                otherButtonItems:goodItem, nil];
         [alert show];
 
+    } else if([userInfo objectForKey:@"fromUser"]) {
+        NSString *message = [userInfo objectForKey:@"aps"][@"alert"];
+        
+        RIButtonItem *cancelItem = [RIButtonItem itemWithLabel:@"Cancel" action:^{
+        }];
+        
+        RIButtonItem *goodItem = [RIButtonItem itemWithLabel:@"Show" action:^{
+            [self.window rootViewController].tabBarController.selectedIndex = 1;
+            [((UITabBarController *)[self.window rootViewController]).viewControllers[1] popToRootViewControllerAnimated:YES];
+        }];
+        
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle: message
+                                                        message: nil
+                                               cancelButtonItem:cancelItem
+                                               otherButtonItems:goodItem, nil];
+        [alert show];
     } else {
         [PFPush handlePush:userInfo];
     }

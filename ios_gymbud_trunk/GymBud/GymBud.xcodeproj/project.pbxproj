@@ -40,6 +40,9 @@
 		B240D9A31A1F153B00374713 /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B2C39D9D197E19A900039F90 /* Parse.framework */; };
 		B240D9A81A1F153B00374713 /* ParseFacebookUtils.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B240D9A51A1F153B00374713 /* ParseFacebookUtils.framework */; };
 		B240D9A91A1F153B00374713 /* ParseUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B240D9A61A1F153B00374713 /* ParseUI.framework */; };
+		B258FEE61A2F9315000153BE /* BubbleChatTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = B258FEE41A2F9315000153BE /* BubbleChatTVC.m */; };
+		B258FEE71A2F9315000153BE /* BubbleChatTVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = B258FEE51A2F9315000153BE /* BubbleChatTVC.xib */; };
+		B25CBEFE1A3271E0004B318C /* About.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B25CBEFD1A3271E0004B318C /* About.storyboard */; };
 		B2722DD919AD832900FEC2AF /* GymBudEventsTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = B2722DD819AD832900FEC2AF /* GymBudEventsTVC.m */; };
 		B2722DE219AD86F800FEC2AF /* GymBudEventsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B2722DE019AD86F800FEC2AF /* GymBudEventsCell.m */; };
 		B2722DE319AD86F800FEC2AF /* GymBudEventsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B2722DE119AD86F800FEC2AF /* GymBudEventsCell.xib */; };
@@ -261,6 +264,7 @@
 		296D739E1A32C7220067624B /* EditPITableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditPITableViewController.m; sourceTree = "<group>"; };
 		29DAA69C1A25438200264253 /* GymBudVC.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = GymBudVC.storyboard; sourceTree = "<group>"; };
 		48EE337A63E5439BA42E30F1 /* libPods-GymBud.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-GymBud.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		4BC2A9230B6CA001F1E15EB0 /* Pods-GymBud.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GymBud.debug.xcconfig"; path = "Pods/Target Support Files/Pods-GymBud/Pods-GymBud.debug.xcconfig"; sourceTree = "<group>"; };
 		77F13143198EEDDD00576708 /* libPods-GymBud-RSDayFlow.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libPods-GymBud-RSDayFlow.a"; path = "Pods/build/Debug-iphoneos/libPods-GymBud-RSDayFlow.a"; sourceTree = "<group>"; };
 		77F13145198EEE0000576708 /* RSDatePickerVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RSDatePickerVC.h; path = GymBud/Controllers/RSDatePickerVC.h; sourceTree = "<group>"; };
 		77F13146198EEE0000576708 /* RSDatePickerVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RSDatePickerVC.m; path = GymBud/Controllers/RSDatePickerVC.m; sourceTree = "<group>"; };
@@ -278,6 +282,7 @@
 		77FE648D1990545A008724CC /* GoActivityChosenVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GoActivityChosenVC.m; path = GymBud/Controllers/GoActivityChosenVC.m; sourceTree = "<group>"; };
 		77FE648F1990A924008724CC /* GoActivityCreateEventVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GoActivityCreateEventVC.h; path = GymBud/Controllers/GoActivityCreateEventVC.h; sourceTree = "<group>"; };
 		77FE64901990A924008724CC /* GoActivityCreateEventVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GoActivityCreateEventVC.m; path = GymBud/Controllers/GoActivityCreateEventVC.m; sourceTree = "<group>"; };
+		85DC9B4FA3E93334639B5070 /* Pods-GymBud.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GymBud.release.xcconfig"; path = "Pods/Target Support Files/Pods-GymBud/Pods-GymBud.release.xcconfig"; sourceTree = "<group>"; };
 		B2011D1019C8019300D65275 /* FilterStoryboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = FilterStoryboard.storyboard; path = GymBud/Views/FilterStoryboard.storyboard; sourceTree = "<group>"; };
 		B2011D1219C91C3500D65275 /* GBEventsFilterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GBEventsFilterViewController.h; path = GymBud/Controllers/GBEventsFilterViewController.h; sourceTree = "<group>"; };
 		B2011D1319C91C3500D65275 /* GBEventsFilterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GBEventsFilterViewController.m; path = GymBud/Controllers/GBEventsFilterViewController.m; sourceTree = "<group>"; };
@@ -291,6 +296,10 @@
 		B240D9A41A1F153B00374713 /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Bolts.framework; path = GymBud/Frameworks/Bolts.framework; sourceTree = "<group>"; };
 		B240D9A51A1F153B00374713 /* ParseFacebookUtils.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ParseFacebookUtils.framework; path = GymBud/Frameworks/ParseFacebookUtils.framework; sourceTree = "<group>"; };
 		B240D9A61A1F153B00374713 /* ParseUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ParseUI.framework; path = GymBud/Frameworks/ParseUI.framework; sourceTree = "<group>"; };
+		B258FEE31A2F9315000153BE /* BubbleChatTVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BubbleChatTVC.h; path = GymBud/Controllers/BubbleChatTVC.h; sourceTree = "<group>"; };
+		B258FEE41A2F9315000153BE /* BubbleChatTVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BubbleChatTVC.m; path = GymBud/Controllers/BubbleChatTVC.m; sourceTree = "<group>"; };
+		B258FEE51A2F9315000153BE /* BubbleChatTVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = BubbleChatTVC.xib; path = GymBud/Controllers/BubbleChatTVC.xib; sourceTree = "<group>"; };
+		B25CBEFD1A3271E0004B318C /* About.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = About.storyboard; path = GymBud/Views/About.storyboard; sourceTree = "<group>"; };
 		B2722DD719AD832900FEC2AF /* GymBudEventsTVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GymBudEventsTVC.h; path = GymBud/Controllers/GymBudEventsTVC.h; sourceTree = "<group>"; };
 		B2722DD819AD832900FEC2AF /* GymBudEventsTVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GymBudEventsTVC.m; path = GymBud/Controllers/GymBudEventsTVC.m; sourceTree = "<group>"; };
 		B2722DDF19AD86F800FEC2AF /* GymBudEventsCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GymBudEventsCell.h; path = GymBud/Views/GymBudEventsCell.h; sourceTree = "<group>"; };
@@ -510,7 +519,6 @@
 		B2E9E8F31A2AEC7A00BB377F /* shoulder.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = shoulder.png; path = "GymBud/Assets/Body Parts/shoulder.png"; sourceTree = "<group>"; };
 		B2FCFBE719CAC15C0078C68D /* EPBasicInfoVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EPBasicInfoVC.h; path = GymBud/Controllers/EPBasicInfoVC.h; sourceTree = "<group>"; };
 		B2FCFBE819CAC15C0078C68D /* EPBasicInfoVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EPBasicInfoVC.m; path = GymBud/Controllers/EPBasicInfoVC.m; sourceTree = "<group>"; };
-		E5F4F985088842DBBF422DE7 /* Pods-GymBud.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GymBud.xcconfig"; path = "Pods/Pods-GymBud.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -549,6 +557,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		18BB36AD8A8C3FAEDC015BF2 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				4BC2A9230B6CA001F1E15EB0 /* Pods-GymBud.debug.xcconfig */,
+				85DC9B4FA3E93334639B5070 /* Pods-GymBud.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		B2232B6C1A26582600FBB97F /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
@@ -652,7 +669,7 @@
 				B2C39D4B197E172600039F90 /* GymBudTests */,
 				B2C39D33197E172600039F90 /* Products */,
 				B2C39DA0197E19B300039F90 /* Frameworks */,
-				E5F4F985088842DBBF422DE7 /* Pods-GymBud.xcconfig */,
+				18BB36AD8A8C3FAEDC015BF2 /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -835,6 +852,9 @@
 				296D738D1A2D23870067624B /* SignUpViewController.m */,
 				296D73861A2BF87D0067624B /* SignIn.storyboard */,
 				296D738A1A2CA78A0067624B /* InitialView.storyboard */,
+				B258FEE31A2F9315000153BE /* BubbleChatTVC.h */,
+				B258FEE41A2F9315000153BE /* BubbleChatTVC.m */,
+				B258FEE51A2F9315000153BE /* BubbleChatTVC.xib */,
 			);
 			name = Controllers;
 			path = ..;
@@ -875,6 +895,7 @@
 				B2D607161A2008A500F19B34 /* GymBudEventCompletionView.h */,
 				B2D607171A2008A500F19B34 /* GymBudEventCompletionView.m */,
 				B2D607191A2009B600F19B34 /* GymBudEventCompletionView.xib */,
+				B25CBEFD1A3271E0004B318C /* About.storyboard */,
 			);
 			name = Views;
 			path = ..;
@@ -1073,6 +1094,7 @@
 				29DAA69D1A25438200264253 /* GymBudVC.storyboard in Resources */,
 				B2E9E9001A2AEC7A00BB377F /* leg_sel.png in Resources */,
 				B2E9E8FE1A2AEC7A00BB377F /* chest_sel.png in Resources */,
+				B258FEE71A2F9315000153BE /* BubbleChatTVC.xib in Resources */,
 				B2787E5D1A2AEE6000DCACBF /* 58.png in Resources */,
 				B2787E3A1A2AEE6000DCACBF /* 23.png in Resources */,
 				B2787E661A2AEE6000DCACBF /* 67.png in Resources */,
@@ -1082,6 +1104,7 @@
 				B2787E681A2AEE6000DCACBF /* 69.png in Resources */,
 				B297741619820C4C000AD7B6 /* tableView.png in Resources */,
 				B2787E591A2AEE6000DCACBF /* 54.png in Resources */,
+				B25CBEFE1A3271E0004B318C /* About.storyboard in Resources */,
 				B297743C198582A5000AD7B6 /* swimmingIcon.png in Resources */,
 				B2787E411A2AEE6000DCACBF /* 30.png in Resources */,
 				B2787E2D1A2AEE6000DCACBF /* 10.png in Resources */,
@@ -1205,7 +1228,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Pods-GymBud-resources.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-GymBud/Pods-GymBud-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		A56C540ABC91495D94309FAE /* Check Pods Manifest.lock */ = {
@@ -1265,6 +1288,7 @@
 				77F13147198EEE0000576708 /* RSDatePickerVC.m in Sources */,
 				B2784DA019B2B34E0042A188 /* GBBodyPartCVC.m in Sources */,
 				B2C39D94197E194F00039F90 /* ViewMessageVC.m in Sources */,
+				B258FEE61A2F9315000153BE /* BubbleChatTVC.m in Sources */,
 				B2B8DC3519DB212300BED65D /* GymBudDetailsVC.m in Sources */,
 				B2C39D9A197E197E00039F90 /* PAWPost.m in Sources */,
 				B2D0CAD1197E2BB700B17D32 /* FindUserTVC.m in Sources */,
@@ -1384,7 +1408,7 @@
 		};
 		B2C39D53197E172600039F90 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = E5F4F985088842DBBF422DE7 /* Pods-GymBud.xcconfig */;
+			baseConfigurationReference = 4BC2A9230B6CA001F1E15EB0 /* Pods-GymBud.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon2;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage2;
@@ -1409,7 +1433,7 @@
 		};
 		B2C39D54197E172600039F90 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = E5F4F985088842DBBF422DE7 /* Pods-GymBud.xcconfig */;
+			baseConfigurationReference = 85DC9B4FA3E93334639B5070 /* Pods-GymBud.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon2;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage2;
