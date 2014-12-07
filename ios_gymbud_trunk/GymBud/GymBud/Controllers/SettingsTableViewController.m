@@ -104,7 +104,29 @@
         {
             // edit profile
             PFUser *currentUser = [PFUser currentUser];
-            
+            NSLog(@"dictionary = %@", currentUser);
+            /*if ([currentUser objectForKey:@"profile"][@"pictureURL"])
+            {
+                if (self.loadedImage == YES)
+                {
+                    cell.imageView.image = [UIImage imageWithData:self.imageData];
+                }
+                else
+                {
+                    NSURL *pictureURL = [NSURL URLWithString:[currentUser objectForKey:@"profile"][@"pictureURL"]];
+                    
+                    NSMutableURLRequest *urlRequest = [NSMutableURLRequest requestWithURL:pictureURL
+                                                                              cachePolicy:NSURLRequestUseProtocolCachePolicy
+                                                                          timeoutInterval:2.0f];
+                    // Run network request asynchronously
+                    NSURLConnection *urlConnection = [[NSURLConnection alloc] initWithRequest:urlRequest delegate:self];
+                    if (!urlConnection)
+                    {
+                        NSLog(@"Failed to download picture");
+                    }
+                }
+            }*/
+
             if ([currentUser objectForKey:@"gymbudProfile"][@"profilePicture"])
             {
                 PFFile *theImage = [currentUser objectForKey:@"gymbudProfile"][@"profilePicture"];
@@ -118,30 +140,6 @@
                         weakCell.imageView.image = [UIImage imageWithData:data];
                     NSLog(@"image is %@", weakCell.imageView.image);
                 }];
-            }
-            else
-            {
-                if ([currentUser objectForKey:@"profile"][@"pictureURL"])
-                {
-                    if (self.loadedImage == YES)
-                    {
-                        cell.imageView.image = [UIImage imageWithData:self.imageData];
-                    }
-                    else
-                    {
-                        NSURL *pictureURL = [NSURL URLWithString:[currentUser objectForKey:@"profile"][@"pictureURL"]];
-                        
-                        NSMutableURLRequest *urlRequest = [NSMutableURLRequest requestWithURL:pictureURL
-                                                                                  cachePolicy:NSURLRequestUseProtocolCachePolicy
-                                                                              timeoutInterval:2.0f];
-                        // Run network request asynchronously
-                        NSURLConnection *urlConnection = [[NSURLConnection alloc] initWithRequest:urlRequest delegate:self];
-                        if (!urlConnection)
-                        {
-                            NSLog(@"Failed to download picture");
-                        }
-                        }
-                }
             }
 
             cell.textLabel.text = [NSString stringWithFormat:@"%@", [PFUser currentUser][@"gymbudProfile"][@"name"]];

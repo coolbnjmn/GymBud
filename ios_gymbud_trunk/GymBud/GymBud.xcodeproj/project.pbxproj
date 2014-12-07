@@ -20,6 +20,7 @@
 		296D739C1A3243AF0067624B /* facebookround.png in Resources */ = {isa = PBXBuildFile; fileRef = 296D739B1A3243AF0067624B /* facebookround.png */; };
 		296D739F1A32C7220067624B /* EditPITableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 296D739E1A32C7220067624B /* EditPITableViewController.m */; };
 		29DAA69D1A25438200264253 /* GymBudVC.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 29DAA69C1A25438200264253 /* GymBudVC.storyboard */; };
+		29E4A5121A3407550023B22F /* greenplus.png in Resources */ = {isa = PBXBuildFile; fileRef = 29E4A5111A3407550023B22F /* greenplus.png */; };
 		77F13147198EEE0000576708 /* RSDatePickerVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 77F13146198EEE0000576708 /* RSDatePickerVC.m */; };
 		77FD41C51993EEF20017E8D5 /* GymBudEventModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 77FD41C41993EEF20017E8D5 /* GymBudEventModel.m */; };
 		77FE647B198EF296008724CC /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 77FE647A198EF296008724CC /* Social.framework */; };
@@ -260,6 +261,7 @@
 		296D739D1A32C7220067624B /* EditPITableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditPITableViewController.h; sourceTree = "<group>"; };
 		296D739E1A32C7220067624B /* EditPITableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditPITableViewController.m; sourceTree = "<group>"; };
 		29DAA69C1A25438200264253 /* GymBudVC.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = GymBudVC.storyboard; sourceTree = "<group>"; };
+		29E4A5111A3407550023B22F /* greenplus.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = greenplus.png; sourceTree = "<group>"; };
 		48EE337A63E5439BA42E30F1 /* libPods-GymBud.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-GymBud.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		77F13143198EEDDD00576708 /* libPods-GymBud-RSDayFlow.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libPods-GymBud-RSDayFlow.a"; path = "Pods/build/Debug-iphoneos/libPods-GymBud-RSDayFlow.a"; sourceTree = "<group>"; };
 		77F13145198EEE0000576708 /* RSDatePickerVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RSDatePickerVC.h; path = GymBud/Controllers/RSDatePickerVC.h; sourceTree = "<group>"; };
@@ -713,6 +715,7 @@
 				B2E9E8E31A2AEC6B00BB377F /* Body Parts */,
 				296D73881A2BFEEA0067624B /* background.png */,
 				296D73941A2FA55F0067624B /* X-icon.png */,
+				29E4A5111A3407550023B22F /* greenplus.png */,
 				296D73961A2FA5E20067624B /* close.png */,
 				296D73921A2FA4830067624B /* Ps-x-button.png */,
 				B2B8DC3C19DB5CCD00BED65D /* othermap.png */,
@@ -981,7 +984,7 @@
 				TargetAttributes = {
 					B2C39D31197E172600039F90 = {
 						CreatedOnToolsVersion = 6.0;
-						DevelopmentTeam = M6Y34M2A35;
+						DevelopmentTeam = 8E2G6A5GQK;
 					};
 					B2C39D47197E172600039F90 = {
 						CreatedOnToolsVersion = 6.0;
@@ -1093,6 +1096,7 @@
 				B297745419864133000AD7B6 /* centeredGear.png in Resources */,
 				B2722DE319AD86F800FEC2AF /* GymBudEventsCell.xib in Resources */,
 				B2787E271A2AEE6000DCACBF /* 4.png in Resources */,
+				29E4A5121A3407550023B22F /* greenplus.png in Resources */,
 				B297743D198582A5000AD7B6 /* weightliftingIcon.png in Resources */,
 				29512D6B1A2963250002C82E /* SettingsTableViewController.xib in Resources */,
 				B2787E641A2AEE6000DCACBF /* 65.png in Resources */,

@@ -117,6 +117,9 @@
 {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"info" forIndexPath:indexPath];
     
+    UIImageView *iv = (UIImageView*)[cell viewWithTag:10];
+    iv.image = [UIImage imageNamed:@"greenplus.png"];
+    
     // Configure the cell...
     switch (indexPath.row)
     {
@@ -124,7 +127,9 @@
         {
             UITextField *tf = (UITextField*)[cell viewWithTag:1];
             if ([self.name length] == 0)
-                tf.placeholder = @"Name";
+            {
+                tf.attributedPlaceholder = [[NSAttributedString alloc] initWithString:@"Name" attributes:@{NSForegroundColorAttributeName: [UIColor blackColor]}];
+            }
             else
             {
                 tf.text = self.name;
@@ -139,7 +144,7 @@
         {
             UITextField *tf = (UITextField*)[cell viewWithTag:1];
             if (self.age == 0)
-                tf.placeholder = @"Age";
+                tf.attributedPlaceholder = [[NSAttributedString alloc] initWithString:@"Age" attributes:@{NSForegroundColorAttributeName: [UIColor blackColor]}];
             else
             {
                 tf.text = [NSString stringWithFormat:@"%ld", (long)self.age];
@@ -159,7 +164,7 @@
         {
             UITextField *tf = (UITextField*)[cell viewWithTag:1];
             if ([self.gender length] == 0)
-                tf.placeholder = @"Gender";
+                tf.attributedPlaceholder = [[NSAttributedString alloc] initWithString:@"Gender" attributes:@{NSForegroundColorAttributeName: [UIColor blackColor]}];
             else
             {
                 tf.text = self.gender;

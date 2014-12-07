@@ -73,7 +73,7 @@
     if (indexPath.section == 0 && indexPath.row == 0)
         return 110;
     else if (indexPath.section == 1)
-        return 100;
+        return 80;
     else
         return 80;
 }
@@ -125,8 +125,14 @@
                 img.layer.cornerRadius = 36.0f;
                 img.layer.masksToBounds = YES;
                 PFUser *currentUser = [PFUser currentUser];
-                
-                if ([currentUser objectForKey:@"gymbudProfile"][@"profilePicture"])
+                NSLog(@"current user is %@", [PFUser currentUser]);
+
+                if (self.loadedImage == YES)
+                {
+                    img.image = [UIImage imageWithData:self.imageData];
+                    self.profileImage = [UIImage imageWithData:self.imageData];
+                }
+                else if ([currentUser objectForKey:@"gymbudProfile"][@"profilePicture"])
                 {
                     PFFile *theImage = [currentUser objectForKey:@"gymbudProfile"][@"profilePicture"];
                     NSLog(@"the image %@", theImage);
@@ -147,37 +153,12 @@
                         NSLog(@"image is %@", weakCell.imageView.image);
                     }];
                 }
-                else
-                {
-                    if ([currentUser objectForKey:@"profile"][@"pictureURL"])
-                    {
-                        if (self.loadedImage == YES)
-                        {
-                            img.image = [UIImage imageWithData:self.imageData];
-                            self.profileImage = [UIImage imageWithData:self.imageData];
-                        }
-                        else
-                        {
-                            NSURL *pictureURL = [NSURL URLWithString:[currentUser objectForKey:@"profile"][@"pictureURL"]];
-                            
-                            NSMutableURLRequest *urlRequest = [NSMutableURLRequest requestWithURL:pictureURL
-                                                                                      cachePolicy:NSURLRequestUseProtocolCachePolicy
-                                                                                  timeoutInterval:2.0f];
-                            // Run network request asynchronously
-                            NSURLConnection *urlConnection = [[NSURLConnection alloc] initWithRequest:urlRequest delegate:self];
-                            if (!urlConnection)
-                            {
-                                NSLog(@"Failed to download picture");
-                            }
-                        }
-                    }
-                }
 
                 UILabel *label = (UILabel*)[cell viewWithTag:2];
-                if ([currentUser objectForKey:@"gymbudProfile"][@"name"])
-                    label.text = [currentUser objectForKey:@"gymbudProfile"][@"name"];
-                else if ([currentUser objectForKey:@"profile"][@"name"])
+                if ([currentUser objectForKey:@"profile"][@"name"])
                     label.text = [currentUser objectForKey:@"profile"][@"name"];
+                else if ([currentUser objectForKey:@"gymbudProfile"][@"name"])
+                    label.text = [currentUser objectForKey:@"gymbudProfile"][@"name"];
                 else
                     label.text = @"Incomplete Profile";
                 label.textColor = [UIColor whiteColor];
@@ -185,23 +166,15 @@
                 UILabel *label_gender = (UILabel*)[cell viewWithTag:3];
                 NSString *age = @"";
                 NSString *gender = @"";
-                if ([currentUser objectForKey:@"gymbudProfile"][@"age"])
+                if ([currentUser objectForKey:@"profile"][@"age"])
+                    age = [currentUser objectForKey:@"profile"][@"age"];
+                else if ([currentUser objectForKey:@"gymbudProfile"][@"age"])
                     age = [currentUser objectForKey:@"gymbudProfile"][@"age"];
-                else
-                {
-                    if ([currentUser objectForKey:@"profile"][@"age"]) {
-                        age = [currentUser objectForKey:@"profile"][@"age"];
-                    }
-                }
                 
-                if ([currentUser objectForKey:@"gymbudProfile"][@"gender"])
+                if ([currentUser objectForKey:@"profile"][@"gender"])
+                    gender = [currentUser objectForKey:@"profile"][@"gender"];
+                else if ([currentUser objectForKey:@"gymbudProfile"][@"gender"])
                     gender = [currentUser objectForKey:@"gymbudProfile"][@"gender"];
-                else
-                {
-                    if ([currentUser objectForKey:@"profile"][@"gender"]) {
-                        gender = [currentUser objectForKey:@"profile"][@"gender"];
-                    }
-                }
                 
                 self.age = age;
                 self.gender = gender;
@@ -273,7 +246,10 @@
         NSArray *permissionsArray = @[ @"user_about_me", @"user_relationships", @"user_birthday", @"user_location"];
         
         NSLog(@"current user is: %@", [PFUser currentUser]);
+        self.profileImage = [[UIImage alloc] init];
         
+        [PFFacebookUtils linkUser:[PFUser currentUser] permissions:permissionsArray target:self selector:@selector(facebookFetchProfile)];
+        /*
         // Login PFUser using facebook
         [PFFacebookUtils logInWithPermissions:permissionsArray block:^(PFUser *user, NSError *error) {
             //        [_activityIndicator stopAnimating]; // Hide loading indicator
@@ -297,7 +273,7 @@
                 [self facebookFetchProfile];
             }
         }];
-        
+        */
         //    [_activityIndicator startAnimating]; // Show loading indicator until login is finished
         self.HUD = [[MBProgressHUD alloc] initWithView:self.view];
         [self.view addSubview:self.HUD];
@@ -375,10 +351,24 @@
                 userProfile[@"pictureURL"] = [pictureURL absoluteString];
             }
             
+            self.loadedImage = NO;
+            NSMutableURLRequest *urlRequest = [NSMutableURLRequest requestWithURL:pictureURL
+                                                                      cachePolicy:NSURLRequestUseProtocolCachePolicy
+                                                                  timeoutInterval:2.0f];
+            // Run network request asynchronously
+            NSURLConnection *urlConnection = [[NSURLConnection alloc] initWithRequest:urlRequest delegate:self];
+            if (!urlConnection)
+            {
+                NSLog(@"Failed to download picture");
+            }
+
+            NSLog(@"user profile = %@", userProfile);
             [[PFUser currentUser] setObject:userProfile forKey:@"profile"];
             [[PFUser currentUser] setObject:userData[@"name"] forKey:@"user_fb_name"];
             [[PFUser currentUser] saveInBackground];
-            
+            self.loadedImage = NO;
+            self.imageData = [[NSMutableData alloc] init];
+            self.profileImage = [[UIImage alloc] init];
             dispatch_async(dispatch_get_main_queue(), ^{
                 //Your main thread code goes in here
                 NSLog(@"Im on the main thread");
@@ -551,13 +541,6 @@ didFinishPickingMediaWithInfo:(NSDictionary *)info
         
         self.profileImage = image;
         
-/*        NSData *imageData = UIImageJPEGRepresentation(image, 0.05f);
-        PFFile *imageFile = [PFFile fileWithName:@"profilePicture.jpg" data:imageData];
-        
-        userProfile[@"profilePicture"] = imageFile;
-        userProfile[@"name"] = @"Johnny Appleseed";
-        [[PFUser currentUser] setObject:userProfile forKey:@"gymbudProfile"];
-        [[PFUser currentUser] saveInBackground];*/
         [self updateProfileButtonHandler:nil];
 
     }
@@ -586,6 +569,7 @@ finishedSavingWithError:(NSError *)error
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection {
     // All data has been downloaded, now we can set the image in the header image view
     self.loadedImage = YES;
+    self.profileImage = [UIImage imageWithData:self.imageData];
     [self.tableView reloadData];
 }
 
