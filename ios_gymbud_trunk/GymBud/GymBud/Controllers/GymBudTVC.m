@@ -207,7 +207,7 @@
         cell.textLabel.text = object[kFacebookUsername];
     
     NSString *text2Text = @"";
-    if(object[@"gymbudProfile"][@"preferred"]) {
+    if(object[@"gymbudProfile"][@"preferred"] && [object[@"gymbudProfile"][@"preferred"] length] < 25) {
         text2Text = [[text2Text stringByAppendingString:@"Preferred Time: "] stringByAppendingString:[kPreferredTimesShort objectAtIndex:[kPreferredTimes indexOfObject:object[@"gymbudProfile"][@"preferred"]]]];
     } else {
         text2Text = @"Workout Time Unspecified";

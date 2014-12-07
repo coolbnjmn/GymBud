@@ -38,6 +38,12 @@
                 [theImage2 getDataInBackgroundWithBlock:^(NSData *data, NSError *error){
                     self.toUserAvatar = [UIImage imageWithData:data];
                     [self.collectionView reloadData];
+                    NSInteger section = [self numberOfSectionsInCollectionView:self.collectionView] - 1;
+                    NSInteger item = [self collectionView:self.collectionView numberOfItemsInSection:section] - 1;
+                    NSIndexPath *lastIndexPath = [NSIndexPath indexPathForItem:item inSection:section];
+                    [self.collectionView scrollToItemAtIndexPath:lastIndexPath atScrollPosition:UICollectionViewScrollPositionBottom animated:YES];
+
+                    
                     [self.HUD hide:YES];
                 }];
             } else {
@@ -52,6 +58,11 @@
             [theImage2 getDataInBackgroundWithBlock:^(NSData *data, NSError *error){
                 self.toUserAvatar = [UIImage imageWithData:data];
                 [self.collectionView reloadData];
+                NSInteger section = [self numberOfSectionsInCollectionView:self.collectionView] - 1;
+                NSInteger item = [self collectionView:self.collectionView numberOfItemsInSection:section] - 1;
+                NSIndexPath *lastIndexPath = [NSIndexPath indexPathForItem:item inSection:section];
+                [self.collectionView scrollToItemAtIndexPath:lastIndexPath atScrollPosition:UICollectionViewScrollPositionBottom animated:YES];
+
                 [self.HUD hide:YES];
             }];
         } else {
