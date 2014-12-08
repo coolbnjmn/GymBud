@@ -15,4 +15,7 @@
 @end
 @interface EditPITableViewController : UITableViewController
 @property(nonatomic, strong) id <EditPITableViewControllerDelegate> delegate;
+@property(nonatomic) NSInteger age;
+@property(nonatomic, strong) NSString *gender;
+@property(nonatomic, strong) NSString *name;
 @end
