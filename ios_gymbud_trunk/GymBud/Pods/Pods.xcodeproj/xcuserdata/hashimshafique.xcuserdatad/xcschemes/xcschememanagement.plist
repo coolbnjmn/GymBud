@@ -14,6 +14,16 @@
 			<key>orderHint</key>
 			<integer>3</integer>
 		</dict>
+		<key>Pods-GymBud-JSQMessagesViewController.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>9</integer>
+		</dict>
+		<key>Pods-GymBud-JSQSystemSoundPlayer.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>10</integer>
+		</dict>
 		<key>Pods-GymBud-MBProgressHUD.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
@@ -57,6 +67,16 @@
 			<key>primary</key>
 			<true/>
 		</dict>
+		<key>0C44638AD286CFF05DD06035</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>1227A1588A32726EE628A2CD</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>21269011644847F9AEFA6693</key>
 		<dict>
 			<key>primary</key>
@@ -68,6 +88,16 @@
 			<true/>
 		</dict>
 		<key>29AF810EABA24CFABF5659A3</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>2D289C1C8CEC523DE9332A6D</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>36C15D53A3660497531DCDEB</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -92,6 +122,11 @@
 			<key>primary</key>
 			<true/>
 		</dict>
+		<key>75687FEB84A745E2FCB9AC25</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>76F48587CB7348D1A072F763</key>
 		<dict>
 			<key>primary</key>
@@ -103,6 +138,11 @@
 			<true/>
 		</dict>
 		<key>80087594E3764F0EB9A50C0E</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>8D94DA40B2316AF8CE97AF23</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -122,7 +162,27 @@
 			<key>primary</key>
 			<true/>
 		</dict>
+		<key>C4B3AB13BA80ED73F52807D0</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>D9F0041B18E5B65A62B17746</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>E1EF8EE7862F4A48B0FDCED0</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>E97309F38504E431391B21E1</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>F7607560290FBB00929496E4</key>
 		<dict>
 			<key>primary</key>
 			<true/>

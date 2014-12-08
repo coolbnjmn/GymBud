@@ -22,6 +22,14 @@
 @property (strong, nonatomic) NSString *age;
 @property (strong, nonatomic) NSString *gender;
 @property (strong, nonatomic) UIImage *profileImage;
+@property (strong, nonatomic) UIImage *previousProfileImage;
+@property (strong, nonatomic) NSString *previousName;
+@property (strong, nonatomic) NSString *previousAge;
+@property (strong, nonatomic) NSString *previousGender;
+@property (nonatomic) BOOL didUpdateUsingFacebook;
+@property (nonatomic) BOOL didUpdateUsingEdit;
+@property (nonatomic) BOOL didUpdatePreviousImage;
+@property (nonatomic) BOOL didGetImageFromLibrary;
 @end
 
 @implementation EditProfileTableViewController
@@ -45,6 +53,10 @@
     self.navigationItem.rightBarButtonItem = saveButton;
     
     self.profileImage = [UIImage imageNamed:@"yogaIcon.png"];
+    self.didUpdateUsingFacebook = NO;
+    self.didUpdateUsingEdit = NO;
+    self.didUpdatePreviousImage = NO;
+    self.didGetImageFromLibrary = NO;
 
 
 }
@@ -75,7 +87,7 @@
     else if (indexPath.section == 1)
         return 80;
     else
-        return 80;
+        return 60;
 }
 
 - (CGFloat) tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
@@ -83,7 +95,7 @@
     if (section ==0)
         return 1.0f;
     else
-        return 80;
+        return 60;
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
@@ -151,6 +163,13 @@
                             self.profileImage = img.image;
                         }
                         NSLog(@"image is %@", weakCell.imageView.image);
+                        if (!self.didUpdatePreviousImage)
+                        {
+                            self.previousProfileImage = [[UIImage alloc] init];
+                            self.previousProfileImage = weakCell.imageView.image;
+                            NSLog(@"prevous image is %@", self.previousProfileImage);
+                            self.didUpdatePreviousImage = YES;
+                        }
                     }];
                 }
 
@@ -249,32 +268,7 @@
         self.profileImage = [[UIImage alloc] init];
         
         [PFFacebookUtils linkUser:[PFUser currentUser] permissions:permissionsArray target:self selector:@selector(facebookFetchProfile)];
-        /*
-        // Login PFUser using facebook
-        [PFFacebookUtils logInWithPermissions:permissionsArray block:^(PFUser *user, NSError *error) {
-            //        [_activityIndicator stopAnimating]; // Hide loading indicator
-            [self.HUD hide:YES];
-            
-            if (!user) {
-                if (!error) {
-                    NSLog(@"Uh oh. The user cancelled the Facebook login.");
-                    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Log In Error" message:@"Uh oh. The user cancelled the Facebook login." delegate:nil cancelButtonTitle:nil otherButtonTitles:@"Dismiss", nil];
-                    [alert show];
-                } else {
-                    NSLog(@"Uh oh. An error occurred: %@", error);
-                    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Log In Error" message:[error description] delegate:nil cancelButtonTitle:nil otherButtonTitles:@"Dismiss", nil];
-                    [alert show];
-                }
-            } else if (user.isNew) {
-                NSLog(@"User with facebook signed up and logged in!");
-                [self facebookFetchProfile];
-            } else {
-                NSLog(@"User with facebook logged in!");
-                [self facebookFetchProfile];
-            }
-        }];
-        */
-        //    [_activityIndicator startAnimating]; // Show loading indicator until login is finished
+
         self.HUD = [[MBProgressHUD alloc] initWithView:self.view];
         [self.view addSubview:self.HUD];
         UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, kLoadingAnimationWidth, kLoadingAnimationHeight)];
@@ -298,6 +292,7 @@
 
 -(void) facebookFetchProfile
 {
+    [self.HUD hide:YES];
     // Send request to Facebook
     FBRequest *request = [FBRequest requestForMe];
     [request startWithCompletionHandler:^(FBRequestConnection *connection, id result, NSError *error) {
@@ -340,7 +335,7 @@
                                                    toDate:[NSDate date]
                                                    options:0];
                 NSInteger age = [ageComponents year];
-                userProfile[@"age"] = [[NSNumber numberWithInt:age] stringValue];
+                userProfile[@"age"] = [[NSNumber numberWithInt:(int)age] stringValue];
             }
             
             if (userData[@"relationship_status"]) {
@@ -351,7 +346,7 @@
                 userProfile[@"pictureURL"] = [pictureURL absoluteString];
             }
             
-            self.loadedImage = NO;
+            // self.loadedImage = NO;
             NSMutableURLRequest *urlRequest = [NSMutableURLRequest requestWithURL:pictureURL
                                                                       cachePolicy:NSURLRequestUseProtocolCachePolicy
                                                                   timeoutInterval:2.0f];
@@ -366,7 +361,7 @@
             [[PFUser currentUser] setObject:userProfile forKey:@"profile"];
             [[PFUser currentUser] setObject:userData[@"name"] forKey:@"user_fb_name"];
             [[PFUser currentUser] saveInBackground];
-            self.loadedImage = NO;
+            // self.loadedImage = NO;
             self.imageData = [[NSMutableData alloc] init];
             self.profileImage = [[UIImage alloc] init];
             dispatch_async(dispatch_get_main_queue(), ^{
@@ -445,6 +440,9 @@
     // Pass the selected object to the new view controller.
     
     EditPITableViewController *dest = [segue destinationViewController];
+    dest.name = self.name;
+    dest.gender = self.gender;
+    dest.age = [self.age integerValue];
     dest.delegate = self;
 }
 
@@ -452,6 +450,27 @@
 - (void)cancelButtonHandler:(id)sender
 {
     NSLog(@"cancel update profile");
+    // unlink facebook user and clear facebook data
+    if (self.didUpdateUsingFacebook)
+    {
+        [PFFacebookUtils unlinkUser:[PFUser currentUser]];
+        NSMutableDictionary *userProfile = [NSMutableDictionary dictionaryWithCapacity:7];
+        [[PFUser currentUser] setObject:userProfile forKey:@"profile"];
+    }
+    if (self.didGetImageFromLibrary)
+        self.profileImage = self.previousProfileImage;
+    
+    if (self.didUpdateUsingEdit)
+    {
+        self.age = self.previousAge;
+        self.name = self.previousName;
+        self.gender = self.previousGender;
+    }
+
+    [self updateProfileButtonHandler:nil];
+    
+    NSLog(@"current user %@", [PFUser currentUser]);
+    
     [self.navigationController popViewControllerAnimated:YES];
 }
 
@@ -531,14 +550,19 @@
 -(void)imagePickerController:(UIImagePickerController *)picker
 didFinishPickingMediaWithInfo:(NSDictionary *)info
 {
-    NSMutableDictionary *userProfile = [NSMutableDictionary dictionaryWithCapacity:7];
     NSString *mediaType = [info
                            objectForKey:UIImagePickerControllerMediaType];
     [self dismissViewControllerAnimated:YES completion:nil];
     if ([mediaType isEqualToString:(NSString *)kUTTypeImage]) {
         UIImage *image = [info
                           objectForKey:UIImagePickerControllerOriginalImage];
-        
+        if (!self.didGetImageFromLibrary)
+        {
+            self.previousProfileImage = [[UIImage alloc] init];
+            self.previousProfileImage = self.profileImage;
+            self.didGetImageFromLibrary = YES;
+        }
+    
         self.profileImage = image;
         
         [self updateProfileButtonHandler:nil];
@@ -576,14 +600,26 @@ finishedSavingWithError:(NSError *)error
 -(void) saveUserDataWithName:(NSString *)name userGender:(NSString *)gender withAge:(NSString*)age
 {
     if ([name length] >0)
+    {
+        if (!self.didUpdateUsingEdit)
+            self.previousName = self.age;
         self.name = name;
+    }
     if ([age length] >0)
+    {
+        if (!self.didUpdateUsingEdit)
+            self.previousAge = self.age;
         self.age = age;
+    }
     if ([gender length] >0)
+    {
+        if (self.didUpdateUsingEdit)
+            self.previousGender = self.gender;
         self.gender = gender;
+    }
     
     [self updateProfileButtonHandler:nil];
-    
+    self.didUpdateUsingEdit = YES;
     [self.tableView reloadData];
     [self.navigationController popViewControllerAnimated:YES];
 

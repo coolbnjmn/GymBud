@@ -12,9 +12,6 @@
 @interface EditPITableViewController () <UIPickerViewDelegate, UIPickerViewDataSource, UITextFieldDelegate>
 @property(nonatomic, strong) NSArray *genderList;
 @property(nonatomic, strong) NSMutableArray *ageList;
-@property(nonatomic) NSInteger age;
-@property(nonatomic, strong) NSString *gender;
-@property(nonatomic, strong) NSString *name;
 
 @end
 
@@ -38,9 +35,9 @@
         [self.ageList addObject:[NSString stringWithFormat:@"%d", j]];
     }
     
-    self.age = 0;
+ /*   self.age = 0;
     self.gender = @"";
-    self.name = @"";
+    self.name = @""; */
     
     UIBarButtonItem *cancelButton = [[UIBarButtonItem alloc] initWithTitle:@"Cancel" style:UIBarButtonItemStyleBordered target:self action:@selector(cancelButtonHandler:)];
     self.navigationItem.leftBarButtonItem = cancelButton;

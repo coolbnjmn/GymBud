@@ -143,7 +143,13 @@
                 }];
             }
 
-            cell.textLabel.text = [NSString stringWithFormat:@"%@", [PFUser currentUser][@"gymbudProfile"][@"name"]];
+            if ([currentUser objectForKey:@"profile"][@"name"])
+                cell.textLabel.text = [currentUser objectForKey:@"profile"][@"name"];
+            else if ([currentUser objectForKey:@"gymbudProfile"][@"name"])
+                cell.textLabel.text = [currentUser objectForKey:@"gymbudProfile"][@"name"];
+            else
+                cell.textLabel.text = @"Incomplete Profile";
+
             cell.imageView.layer.cornerRadius = 30.0f;
             cell.imageView.layer.masksToBounds = YES;
             CGSize itemSize = CGSizeMake(60, 60);
