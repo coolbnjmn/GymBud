@@ -54,12 +54,7 @@
     
     PFUser *currentUser = [PFUser currentUser];
 //    [currentUser fetch];
-    Mixpanel *mix = [Mixpanel sharedInstance];
-    [mix identify:[currentUser objectId]];
-    NSMutableDictionary *dictionary = [[NSMutableDictionary alloc] initWithDictionary:currentUser[@"gymbudProfile"]];
-    [dictionary removeObjectForKey:@"profilePicture"];
-    [dictionary setObject:currentUser[@"email"] forKey:@"$email"];
-    [[mix people] set:dictionary];
+    
 
     NSLog(@"current user %@", currentUser);
     
@@ -72,6 +67,12 @@
                                               otherButtonTitles:nil];
         alert.tag = 10;
         [alert show];
+        Mixpanel *mix = [Mixpanel sharedInstance];
+        [mix identify:[currentUser objectId]];
+        NSMutableDictionary *dictionary = [[NSMutableDictionary alloc] initWithDictionary:currentUser[@"gymbudProfile"]];
+        [dictionary removeObjectForKey:@"profilePicture"];
+        [dictionary setObject:currentUser[@"email"] forKey:@"$email"];
+        [[mix people] set:dictionary];
     }
 
     else if (currentUser) {
@@ -80,6 +81,12 @@
         UITabBarController *root2ViewController = [storyboard instantiateViewControllerWithIdentifier:@"tabbar"];
         [self presentInitialViewController:root2ViewController];
         self.window.rootViewController = root2ViewController;
+        Mixpanel *mix = [Mixpanel sharedInstance];
+        [mix identify:[currentUser objectId]];
+        NSMutableDictionary *dictionary = [[NSMutableDictionary alloc] initWithDictionary:currentUser[@"gymbudProfile"]];
+        [dictionary removeObjectForKey:@"profilePicture"];
+        [dictionary setObject:currentUser[@"email"] forKey:@"$email"];
+        [[mix people] set:dictionary];
     } else {
         UIStoryboard *signin = [UIStoryboard storyboardWithName:@"SignIn" bundle:nil];
         SignInViewController *goVC = [signin instantiateViewControllerWithIdentifier:@"SignInViewController"];

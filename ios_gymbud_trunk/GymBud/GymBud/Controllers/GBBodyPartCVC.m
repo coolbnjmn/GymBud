@@ -40,7 +40,30 @@ static NSString * const reuseIdentifier = @"goActivityCell";
     // Register cell classes
     [self.collectionView registerNib:[UINib nibWithNibName:@"GoActivityCVCell" bundle:[NSBundle mainBundle]] forCellWithReuseIdentifier:reuseIdentifier];
     UIColor * color = kGymBudLightBlue;
-    self.collectionView.backgroundColor = color;
+    
+    UIColor *lightOp = kGymBudLightBlue;
+    UIColor *darkOp = kGymBudDarkBlue;
+    
+    // Create the gradient
+    CAGradientLayer *gradient = [CAGradientLayer layer];
+    
+    // Set colors
+    gradient.colors = [NSArray arrayWithObjects:
+                       [UIColor whiteColor].CGColor,
+                       (id)lightOp.CGColor,
+                       (id)darkOp.CGColor,
+                       nil];
+    
+    // Set bounds
+    gradient.frame = self.view.bounds;
+
+//    gradient.anchorP;
+    // Add the gradient to the view
+    self.collectionView.backgroundView = [[UIView alloc] init];
+    [self.collectionView.backgroundView.layer insertSublayer:gradient atIndex:0];
+//    self.collectionView.backgroundColor = color;
+    
+    
     self.navigationItem.title = @"Select Body Part(s)";
     [self.collectionView setAllowsMultipleSelection:YES];
     self.selectedBodyParts = [[NSMutableArray alloc] init];

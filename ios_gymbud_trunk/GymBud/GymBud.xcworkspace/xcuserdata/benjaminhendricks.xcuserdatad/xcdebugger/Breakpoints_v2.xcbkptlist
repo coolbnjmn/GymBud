@@ -110,11 +110,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "GymBud/AppDelegate.m"
-            timestampString = "439522189.653951"
+            timestampString = "439747680.150193"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "167"
-            endingLineNumber = "167"
+            startingLineNumber = "174"
+            endingLineNumber = "174"
             landmarkName = "-application:didFinishLaunchingWithOptions:"
             landmarkType = "5">
          </BreakpointContent>
@@ -126,12 +126,28 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "GymBud/AppDelegate.m"
-            timestampString = "439522191.025319"
+            timestampString = "439747680.150193"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "183"
-            endingLineNumber = "183"
+            startingLineNumber = "190"
+            endingLineNumber = "190"
             landmarkName = "-application:didFinishLaunchingWithOptions:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "GymBud/Controllers/GBBodyPartCVC.m"
+            timestampString = "439709270.633749"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "63"
+            endingLineNumber = "63"
+            landmarkName = "-viewDidLoad"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
