@@ -614,7 +614,7 @@ finishedSavingWithError:(NSError *)error
     }
     if ([gender length] >0)
     {
-        if (self.didUpdateUsingEdit)
+        if (!self.didUpdateUsingEdit)
             self.previousGender = self.gender;
         self.gender = gender;
     }

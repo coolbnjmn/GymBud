@@ -35,10 +35,6 @@
         [self.ageList addObject:[NSString stringWithFormat:@"%d", j]];
     }
     
- /*   self.age = 0;
-    self.gender = @"";
-    self.name = @""; */
-    
     UIBarButtonItem *cancelButton = [[UIBarButtonItem alloc] initWithTitle:@"Cancel" style:UIBarButtonItemStyleBordered target:self action:@selector(cancelButtonHandler:)];
     self.navigationItem.leftBarButtonItem = cancelButton;
     
