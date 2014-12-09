@@ -95,7 +95,7 @@
     if (section ==0)
         return 1.0f;
     else
-        return 60;
+        return 40;
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
@@ -378,6 +378,7 @@
         }
     }];
     
+    [self.tableView reloadData];
 
 }
 
