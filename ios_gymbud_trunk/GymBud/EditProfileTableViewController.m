@@ -22,14 +22,8 @@
 @property (strong, nonatomic) NSString *age;
 @property (strong, nonatomic) NSString *gender;
 @property (strong, nonatomic) UIImage *profileImage;
-@property (strong, nonatomic) UIImage *previousProfileImage;
-@property (strong, nonatomic) NSString *previousName;
-@property (strong, nonatomic) NSString *previousAge;
-@property (strong, nonatomic) NSString *previousGender;
 @property (nonatomic) BOOL didUpdateUsingFacebook;
-@property (nonatomic) BOOL didUpdateUsingEdit;
-@property (nonatomic) BOOL didUpdatePreviousImage;
-@property (nonatomic) BOOL didGetImageFromLibrary;
+@property (nonatomic) BOOL pickedPicture;
 @end
 
 @implementation EditProfileTableViewController
@@ -38,11 +32,7 @@
 {
     [super viewDidLoad];
     self.loadedImage = NO;
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
-    
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+
     self.tableView.separatorColor = [UIColor whiteColor];
     self.tableView.backgroundColor = kGymBudLightBlue;
     
@@ -54,9 +44,30 @@
     
     self.profileImage = [UIImage imageNamed:@"yogaIcon.png"];
     self.didUpdateUsingFacebook = NO;
-    self.didUpdateUsingEdit = NO;
-    self.didUpdatePreviousImage = NO;
-    self.didGetImageFromLibrary = NO;
+    self.pickedPicture = NO;
+    
+    PFUser *currentUser = [PFUser currentUser];
+    
+    if ([currentUser objectForKey:@"profile"][@"name"])
+        self.name = [currentUser objectForKey:@"profile"][@"name"];
+    else if ([currentUser objectForKey:@"gymbudProfile"][@"name"])
+        self.name = [currentUser objectForKey:@"gymbudProfile"][@"name"];
+    else
+        self.name = @"Incomplete Profile";
+
+    self.age = @"";
+    self.gender = @"";
+    
+    if ([currentUser objectForKey:@"profile"][@"age"])
+        self.age = [currentUser objectForKey:@"profile"][@"age"];
+    else if ([currentUser objectForKey:@"gymbudProfile"][@"age"])
+        self.age = [currentUser objectForKey:@"gymbudProfile"][@"age"];
+    
+    if ([currentUser objectForKey:@"profile"][@"gender"])
+        self.gender = [currentUser objectForKey:@"profile"][@"gender"];
+    else if ([currentUser objectForKey:@"gymbudProfile"][@"gender"])
+        self.gender = [currentUser objectForKey:@"gymbudProfile"][@"gender"];
+
 
 
 }
@@ -144,6 +155,10 @@
                     img.image = [UIImage imageWithData:self.imageData];
                     self.profileImage = [UIImage imageWithData:self.imageData];
                 }
+                else if (self.pickedPicture)
+                {
+                    img.image = self.profileImage;
+                }
                 else if ([currentUser objectForKey:@"gymbudProfile"][@"profilePicture"])
                 {
                     PFFile *theImage = [currentUser objectForKey:@"gymbudProfile"][@"profilePicture"];
@@ -163,47 +178,21 @@
                             self.profileImage = img.image;
                         }
                         NSLog(@"image is %@", weakCell.imageView.image);
-                        if (!self.didUpdatePreviousImage)
-                        {
-                            self.previousProfileImage = [[UIImage alloc] init];
-                            self.previousProfileImage = weakCell.imageView.image;
-                            NSLog(@"prevous image is %@", self.previousProfileImage);
-                            self.didUpdatePreviousImage = YES;
-                        }
                     }];
                 }
 
                 UILabel *label = (UILabel*)[cell viewWithTag:2];
-                if ([currentUser objectForKey:@"profile"][@"name"])
-                    label.text = [currentUser objectForKey:@"profile"][@"name"];
-                else if ([currentUser objectForKey:@"gymbudProfile"][@"name"])
-                    label.text = [currentUser objectForKey:@"gymbudProfile"][@"name"];
-                else
-                    label.text = @"Incomplete Profile";
                 label.textColor = [UIColor whiteColor];
-                self.name = label.text;
+                label.text = self.name;
+                
                 UILabel *label_gender = (UILabel*)[cell viewWithTag:3];
-                NSString *age = @"";
-                NSString *gender = @"";
-                if ([currentUser objectForKey:@"profile"][@"age"])
-                    age = [currentUser objectForKey:@"profile"][@"age"];
-                else if ([currentUser objectForKey:@"gymbudProfile"][@"age"])
-                    age = [currentUser objectForKey:@"gymbudProfile"][@"age"];
                 
-                if ([currentUser objectForKey:@"profile"][@"gender"])
-                    gender = [currentUser objectForKey:@"profile"][@"gender"];
-                else if ([currentUser objectForKey:@"gymbudProfile"][@"gender"])
-                    gender = [currentUser objectForKey:@"gymbudProfile"][@"gender"];
-                
-                self.age = age;
-                self.gender = gender;
-                
-                if ([age length] > 0 && [gender length] > 0)
-                    label_gender.text = [NSString stringWithFormat:@"Age: %@, Gender: %@", age, gender];
-                else if ([age length] > 0)
-                    label_gender.text = [NSString stringWithFormat:@"Age: %@", age];
-                else if ([gender length] > 0)
-                    label_gender.text = [NSString stringWithFormat:@"Gender: %@", gender];
+                if ([self.age length] > 0 && [self.gender length] > 0)
+                    label_gender.text = [NSString stringWithFormat:@"Age: %@, Gender: %@", self.age, self.gender];
+                else if ([self.age length] > 0)
+                    label_gender.text = [NSString stringWithFormat:@"Age: %@", self.age];
+                else if ([self.gender length] > 0)
+                    label_gender.text = [NSString stringWithFormat:@"Gender: %@", self.gender];
                 label_gender.textColor = [UIColor whiteColor];
             }
             else if (indexPath.row == 1)
@@ -220,16 +209,33 @@
             {
                 UITextView *tv = (UITextView*)[cell viewWithTag:5];
                 tv.delegate = self;
-                tv.text = @"What are your weightlifting goals? Ex: I want to bench press 200 pounds as soon as possible";
-                tv.textColor = [UIColor lightGrayColor]; //optional
+                if ([[PFUser currentUser] objectForKey:@"gymbudProfile"][@"goals"])
+                {
+                    tv.text = [[PFUser currentUser] objectForKey:@"gymbudProfile"][@"goals"];
+                    tv.textColor = [UIColor blackColor];
+                
+                }
+                else
+                {
+                    tv.text = @"What are your weightlifting goals? Ex: I want to bench press 200 pounds as soon as possible";
+                    tv.textColor = [UIColor lightGrayColor];
+                }
                 tv.backgroundColor = kGymBudLightBlue;
             }
             if (indexPath.row==1)
             {
                 UITextView *tv = (UITextView*)[cell viewWithTag:5];
                 tv.delegate = self;
-                tv.text = @"When are you generally free to work out? Ex: Mon/Wed 4-6, Thurs 9am-12.";
-                tv.textColor = [UIColor lightGrayColor]; //optional
+                if ([[PFUser currentUser] objectForKey:@"gymbudProfile"][@"preferred"])
+                {
+                    tv.text = [[PFUser currentUser] objectForKey:@"gymbudProfile"][@"preferred"];
+                    tv.textColor = [UIColor blackColor];
+                }
+                else
+                {
+                    tv.text = @"When are you generally free to work out? Ex: Mon/Wed 4-6, Thurs 9am-12.";
+                    tv.textColor = [UIColor lightGrayColor];
+                }
                 tv.backgroundColor = kGymBudLightBlue;
             }
         }
@@ -314,6 +320,7 @@
             
             if (userData[@"name"]) {
                 userProfile[@"name"] = userData[@"name"];
+                self.name = userData[@"name"];
             }
             
             if (userData[@"location"][@"name"]) {
@@ -322,6 +329,7 @@
             
             if (userData[@"gender"]) {
                 userProfile[@"gender"] = userData[@"gender"];
+                self.gender = userData[@"gender"];
             }
             
             if (userData[@"birthday"]) {
@@ -336,6 +344,7 @@
                                                    options:0];
                 NSInteger age = [ageComponents year];
                 userProfile[@"age"] = [[NSNumber numberWithInt:(int)age] stringValue];
+                self.age = [[NSNumber numberWithInt:(int)age] stringValue];
             }
             
             if (userData[@"relationship_status"]) {
@@ -361,7 +370,6 @@
             [[PFUser currentUser] setObject:userProfile forKey:@"profile"];
             [[PFUser currentUser] setObject:userData[@"name"] forKey:@"user_fb_name"];
             [[PFUser currentUser] saveInBackground];
-            // self.loadedImage = NO;
             self.imageData = [[NSMutableData alloc] init];
             self.profileImage = [[UIImage alloc] init];
             dispatch_async(dispatch_get_main_queue(), ^{
@@ -427,6 +435,7 @@
         tv.text = @"What are your weightlifting goals? Ex: I want to bench press 200 pounds as soon as possible";
     else
         tv.text = @"When are you generally free to work out? Ex: Mon/Wed 4-6, Thurs 9am-12.";
+    
     tv.textColor = [UIColor lightGrayColor];
     
 }
@@ -458,18 +467,7 @@
         NSMutableDictionary *userProfile = [NSMutableDictionary dictionaryWithCapacity:7];
         [[PFUser currentUser] setObject:userProfile forKey:@"profile"];
     }
-    if (self.didGetImageFromLibrary)
-        self.profileImage = self.previousProfileImage;
-    
-    if (self.didUpdateUsingEdit)
-    {
-        self.age = self.previousAge;
-        self.name = self.previousName;
-        self.gender = self.previousGender;
-    }
 
-    [self updateProfileButtonHandler:nil];
-    
     NSLog(@"current user %@", [PFUser currentUser]);
     
     [self.navigationController popViewControllerAnimated:YES];
@@ -524,8 +522,22 @@
 
     [[PFUser currentUser] setObject:userProfile forKey:@"gymbudProfile"];
     [[PFUser currentUser] saveInBackground];
-    if (sender)
-        [self.navigationController popViewControllerAnimated:YES];
+
+    // update facebook profile in case facebook data was overwritten
+    PFUser *currentUser = [PFUser currentUser];
+    
+    if ([currentUser objectForKey:@"profile"][@"name"])
+        [[currentUser objectForKey:@"profile"] setObject:self.name forKey:@"name"];
+    
+    if ([currentUser objectForKey:@"profile"][@"age"])
+        [[currentUser objectForKey:@"profile"] setObject:self.age forKey:@"age"];
+
+    if ([currentUser objectForKey:@"profile"][@"gender"])
+        [[currentUser objectForKey:@"profile"] setObject:self.gender forKey:@"gender"];
+
+    [[PFUser currentUser] saveInBackground];
+
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 
@@ -554,20 +566,12 @@ didFinishPickingMediaWithInfo:(NSDictionary *)info
     NSString *mediaType = [info
                            objectForKey:UIImagePickerControllerMediaType];
     [self dismissViewControllerAnimated:YES completion:nil];
-    if ([mediaType isEqualToString:(NSString *)kUTTypeImage]) {
+    if ([mediaType isEqualToString:(NSString *)kUTTypeImage])
+    {
         UIImage *image = [info
                           objectForKey:UIImagePickerControllerOriginalImage];
-        if (!self.didGetImageFromLibrary)
-        {
-            self.previousProfileImage = [[UIImage alloc] init];
-            self.previousProfileImage = self.profileImage;
-            self.didGetImageFromLibrary = YES;
-        }
-    
         self.profileImage = image;
-        
-        [self updateProfileButtonHandler:nil];
-
+        self.pickedPicture = YES;
     }
     [self.tableView reloadData];
 }
@@ -602,25 +606,17 @@ finishedSavingWithError:(NSError *)error
 {
     if ([name length] >0)
     {
-        if (!self.didUpdateUsingEdit)
-            self.previousName = self.age;
         self.name = name;
     }
     if ([age length] >0)
     {
-        if (!self.didUpdateUsingEdit)
-            self.previousAge = self.age;
         self.age = age;
     }
     if ([gender length] >0)
     {
-        if (!self.didUpdateUsingEdit)
-            self.previousGender = self.gender;
         self.gender = gender;
     }
     
-    [self updateProfileButtonHandler:nil];
-    self.didUpdateUsingEdit = YES;
     [self.tableView reloadData];
     [self.navigationController popViewControllerAnimated:YES];
 
