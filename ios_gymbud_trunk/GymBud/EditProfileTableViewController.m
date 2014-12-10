@@ -24,6 +24,8 @@
 @property (strong, nonatomic) UIImage *profileImage;
 @property (nonatomic) BOOL didUpdateUsingFacebook;
 @property (nonatomic) BOOL pickedPicture;
+@property (nonatomic, strong) NSString *goals;
+@property (nonatomic, strong) NSString *preferred;
 @end
 
 @implementation EditProfileTableViewController
@@ -57,6 +59,8 @@
 
     self.age = @"";
     self.gender = @"";
+    self.goals = @"";
+    self.preferred = @"";
     
     if ([currentUser objectForKey:@"profile"][@"age"])
         self.age = [currentUser objectForKey:@"profile"][@"age"];
@@ -68,7 +72,16 @@
     else if ([currentUser objectForKey:@"gymbudProfile"][@"gender"])
         self.gender = [currentUser objectForKey:@"gymbudProfile"][@"gender"];
 
+    if ([[PFUser currentUser] objectForKey:@"gymbudProfile"][@"goals"])
+        self.goals = [[PFUser currentUser] objectForKey:@"gymbudProfile"][@"goals"];
+    if ([[PFUser currentUser] objectForKey:@"gymbudProfile"][@"preferred"])
+        self.preferred = [[PFUser currentUser] objectForKey:@"gymbudProfile"][@"preferred"];
+    
 
+
+    NSLog(@"goals: %@", [[PFUser currentUser] objectForKey:@"gymbudProfile"][@"goals"]);
+    NSLog(@"preferred: %@", [[PFUser currentUser] objectForKey:@"gymbudProfile"][@"preferred"]);
+    
 
 }
 
@@ -130,8 +143,10 @@
     UITableViewCell *cell;
     if (indexPath.section == 0 && indexPath.row == 0)
         cell = [tableView dequeueReusableCellWithIdentifier:@"headerrow" forIndexPath:indexPath];
-    else if (indexPath.section == 1)
+    else if (indexPath.section == 1 && indexPath.row == 0)
         cell = [tableView dequeueReusableCellWithIdentifier:@"inputtext" forIndexPath:indexPath];
+    else if (indexPath.section == 1 && indexPath.row == 1)
+        cell = [tableView dequeueReusableCellWithIdentifier:@"inputtext_cell2" forIndexPath:indexPath];
     else
         cell = [tableView dequeueReusableCellWithIdentifier:@"commonrow" forIndexPath:indexPath];
     // Configure the cell...
@@ -209,9 +224,9 @@
             {
                 UITextView *tv = (UITextView*)[cell viewWithTag:5];
                 tv.delegate = self;
-                if ([[PFUser currentUser] objectForKey:@"gymbudProfile"][@"goals"])
+                if ([self.goals length])
                 {
-                    tv.text = [[PFUser currentUser] objectForKey:@"gymbudProfile"][@"goals"];
+                    tv.text = self.goals;
                     tv.textColor = [UIColor blackColor];
                 
                 }
@@ -221,14 +236,15 @@
                     tv.textColor = [UIColor lightGrayColor];
                 }
                 tv.backgroundColor = kGymBudLightBlue;
+                cell.tag = 19;
             }
-            if (indexPath.row==1)
+            else if (indexPath.row==1)
             {
-                UITextView *tv = (UITextView*)[cell viewWithTag:5];
+                UITextView *tv = (UITextView*)[cell viewWithTag:6];
                 tv.delegate = self;
-                if ([[PFUser currentUser] objectForKey:@"gymbudProfile"][@"preferred"])
+                if ([self.preferred length])
                 {
-                    tv.text = [[PFUser currentUser] objectForKey:@"gymbudProfile"][@"preferred"];
+                    tv.text = self.preferred;
                     tv.textColor = [UIColor blackColor];
                 }
                 else
@@ -237,7 +253,9 @@
                     tv.textColor = [UIColor lightGrayColor];
                 }
                 tv.backgroundColor = kGymBudLightBlue;
+                cell.tag = 20;
             }
+            
         }
             
         default:
@@ -413,31 +431,16 @@
 
 - (void)textViewDidEndEditing:(UITextView *)textView
 {
-    UITableViewCell* cell = (UITableViewCell*)[textView superview];
-    //UITableView* table = (UITableView *)[cell superview];
-    NSIndexPath* pathOfTheCell = [self.tableView indexPathForCell:cell];
-    NSInteger rowOfTheCell = [pathOfTheCell row];
-
-    if ([textView.text isEqualToString:@"What are your weightlifting goals? Ex: I want to bench press 200 pounds as soon as possible"] || [textView.text isEqualToString:@"When are you generally free to work out? Ex: Mon/Wed 4-6, Thurs 9am-12."])
-    {
-        [self updateTextView:textView withIndex:rowOfTheCell];
-    }
-    else if ([textView.text length] == 0)
-    {
-        [self updateTextView:textView withIndex:rowOfTheCell];
-    }
+    if (textView.tag == 5)
+        self.goals = textView.text;
+    else if (textView.tag == 6)
+        self.preferred = textView.text;
     [textView resignFirstResponder];
+    [self.tableView reloadData];
 }
 
 -(void)updateTextView:(UITextView*)tv withIndex:(NSInteger) index
 {
-    if (index == 0)
-        tv.text = @"What are your weightlifting goals? Ex: I want to bench press 200 pounds as soon as possible";
-    else
-        tv.text = @"When are you generally free to work out? Ex: Mon/Wed 4-6, Thurs 9am-12.";
-    
-    tv.textColor = [UIColor lightGrayColor];
-    
 }
 
 
@@ -514,8 +517,8 @@
         [app.keyWindow addSubview:self.errorToast];
     }
 
-    userProfile[@"goals"] = goal;
-    userProfile[@"preferred"] = time;
+    userProfile[@"goals"] = self.goals;
+    userProfile[@"preferred"] = self.preferred;
     userProfile[@"name"] = self.name;
     userProfile[@"age"] = self.age;
     userProfile[@"gender"] = self.gender;
@@ -572,6 +575,7 @@ didFinishPickingMediaWithInfo:(NSDictionary *)info
                           objectForKey:UIImagePickerControllerOriginalImage];
         self.profileImage = image;
         self.pickedPicture = YES;
+        self.loadedImage = NO;
     }
     [self.tableView reloadData];
 }
