@@ -15,6 +15,7 @@
 @interface GBBodyPartCVC ()
 
 @property (nonatomic, strong) NSMutableArray *selectedBodyParts;
+
 @end
 
 @implementation GBBodyPartCVC

@@ -38,6 +38,8 @@
 		B2232B7E1A265ECE00FBB97F /* MGS85__A.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B2232B7B1A265ECE00FBB97F /* MGS85__A.ttf */; };
 		B223AD9B1A199F60000C7FB1 /* GymBudMessageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B223AD991A199F60000C7FB1 /* GymBudMessageCell.m */; };
 		B223AD9C1A199F60000C7FB1 /* GymBudMessageCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B223AD9A1A199F60000C7FB1 /* GymBudMessageCell.xib */; };
+		B22A6EC61A395B3100A30D8A /* CreateInviteTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = B22A6EC51A395B3100A30D8A /* CreateInviteTVC.m */; };
+		B22A6ECB1A396D6C00A30D8A /* CreateInviteCVCCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B22A6ECA1A396D6C00A30D8A /* CreateInviteCVCCell.m */; };
 		B240D9A31A1F153B00374713 /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B2C39D9D197E19A900039F90 /* Parse.framework */; };
 		B240D9A81A1F153B00374713 /* ParseFacebookUtils.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B240D9A51A1F153B00374713 /* ParseFacebookUtils.framework */; };
 		B240D9A91A1F153B00374713 /* ParseUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B240D9A61A1F153B00374713 /* ParseUI.framework */; };
@@ -295,6 +297,10 @@
 		B223AD981A199F60000C7FB1 /* GymBudMessageCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GymBudMessageCell.h; path = GymBud/Views/GymBudMessageCell.h; sourceTree = "<group>"; };
 		B223AD991A199F60000C7FB1 /* GymBudMessageCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GymBudMessageCell.m; path = GymBud/Views/GymBudMessageCell.m; sourceTree = "<group>"; };
 		B223AD9A1A199F60000C7FB1 /* GymBudMessageCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = GymBudMessageCell.xib; path = GymBud/Views/GymBudMessageCell.xib; sourceTree = "<group>"; };
+		B22A6EC41A395B3100A30D8A /* CreateInviteTVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CreateInviteTVC.h; path = GymBud/Controllers/CreateInviteTVC.h; sourceTree = "<group>"; };
+		B22A6EC51A395B3100A30D8A /* CreateInviteTVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CreateInviteTVC.m; path = GymBud/Controllers/CreateInviteTVC.m; sourceTree = "<group>"; };
+		B22A6EC91A396D6C00A30D8A /* CreateInviteCVCCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CreateInviteCVCCell.h; path = GymBud/Controllers/CreateInviteCVCCell.h; sourceTree = "<group>"; };
+		B22A6ECA1A396D6C00A30D8A /* CreateInviteCVCCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CreateInviteCVCCell.m; path = GymBud/Controllers/CreateInviteCVCCell.m; sourceTree = "<group>"; };
 		B240D9A41A1F153B00374713 /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Bolts.framework; path = GymBud/Frameworks/Bolts.framework; sourceTree = "<group>"; };
 		B240D9A51A1F153B00374713 /* ParseFacebookUtils.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ParseFacebookUtils.framework; path = GymBud/Frameworks/ParseFacebookUtils.framework; sourceTree = "<group>"; };
 		B240D9A61A1F153B00374713 /* ParseUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ParseUI.framework; path = GymBud/Frameworks/ParseUI.framework; sourceTree = "<group>"; };
@@ -829,6 +835,8 @@
 				B2C39D81197E194F00039F90 /* PAWWallViewController.xib */,
 				B2C39D82197E194F00039F90 /* UserDetailsViewController.h */,
 				B2C39D83197E194F00039F90 /* UserDetailsViewController.m */,
+				B2784D9E19B2B34E0042A188 /* GBBodyPartCVC.h */,
+				B2784D9F19B2B34E0042A188 /* GBBodyPartCVC.m */,
 				B2C39D84197E194F00039F90 /* ViewMessageVC.h */,
 				B2C39D85197E194F00039F90 /* ViewMessageVC.m */,
 				B2C39D86197E194F00039F90 /* ViewMessageVC.xib */,
@@ -838,8 +846,6 @@
 				77F13146198EEE0000576708 /* RSDatePickerVC.m */,
 				77FE647E198F4FE1008724CC /* GoActivityCVC.h */,
 				77FE647F198F4FE1008724CC /* GoActivityCVC.m */,
-				B2784D9E19B2B34E0042A188 /* GBBodyPartCVC.h */,
-				B2784D9F19B2B34E0042A188 /* GBBodyPartCVC.m */,
 				77FE648C1990545A008724CC /* GoActivityChosenVC.h */,
 				77FE648D1990545A008724CC /* GoActivityChosenVC.m */,
 				77FE648F1990A924008724CC /* GoActivityCreateEventVC.h */,
@@ -858,6 +864,10 @@
 				B258FEE31A2F9315000153BE /* BubbleChatTVC.h */,
 				B258FEE41A2F9315000153BE /* BubbleChatTVC.m */,
 				B258FEE51A2F9315000153BE /* BubbleChatTVC.xib */,
+				B22A6EC91A396D6C00A30D8A /* CreateInviteCVCCell.h */,
+				B22A6ECA1A396D6C00A30D8A /* CreateInviteCVCCell.m */,
+				B22A6EC41A395B3100A30D8A /* CreateInviteTVC.h */,
+				B22A6EC51A395B3100A30D8A /* CreateInviteTVC.m */,
 			);
 			name = Controllers;
 			path = ..;
@@ -1005,7 +1015,7 @@
 				TargetAttributes = {
 					B2C39D31197E172600039F90 = {
 						CreatedOnToolsVersion = 6.0;
-						DevelopmentTeam = 8E2G6A5GQK;
+						DevelopmentTeam = M6Y34M2A35;
 					};
 					B2C39D47197E172600039F90 = {
 						CreatedOnToolsVersion = 6.0;
@@ -1283,6 +1293,7 @@
 				B2FCFBE919CAC15C0078C68D /* EPBasicInfoVC.m in Sources */,
 				B2C39D8E197E194F00039F90 /* PAWWallPostCreateViewController.m in Sources */,
 				B2722DD919AD832900FEC2AF /* GymBudEventsTVC.m in Sources */,
+				B22A6ECB1A396D6C00A30D8A /* CreateInviteCVCCell.m in Sources */,
 				B2C39D93197E194F00039F90 /* UserDetailsViewController.m in Sources */,
 				296D739F1A32C7220067624B /* EditPITableViewController.m in Sources */,
 				77FE6480198F4FE1008724CC /* GoActivityCVC.m in Sources */,
@@ -1293,6 +1304,7 @@
 				B2784DA019B2B34E0042A188 /* GBBodyPartCVC.m in Sources */,
 				B2C39D94197E194F00039F90 /* ViewMessageVC.m in Sources */,
 				B258FEE61A2F9315000153BE /* BubbleChatTVC.m in Sources */,
+				B22A6EC61A395B3100A30D8A /* CreateInviteTVC.m in Sources */,
 				B2B8DC3519DB212300BED65D /* GymBudDetailsVC.m in Sources */,
 				B2C39D9A197E197E00039F90 /* PAWPost.m in Sources */,
 				B2D0CAD1197E2BB700B17D32 /* FindUserTVC.m in Sources */,

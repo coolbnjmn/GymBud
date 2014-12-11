@@ -17,6 +17,7 @@
 #import "GymBudConstants.h"
 #import "SettingsTableViewController.h"
 #import "SignInViewController.h"
+#import "CreateInviteTVC.h"
 
 #define MIXPANEL_TOKEN @"079a199396a3f6b60e57782e3b79d25f"
 #define kGymBudEventCompletionHeight 154
