@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6250" systemVersion="13F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6244"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+    </dependencies>
+    <scenes>
+        <!--Location FinderVC-->
+        <scene sceneID="6kq-gL-uWE">
+            <objects>
+                <viewController restorationIdentifier="LocationFinderVC" storyboardIdentifier="LocationFinderVC" id="xAU-Ca-VZX" customClass="LocationFinderVC" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="of5-Sd-gZ6"/>
+                        <viewControllerLayoutGuide type="bottom" id="Wgs-fj-15a"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="td4-oG-ofK">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="7mP-59-eVR" customClass="MLPAutoCompleteTextField">
+                                <rect key="frame" x="24" y="28" width="552" height="45"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="45" id="gHg-vl-cZ9"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <outlet property="autoCompleteDataSource" destination="xAU-Ca-VZX" id="gDK-OY-5LC"/>
+                                    <outlet property="autoCompleteDelegate" destination="xAU-Ca-VZX" id="Vh0-3v-Owu"/>
+                                    <outlet property="delegate" destination="xAU-Ca-VZX" id="dKn-hm-hhj"/>
+                                </connections>
+                            </textField>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="9TW-rR-klt">
+                                <rect key="frame" x="24" y="81" width="552" height="511"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="xAU-Ca-VZX" id="tQ9-0f-Owg"/>
+                                    <outlet property="delegate" destination="xAU-Ca-VZX" id="SgT-iI-BJy"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailingMargin" secondItem="9TW-rR-klt" secondAttribute="trailing" constant="8" id="4uz-7Y-fBb"/>
+                            <constraint firstItem="Wgs-fj-15a" firstAttribute="top" secondItem="9TW-rR-klt" secondAttribute="bottom" constant="8" id="8Te-fo-nlX"/>
+                            <constraint firstItem="9TW-rR-klt" firstAttribute="top" secondItem="7mP-59-eVR" secondAttribute="bottom" constant="8" id="9Kq-4r-pSL"/>
+                            <constraint firstItem="7mP-59-eVR" firstAttribute="leading" secondItem="td4-oG-ofK" secondAttribute="leadingMargin" constant="8" id="Roj-tV-eYQ"/>
+                            <constraint firstItem="Wgs-fj-15a" firstAttribute="top" secondItem="7mP-59-eVR" secondAttribute="bottom" constant="8" id="o5c-fn-Zvv"/>
+                            <constraint firstItem="7mP-59-eVR" firstAttribute="top" secondItem="of5-Sd-gZ6" secondAttribute="bottom" constant="8" id="p3U-je-aQ5"/>
+                            <constraint firstItem="9TW-rR-klt" firstAttribute="leading" secondItem="td4-oG-ofK" secondAttribute="leadingMargin" constant="8" id="sic-RH-iAm"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="7mP-59-eVR" secondAttribute="trailing" constant="8" id="zJq-WW-L3X"/>
+                        </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="o5c-fn-Zvv"/>
+                            </mask>
+                        </variation>
+                    </view>
+                    <connections>
+                        <outlet property="locationFinder" destination="7mP-59-eVR" id="QMz-nN-aCl"/>
+                        <outlet property="tableView" destination="9TW-rR-klt" id="4WD-dc-tDu"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="6xz-h4-Drv" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="298" y="222"/>
+        </scene>
+    </scenes>
+</document>

@@ -10,6 +10,7 @@
 #import "GoActivityCVCell.h"
 #import "GymBudConstants.h"
 #import "CreateInviteCVCCell.h"
+#import "LocationFinderVC.h"
 
 @interface CreateInviteTVC () <UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout>
 
@@ -91,6 +92,50 @@
             break;
     }
     return cell;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    switch (indexPath.section) {
+        case 0:
+            switch(indexPath.row) {
+                case 0: // Label for body parts -- section1Label
+                    [tableView deselectRowAtIndexPath:indexPath animated:NO];
+                    break;
+                case 1: // Collection View
+                    [tableView deselectRowAtIndexPath:indexPath animated:NO];
+                    break;
+                default:
+                    break;
+            }
+            break;
+        case 1:
+            // Location Cell
+        {
+            UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"LocationFinderVC"
+                                                                 bundle:[NSBundle mainBundle]];
+            LocationFinderVC *locationFinder = [storyboard instantiateViewControllerWithIdentifier:@"LocationFinderVC"];            [self.navigationController pushViewController:locationFinder animated:YES];
+            [tableView deselectRowAtIndexPath:indexPath animated:NO];
+        }
+            break;
+        case 2:
+            switch(indexPath.row) {
+                case 0: // Date Cell
+                    [tableView deselectRowAtIndexPath:indexPath animated:NO];
+                    break;
+                case 1: // Invite Friends button
+                    [tableView deselectRowAtIndexPath:indexPath animated:NO];
+                    break;
+                case 2: // Create event button
+                    [tableView deselectRowAtIndexPath:indexPath animated:NO];
+                    break;
+                default:
+                    break;
+            }
+            break;
+        default:
+            break;
+    }
 }
 
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
