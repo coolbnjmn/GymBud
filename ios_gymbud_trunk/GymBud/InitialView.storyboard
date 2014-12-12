@@ -378,6 +378,27 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="JUc-VR-xql">
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="JUc-VR-xql" id="KCN-12-vam">
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="249" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HZp-qV-9fu">
+                                                    <rect key="frame" x="8" y="8" width="398" height="27.5"/>
+                                                    <state key="normal" title="Button">
+                                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                                    </state>
+                                                </button>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="bottomMargin" secondItem="HZp-qV-9fu" secondAttribute="bottom" id="Ksa-gw-ILT"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="HZp-qV-9fu" secondAttribute="trailing" id="c2m-PC-i4J"/>
+                                                <constraint firstItem="HZp-qV-9fu" firstAttribute="leading" secondItem="KCN-12-vam" secondAttribute="leadingMargin" id="t0W-bk-kmT"/>
+                                                <constraint firstItem="HZp-qV-9fu" firstAttribute="top" secondItem="KCN-12-vam" secondAttribute="topMargin" id="zVT-xU-RHS"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
                                 </cells>
                             </tableViewSection>
                         </sections>
@@ -391,6 +412,7 @@
                     <connections>
                         <outlet property="button1" destination="9s9-GE-Uph" id="Arf-vC-fX7"/>
                         <outlet property="button2" destination="O2O-C1-5Vi" id="t2C-u8-g6O"/>
+                        <outlet property="button3" destination="HZp-qV-9fu" id="rRX-fT-XaB"/>
                         <outlet property="section1Label" destination="C49-5C-C4u" id="FJc-tP-N5v"/>
                         <outlet property="section2Label" destination="v4d-pN-Nf9" id="uKP-34-LWh"/>
                         <outlet property="section3TextField" destination="T37-bB-EoS" id="a7l-cJ-t3o"/>

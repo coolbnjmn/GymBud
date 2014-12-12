@@ -19,6 +19,7 @@
 @property (weak, nonatomic) IBOutlet UITextField *section3TextField;
 @property (weak, nonatomic) IBOutlet UIButton *button1;
 @property (weak, nonatomic) IBOutlet UIButton *button2;
+@property (weak, nonatomic) IBOutlet UIButton *button3;
 @property (nonatomic, strong) NSMutableArray *selectedBodyParts;
 @property (nonatomic, strong) UIDatePicker *datePicker;
 
@@ -117,6 +118,10 @@
                 case 2: // Create event button
                     [self.button2 setTitle:@"Create an Event (Public)" forState:UIControlStateNormal];
                     [cell addSubview:self.button2];
+                    break;
+                case 3:
+                    [self.button3 setTitle:@"Find Others" forState:UIControlStateNormal];
+                    [cell addSubview:self.button3];
                     break;
                 default:
                     break;
