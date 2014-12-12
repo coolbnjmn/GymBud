@@ -9,8 +9,16 @@
 #import <UIKit/UIKit.h>
 #import <MLPAutoCompleteTextField/MLPAutoCompleteTextField.h>
 
+@protocol LocationFinderVCDelegate <NSObject>
+
+-(void) didSetLocation:(NSString *)locationName;
+
+@end
 
 @interface LocationFinderVC : UIViewController
 
 @property (weak, nonatomic) IBOutlet MLPAutoCompleteTextField *locationFinder;
+@property (nonatomic, strong) id <LocationFinderVCDelegate> delegate;
+@property (nonatomic, strong) NSString *input;
+
 @end

@@ -12,15 +12,15 @@
 #import "CreateInviteCVCCell.h"
 #import "LocationFinderVC.h"
 
-@interface CreateInviteTVC () <UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout>
+@interface CreateInviteTVC () <UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, UITextFieldDelegate, LocationFinderVCDelegate>
 
 @property (weak, nonatomic) IBOutlet UILabel *section1Label;
 @property (weak, nonatomic) IBOutlet UILabel *section2Label;
-@property (weak, nonatomic) IBOutlet UILabel *section3Label;
+@property (weak, nonatomic) IBOutlet UITextField *section3TextField;
 @property (weak, nonatomic) IBOutlet UIButton *button1;
 @property (weak, nonatomic) IBOutlet UIButton *button2;
 @property (nonatomic, strong) NSMutableArray *selectedBodyParts;
-
+@property (nonatomic, strong) UIDatePicker *datePicker;
 
 @end
 
@@ -73,15 +73,49 @@
         case 2:
             switch(indexPath.row) {
                 case 0: // Date Cell
-                    self.section3Label.text = @"Select a date & time";
-                    [cell addSubview:self.section3Label];
+                {
+                    self.section3TextField.text = @"Select a date & time";
+                    self.datePicker = [[UIDatePicker alloc] init];
+                    self.datePicker.minimumDate = [NSDate date];
+                    self.datePicker.minuteInterval = 15;
+
+                    NSCalendar *calendar = [NSCalendar autoupdatingCurrentCalendar];
+                    NSDateComponents *components = [calendar components:NSYearCalendarUnit
+                                                    | NSMonthCalendarUnit | NSDayCalendarUnit
+                                                               fromDate:[NSDate date]];
+                    components.day += 5;
+                    NSDate *date = [calendar dateFromComponents:components];
+                    self.datePicker.maximumDate = date;
+                    self.section3TextField.delegate = self;
+                    self.datePicker.autoresizingMask = (UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight);
+
+                    
+                    // create a done view + done button, attach to it a doneClicked action, and place it in a toolbar as an accessory input view...
+                    // Prepare done button
+                    UIToolbar* keyboardDoneButtonView = [[UIToolbar alloc] init];
+                    keyboardDoneButtonView.barStyle = UIBarStyleBlack;
+                    keyboardDoneButtonView.translucent = YES;
+                    keyboardDoneButtonView.tintColor = nil;
+                    [keyboardDoneButtonView sizeToFit];
+                    
+                    UIBarButtonItem* doneButton = [[UIBarButtonItem alloc] initWithTitle:@"Done"
+                                                                                   style:UIBarButtonItemStyleBordered target:self
+                                                                                  action:@selector(doneClicked:)];
+                    [keyboardDoneButtonView setItems:[NSArray arrayWithObjects:doneButton, nil]];
+                    
+                    // Plug the keyboardDoneButtonView into the text field...
+                    self.section3TextField.inputAccessoryView = keyboardDoneButtonView;
+                    self.section3TextField.inputView = self.datePicker;
+
+                    [cell addSubview:self.section3TextField];
+            }
                     break;
                 case 1: // Invite Friends button
-                    self.button1.titleLabel.text = @"Invite Friends (SMS)";
+                    [self.button1 setTitle:@"Invite Friends (SMS)" forState:UIControlStateNormal];
                     [cell addSubview:self.button1];
                     break;
                 case 2: // Create event button
-                    self.button2.titleLabel.text = @"Create an Event (Public)";
+                    [self.button2 setTitle:@"Create an Event (Public)" forState:UIControlStateNormal];
                     [cell addSubview:self.button2];
                     break;
                 default:
@@ -115,13 +149,18 @@
             UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"LocationFinderVC"
                                                                  bundle:[NSBundle mainBundle]];
             LocationFinderVC *locationFinder = [storyboard instantiateViewControllerWithIdentifier:@"LocationFinderVC"];            [self.navigationController pushViewController:locationFinder animated:YES];
+            locationFinder.delegate = self;
+            locationFinder.input = self.section2Label.text;
             [tableView deselectRowAtIndexPath:indexPath animated:NO];
         }
             break;
         case 2:
             switch(indexPath.row) {
                 case 0: // Date Cell
+                {
                     [tableView deselectRowAtIndexPath:indexPath animated:NO];
+                    [self setDateClicked:self];
+                }
                     break;
                 case 1: // Invite Friends button
                     [tableView deselectRowAtIndexPath:indexPath animated:NO];
@@ -137,6 +176,26 @@
             break;
     }
 }
+
+// When the setDate button is clicked, call:
+
+- (void)setDateClicked:(id)sender {
+    [self.section3TextField becomeFirstResponder];
+}
+
+- (void)doneClicked:(id)sender {
+    // Write out the date...
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    [formatter setTimeStyle:NSDateFormatterShortStyle];
+    [formatter setDateStyle:NSDateFormatterShortStyle];
+    //Optionally for time zone conversions
+    
+    NSString *stringFromDate = [formatter stringFromDate:self.datePicker.date];
+
+    self.section3TextField.text = stringFromDate;
+    [self.section3TextField resignFirstResponder];
+}
+
 
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
 {
@@ -190,5 +249,9 @@
     cell.goActivityPictureImaveView.image = [UIImage imageNamed:[kGBBodyPartImagesArray objectAtIndex:indexPath.row]];
 }
 
+- (void)didSetLocation:(NSString *)locationName {
+    self.section2Label.text = locationName;
+    [self.section2Label layoutIfNeeded];
+}
 
 @end

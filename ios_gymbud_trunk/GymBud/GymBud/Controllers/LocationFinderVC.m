@@ -28,9 +28,34 @@
     self.locationFinder.delegate = self;
     self.locationFinder.autoCompleteTableAppearsAsKeyboardAccessory = NO;
     self.locationFinder.autoCompleteTableOriginOffset = CGSizeMake(0, -self.view.bounds.size.height + 45);
-//    self.tableView = self.locationFinder.autoCompleteTableView;
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
+    if(![self.input isEqualToString:@""]) {
+        self.locationFinder.text = self.input;
+        NSURL *url = [NSURL URLWithString:@"https://maps.googleapis.com/maps/api/place/autocomplete/"];
+        
+        AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
+        CLLocation *currentLocation = appDelegate.currentLocation;
+        
+        NSDictionary *params = @{@"input" : [self.input stringByReplacingOccurrencesOfString:@" " withString:@"+"],
+                                 @"location" : [NSString stringWithFormat:@"%f,%f", currentLocation.coordinate.latitude, currentLocation.coordinate.longitude],
+                                 @"sensor" : @"true",
+                                 @"key" : kGoogleApiKey};
+        
+        AFHTTPSessionManager *httpSessionManager = [[AFHTTPSessionManager alloc] initWithBaseURL:url];
+        [httpSessionManager GET:@"json" parameters:params success:^(NSURLSessionDataTask *task, id responseObject) {
+            //        NSLog(@"\n============= Entity Saved Success ===\n%@",responseObject);
+            [self.places removeAllObjects];
+            for(id description in responseObject[@"predictions"]) {
+                [self.places addObject:description[@"description"]];
+                [self.tableView reloadData];
+            }
+        } failure:^(NSURLSessionDataTask *task, NSError *error) {
+            NSLog(@"\n============== ERROR ====\n%@",error.userInfo);
+        }];
+
+    }
+    
 }
 
 
@@ -45,7 +70,6 @@
         if(textField.text.length < 2) {
             return YES;
         }
-        NSLog(@"textField text is: %@", textField.text);
         NSURL *url = [NSURL URLWithString:@"https://maps.googleapis.com/maps/api/place/autocomplete/"];
 
         AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
@@ -61,7 +85,6 @@
             //        NSLog(@"\n============= Entity Saved Success ===\n%@",responseObject);
             [self.places removeAllObjects];
             for(id description in responseObject[@"predictions"]) {
-                NSLog(@"%@", description[@"description"]);
                 [self.places addObject:description[@"description"]];
                 [self.tableView reloadData];
             }
@@ -82,6 +105,12 @@
     UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"placeCell"];
     cell.textLabel.text = [self.places objectAtIndex:indexPath.row];
     return cell;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    [self.delegate performSelector:@selector(didSetLocation:) withObject:[self.places objectAtIndex:indexPath.row]];
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (NSArray *)autoCompleteTextField:(MLPAutoCompleteTextField *)textField
