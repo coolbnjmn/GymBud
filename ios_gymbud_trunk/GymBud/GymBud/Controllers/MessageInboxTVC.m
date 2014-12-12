@@ -40,7 +40,7 @@
 
     self.navigationItem.title = @"Inbox";
     self.navigationItem.rightBarButtonItem = messageButton;
-    
+    [self loadObjects];
 }
 
 -(void)sendMessage:(id) sender {
@@ -86,8 +86,11 @@
     [query includeKey:@"toUser"];
     [query setCachePolicy:kPFCachePolicyNetworkOnly];
     
-    self.HUD = [[MBProgressHUD alloc] initWithView:self.view];
-    [self.view addSubview:self.HUD];
+    if(!self.HUD) {
+        self.HUD = [[MBProgressHUD alloc] initWithView:self.view];
+        [self.view addSubview:self.HUD];
+    }
+    
     UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, kLoadingAnimationWidth, kLoadingAnimationHeight)];
     imageView.image = [UIImage imageNamed:kLoadingImageFirst];
     //Add more images which will be used for the animation
@@ -101,8 +104,10 @@
     self.HUD.customView = imageView;
     self.HUD.mode = MBProgressHUDModeCustomView;
     self.HUD.color = [UIColor clearColor];
-
-    [self.HUD show:YES];
+    
+    if([self.HUD isHidden]) {
+        [self.HUD show:YES];
+    }
     for (UIView *subview in self.view.subviews)
     {
         if ([subview class] == NSClassFromString(@"PFLoadingView"))
@@ -150,6 +155,7 @@
     
     [super objectsDidLoad:error];
     [self.HUD hide:YES];
+
     lastRefresh = [NSDate date];
 //    [[NSUserDefaults standardUserDefaults] setObject:lastRefresh forKey:kPAPUserDefaultsActivityFeedViewControllerLastRefreshKey];
 //    [[NSUserDefaults standardUserDefaults] synchronize];

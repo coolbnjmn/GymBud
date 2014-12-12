@@ -340,6 +340,9 @@
                                                     <state key="normal" title="Button">
                                                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                                     </state>
+                                                    <connections>
+                                                        <action selector="button1Pressed:" destination="Kvh-u8-nCm" eventType="touchUpInside" id="tAb-co-dht"/>
+                                                    </connections>
                                                 </button>
                                             </subviews>
                                             <constraints>
@@ -352,8 +355,8 @@
                                             </constraints>
                                             <variation key="default">
                                                 <mask key="constraints">
-                                                    <exclude reference="zKq-9E-8zC"/>
                                                     <exclude reference="Gfn-pY-yCx"/>
+                                                    <exclude reference="zKq-9E-8zC"/>
                                                 </mask>
                                             </variation>
                                         </tableViewCellContentView>
@@ -368,6 +371,9 @@
                                                     <state key="normal" title="Button">
                                                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                                     </state>
+                                                    <connections>
+                                                        <action selector="button2Pressed:" destination="Kvh-u8-nCm" eventType="touchUpInside" id="OlZ-Cr-clt"/>
+                                                    </connections>
                                                 </button>
                                             </subviews>
                                             <constraints>
@@ -389,6 +395,9 @@
                                                     <state key="normal" title="Button">
                                                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                                     </state>
+                                                    <connections>
+                                                        <action selector="button3Pressed:" destination="Kvh-u8-nCm" eventType="touchUpInside" id="tTC-l0-ZyX"/>
+                                                    </connections>
                                                 </button>
                                             </subviews>
                                             <constraints>

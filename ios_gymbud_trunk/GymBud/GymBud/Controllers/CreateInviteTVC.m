@@ -11,8 +11,9 @@
 #import "GymBudConstants.h"
 #import "CreateInviteCVCCell.h"
 #import "LocationFinderVC.h"
+#import "InviteFriendsTVC.h"
 
-@interface CreateInviteTVC () <UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, UITextFieldDelegate, LocationFinderVCDelegate>
+@interface CreateInviteTVC () <UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, UITextFieldDelegate, LocationFinderVCDelegate, ABPeoplePickerNavigationControllerDelegate>
 
 @property (weak, nonatomic) IBOutlet UILabel *section1Label;
 @property (weak, nonatomic) IBOutlet UILabel *section2Label;
@@ -173,6 +174,8 @@
                 case 2: // Create event button
                     [tableView deselectRowAtIndexPath:indexPath animated:NO];
                     break;
+                case 3: // Find others button
+                    [tableView deselectRowAtIndexPath:indexPath animated:NO];
                 default:
                     break;
             }
@@ -257,6 +260,48 @@
 - (void)didSetLocation:(NSString *)locationName {
     self.section2Label.text = locationName;
     [self.section2Label layoutIfNeeded];
+}
+- (IBAction)button1Pressed:(id)sender {
+    // Invite friends here
+//    NSLog(@"button1Pressed");
+    InviteFriendsTVC *invite = [[InviteFriendsTVC alloc] init];
+    [self.navigationController pushViewController:invite animated:YES];
+    
+}
+- (IBAction)button2Pressed:(id)sender {
+    // Create event here
+    NSLog(@"button2Pressed");
+}
+
+
+- (IBAction)button3Pressed:(id)sender {
+    // Go to find others here
+    NSLog(@"button3Pressed");
+}
+
+
+- (void)peoplePickerNavigationControllerDidCancel:
+(ABPeoplePickerNavigationController *)peoplePicker {
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+
+- (BOOL)peoplePickerNavigationController:(ABPeoplePickerNavigationController *)peoplePicker
+      shouldContinueAfterSelectingPerson:(ABRecordRef)person {
+    
+    NSString* name = (__bridge_transfer NSString *)ABRecordCopyValue(person, kABPersonFirstNameProperty);
+    NSLog(@"name is : %@", name);
+    [self dismissViewControllerAnimated:YES completion:nil];
+    
+    return NO;
+}
+
+- (BOOL)peoplePickerNavigationController:
+(ABPeoplePickerNavigationController *)peoplePicker
+      shouldContinueAfterSelectingPerson:(ABRecordRef)person
+                                property:(ABPropertyID)property
+                              identifier:(ABMultiValueIdentifier)identifier{
+    return NO;
 }
 
 @end

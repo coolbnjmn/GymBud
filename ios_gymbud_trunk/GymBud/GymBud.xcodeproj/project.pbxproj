@@ -132,6 +132,7 @@
 		B27996BB1A2FCFCB00FDBA9F /* 76.png in Resources */ = {isa = PBXBuildFile; fileRef = B27996B71A2FCFCB00FDBA9F /* 76.png */; };
 		B27AF67019B0417300FDBF0F /* GBJoinedEventsTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = B27AF66F19B0417300FDBF0F /* GBJoinedEventsTVC.m */; };
 		B27AF67319B0D00700FDBF0F /* NSDate+Utilities.m in Sources */ = {isa = PBXBuildFile; fileRef = B27AF67219B0D00700FDBF0F /* NSDate+Utilities.m */; };
+		B27E6DBA1A3B700700A103FB /* InviteFriendsTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = B27E6DB91A3B700700A103FB /* InviteFriendsTVC.m */; };
 		B297741519820C4C000AD7B6 /* mapView.png in Resources */ = {isa = PBXBuildFile; fileRef = B297741319820C4C000AD7B6 /* mapView.png */; };
 		B297741619820C4C000AD7B6 /* tableView.png in Resources */ = {isa = PBXBuildFile; fileRef = B297741419820C4C000AD7B6 /* tableView.png */; };
 		B297741819843EC9000AD7B6 /* sampleMapPin.png in Resources */ = {isa = PBXBuildFile; fileRef = B297741719843EC9000AD7B6 /* sampleMapPin.png */; };
@@ -402,6 +403,8 @@
 		B27AF66F19B0417300FDBF0F /* GBJoinedEventsTVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GBJoinedEventsTVC.m; path = GymBud/Controllers/GBJoinedEventsTVC.m; sourceTree = "<group>"; };
 		B27AF67119B0D00700FDBF0F /* NSDate+Utilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSDate+Utilities.h"; path = "GymBud/Models/NSDate+Utilities.h"; sourceTree = "<group>"; };
 		B27AF67219B0D00700FDBF0F /* NSDate+Utilities.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSDate+Utilities.m"; path = "GymBud/Models/NSDate+Utilities.m"; sourceTree = "<group>"; };
+		B27E6DB81A3B700700A103FB /* InviteFriendsTVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = InviteFriendsTVC.h; path = GymBud/Controllers/InviteFriendsTVC.h; sourceTree = "<group>"; };
+		B27E6DB91A3B700700A103FB /* InviteFriendsTVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = InviteFriendsTVC.m; path = GymBud/Controllers/InviteFriendsTVC.m; sourceTree = "<group>"; };
 		B297741319820C4C000AD7B6 /* mapView.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = mapView.png; path = GymBud/Assets/mapView.png; sourceTree = "<group>"; };
 		B297741419820C4C000AD7B6 /* tableView.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = tableView.png; path = GymBud/Assets/tableView.png; sourceTree = "<group>"; };
 		B297741719843EC9000AD7B6 /* sampleMapPin.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = sampleMapPin.png; path = GymBud/Assets/sampleMapPin.png; sourceTree = "<group>"; };
@@ -873,6 +876,8 @@
 				B22A6ECA1A396D6C00A30D8A /* CreateInviteCVCCell.m */,
 				B22A6EC41A395B3100A30D8A /* CreateInviteTVC.h */,
 				B22A6EC51A395B3100A30D8A /* CreateInviteTVC.m */,
+				B27E6DB81A3B700700A103FB /* InviteFriendsTVC.h */,
+				B27E6DB91A3B700700A103FB /* InviteFriendsTVC.m */,
 				B22A6ECC1A3A00B900A30D8A /* LocationFinderVC.h */,
 				B22A6ECD1A3A00B900A30D8A /* LocationFinderVC.m */,
 				B22A6ED11A3A059100A30D8A /* LocationFinderVC.storyboard */,
@@ -1276,6 +1281,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B27E6DBA1A3B700700A103FB /* InviteFriendsTVC.m in Sources */,
 				296D73851A2BEE5A0067624B /* SignInViewController.m in Sources */,
 				B2D607181A2008A500F19B34 /* GymBudEventCompletionView.m in Sources */,
 				B2D6071D1A21CD4500F19B34 /* SWRevealViewController.m in Sources */,
