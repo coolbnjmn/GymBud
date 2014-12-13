@@ -1,0 +1,275 @@
+//
+//  GBJoinedEventsTableViewController.m
+//  GymBud
+//
+//  Created by Hashim Shafique on 12/12/14.
+//  Copyright (c) 2014 GymBud. All rights reserved.
+//
+
+#import "GBJoinedEventsTableViewController.h"
+#import "MBProgressHUD.h"
+#import "GymBudConstants.h"
+#import "Mixpanel.h"
+
+#define kCellHeight 100
+
+@interface GBJoinedEventsTableViewController () <UISearchDisplayDelegate>
+@property NSString *reuseId;
+@property MBProgressHUD *HUD;
+@end
+
+@implementation GBJoinedEventsTableViewController
+
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+    
+    // Do something
+    // The className to query on
+    // self.parseClassName = @"Event";
+    self.reuseId = @"GymBudEventsCell";
+    
+    // The key of the PFObject to display in the label of the default cell style
+    self.title = @"GymBud";
+    
+    // Whether the built-in pull-to-refresh is enabled
+    if (NSClassFromString(@"UIRefreshControl")) {
+        self.pullToRefreshEnabled = NO;
+    } else {
+        self.pullToRefreshEnabled = YES;
+    }
+    
+    // Whether the built-in pagination is enabled
+    self.paginationEnabled = YES;
+    
+    // The number of objects to show per page
+    self.objectsPerPage = 100;
+
+    // Do any additional setup after loading the view.
+    self.reuseId = @"GymBudEventsCell";
+    // The className to query on
+    self.parseClassName = @"Event";
+    
+    // The key of the PFObject to display in the label of the default cell style
+    self.title = @"GymBud";
+    
+    // Whether the built-in pull-to-refresh is enabled
+    if (NSClassFromString(@"UIRefreshControl")) {
+        self.pullToRefreshEnabled = NO;
+    } else {
+        self.pullToRefreshEnabled = YES;
+    }
+    
+    // Whether the built-in pagination is enabled
+    self.paginationEnabled = YES;
+    
+    // The number of objects to show per page
+    self.objectsPerPage = 100;
+    
+    if (NSClassFromString(@"UIRefreshControl")) {
+        // Use the new iOS 6 refresh control.
+        UIRefreshControl *refreshControl = [[UIRefreshControl alloc] init];
+        self.refreshControl = refreshControl;
+        self.refreshControl.tintColor = [UIColor colorWithRed:118.0f/255.0f green:117.0f/255.0f blue:117.0f/255.0f alpha:1.0f];
+        [self.refreshControl addTarget:self action:@selector(refreshControlValueChanged:) forControlEvents:UIControlEventValueChanged];
+        self.pullToRefreshEnabled = NO;
+    }
+    
+    [self.tableView registerNib:[UINib nibWithNibName:@"GymBudEventsCell" bundle:nil] forCellReuseIdentifier:self.reuseId];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(postWasCreated:) name:@"CreatePostNotification" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(locationDidChange:) name:@"LocationChangeNotification" object:nil];
+    
+    self.tableView.separatorColor = [UIColor whiteColor];
+    self.navigationItem.title = @"Joined Events";
+    
+    searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0, 0, 320, 44)];
+    /*the search bar widht must be > 1, the height must be at least 44
+     (the real size of the search bar)*/
+    
+    searchDisplayController = [[UISearchDisplayController alloc] initWithSearchBar:searchBar contentsController:self];
+    /*contents controller is the UITableViewController, this let you to reuse
+     the same TableViewController Delegate method used for the main table.*/
+    
+    searchDisplayController.delegate = self;
+    searchDisplayController.searchResultsDataSource = self;
+    //set the delegate = self. Previously declared in ViewController.h
+    
+    self.tableView.tableHeaderView = searchBar; //this line add the searchBar
+    //on the top of tableView.
+    self.tableView.backgroundColor = kGymBudLightBlue;
+
+}
+
+- (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"LocationChangeNotification" object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"CreatePostNotification" object:nil];
+}
+
+
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
+
+#pragma mark - PFQueryTableViewController
+
+- (void)objectsDidLoad:(NSError *)error {
+    [super objectsDidLoad:error];
+    
+    [self.HUD hide:YES];
+    NSLog(@"objectsDidLoad GymBudEventsTVC");
+    // This method is called every time objects are loaded from Parse via the PFQuery
+    if (NSClassFromString(@"UIRefreshControl")) {
+        [self.refreshControl endRefreshing];
+    }
+}
+
+- (void)objectsWillLoad {
+    [super objectsWillLoad];
+    
+    // This method is called before a PFQuery is fired to get more objects
+}
+
+// Override to customize what kind of query to perform on the class. The default is to query for
+// all objects ordered by createdAt descending.
+- (PFQuery *)queryForTable {
+    //    PFQuery *query = [PFQuery queryWithClassName:self.parseClassName];
+    // Query for posts near our current location.
+    self.parseClassName = @"Event";
+
+    PFQuery *attendeeQuery = [PFQuery queryWithClassName:self.parseClassName];
+    PFQuery *organizerQuery = [PFQuery queryWithClassName:self.parseClassName];
+    
+    NSLog(@"current user is %@", [PFUser currentUser]);
+    
+    [attendeeQuery whereKey:@"attendees" containsAllObjectsInArray:[NSArray arrayWithObjects:[PFUser currentUser], nil]];
+    
+    [organizerQuery whereKey:@"organizer" equalTo:[PFUser currentUser]];
+    
+    PFQuery *query = [PFQuery orQueryWithSubqueries:@[organizerQuery, attendeeQuery]];
+    
+    // If no objects are loaded in memory, we look to the cache first to fill the table
+    // and then subsequently do a query against the network.
+    if ([self.objects count] == 0) {
+        query.cachePolicy = kPFCachePolicyCacheThenNetwork;
+    }
+    
+    [query includeKey:@"organizer"];
+    [query whereKey:@"isVisible" equalTo:[NSNumber numberWithBool:YES]];
+    [query orderByAscending:@"time"];
+    
+    self.HUD = [[MBProgressHUD alloc] initWithView:self.view];
+    [self.view addSubview:self.HUD];
+    UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, kLoadingAnimationWidth, kLoadingAnimationHeight)];
+    imageView.image = [UIImage imageNamed:kLoadingImageFirst];
+    //Add more images which will be used for the animation
+    imageView.animationImages = kLoadingImagesArray;
+    
+    //Set the duration of the animation (play with it
+    //until it looks nice for you)
+    imageView.animationDuration = kLoadingAnimationDuration;
+    [imageView startAnimating];
+    imageView.contentMode = UIViewContentModeScaleToFill;
+    self.HUD.customView = imageView;
+    self.HUD.mode = MBProgressHUDModeCustomView;
+    self.HUD.color = [UIColor clearColor];
+    
+    [self.HUD show:YES];
+    for (UIView *subview in self.view.subviews)
+    {
+        if ([subview class] == NSClassFromString(@"PFLoadingView"))
+        {
+            [subview removeFromSuperview];
+            break;
+        }
+    }
+    [self setLoadingViewEnabled:NO];
+    return query;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return kCellHeight;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath object:(PFObject *)object
+{
+    UITableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:@"joined"
+                                                forIndexPath:indexPath];
+    
+    PFFile *theImage = [object objectForKey:@"organizer"][@"gymbudProfile"][@"profilePicture"];
+    
+    __weak UITableViewCell *weakCell = cell;
+    [theImage getDataInBackgroundWithBlock:^(NSData *data, NSError *error){
+        NSLog(@"+++++++++ Loading image view with real data ++++++++");
+        weakCell.imageView.image = [UIImage imageWithData:data];
+        [weakCell setNeedsLayout];
+        weakCell.imageView.layer.cornerRadius = 30.0f;
+        weakCell.imageView.layer.masksToBounds = YES;
+        CGSize itemSize = CGSizeMake(60, 60);
+        UIGraphicsBeginImageContextWithOptions(itemSize, NO, UIScreen.mainScreen.scale);
+        CGRect imageRect = CGRectMake(0.0, 0.0, itemSize.width, itemSize.height);
+        [weakCell.imageView.image drawInRect:imageRect];
+        weakCell.imageView.image = UIGraphicsGetImageFromCurrentImageContext();
+        UIGraphicsEndImageContext();
+
+    }];
+    
+    cell.textLabel.font = [UIFont fontWithName:@"MagistralATT" size:18];
+    cell.detailTextLabel.font = [UIFont fontWithName:@"MagistralATT" size:12];
+    cell.textLabel.textColor = [UIColor whiteColor];
+    cell.detailTextLabel.textColor = [UIColor whiteColor];
+    
+    cell.textLabel.text = [NSString stringWithFormat:@"Event Organizer: %@",[object objectForKey:@"organizer"][@"gymbudProfile"][@"name"]];
+    
+    NSDate *eventStartTime = [object objectForKey:@"time"];
+    NSDateFormatter *format = [[NSDateFormatter alloc] init];
+    [format setDateFormat:@"MMM dd, yyyy HH:mm"];
+    NSString *dateString = [format stringFromDate:eventStartTime];
+
+    cell.detailTextLabel.text = [NSString stringWithFormat:@"Event Time: %@", dateString];
+    cell.backgroundColor = kGymBudLightBlue;
+    cell.textLabel.adjustsFontSizeToFitWidth = YES;
+    cell.textLabel.numberOfLines = 1;
+
+    [cell.textLabel sizeToFit];
+
+    return cell;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+}
+
+#pragma mark - ()
+
+- (void)distanceFilterDidChange:(NSNotification *)note {
+    [self loadObjects];
+}
+
+- (void)locationDidChange:(NSNotification *)note {
+    NSLog(@"Location did change");
+    [self loadObjects];
+}
+
+- (void)postWasCreated:(NSNotification *)note {
+    NSLog(@"post was created");
+    [self loadObjects];
+}
+
+- (void)refreshControlValueChanged:(UIRefreshControl *)refreshControl {
+    [self loadObjects];
+}
+
+
+/*
+#pragma mark - Navigation
+
+// In a storyboard-based application, you will often want to do a little preparation before navigation
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    // Get the new view controller using [segue destinationViewController].
+    // Pass the selected object to the new view controller.
+}
+*/
+
+@end

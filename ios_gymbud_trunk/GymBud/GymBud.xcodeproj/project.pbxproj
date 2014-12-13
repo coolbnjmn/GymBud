@@ -19,6 +19,7 @@
 		296D739A1A3228A50067624B /* EditProfileTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 296D73991A3228A50067624B /* EditProfileTableViewController.m */; };
 		296D739C1A3243AF0067624B /* facebookround.png in Resources */ = {isa = PBXBuildFile; fileRef = 296D739B1A3243AF0067624B /* facebookround.png */; };
 		296D739F1A32C7220067624B /* EditPITableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 296D739E1A32C7220067624B /* EditPITableViewController.m */; };
+		29AD93D81A3BD1110020E22A /* GBJoinedEventsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 29AD93D71A3BD1110020E22A /* GBJoinedEventsTableViewController.m */; };
 		29DAA69D1A25438200264253 /* GymBudVC.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 29DAA69C1A25438200264253 /* GymBudVC.storyboard */; };
 		29E4A5121A3407550023B22F /* greenplus.png in Resources */ = {isa = PBXBuildFile; fileRef = 29E4A5111A3407550023B22F /* greenplus.png */; };
 		77F13147198EEE0000576708 /* RSDatePickerVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 77F13146198EEE0000576708 /* RSDatePickerVC.m */; };
@@ -130,7 +131,6 @@
 		B27996B91A2FCFCB00FDBA9F /* 74.png in Resources */ = {isa = PBXBuildFile; fileRef = B27996B51A2FCFCB00FDBA9F /* 74.png */; };
 		B27996BA1A2FCFCB00FDBA9F /* 75.png in Resources */ = {isa = PBXBuildFile; fileRef = B27996B61A2FCFCB00FDBA9F /* 75.png */; };
 		B27996BB1A2FCFCB00FDBA9F /* 76.png in Resources */ = {isa = PBXBuildFile; fileRef = B27996B71A2FCFCB00FDBA9F /* 76.png */; };
-		B27AF67019B0417300FDBF0F /* GBJoinedEventsTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = B27AF66F19B0417300FDBF0F /* GBJoinedEventsTVC.m */; };
 		B27AF67319B0D00700FDBF0F /* NSDate+Utilities.m in Sources */ = {isa = PBXBuildFile; fileRef = B27AF67219B0D00700FDBF0F /* NSDate+Utilities.m */; };
 		B297741519820C4C000AD7B6 /* mapView.png in Resources */ = {isa = PBXBuildFile; fileRef = B297741319820C4C000AD7B6 /* mapView.png */; };
 		B297741619820C4C000AD7B6 /* tableView.png in Resources */ = {isa = PBXBuildFile; fileRef = B297741419820C4C000AD7B6 /* tableView.png */; };
@@ -267,6 +267,8 @@
 		296D739B1A3243AF0067624B /* facebookround.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = facebookround.png; sourceTree = "<group>"; };
 		296D739D1A32C7220067624B /* EditPITableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditPITableViewController.h; sourceTree = "<group>"; };
 		296D739E1A32C7220067624B /* EditPITableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditPITableViewController.m; sourceTree = "<group>"; };
+		29AD93D61A3BD1110020E22A /* GBJoinedEventsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GBJoinedEventsTableViewController.h; path = GymBud/Controllers/GBJoinedEventsTableViewController.h; sourceTree = "<group>"; };
+		29AD93D71A3BD1110020E22A /* GBJoinedEventsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GBJoinedEventsTableViewController.m; path = GymBud/Controllers/GBJoinedEventsTableViewController.m; sourceTree = "<group>"; };
 		29DAA69C1A25438200264253 /* GymBudVC.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = GymBudVC.storyboard; sourceTree = "<group>"; };
 		29E4A5111A3407550023B22F /* greenplus.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = greenplus.png; sourceTree = "<group>"; };
 		48EE337A63E5439BA42E30F1 /* libPods-GymBud.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-GymBud.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -398,8 +400,6 @@
 		B27996B51A2FCFCB00FDBA9F /* 74.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = 74.png; path = "GymBud/Assets/Loading Images/74.png"; sourceTree = "<group>"; };
 		B27996B61A2FCFCB00FDBA9F /* 75.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = 75.png; path = "GymBud/Assets/Loading Images/75.png"; sourceTree = "<group>"; };
 		B27996B71A2FCFCB00FDBA9F /* 76.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = 76.png; path = "GymBud/Assets/Loading Images/76.png"; sourceTree = "<group>"; };
-		B27AF66E19B0417300FDBF0F /* GBJoinedEventsTVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GBJoinedEventsTVC.h; path = GymBud/Controllers/GBJoinedEventsTVC.h; sourceTree = "<group>"; };
-		B27AF66F19B0417300FDBF0F /* GBJoinedEventsTVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GBJoinedEventsTVC.m; path = GymBud/Controllers/GBJoinedEventsTVC.m; sourceTree = "<group>"; };
 		B27AF67119B0D00700FDBF0F /* NSDate+Utilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSDate+Utilities.h"; path = "GymBud/Models/NSDate+Utilities.h"; sourceTree = "<group>"; };
 		B27AF67219B0D00700FDBF0F /* NSDate+Utilities.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSDate+Utilities.m"; path = "GymBud/Models/NSDate+Utilities.m"; sourceTree = "<group>"; };
 		B297741319820C4C000AD7B6 /* mapView.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = mapView.png; path = GymBud/Assets/mapView.png; sourceTree = "<group>"; };
@@ -827,8 +827,8 @@
 				B297742F1984C34E000AD7B6 /* PCInterestTVC.m */,
 				B2C39D7D197E194F00039F90 /* PAWWallPostsTableViewController.h */,
 				B2C39D7E197E194F00039F90 /* PAWWallPostsTableViewController.m */,
-				B27AF66E19B0417300FDBF0F /* GBJoinedEventsTVC.h */,
-				B27AF66F19B0417300FDBF0F /* GBJoinedEventsTVC.m */,
+				29AD93D61A3BD1110020E22A /* GBJoinedEventsTableViewController.h */,
+				29AD93D71A3BD1110020E22A /* GBJoinedEventsTableViewController.m */,
 				B2722DD719AD832900FEC2AF /* GymBudEventsTVC.h */,
 				B2722DD819AD832900FEC2AF /* GymBudEventsTVC.m */,
 				B2B8DC2B19D9208800BED65D /* GymBudTVC.h */,
@@ -1023,7 +1023,7 @@
 				TargetAttributes = {
 					B2C39D31197E172600039F90 = {
 						CreatedOnToolsVersion = 6.0;
-						DevelopmentTeam = M6Y34M2A35;
+						DevelopmentTeam = 8E2G6A5GQK;
 					};
 					B2C39D47197E172600039F90 = {
 						CreatedOnToolsVersion = 6.0;
@@ -1279,6 +1279,7 @@
 				296D73851A2BEE5A0067624B /* SignInViewController.m in Sources */,
 				B2D607181A2008A500F19B34 /* GymBudEventCompletionView.m in Sources */,
 				B2D6071D1A21CD4500F19B34 /* SWRevealViewController.m in Sources */,
+				29AD93D81A3BD1110020E22A /* GBJoinedEventsTableViewController.m in Sources */,
 				77FD41C51993EEF20017E8D5 /* GymBudEventModel.m in Sources */,
 				B2C39D8C197E194F00039F90 /* MessageUserVC.m in Sources */,
 				77FE6487198F715C008724CC /* GoActivityCVCell.m in Sources */,
@@ -1294,7 +1295,6 @@
 				B2C39D8B197E194F00039F90 /* MessageInboxTVC.m in Sources */,
 				B223AD9B1A199F60000C7FB1 /* GymBudMessageCell.m in Sources */,
 				B2011D1419C91C3500D65275 /* GBEventsFilterViewController.m in Sources */,
-				B27AF67019B0417300FDBF0F /* GBJoinedEventsTVC.m in Sources */,
 				B2A0C7071A294A8C0091E84B /* SettingsTableViewController.m in Sources */,
 				B2C39D3B197E172600039F90 /* AppDelegate.m in Sources */,
 				B29774301984C34E000AD7B6 /* PCInterestTVC.m in Sources */,
