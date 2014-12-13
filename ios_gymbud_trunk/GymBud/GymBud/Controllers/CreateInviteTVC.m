@@ -156,7 +156,9 @@
                                                                  bundle:[NSBundle mainBundle]];
             LocationFinderVC *locationFinder = [storyboard instantiateViewControllerWithIdentifier:@"LocationFinderVC"];            [self.navigationController pushViewController:locationFinder animated:YES];
             locationFinder.delegate = self;
-            locationFinder.input = self.section2Label.text;
+            if(![self.section2Label.text isEqualToString:@"Select a location"]) {
+                locationFinder.input = self.section2Label.text;
+            }
             [tableView deselectRowAtIndexPath:indexPath animated:NO];
         }
             break;
