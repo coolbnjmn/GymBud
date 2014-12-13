@@ -183,7 +183,7 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return kCellHeight;
+    return kCellHeight + 20;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath object:(PFObject *)object
@@ -196,37 +196,66 @@
     __weak UITableViewCell *weakCell = cell;
     [theImage getDataInBackgroundWithBlock:^(NSData *data, NSError *error){
         NSLog(@"+++++++++ Loading image view with real data ++++++++");
-        weakCell.imageView.image = [UIImage imageWithData:data];
+        UIImageView *pict = (UIImageView*) [cell viewWithTag:10];
+        pict.image = [UIImage imageWithData:data];
         [weakCell setNeedsLayout];
-        weakCell.imageView.layer.cornerRadius = 30.0f;
-        weakCell.imageView.layer.masksToBounds = YES;
+        pict.layer.cornerRadius = 30.0f;
+        pict.layer.masksToBounds = YES;
         CGSize itemSize = CGSizeMake(60, 60);
         UIGraphicsBeginImageContextWithOptions(itemSize, NO, UIScreen.mainScreen.scale);
         CGRect imageRect = CGRectMake(0.0, 0.0, itemSize.width, itemSize.height);
-        [weakCell.imageView.image drawInRect:imageRect];
-        weakCell.imageView.image = UIGraphicsGetImageFromCurrentImageContext();
+        [pict.image drawInRect:imageRect];
+        pict.image = UIGraphicsGetImageFromCurrentImageContext();
         UIGraphicsEndImageContext();
 
     }];
     
-    cell.textLabel.font = [UIFont fontWithName:@"MagistralATT" size:18];
-    cell.detailTextLabel.font = [UIFont fontWithName:@"MagistralATT" size:12];
-    cell.textLabel.textColor = [UIColor whiteColor];
-    cell.detailTextLabel.textColor = [UIColor whiteColor];
+    UILabel *nameLabel = (UILabel *)[cell viewWithTag:2];
+    UILabel *dateLabel = (UILabel *)[cell viewWithTag:3];
     
-    cell.textLabel.text = [NSString stringWithFormat:@"Event Organizer: %@",[object objectForKey:@"organizer"][@"gymbudProfile"][@"name"]];
+    nameLabel.font = [UIFont fontWithName:@"MagistralATT" size:18];
+    dateLabel.font = [UIFont fontWithName:@"MagistralATT" size:12];
+    nameLabel.textColor = [UIColor whiteColor];
+    nameLabel.textColor = [UIColor whiteColor];
+    dateLabel.textColor = [UIColor whiteColor];
+    
+    nameLabel.text = [NSString stringWithFormat:@"Event Organizer: %@",[object objectForKey:@"organizer"][@"gymbudProfile"][@"name"]];
     
     NSDate *eventStartTime = [object objectForKey:@"time"];
     NSDateFormatter *format = [[NSDateFormatter alloc] init];
     [format setDateFormat:@"MMM dd, yyyy HH:mm"];
     NSString *dateString = [format stringFromDate:eventStartTime];
 
-    cell.detailTextLabel.text = [NSString stringWithFormat:@"Event Time: %@", dateString];
+    dateLabel.text = [NSString stringWithFormat:@"Event Time: %@", dateString];
     cell.backgroundColor = kGymBudLightBlue;
-    cell.textLabel.adjustsFontSizeToFitWidth = YES;
-    cell.textLabel.numberOfLines = 1;
+    nameLabel.adjustsFontSizeToFitWidth = YES;
+    nameLabel.numberOfLines = 1;
 
-    [cell.textLabel sizeToFit];
+    [nameLabel sizeToFit];
+
+    NSArray *subLogoIndices = [object objectForKey:@"detailLogoIndices"];
+    int subLogoIndex = 0;
+    for(NSNumber *index in subLogoIndices) {
+        if(subLogoIndex == 0) {
+            
+            UIImageView *imv = (UIImageView*) [cell viewWithTag:4];
+            imv.image=[UIImage imageNamed:[kGBBodyPartImagesArray objectAtIndex:[index integerValue]]];
+            [cell.contentView addSubview:imv];
+        } else if(subLogoIndex == 1) {
+            UIImageView *imv = (UIImageView*) [cell viewWithTag:5];
+            imv.image=[UIImage imageNamed:[kGBBodyPartImagesArray objectAtIndex:[index integerValue]]];
+            [cell.contentView addSubview:imv];
+        } else if(subLogoIndex == 2) {
+            UIImageView *imv = (UIImageView*) [cell viewWithTag:6];
+            imv.image=[UIImage imageNamed:[kGBBodyPartImagesArray objectAtIndex:[index integerValue]]];
+            [cell.contentView addSubview:imv];
+        } else {
+            UIImageView *imv = (UIImageView*) [cell viewWithTag:7];
+            imv.image=[UIImage imageNamed:[kGBBodyPartImagesArray objectAtIndex:[index integerValue]]];
+            [cell.contentView addSubview:imv];
+        }
+        subLogoIndex++;
+    }
 
     return cell;
 }
