@@ -29,9 +29,6 @@
     // self.parseClassName = @"Event";
     self.reuseId = @"GymBudEventsCell";
     
-    // The key of the PFObject to display in the label of the default cell style
-    self.title = @"GymBud";
-    
     // Whether the built-in pull-to-refresh is enabled
     if (NSClassFromString(@"UIRefreshControl")) {
         self.pullToRefreshEnabled = NO;
@@ -49,9 +46,6 @@
     self.reuseId = @"GymBudEventsCell";
     // The className to query on
     self.parseClassName = @"Event";
-    
-    // The key of the PFObject to display in the label of the default cell style
-    self.title = @"GymBud";
     
     // Whether the built-in pull-to-refresh is enabled
     if (NSClassFromString(@"UIRefreshControl")) {
