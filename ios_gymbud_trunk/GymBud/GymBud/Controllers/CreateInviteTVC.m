@@ -23,6 +23,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *button3;
 @property (nonatomic, strong) NSMutableArray *selectedBodyParts;
 @property (nonatomic, strong) UIDatePicker *datePicker;
+@property (nonatomic, retain) NSDate *date;
 
 @end
 
@@ -200,6 +201,7 @@
     [formatter setDateStyle:NSDateFormatterShortStyle];
     //Optionally for time zone conversions
     
+    self.date = self.datePicker.date;
     NSString *stringFromDate = [formatter stringFromDate:self.datePicker.date];
 
     self.section3TextField.text = stringFromDate;
@@ -267,6 +269,9 @@
     // Invite friends here
 //    NSLog(@"button1Pressed");
     InviteFriendsTVC *invite = [[InviteFriendsTVC alloc] init];
+    invite.date = self.date;
+    invite.location = self.section2Label.text;
+    invite.bodyParts = self.selectedBodyParts;
     [self.navigationController pushViewController:invite animated:YES];
     
 }

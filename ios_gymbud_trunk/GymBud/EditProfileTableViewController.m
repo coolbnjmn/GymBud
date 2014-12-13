@@ -2,7 +2,7 @@
 //  EditProfileTableViewController.m
 //  GymBud
 //
-//  Created by Hashim Shafique on 12/5/14.
+//  Created by Benjamin Hendricks on 12/5/14.
 //  Copyright (c) 2014 GymBud. All rights reserved.
 //
 

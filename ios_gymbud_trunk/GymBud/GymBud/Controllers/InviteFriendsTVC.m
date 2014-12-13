@@ -1,4 +1,13 @@
+//
+//  GoActivityCreateEventVC.h
+//  GymBud
+//
+//  Created by Benjamin Hendricks on 8/4/14.
+//  Copyright (c) 2014 GymBud. All rights reserved.
+//
 
+#import <Parse/Parse.h>
+#import <Parse/PFCloud.h>
 
 #import "InviteFriendsTVC.h"
 
@@ -20,7 +29,43 @@
     
     UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(showAddressBook)];
     self.navigationItem.title = @"Invite Friends";
-    self.navigationItem.rightBarButtonItem = addButton;
+//    self.navigationItem.rightBarButtonItem = addButton;
+    
+    UIBarButtonItem *sendButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(inviteFriends:)];
+    self.navigationItem.rightBarButtonItem = sendButton;
+    CFErrorRef * error;
+    ABAddressBookRef addressBook = ABAddressBookCreateWithOptions(NULL, (CFErrorRef *)&error);
+    CFArrayRef allPeople = ABAddressBookCopyArrayOfAllPeople( addressBook );
+    CFIndex nPeople = ABAddressBookGetPersonCount( addressBook );
+    
+    for ( int i = 0; i < nPeople; i++ )
+    {
+        ABRecordRef ref = CFArrayGetValueAtIndex( allPeople, i );
+        ABMultiValueRef multiPhones = ABRecordCopyValue(ref, kABPersonPhoneProperty);
+        CFStringRef firstName = ABRecordCopyValue(ref, kABPersonFirstNameProperty);
+        CFStringRef lastName = ABRecordCopyValue(ref, kABPersonLastNameProperty);
+        
+        for(CFIndex i = 0; i < ABMultiValueGetCount(multiPhones); i++) {
+            CFStringRef phoneNumberRef = ABMultiValueCopyValueAtIndex(multiPhones, i);
+            NSString *phoneNumber = (__bridge NSString *) phoneNumberRef;
+            CFRelease(phoneNumberRef);
+            if(![phoneNumber isEqualToString:@"" ]) {
+                NSMutableDictionary *userDict = [[NSMutableDictionary alloc] init];
+                [userDict setObject:phoneNumber forKey:@"phone"];
+                NSString *name = [[((__bridge NSString *) firstName? : @"") stringByAppendingString:@" " ] stringByAppendingString:((__bridge NSString *)lastName ? : @"")];
+                [userDict setObject:name forKey:@"name"];
+                if (_arrContactsData == nil) {
+                    _arrContactsData = [[NSMutableArray alloc] init];
+                }
+                [self.arrContactsData addObject:userDict];
+
+            }
+            
+        }
+        CFRelease(multiPhones);
+    }
+    [self.tableView reloadData];
+    [self.tableView setAllowsMultipleSelection:YES];
 }
 
 - (void)didReceiveMemoryWarning
@@ -31,6 +76,40 @@
 
 
 #pragma mark - Private method implementation
+- (void) inviteFriends:(id) sender {
+    NSArray *selectedIndices = [self.tableView indexPathsForSelectedRows];
+    for(NSIndexPath *path in selectedIndices) {
+        NSDictionary *dict = [self.arrContactsData objectAtIndex:path.row   ];
+        // SEND TWILIO TEXT HERE
+        [self sendSMSToNumber:[dict mutableCopy]];
+    }
+}
+
+/* Send invitation SMS to a phone number using Cloud Code and Twilio! */
+- (void)sendSMSToNumber:(NSMutableDictionary *)userDict {
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    [formatter setDateStyle:NSDateFormatterShortStyle];
+    [formatter setTimeStyle:NSDateFormatterShortStyle];
+    
+    NSString *shortDate = [formatter stringFromDate:self.date];
+    NSString *body = [[PFUser currentUser][@"gymbudProfile"][@"name"] stringByAppendingString: [NSString stringWithFormat:@" invited you to go lift @ %@ %@. Reply IN or OUT now!", shortDate, self.location, nil]];
+    [userDict setObject:body forKey:@"body"];
+    [PFCloud callFunctionInBackground:@"inviteWithTwilio" withParameters:userDict block:^(id object, NSError *error) {
+        NSString *message = @"";
+        if (!error) {
+            message = @"Your SMS invitation has been sent!";
+        } else {
+            message = @"Uh oh, something went wrong :(";
+        }
+        
+        [[[UIAlertView alloc] initWithTitle:@"Invite Sent!"
+                                    message:message
+                                   delegate:nil
+                          cancelButtonTitle:@"Ok"
+                          otherButtonTitles:nil, nil] show];
+        [self.tableView reloadData];
+    }];
+}
 
 -(void)showAddressBook{
     if (ABAddressBookGetAuthorizationStatus() == kABAuthorizationStatusDenied ||
@@ -44,6 +123,9 @@
         NSLog(@"Authorized");
         _addressBookController = [[ABPeoplePickerNavigationController alloc] init];
         [_addressBookController setPeoplePickerDelegate:self];
+        _addressBookController.displayedProperties = [NSArray arrayWithObjects:
+                                                      [NSNumber numberWithInt:kABPersonPhoneProperty],
+                                                      nil];
         [self presentViewController:_addressBookController animated:YES completion:nil];
 
     } else{ //ABAddressBookGetAuthorizationStatus() == kABAuthorizationStatusNotDetermined
@@ -61,6 +143,9 @@
                 //5 Accepted, do the accept thing
                 _addressBookController = [[ABPeoplePickerNavigationController alloc] init];
                 [_addressBookController setPeoplePickerDelegate:self];
+                _addressBookController.displayedProperties = [NSArray arrayWithObjects:
+                                                        [NSNumber numberWithInt:kABPersonPhoneProperty],
+                                                        nil];
                 [self presentViewController:_addressBookController animated:YES completion:nil];
 
                 
@@ -90,15 +175,36 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
 //    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];
-    UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cell"];
+    UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"cell"];
     
     NSDictionary *contactInfoDict = [_arrContactsData objectAtIndex:indexPath.row];
-    cell.textLabel.text = [NSString stringWithFormat:@"%@ %@", [contactInfoDict objectForKey:@"firstName"], [contactInfoDict objectForKey:@"lastName"]];
-    
+//    cell.textLabel.text = [NSString stringWithFormat:@"%@ %@", [contactInfoDict objectForKey:@"firstName"], [contactInfoDict objectForKey:@"lastName"]];
+//    cell.detailTextLabel.text = [NSString stringWithFormat:@"%@", [contactInfoDict objectForKey:@"homeNumber"] ? : [contactInfoDict objectForKey:@"mobileNumber"]];
+    cell.textLabel.text = [NSString stringWithFormat:@"%@", [contactInfoDict objectForKey:@"name"]];
+    cell.detailTextLabel.text = [NSString stringWithFormat:@"%@", [contactInfoDict objectForKey:@"phone"]];
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+
     return cell;
 }
 
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    NSArray *selectedIndices = [tableView indexPathsForSelectedRows];
+    if([selectedIndices count] > 10) {
+        // Show an alert saying max is 10
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"We must limit you to 10 invites per event" message:@"Select the best 10 contacts you can!" delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil];
+        [alertView show];
 
+        return;
+    }
+    UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+    cell.accessoryType = UITableViewCellAccessoryCheckmark;
+}
+
+- (void)tableView:(UITableView *)tableView didDeselectRowAtIndexPath:(NSIndexPath *)indexPath {
+    UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+    cell.accessoryType = UITableViewCellAccessoryNone;
+
+}
 #pragma mark - ABPeoplePickerNavigationController Delegate method implementation
 - (void)peoplePickerNavigationController:(ABPeoplePickerNavigationController *)peoplePicker didSelectPerson:(ABRecordRef)person
 {

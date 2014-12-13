@@ -2,7 +2,7 @@
 //  SignInViewController.h
 //  GymBud
 //
-//  Created by Hashim Shafique on 11/30/14.
+//  Created by Benjamin Hendricks on 11/30/14.
 //  Copyright (c) 2014 GymBud. All rights reserved.
 //
 

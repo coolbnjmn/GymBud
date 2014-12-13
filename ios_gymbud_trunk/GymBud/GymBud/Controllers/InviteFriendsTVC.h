@@ -13,5 +13,8 @@
 
 @interface InviteFriendsTVC : UITableViewController <ABPeoplePickerNavigationControllerDelegate>
 
+@property (nonatomic, retain) NSDate *date;
+@property (nonatomic, retain) NSString *location;
+@property (nonatomic, retain) NSArray *bodyParts;
 
 @end

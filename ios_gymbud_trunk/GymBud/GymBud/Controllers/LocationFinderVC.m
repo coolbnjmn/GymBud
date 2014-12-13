@@ -113,6 +113,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.navigationItem.title = @"Create Event";
     // Do any additional setup after loading the view from its nib.
     self.places = [[NSMutableArray alloc] init];
     self.distances = [[NSMutableArray alloc] init];

@@ -1,3 +1,6 @@
+var twilio = require("twilio");
+
+twilio.initialize("ACed42b9aed728493cddb8c7d35935865b", "dffc6073b68750dfa8f7230c4e1506bf");
 
 // Use Parse.Cloud.define to define as many cloud functions as you want.
 // For example:
@@ -6,6 +9,24 @@ Parse.Cloud.define("hello", function(request, response) {
   response.success("Hello world!");
 });
 
+Parse.Cloud.define("inviteWithTwilio", function(request, response) {
+	console.log(request.params.phone);
+	twilio.sendSMS({
+		From: "(650) 614-5446",
+		To: request.params.phone,
+		Body: request.params.body
+	}, {
+		success: function(httpResponse) {
+			console.log(httpResponse);
+			response.success("SMS Sent!");
+		},
+		error: function(httpResponse) {
+			console.error(httpResponse);
+			response.error("Uh OH, something went wrong");
+		}
+	});
+
+});
 Parse.Cloud.job("eventReminder", function(request, response) {
 	Parse.Cloud.useMasterKey();
 	var Event = Parse.Object.extend("Event");

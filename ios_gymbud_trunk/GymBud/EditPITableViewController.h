@@ -2,9 +2,10 @@
 //  EditPITableViewController.h
 //  GymBud
 //
-//  Created by Hashim Shafique on 12/6/14.
+//  Created by Benjamin Hendricks on 8/4/14.
 //  Copyright (c) 2014 GymBud. All rights reserved.
 //
+
 
 #import <UIKit/UIKit.h>
 

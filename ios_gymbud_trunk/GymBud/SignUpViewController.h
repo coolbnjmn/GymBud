@@ -2,7 +2,7 @@
 //  SignUpViewController.h
 //  GymBud
 //
-//  Created by Hashim Shafique on 12/1/14.
+//  Created by Benjamin Hendricks on 12/1/14.
 //  Copyright (c) 2014 GymBud. All rights reserved.
 //
 
