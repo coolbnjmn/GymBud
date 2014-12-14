@@ -25,6 +25,9 @@
     self.view.layer.contents = (id)[UIImage imageNamed:@"background.png"].CGImage;
     self.signUpView.emailAsUsername = YES;
     self.keyboardPresent = 0;
+    [self.signUpView.additionalField setPlaceholder:@"Confirm Password"];
+    self.signUpView.additionalField.hidden = NO;
+    
     
     if (SYSTEM_VERSION_LESS_THAN(@"8.0"))
     {
@@ -82,6 +85,7 @@
     // Set frame for elements
     [self.signUpView.usernameField setFrame:CGRectMake(0.0f, 285.0f-scalingFactor, 360.0f, 50.0f)];
     [self.signUpView.passwordField setFrame:CGRectMake(0.0f, 325.0f-scalingFactor, 360.0f, 50.0f)];
+    [self.signUpView.additionalField setFrame:CGRectMake(0.0f, 365.0f, 360.0f, 50.0f)];
     [self.signUpView.signUpButton setFrame:CGRectMake(35.0f, 430.0f-scalingFactor, 250.0f, 40.0f)];
 }
 @end
