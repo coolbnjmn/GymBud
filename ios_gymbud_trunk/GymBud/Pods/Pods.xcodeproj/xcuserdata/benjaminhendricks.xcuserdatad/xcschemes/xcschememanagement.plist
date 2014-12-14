@@ -14,6 +14,16 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>Pods-GymBud-Bolts.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>Pods-GymBud-Facebook-iOS-SDK.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>Pods-GymBud-JSQMessagesViewController.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -39,6 +49,21 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>Pods-GymBud-Parse.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>Pods-GymBud-ParseFacebookUtils.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>Pods-GymBud-ParseUI.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>Pods-GymBud-RSDayFlow.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -57,52 +82,77 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>0C44638AD286CFF05DD06035</key>
+		<key>04E78F886A8A7929BF3DF1A1</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>1227A1588A32726EE628A2CD</key>
+		<key>0F05EF9945F83C296568139B</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>2D289C1C8CEC523DE9332A6D</key>
+		<key>11FE1CF477058AE4EB2892FE</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>36C15D53A3660497531DCDEB</key>
+		<key>12B4A3EAA848E9EB1D887A75</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>75687FEB84A745E2FCB9AC25</key>
+		<key>26E4E53850B45D4D3FC0217F</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>8D94DA40B2316AF8CE97AF23</key>
+		<key>310DA967A7A0975E75BF7B4F</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>C4B3AB13BA80ED73F52807D0</key>
+		<key>43293EAB675CA917D5AAB339</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>D9F0041B18E5B65A62B17746</key>
+		<key>56C8F836892E8B0FE60BC41D</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>E97309F38504E431391B21E1</key>
+		<key>80E58405F5F431E3FDCB7841</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>F7607560290FBB00929496E4</key>
+		<key>8932AD2E2619686DB007A277</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>B5740C99312DCFA803B024EC</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>B93692825A197073D897B2DB</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>BF8E97592F792D94D2127C7D</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>C26B0D3123564C69C300975C</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>F28423BB5EC819E41858326F</key>
 		<dict>
 			<key>primary</key>
 			<true/>

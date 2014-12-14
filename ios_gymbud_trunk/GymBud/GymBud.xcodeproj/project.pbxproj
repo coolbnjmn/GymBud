@@ -43,9 +43,6 @@
 		B22A6ECB1A396D6C00A30D8A /* CreateInviteCVCCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B22A6ECA1A396D6C00A30D8A /* CreateInviteCVCCell.m */; };
 		B22A6ECF1A3A00B900A30D8A /* LocationFinderVC.m in Sources */ = {isa = PBXBuildFile; fileRef = B22A6ECD1A3A00B900A30D8A /* LocationFinderVC.m */; };
 		B22A6ED21A3A059100A30D8A /* LocationFinderVC.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B22A6ED11A3A059100A30D8A /* LocationFinderVC.storyboard */; };
-		B240D9A31A1F153B00374713 /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B2C39D9D197E19A900039F90 /* Parse.framework */; };
-		B240D9A81A1F153B00374713 /* ParseFacebookUtils.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B240D9A51A1F153B00374713 /* ParseFacebookUtils.framework */; };
-		B240D9A91A1F153B00374713 /* ParseUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B240D9A61A1F153B00374713 /* ParseUI.framework */; };
 		B258FEE61A2F9315000153BE /* BubbleChatTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = B258FEE41A2F9315000153BE /* BubbleChatTVC.m */; };
 		B258FEE71A2F9315000153BE /* BubbleChatTVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = B258FEE51A2F9315000153BE /* BubbleChatTVC.xib */; };
 		B25CBEFE1A3271E0004B318C /* About.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B25CBEFD1A3271E0004B318C /* About.storyboard */; };
@@ -217,7 +214,6 @@
 		B2D0CACD197E272400B17D32 /* login-button-small@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B2D0CAC9197E272400B17D32 /* login-button-small@2x.png */; };
 		B2D0CAD1197E2BB700B17D32 /* FindUserTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = B2D0CACF197E2BB700B17D32 /* FindUserTVC.m */; };
 		B2D0CAD8197E2EAE00B17D32 /* TableHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = B2D0CAD7197E2EAE00B17D32 /* TableHeaderView.xib */; };
-		B2D607151A1F1BF400F19B34 /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B2C39D9C197E19A900039F90 /* FacebookSDK.framework */; };
 		B2D607181A2008A500F19B34 /* GymBudEventCompletionView.m in Sources */ = {isa = PBXBuildFile; fileRef = B2D607171A2008A500F19B34 /* GymBudEventCompletionView.m */; };
 		B2D6071A1A2009B600F19B34 /* GymBudEventCompletionView.xib in Resources */ = {isa = PBXBuildFile; fileRef = B2D607191A2009B600F19B34 /* GymBudEventCompletionView.xib */; };
 		B2D6071D1A21CD4500F19B34 /* SWRevealViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B2D6071C1A21CD4500F19B34 /* SWRevealViewController.m */; };
@@ -555,10 +551,6 @@
 				77FE647B198EF296008724CC /* Social.framework in Frameworks */,
 				B2C39DA8197E1A9B00039F90 /* CoreLocation.framework in Frameworks */,
 				B2C39DA6197E1A9000039F90 /* StoreKit.framework in Frameworks */,
-				B2D607151A1F1BF400F19B34 /* FacebookSDK.framework in Frameworks */,
-				B240D9A81A1F153B00374713 /* ParseFacebookUtils.framework in Frameworks */,
-				B240D9A91A1F153B00374713 /* ParseUI.framework in Frameworks */,
-				B240D9A31A1F153B00374713 /* Parse.framework in Frameworks */,
 				B2C39DA4197E1A7C00039F90 /* QuartzCore.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

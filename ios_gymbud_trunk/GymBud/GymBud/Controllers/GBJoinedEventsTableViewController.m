@@ -24,38 +24,13 @@
 {
     [super viewDidLoad];
     
-    // Do something
-    // The className to query on
-    // self.parseClassName = @"Event";
-    self.reuseId = @"GymBudEventsCell";
-    
-    // Whether the built-in pull-to-refresh is enabled
-    if (NSClassFromString(@"UIRefreshControl")) {
-        self.pullToRefreshEnabled = NO;
-    } else {
-        self.pullToRefreshEnabled = YES;
-    }
-    
     // Whether the built-in pagination is enabled
     self.paginationEnabled = YES;
-    
-    // The number of objects to show per page
-    self.objectsPerPage = 100;
 
     // Do any additional setup after loading the view.
     self.reuseId = @"GymBudEventsCell";
     // The className to query on
     self.parseClassName = @"Event";
-    
-    // Whether the built-in pull-to-refresh is enabled
-    if (NSClassFromString(@"UIRefreshControl")) {
-        self.pullToRefreshEnabled = NO;
-    } else {
-        self.pullToRefreshEnabled = YES;
-    }
-    
-    // Whether the built-in pagination is enabled
-    self.paginationEnabled = YES;
     
     // The number of objects to show per page
     self.objectsPerPage = 100;
@@ -100,6 +75,10 @@
     [[NSNotificationCenter defaultCenter] removeObserver:self name:@"CreatePostNotification" object:nil];
 }
 
+//- (BOOL)searchDisplayController:(UISearchDisplayController *)controller shouldReloadTableForSearchString:(NSString *)searchString {
+//    [self filterResults:searchString];
+//    return YES;
+//}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -110,32 +89,11 @@
 
 - (void)objectsDidLoad:(NSError *)error {
     [super objectsDidLoad:error];
-    
-    for (UIView *subview in self.view.subviews)
-    {
-        if ([subview class] == NSClassFromString(@"PFLoadingView"))
-        {
-            [subview removeFromSuperview];
-            break;
-        } else if([subview class] == NSClassFromString(@"MBProgressHud"))
-        {
-            [subview removeFromSuperview];
-            break;
-        }
-    }
     [self.HUD hide:YES];
     NSLog(@"objectsDidLoad GymBudEventsTVC");
-    // This method is called every time objects are loaded from Parse via the PFQuery
-    if (NSClassFromString(@"UIRefreshControl")) {
-        [self.refreshControl endRefreshing];
-    }
+
 }
 
-- (void)objectsWillLoad {
-    [super objectsWillLoad];
-    
-    // This method is called before a PFQuery is fired to get more objects
-}
 
 // Override to customize what kind of query to perform on the class. The default is to query for
 // all objects ordered by createdAt descending.

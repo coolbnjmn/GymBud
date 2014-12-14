@@ -11,6 +11,7 @@ pod 'Mixpanel'
 pod 'AXRatingView'
 pod 'JSQMessagesViewController'
 pod 'UIAlertView-Blocks'
+pod 'ParseUI'
 
 end
 
