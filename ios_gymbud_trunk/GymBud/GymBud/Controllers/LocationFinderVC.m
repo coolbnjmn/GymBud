@@ -124,6 +124,8 @@
     self.locationFinder.autoCompleteTableOriginOffset = CGSizeMake(0, -self.view.bounds.size.height + 45);
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
+    [self startStandardUpdates];
+
     if(![self.input isEqualToString:@""] && self.input != nil) {
         self.locationFinder.text = self.input;
         NSURL *url = [NSURL URLWithString:@"https://maps.googleapis.com/maps/api/place/autocomplete/"];
@@ -148,7 +150,6 @@
              NSLog(@"\n============== ERROR ====\n%@",error.userInfo);
          }];
     }
-    [self startStandardUpdates];
 }
 
 - (void)addDistanceObjectWithLocation:(NSString *)name {
@@ -197,12 +198,22 @@
         //1 meter == 3.280 feet
         
         double mile_distance = distance * 3.280 / 5280;
+        if(mile_distance == 0) {
+            return;
+        }
         NSMutableDictionary *mutableDict = [[NSMutableDictionary alloc] init];
         [mutableDict setObject:[NSNumber numberWithDouble:mile_distance] forKey:@"distance"];
         [mutableDict setObject:name forKey:@"description"];
-        [self.places addObject:mutableDict[@"description"]];
-
-        [self.distances addObject:mutableDict[@"distance"]];
+        [self.distances addObject:mutableDict];
+        [self.distances sortUsingComparator:^(id obj1, id obj2) {
+            NSNumber *rating1 = [(NSDictionary *)obj1 objectForKey:@"distance"];
+            NSNumber *rating2 = [(NSDictionary *)obj2 objectForKey:@"distance"];
+            return [rating1 compare:rating2];
+        }];
+        [self.places removeAllObjects];
+        for(NSDictionary *dict in self.distances) {
+            [self.places addObject:dict[@"description"]];
+        }
         
         [self.tableView reloadData];
     } failure:^(NSURLSessionDataTask *task, NSError *error) {
@@ -228,12 +239,15 @@
         NSDictionary *params = @{@"input" : [textField.text stringByReplacingOccurrencesOfString:@" " withString:@"+"],
                                  @"location" : [NSString stringWithFormat:@"%f,%f", currentLocation.coordinate.latitude, currentLocation.coordinate.longitude],
                                  @"sensor" : @"true",
+                                 @"radius" : @"5000",
+                                 @"types" : @"establishment",
                                  @"key" : kGoogleApiKey};
 
         AFHTTPSessionManager *httpSessionManager = [[AFHTTPSessionManager alloc] initWithBaseURL:url];
         [httpSessionManager GET:@"json" parameters:params success:^(NSURLSessionDataTask *task, id responseObject) {
             //        NSLog(@"\n============= Entity Saved Success ===\n%@",responseObject);
             [self.places removeAllObjects];
+            [self.distances removeAllObjects];
             for(id description in responseObject[@"predictions"]) {
 //                [self.places addObject:description[@"description"]];
                 [self.tableView reloadData];
@@ -256,7 +270,7 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"placeCell"];
     cell.textLabel.text = [self.places objectAtIndex:indexPath.row];
-    NSNumber *distance = [self.distances objectAtIndex:indexPath.row];
+    NSNumber *distance = [self.distances objectAtIndex:indexPath.row][@"distance"];
     NSNumberFormatter *fmt = [[NSNumberFormatter alloc] init];
     [fmt setPositiveFormat:@"0.##"];
     NSString *detailLabelText = [fmt stringFromNumber:distance];

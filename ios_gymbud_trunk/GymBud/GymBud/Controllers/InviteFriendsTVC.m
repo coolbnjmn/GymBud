@@ -7,7 +7,12 @@
 //
 
 #import <Parse/Parse.h>
+#import <AFNetworking/AFNetworking.h>
 #import <Parse/PFCloud.h>
+#import "GymBudConstants.h"
+#import "AppDelegate.h"
+#import <MBProgressHUD/MBProgressHUD.h>
+#import <Mixpanel/Mixpanel.h>
 
 #import "InviteFriendsTVC.h"
 
@@ -15,6 +20,7 @@
 
 @property (nonatomic, strong) NSMutableArray *arrContactsData;
 @property (nonatomic, strong) ABPeoplePickerNavigationController *addressBookController;
+@property (nonatomic, strong) MBProgressHUD *HUD;
 
 -(void)showAddressBook;
 
@@ -94,21 +100,128 @@
     NSString *shortDate = [formatter stringFromDate:self.date];
     NSString *body = [[PFUser currentUser][@"gymbudProfile"][@"name"] stringByAppendingString: [NSString stringWithFormat:@" invited you to go lift @ %@ %@. Reply IN or OUT now!", shortDate, self.location, nil]];
     [userDict setObject:body forKey:@"body"];
-    [PFCloud callFunctionInBackground:@"inviteWithTwilio" withParameters:userDict block:^(id object, NSError *error) {
-        NSString *message = @"";
-        if (!error) {
-            message = @"Your SMS invitation has been sent!";
-        } else {
-            message = @"Uh oh, something went wrong :(";
+        
+    // now for the location
+    NSURL *url = [NSURL URLWithString:@"https://maps.googleapis.com/maps/api/geocode/"];
+    NSLog(@"%@", [[self.location stringByReplacingOccurrencesOfString:@", " withString:@"+"] stringByReplacingOccurrencesOfString:@" " withString:@"+"]);
+    NSDictionary *params = @{@"address" : [[self.location stringByReplacingOccurrencesOfString:@", " withString:@"+"] stringByReplacingOccurrencesOfString:@" " withString:@"+"],
+                             @"sensor" : @"true",
+                             @"key" : kGoogleApiKey};
+    self.HUD = [[MBProgressHUD alloc] initWithView:self.view];
+    [self.view addSubview:self.HUD];
+    UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, kLoadingAnimationWidth, kLoadingAnimationHeight)];
+    imageView.image = [UIImage imageNamed:kLoadingImageFirst];
+    //Add more images which will be used for the animation
+    imageView.animationImages = kLoadingImagesArray;
+    
+    //Set the duration of the animation (play with it
+    //until it looks nice for you)
+    imageView.animationDuration = kLoadingAnimationDuration;
+    [imageView startAnimating];
+    imageView.contentMode = UIViewContentModeScaleToFill;
+    self.HUD.customView = imageView;
+    self.HUD.mode = MBProgressHUDModeCustomView;
+    self.HUD.color = [UIColor clearColor];
+    [self.HUD show:YES];
+    AFHTTPSessionManager *httpSessionManager = [[AFHTTPSessionManager alloc] initWithBaseURL:url];
+    [httpSessionManager GET:@"json" parameters:params success:^(NSURLSessionDataTask *task, id responseObject) {
+        NSLog(@"\n============= Entity Saved Success ===\n%@",responseObject);
+        NSString *latStr;
+        NSString *lngStr;
+        for(id object in responseObject[@"results"]) {
+            NSLog(@"%@", object);
+            if([object objectForKey:@"geometry"]) {
+                latStr = object[@"geometry"][@"location"][@"lat"];
+                lngStr = object[@"geometry"][@"location"][@"lng"];
+            }
         }
         
-        [[[UIAlertView alloc] initWithTitle:@"Invite Sent!"
-                                    message:message
-                                   delegate:nil
-                          cancelButtonTitle:@"Ok"
-                          otherButtonTitles:nil, nil] show];
-        [self.tableView reloadData];
+        CLLocationDegrees lat = [latStr doubleValue];
+        CLLocationDegrees lng = [lngStr doubleValue];
+        
+        if(lat == 0 || lng == 0) {
+            AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
+            lat = appDelegate.currentLocation.coordinate.latitude;
+            lng = appDelegate.currentLocation.coordinate.longitude;
+        }
+        PFGeoPoint *eventLocation = [PFGeoPoint geoPointWithLatitude:lat longitude:lng];
+        
+        PFObject *eventObject = [PFObject objectWithClassName:@"Event"];
+        [eventObject setObject:[PFUser currentUser] forKey:@"organizer"];
+        
+        //        [eventObject setObject:eventLocation forKey:@"location"];
+        [eventObject setObject:self.location forKey:@"locationName"];
+        [eventObject setObject:eventLocation forKey:@"location"];
+        [eventObject setObject:@"" forKey:@"additional"];
+        [eventObject setObject:self.date forKey:@"time"];
+        [eventObject setObject:[NSNumber numberWithBool:YES] forKey:@"isVisible"];
+        
+        [eventObject setObject:@"Strength Training" forKey:@"activity"];
+        
+        NSMutableArray *indices = [[NSMutableArray alloc] init];
+        for(NSIndexPath *indexPath in self.bodyParts) {
+            [indices addObject:[NSNumber numberWithInteger:indexPath.row]];
+        }
+        [eventObject setObject:indices forKey:@"detailLogoIndices"];
+        
+        //        int selectedCountRow = (int) [self.countPicker selectedRowInComponent:0];
+        // add 1 because it is 0 based indexing.
+        [eventObject setObject:[NSNumber numberWithInt:1] forKey:@"count"];
+
+        [eventObject setObject:[NSNumber numberWithInt:60] forKey:@"duration"];
+        
+        [eventObject setObject:[[PFUser currentUser][@"gymbudProfile"][@"name"] stringByAppendingString: [NSString stringWithFormat:@" invited you to go lift @ %@ %@. Reply IN or OUT now!", shortDate, self.location, nil]] forKey:@"description"];
+        
+        [eventObject saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+            if (error) {
+                NSLog(@"Couldn't save!");
+                NSLog(@"%@", error);
+                [self.HUD hide:NO];
+                UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:[[error userInfo] objectForKey:@"error"] message:nil delegate:self cancelButtonTitle:nil otherButtonTitles:@"Ok", nil];
+                [alertView show];
+                return;
+            }
+            if (succeeded) {
+                NSLog(@"Successfully saved!");
+                
+                    
+                [PFCloud callFunctionInBackground:@"inviteWithTwilio" withParameters:userDict block:^(id object, NSError *error) {
+                    NSString *message = @"";
+                    if (!error) {
+                        message = @"Your SMS invitation has been sent!";
+                    } else {
+                        message = @"Uh oh, something went wrong :(";
+                    }
+                    
+                    UIAlertView *smsSentAlertView = [[UIAlertView alloc] initWithTitle:@"Invite Sent!"
+                                                                               message:message
+                                                                              delegate:nil
+                                                                     cancelButtonTitle:@"Ok"
+                                                                     otherButtonTitles:nil, nil];
+                    [smsSentAlertView show];
+                    
+                    [self.HUD hide:YES];
+                    NSLog(@"%@", eventObject);
+                    
+                    [self.navigationController popToRootViewControllerAnimated:YES];
+                    
+                    Mixpanel *mixpanel = [Mixpanel sharedInstance];
+                    [mixpanel track:@"InviteFriendsTVC CreateEvent" properties:@{
+                                                                                 
+                                                                                 }];
+                    [self.tableView reloadData];
+
+                    
+                }];
+
+            } else {
+                NSLog(@"Failed to save.");
+            }
+        }];
+    } failure:^(NSURLSessionDataTask *task, NSError *error) {
+        NSLog(@"\n============== ERROR ====\n%@",error.userInfo);
     }];
+
 }
 
 -(void)showAddressBook{
