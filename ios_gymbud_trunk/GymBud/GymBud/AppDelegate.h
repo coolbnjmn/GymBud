@@ -13,8 +13,6 @@
 #import "GymBudEventsTVC.h"
 #import "MessageInboxTVC.h"
 #import "GoActivityCVC.h"
-#import "GBJoinedEventsTVC.h"
-
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 

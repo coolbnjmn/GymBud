@@ -1,75 +1,33 @@
 //
-//  GBJoinedEventsTVC.m
+//  GBJoinedEventsTableViewController.m
 //  GymBud
 //
-//  Created by Benjamin Hendricks on 8/28/14.
+//  Created by Hashim Shafique on 12/12/14.
 //  Copyright (c) 2014 GymBud. All rights reserved.
 //
 
-#import "GBJoinedEventsTVC.h"
-#import "GymBudEventsCell.h"
-#import "GymBudEventModel.h"
-#import "UserDetailsViewController.h"
-#import "GymBudConstants.h"
-#import "NSDate+Utilities.h"
-#import "UIImageView+AFNetworking.h"
+#import "GBJoinedEventsTableViewController.h"
 #import "MBProgressHUD.h"
+#import "GymBudConstants.h"
 #import "Mixpanel.h"
 
 #define kCellHeight 100
 
-@interface GBJoinedEventsTVC ()
-
+@interface GBJoinedEventsTableViewController () <UISearchDisplayDelegate>
 @property NSString *reuseId;
 @property MBProgressHUD *HUD;
-
 @end
 
-@implementation GBJoinedEventsTVC
-
--(id)initWithCoder:(NSCoder *)aDecoder
-{
-    if(self = [super initWithCoder:aDecoder]) {
-        // Do something
-        // The className to query on
-        self.parseClassName = @"Event";
-        self.reuseId = @"GymBudEventsCell";
-        
-        // The key of the PFObject to display in the label of the default cell style
-        self.title = @"GymBud";
-        
-        // Whether the built-in pull-to-refresh is enabled
-        if (NSClassFromString(@"UIRefreshControl")) {
-            self.pullToRefreshEnabled = NO;
-        } else {
-            self.pullToRefreshEnabled = YES;
-        }
-        
-        // Whether the built-in pagination is enabled
-        self.paginationEnabled = YES;
-        
-        // The number of objects to show per page
-        self.objectsPerPage = 100;
-        
-    }
-    return self;
-}
-
-- (void)dealloc {
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"LocationChangeNotification" object:nil];
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"CreatePostNotification" object:nil];
-}
+@implementation GBJoinedEventsTableViewController
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     
-    self.reuseId = @"GymBudEventsCell";
+    // Do something
     // The className to query on
-    self.parseClassName = @"Event";
-    
-    // The key of the PFObject to display in the label of the default cell style
-    self.title = @"GymBud";
+    // self.parseClassName = @"Event";
+    self.reuseId = @"GymBudEventsCell";
     
     // Whether the built-in pull-to-refresh is enabled
     if (NSClassFromString(@"UIRefreshControl")) {
@@ -83,7 +41,25 @@
     
     // The number of objects to show per page
     self.objectsPerPage = 100;
-   
+
+    // Do any additional setup after loading the view.
+    self.reuseId = @"GymBudEventsCell";
+    // The className to query on
+    self.parseClassName = @"Event";
+    
+    // Whether the built-in pull-to-refresh is enabled
+    if (NSClassFromString(@"UIRefreshControl")) {
+        self.pullToRefreshEnabled = NO;
+    } else {
+        self.pullToRefreshEnabled = YES;
+    }
+    
+    // Whether the built-in pagination is enabled
+    self.paginationEnabled = YES;
+    
+    // The number of objects to show per page
+    self.objectsPerPage = 100;
+    
     if (NSClassFromString(@"UIRefreshControl")) {
         // Use the new iOS 6 refresh control.
         UIRefreshControl *refreshControl = [[UIRefreshControl alloc] init];
@@ -98,14 +74,34 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(postWasCreated:) name:@"CreatePostNotification" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(locationDidChange:) name:@"LocationChangeNotification" object:nil];
     
-    self.tableView.backgroundColor = [UIColor whiteColor];
-    self.tableView.separatorColor = [UIColor clearColor];
+    self.tableView.separatorColor = [UIColor whiteColor];
     self.navigationItem.title = @"Joined Events";
     
+    searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0, 0, 320, 44)];
+    /*the search bar widht must be > 1, the height must be at least 44
+     (the real size of the search bar)*/
+    
+    searchDisplayController = [[UISearchDisplayController alloc] initWithSearchBar:searchBar contentsController:self];
+    /*contents controller is the UITableViewController, this let you to reuse
+     the same TableViewController Delegate method used for the main table.*/
+    
+    searchDisplayController.delegate = self;
+    searchDisplayController.searchResultsDataSource = self;
+    //set the delegate = self. Previously declared in ViewController.h
+    
+    self.tableView.tableHeaderView = searchBar; //this line add the searchBar
+    //on the top of tableView.
+    self.tableView.backgroundColor = kGymBudLightBlue;
+
 }
 
-- (void)didReceiveMemoryWarning
-{
+- (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"LocationChangeNotification" object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"CreatePostNotification" object:nil];
+}
+
+
+- (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
@@ -132,8 +128,10 @@
 // Override to customize what kind of query to perform on the class. The default is to query for
 // all objects ordered by createdAt descending.
 - (PFQuery *)queryForTable {
-//    PFQuery *query = [PFQuery queryWithClassName:self.parseClassName];
+    //    PFQuery *query = [PFQuery queryWithClassName:self.parseClassName];
     // Query for posts near our current location.
+    self.parseClassName = @"Event";
+
     PFQuery *attendeeQuery = [PFQuery queryWithClassName:self.parseClassName];
     PFQuery *organizerQuery = [PFQuery queryWithClassName:self.parseClassName];
     
@@ -185,90 +183,85 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return kCellHeight;
+    return kCellHeight + 20;
 }
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath object:(PFObject *)object {
-    
-    GymBudEventsCell *cell = [tableView dequeueReusableCellWithIdentifier:self.reuseId forIndexPath:indexPath];
-    
-    if(cell == nil) {
-        cell = [[GymBudEventsCell alloc] init];
-    }
-    
-    cell.nameTextLabel.text = [object objectForKey:@"organizer"][@"gymbudProfile"][@"name"];
-    
-    NSDate *eventStartTime = [object objectForKey:@"time"];
-    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-    [formatter setDateStyle:NSDateFormatterNoStyle];
-    [formatter setTimeStyle:NSDateFormatterShortStyle];
-    cell.startTimeTextLabel.text = [formatter stringFromDate:eventStartTime];
-    cell.activityTextLabel.text = ![object[@"additional"] isEqualToString:@""] ? [[[object objectForKey:@"activity"] stringByAppendingString:@" - "] stringByAppendingString:object[@"additional"]] : object[@"activity"];
-    UIColor * color = [UIColor colorWithRed:178/255.0f green:168/255.0f blue:151/255.0f alpha:1.0f];
-    cell.backgroundColor = color;
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath object:(PFObject *)object
+{
+    UITableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:@"joined"
+                                                forIndexPath:indexPath];
     
     PFFile *theImage = [object objectForKey:@"organizer"][@"gymbudProfile"][@"profilePicture"];
-    cell.logoImageView.image = [UIImage imageNamed:[kGymBudActivityIconMapping objectForKey:[object objectForKey:@"activity"]]];
     
-    __weak GymBudEventsCell *weakCell = cell;
+    __weak UITableViewCell *weakCell = cell;
     [theImage getDataInBackgroundWithBlock:^(NSData *data, NSError *error){
         NSLog(@"+++++++++ Loading image view with real data ++++++++");
-        weakCell.logoImageView.image = [UIImage imageWithData:data];
+        UIImageView *pict = (UIImageView*) [cell viewWithTag:10];
+        pict.image = [UIImage imageWithData:data];
         [weakCell setNeedsLayout];
+        pict.layer.cornerRadius = 30.0f;
+        pict.layer.masksToBounds = YES;
+        CGSize itemSize = CGSizeMake(60, 60);
+        UIGraphicsBeginImageContextWithOptions(itemSize, NO, UIScreen.mainScreen.scale);
+        CGRect imageRect = CGRectMake(0.0, 0.0, itemSize.width, itemSize.height);
+        [pict.image drawInRect:imageRect];
+        pict.image = UIGraphicsGetImageFromCurrentImageContext();
+        UIGraphicsEndImageContext();
+
     }];
     
-    if([eventStartTime isToday]) {
-        cell.startDateTextLabel.text = @"Today";
-    } else if([eventStartTime isTomorrow]) {
-        cell.startDateTextLabel.text = @"Tomorrow";
-    } else {
-        NSDateFormatter *formatter2 = [[NSDateFormatter alloc] init];
-        [formatter2 setDateFormat:@"MM/dd"];
-        cell.startDateTextLabel.text = [formatter2 stringFromDate:eventStartTime];
-    }
-    cell.locationTextLabel.text = [object objectForKey:@"locationName"];
-    NSString *countOverCapacity;
-    NSString *count = [NSString stringWithFormat:@"%ld", [((NSArray *)[object objectForKey:@"attendees"]) count]];
-    NSString *capacity = [NSString stringWithFormat:@"%ld", [[object objectForKey:@"count"] integerValue]];
-    countOverCapacity = [[count stringByAppendingString:@"/"] stringByAppendingString:capacity];
-    cell.capacityTextLabel.text = countOverCapacity;
+    UILabel *nameLabel = (UILabel *)[cell viewWithTag:2];
+    UILabel *dateLabel = (UILabel *)[cell viewWithTag:3];
     
+    nameLabel.font = [UIFont fontWithName:@"MagistralATT" size:18];
+    dateLabel.font = [UIFont fontWithName:@"MagistralATT" size:12];
+    nameLabel.textColor = [UIColor whiteColor];
+    nameLabel.textColor = [UIColor whiteColor];
+    dateLabel.textColor = [UIColor whiteColor];
+    
+    nameLabel.text = [NSString stringWithFormat:@"Event Organizer: %@",[object objectForKey:@"organizer"][@"gymbudProfile"][@"name"]];
+    
+    NSDate *eventStartTime = [object objectForKey:@"time"];
+    NSDateFormatter *format = [[NSDateFormatter alloc] init];
+    [format setDateFormat:@"MMM dd, yyyy HH:mm"];
+    NSString *dateString = [format stringFromDate:eventStartTime];
+
+    dateLabel.text = [NSString stringWithFormat:@"Event Time: %@", dateString];
+    cell.backgroundColor = kGymBudLightBlue;
+    nameLabel.adjustsFontSizeToFitWidth = YES;
+    nameLabel.numberOfLines = 1;
+
+    [nameLabel sizeToFit];
+
     NSArray *subLogoIndices = [object objectForKey:@"detailLogoIndices"];
     int subLogoIndex = 0;
     for(NSNumber *index in subLogoIndices) {
         if(subLogoIndex == 0) {
-            cell.subLogoImageView1.image = [UIImage imageNamed:[kGBBodyPartImagesArray objectAtIndex:[index integerValue]]];
+            
+            UIImageView *imv = (UIImageView*) [cell viewWithTag:4];
+            imv.image=[UIImage imageNamed:[kGBBodyPartImagesArray objectAtIndex:[index integerValue]]];
+            [cell.contentView addSubview:imv];
         } else if(subLogoIndex == 1) {
-            cell.subLogoImageView2.image = [UIImage imageNamed:[kGBBodyPartImagesArray objectAtIndex:[index integerValue]]];
+            UIImageView *imv = (UIImageView*) [cell viewWithTag:5];
+            imv.image=[UIImage imageNamed:[kGBBodyPartImagesArray objectAtIndex:[index integerValue]]];
+            [cell.contentView addSubview:imv];
         } else if(subLogoIndex == 2) {
-            cell.subLogoImageView3.image = [UIImage imageNamed:[kGBBodyPartImagesArray objectAtIndex:[index integerValue]]];
+            UIImageView *imv = (UIImageView*) [cell viewWithTag:6];
+            imv.image=[UIImage imageNamed:[kGBBodyPartImagesArray objectAtIndex:[index integerValue]]];
+            [cell.contentView addSubview:imv];
         } else {
-            cell.subLogoImageView4.image = [UIImage imageNamed:[kGBBodyPartImagesArray objectAtIndex:[index integerValue]]];
+            UIImageView *imv = (UIImageView*) [cell viewWithTag:7];
+            imv.image=[UIImage imageNamed:[kGBBodyPartImagesArray objectAtIndex:[index integerValue]]];
+            [cell.contentView addSubview:imv];
         }
         subLogoIndex++;
     }
+
     return cell;
 }
 
-
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    // call super because we're a custom subclass.
-    [super tableView:tableView didSelectRowAtIndexPath:indexPath];
-    UserDetailsViewController *controller = [[UserDetailsViewController alloc] initWithNibName:nil
-                                                                                        bundle:nil];
-    PFQuery *query = [PFQuery queryWithClassName:self.parseClassName];
-    [query includeKey:@"organizer"];
-    [query whereKey:@"objectId" equalTo:[[self.objects objectAtIndex:indexPath.row] objectId]];
-
-    [query findObjectsInBackgroundWithBlock:^(NSArray *events, NSError *error) {
-        if(self.navigationController.topViewController == self) {
-            controller.annotation = [events objectAtIndex:0];
-            [self.navigationController pushViewController:controller animated:YES]; // or use presentViewController if you're using modals
-            Mixpanel *mixpanel = [Mixpanel sharedInstance];
-            [mixpanel track:@"GBJoinedEventsTVC SelectedRow" properties:@{
-                                                                   }];
-        }
-    }];
-    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
 }
 
 #pragma mark - ()
@@ -290,5 +283,16 @@
 - (void)refreshControlValueChanged:(UIRefreshControl *)refreshControl {
     [self loadObjects];
 }
+
+
+/*
+#pragma mark - Navigation
+
+// In a storyboard-based application, you will often want to do a little preparation before navigation
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    // Get the new view controller using [segue destinationViewController].
+    // Pass the selected object to the new view controller.
+}
+*/
 
 @end
