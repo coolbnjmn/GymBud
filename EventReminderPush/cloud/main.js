@@ -89,7 +89,8 @@ Parse.Cloud.job("eventReminder", function(request, response) {
 	       data: {
 	         alert: "Your event is starting soon!",
 		  eventObjectId: eventObj.id,
-		  eventObj: attendeesAndOrganizer
+		  eventObj: attendeesAndOrganizer,
+		  badge: "Increment"
 	       }
 	     }, {
 	       success: function() {
@@ -106,7 +107,8 @@ Parse.Cloud.job("eventReminder", function(request, response) {
 		data: {
 		  alert: "How was your GymBud?",
 		  eventObjectId: eventObj.id,
-		  eventObj: eventObj
+		  eventObj: eventObj,
+		  badge: "Increment"
 		},
 		push_time: end_date// end date
 	       }, {

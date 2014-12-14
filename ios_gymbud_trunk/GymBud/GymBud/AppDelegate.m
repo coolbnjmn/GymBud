@@ -126,6 +126,7 @@
                 [data setObject:[NSString stringWithFormat:@"%@ went with someone else. Create your own event?", name] forKey:@"alert"];
                 [data setObject:[notificationPayload objectForKey:@"eventObj"] forKey:@"eventObj"];
                 [data setObject:[NSNumber numberWithBool:YES] forKey:@"createEventPush"];
+                [data setObject:@"Increment" forKey:@"badge"];
                 [requestorPush setData:data];
                 [requestorPush setQuery:pushQuery];
                 [requestorPush sendPushInBackground];
@@ -144,6 +145,7 @@
                     name = [[[PFUser currentUser] objectForKey:@"profile"] objectForKey:@"name"];
                 }
                 
+                [data setObject:@"Increment" forKey:@"badge"];
                 [data setObject:[NSString stringWithFormat:@"%@ accepted. Let's go lift!", name] forKey:@"alert"];
                 [requestorPush setData:data];
                 [requestorPush setQuery:pushQuery];
@@ -352,6 +354,7 @@ didReceiveRemoteNotification:(NSDictionary *)userInfo {
             [data setObject:[NSString stringWithFormat:@"%@ went with someone else. Create your own event?", name] forKey:@"alert"];
             [data setObject:[userInfo objectForKey:@"eventObj"] forKey:@"eventObj"];
             [data setObject:[NSNumber numberWithBool:YES] forKey:@"createEventPush"];
+            [data setObject:@"Increment" forKey:@"badge"];
             [requestorPush setData:data];
             [requestorPush setQuery:pushQuery];
             [requestorPush sendPushInBackground];
@@ -375,6 +378,7 @@ didReceiveRemoteNotification:(NSDictionary *)userInfo {
             }
             
             [data setObject:[NSString stringWithFormat:@"%@ accepted. Let's go lift!", name] forKey:@"alert"];
+            [data setObject:@"Increment" forKey:@"badge"];
             [requestorPush setData:data];
             [requestorPush setQuery:pushQuery];
             [requestorPush sendPushInBackground];

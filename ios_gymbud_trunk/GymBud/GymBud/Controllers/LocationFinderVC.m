@@ -45,8 +45,6 @@
     if (currentLocation) {
         appDelegate.currentLocation = currentLocation;
     }
-    //    [self.mapView setCenterCoordinate:self.mapView.userLocation.location.coordinate animated:YES];
-//    [self.mapView setCenterCoordinate:appDelegate.currentLocation.coordinate animated:YES];
 }
 
 

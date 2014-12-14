@@ -450,6 +450,7 @@
     NSMutableDictionary *data = [[NSMutableDictionary alloc] init];
     [data setObject:[NSString stringWithFormat:@"%@ messaged you, see now?", name] forKey:@"alert"];
     [data setObject:[PFUser currentUser] forKey:@"fromUser"];
+    [data setObject:@"Increment" forKey:@"badge"];
     [push setData:data];
 
 //    [push setMessage:[NSString stringWithFormat:@"Message From: %@", name]];

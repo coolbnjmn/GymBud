@@ -293,7 +293,11 @@
     } else {
         name = [currentUser objectForKey:@"profile"][@"name"];
     }
-    [push setMessage:[NSString stringWithFormat:@"Message From: %@", name]];
+    
+    NSMutableDictionary *data = [[NSMutableDictionary alloc] init];
+    [data setObject:[NSString stringWithFormat:@"Message From: %@", name] forKey:@"alert"];
+    [data setObject:@"Increment" forKey:@"badge"];
+    [push setData:data];
     [push sendPushInBackground];
     
 

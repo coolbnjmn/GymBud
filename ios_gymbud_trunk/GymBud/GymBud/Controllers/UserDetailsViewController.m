@@ -400,6 +400,7 @@
         [data setObject:[NSString stringWithFormat:@"%@ wants to join, accept?", name] forKey:@"alert"];
         [data setObject:[objects objectAtIndex:0] forKey:@"eventObj"];
         [data setObject:currentUser forKey:@"requestor"];
+        [data setObject:@"Increment" forKey:@"badge"];
         [push setData:data];
         [push setQuery:query];
         [push sendPushInBackground];
