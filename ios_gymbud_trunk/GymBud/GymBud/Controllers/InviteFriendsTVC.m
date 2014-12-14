@@ -16,11 +16,19 @@
 
 #import "InviteFriendsTVC.h"
 
-@interface InviteFriendsTVC ()
+@interface InviteFriendsTVC () <UISearchDisplayDelegate, UISearchBarDelegate>
 
 @property (nonatomic, strong) NSMutableArray *arrContactsData;
 @property (nonatomic, strong) ABPeoplePickerNavigationController *addressBookController;
 @property (nonatomic, strong) MBProgressHUD *HUD;
+
+@property (nonatomic, retain) NSMutableArray *searchData;
+
+@property (nonatomic, retain) UISearchBar *searchBar;
+@property (nonatomic, retain) UISearchDisplayController *mySearchDisplayController;
+@property (nonatomic, retain) NSMutableArray *searchResults;
+
+@property (nonatomic, retain) NSMutableArray *selectedResults;
 
 -(void)showAddressBook;
 
@@ -40,38 +48,139 @@
     UIBarButtonItem *sendButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(inviteFriends:)];
     self.navigationItem.rightBarButtonItem = sendButton;
     CFErrorRef * error;
-    ABAddressBookRef addressBook = ABAddressBookCreateWithOptions(NULL, (CFErrorRef *)&error);
-    CFArrayRef allPeople = ABAddressBookCopyArrayOfAllPeople( addressBook );
-    CFIndex nPeople = ABAddressBookGetPersonCount( addressBook );
+//    ABAddressBookRef addressBook = ABAddressBookCreateWithOptions(NULL, (CFErrorRef *)&error);
+    ABAddressBookRef addressBookRef = ABAddressBookCreateWithOptions(NULL, NULL);
     
-    for ( int i = 0; i < nPeople; i++ )
-    {
-        ABRecordRef ref = CFArrayGetValueAtIndex( allPeople, i );
-        ABMultiValueRef multiPhones = ABRecordCopyValue(ref, kABPersonPhoneProperty);
-        CFStringRef firstName = ABRecordCopyValue(ref, kABPersonFirstNameProperty);
-        CFStringRef lastName = ABRecordCopyValue(ref, kABPersonLastNameProperty);
-        
-        for(CFIndex i = 0; i < ABMultiValueGetCount(multiPhones); i++) {
-            CFStringRef phoneNumberRef = ABMultiValueCopyValueAtIndex(multiPhones, i);
-            NSString *phoneNumber = (__bridge NSString *) phoneNumberRef;
-            CFRelease(phoneNumberRef);
-            if(![phoneNumber isEqualToString:@"" ]) {
-                NSMutableDictionary *userDict = [[NSMutableDictionary alloc] init];
-                [userDict setObject:phoneNumber forKey:@"phone"];
-                NSString *name = [[((__bridge NSString *) firstName? : @"") stringByAppendingString:@" " ] stringByAppendingString:((__bridge NSString *)lastName ? : @"")];
-                [userDict setObject:name forKey:@"name"];
-                if (_arrContactsData == nil) {
-                    _arrContactsData = [[NSMutableArray alloc] init];
-                }
-                [self.arrContactsData addObject:userDict];
-
-            }
+    if (ABAddressBookGetAuthorizationStatus() == kABAuthorizationStatusNotDetermined) {
+        ABAddressBookRequestAccessWithCompletion(addressBookRef, ^(bool granted, CFErrorRef error) {
+            ABAddressBookRef addressBook = ABAddressBookCreateWithOptions(NULL,NULL);
+            CFArrayRef allPeople = ABAddressBookCopyArrayOfAllPeople( addressBook );
+            CFIndex nPeople = ABAddressBookGetPersonCount( addressBook );
             
-        }
-        CFRelease(multiPhones);
+            for ( int i = 0; i < nPeople; i++ )
+            {
+                ABRecordRef ref = CFArrayGetValueAtIndex( allPeople, i );
+                ABMultiValueRef multiPhones = ABRecordCopyValue(ref, kABPersonPhoneProperty);
+                CFStringRef firstName = ABRecordCopyValue(ref, kABPersonFirstNameProperty);
+                CFStringRef lastName = ABRecordCopyValue(ref, kABPersonLastNameProperty);
+                
+                for(CFIndex i = 0; i < ABMultiValueGetCount(multiPhones); i++) {
+                    CFStringRef phoneNumberRef = ABMultiValueCopyValueAtIndex(multiPhones, i);
+                    NSString *phoneNumber = (__bridge NSString *) phoneNumberRef;
+                    CFRelease(phoneNumberRef);
+                    if(![phoneNumber isEqualToString:@"" ]) {
+                        NSMutableDictionary *userDict = [[NSMutableDictionary alloc] init];
+                        [userDict setObject:phoneNumber forKey:@"phone"];
+                        NSString *name = [[((__bridge NSString *) firstName? : @"") stringByAppendingString:@" " ] stringByAppendingString:((__bridge NSString *)lastName ? : @"")];
+                        [userDict setObject:name forKey:@"name"];
+                        if (_arrContactsData == nil) {
+                            _arrContactsData = [[NSMutableArray alloc] init];
+                        }
+                        [self.arrContactsData addObject:userDict];
+                        
+                    }
+                    
+                }
+                CFRelease(multiPhones);
+            }
+            [self.tableView reloadData];
+        });
     }
+    else if (ABAddressBookGetAuthorizationStatus() == kABAuthorizationStatusAuthorized) {
+        
+        ABAddressBookRef addressBook = ABAddressBookCreateWithOptions(NULL, &error);
+        CFArrayRef allPeople = ABAddressBookCopyArrayOfAllPeople( addressBook );
+        CFIndex nPeople = ABAddressBookGetPersonCount( addressBook );
+        
+        for ( int i = 0; i < nPeople; i++ )
+        {
+            ABRecordRef ref = CFArrayGetValueAtIndex( allPeople, i );
+            ABMultiValueRef multiPhones = ABRecordCopyValue(ref, kABPersonPhoneProperty);
+            CFStringRef firstName = ABRecordCopyValue(ref, kABPersonFirstNameProperty);
+            CFStringRef lastName = ABRecordCopyValue(ref, kABPersonLastNameProperty);
+            
+            for(CFIndex i = 0; i < ABMultiValueGetCount(multiPhones); i++) {
+                CFStringRef phoneNumberRef = ABMultiValueCopyValueAtIndex(multiPhones, i);
+                NSString *phoneNumber = (__bridge NSString *) phoneNumberRef;
+                CFRelease(phoneNumberRef);
+                if(![phoneNumber isEqualToString:@"" ]) {
+                    NSMutableDictionary *userDict = [[NSMutableDictionary alloc] init];
+                    [userDict setObject:phoneNumber forKey:@"phone"];
+                    NSString *name = [[((__bridge NSString *) firstName? : @"") stringByAppendingString:@" " ] stringByAppendingString:((__bridge NSString *)lastName ? : @"")];
+                    [userDict setObject:name forKey:@"name"];
+                    if (_arrContactsData == nil) {
+                        _arrContactsData = [[NSMutableArray alloc] init];
+                    }
+                    [self.arrContactsData addObject:userDict];
+                    
+                }
+                
+            }
+            CFRelease(multiPhones);
+        }
+        [self.tableView reloadData];
+    }
+    else {
+        // Send an alert telling user to change privacy setting in settings app
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Please let us use your contacts." message:@"So you can invite your friends! Go to settings now!" delegate:self cancelButtonTitle:nil otherButtonTitles:@"Ok", nil];
+        [alert show];
+    }
+//    CFArrayRef allPeople = ABAddressBookCopyArrayOfAllPeople( addressBookRef );
+//    CFIndex nPeople = ABAddressBookGetPersonCount( addressBookRef );
+//    
+//    for ( int i = 0; i < nPeople; i++ )
+//    {
+//        ABRecordRef ref = CFArrayGetValueAtIndex( allPeople, i );
+//        ABMultiValueRef multiPhones = ABRecordCopyValue(ref, kABPersonPhoneProperty);
+//        CFStringRef firstName = ABRecordCopyValue(ref, kABPersonFirstNameProperty);
+//        CFStringRef lastName = ABRecordCopyValue(ref, kABPersonLastNameProperty);
+//        
+//        for(CFIndex i = 0; i < ABMultiValueGetCount(multiPhones); i++) {
+//            CFStringRef phoneNumberRef = ABMultiValueCopyValueAtIndex(multiPhones, i);
+//            NSString *phoneNumber = (__bridge NSString *) phoneNumberRef;
+//            CFRelease(phoneNumberRef);
+//            if(![phoneNumber isEqualToString:@"" ]) {
+//                NSMutableDictionary *userDict = [[NSMutableDictionary alloc] init];
+//                [userDict setObject:phoneNumber forKey:@"phone"];
+//                NSString *name = [[((__bridge NSString *) firstName? : @"") stringByAppendingString:@" " ] stringByAppendingString:((__bridge NSString *)lastName ? : @"")];
+//                [userDict setObject:name forKey:@"name"];
+//                if (_arrContactsData == nil) {
+//                    _arrContactsData = [[NSMutableArray alloc] init];
+//                }
+//                [self.arrContactsData addObject:userDict];
+//
+//            }
+//            
+//        }
+//        CFRelease(multiPhones);
+//    }
     [self.tableView reloadData];
     [self.tableView setAllowsMultipleSelection:YES];
+    self.searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, 44)];
+    /*the search bar widht must be > 1, the height must be at least 44
+     (the real size of the search bar)*/
+    
+    self.mySearchDisplayController = [[UISearchDisplayController alloc] initWithSearchBar:self.searchBar contentsController:self];
+    /*contents controller is the UITableViewController, this let you to reuse
+     the same TableViewController Delegate method used for the main table.*/
+    
+    self.mySearchDisplayController.delegate = self;
+    self.mySearchDisplayController.searchResultsDataSource = self;
+    self.mySearchDisplayController.searchResultsDelegate = self;
+    //set the delegate = self. Previously declared in ViewController.h
+    
+    self.tableView.tableHeaderView = self.searchBar; //this line add the searchBar
+    //on the top of tableView.
+    self.searchBar.barTintColor = kGymBudDarkBlue;
+    
+    self.searchResults = [NSMutableArray array];
+    self.tableView.backgroundColor = kGymBudLightBlue;
+
+}
+
+- (BOOL)searchDisplayController:(UISearchDisplayController *)controller shouldReloadTableForSearchString:(NSString *)searchString {
+    [self filterResults:searchString];
+    return YES;
 }
 
 - (void)didReceiveMemoryWarning
@@ -80,19 +189,35 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (void)filterResults:(NSString *)searchTerm {
+    NSLog(@"filterResults being called");
+    [self.searchResults removeAllObjects];
+    
+    NSMutableArray *actualResults = [[NSMutableArray alloc] initWithCapacity:1000];
+    
+    for (NSDictionary *contactDict in self.arrContactsData) {
+        if([contactDict[@"name"] rangeOfString:searchTerm].location == NSNotFound) {
+            
+        } else {
+            [actualResults addObject:contactDict];
+        }
+    }
+    [self.searchResults addObjectsFromArray:actualResults];
+}
+
 
 #pragma mark - Private method implementation
 - (void) inviteFriends:(id) sender {
-    NSArray *selectedIndices = [self.tableView indexPathsForSelectedRows];
-    for(NSIndexPath *path in selectedIndices) {
-        NSDictionary *dict = [self.arrContactsData objectAtIndex:path.row   ];
+    bool alertBool = YES;
+    for(NSDictionary *dict in self.selectedResults) {
         // SEND TWILIO TEXT HERE
-        [self sendSMSToNumber:[dict mutableCopy]];
+        [self sendSMSToNumber:[dict mutableCopy] withAlert:alertBool];
+        alertBool = NO;
     }
 }
 
 /* Send invitation SMS to a phone number using Cloud Code and Twilio! */
-- (void)sendSMSToNumber:(NSMutableDictionary *)userDict {
+- (void)sendSMSToNumber:(NSMutableDictionary *)userDict withAlert:(BOOL)alertSetting {
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
     [formatter setDateStyle:NSDateFormatterShortStyle];
     [formatter setTimeStyle:NSDateFormatterShortStyle];
@@ -198,7 +323,9 @@
                                                                               delegate:nil
                                                                      cancelButtonTitle:@"Ok"
                                                                      otherButtonTitles:nil, nil];
-                    [smsSentAlertView show];
+                    if(alertSetting) {
+                        [smsSentAlertView show];
+                    }
                     
                     [self.HUD hide:YES];
                     NSLog(@"%@", eventObject);
@@ -272,16 +399,44 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 1;
+    if(tableView != self.searchDisplayController.searchResultsTableView) {
+        return 2;
+    } else {
+        return 1;
+    }
 }
+
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    if (_arrContactsData) {
-        return _arrContactsData.count;
+    if (tableView == self.tableView) {
+        if(section == 0) {
+            if (self.selectedResults) {
+                return self.selectedResults.count;
+            }
+            else{
+                return 0;
+            }
+        } else {
+            if (_arrContactsData) {
+                return _arrContactsData.count;
+            }
+            else{
+                return 0;
+            }
+        }
+        
+    } else {
+        return self.searchResults.count;
     }
-    else{
-        return 0;
+   
+}
+
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
+    if(section == 0 && tableView != self.searchDisplayController.searchResultsTableView) {
+        return @"Selected";
+    } else {
+        return @"Contacts";
     }
 }
 
@@ -289,28 +444,70 @@
 {
 //    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];
     UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"cell"];
-    
-    NSDictionary *contactInfoDict = [_arrContactsData objectAtIndex:indexPath.row];
-//    cell.textLabel.text = [NSString stringWithFormat:@"%@ %@", [contactInfoDict objectForKey:@"firstName"], [contactInfoDict objectForKey:@"lastName"]];
-//    cell.detailTextLabel.text = [NSString stringWithFormat:@"%@", [contactInfoDict objectForKey:@"homeNumber"] ? : [contactInfoDict objectForKey:@"mobileNumber"]];
+    NSDictionary *contactInfoDict;
+
+    if(indexPath.section == 0 && tableView != self.searchDisplayController.searchResultsTableView) {
+        contactInfoDict = [self.selectedResults objectAtIndex:indexPath.row];
+        cell.accessoryType = UITableViewCellAccessoryCheckmark;
+    }
+    else if (tableView != self.searchDisplayController.searchResultsTableView) {
+        contactInfoDict = [_arrContactsData objectAtIndex:indexPath.row];
+    } else {
+        contactInfoDict = [self.searchResults objectAtIndex:indexPath.row];
+    }
     cell.textLabel.text = [NSString stringWithFormat:@"%@", [contactInfoDict objectForKey:@"name"]];
     cell.detailTextLabel.text = [NSString stringWithFormat:@"%@", [contactInfoDict objectForKey:@"phone"]];
-    cell.selectionStyle = UITableViewCellSelectionStyleNone;
 
     return cell;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    NSArray *selectedIndices = [tableView indexPathsForSelectedRows];
-    if([selectedIndices count] > 10) {
-        // Show an alert saying max is 10
-        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"We must limit you to 10 invites per event" message:@"Select the best 10 contacts you can!" delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil];
-        [alertView show];
+    
+    if(indexPath.section == 1 && tableView != self.searchDisplayController.searchResultsTableView) {
+        if([self.selectedResults count] > 10) {
+            // Show an alert saying max is 10
+            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"We must limit you to 10 invites per event" message:@"Select the best 10 contacts you can!" delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil];
+            [alertView show];
+            
+            return;
+        }
+        UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+        cell.accessoryType = UITableViewCellAccessoryCheckmark;
+        if(self.selectedResults == nil) {
+            self.selectedResults = [[NSMutableArray alloc] init];
+        }
+        [self.selectedResults addObject:[self.arrContactsData objectAtIndex:indexPath.row]];
+        [self.arrContactsData removeObject:[self.arrContactsData objectAtIndex:indexPath.row]];
+        [tableView reloadData];
+        
+    } else if(indexPath.section == 0 && tableView != self.searchDisplayController.searchResultsTableView) {
+        UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+        cell.accessoryType = UITableViewCellAccessoryNone;
+        
+        [self.arrContactsData addObject:[self.selectedResults objectAtIndex:indexPath.row]];
+        [self.selectedResults removeObject:[self.selectedResults objectAtIndex:indexPath.row]];
+        [tableView reloadData];
 
-        return;
+    } else {
+        if([self.selectedResults count] > 10) {
+            // Show an alert saying max is 10
+            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"We must limit you to 10 invites per event" message:@"Select the best 10 contacts you can!" delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil];
+            [alertView show];
+            
+            return;
+        }
+        UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+        cell.accessoryType = UITableViewCellAccessoryCheckmark;
+        if(self.selectedResults == nil) {
+            self.selectedResults = [[NSMutableArray alloc] init];
+        }
+        [self.selectedResults addObject:[self.searchResults objectAtIndex:indexPath.row]];
+        [self.arrContactsData removeObject:[self.searchResults objectAtIndex:indexPath.row]];
+        [self.searchResults removeObject:[self.searchResults objectAtIndex:indexPath.row]];
+        [self.searchDisplayController setActive:NO];
+        [self.tableView reloadData];
     }
-    UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
-    cell.accessoryType = UITableViewCellAccessoryCheckmark;
+    
 }
 
 - (void)tableView:(UITableView *)tableView didDeselectRowAtIndexPath:(NSIndexPath *)indexPath {

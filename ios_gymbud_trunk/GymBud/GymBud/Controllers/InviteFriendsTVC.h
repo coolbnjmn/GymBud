@@ -17,4 +17,6 @@
 @property (nonatomic, retain) NSString *location;
 @property (nonatomic, retain) NSArray *bodyParts;
 
+
+
 @end

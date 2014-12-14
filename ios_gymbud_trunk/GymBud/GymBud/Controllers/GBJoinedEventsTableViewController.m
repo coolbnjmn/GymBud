@@ -111,6 +111,18 @@
 - (void)objectsDidLoad:(NSError *)error {
     [super objectsDidLoad:error];
     
+    for (UIView *subview in self.view.subviews)
+    {
+        if ([subview class] == NSClassFromString(@"PFLoadingView"))
+        {
+            [subview removeFromSuperview];
+            break;
+        } else if([subview class] == NSClassFromString(@"MBProgressHud"))
+        {
+            [subview removeFromSuperview];
+            break;
+        }
+    }
     [self.HUD hide:YES];
     NSLog(@"objectsDidLoad GymBudEventsTVC");
     // This method is called every time objects are loaded from Parse via the PFQuery

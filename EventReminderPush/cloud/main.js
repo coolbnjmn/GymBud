@@ -9,6 +9,11 @@ Parse.Cloud.define("hello", function(request, response) {
   response.success("Hello world!");
 });
 
+Parse.Cloud.define("receiveSMS", function(request, response) {
+  console.log("Received a new text: " + request.params.From);
+    response.success();
+});
+
 Parse.Cloud.define("inviteWithTwilio", function(request, response) {
 	console.log(request.params.phone);
 	twilio.sendSMS({

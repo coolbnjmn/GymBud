@@ -57,7 +57,9 @@
             // Re-enable the post button if it was disabled before.
             self.navigationItem.rightBarButtonItem.enabled = YES;
             [locationManager startUpdatingLocation];
-            [locationManager requestWhenInUseAuthorization];
+            if ([locationManager respondsToSelector:@selector(requestWhenInUseAuthorization)]) {
+                [locationManager requestWhenInUseAuthorization];
+            }
             [self startStandardUpdates];
             break;
         case kCLAuthorizationStatusDenied:
@@ -70,7 +72,9 @@
         }}
             break;
         case kCLAuthorizationStatusNotDetermined:
-            [manager requestAlwaysAuthorization];
+            if ([manager respondsToSelector:@selector(requestWhenInUseAuthorization)]) {
+                [manager requestWhenInUseAuthorization];
+            }
             NSLog(@"kCLAuthorizationStatusNotDetermined");
             break;
         case kCLAuthorizationStatusRestricted:
