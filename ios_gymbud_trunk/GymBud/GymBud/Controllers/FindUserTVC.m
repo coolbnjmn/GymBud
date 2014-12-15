@@ -78,10 +78,10 @@
 }
 
 
-- (BOOL)searchDisplayController:(UISearchDisplayController *)controller shouldReloadTableForSearchString:(NSString *)searchString {
-    [self filterResults:searchString];
-    return YES;
-}
+//- (BOOL)searchDisplayController:(UISearchDisplayController *)controller shouldReloadTableForSearchString:(NSString *)searchString {
+//    [self filterResults:searchString];
+//    return YES;
+//}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -92,10 +92,8 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
     if (tableView == self.tableView) {
-        NSLog(@"self.objects.count = %d", self.objects.count);
         return self.objects.count;
     } else {
-        NSLog(@"self.searchResults.count = %d", self.searchResults.count);
         return self.searchResults.count;
     }
     
