@@ -45,6 +45,7 @@
     if (currentLocation) {
         appDelegate.currentLocation = currentLocation;
     }
+    self.navigationItem.title = @"Choose Location";
 }
 
 
@@ -165,11 +166,10 @@
                               @"sensor" : @"true",
                               @"key" : kGoogleApiKey};
     [httpSessionManager GET:@"json" parameters:params2 success:^(NSURLSessionDataTask *task2, id responseObject2) {
-        NSLog(@"\n============= Entity Saved Success ===\n%@",responseObject2);
+//        NSLog(@"\n============= Entity Saved Success ===\n%@",responseObject2);
         NSString *latStr;
         NSString *lngStr;
         for(id object in responseObject2[@"results"]) {
-            NSLog(@"%@", object);
             if([object objectForKey:@"geometry"]) {
                 latStr = object[@"geometry"][@"location"][@"lat"];
                 lngStr = object[@"geometry"][@"location"][@"lng"];

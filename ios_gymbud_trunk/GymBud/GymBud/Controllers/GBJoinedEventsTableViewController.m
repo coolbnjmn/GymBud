@@ -44,13 +44,8 @@
         self.pullToRefreshEnabled = NO;
     }
     
-    [self.tableView registerNib:[UINib nibWithNibName:@"GymBudEventsCell" bundle:nil] forCellReuseIdentifier:self.reuseId];
-    
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(postWasCreated:) name:@"CreatePostNotification" object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(locationDidChange:) name:@"LocationChangeNotification" object:nil];
-    
     self.tableView.separatorColor = [UIColor whiteColor];
-    self.navigationItem.title = @"Joined Events";
+    self.navigationItem.title = @"Your Events";
     
     searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0, 0, 320, 44)];
     /*the search bar widht must be > 1, the height must be at least 44
@@ -90,7 +85,7 @@
 - (void)objectsDidLoad:(NSError *)error {
     [super objectsDidLoad:error];
     [self.HUD hide:YES];
-    NSLog(@"objectsDidLoad GymBudEventsTVC");
+    NSLog(@"objectsDidLoad GBJoinedEVentsTableViewController");
 
 }
 
@@ -238,33 +233,8 @@
 
 #pragma mark - ()
 
-- (void)distanceFilterDidChange:(NSNotification *)note {
-    [self loadObjects];
-}
-
-- (void)locationDidChange:(NSNotification *)note {
-    NSLog(@"Location did change");
-    [self loadObjects];
-}
-
-- (void)postWasCreated:(NSNotification *)note {
-    NSLog(@"post was created");
-    [self loadObjects];
-}
-
 - (void)refreshControlValueChanged:(UIRefreshControl *)refreshControl {
     [self loadObjects];
 }
-
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

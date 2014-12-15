@@ -309,7 +309,8 @@
             if (succeeded) {
                 NSLog(@"Successfully saved!");
                 
-                    
+                [self.HUD hide:YES];
+
                 [PFCloud callFunctionInBackground:@"inviteWithTwilio" withParameters:userDict block:^(id object, NSError *error) {
                     NSString *message = @"";
                     if (!error) {
@@ -328,7 +329,6 @@
                         [smsSentAlertView show];
                     }
                     
-                    [self.HUD hide:YES];
                     NSLog(@"%@", eventObject);
                     
                     [self.navigationController popToRootViewControllerAnimated:YES];
