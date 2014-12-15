@@ -52,7 +52,8 @@
     // Create the sign up view controller
     SignUpViewController *signUpViewController = [[SignUpViewController alloc] init];
     [signUpViewController setDelegate:self]; // Set ourselves as the delegate
-    
+    [signUpViewController setFields:PFSignUpFieldsDefault | PFSignUpFieldsAdditional];
+
     // Assign our sign up controller to be displayed from the login controller
     [self setSignUpController:signUpViewController];
 }
@@ -200,6 +201,10 @@
     NSString *errorMsg;
     
     NSString *email = [info objectForKey:@"email"];
+    NSString *password = [info objectForKey:@"password"];
+    NSString *confirmPassword = [info objectForKey:@"additional"];
+    
+    
     
     // loop through all of the submitted data
     for (id key in info) {
@@ -208,7 +213,12 @@
     }
 
     NSLog(@"username is %@ %@", info, email);
-    if ([email rangeOfString:@"@ucla.edu"].location  == NSNotFound)
+    if (![password isEqualToString:confirmPassword])
+    {
+        emailAddressIsValid = NO;
+        errorMsg = @"The password fields must be the same";
+    }
+    else if ([email rangeOfString:@"@ucla.edu"].location  == NSNotFound)
     {
         emailAddressIsValid = NO;
         errorMsg = @"Currently GymBud is only deployed for UCLA faculty and students. Please use your UCLA email address for validation.";
