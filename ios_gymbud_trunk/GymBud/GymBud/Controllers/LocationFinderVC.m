@@ -271,13 +271,17 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"placeCell"];
-    cell.textLabel.text = [self.places objectAtIndex:indexPath.row];
-    NSNumber *distance = [self.distances objectAtIndex:indexPath.row][@"distance"];
-    NSNumberFormatter *fmt = [[NSNumberFormatter alloc] init];
-    [fmt setPositiveFormat:@"0.##"];
-    NSString *detailLabelText = [fmt stringFromNumber:distance];
-    cell.detailTextLabel.text = [NSString stringWithFormat:@"Distance: %@ miles",detailLabelText];
+    
+    if([self.places count] > 0) {
+        cell.textLabel.text = [self.places objectAtIndex:indexPath.row];
+        NSNumber *distance = [self.distances objectAtIndex:indexPath.row][@"distance"];
+        NSNumberFormatter *fmt = [[NSNumberFormatter alloc] init];
+        [fmt setPositiveFormat:@"0.##"];
+        NSString *detailLabelText = [fmt stringFromNumber:distance];
+        cell.detailTextLabel.text = [NSString stringWithFormat:@"Distance: %@ miles",detailLabelText];
+    }
     return cell;
+    
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {

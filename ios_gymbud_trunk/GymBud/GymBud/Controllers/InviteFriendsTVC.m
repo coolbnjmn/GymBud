@@ -316,6 +316,7 @@
                         message = @"Your SMS invitation has been sent!";
                     } else {
                         message = @"Uh oh, something went wrong :(";
+                        [eventObject deleteInBackground];
                     }
                     
                     UIAlertView *smsSentAlertView = [[UIAlertView alloc] initWithTitle:@"Invite Sent!"

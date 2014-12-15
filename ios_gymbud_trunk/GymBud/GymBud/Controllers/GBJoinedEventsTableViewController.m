@@ -101,14 +101,14 @@
     //    PFQuery *query = [PFQuery queryWithClassName:self.parseClassName];
     // Query for posts near our current location.
     self.parseClassName = @"Event";
-
+    
     PFQuery *attendeeQuery = [PFQuery queryWithClassName:self.parseClassName];
     PFQuery *organizerQuery = [PFQuery queryWithClassName:self.parseClassName];
     
     NSLog(@"current user is %@", [PFUser currentUser]);
     
     [attendeeQuery whereKey:@"attendees" containsAllObjectsInArray:[NSArray arrayWithObjects:[PFUser currentUser], nil]];
-    
+     
     [organizerQuery whereKey:@"organizer" equalTo:[PFUser currentUser]];
     
     PFQuery *query = [PFQuery orQueryWithSubqueries:@[organizerQuery, attendeeQuery]];
@@ -116,7 +116,8 @@
     // If no objects are loaded in memory, we look to the cache first to fill the table
     // and then subsequently do a query against the network.
     if ([self.objects count] == 0) {
-        query.cachePolicy = kPFCachePolicyCacheThenNetwork;
+//        query.cachePolicy = kPFCachePolicyCacheThenNetwork;
+        query.cachePolicy = kPFCachePolicyIgnoreCache;
     }
     
     [query includeKey:@"organizer"];
@@ -149,6 +150,7 @@
         }
     }
     [self setLoadingViewEnabled:NO];
+    
     return query;
 }
 
