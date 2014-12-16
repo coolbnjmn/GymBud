@@ -12,6 +12,11 @@
 #import "CreateInviteCVCCell.h"
 #import "LocationFinderVC.h"
 #import "InviteFriendsTVC.h"
+#import <UIAlertView+Blocks.h>
+#import <AFNetworking/AFNetworking.h>
+#import <Parse/Parse.h>
+#import "AppDelegate.h"
+
 
 @interface CreateInviteTVC () <UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, UITextFieldDelegate, LocationFinderVCDelegate, ABPeoplePickerNavigationControllerDelegate>
 
@@ -277,7 +282,100 @@
     
 }
 - (IBAction)button2Pressed:(id)sender {
+    
+    RIButtonItem *cancelItem = [RIButtonItem itemWithLabel:@"Cancel" action:^{
+    }];
+    
+    RIButtonItem *goodItem = [RIButtonItem itemWithLabel:@"Create" action:^{
+        NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+        [formatter setDateStyle:NSDateFormatterShortStyle];
+        [formatter setTimeStyle:NSDateFormatterShortStyle];
+        
+        NSString *shortDate = [formatter stringFromDate:self.date];
+        NSString *body = [[PFUser currentUser][@"gymbudProfile"][@"name"] stringByAppendingString: [NSString stringWithFormat:@" invited you to go lift @ %@ %@. Reply IN or OUT now!", shortDate, self.section2Label, nil]];
+        
+        // now for the location
+        NSURL *url = [NSURL URLWithString:@"https://maps.googleapis.com/maps/api/geocode/"];
+        NSLog(@"%@", [[self.section2Label.text stringByReplacingOccurrencesOfString:@", " withString:@"+"] stringByReplacingOccurrencesOfString:@" " withString:@"+"]);
+        NSDictionary *params = @{@"address" : [[self.section2Label.text stringByReplacingOccurrencesOfString:@", " withString:@"+"] stringByReplacingOccurrencesOfString:@" " withString:@"+"],
+                                 @"sensor" : @"true",
+                                 @"key" : kGoogleApiKey};
+        AFHTTPSessionManager *httpSessionManager = [[AFHTTPSessionManager alloc] initWithBaseURL:url];
+        [httpSessionManager GET:@"json" parameters:params success:^(NSURLSessionDataTask *task, id responseObject) {
+            NSLog(@"\n============= Entity Saved Success ===\n%@",responseObject);
+            NSString *latStr;
+            NSString *lngStr;
+            for(id object in responseObject[@"results"]) {
+                NSLog(@"%@", object);
+                if([object objectForKey:@"geometry"]) {
+                    latStr = object[@"geometry"][@"location"][@"lat"];
+                    lngStr = object[@"geometry"][@"location"][@"lng"];
+                }
+            }
+            
+            CLLocationDegrees lat = [latStr doubleValue];
+            CLLocationDegrees lng = [lngStr doubleValue];
+            
+            if(lat == 0 || lng == 0) {
+                AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
+                lat = appDelegate.currentLocation.coordinate.latitude;
+                lng = appDelegate.currentLocation.coordinate.longitude;
+            }
+            PFGeoPoint *eventLocation = [PFGeoPoint geoPointWithLatitude:lat longitude:lng];
+            
+            PFObject *eventObject = [PFObject objectWithClassName:@"Event"];
+            [eventObject setObject:[PFUser currentUser] forKey:@"organizer"];
+            
+            //        [eventObject setObject:eventLocation forKey:@"location"];
+            [eventObject setObject:self.section2Label.text forKey:@"locationName"];
+            [eventObject setObject:eventLocation forKey:@"location"];
+            [eventObject setObject:@"" forKey:@"additional"];
+            [eventObject setObject:self.date forKey:@"time"];
+            [eventObject setObject:[NSNumber numberWithBool:YES] forKey:@"isVisible"];
+            
+            [eventObject setObject:@"Strength Training" forKey:@"activity"];
+            
+            NSMutableArray *indices = [[NSMutableArray alloc] init];
+            for(NSIndexPath *indexPath in self.selectedBodyParts) {
+                [indices addObject:[NSNumber numberWithInteger:indexPath.row]];
+            }
+            [eventObject setObject:indices forKey:@"detailLogoIndices"];
+            
+            //        int selectedCountRow = (int) [self.countPicker selectedRowInComponent:0];
+            // add 1 because it is 0 based indexing.
+            [eventObject setObject:[NSNumber numberWithInt:1] forKey:@"count"];
+            
+            [eventObject setObject:[NSNumber numberWithInt:60] forKey:@"duration"];
+            
+            [eventObject setObject:[[PFUser currentUser][@"gymbudProfile"][@"name"] stringByAppendingString: [NSString stringWithFormat:@" invited you to go lift @ %@ %@. Reply IN or OUT now!", shortDate, self.section2Label, nil]] forKey:@"description"];
+            
+            [eventObject saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+                if (error) {
+                    NSLog(@"Couldn't save!");
+                    NSLog(@"%@", error);
+                    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:[[error userInfo] objectForKey:@"error"] message:nil delegate:self cancelButtonTitle:nil otherButtonTitles:@"Ok", nil];
+                    [alertView show];
+                    return;
+                }
+                if (succeeded) {
+                    NSLog(@"Successfully saved!");
+                    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Event created!" message:nil delegate:self cancelButtonTitle:nil otherButtonTitles:@"Ok", nil];
+                    [alertView show];
+                } else {
+                    NSLog(@"Failed to save.");
+                }
+            }];
+        } failure:^(NSURLSessionDataTask *task, NSError *error) {
+            NSLog(@"\n============== ERROR ====\n%@",error.userInfo);
+        }];
+
+    }];
     // Create event here
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle: @"Are you sure you want to create this event?"
+                                                    message: @"Other GymBuds will be able to message you about it."
+                                           cancelButtonItem:cancelItem
+                                           otherButtonItems:goodItem, nil];
+    [alert show];
     NSLog(@"button2Pressed");
 }
 
