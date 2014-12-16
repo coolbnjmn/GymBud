@@ -27,6 +27,7 @@
     self.keyboardPresent = 0;
     [self.signUpView.additionalField setPlaceholder:@"Confirm Password"];
     self.signUpView.additionalField.hidden = NO;
+    self.signUpView.additionalField.secureTextEntry = YES;
     
     
     if (SYSTEM_VERSION_LESS_THAN(@"8.0"))
