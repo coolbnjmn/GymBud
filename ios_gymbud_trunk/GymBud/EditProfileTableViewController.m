@@ -485,7 +485,7 @@
     
     UITextField *tf = (UITextField*)[[cells objectAtIndex:2] viewWithTag:5];
     NSString *goal = tf.text;
-    UITextField *tf2 = (UITextField*)[[cells objectAtIndex:3] viewWithTag:5];
+    UITextField *tf2 = (UITextField*)[[cells objectAtIndex:3] viewWithTag:6];
     NSString *time = tf2.text;
 
     NSData *imageData = UIImageJPEGRepresentation(self.profileImage, 0.05f);

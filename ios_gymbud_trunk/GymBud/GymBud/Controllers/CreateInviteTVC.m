@@ -20,8 +20,7 @@
 
 @interface CreateInviteTVC () <UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, UITextFieldDelegate, LocationFinderVCDelegate, ABPeoplePickerNavigationControllerDelegate>
 
-@property (weak, nonatomic) IBOutlet UILabel *section1Label;
-@property (weak, nonatomic) IBOutlet UILabel *section2Label;
+@property (strong, nonatomic) IBOutlet UILabel *section2Label;
 @property (weak, nonatomic) IBOutlet UITextField *section3TextField;
 @property (weak, nonatomic) IBOutlet UIButton *button1;
 @property (weak, nonatomic) IBOutlet UIButton *button2;
@@ -39,6 +38,8 @@
     
     self.navigationItem.title = @"Create Event";
     self.selectedBodyParts = [[NSMutableArray alloc] initWithCapacity:[kGBBodyPartArray count]];
+    self.tableView.backgroundColor = kGymBudLightBlue;
+    self.tableView.alwaysBounceVertical = NO;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -48,23 +49,60 @@
 
 #pragma mark - Table view data source
 
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+{
+    return CGFLOAT_MIN;;
+}
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
+    // Return the number of sections.
+    return 4;
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    // Return the number of rows in the section.
+    switch (section) {
+        case 0:
+            return 2;
+            break;
+        case 1:
+            return 1;
+            break;
+        case 2:
+            return 1;
+            break;
+        case 3:
+            return 3;
+            break;
+            
+        default:
+            return 0;
+            break;
+    };
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (indexPath.row == 1 && indexPath.section == 0)
+        return 140;
+    else
+        return 50;
+}
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    CGFloat cellHeight;
-    if(indexPath.row == 1 && indexPath.section == 0) {
-        cellHeight = 200;
-    } else {
-        cellHeight = 40;
-    }
+
+    UITableViewCell *cell;
     
-    UITableViewCell *cell = [[UITableViewCell alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, cellHeight)];
-    // Configure the cell...
-    
-    switch (indexPath.section) {
+    switch (indexPath.section)
+    {
         case 0:
             switch(indexPath.row) {
-                case 0: // Label for body parts -- section1Label
-                    self.section1Label.text = @"Select Up To 4 Body Parts";
-                    [cell addSubview:self.section1Label];
+                case 0:
+                    cell = [self.tableView dequeueReusableCellWithIdentifier:@"base"
+                                                                forIndexPath:indexPath];
+                    cell.textLabel.text = @"Select Up To 4 Body Parts";
                     break;
                 case 1: // Collection View
                     cell = [[CreateInviteCVCCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"goActivityCell"];
@@ -75,15 +113,28 @@
             }
             break;
         case 1:
+            cell = [self.tableView dequeueReusableCellWithIdentifier:@"base"
+                                                        forIndexPath:indexPath];
             // Location Cell
-            self.section2Label.text = @"Select a location";
-            [cell addSubview:self.section2Label];
+            if ([self.section2Label.text length] >0)
+                cell.textLabel.text = self.section2Label.text;
+            else
+                cell.textLabel.text = @"Select a location";
+            cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
             break;
         case 2:
-            switch(indexPath.row) {
-                case 0: // Date Cell
                 {
+                    cell = [self.tableView dequeueReusableCellWithIdentifier:@"date"
+                                                                forIndexPath:indexPath];
+                    self.section3TextField = (UITextField*)[cell viewWithTag:100];
+                
+                    self.section3TextField.contentHorizontalAlignment = UIControlContentHorizontalAlignmentCenter;
                     self.section3TextField.text = @"Select a date & time";
+                    self.section3TextField.textAlignment = NSTextAlignmentCenter;
+                    self.section3TextField.textColor = [UIColor whiteColor];
+                    self.section3TextField.font = [UIFont fontWithName:@"MagistralATT" size:20];
+                    self.section3TextField.backgroundColor = kGymBudLightBlue;
+                    
                     self.datePicker = [[UIDatePicker alloc] init];
                     self.datePicker.minimumDate = [NSDate date];
                     self.datePicker.minuteInterval = 15;
@@ -116,46 +167,46 @@
                     self.section3TextField.inputAccessoryView = keyboardDoneButtonView;
                     self.section3TextField.inputView = self.datePicker;
 
-                    [cell addSubview:self.section3TextField];
+                    self.section3TextField.frame = CGRectMake(5, 5, self.view.frame.size.width-5, 55);
             }
                     break;
-                case 1: // Invite Friends button
-                    [self.button1 setTitle:@"Invite Friends (SMS)" forState:UIControlStateNormal];
-                    [cell addSubview:self.button1];
+        case 3:
+            cell = [self.tableView dequeueReusableCellWithIdentifier:@"base"
+                                                        forIndexPath:indexPath];
+
+            switch (indexPath.row)
+        {
+                case 0:
+                    cell.textLabel.text = @"Invite Friends (SMS)";
+                    cell.textLabel.textAlignment=NSTextAlignmentCenter;
                     break;
-                case 2: // Create event button
-                    [self.button2 setTitle:@"Create an Event (Public)" forState:UIControlStateNormal];
-                    [cell addSubview:self.button2];
-                    break;
-                case 3:
-                    [self.button3 setTitle:@"Find Others" forState:UIControlStateNormal];
-                    [cell addSubview:self.button3];
-                    break;
+            case 1:
+                cell.textLabel.text = @"Create an Event (Public)";
+                cell.textLabel.textAlignment=NSTextAlignmentCenter;
+                break;
+            case 2:
+                cell.textLabel.text = @"Find Others";
+                cell.textLabel.textAlignment=NSTextAlignmentCenter;
+                break;
+                
                 default:
                     break;
             }
-            break;
         default:
             break;
     }
+    cell.textLabel.textColor = [UIColor whiteColor];
+    cell.textLabel.font = [UIFont fontWithName:@"MagistralATT" size:20];
+    
+    cell.backgroundColor = kGymBudLightBlue;
+
     return cell;
 }
 
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    [tableView deselectRowAtIndexPath:indexPath animated:NO];
     switch (indexPath.section) {
-        case 0:
-            switch(indexPath.row) {
-                case 0: // Label for body parts -- section1Label
-                    [tableView deselectRowAtIndexPath:indexPath animated:NO];
-                    break;
-                case 1: // Collection View
-                    [tableView deselectRowAtIndexPath:indexPath animated:NO];
-                    break;
-                default:
-                    break;
-            }
-            break;
         case 1:
             // Location Cell
         {
@@ -166,25 +217,21 @@
             if(![self.section2Label.text isEqualToString:@"Select a location"]) {
                 locationFinder.input = self.section2Label.text;
             }
-            [tableView deselectRowAtIndexPath:indexPath animated:NO];
         }
             break;
         case 2:
+            [self setDateClicked:self];
+            break;
+        case 3:
             switch(indexPath.row) {
-                case 0: // Date Cell
-                {
-                    [tableView deselectRowAtIndexPath:indexPath animated:NO];
-                    [self setDateClicked:self];
-                }
+                case 0: // Invite Friends button
+                    [self button1Pressed:nil];
                     break;
-                case 1: // Invite Friends button
-                    [tableView deselectRowAtIndexPath:indexPath animated:NO];
+                case 1: // Create event button
+                    [self button2Pressed:nil];
                     break;
-                case 2: // Create event button
-                    [tableView deselectRowAtIndexPath:indexPath animated:NO];
-                    break;
-                case 3: // Find others button
-                    [tableView deselectRowAtIndexPath:indexPath animated:NO];
+                case 2: // Find others button
+                    [self button3Pressed:nil];
                 default:
                     break;
             }
@@ -248,9 +295,6 @@
     if([self.selectedBodyParts count] < 4) {
         [self.selectedBodyParts addObject:indexPath];
         GoActivityCVCell *cell = (GoActivityCVCell *)[collectionView cellForItemAtIndexPath:indexPath];
-        //        cell.backgroundColor = [UIColor whiteColor];
-        //        cell.layer.cornerRadius = 30;
-        //        cell.layer.masksToBounds = YES;
         cell.goActivityPictureImaveView.image = [UIImage imageNamed:[kGBBodyPartImagesSelArray objectAtIndex:indexPath.row]];
         
     } else {
@@ -268,8 +312,9 @@
 }
 
 - (void)didSetLocation:(NSString *)locationName {
-    self.section2Label.text = locationName;
-    [self.section2Label layoutIfNeeded];
+    self.section2Label = [[UILabel alloc]init];
+    self.section2Label.text = [[NSString alloc] initWithString:locationName];
+    [self.tableView reloadData];
 }
 - (IBAction)button1Pressed:(id)sender {
     // Invite friends here
@@ -292,7 +337,6 @@
         [formatter setTimeStyle:NSDateFormatterShortStyle];
         
         NSString *shortDate = [formatter stringFromDate:self.date];
-        NSString *body = [[PFUser currentUser][@"gymbudProfile"][@"name"] stringByAppendingString: [NSString stringWithFormat:@" invited you to go lift @ %@ %@. Reply IN or OUT now!", shortDate, self.section2Label, nil]];
         
         // now for the location
         NSURL *url = [NSURL URLWithString:@"https://maps.googleapis.com/maps/api/geocode/"];
