@@ -26,7 +26,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.tableView.backgroundColor = kGymBudLightBlue;
+    self.tableView.backgroundColor = kGymBudGrey;
     self.genderList = @[@"",@"Male", @"Female"];
     
     [self.ageList addObject:@""];
@@ -94,10 +94,10 @@
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
     UILabel * sectionHeader = [[UILabel alloc] initWithFrame:CGRectZero];
-    sectionHeader.backgroundColor = kGymBudLightBlue;
+    sectionHeader.backgroundColor = kGymBudGrey;
     sectionHeader.textAlignment = NSTextAlignmentLeft;
     sectionHeader.font = [UIFont fontWithName:@"MagistralATT" size:22];
-    sectionHeader.textColor = [UIColor whiteColor];
+    sectionHeader.textColor = kGymBudLightBlue;
     
     switch(section) {
         case 0:sectionHeader.text = @"Personal Information"; break;
@@ -126,7 +126,7 @@
             else
             {
                 tf.text = self.name;
-                tf.textColor = [UIColor whiteColor];
+                tf.textColor = kGymBudLightBlue;
             }
             tf.textAlignment = NSTextAlignmentCenter;
             tf.font = [UIFont fontWithName:@"MagistralATT" size:18];
@@ -141,7 +141,7 @@
             else
             {
                 tf.text = [NSString stringWithFormat:@"%ld", (long)self.age];
-                tf.textColor = [UIColor whiteColor];
+                tf.textColor = kGymBudLightBlue;
             }
             tf.textAlignment = NSTextAlignmentCenter;
             tf.font = [UIFont fontWithName:@"MagistralATT" size:18];
@@ -161,7 +161,7 @@
             else
             {
                 tf.text = self.gender;
-                tf.textColor = [UIColor whiteColor];
+                tf.textColor = kGymBudLightBlue;
             }
             tf.textAlignment = NSTextAlignmentCenter;
             tf.font = [UIFont fontWithName:@"MagistralATT" size:18];
@@ -178,7 +178,7 @@
         default:
             break;
     }
-    cell.backgroundColor = kGymBudLightBlue;
+    cell.backgroundColor = kGymBudGrey;
     return cell;
 }
 

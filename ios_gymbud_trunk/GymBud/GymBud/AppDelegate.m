@@ -54,7 +54,7 @@
     }
     
     PFUser *currentUser = [PFUser currentUser];
-//    [currentUser fetch];
+    [currentUser fetch];
     
 
     NSLog(@"current user %@", currentUser);
@@ -225,7 +225,8 @@
                                                       [UIFont fontWithName:@"MagistralA-Bold" size:24.0],
                                                       NSFontAttributeName,
                                                       nil]];
-            nv.navigationBar.barTintColor = [UIColor whiteColor];
+            nv.navigationBar.barTintColor = kGymBudLightBlue;
+            nv.navigationBar.tintColor = kGymBudGrey;
         }
         else
             NSLog(@"hit non nav class");

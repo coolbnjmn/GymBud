@@ -35,8 +35,8 @@
     [super viewDidLoad];
     self.loadedImage = NO;
 
-    self.tableView.separatorColor = [UIColor whiteColor];
-    self.tableView.backgroundColor = kGymBudLightBlue;
+    self.tableView.separatorColor = kGymBudLightBlue;
+    self.tableView.backgroundColor = kGymBudGrey;
     
     UIBarButtonItem *cancelButton = [[UIBarButtonItem alloc] initWithTitle:@"Cancel" style:UIBarButtonItemStyleBordered target:self action:@selector(cancelButtonHandler:)];
     self.navigationItem.leftBarButtonItem = cancelButton;
@@ -125,10 +125,10 @@
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
     UILabel * sectionHeader = [[UILabel alloc] initWithFrame:CGRectZero];
-    sectionHeader.backgroundColor = kGymBudLightBlue;
+    sectionHeader.backgroundColor = kGymBudGrey;
     sectionHeader.textAlignment = NSTextAlignmentLeft;
     sectionHeader.font = [UIFont fontWithName:@"MagistralATT" size:18];
-    sectionHeader.textColor = [UIColor whiteColor];
+    sectionHeader.textColor = kGymBudLightBlue;
     
     switch(section) {
         case 1:sectionHeader.text = @"Personal Preferences"; break;
@@ -197,7 +197,7 @@
                 }
 
                 UILabel *label = (UILabel*)[cell viewWithTag:2];
-                label.textColor = [UIColor whiteColor];
+                label.textColor = kGymBudLightBlue;
                 label.text = self.name;
                 
                 UILabel *label_gender = (UILabel*)[cell viewWithTag:3];
@@ -208,7 +208,7 @@
                     label_gender.text = [NSString stringWithFormat:@"Age: %@", self.age];
                 else if ([self.gender length] > 0)
                     label_gender.text = [NSString stringWithFormat:@"Gender: %@", self.gender];
-                label_gender.textColor = [UIColor whiteColor];
+                label_gender.textColor = kGymBudLightBlue;
             }
             else if (indexPath.row == 1)
             {
@@ -235,7 +235,7 @@
                     tv.text = @"What are your weightlifting goals? Ex: I want to bench press 200 pounds as soon as possible";
                     tv.textColor = [UIColor lightGrayColor];
                 }
-                tv.backgroundColor = kGymBudLightBlue;
+                tv.backgroundColor = kGymBudGrey;
                 cell.tag = 19;
             }
             else if (indexPath.row==1)
@@ -252,7 +252,7 @@
                     tv.text = @"When are you generally free to work out? Ex: Mon/Wed 4-6, Thurs 9am-12.";
                     tv.textColor = [UIColor lightGrayColor];
                 }
-                tv.backgroundColor = kGymBudLightBlue;
+                tv.backgroundColor = kGymBudGrey;
                 cell.tag = 20;
             }
             
@@ -263,9 +263,9 @@
     }
     cell.textLabel.font = [UIFont fontWithName:@"MagistralATT" size:18];
     cell.detailTextLabel.font = [UIFont fontWithName:@"MagistralATT" size:12];
-    cell.textLabel.textColor = [UIColor whiteColor];
+    cell.textLabel.textColor = kGymBudLightBlue;
 
-    UIColor * color = kGymBudLightBlue;
+    UIColor * color = kGymBudGrey;
     cell.backgroundColor = color;
     
 
@@ -307,7 +307,7 @@
         imageView.contentMode = UIViewContentModeScaleToFill;
         self.HUD.customView = imageView;
         self.HUD.mode = MBProgressHUDModeCustomView;
-        self.HUD.color = [UIColor whiteColor];
+        self.HUD.color = kGymBudLightBlue;
         [self.HUD show:YES];
 
     }
@@ -413,7 +413,7 @@
     if ([textView.text isEqualToString:@"What are your weightlifting goals? Ex: I want to bench press 200 pounds as soon as possible"] || [textView.text isEqualToString:@"When are you generally free to work out? Ex: Mon/Wed 4-6, Thurs 9am-12."])
     {
         textView.text = @"";
-        textView.textColor = [UIColor whiteColor];
+        textView.textColor = kGymBudLightBlue;
     }
     
 }
