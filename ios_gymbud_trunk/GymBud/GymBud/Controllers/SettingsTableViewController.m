@@ -23,8 +23,11 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    self.navigationController.navigationBar.barTintColor = kGymBudLightBlue;
+    self.navigationController.navigationBar.tintColor = kGymBudGrey;
     self.navigationItem.title = @"Settings";
-    self.tableView.backgroundColor = kGymBudLightBlue;
+    self.tableView.backgroundColor = kGymBudGrey;
+    
     self.imageData = [[NSMutableData alloc] init];
     self.loadedImage = NO;
     
@@ -93,10 +96,10 @@
         cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cell"];
     }
     // Configure the cell...
-    cell.backgroundColor = kGymBudLightBlue;
-    cell.textLabel.textColor = [UIColor whiteColor];
-    cell.detailTextLabel.textColor = [UIColor whiteColor];
-    cell.textLabel.font = [UIFont fontWithName:@"MagistralATT" size:18];
+    cell.backgroundColor = kGymBudGrey;
+    cell.textLabel.textColor = kGymBudLightBlue;
+    cell.detailTextLabel.textColor = kGymBudLightBlue;
+    cell.textLabel.font = [UIFont fontWithName:@"MagistralA-Bold" size:18];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
 
     switch (indexPath.row)

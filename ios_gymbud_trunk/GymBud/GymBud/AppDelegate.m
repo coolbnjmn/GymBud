@@ -216,9 +216,9 @@
             UINavigationController *nv = (UINavigationController*)vc;
             NSLog(@"hit nav class");
             [nv.navigationBar setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:
-                                                      kGymBudLightBlue,
+                                                      kGymBudGrey,
                                                       NSForegroundColorAttributeName,
-                                                      kGymBudLightBlue,
+                                                      kGymBudGrey,
                                                       NSForegroundColorAttributeName,
                                                       [NSValue valueWithUIOffset:UIOffsetMake(0, -1)],
                                                       NSForegroundColorAttributeName,
