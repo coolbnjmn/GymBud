@@ -10,6 +10,7 @@
 #import "MBProgressHUD.h"
 #import "GymBudConstants.h"
 #import "Mixpanel.h"
+#import "EventDetailsTableViewController.h"
 
 #define kCellHeight 100
 
@@ -85,8 +86,6 @@
 - (void)objectsDidLoad:(NSError *)error {
     [super objectsDidLoad:error];
     [self.HUD hide:YES];
-    NSLog(@"objectsDidLoad GBJoinedEVentsTableViewController");
-
 }
 
 
@@ -155,6 +154,7 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath object:(PFObject *)object
 {
+    NSLog(@"Object is %@", object);
     UITableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:@"joined"
                                                 forIndexPath:indexPath];
     
@@ -235,6 +235,24 @@
 
 - (void)refreshControlValueChanged:(UIRefreshControl *)refreshControl {
     [self loadObjects];
+}
+
+// In a storyboard-based application, you will often want to do a little preparation before navigation
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    // Get the new view controller using [segue destinationViewController].
+    // Pass the selected object to the new view controller.
+    NSLog(@"prepare for segue");
+    // Get the new view controller using [segue destinationViewController].
+    // Pass the selected object to the new view controller.
+
+    NSIndexPath *path = [self.tableView indexPathForSelectedRow];
+    
+    EventDetailsTableViewController *dest = [segue destinationViewController];
+    [dest setObjectList:self.objects[path.row]];
+    self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Back" style:UIBarButtonItemStylePlain target:nil action:nil];
+
+    
 }
 
 @end

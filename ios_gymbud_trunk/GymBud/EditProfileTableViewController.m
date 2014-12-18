@@ -488,6 +488,9 @@
     UITextField *tf2 = (UITextField*)[[cells objectAtIndex:3] viewWithTag:6];
     NSString *time = tf2.text;
 
+    self.goals = tf.text;
+    self.preferred = tf2.text;
+    
     NSData *imageData = UIImageJPEGRepresentation(self.profileImage, 0.05f);
     PFFile *imageFile = [PFFile fileWithName:@"profilePicture.jpg" data:imageData];
     
