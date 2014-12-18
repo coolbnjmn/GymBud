@@ -20,6 +20,9 @@
 		296D739C1A3243AF0067624B /* facebookround.png in Resources */ = {isa = PBXBuildFile; fileRef = 296D739B1A3243AF0067624B /* facebookround.png */; };
 		296D739F1A32C7220067624B /* EditPITableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 296D739E1A32C7220067624B /* EditPITableViewController.m */; };
 		29AD93D81A3BD1110020E22A /* GBJoinedEventsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 29AD93D71A3BD1110020E22A /* GBJoinedEventsTableViewController.m */; };
+		29AD946D1A41C66B0020E22A /* EventDetailsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 29AD946C1A41C66B0020E22A /* EventDetailsTableViewController.m */; };
+		29AD946F1A42490E0020E22A /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 29AD946E1A42490E0020E22A /* MapKit.framework */; };
+		29AD94721A4259540020E22A /* MapViewAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 29AD94711A4259540020E22A /* MapViewAnnotation.m */; };
 		29DAA69D1A25438200264253 /* GymBudVC.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 29DAA69C1A25438200264253 /* GymBudVC.storyboard */; };
 		29E4A5121A3407550023B22F /* greenplus.png in Resources */ = {isa = PBXBuildFile; fileRef = 29E4A5111A3407550023B22F /* greenplus.png */; };
 		77F13147198EEE0000576708 /* RSDatePickerVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 77F13146198EEE0000576708 /* RSDatePickerVC.m */; };
@@ -266,6 +269,11 @@
 		296D739E1A32C7220067624B /* EditPITableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditPITableViewController.m; sourceTree = "<group>"; };
 		29AD93D61A3BD1110020E22A /* GBJoinedEventsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GBJoinedEventsTableViewController.h; path = GymBud/Controllers/GBJoinedEventsTableViewController.h; sourceTree = "<group>"; };
 		29AD93D71A3BD1110020E22A /* GBJoinedEventsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GBJoinedEventsTableViewController.m; path = GymBud/Controllers/GBJoinedEventsTableViewController.m; sourceTree = "<group>"; };
+		29AD946B1A41C66B0020E22A /* EventDetailsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EventDetailsTableViewController.h; path = GymBud/Controllers/EventDetailsTableViewController.h; sourceTree = "<group>"; };
+		29AD946C1A41C66B0020E22A /* EventDetailsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EventDetailsTableViewController.m; path = GymBud/Controllers/EventDetailsTableViewController.m; sourceTree = "<group>"; };
+		29AD946E1A42490E0020E22A /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		29AD94701A4259540020E22A /* MapViewAnnotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MapViewAnnotation.h; path = GymBud/Models/MapViewAnnotation.h; sourceTree = "<group>"; };
+		29AD94711A4259540020E22A /* MapViewAnnotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MapViewAnnotation.m; path = GymBud/Models/MapViewAnnotation.m; sourceTree = "<group>"; };
 		29DAA69C1A25438200264253 /* GymBudVC.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = GymBudVC.storyboard; sourceTree = "<group>"; };
 		29E4A5111A3407550023B22F /* greenplus.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = greenplus.png; sourceTree = "<group>"; };
 		48EE337A63E5439BA42E30F1 /* libPods-GymBud.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-GymBud.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -538,6 +546,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				29AD946F1A42490E0020E22A /* MapKit.framework in Frameworks */,
 				B2081ECC1A0D4E5A00D18F9B /* MessageUI.framework in Frameworks */,
 				D6179B487D9E4DCAA95C19B3 /* libPods-GymBud.a in Frameworks */,
 				B2C39DA2197E1A7100039F90 /* UIKit.framework in Frameworks */,
@@ -861,6 +870,8 @@
 				296D738D1A2D23870067624B /* SignUpViewController.m */,
 				296D73861A2BF87D0067624B /* SignIn.storyboard */,
 				296D738A1A2CA78A0067624B /* InitialView.storyboard */,
+				29AD946B1A41C66B0020E22A /* EventDetailsTableViewController.h */,
+				29AD946C1A41C66B0020E22A /* EventDetailsTableViewController.m */,
 				B258FEE31A2F9315000153BE /* BubbleChatTVC.h */,
 				B258FEE41A2F9315000153BE /* BubbleChatTVC.m */,
 				B258FEE51A2F9315000153BE /* BubbleChatTVC.xib */,
@@ -888,6 +899,8 @@
 				77FD41C41993EEF20017E8D5 /* GymBudEventModel.m */,
 				B27AF67119B0D00700FDBF0F /* NSDate+Utilities.h */,
 				B27AF67219B0D00700FDBF0F /* NSDate+Utilities.m */,
+				29AD94701A4259540020E22A /* MapViewAnnotation.h */,
+				29AD94711A4259540020E22A /* MapViewAnnotation.m */,
 			);
 			name = Models;
 			path = ..;
@@ -922,6 +935,7 @@
 		B2C39DA0197E19B300039F90 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				29AD946E1A42490E0020E22A /* MapKit.framework */,
 				B240D9A41A1F153B00374713 /* Bolts.framework */,
 				B240D9A51A1F153B00374713 /* ParseFacebookUtils.framework */,
 				B240D9A61A1F153B00374713 /* ParseUI.framework */,
@@ -1282,6 +1296,7 @@
 				B2C39D8C197E194F00039F90 /* MessageUserVC.m in Sources */,
 				77FE6487198F715C008724CC /* GoActivityCVCell.m in Sources */,
 				B2B8DC2D19D9208800BED65D /* GymBudTVC.m in Sources */,
+				29AD946D1A41C66B0020E22A /* EventDetailsTableViewController.m in Sources */,
 				B22A6ECF1A3A00B900A30D8A /* LocationFinderVC.m in Sources */,
 				B2B8DC4219DCA9A800BED65D /* GymBudConversationTVC.m in Sources */,
 				77FE64911990A924008724CC /* GoActivityCreateEventVC.m in Sources */,
@@ -1311,6 +1326,7 @@
 				77F13147198EEE0000576708 /* RSDatePickerVC.m in Sources */,
 				B2784DA019B2B34E0042A188 /* GBBodyPartCVC.m in Sources */,
 				B2C39D94197E194F00039F90 /* ViewMessageVC.m in Sources */,
+				29AD94721A4259540020E22A /* MapViewAnnotation.m in Sources */,
 				B258FEE61A2F9315000153BE /* BubbleChatTVC.m in Sources */,
 				B22A6EC61A395B3100A30D8A /* CreateInviteTVC.m in Sources */,
 				B2B8DC3519DB212300BED65D /* GymBudDetailsVC.m in Sources */,
