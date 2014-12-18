@@ -165,6 +165,7 @@
 		B297745619864133000AD7B6 /* centeredPeople.png in Resources */ = {isa = PBXBuildFile; fileRef = B297745319864133000AD7B6 /* centeredPeople.png */; };
 		B2A0C7071A294A8C0091E84B /* SettingsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B2A0C7051A294A8C0091E84B /* SettingsTableViewController.m */; };
 		B2A0C7081A294A8C0091E84B /* SettingsTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B2A0C7061A294A8C0091E84B /* SettingsTableViewController.xib */; };
+		B2A974B01A42A3B500815192 /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B2A974AF1A42A3B500815192 /* Accounts.framework */; };
 		B2B8DC2D19D9208800BED65D /* GymBudTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = B2B8DC2C19D9208800BED65D /* GymBudTVC.m */; };
 		B2B8DC3519DB212300BED65D /* GymBudDetailsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = B2B8DC3419DB212300BED65D /* GymBudDetailsVC.m */; };
 		B2B8DC3719DB214B00BED65D /* GymBudHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = B2B8DC3619DB214B00BED65D /* GymBudHeaderView.xib */; };
@@ -444,6 +445,7 @@
 		B2A0C7041A294A8C0091E84B /* SettingsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SettingsTableViewController.h; path = GymBud/Controllers/SettingsTableViewController.h; sourceTree = "<group>"; };
 		B2A0C7051A294A8C0091E84B /* SettingsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SettingsTableViewController.m; path = GymBud/Controllers/SettingsTableViewController.m; sourceTree = "<group>"; };
 		B2A0C7061A294A8C0091E84B /* SettingsTableViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = SettingsTableViewController.xib; path = GymBud/Controllers/SettingsTableViewController.xib; sourceTree = "<group>"; };
+		B2A974AF1A42A3B500815192 /* Accounts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accounts.framework; path = System/Library/Frameworks/Accounts.framework; sourceTree = SDKROOT; };
 		B2B8DC2B19D9208800BED65D /* GymBudTVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GymBudTVC.h; path = GymBud/Controllers/GymBudTVC.h; sourceTree = "<group>"; };
 		B2B8DC2C19D9208800BED65D /* GymBudTVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GymBudTVC.m; path = GymBud/Controllers/GymBudTVC.m; sourceTree = "<group>"; };
 		B2B8DC3319DB212300BED65D /* GymBudDetailsVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GymBudDetailsVC.h; path = GymBud/Controllers/GymBudDetailsVC.h; sourceTree = "<group>"; };
@@ -546,6 +548,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B2A974B01A42A3B500815192 /* Accounts.framework in Frameworks */,
 				29AD946F1A42490E0020E22A /* MapKit.framework in Frameworks */,
 				B2081ECC1A0D4E5A00D18F9B /* MessageUI.framework in Frameworks */,
 				D6179B487D9E4DCAA95C19B3 /* libPods-GymBud.a in Frameworks */,
@@ -935,6 +938,7 @@
 		B2C39DA0197E19B300039F90 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				B2A974AF1A42A3B500815192 /* Accounts.framework */,
 				29AD946E1A42490E0020E22A /* MapKit.framework */,
 				B240D9A41A1F153B00374713 /* Bolts.framework */,
 				B240D9A51A1F153B00374713 /* ParseFacebookUtils.framework */,

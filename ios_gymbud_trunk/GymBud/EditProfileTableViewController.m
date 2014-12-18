@@ -43,6 +43,8 @@
     if ([PFUser currentUser][@"gymbudProfile"] != nil)
     {
         self.navigationItem.leftBarButtonItem = cancelButton;
+    } else {
+        self.navigationItem.hidesBackButton = YES;
     }
 
     
