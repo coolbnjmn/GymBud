@@ -39,7 +39,12 @@
     self.tableView.backgroundColor = kGymBudGrey;
     
     UIBarButtonItem *cancelButton = [[UIBarButtonItem alloc] initWithTitle:@"Cancel" style:UIBarButtonItemStyleBordered target:self action:@selector(cancelButtonHandler:)];
-    self.navigationItem.leftBarButtonItem = cancelButton;
+    
+    if ([PFUser currentUser][@"gymbudProfile"] != nil)
+    {
+        self.navigationItem.leftBarButtonItem = cancelButton;
+    }
+
     
     UIBarButtonItem *saveButton = [[UIBarButtonItem alloc] initWithTitle:@"Save" style:UIBarButtonItemStyleBordered target:self action:@selector(updateProfileButtonHandler:)];
     self.navigationItem.rightBarButtonItem = saveButton;

@@ -176,19 +176,27 @@
             cell = [self.tableView dequeueReusableCellWithIdentifier:@"base"
                                                         forIndexPath:indexPath];
 
+            cell.backgroundColor = kGymBudGrey;
+            cell.textLabel.textColor = kGymBudLightBlue;
+            cell.textLabel.font = [UIFont fontWithName:@"MagistralATT" size:20];
             switch (indexPath.row)
         {
                 case 0:
                     cell.textLabel.text = @"Invite Friends (SMS)";
                     cell.textLabel.textAlignment=NSTextAlignmentCenter;
+                cell.backgroundColor = kGymBudLightBlue;
+                cell.textLabel.textColor = kGymBudGrey;
                     break;
             case 1:
                 cell.textLabel.text = @"Create an Event (Public)";
                 cell.textLabel.textAlignment=NSTextAlignmentCenter;
+                cell.backgroundColor = kGymBudOrange;
                 break;
             case 2:
                 cell.textLabel.text = @"Find Others";
                 cell.textLabel.textAlignment=NSTextAlignmentCenter;
+                cell.backgroundColor = kGymBudLightBlue;
+                cell.textLabel.textColor = kGymBudGrey;
                 break;
                 
                 default:
@@ -197,10 +205,7 @@
         default:
             break;
     }
-    cell.textLabel.textColor = kGymBudLightBlue;
-    cell.textLabel.font = [UIFont fontWithName:@"MagistralATT" size:20];
     
-    cell.backgroundColor = kGymBudGrey;
 
     return cell;
 }
