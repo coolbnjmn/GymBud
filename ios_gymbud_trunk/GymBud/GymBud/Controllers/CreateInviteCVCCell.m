@@ -43,7 +43,6 @@
     gradient.colors = [NSArray arrayWithObjects:
                        (id)kGymBudGrey.CGColor,
                        (id)lightOp.CGColor,
-                       (id)darkOp.CGColor,
                        nil];
     
     // Set bounds

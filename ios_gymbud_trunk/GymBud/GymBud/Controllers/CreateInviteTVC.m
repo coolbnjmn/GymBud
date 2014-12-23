@@ -49,16 +49,34 @@
 
 #pragma mark - Table view data source
 
-- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
-{
-    return CGFLOAT_MIN;;
-}
+//- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+//{
+//    return CGFLOAT_MIN;;
+//}
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     // Return the number of sections.
     return 4;
 }
+
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
+    UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, tableView.bounds.size.width, 6)];
+    headerView.backgroundColor = kGymBudOrange;
+    return headerView;
+    
+    //    return nil;
+    
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
+    if(section == 3) {
+        return 6.0f;
+    } else {
+        return CGFLOAT_MIN;
+    }
+}
+
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
@@ -101,6 +119,7 @@
         {
             cell = [self.tableView dequeueReusableCellWithIdentifier:@"date"
                                                         forIndexPath:indexPath];
+            cell.backgroundColor = kGymBudGrey;
             self.section3TextField = (UITextField*)[cell viewWithTag:100];
             
             self.section3TextField.contentHorizontalAlignment = UIControlContentHorizontalAlignmentCenter;
@@ -143,6 +162,7 @@
             self.section3TextField.inputView = self.datePicker;
             
             self.section3TextField.frame = CGRectMake(5, 5, self.view.frame.size.width-5, 55);
+            
         }
             break;
 
@@ -170,6 +190,7 @@
             else
                 cell.textLabel.text = @"Select a location";
             cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+            cell.backgroundColor = kGymBudGrey;
             break;
         
         case 3:
@@ -190,7 +211,7 @@
             case 1:
                 cell.textLabel.text = @"Create an Event (Public)";
                 cell.textLabel.textAlignment=NSTextAlignmentCenter;
-                cell.backgroundColor = kGymBudOrange;
+                cell.backgroundColor = kGymBudGrey;
                 break;
             case 2:
                 cell.textLabel.text = @"Find Others";

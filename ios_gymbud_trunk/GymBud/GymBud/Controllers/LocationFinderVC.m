@@ -127,6 +127,8 @@
     self.locationFinder.autoCompleteTableOriginOffset = CGSizeMake(0, -self.view.bounds.size.height + 45);
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
+    self.view.backgroundColor = kGymBudGrey;
+    self.tableView.backgroundColor = kGymBudGrey;
     [self startStandardUpdates];
 
     if(![self.input isEqualToString:@""] && self.input != nil) {
@@ -279,6 +281,8 @@
         [fmt setPositiveFormat:@"0.##"];
         NSString *detailLabelText = [fmt stringFromNumber:distance];
         cell.detailTextLabel.text = [NSString stringWithFormat:@"Distance: %@ miles",detailLabelText];
+            
+        cell.backgroundColor = kGymBudGrey;
     }
     return cell;
     
