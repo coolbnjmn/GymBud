@@ -486,6 +486,12 @@ didReceiveRemoteNotification:(NSDictionary *)userInfo {
 }
 
 - (void)setCurrentLocation:(CLLocation *)aCurrentLocation {
+    if(currentLocation == nil ) {
+        currentLocation = [[CLLocation alloc] init];
+    }
+    if([aCurrentLocation distanceFromLocation:currentLocation] < 5) {
+        return;
+    }
     currentLocation = aCurrentLocation;
     
     // Notify the app of the location change:

@@ -37,6 +37,8 @@
 	<true/>
 	<key>NSLocationAlwaysUsageDescription</key>
 	<string>We want to be able to place your workouts on a map</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>We use your location to find nearby events for you!</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>MGS45__A.ttf</string>
@@ -48,6 +50,7 @@
 	<key>UIRequiredDeviceCapabilities</key>
 	<array>
 		<string>armv7</string>
+		<string>location_services</string>
 	</array>
 	<key>UISupportedInterfaceOrientations</key>
 	<array>

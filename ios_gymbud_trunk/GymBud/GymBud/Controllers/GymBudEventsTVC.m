@@ -7,7 +7,6 @@
 //
 
 #import "GymBudEventsTVC.h"
-#import "GymBudEventsCell.h"
 #import "GymBudEventModel.h"
 #import "UserDetailsViewController.h"
 #import "AppDelegate.h"
@@ -17,58 +16,33 @@
 #import "MBProgressHUD.h"
 #import "GBEventsFilterViewController.h"
 #import "Mixpanel.h"
-#import "PAWWallViewController.h"
+#import <CoreLocation/CoreLocation.h>
+
 
 #define kCellHeight 100
 
-@interface GymBudEventsTVC ()
+@interface GymBudEventsTVC () <CLLocationManagerDelegate>
 
 @property NSString *reuseId;
 @property MBProgressHUD *HUD;
 @property (strong,nonatomic) UIViewController *modal;
 @property (strong, nonatomic) UIView *opaqueView;
 @property (nonatomic, strong) NSArray *activityFilters;
+@property (nonatomic, strong) CLLocationManager *locationManager;
+
 
 @end
 
 @implementation GymBudEventsTVC
 
-- (instancetype)initWithStyle:(UITableViewStyle)style
-{
-    self = [super initWithStyle:style];
-    if (self) {
-        // Customize the table:
-        
-        // The className to query on
-        self.parseClassName = @"Event";
-        self.reuseId = @"GymBudEventsCell";
-        
-        // The key of the PFObject to display in the label of the default cell style
-        self.title = @"GymBud";
-        
-        // Whether the built-in pull-to-refresh is enabled
-        if (NSClassFromString(@"UIRefreshControl")) {
-            self.pullToRefreshEnabled = NO;
-        } else {
-            self.pullToRefreshEnabled = YES;
-        }
-        
-        // Whether the built-in pagination is enabled
-        self.paginationEnabled = YES;
-        
-        // The number of objects to show per page
-        self.objectsPerPage = 100;
-    }
-    return self;
-}
-
 - (void)dealloc {
     [[NSNotificationCenter defaultCenter] removeObserver:self name:@"LocationChangeNotification" object:nil];
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"CreatePostNotification" object:nil];
 }
 
 - (void)viewDidLoad
 {
+    [self startStandardUpdates];
+
     [super viewDidLoad];
     
     if (NSClassFromString(@"UIRefreshControl")) {
@@ -80,26 +54,15 @@
         self.pullToRefreshEnabled = NO;
     }
     
-    [self.tableView registerNib:[UINib nibWithNibName:@"GymBudEventsCell" bundle:nil] forCellReuseIdentifier:self.reuseId];
+    self.reuseId = @"eventCell";
+    self.parseClassName = @"Event";
+//    [self.tableView registerNib:[UINib nibWithNibName:@"GymBudEventsCell" bundle:nil] forCellReuseIdentifier:self.reuseId];
 
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(postWasCreated:) name:@"CreatePostNotification" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(locationDidChange:) name:@"LocationChangeNotification" object:nil];
     
     self.tableView.backgroundColor = [UIColor whiteColor];
     self.tableView.separatorColor = [UIColor clearColor];
-    self.navigationItem.title = @"Local GymBuds";
-    
-    UIImage *buttonImage = [UIImage imageNamed:@"mapTableToggle1.png"];
-    UIBarButtonItem *mapToTableViewButton = [[UIBarButtonItem alloc] initWithImage:[buttonImage imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal] style:UIBarButtonItemStyleBordered target:self action:@selector(toggleMapTable:)];
-    
-    UIBarButtonItem *filterModalViewButton = [[UIBarButtonItem alloc] initWithTitle:@"Filter" style:UIBarButtonItemStyleBordered target:self action:@selector(toggleHalfModal:)];
-//    self.navigationItem.leftBarButtonItem = filterModalViewButton;
-//    self.navigationItem.rightBarButtonItem = filterModalViewButton;
-//    self.navigationItem.rightBarButtonItem = mapToTableViewButton;
-//    self.navigationItem.hidesBackButton = YES;
-    
-    self.isShowingMap = NO;
-    
+    self.navigationItem.title = @"Events Nearby";
 }
 
 - (void) viewDidDisappear:(BOOL)animated {
@@ -116,17 +79,11 @@
 - (void)objectsDidLoad:(NSError *)error {
     [super objectsDidLoad:error];
     [self.HUD hide:YES];
-    NSLog(@"objectsDidLoad GymBudEventsTVC");
+    NSLog(@"objectsDidLoad GymBudEventsTVC 1");
     // This method is called every time objects are loaded from Parse via the PFQuery
     if (NSClassFromString(@"UIRefreshControl")) {
         [self.refreshControl endRefreshing];
     }
-}
-
-- (void)objectsWillLoad {
-    [super objectsWillLoad];
-    
-    // This method is called before a PFQuery is fired to get more objects
 }
 
 // Override to customize what kind of query to perform on the class. The default is to query for
@@ -147,11 +104,14 @@
     CLLocation *currentLocation = appDelegate.currentLocation;
     
     // And set the query to look by location
-    PFGeoPoint *point = [PFGeoPoint geoPointWithLatitude:currentLocation.coordinate.latitude longitude:currentLocation.coordinate.longitude];
-    //	[query whereKey:@"location" nearGeoPoint:point withinKilometers:100];
+    NSLog(@"querying now");
+    if(currentLocation != nil) {
+        PFGeoPoint *point = [PFGeoPoint geoPointWithLatitude:currentLocation.coordinate.latitude longitude:currentLocation.coordinate.longitude];
+        [query whereKey:@"location" nearGeoPoint:point withinKilometers:100];
+    }
     [query includeKey:@"organizer"];
     [query whereKey:@"isVisible" equalTo:[NSNumber numberWithBool:YES]];
-    [query orderByAscending:@"time"];
+//    [query orderByAscending:@"time"];
     if(self.activityFilter != nil) {
         [query whereKey:@"activity" equalTo:self.activityFilter];
     }
@@ -199,73 +159,78 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     return kCellHeight;
 }
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath object:(PFObject *)object {
-    GymBudEventsCell *cell = [tableView dequeueReusableCellWithIdentifier:self.reuseId forIndexPath:indexPath];
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath object:(PFObject *)object
+{
+    NSLog(@"Object is %@", object);
+    UITableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:@"joined"
+                                                                 forIndexPath:indexPath];
     
-    if(cell == nil) {
-        cell = [[GymBudEventsCell alloc] init];
-    }
-    
-    NSString *name;
-    if([object objectForKey:@"organizer"][@"gymbudProfile"][@"name"]) {
-        name = [object objectForKey:@"organizer"][@"gymbudProfile"][@"name"];
-    } else {
-        name = [[object objectForKey:@"organizer"] objectForKey:kFacebookUsername];
-    }
-    cell.nameTextLabel.text = name;
-    cell.capacityTextLabel.text = @"TBD";
-    
-    NSDate *eventStartTime = [object objectForKey:@"time"];
-    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-//    [formatter setDateFormat:@"HH:mm"];
-    [formatter setDateStyle:NSDateFormatterNoStyle];
-    [formatter setTimeStyle:NSDateFormatterShortStyle];
-    cell.startTimeTextLabel.text = [formatter stringFromDate:eventStartTime];
-    cell.activityTextLabel.text = object[@"additional"] ? [[[object objectForKey:@"activity"] stringByAppendingString:@" - "] stringByAppendingString:object[@"additional"]] : object[@"activity"];
-    cell.backgroundColor = [UIColor grayColor];
-        
     PFFile *theImage = [object objectForKey:@"organizer"][@"gymbudProfile"][@"profilePicture"];
-    cell.logoImageView.image = [UIImage imageNamed:[kGymBudActivityIconMapping objectForKey:[object objectForKey:@"activity"]]];
     
-    __weak GymBudEventsCell *weakCell = cell;
+    __weak UITableViewCell *weakCell = cell;
     [theImage getDataInBackgroundWithBlock:^(NSData *data, NSError *error){
         NSLog(@"+++++++++ Loading image view with real data ++++++++");
-        weakCell.logoImageView.image = [UIImage imageWithData:data];
+        UIImageView *pict = (UIImageView*) [cell viewWithTag:10];
+        pict.image = [UIImage imageWithData:data];
         [weakCell setNeedsLayout];
+        pict.layer.cornerRadius = 30.0f;
+        pict.layer.masksToBounds = YES;
+        CGSize itemSize = CGSizeMake(60, 60);
+        UIGraphicsBeginImageContextWithOptions(itemSize, NO, UIScreen.mainScreen.scale);
+        CGRect imageRect = CGRectMake(0.0, 0.0, itemSize.width, itemSize.height);
+        [pict.image drawInRect:imageRect];
+        pict.image = UIGraphicsGetImageFromCurrentImageContext();
+        UIGraphicsEndImageContext();
+        
     }];
-
     
-    if([eventStartTime isToday]) {
-        cell.startDateTextLabel.text = @"Today";
-    } else if([eventStartTime isTomorrow]) {
-        cell.startDateTextLabel.text = @"Tomorrow";
-    } else {
-        NSDateFormatter *formatter2 = [[NSDateFormatter alloc] init];
-        [formatter2 setDateFormat:@"MM/dd"];
-        cell.startDateTextLabel.text = [formatter2 stringFromDate:eventStartTime];
-    }
-    cell.locationTextLabel.text = [object objectForKey:@"locationName"];
+    UILabel *nameLabel = (UILabel *)[cell viewWithTag:2];
+    UILabel *dateLabel = (UILabel *)[cell viewWithTag:3];
     
-    NSString *countOverCapacity;
-    NSString *count = [NSString stringWithFormat:@"%lu", (unsigned long)[((NSArray *)[object objectForKey:@"attendees"]) count]];
-    NSString *capacity = [NSString stringWithFormat:@"%ld", (long)[[object objectForKey:@"count"] integerValue]];
-    countOverCapacity = [[count stringByAppendingString:@"/"] stringByAppendingString:capacity];
-    cell.capacityTextLabel.text = countOverCapacity;
+    nameLabel.font = [UIFont fontWithName:@"MagistralATT" size:18];
+    dateLabel.font = [UIFont fontWithName:@"MagistralATT" size:12];
+    nameLabel.textColor = [UIColor whiteColor];
+    nameLabel.textColor = [UIColor whiteColor];
+    dateLabel.textColor = [UIColor whiteColor];
+    
+    nameLabel.text = [NSString stringWithFormat:@"Event Organizer: %@",[object objectForKey:@"organizer"][@"gymbudProfile"][@"name"]];
+    
+    NSDate *eventStartTime = [object objectForKey:@"time"];
+    NSDateFormatter *format = [[NSDateFormatter alloc] init];
+    [format setDateFormat:@"MMM dd, yyyy HH:mm"];
+    NSString *dateString = [format stringFromDate:eventStartTime];
+    
+    dateLabel.text = [NSString stringWithFormat:@"Event Time: %@", dateString];
+    cell.backgroundColor = kGymBudLightBlue;
+    nameLabel.adjustsFontSizeToFitWidth = YES;
+    nameLabel.numberOfLines = 1;
+    
+    [nameLabel sizeToFit];
     
     NSArray *subLogoIndices = [object objectForKey:@"detailLogoIndices"];
     int subLogoIndex = 0;
     for(NSNumber *index in subLogoIndices) {
         if(subLogoIndex == 0) {
-            cell.subLogoImageView1.image = [UIImage imageNamed:[kGBBodyPartImagesArray objectAtIndex:[index integerValue]]];
+            
+            UIImageView *imv = (UIImageView*) [cell viewWithTag:4];
+            imv.image=[UIImage imageNamed:[kGBBodyPartImagesArray objectAtIndex:[index integerValue]]];
+            [cell.contentView addSubview:imv];
         } else if(subLogoIndex == 1) {
-            cell.subLogoImageView2.image = [UIImage imageNamed:[kGBBodyPartImagesArray objectAtIndex:[index integerValue]]];
+            UIImageView *imv = (UIImageView*) [cell viewWithTag:5];
+            imv.image=[UIImage imageNamed:[kGBBodyPartImagesArray objectAtIndex:[index integerValue]]];
+            [cell.contentView addSubview:imv];
         } else if(subLogoIndex == 2) {
-            cell.subLogoImageView3.image = [UIImage imageNamed:[kGBBodyPartImagesArray objectAtIndex:[index integerValue]]];
+            UIImageView *imv = (UIImageView*) [cell viewWithTag:6];
+            imv.image=[UIImage imageNamed:[kGBBodyPartImagesArray objectAtIndex:[index integerValue]]];
+            [cell.contentView addSubview:imv];
         } else {
-            cell.subLogoImageView4.image = [UIImage imageNamed:[kGBBodyPartImagesArray objectAtIndex:[index integerValue]]];
+            UIImageView *imv = (UIImageView*) [cell viewWithTag:7];
+            imv.image=[UIImage imageNamed:[kGBBodyPartImagesArray objectAtIndex:[index integerValue]]];
+            [cell.contentView addSubview:imv];
         }
         subLogoIndex++;
     }
+    
     return cell;
 }
 
@@ -273,24 +238,24 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     // call super because we're a custom subclass.
     [super tableView:tableView didSelectRowAtIndexPath:indexPath];
-    UserDetailsViewController *controller = [[UserDetailsViewController alloc] initWithNibName:nil
-                                                                                        bundle:nil];
-    GymBudEventsCell *cell = (GymBudEventsCell *)[tableView cellForRowAtIndexPath:indexPath];
-    
-    PFQuery *query = [PFQuery queryWithClassName:self.parseClassName];
-    [query includeKey:@"organizer"];
-    [query whereKey:@"objectId" equalTo:[[self.objects objectAtIndex:indexPath.row] objectId]];
-    
-    [query findObjectsInBackgroundWithBlock:^(NSArray *events, NSError *error) {
-        if(self.navigationController.topViewController == self) {
-//            GymBudEventModel *post = [[GymBudEventModel alloc] initWithPFObject:[objects objectAtIndex:0]];
-            controller.annotation = [events objectAtIndex:0];
-            [self.navigationController pushViewController:controller animated:YES]; // or use presentViewController if you're using modals
-            Mixpanel *mixpanel = [Mixpanel sharedInstance];
-            [mixpanel track:@"GymBudEventsTVC SelectedRow" properties:@{
-                                                                   }];
-        }
-    }];
+//    UserDetailsViewController *controller = [[UserDetailsViewController alloc] initWithNibName:nil
+//                                                                                        bundle:nil];
+//    GymBudEventsCell *cell = (GymBudEventsCell *)[tableView cellForRowAtIndexPath:indexPath];
+//    
+//    PFQuery *query = [PFQuery queryWithClassName:self.parseClassName];
+//    [query includeKey:@"organizer"];
+//    [query whereKey:@"objectId" equalTo:[[self.objects objectAtIndex:indexPath.row] objectId]];
+//    
+//    [query findObjectsInBackgroundWithBlock:^(NSArray *events, NSError *error) {
+//        if(self.navigationController.topViewController == self) {
+////            GymBudEventModel *post = [[GymBudEventModel alloc] initWithPFObject:[objects objectAtIndex:0]];
+//            controller.annotation = [events objectAtIndex:0];
+//            [self.navigationController pushViewController:controller animated:YES]; // or use presentViewController if you're using modals
+//            Mixpanel *mixpanel = [Mixpanel sharedInstance];
+//            [mixpanel track:@"GymBudEventsTVC SelectedRow" properties:@{
+//                                                                   }];
+//        }
+//    }];
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
@@ -305,28 +270,23 @@
     [self loadObjects];
 }
 
-- (void)postWasCreated:(NSNotification *)note {
-    NSLog(@"post was created");
-    [self loadObjects];
-}
-
 - (void)refreshControlValueChanged:(UIRefreshControl *)refreshControl {
     [self loadObjects];
 }
 
-- (void)toggleMapTable:(id)sender {
-    NSLog(@"toggle map table");
-    if(!self.isShowingMap) {
-        // show map
-        PAWWallViewController *wvc = [[PAWWallViewController alloc] init];
-        [self.navigationController pushViewController:wvc animated:YES];
-        self.isShowingMap = YES;
-    } else {
-        [self.navigationController popViewControllerAnimated:YES];
-        self.isShowingMap = NO;
-    }
-    
-}
+//- (void)toggleMapTable:(id)sender {
+//    NSLog(@"toggle map table");
+//    if(!self.isShowingMap) {
+//        // show map
+//        PAWWallViewController *wvc = [[PAWWallViewController alloc] init];
+//        [self.navigationController pushViewController:wvc animated:YES];
+//        self.isShowingMap = YES;
+//    } else {
+//        [self.navigationController popViewControllerAnimated:YES];
+//        self.isShowingMap = NO;
+//    }
+//    
+//}
 
 //- (IBAction)toggleHalfModal:(id)sender {
 //    if (self.childViewControllers.count == 0) {
@@ -382,5 +342,91 @@
 //
 //    }
 //}
+
+#pragma mark - CLLocationManagerDelegate methods and helpers
+
+- (void)startStandardUpdates {
+    if (nil == self.locationManager) {
+        self.locationManager = [[CLLocationManager alloc] init];
+    }
+    
+    self.locationManager.delegate = self;
+    self.locationManager.desiredAccuracy = kCLLocationAccuracyBest;
+    
+    // Set a movement threshold for new events.
+    self.locationManager.distanceFilter = kCLLocationAccuracyNearestTenMeters;
+    
+    if([CLLocationManager locationServicesEnabled] && CLLocationManager.authorizationStatus == kCLAuthorizationStatusNotDetermined) {
+        [self.locationManager requestWhenInUseAuthorization];
+    }
+    [self.locationManager startUpdatingLocation];
+    AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
+    
+    CLLocation *currentLocation = self.locationManager.location;
+    if (currentLocation) {
+        appDelegate.currentLocation = currentLocation;
+    }
+}
+
+
+- (void)locationManager:(CLLocationManager *)manager didChangeAuthorizationStatus:(CLAuthorizationStatus)status {
+    NSLog(@"%s", __PRETTY_FUNCTION__);
+    switch (status) {
+        case kCLAuthorizationStatusAuthorizedWhenInUse:
+        case kCLAuthorizationStatusAuthorizedAlways:
+            NSLog(@"kCLAuthorizationStatusAuthorized");
+            [self.locationManager startUpdatingLocation];
+//            [self.locationManager requestWhenInUseAuthorization];
+            [self startStandardUpdates];
+            break;
+        case kCLAuthorizationStatusDenied:
+            NSLog(@"kCLAuthorizationStatusDenied");
+        {{
+            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"GymBud can’t access your current location.\n\nTo view nearby posts or create a post at your current location, turn on access for GymBud to your location in the Settings app under Location Services." message:nil delegate:self cancelButtonTitle:nil otherButtonTitles:@"Ok", nil];
+            [alertView show];
+            // Disable the post button.
+            self.navigationItem.rightBarButtonItem.enabled = NO;
+        }}
+            break;
+        case kCLAuthorizationStatusNotDetermined:
+            [self.locationManager requestWhenInUseAuthorization];
+            NSLog(@"kCLAuthorizationStatusNotDetermined");
+            break;
+        case kCLAuthorizationStatusRestricted:
+            NSLog(@"kCLAuthorizationStatusRestricted");
+            break;
+    }
+}
+
+- (void)locationManager:(CLLocationManager *)manager
+    didUpdateToLocation:(CLLocation *)newLocation
+           fromLocation:(CLLocation *)oldLocation {
+    NSLog(@"%s", __PRETTY_FUNCTION__);
+    
+    AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
+    appDelegate.currentLocation = newLocation;
+    
+    [self loadObjects];
+}
+
+- (void)locationManager:(CLLocationManager *)manager
+       didFailWithError:(NSError *)error {
+    NSLog(@"%s", __PRETTY_FUNCTION__);
+    NSLog(@"Error: %@", [error description]);
+    
+    if (error.code == kCLErrorDenied) {
+        [self.locationManager stopUpdatingLocation];
+    } else if (error.code == kCLErrorLocationUnknown) {
+        // todo: retry?
+        // set a timer for five seconds to cycle location, and if it fails again, bail and tell the user.
+    } else {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error retrieving location"
+                                                        message:[error description]
+                                                       delegate:nil
+                                              cancelButtonTitle:nil
+                                              otherButtonTitles:@"Ok", nil];
+        [alert show];
+    }
+}
 
 @end
