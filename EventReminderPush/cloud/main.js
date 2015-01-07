@@ -1,4 +1,14 @@
 var twilio = require("twilio");
+var express = require('express');
+var app = express();
+
+app.use(express.bodyParser());
+
+app.post('/receiveSMS', function(req, res) {
+        console.log('receive SMS');
+	console.log(req.body.text);
+	res.send('Success');
+});
 
 twilio.initialize("ACed42b9aed728493cddb8c7d35935865b", "dffc6073b68750dfa8f7230c4e1506bf");
 
@@ -9,10 +19,6 @@ Parse.Cloud.define("hello", function(request, response) {
   response.success("Hello world!");
 });
 
-Parse.Cloud.define("receiveSMS", function(request, response) {
-  console.log("Received a new text: " + request.params.From);
-    response.success();
-});
 
 Parse.Cloud.define("inviteWithTwilio", function(request, response) {
 	console.log(request.params.phone);
@@ -133,3 +139,5 @@ Parse.Cloud.job("eventReminder", function(request, response) {
 	   console.log("didn't send pushes");
 	});
 });
+
+app.listen();

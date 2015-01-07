@@ -77,9 +77,10 @@
 #pragma mark - PFQueryTableViewController
 
 - (void)objectsDidLoad:(NSError *)error {
+    
     [super objectsDidLoad:error];
     [self.HUD hide:YES];
-    NSLog(@"objectsDidLoad GymBudEventsTVC 1");
+    NSLog(@"objects is: %@", self.objects);
     // This method is called every time objects are loaded from Parse via the PFQuery
     if (NSClassFromString(@"UIRefreshControl")) {
         [self.refreshControl endRefreshing];
@@ -107,7 +108,7 @@
     NSLog(@"querying now");
     if(currentLocation != nil) {
         PFGeoPoint *point = [PFGeoPoint geoPointWithLatitude:currentLocation.coordinate.latitude longitude:currentLocation.coordinate.longitude];
-        [query whereKey:@"location" nearGeoPoint:point withinKilometers:100];
+        [query whereKey:@"location" nearGeoPoint:point withinKilometers:1000];
     }
     [query includeKey:@"organizer"];
     [query whereKey:@"isVisible" equalTo:[NSNumber numberWithBool:YES]];
@@ -144,7 +145,10 @@
     self.HUD.mode = MBProgressHUDModeCustomView;
     self.HUD.color = [UIColor clearColor];
     
-    [self.HUD show:YES];
+    if(self.HUD.isHidden) {
+        [self.HUD show:YES];
+    }
+    
     for (UIView *subview in self.view.subviews)
     {
         if ([subview class] == NSClassFromString(@"PFLoadingView"))
@@ -162,7 +166,7 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath object:(PFObject *)object
 {
     NSLog(@"Object is %@", object);
-    UITableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:@"joined"
+    UITableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:@"eventCell"
                                                                  forIndexPath:indexPath];
     
     PFFile *theImage = [object objectForKey:@"organizer"][@"gymbudProfile"][@"profilePicture"];
@@ -262,16 +266,19 @@
 #pragma mark - ()
 
 - (void)distanceFilterDidChange:(NSNotification *)note {
-    [self loadObjects];
+//    [self loadObjects];
+    [self loadObjects:0 clear:YES];
 }
 
 - (void)locationDidChange:(NSNotification *)note {
     NSLog(@"Location did change");
-    [self loadObjects];
+    [self loadObjects:0 clear:YES];
+//    [self loadObjects];
 }
 
 - (void)refreshControlValueChanged:(UIRefreshControl *)refreshControl {
-    [self loadObjects];
+    [self loadObjects:0 clear:YES];
+    //    [self loadObjects];
 }
 
 //- (void)toggleMapTable:(id)sender {
@@ -406,7 +413,8 @@
     AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
     appDelegate.currentLocation = newLocation;
     
-    [self loadObjects];
+//    [self loadObjects];
+    [self loadObjects:0 clear:YES];
 }
 
 - (void)locationManager:(CLLocationManager *)manager

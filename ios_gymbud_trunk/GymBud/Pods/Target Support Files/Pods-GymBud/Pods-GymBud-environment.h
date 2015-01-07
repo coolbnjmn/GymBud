@@ -9,44 +9,44 @@
 // AFNetworking
 #define COCOAPODS_POD_AVAILABLE_AFNetworking
 #define COCOAPODS_VERSION_MAJOR_AFNetworking 2
-#define COCOAPODS_VERSION_MINOR_AFNetworking 3
-#define COCOAPODS_VERSION_PATCH_AFNetworking 1
+#define COCOAPODS_VERSION_MINOR_AFNetworking 5
+#define COCOAPODS_VERSION_PATCH_AFNetworking 0
 
 // AFNetworking/NSURLConnection
 #define COCOAPODS_POD_AVAILABLE_AFNetworking_NSURLConnection
 #define COCOAPODS_VERSION_MAJOR_AFNetworking_NSURLConnection 2
-#define COCOAPODS_VERSION_MINOR_AFNetworking_NSURLConnection 3
-#define COCOAPODS_VERSION_PATCH_AFNetworking_NSURLConnection 1
+#define COCOAPODS_VERSION_MINOR_AFNetworking_NSURLConnection 5
+#define COCOAPODS_VERSION_PATCH_AFNetworking_NSURLConnection 0
 
 // AFNetworking/NSURLSession
 #define COCOAPODS_POD_AVAILABLE_AFNetworking_NSURLSession
 #define COCOAPODS_VERSION_MAJOR_AFNetworking_NSURLSession 2
-#define COCOAPODS_VERSION_MINOR_AFNetworking_NSURLSession 3
-#define COCOAPODS_VERSION_PATCH_AFNetworking_NSURLSession 1
+#define COCOAPODS_VERSION_MINOR_AFNetworking_NSURLSession 5
+#define COCOAPODS_VERSION_PATCH_AFNetworking_NSURLSession 0
 
 // AFNetworking/Reachability
 #define COCOAPODS_POD_AVAILABLE_AFNetworking_Reachability
 #define COCOAPODS_VERSION_MAJOR_AFNetworking_Reachability 2
-#define COCOAPODS_VERSION_MINOR_AFNetworking_Reachability 3
-#define COCOAPODS_VERSION_PATCH_AFNetworking_Reachability 1
+#define COCOAPODS_VERSION_MINOR_AFNetworking_Reachability 5
+#define COCOAPODS_VERSION_PATCH_AFNetworking_Reachability 0
 
 // AFNetworking/Security
 #define COCOAPODS_POD_AVAILABLE_AFNetworking_Security
 #define COCOAPODS_VERSION_MAJOR_AFNetworking_Security 2
-#define COCOAPODS_VERSION_MINOR_AFNetworking_Security 3
-#define COCOAPODS_VERSION_PATCH_AFNetworking_Security 1
+#define COCOAPODS_VERSION_MINOR_AFNetworking_Security 5
+#define COCOAPODS_VERSION_PATCH_AFNetworking_Security 0
 
 // AFNetworking/Serialization
 #define COCOAPODS_POD_AVAILABLE_AFNetworking_Serialization
 #define COCOAPODS_VERSION_MAJOR_AFNetworking_Serialization 2
-#define COCOAPODS_VERSION_MINOR_AFNetworking_Serialization 3
-#define COCOAPODS_VERSION_PATCH_AFNetworking_Serialization 1
+#define COCOAPODS_VERSION_MINOR_AFNetworking_Serialization 5
+#define COCOAPODS_VERSION_PATCH_AFNetworking_Serialization 0
 
 // AFNetworking/UIKit
 #define COCOAPODS_POD_AVAILABLE_AFNetworking_UIKit
 #define COCOAPODS_VERSION_MAJOR_AFNetworking_UIKit 2
-#define COCOAPODS_VERSION_MINOR_AFNetworking_UIKit 3
-#define COCOAPODS_VERSION_PATCH_AFNetworking_UIKit 1
+#define COCOAPODS_VERSION_MINOR_AFNetworking_UIKit 5
+#define COCOAPODS_VERSION_PATCH_AFNetworking_UIKit 0
 
 // AXRatingView
 #define COCOAPODS_POD_AVAILABLE_AXRatingView
@@ -63,14 +63,14 @@
 // Facebook-iOS-SDK
 #define COCOAPODS_POD_AVAILABLE_Facebook_iOS_SDK
 #define COCOAPODS_VERSION_MAJOR_Facebook_iOS_SDK 3
-#define COCOAPODS_VERSION_MINOR_Facebook_iOS_SDK 21
-#define COCOAPODS_VERSION_PATCH_Facebook_iOS_SDK 1
+#define COCOAPODS_VERSION_MINOR_Facebook_iOS_SDK 22
+#define COCOAPODS_VERSION_PATCH_Facebook_iOS_SDK 0
 
 // JSQMessagesViewController
 #define COCOAPODS_POD_AVAILABLE_JSQMessagesViewController
 #define COCOAPODS_VERSION_MAJOR_JSQMessagesViewController 6
 #define COCOAPODS_VERSION_MINOR_JSQMessagesViewController 1
-#define COCOAPODS_VERSION_PATCH_JSQMessagesViewController 0
+#define COCOAPODS_VERSION_PATCH_JSQMessagesViewController 1
 
 // JSQSystemSoundPlayer
 #define COCOAPODS_POD_AVAILABLE_JSQSystemSoundPlayer
@@ -93,20 +93,26 @@
 // Mixpanel
 #define COCOAPODS_POD_AVAILABLE_Mixpanel
 #define COCOAPODS_VERSION_MAJOR_Mixpanel 2
-#define COCOAPODS_VERSION_MINOR_Mixpanel 5
-#define COCOAPODS_VERSION_PATCH_Mixpanel 4
+#define COCOAPODS_VERSION_MINOR_Mixpanel 6
+#define COCOAPODS_VERSION_PATCH_Mixpanel 2
+
+// Mixpanel/MPCategoryHelpers
+#define COCOAPODS_POD_AVAILABLE_Mixpanel_MPCategoryHelpers
+#define COCOAPODS_VERSION_MAJOR_Mixpanel_MPCategoryHelpers 2
+#define COCOAPODS_VERSION_MINOR_Mixpanel_MPCategoryHelpers 6
+#define COCOAPODS_VERSION_PATCH_Mixpanel_MPCategoryHelpers 2
 
 // Parse
 #define COCOAPODS_POD_AVAILABLE_Parse
 #define COCOAPODS_VERSION_MAJOR_Parse 1
 #define COCOAPODS_VERSION_MINOR_Parse 6
-#define COCOAPODS_VERSION_PATCH_Parse 0
+#define COCOAPODS_VERSION_PATCH_Parse 1
 
 // ParseFacebookUtils
 #define COCOAPODS_POD_AVAILABLE_ParseFacebookUtils
 #define COCOAPODS_VERSION_MAJOR_ParseFacebookUtils 1
 #define COCOAPODS_VERSION_MINOR_ParseFacebookUtils 6
-#define COCOAPODS_VERSION_PATCH_ParseFacebookUtils 0
+#define COCOAPODS_VERSION_PATCH_ParseFacebookUtils 1
 
 // ParseUI
 #define COCOAPODS_POD_AVAILABLE_ParseUI
