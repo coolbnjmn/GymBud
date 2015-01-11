@@ -2,15 +2,81 @@ var twilio = require("twilio");
 var express = require('express');
 var app = express();
 
+twilio.initialize("ACed42b9aed728493cddb8c7d35935865b", "dffc6073b68750dfa8f7230c4e1506bf");
 app.use(express.bodyParser());
 
 app.post('/receiveSMS', function(req, res) {
         console.log('receive SMS');
-	console.log(req.body.text);
+	console.log(req.body.Body);
+
 	res.send('Success');
+	if(req.body.Body.toLowerCase() == "in" || req.body.Body.toLowerCase() == "out") {
+		twilio.sendSMS({
+			From: "(650) 614-5446",
+			To: req.body.From,
+			Body: "It's been noted, and notifications have been sent. Check us out at https://itunes.apple.com/us/app/gymbud-for-ucla/id935537048?mt=8"
+		}, {
+			success: function(httpResponse) {
+				console.log(httpResponse);
+				response.success("SMS Sent!");
+			}, 
+			error: function(httpResponse) {
+				console.error(httpResponse);
+				response.error("Uh OH, something went wrong");
+			}
+		});
+		if(req.body.Body.toLowerCase() == "in") {
+		var userObj = Parse.Object.extend("User");
+		var userQuery = new Parse.Query(userObj);
+
+		userQuery.equalTo("user_fb_name", req.body.
+		var eventObj = Parse.Object.extend("Event");
+		var query = new Parse.Query(eventObj);
+		query.equalTo("playerName", "Dan Stemkoski");
+		query.find({
+		  success: function(results) {
+		      alert("Successfully retrieved " + results.length + " scores.");
+		          // Do something with the returned Parse.Object values
+			      for (var i = 0; i < results.length; i++) { 
+			            var object = results[i];
+				          alert(object.id + ' - ' + object.get('playerName'));
+					      }
+					        },
+						  error: function(error) {
+						      alert("Error: " + error.code + " " + error.message);
+						        }
+	     var pushQuery = new Parse.Query(Parse.Installation);
+	     var attendeesAndOrganizer = eventObj.get("attendees");
+	     if(attendeesAndOrganizer)
+	       attendeesAndOrganizer.push(eventObj.get("organizer"));
+	     else 
+	       attendeesAndOrganizer = [eventObj.get("organizer")];
+
+	     console.log(attendeesAndOrganizer);
+	     pushQuery.containedIn("user", attendeesAndOrganizer);
+	     Parse.Push.send({
+	       where: pushQuery, 
+	       data: {
+	         alert: "Your event is starting soon!",
+		  eventObjectId: eventObj.id,
+		  eventObj: attendeesAndOrganizer,
+		  badge: "Increment"
+	       }
+	     }, {
+	       success: function() {
+	         response.success("pushed");
+	       }, error: function(error) {
+	         reponse.error("didn't push");
+	       }
+	     });
+	     
+		}
+	} else {
+	
+	// do nothing for now
+	}
 });
 
-twilio.initialize("ACed42b9aed728493cddb8c7d35935865b", "dffc6073b68750dfa8f7230c4e1506bf");
 
 // Use Parse.Cloud.define to define as many cloud functions as you want.
 // For example:
