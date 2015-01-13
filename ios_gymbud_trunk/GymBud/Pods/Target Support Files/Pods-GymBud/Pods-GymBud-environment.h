@@ -70,13 +70,13 @@
 #define COCOAPODS_POD_AVAILABLE_JSQMessagesViewController
 #define COCOAPODS_VERSION_MAJOR_JSQMessagesViewController 6
 #define COCOAPODS_VERSION_MINOR_JSQMessagesViewController 1
-#define COCOAPODS_VERSION_PATCH_JSQMessagesViewController 1
+#define COCOAPODS_VERSION_PATCH_JSQMessagesViewController 3
 
 // JSQSystemSoundPlayer
 #define COCOAPODS_POD_AVAILABLE_JSQSystemSoundPlayer
 #define COCOAPODS_VERSION_MAJOR_JSQSystemSoundPlayer 2
 #define COCOAPODS_VERSION_MINOR_JSQSystemSoundPlayer 0
-#define COCOAPODS_VERSION_PATCH_JSQSystemSoundPlayer 0
+#define COCOAPODS_VERSION_PATCH_JSQSystemSoundPlayer 1
 
 // MBProgressHUD
 #define COCOAPODS_POD_AVAILABLE_MBProgressHUD
@@ -118,7 +118,7 @@
 #define COCOAPODS_POD_AVAILABLE_ParseUI
 #define COCOAPODS_VERSION_MAJOR_ParseUI 1
 #define COCOAPODS_VERSION_MINOR_ParseUI 0
-#define COCOAPODS_VERSION_PATCH_ParseUI 2
+#define COCOAPODS_VERSION_PATCH_ParseUI 3
 
 // RSDayFlow
 #define COCOAPODS_POD_AVAILABLE_RSDayFlow
@@ -131,4 +131,10 @@
 #define COCOAPODS_VERSION_MAJOR_UIAlertView_Blocks 1
 #define COCOAPODS_VERSION_MINOR_UIAlertView_Blocks 0
 #define COCOAPODS_VERSION_PATCH_UIAlertView_Blocks 0
+
+// libPhoneNumber-iOS
+#define COCOAPODS_POD_AVAILABLE_libPhoneNumber_iOS
+#define COCOAPODS_VERSION_MAJOR_libPhoneNumber_iOS 0
+#define COCOAPODS_VERSION_MINOR_libPhoneNumber_iOS 7
+#define COCOAPODS_VERSION_PATCH_libPhoneNumber_iOS 5
 

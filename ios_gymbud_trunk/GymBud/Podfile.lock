@@ -24,9 +24,10 @@ PODS:
   - Bolts (1.1.3)
   - Facebook-iOS-SDK (3.22.0):
     - Bolts (~> 1.0)
-  - JSQMessagesViewController (6.1.1):
-    - JSQSystemSoundPlayer (~> 2.0.0)
-  - JSQSystemSoundPlayer (2.0.0)
+  - JSQMessagesViewController (6.1.3):
+    - JSQSystemSoundPlayer (~> 2.0.1)
+  - JSQSystemSoundPlayer (2.0.1)
+  - libPhoneNumber-iOS (0.7.5)
   - MBProgressHUD (0.9)
   - Mixpanel (2.6.2):
     - Mixpanel/MPCategoryHelpers (= 2.6.2)
@@ -37,9 +38,9 @@ PODS:
   - ParseFacebookUtils (1.6.1):
     - Facebook-iOS-SDK (~> 3.20)
     - Parse (~> 1.6.1)
-  - ParseUI (1.0.2):
-    - Parse (~> 1.5)
-    - ParseFacebookUtils (~> 1.5)
+  - ParseUI (1.0.3):
+    - Parse (~> 1.6)
+    - ParseFacebookUtils (~> 1.6)
   - RSDayFlow (0.1.2)
   - UIAlertView-Blocks (1.0)
 
@@ -47,6 +48,7 @@ DEPENDENCIES:
   - AFNetworking (~> 2.0)
   - AXRatingView
   - JSQMessagesViewController
+  - libPhoneNumber-iOS (~> 0.7)
   - MBProgressHUD (~> 0.8)
   - Mixpanel
   - MLPAutoCompleteTextField (~> 1.5)
@@ -59,14 +61,15 @@ SPEC CHECKSUMS:
   AXRatingView: 4f6d6c96f6d0efc1deaa6cf493dbb1ffcfa79e55
   Bolts: 3db0a875235e0c9042b013af13af0f00f79b102c
   Facebook-iOS-SDK: 0eda8ff7120aada0a9c5f98552f7625da6c3440a
-  JSQMessagesViewController: 84a5823a1f6a4f29ee6d4db0ea4b9d63876be4ee
-  JSQSystemSoundPlayer: c98443b1cbb3b45db09d0d3d6c2355cf78294981
+  JSQMessagesViewController: e93a288a9662d4519c95a28a8c0eec10beae1bfc
+  JSQSystemSoundPlayer: 55528c699a283aae2220d3ae7b8b527d2ecef4b4
+  libPhoneNumber-iOS: 16b9556d7fdf4819eabeb7b7356fea3373fa47f9
   MBProgressHUD: 2038dbcf3dce73215abed6001657043d53aa79a8
   Mixpanel: c075cedebda3328ce1ee29a18429e265ce967cd8
   MLPAutoCompleteTextField: 5e440aa7b139258f779db3375dd486421959be15
   Parse: b0ec7666167e212edb6fc94f60ba170248bd1869
   ParseFacebookUtils: 7659dcda0fa59f67234ab7ba5a82a9b05073c59a
-  ParseUI: 0eed358b238dcd66949ebc22513eba603e110087
+  ParseUI: 8201eccd0e68eaa000b58253c4286e92de0ce5c5
   RSDayFlow: 03f2ed762b7ed199323770650597a499ef39112a
   UIAlertView-Blocks: f3271e84372beb97aea115cd1fb26ae66457f12f
 

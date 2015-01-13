@@ -12,6 +12,8 @@ pod 'AXRatingView'
 pod 'JSQMessagesViewController'
 pod 'UIAlertView-Blocks'
 pod 'ParseUI'
+pod 'libPhoneNumber-iOS', '~> 0.7'
+
 
 end
 

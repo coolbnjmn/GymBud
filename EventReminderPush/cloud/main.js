@@ -6,7 +6,7 @@ twilio.initialize("ACed42b9aed728493cddb8c7d35935865b", "dffc6073b68750dfa8f7230
 app.use(express.bodyParser());
 
 app.post('/receiveSMS', function(req, res) {
-        console.log('receive SMS');
+	console.log('receive SMS');
 	console.log(req.body.Body);
 
 	res.send('Success');
@@ -25,55 +25,73 @@ app.post('/receiveSMS', function(req, res) {
 				response.error("Uh OH, something went wrong");
 			}
 		});
+
 		if(req.body.Body.toLowerCase() == "in") {
-		var userObj = Parse.Object.extend("User");
-		var userQuery = new Parse.Query(userObj);
+			console.log("in was received");
+			// eventQuery
+			var contactObj = Parse.Object.extend("Contact");
+			var contactQuery = new Parse.Query(contactObj);
+			console.log(req.body.From);
+			contactQuery.containedIn("phone", req.body.From);
 
-		userQuery.equalTo("user_fb_name", req.body.
-		var eventObj = Parse.Object.extend("Event");
-		var query = new Parse.Query(eventObj);
-		query.equalTo("playerName", "Dan Stemkoski");
-		query.find({
-		  success: function(results) {
-		      alert("Successfully retrieved " + results.length + " scores.");
-		          // Do something with the returned Parse.Object values
-			      for (var i = 0; i < results.length; i++) { 
-			            var object = results[i];
-				          alert(object.id + ' - ' + object.get('playerName'));
-					      }
-					        },
-						  error: function(error) {
-						      alert("Error: " + error.code + " " + error.message);
-						        }
-	     var pushQuery = new Parse.Query(Parse.Installation);
-	     var attendeesAndOrganizer = eventObj.get("attendees");
-	     if(attendeesAndOrganizer)
-	       attendeesAndOrganizer.push(eventObj.get("organizer"));
-	     else 
-	       attendeesAndOrganizer = [eventObj.get("organizer")];
+			contactQuery.count({
+			  success: function(number) {
+			    // There are number instances of MyClass.
+			    console.log("something");
+			  },
 
-	     console.log(attendeesAndOrganizer);
-	     pushQuery.containedIn("user", attendeesAndOrganizer);
-	     Parse.Push.send({
-	       where: pushQuery, 
-	       data: {
-	         alert: "Your event is starting soon!",
-		  eventObjectId: eventObj.id,
-		  eventObj: attendeesAndOrganizer,
-		  badge: "Increment"
-	       }
-	     }, {
-	       success: function() {
-	         response.success("pushed");
-	       }, error: function(error) {
-	         reponse.error("didn't push");
-	       }
-	     });
-	     
+			  error: function(error) {
+			    // error is an instance of Parse.Error.
+			    console.log("error");
+			  }
+			});
+			contactQuery.each(function(contact) {
+				console.log(contact);
+				var eventObj = Parse.Object.extend("Event");
+				var eventQuery = new Parse.Query(eventObj);
+				eventQuery.equalTo("organizer", contact["owner"]);
+				eventQuery.each(function(foundEvent) {
+					var attendees = foundEvent["attendees"];
+					attendees.push(contact);
+					foundEvent["attendees"] = attendees;
+					foundEvent.save(null, {
+						success: function(foundEvent) {
+					    // Execute any logic that should take place after the object is saved.
+					    var organizer = foundEvent["organizer"];
+						var pushQuery = new Parse.Query(Parse.Installation);
+
+						pushQuery.containedIn("user", organizer);
+
+
+						Parse.Push.send({
+							where: pushQuery, 
+							data: {
+								alert: contact["name"]+" has joined your event!",
+								badge: "Increment"
+							},
+						}, {
+							success: function() {
+								console.log("trying to send push");
+								response.success("scheduled end of event push");
+							}, error: function(error) {
+								console.log("trying to send push");
+								reponse.error("didn't schedule the push")
+							}
+						});
+					},
+						error: function(foundEvent, error) {
+					    // Execute any logic that should take place if the save fails.
+					    // error is a Parse.Error with an error code and message.
+					    console.log("error saving attendees object");
+					}
+					});
+				});
+			}).then(function() {
+			    console.log("found contact");
+			 }, function(error) {
+			    console.log("didn't find contact");
+			});
 		}
-	} else {
-	
-	// do nothing for now
 	}
 });
 

@@ -74,6 +74,11 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>Pods-GymBud-libPhoneNumber-iOS.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>Pods-GymBud.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -82,77 +87,82 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>044F4230C9D71A49BB744090</key>
+		<key>1FD1935B003EC2181D61DB17</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>14E1B9599E99926F3D721D61</key>
+		<key>27881DACB99FE266E84FD26E</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>4EDA24BA7CC53A10123F66A6</key>
+		<key>3389FFA52F300BFEC8154066</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>6218285AAAE790E885E5E4FA</key>
+		<key>464FADC2A4A9C57153D87FFB</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>66D589AFC7F57AC21059846A</key>
+		<key>50EA0F98C4C2B5E22F5A8469</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>737901A6E06C011F70D22E45</key>
+		<key>569B2AE2D88F5C59034D948C</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>76CEA5BFAA5A12A6813C00F4</key>
+		<key>72C179CF06602F72D02531FD</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>8A1BD1EBB81D08B5BFAB394D</key>
+		<key>ADBFD9EC20C549BCBC649705</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>8F30B4EEB92CC007ED0A70C6</key>
+		<key>ADE2351356CDE8E6EEB91183</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>B00F2EAAB0758678BA3543B8</key>
+		<key>B64A036B7648D778680CB336</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>B5A266D8FB2446669D08BD8D</key>
+		<key>BDDD11AAC49F8F88C44DFCD4</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>C3C15C23D509B5E9E1E9666E</key>
+		<key>BE80DB2EA0EDA8A229ADE244</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>CF5AFA656ED6C02E6B2D77DF</key>
+		<key>C1734CEFD995660CA1F72F25</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>E6CA7C85B3A0597117C95A22</key>
+		<key>DAB57483465935A4F132B74E</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>F7DB59E8EC5CEE15ED499896</key>
+		<key>EB89000750FCF42E1B5DE73B</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>F371C260DB5D13342CCB1718</key>
 		<dict>
 			<key>primary</key>
 			<true/>

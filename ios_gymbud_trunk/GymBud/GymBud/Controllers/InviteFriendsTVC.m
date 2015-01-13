@@ -29,6 +29,7 @@
 @property (nonatomic, retain) NSMutableArray *searchResults;
 
 @property (nonatomic, retain) NSMutableArray *selectedResults;
+@property int selectedResultsIndex;
 
 -(void)showAddressBook;
 
@@ -209,11 +210,12 @@
 #pragma mark - Private method implementation
 - (void) inviteFriends:(id) sender {
     bool alertBool = YES;
-    for(NSDictionary *dict in self.selectedResults) {
-        // SEND TWILIO TEXT HERE
-        [self sendSMSToNumber:[dict mutableCopy] withAlert:alertBool];
-        alertBool = NO;
-    }
+    self.selectedResultsIndex = 0;
+    NSDictionary *dict = self.selectedResults[self.selectedResultsIndex];
+    
+    // SEND TWILIO TEXT HERE
+    [self sendSMSToNumber:[dict mutableCopy] withAlert:alertBool];
+    alertBool = NO;
 }
 
 /* Send invitation SMS to a phone number using Cloud Code and Twilio! */
@@ -250,6 +252,7 @@
     [self.HUD show:YES];
     AFHTTPSessionManager *httpSessionManager = [[AFHTTPSessionManager alloc] initWithBaseURL:url];
     [httpSessionManager GET:@"json" parameters:params success:^(NSURLSessionDataTask *task, id responseObject) {
+        
         NSLog(@"\n============= Entity Saved Success ===\n%@",responseObject);
         NSString *latStr;
         NSString *lngStr;
@@ -271,82 +274,195 @@
         }
         PFGeoPoint *eventLocation = [PFGeoPoint geoPointWithLatitude:lat longitude:lng];
         
-        PFObject *eventObject = [PFObject objectWithClassName:@"Event"];
-        [eventObject setObject:[PFUser currentUser] forKey:@"organizer"];
+        PFQuery *eventQuery = [PFQuery queryWithClassName:@"Event"];
+        [eventQuery whereKey:@"location" nearGeoPoint:eventLocation];
+        [eventQuery whereKey:@"time" equalTo:self.date];
+        [eventQuery whereKey:@"locationName" equalTo:self.location];
+        [eventQuery whereKey:@"organizer" equalTo:[PFUser currentUser]];
         
-        //        [eventObject setObject:eventLocation forKey:@"location"];
-        [eventObject setObject:self.location forKey:@"locationName"];
-        [eventObject setObject:eventLocation forKey:@"location"];
-        [eventObject setObject:@"" forKey:@"additional"];
-        [eventObject setObject:self.date forKey:@"time"];
-        [eventObject setObject:[NSNumber numberWithBool:YES] forKey:@"isVisible"];
-        
-        [eventObject setObject:@"Strength Training" forKey:@"activity"];
-        
-        NSMutableArray *indices = [[NSMutableArray alloc] init];
-        for(NSIndexPath *indexPath in self.bodyParts) {
-            [indices addObject:[NSNumber numberWithInteger:indexPath.row]];
-        }
-        [eventObject setObject:indices forKey:@"detailLogoIndices"];
-        
-        //        int selectedCountRow = (int) [self.countPicker selectedRowInComponent:0];
-        // add 1 because it is 0 based indexing.
-        [eventObject setObject:[NSNumber numberWithInt:1] forKey:@"count"];
-
-        [eventObject setObject:[NSNumber numberWithInt:60] forKey:@"duration"];
-        
-        [eventObject setObject:[[PFUser currentUser][@"gymbudProfile"][@"name"] stringByAppendingString: [NSString stringWithFormat:@" invited you to go lift @ %@ %@. Reply IN or OUT now!", shortDate, self.location, nil]] forKey:@"description"];
-        
-        [eventObject saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
-            if (error) {
-                NSLog(@"Couldn't save!");
-                NSLog(@"%@", error);
-                [self.HUD hide:NO];
-                UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:[[error userInfo] objectForKey:@"error"] message:nil delegate:self cancelButtonTitle:nil otherButtonTitles:@"Ok", nil];
-                [alertView show];
-                return;
-            }
-            if (succeeded) {
-                NSLog(@"Successfully saved!");
+        [eventQuery findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+            if([objects count] == 0) {
+                // make new object
+                PFObject *eventObject = [PFObject objectWithClassName:@"Event"];
+                [eventObject setObject:[PFUser currentUser] forKey:@"organizer"];
+                [eventObject setObject:[NSArray arrayWithObjects:userDict[@"phone"], nil] forKey:@"invitees"];
                 
-                [self.HUD hide:YES];
+                PFQuery *contactQuery = [PFQuery queryWithClassName:@"Contact"];
+                [contactQuery whereKey:@"phone" equalTo:userDict[@"phone"]];
+                [contactQuery whereKey:@"owner" equalTo:[PFUser currentUser]];
+                [contactQuery findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+                    if([objects count] == 0) {
+                        PFObject *contactObject = [PFObject objectWithClassName:@"Contact"];
+                        [contactObject setObject:userDict[@"phone"] forKey:@"phone"];
+                        [contactObject setObject:userDict[@"name"] forKey:@"name"];
+                        [contactObject setObject:[PFUser currentUser] forKey:@"owner"];
+                        [contactObject saveInBackground];
+                    }
+                }];
+                //                 [eventObject setObject:[NSArray arrayWithObjects:[NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:userDict[@"phone"], userDict[@"name"], nil] forKeys:[NSArray arrayWithObjects:@"phone", @"name", nil]], nil] forKey:@"invitees"];
 
-                [PFCloud callFunctionInBackground:@"inviteWithTwilio" withParameters:userDict block:^(id object, NSError *error) {
-                    NSString *message = @"";
-                    if (!error) {
-                        message = @"Your SMS invitation has been sent!";
+                [eventObject setObject:self.location forKey:@"locationName"];
+                [eventObject setObject:eventLocation forKey:@"location"];
+                [eventObject setObject:@"" forKey:@"additional"];
+                [eventObject setObject:self.date forKey:@"time"];
+                [eventObject setObject:[NSNumber numberWithBool:YES] forKey:@"isVisible"];
+                
+                [eventObject setObject:@"Strength Training" forKey:@"activity"];
+                
+                NSMutableArray *indices = [[NSMutableArray alloc] init];
+                for(NSIndexPath *indexPath in self.bodyParts) {
+                    [indices addObject:[NSNumber numberWithInteger:indexPath.row]];
+                }
+                [eventObject setObject:indices forKey:@"detailLogoIndices"];
+                
+                //        int selectedCountRow = (int) [self.countPicker selectedRowInComponent:0];
+                // add 1 because it is 0 based indexing.
+                [eventObject setObject:[NSNumber numberWithInt:1] forKey:@"count"];
+                
+                [eventObject setObject:[NSNumber numberWithInt:60] forKey:@"duration"];
+                
+                [eventObject setObject:[[PFUser currentUser][@"gymbudProfile"][@"name"] stringByAppendingString: [NSString stringWithFormat:@" invited you to go lift @ %@ %@. Reply IN or OUT now!", shortDate, self.location, nil]] forKey:@"description"];
+                
+                [eventObject saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+                    if (error) {
+                        NSLog(@"Couldn't save!");
+                        NSLog(@"%@", error);
+                        [self.HUD hide:NO];
+                        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:[[error userInfo] objectForKey:@"error"] message:nil delegate:self cancelButtonTitle:nil otherButtonTitles:@"Ok", nil];
+                        [alertView show];
+                        return;
+                    }
+                    if (succeeded) {
+                        NSLog(@"Successfully saved!");
+                        
+                        [self.HUD hide:YES];
+                        
+                        [PFCloud callFunctionInBackground:@"inviteWithTwilio" withParameters:userDict block:^(id object, NSError *error) {
+                            NSString *message = @"";
+                            if (!error) {
+                                message = @"Your SMS invitation has been sent!";
+                            } else {
+                                message = @"Uh oh, something went wrong :(";
+                                [eventObject deleteInBackground];
+                            }
+                            
+                            UIAlertView *smsSentAlertView = [[UIAlertView alloc] initWithTitle:@"Invite Sent!"
+                                                                                       message:message
+                                                                                      delegate:nil
+                                                                             cancelButtonTitle:@"Ok"
+                                                                             otherButtonTitles:nil, nil];
+                            if(alertSetting) {
+                                [smsSentAlertView show];
+                            }
+                            
+                            NSLog(@"%@", eventObject);
+                            self.selectedResultsIndex++;
+                            
+                            if(self.selectedResultsIndex == [self.selectedResults count]) {
+                                [self.navigationController popToRootViewControllerAnimated:YES];
+                                
+                                Mixpanel *mixpanel = [Mixpanel sharedInstance];
+                                [mixpanel track:@"InviteFriendsTVC CreateEvent" properties:@{
+                                                                                             
+                                                                                             }];
+                                [self.tableView reloadData];
+                                
+                            } else {
+                                NSDictionary *dict = self.selectedResults[self.selectedResultsIndex];
+                                
+                                // SEND TWILIO TEXT HERE
+                                [self sendSMSToNumber:[dict mutableCopy] withAlert:NO];
+                            }
+                            
+                            
+                        }];
+                        
                     } else {
-                        message = @"Uh oh, something went wrong :(";
-                        [eventObject deleteInBackground];
+                        NSLog(@"Failed to save.");
                     }
-                    
-                    UIAlertView *smsSentAlertView = [[UIAlertView alloc] initWithTitle:@"Invite Sent!"
-                                                                               message:message
-                                                                              delegate:nil
-                                                                     cancelButtonTitle:@"Ok"
-                                                                     otherButtonTitles:nil, nil];
-                    if(alertSetting) {
-                        [smsSentAlertView show];
-                    }
-                    
-                    NSLog(@"%@", eventObject);
-                    
-                    [self.navigationController popToRootViewControllerAnimated:YES];
-                    
-                    Mixpanel *mixpanel = [Mixpanel sharedInstance];
-                    [mixpanel track:@"InviteFriendsTVC CreateEvent" properties:@{
-                                                                                 
-                                                                                 }];
-                    [self.tableView reloadData];
-
-                    
                 }];
 
-            } else {
-                NSLog(@"Failed to save.");
+            }
+            else {
+                PFObject *event = [objects objectAtIndex:0];
+                NSMutableArray *invitees = [event objectForKey:@"invitees"];
+                NSMutableArray *backup = [invitees copy];
+                [invitees addObject:userDict[@"phone"]];
+                PFQuery *contactQuery = [PFQuery queryWithClassName:@"Contact"];
+                [contactQuery whereKey:@"phone" equalTo:userDict[@"phone"]];
+                [contactQuery whereKey:@"owner" equalTo:[PFUser currentUser]];
+                [contactQuery findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+                    if([objects count] == 0) {
+                        PFObject *contactObject = [PFObject objectWithClassName:@"Contact"];
+                        [contactObject setObject:userDict[@"phone"] forKey:@"phone"];
+                        [contactObject setObject:userDict[@"name"] forKey:@"name"];
+                        [contactObject setObject:[PFUser currentUser] forKey:@"owner"];
+                        [contactObject saveInBackground];
+                    }
+                }];
+                
+                [event setObject:invitees forKey:@"invitees"];
+                [event saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+                    if (error) {
+                        NSLog(@"Couldn't save!");
+                        NSLog(@"%@", error);
+                        [self.HUD hide:NO];
+                        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:[[error userInfo] objectForKey:@"error"] message:nil delegate:self cancelButtonTitle:nil otherButtonTitles:@"Ok", nil];
+                        [alertView show];
+                        return;
+                    }
+                    if (succeeded) {
+                        NSLog(@"Successfully saved!");
+                        
+                        [self.HUD hide:YES];
+                        
+                        [PFCloud callFunctionInBackground:@"inviteWithTwilio" withParameters:userDict block:^(id object, NSError *error) {
+                            NSString *message = @"";
+                            if (!error) {
+                                message = @"Your SMS invitation has been sent!";
+                            } else {
+                                message = @"Uh oh, something went wrong :(";
+                                [event setObject:backup forKey:@"invitees"];
+//                                [event deleteInBackground];
+                            }
+                            
+                            UIAlertView *smsSentAlertView = [[UIAlertView alloc] initWithTitle:@"Invite Sent!"
+                                                                                       message:message
+                                                                                      delegate:nil
+                                                                             cancelButtonTitle:@"Ok"
+                                                                             otherButtonTitles:nil, nil];
+                            if(alertSetting) {
+                                [smsSentAlertView show];
+                            }
+                            
+                            NSLog(@"%@", event);
+                            self.selectedResultsIndex++;
+                            
+                            if(self.selectedResultsIndex == [self.selectedResults count]) {
+                                [self.navigationController popToRootViewControllerAnimated:YES];
+                                
+                                Mixpanel *mixpanel = [Mixpanel sharedInstance];
+                                [mixpanel track:@"InviteFriendsTVC CreateEvent" properties:@{
+                                                                                             
+                                                                                             }];
+                                [self.tableView reloadData];
+
+                            } else {
+                                NSDictionary *dict = self.selectedResults[self.selectedResultsIndex];
+                                
+                                // SEND TWILIO TEXT HERE
+                                [self sendSMSToNumber:[dict mutableCopy] withAlert:NO];
+                            }
+                        }];
+                        
+                    } else {
+                        NSLog(@"Failed to save.");
+                    }
+                }];
             }
         }];
-    } failure:^(NSURLSessionDataTask *task, NSError *error) {
+        
+        } failure:^(NSURLSessionDataTask *task, NSError *error) {
         NSLog(@"\n============== ERROR ====\n%@",error.userInfo);
     }];
 
