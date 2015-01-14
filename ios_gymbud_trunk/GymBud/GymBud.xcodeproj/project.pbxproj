@@ -19,6 +19,7 @@
 		296D739A1A3228A50067624B /* EditProfileTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 296D73991A3228A50067624B /* EditProfileTableViewController.m */; };
 		296D739C1A3243AF0067624B /* facebookround.png in Resources */ = {isa = PBXBuildFile; fileRef = 296D739B1A3243AF0067624B /* facebookround.png */; };
 		296D739F1A32C7220067624B /* EditPITableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 296D739E1A32C7220067624B /* EditPITableViewController.m */; };
+		297C72DC1A66A85C00274179 /* GymBudFriendDetailsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 297C72DB1A66A85B00274179 /* GymBudFriendDetailsTableViewController.m */; };
 		29AD93D81A3BD1110020E22A /* GBJoinedEventsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 29AD93D71A3BD1110020E22A /* GBJoinedEventsTableViewController.m */; };
 		29AD946D1A41C66B0020E22A /* EventDetailsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 29AD946C1A41C66B0020E22A /* EventDetailsTableViewController.m */; };
 		29AD946F1A42490E0020E22A /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 29AD946E1A42490E0020E22A /* MapKit.framework */; };
@@ -268,6 +269,8 @@
 		296D739B1A3243AF0067624B /* facebookround.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = facebookround.png; sourceTree = "<group>"; };
 		296D739D1A32C7220067624B /* EditPITableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditPITableViewController.h; sourceTree = "<group>"; };
 		296D739E1A32C7220067624B /* EditPITableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditPITableViewController.m; sourceTree = "<group>"; };
+		297C72DA1A66A85B00274179 /* GymBudFriendDetailsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GymBudFriendDetailsTableViewController.h; path = GymBud/Controllers/GymBudFriendDetailsTableViewController.h; sourceTree = "<group>"; };
+		297C72DB1A66A85B00274179 /* GymBudFriendDetailsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GymBudFriendDetailsTableViewController.m; path = GymBud/Controllers/GymBudFriendDetailsTableViewController.m; sourceTree = "<group>"; };
 		29AD93D61A3BD1110020E22A /* GBJoinedEventsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GBJoinedEventsTableViewController.h; path = GymBud/Controllers/GBJoinedEventsTableViewController.h; sourceTree = "<group>"; };
 		29AD93D71A3BD1110020E22A /* GBJoinedEventsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GBJoinedEventsTableViewController.m; path = GymBud/Controllers/GBJoinedEventsTableViewController.m; sourceTree = "<group>"; };
 		29AD946B1A41C66B0020E22A /* EventDetailsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EventDetailsTableViewController.h; path = GymBud/Controllers/EventDetailsTableViewController.h; sourceTree = "<group>"; };
@@ -842,6 +845,8 @@
 				B2B8DC2C19D9208800BED65D /* GymBudTVC.m */,
 				B2B8DC3319DB212300BED65D /* GymBudDetailsVC.h */,
 				B2B8DC3419DB212300BED65D /* GymBudDetailsVC.m */,
+				297C72DA1A66A85B00274179 /* GymBudFriendDetailsTableViewController.h */,
+				297C72DB1A66A85B00274179 /* GymBudFriendDetailsTableViewController.m */,
 				B2C39D7F197E194F00039F90 /* PAWWallViewController.h */,
 				B2C39D80197E194F00039F90 /* PAWWallViewController.m */,
 				B2C39D81197E194F00039F90 /* PAWWallViewController.xib */,
@@ -1307,6 +1312,7 @@
 				296D739A1A3228A50067624B /* EditProfileTableViewController.m in Sources */,
 				B27AF67319B0D00700FDBF0F /* NSDate+Utilities.m in Sources */,
 				B297742A1984C195000AD7B6 /* PostCreateTVC.m in Sources */,
+				297C72DC1A66A85C00274179 /* GymBudFriendDetailsTableViewController.m in Sources */,
 				296D738E1A2D23870067624B /* SignUpViewController.m in Sources */,
 				B2C39D89197E194F00039F90 /* EPInterestVC.m in Sources */,
 				B2C39D8B197E194F00039F90 /* MessageInboxTVC.m in Sources */,

@@ -12,6 +12,7 @@
 #import "GymBudTVC.h"
 #import "Mixpanel.h"
 #import <ParseFacebookUtils/PFFacebookUtils.h>
+#import "GymBudFriendDetailsTableViewController.h"
 
 @interface GymBudTVC ()
 
@@ -61,15 +62,20 @@
     // Dispose of any resources that can be recreated.
 }
 
-/*
+
 #pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
+    NSLog(@"about to segue");
+    GymBudFriendDetailsTableViewController *dest = (GymBudFriendDetailsTableViewController*)[segue destinationViewController];
+    NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
+    
+    [dest setUser:[self.objects objectAtIndex:indexPath.row]];
 }
-*/
+
 
 #pragma mark - PFQueryTableViewController
 
@@ -132,9 +138,6 @@
     return kCellHeight;
 }
 
-
-// Override to customize the look of the cell that allows the user to load the next page of objects.
-// The default implementation is a UITableViewCellStyleDefault cell with simple labels.
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForNextPageAtIndexPath:(NSIndexPath *)indexPath {
     static NSString *CellIdentifier = @"NextPage";
 
@@ -174,32 +177,6 @@
     UITableViewCell *cell;
     cell = [self.tableView dequeueReusableCellWithIdentifier:@"friend"
                                                 forIndexPath:indexPath];
-    
-    NSDictionary *params = [NSDictionary dictionaryWithObjectsAndKeys:
-                            @"context.fields(mutual_friends)", @"fields",
-                            nil
-                            ];
-//    [FBRequestConnection startWithGraphPath:[NSString stringWithFormat:@"/%@", object[@"profile"][@"facebookId"]]
-//                                 parameters:params
-//                                 HTTPMethod:@"GET"
-//                          completionHandler:^(
-//                                              FBRequestConnection *connection,
-//                                              id result,
-//                                              NSError *error
-//                                              ) {
-//                              NSLog(@"result is :%@ for user: %@", result[@"context"][@"mutual_friends"][@"summary"][@"total_count"], object[@"profile"][@"facebookId"]);
-//
-//                              NSString *text3 = [NSString stringWithFormat:@"Mutual GymBuds: %ld", (result[@"context"][@"mutual_friends"][@"summary"][@"total_count"] ? [((NSString*)result[@"context"][@"mutual_friends"][@"summary"][@"total_count"]) integerValue] : 0)];
-//                              NSLog(@"cell.text3.text is: %@", text3);
-//                              cell.detailTextLabel.numberOfLines = 2;
-//                              NSUInteger numberOfOccurrences = [[cell.detailTextLabel.text componentsSeparatedByString:@"\n"] count] - 1;
-//                              if (numberOfOccurrences==0)
-//                              {
-//                                  cell.detailTextLabel.text = [NSString stringWithFormat:@"%@\n"
-//                                                               @"%@", cell.detailTextLabel.text, text3];
-//                                  [cell.detailTextLabel sizeToFit];
-//                              }
-//                          }];
     
     if(object[@"gymbudProfile"][@"name"])
         cell.textLabel.text = object[@"gymbudProfile"][@"name"];
@@ -250,29 +227,6 @@
 
 
     return cell;
-}
-
-
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    
-    if(indexPath.row >= [self.objects count]) {
-        [self loadNextPage];
-        Mixpanel *mixpanel = [Mixpanel sharedInstance];
-        [mixpanel track:@"GymBudTVC SelectedRow LoadMore" properties:@{
-                                                                       }];
-
-    } else {
-        GymBudDetailsVC *detailsVC = [[GymBudDetailsVC alloc] init];
-        
-        detailsVC.user = [self.objects objectAtIndex:indexPath.row];
-        [self.navigationController pushViewController:detailsVC animated:YES];
-        [tableView deselectRowAtIndexPath:indexPath animated:YES];
-        Mixpanel *mixpanel = [Mixpanel sharedInstance];
-        [mixpanel track:@"GymBudTVC SelectedRow" properties:@{
-                                                              }];
-        
-    }
-    
 }
 
 - (void)refreshControlValueChanged:(UIRefreshControl *)refreshControl
