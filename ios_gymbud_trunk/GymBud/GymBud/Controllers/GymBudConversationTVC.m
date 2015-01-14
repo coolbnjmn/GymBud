@@ -28,6 +28,7 @@
     // self.clearsSelectionOnViewWillAppear = NO;
     [self.tableView registerNib:[UINib nibWithNibName:@"GymBudMessageCell" bundle:nil] forCellReuseIdentifier:self.reuseId];
 
+    self.tableView.backgroundColor = kGymBudGrey;
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
 //    self.tableView.estimatedRowHeight = 80.0f;

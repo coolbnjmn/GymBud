@@ -175,6 +175,11 @@
 - (void)signUpViewController:(PFSignUpViewController *)signUpController didSignUpUser:(PFUser *)user
 {
     [self dismissViewControllerAnimated:YES completion:nil]; // Dismiss the PFSignUpViewController
+    [[[UIAlertView alloc] initWithTitle:@"Check Your Email!"
+                                message:@"Please verify your email before you login."
+                               delegate:nil
+                      cancelButtonTitle:@"Dismiss"
+                      otherButtonTitles:nil] show];
 }
 
 // Sent to the delegate when the sign up attempt fails.
@@ -218,11 +223,11 @@
         emailAddressIsValid = NO;
         errorMsg = @"The password fields must be the same";
     }
-    else if ([email rangeOfString:@"@ucla.edu"].location  == NSNotFound)
-    {
-        emailAddressIsValid = NO;
-        errorMsg = @"Currently GymBud is only deployed for UCLA faculty and students. Please use your UCLA email address for validation.";
-    }
+//    else if ([email rangeOfString:@"@ucla.edu"].location  == NSNotFound)
+//    {
+//        emailAddressIsValid = NO;
+//        errorMsg = @"Currently GymBud is only deployed for UCLA faculty and students. Please use your UCLA email address for validation.";
+//    }
     // Display an alert if a field wasn't completed
     if (!emailAddressIsValid)
     {

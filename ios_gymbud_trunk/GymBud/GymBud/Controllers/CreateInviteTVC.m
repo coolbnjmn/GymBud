@@ -38,7 +38,7 @@
     
     self.navigationItem.title = @"Create Event";
     self.selectedBodyParts = [[NSMutableArray alloc] initWithCapacity:[kGBBodyPartArray count]];
-    self.tableView.backgroundColor = kGymBudLightBlue;
+    self.tableView.backgroundColor = kGymBudGrey;
     self.tableView.alwaysBounceVertical = NO;
 }
 
@@ -49,10 +49,10 @@
 
 #pragma mark - Table view data source
 
-- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
-{
-    return CGFLOAT_MIN;;
-}
+//- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+//{
+//    return CGFLOAT_MIN;;
+//}
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
@@ -60,12 +60,30 @@
     return 4;
 }
 
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
+    UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, tableView.bounds.size.width, 6)];
+    headerView.backgroundColor = kGymBudOrange;
+    return headerView;
+    
+    //    return nil;
+    
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
+    if(section == 3) {
+        return 6.0f;
+    } else {
+        return CGFLOAT_MIN;
+    }
+}
+
+
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     // Return the number of rows in the section.
     switch (section) {
         case 0:
-            return 2;
+            return 1;
             break;
         case 1:
             return 1;
@@ -85,7 +103,7 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (indexPath.row == 1 && indexPath.section == 0)
+    if (indexPath.row == 0 && indexPath.section == 1)
         return 140;
     else
         return 50;
@@ -98,13 +116,64 @@
     switch (indexPath.section)
     {
         case 0:
+        {
+            cell = [self.tableView dequeueReusableCellWithIdentifier:@"date"
+                                                        forIndexPath:indexPath];
+            cell.backgroundColor = kGymBudGrey;
+            self.section3TextField = (UITextField*)[cell viewWithTag:100];
+            
+            self.section3TextField.contentHorizontalAlignment = UIControlContentHorizontalAlignmentCenter;
+            self.section3TextField.text = @"Select a date & time";
+            self.section3TextField.textAlignment = NSTextAlignmentCenter;
+            self.section3TextField.textColor = kGymBudLightBlue;
+            self.section3TextField.font = [UIFont fontWithName:@"MagistralATT" size:20];
+            self.section3TextField.backgroundColor = kGymBudGrey;
+            
+            self.datePicker = [[UIDatePicker alloc] init];
+            self.datePicker.minimumDate = [NSDate date];
+            self.datePicker.minuteInterval = 15;
+            
+            NSCalendar *calendar = [NSCalendar autoupdatingCurrentCalendar];
+            NSDateComponents *components = [calendar components:NSYearCalendarUnit
+                                            | NSMonthCalendarUnit | NSDayCalendarUnit
+                                                       fromDate:[NSDate date]];
+            components.day += 5;
+            NSDate *date = [calendar dateFromComponents:components];
+            self.datePicker.maximumDate = date;
+            self.section3TextField.delegate = self;
+            self.datePicker.autoresizingMask = (UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight);
+            
+            
+            // create a done view + done button, attach to it a doneClicked action, and place it in a toolbar as an accessory input view...
+            // Prepare done button
+            UIToolbar* keyboardDoneButtonView = [[UIToolbar alloc] init];
+            keyboardDoneButtonView.barStyle = UIBarStyleBlack;
+            keyboardDoneButtonView.translucent = YES;
+            keyboardDoneButtonView.tintColor = nil;
+            [keyboardDoneButtonView sizeToFit];
+            
+            UIBarButtonItem* doneButton = [[UIBarButtonItem alloc] initWithTitle:@"Done"
+                                                                           style:UIBarButtonItemStyleBordered target:self
+                                                                          action:@selector(doneClicked:)];
+            [keyboardDoneButtonView setItems:[NSArray arrayWithObjects:doneButton, nil]];
+            
+            // Plug the keyboardDoneButtonView into the text field...
+            self.section3TextField.inputAccessoryView = keyboardDoneButtonView;
+            self.section3TextField.inputView = self.datePicker;
+            
+            self.section3TextField.frame = CGRectMake(5, 5, self.view.frame.size.width-5, 55);
+            
+        }
+            break;
+
+        case 1:
             switch(indexPath.row) {
-                case 0:
-                    cell = [self.tableView dequeueReusableCellWithIdentifier:@"base"
-                                                                forIndexPath:indexPath];
-                    cell.textLabel.text = @"Select Up To 4 Body Parts";
-                    break;
-                case 1: // Collection View
+//                case 0:
+//                    cell = [self.tableView dequeueReusableCellWithIdentifier:@"base"
+//                                                                forIndexPath:indexPath];
+//                    cell.textLabel.text = @"Select Up To 4 Body Parts";
+//                    break;
+                case 0: // Collection View
                     cell = [[CreateInviteCVCCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"goActivityCell"];
                     [(CreateInviteCVCCell *)cell setCollectionViewDataSourceDelegate:self index:0];
                     break;
@@ -112,7 +181,7 @@
                     break;
             }
             break;
-        case 1:
+        case 2:
             cell = [self.tableView dequeueReusableCellWithIdentifier:@"base"
                                                         forIndexPath:indexPath];
             // Location Cell
@@ -121,72 +190,34 @@
             else
                 cell.textLabel.text = @"Select a location";
             cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+            cell.backgroundColor = kGymBudGrey;
             break;
-        case 2:
-                {
-                    cell = [self.tableView dequeueReusableCellWithIdentifier:@"date"
-                                                                forIndexPath:indexPath];
-                    self.section3TextField = (UITextField*)[cell viewWithTag:100];
-                
-                    self.section3TextField.contentHorizontalAlignment = UIControlContentHorizontalAlignmentCenter;
-                    self.section3TextField.text = @"Select a date & time";
-                    self.section3TextField.textAlignment = NSTextAlignmentCenter;
-                    self.section3TextField.textColor = [UIColor whiteColor];
-                    self.section3TextField.font = [UIFont fontWithName:@"MagistralATT" size:20];
-                    self.section3TextField.backgroundColor = kGymBudLightBlue;
-                    
-                    self.datePicker = [[UIDatePicker alloc] init];
-                    self.datePicker.minimumDate = [NSDate date];
-                    self.datePicker.minuteInterval = 15;
-
-                    NSCalendar *calendar = [NSCalendar autoupdatingCurrentCalendar];
-                    NSDateComponents *components = [calendar components:NSYearCalendarUnit
-                                                    | NSMonthCalendarUnit | NSDayCalendarUnit
-                                                               fromDate:[NSDate date]];
-                    components.day += 5;
-                    NSDate *date = [calendar dateFromComponents:components];
-                    self.datePicker.maximumDate = date;
-                    self.section3TextField.delegate = self;
-                    self.datePicker.autoresizingMask = (UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight);
-
-                    
-                    // create a done view + done button, attach to it a doneClicked action, and place it in a toolbar as an accessory input view...
-                    // Prepare done button
-                    UIToolbar* keyboardDoneButtonView = [[UIToolbar alloc] init];
-                    keyboardDoneButtonView.barStyle = UIBarStyleBlack;
-                    keyboardDoneButtonView.translucent = YES;
-                    keyboardDoneButtonView.tintColor = nil;
-                    [keyboardDoneButtonView sizeToFit];
-                    
-                    UIBarButtonItem* doneButton = [[UIBarButtonItem alloc] initWithTitle:@"Done"
-                                                                                   style:UIBarButtonItemStyleBordered target:self
-                                                                                  action:@selector(doneClicked:)];
-                    [keyboardDoneButtonView setItems:[NSArray arrayWithObjects:doneButton, nil]];
-                    
-                    // Plug the keyboardDoneButtonView into the text field...
-                    self.section3TextField.inputAccessoryView = keyboardDoneButtonView;
-                    self.section3TextField.inputView = self.datePicker;
-
-                    self.section3TextField.frame = CGRectMake(5, 5, self.view.frame.size.width-5, 55);
-            }
-                    break;
+        
         case 3:
             cell = [self.tableView dequeueReusableCellWithIdentifier:@"base"
                                                         forIndexPath:indexPath];
 
+            cell.backgroundColor = kGymBudGrey;
+            cell.textLabel.textColor = kGymBudLightBlue;
+            cell.textLabel.font = [UIFont fontWithName:@"MagistralATT" size:20];
             switch (indexPath.row)
         {
                 case 0:
                     cell.textLabel.text = @"Invite Friends (SMS)";
                     cell.textLabel.textAlignment=NSTextAlignmentCenter;
+                cell.backgroundColor = kGymBudLightBlue;
+                cell.textLabel.textColor = kGymBudGrey;
                     break;
             case 1:
                 cell.textLabel.text = @"Create an Event (Public)";
                 cell.textLabel.textAlignment=NSTextAlignmentCenter;
+                cell.backgroundColor = kGymBudGrey;
                 break;
             case 2:
                 cell.textLabel.text = @"Find Others";
                 cell.textLabel.textAlignment=NSTextAlignmentCenter;
+                cell.backgroundColor = kGymBudLightBlue;
+                cell.textLabel.textColor = kGymBudGrey;
                 break;
                 
                 default:
@@ -195,10 +226,7 @@
         default:
             break;
     }
-    cell.textLabel.textColor = [UIColor whiteColor];
-    cell.textLabel.font = [UIFont fontWithName:@"MagistralATT" size:20];
     
-    cell.backgroundColor = kGymBudLightBlue;
 
     return cell;
 }
@@ -207,7 +235,10 @@
 {
     [tableView deselectRowAtIndexPath:indexPath animated:NO];
     switch (indexPath.section) {
-        case 1:
+        case 0:
+            [self setDateClicked:self];
+            break;
+        case 2:
             // Location Cell
         {
             UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"LocationFinderVC"
@@ -218,9 +249,6 @@
                 locationFinder.input = self.section2Label.text;
             }
         }
-            break;
-        case 2:
-            [self setDateClicked:self];
             break;
         case 3:
             switch(indexPath.row) {
@@ -284,7 +312,7 @@
     }
     cell.goActivityTextLabel.text = [kGBBodyPartArray objectAtIndex:indexPath.row];
     cell.backgroundColor = [UIColor clearColor];
-    cell.goActivityTextLabel.font = [UIFont fontWithName:@"MagistralATT-Bold" size:18];
+    cell.goActivityTextLabel.font = [UIFont fontWithName:@"MagistralA-Bold" size:18];
     cell.goActivityTextLabel.textColor = kGymBudGold;
 
     return cell;

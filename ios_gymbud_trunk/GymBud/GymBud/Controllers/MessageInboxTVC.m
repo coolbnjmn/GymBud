@@ -38,6 +38,7 @@
     self.sections = [NSMutableDictionary dictionary];
     self.sectionToConversationMap = [NSMutableDictionary dictionary];
 
+    self.tableView.backgroundColor = kGymBudGrey;
     self.navigationItem.title = @"Inbox";
     self.navigationItem.rightBarButtonItem = messageButton;
     [self loadObjects];
@@ -201,9 +202,18 @@
 //    headerView.backgroundColor = [UIColor whiteColor];
 //    labelHeader.text = [self sportTypeForSection:section];
 //    return headerView;
-    return nil;
+    
+    UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, tableView.bounds.size.width, 6)];
+    headerView.backgroundColor = kGymBudLightBlue;
+    return headerView;
+    
+    //    return nil;
+    
 }
 
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
+    return 6.0f;
+}
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return self.sections.allKeys.count;
@@ -246,9 +256,9 @@
         cell.textLabel.textColor = [UIColor blackColor];
         cell.detailTextLabel.textColor = [UIColor blackColor];
     } else {
-        cell.backgroundColor = kGymBudLightBlue;
-        cell.textLabel.textColor = [UIColor whiteColor];
-        cell.detailTextLabel.textColor = [UIColor whiteColor];
+        cell.backgroundColor = kGymBudGrey;
+        cell.textLabel.textColor = kGymBudLightBlue;
+        cell.detailTextLabel.textColor = kGymBudLightBlue;
 
     }
     

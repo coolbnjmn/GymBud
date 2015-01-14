@@ -44,12 +44,12 @@
         // Use the new iOS 6 refresh control.
         UIRefreshControl *refreshControl = [[UIRefreshControl alloc] init];
         self.refreshControl = refreshControl;
-        self.refreshControl.tintColor = [UIColor whiteColor];
+        self.refreshControl.tintColor = kGymBudGrey;
         [self.refreshControl addTarget:self action:@selector(refreshControlValueChanged:) forControlEvents:UIControlEventValueChanged];
         self.pullToRefreshEnabled = NO;
     }
     
-    self.tableView.separatorColor = [UIColor whiteColor];
+    self.tableView.separatorColor = kGymBudLightBlue;
     self.navigationItem.title = @"Local GymBuds";
     self.objectsPerPage = 25;
     self.navigationItem.hidesBackButton = YES;
@@ -158,11 +158,11 @@
     [cell.imageView.image drawInRect:imageRect];
     cell.imageView.image = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
-    UIColor * color = kGymBudLightBlue;
+    UIColor * color = kGymBudGrey;
     cell.backgroundColor = color;
     
-    cell.textLabel.textColor = [UIColor whiteColor];
-    cell.detailTextLabel.textColor = [UIColor whiteColor];
+    cell.textLabel.textColor = kGymBudLightBlue;
+    cell.detailTextLabel.textColor = kGymBudLightBlue;
 
     cell.textLabel.font = [UIFont fontWithName:@"MagistralATT" size:18];
     cell.detailTextLabel.font = [UIFont fontWithName:@"MagistralATT" size:12];
@@ -193,12 +193,12 @@
     cell.detailTextLabel.text = [NSString stringWithFormat:@"%@", text2Text];
     [cell.detailTextLabel sizeToFit];
 
-    UIColor * color = kGymBudLightBlue;
+    UIColor * color = kGymBudGrey;
     cell.backgroundColor = color;
     cell.imageView.image = [UIImage imageNamed:@"yogaIcon.png"];
 
-    cell.textLabel.textColor = [UIColor whiteColor];
-    cell.detailTextLabel.textColor = [UIColor whiteColor];
+    cell.textLabel.textColor = kGymBudLightBlue;
+    cell.detailTextLabel.textColor = kGymBudLightBlue;
     PFFile *theImage = [object objectForKey:@"gymbudProfile"][@"profilePicture"];
     __weak UITableViewCell *weakCell = cell;
     [theImage getDataInBackgroundWithBlock:^(NSData *data, NSError *error){
@@ -222,8 +222,8 @@
     [cell.imageView.image drawInRect:imageRect];
     cell.imageView.image = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
-    cell.textLabel.font = [UIFont fontWithName:@"MagistralATT" size:18];
-    cell.detailTextLabel.font = [UIFont fontWithName:@"MagistralATT" size:12];
+    cell.textLabel.font = [UIFont fontWithName:@"MagistralA-Bold" size:18];
+    cell.detailTextLabel.font = [UIFont fontWithName:@"MagistralA-Bold" size:12];
 
 
     return cell;

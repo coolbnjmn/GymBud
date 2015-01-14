@@ -54,7 +54,7 @@
     }
     
     PFUser *currentUser = [PFUser currentUser];
-//    [currentUser fetch];
+    [currentUser fetch];
     
 
     NSLog(@"current user %@", currentUser);
@@ -216,16 +216,17 @@
             UINavigationController *nv = (UINavigationController*)vc;
             NSLog(@"hit nav class");
             [nv.navigationBar setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:
-                                                      kGymBudLightBlue,
+                                                      kGymBudGrey,
                                                       NSForegroundColorAttributeName,
-                                                      kGymBudLightBlue,
+                                                      kGymBudGrey,
                                                       NSForegroundColorAttributeName,
                                                       [NSValue valueWithUIOffset:UIOffsetMake(0, -1)],
                                                       NSForegroundColorAttributeName,
                                                       [UIFont fontWithName:@"MagistralA-Bold" size:24.0],
                                                       NSFontAttributeName,
                                                       nil]];
-            nv.navigationBar.barTintColor = [UIColor whiteColor];
+            nv.navigationBar.barTintColor = kGymBudLightBlue;
+            nv.navigationBar.tintColor = kGymBudGrey;
         }
         else
             NSLog(@"hit non nav class");
@@ -485,6 +486,12 @@ didReceiveRemoteNotification:(NSDictionary *)userInfo {
 }
 
 - (void)setCurrentLocation:(CLLocation *)aCurrentLocation {
+    if(currentLocation == nil ) {
+        currentLocation = [[CLLocation alloc] init];
+    }
+    if([aCurrentLocation distanceFromLocation:currentLocation] < 5) {
+        return;
+    }
     currentLocation = aCurrentLocation;
     
     // Notify the app of the location change:
