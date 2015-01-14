@@ -32,20 +32,11 @@ app.post('/receiveSMS', function(req, res) {
 			var contactObj = Parse.Object.extend("Contact");
 			var contactQuery = new Parse.Query(contactObj);
 			console.log(req.body.From);
-			contactQuery.containedIn("phone", req.body.From);
 
-			contactQuery.count({
-			  success: function(number) {
-			    // There are number instances of MyClass.
-			    console.log("something");
-			  },
+			// contactQuery.equalTo("phone", req.body.From);
 
-			  error: function(error) {
-			    // error is an instance of Parse.Error.
-			    console.log("error");
-			  }
-			});
 			contactQuery.each(function(contact) {
+				console.log("found contact");
 				console.log(contact);
 				var eventObj = Parse.Object.extend("Event");
 				var eventQuery = new Parse.Query(eventObj);

@@ -36,11 +36,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "GymBud/Controllers/InviteFriendsTVC.m"
-            timestampString = "442866741.48076"
+            timestampString = "442878958.591502"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "284"
-            endingLineNumber = "284"
+            startingLineNumber = "323"
+            endingLineNumber = "323"
             landmarkName = "-sendSMSToNumber:withAlert:"
             landmarkType = "5">
          </BreakpointContent>

@@ -13,6 +13,7 @@
 #import "AppDelegate.h"
 #import <MBProgressHUD/MBProgressHUD.h>
 #import <Mixpanel/Mixpanel.h>
+#import <libPhoneNumber-iOS/NBPhoneNumberUtil.h>
 
 #import "InviteFriendsTVC.h"
 
@@ -224,6 +225,44 @@
     [formatter setDateStyle:NSDateFormatterShortStyle];
     [formatter setTimeStyle:NSDateFormatterShortStyle];
     
+    NBPhoneNumberUtil *phoneUtil = [NBPhoneNumberUtil sharedInstance];
+    
+    NSError *anError = nil;
+    NBPhoneNumber *myNumber = [phoneUtil parse:userDict[@"phone"]
+                                 defaultRegion:@"US" error:&anError];
+    
+    if (anError == nil) {
+        // Should check error
+        NSLog(@"isValidPhoneNumber ? [%@]", [phoneUtil isValidNumber:myNumber] ? @"YES":@"NO");
+        
+        // E164          : +436766077303
+        NSLog(@"E164          : %@", [phoneUtil format:myNumber
+                                          numberFormat:NBEPhoneNumberFormatE164
+                                                 error:&anError]);
+        userDict[@"phone"] = [phoneUtil format:myNumber numberFormat:NBEPhoneNumberFormatE164 error:&anError];
+        // INTERNATIONAL : +43 676 6077303
+        NSLog(@"INTERNATIONAL : %@", [phoneUtil format:myNumber
+                                          numberFormat:NBEPhoneNumberFormatINTERNATIONAL
+                                                 error:&anError]);
+        // NATIONAL      : 0676 6077303
+        NSLog(@"NATIONAL      : %@", [phoneUtil format:myNumber
+                                          numberFormat:NBEPhoneNumberFormatNATIONAL
+                                                 error:&anError]);
+        // RFC3966       : tel:+43-676-6077303
+        NSLog(@"RFC3966       : %@", [phoneUtil format:myNumber
+                                          numberFormat:NBEPhoneNumberFormatRFC3966
+                                                 error:&anError]);
+    } else {
+        NSLog(@"Error : %@", [anError localizedDescription]);
+    }
+    
+    NSLog (@"extractCountryCode [%@]", [phoneUtil extractCountryCode:@"823213123123" nationalNumber:nil]);
+    
+    NSString *nationalNumber = nil;
+    NSNumber *countryCode = [phoneUtil extractCountryCode:@"823213123123" nationalNumber:&nationalNumber];
+    
+    NSLog (@"extractCountryCode [%@] [%@]", countryCode, nationalNumber);
+    
     NSString *shortDate = [formatter stringFromDate:self.date];
     NSString *body = [[PFUser currentUser][@"gymbudProfile"][@"name"] stringByAppendingString: [NSString stringWithFormat:@" invited you to go lift @ %@ %@. Reply IN or OUT now!", shortDate, self.location, nil]];
     [userDict setObject:body forKey:@"body"];
@@ -285,6 +324,7 @@
                 // make new object
                 PFObject *eventObject = [PFObject objectWithClassName:@"Event"];
                 [eventObject setObject:[PFUser currentUser] forKey:@"organizer"];
+                
                 [eventObject setObject:[NSArray arrayWithObjects:userDict[@"phone"], nil] forKey:@"invitees"];
                 
                 PFQuery *contactQuery = [PFQuery queryWithClassName:@"Contact"];
