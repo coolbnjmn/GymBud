@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "27881DACB99FE266E84FD26E"
+               BlueprintIdentifier = "9EC589800459B318BBB7F494"
                BuildableName = "libPods-GymBud-JSQMessagesViewController.a"
                BlueprintName = "Pods-GymBud-JSQMessagesViewController"
                ReferencedContainer = "container:Pods.xcodeproj">
