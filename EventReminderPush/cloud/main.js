@@ -9,7 +9,6 @@ app.post('/receiveSMS', function(req, res) {
 	console.log('receive SMS');
 	console.log(req.body.Body);
 
-	res.send('Success');
 	if(req.body.Body.toLowerCase() == "in" || req.body.Body.toLowerCase() == "out") {
 		twilio.sendSMS({
 			From: "(650) 614-5446",
@@ -18,11 +17,11 @@ app.post('/receiveSMS', function(req, res) {
 		}, {
 			success: function(httpResponse) {
 				console.log(httpResponse);
-				response.success("SMS Sent!");
+				res.send('Success');
 			}, 
 			error: function(httpResponse) {
 				console.error(httpResponse);
-				response.error("Uh OH, something went wrong");
+				res.send('Error');
 			}
 		});
 
@@ -33,54 +32,63 @@ app.post('/receiveSMS', function(req, res) {
 			var contactQuery = new Parse.Query(contactObj);
 			console.log(req.body.From);
 
-			// contactQuery.equalTo("phone", req.body.From);
+			contactQuery.equalTo("phone", req.body.From);
+			contactQuery.first({
+				success: function(contact) {
 
-			contactQuery.each(function(contact) {
-				console.log("found contact");
-				console.log(contact);
-				var eventObj = Parse.Object.extend("Event");
-				var eventQuery = new Parse.Query(eventObj);
-				eventQuery.equalTo("organizer", contact["owner"]);
-				eventQuery.each(function(foundEvent) {
-					var attendees = foundEvent["attendees"];
-					attendees.push(contact);
-					foundEvent["attendees"] = attendees;
-					foundEvent.save(null, {
+					console.log("found contact");
+					console.log(contact);
+					console.log(contact.get('owner'));
+					console.log(contact.get('owner').id);
+					var eventObj = Parse.Object.extend("Event");
+					var eventQuery = new Parse.Query(eventObj);
+					eventQuery.equalTo("organizer", contact.get('owner'));
+					eventQuery.descending("createdAt");
+					eventQuery.first({
 						success: function(foundEvent) {
-					    // Execute any logic that should take place after the object is saved.
-					    var organizer = foundEvent["organizer"];
-						var pushQuery = new Parse.Query(Parse.Installation);
+							console.log(foundEvent);
+							var attendees = foundEvent.get('attendees');
+							console.log(attendees);
+							if(attendees)
+								attendees.push(contact);
+							else 
+								attendees = [contact];
+							foundEvent.set("attendees",attendees);
+							foundEvent.save(null, {
+								success: function(savedEvent) {
+									var organizer = foundEvent.get('organizer');
+									var userQuery = new Parse.Query(Parse.User);
+									userQuery.equalTo("objectId", organizer.id);
 
-						pushQuery.containedIn("user", organizer);
+									var pushQuery = new Parse.Query(Parse.Installation);
 
+									pushQuery.matchesQuery('user', userQuery);
 
-						Parse.Push.send({
-							where: pushQuery, 
-							data: {
-								alert: contact["name"]+" has joined your event!",
-								badge: "Increment"
-							},
-						}, {
-							success: function() {
-								console.log("trying to send push");
-								response.success("scheduled end of event push");
-							}, error: function(error) {
-								console.log("trying to send push");
-								reponse.error("didn't schedule the push")
-							}
-						});
-					},
-						error: function(foundEvent, error) {
-					    // Execute any logic that should take place if the save fails.
-					    // error is a Parse.Error with an error code and message.
-					    console.log("error saving attendees object");
-					}
+									Parse.Push.send({
+										where: pushQuery, 
+										data: {
+											alert: contact.get('name')+" has joined your event!",
+											badge: "Increment"
+										},
+									}, {
+										success: function() {
+											console.log("trying to send push succeeded");
+										}, error: function(error) {
+											console.log("trying to send push failed");
+										}
+									});
+								}, error: function(error) {
+									alert("Error at event saving level: " + error.code + " " + error.message);
+								}
+							});
+
+						}, error: function(error) {
+							alert("Error at event level: " + error.code + " " + error.message);
+						}
 					});
-				});
-			}).then(function() {
-			    console.log("found contact");
-			 }, function(error) {
-			    console.log("didn't find contact");
+				}, error: function(error) {
+					alert("Error: " + error.code + " " + error.message);
+				}
 			});
 		}
 	}

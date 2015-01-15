@@ -11,6 +11,7 @@
 #import <Parse/Parse.h>
 #import <MapKit/MapKit.h>
 #import "MapViewAnnotation.h"
+#import "GymBudFriendDetailsTableViewController.h"
 
 #define kCellHeight 70;
 
@@ -290,7 +291,26 @@ heightForHeaderInSection:(NSInteger)section
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    if(indexPath.section == 0) {
+//        GymBudFriendDetailsTableViewController *vc = [[GymBudFriendDetailsTableViewController alloc] init];
+//        vc.user = [self.objectList objectForKey:@"organizer"];
+//        [self.navigationController presentViewController:vc animated:YES completion:nil];
+//        [self performSegueWithIdentifier:@"showPerson" sender:self];
+    }
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
+
+// In a storyboard-based application, you will often want to do a little preparation before navigation
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    // Get the new view controller using [segue destinationViewController].
+    // Pass the selected object to the new view controller.
+    NSLog(@"about to segue");
+    GymBudFriendDetailsTableViewController *dest = (GymBudFriendDetailsTableViewController*)[segue destinationViewController];
+//    NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
+    dest.user = [self.objectList objectForKey:@"organizer"];
+
+//    [dest setUser:[self.objects objectAtIndex:indexPath.row]];
+}
+
 
 @end
