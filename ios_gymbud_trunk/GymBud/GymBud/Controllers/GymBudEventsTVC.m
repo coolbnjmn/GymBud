@@ -17,6 +17,7 @@
 #import "GBEventsFilterViewController.h"
 #import "Mixpanel.h"
 #import <CoreLocation/CoreLocation.h>
+#import "EventDetailsTableViewController.h"
 
 
 #define kCellHeight 100
@@ -29,6 +30,7 @@
 @property (strong, nonatomic) UIView *opaqueView;
 @property (nonatomic, strong) NSArray *activityFilters;
 @property (nonatomic, strong) CLLocationManager *locationManager;
+@property (nonatomic) NSInteger selectedRow;
 
 
 @end
@@ -260,6 +262,8 @@
 //                                                                   }];
 //        }
 //    }];
+    [self performSegueWithIdentifier:@"showEvent" sender:self];
+    self.selectedRow = indexPath.row;
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
@@ -436,5 +440,15 @@
         [alert show];
     }
 }
+
+// In a storyboard-based application, you will often want to do a little preparation before navigation
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    // Get the new view controller using [segue destinationViewController].
+    // Pass the selected object to the new view controller.
+    NSIndexPath *path = [self.tableView indexPathForSelectedRow];
+    
+    EventDetailsTableViewController *dest = [segue destinationViewController];
+    [dest setObjectList:self.objects[path.row]];
+    self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Back" style:UIBarButtonItemStylePlain target:nil action:nil];}
 
 @end

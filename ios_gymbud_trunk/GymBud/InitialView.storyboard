@@ -133,7 +133,7 @@
                                     </subviews>
                                 </tableViewCellContentView>
                                 <connections>
-                                    <segue destination="mLj-eT-ft4" kind="push" id="xLp-W9-dBz"/>
+                                    <segue destination="vbc-lN-l95" kind="push" identifier="showEvent" id="3j8-FR-5ye"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -547,6 +547,6 @@
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="tBY-O8-5NR"/>
+        <segue reference="3j8-FR-5ye"/>
     </inferredMetricsTieBreakers>
 </document>
