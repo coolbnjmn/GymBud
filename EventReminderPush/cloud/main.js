@@ -33,7 +33,8 @@ app.post('/receiveSMS', function(req, res) {
 			console.log(req.body.From);
 
 			contactQuery.equalTo("phone", req.body.From);
-			contactQuery.first({
+			// contactQuery.
+=			contactQuery.first({
 				success: function(contact) {
 
 					console.log("found contact");
