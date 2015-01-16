@@ -242,8 +242,6 @@
 
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    // call super because we're a custom subclass.
-    [super tableView:tableView didSelectRowAtIndexPath:indexPath];
 //    UserDetailsViewController *controller = [[UserDetailsViewController alloc] initWithNibName:nil
 //                                                                                        bundle:nil];
 //    GymBudEventsCell *cell = (GymBudEventsCell *)[tableView cellForRowAtIndexPath:indexPath];
@@ -262,7 +260,7 @@
 //                                                                   }];
 //        }
 //    }];
-    [self performSegueWithIdentifier:@"showEvent" sender:self];
+//    [self performSegueWithIdentifier:@"showEvent" sender:self];
     self.selectedRow = indexPath.row;
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }

@@ -163,7 +163,7 @@ heightForHeaderInSection:(NSInteger)section
             
             [cell.textLabel sizeToFit];
             cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-
+            cell.selectionStyle = UITableViewCellSelectionStyleDefault;
             cell.detailTextLabel.text = @"";
         }
         break;
@@ -264,14 +264,26 @@ heightForHeaderInSection:(NSInteger)section
         {
             cell = [tableView dequeueReusableCellWithIdentifier:@"details" forIndexPath:indexPath];
             NSArray *attendees = [self.objectList objectForKey:@"attendees"];
-            PFUser *user = [self.objectList objectForKey:@"attendees"][indexPath.row];
+            PFUser *user = ([[self.objectList objectForKey:@"attendees"][indexPath.row] isKindOfClass:[PFUser class]] ? [self.objectList objectForKey:@"attendees"][indexPath.row] : nil);
+            PFObject *contact;
+
+            if(!user) {
+                contact = [self.objectList objectForKey:@"attendees"][indexPath.row];
+            }
             [user fetchIfNeeded];
             if (![attendees count])
                 cell.textLabel.text = @"No attendees have joined this event";
             else
             {
-                cell.textLabel.text = [NSString stringWithFormat:@"%@",user[@"profile"][@"name"]];
+                if(!user) {
+                    [contact fetch];
+                    cell.textLabel.text = [NSString stringWithFormat:@"%@",contact[@"name"]];
+                } else {
+                    cell.textLabel.text = [NSString stringWithFormat:@"%@",user[@"profile"][@"name"]];
+                }
             }
+            cell.accessoryType = UITableViewCellAccessoryNone;
+            cell.selectionStyle = UITableViewCellSelectionStyleNone;
             cell.textLabel.font = [UIFont fontWithName:@"MagistralATT" size:16];
             cell.textLabel.textColor = [UIColor whiteColor];
             cell.imageView.image = nil; //[UIImage imageNamed:@"yogaIcon.png"];
@@ -291,13 +303,14 @@ heightForHeaderInSection:(NSInteger)section
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    [tableView deselectRowAtIndexPath:indexPath animated:NO];
+}
+
+- (bool) shouldPerformSegueWithIdentifier:(NSString *)identifier sender:(id)sender {
+    NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
     if(indexPath.section == 0) {
-//        GymBudFriendDetailsTableViewController *vc = [[GymBudFriendDetailsTableViewController alloc] init];
-//        vc.user = [self.objectList objectForKey:@"organizer"];
-//        [self.navigationController presentViewController:vc animated:YES completion:nil];
-//        [self performSegueWithIdentifier:@"showPerson" sender:self];
-    }
-    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+        return YES;
+    } else return NO;
 }
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation

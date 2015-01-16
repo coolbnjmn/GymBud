@@ -330,7 +330,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="details" textLabel="gim-5E-kQl" detailTextLabel="I2D-E5-r2S" style="IBUITableViewCellStyleSubtitle" id="wtT-3f-4IM">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="none" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="details" textLabel="gim-5E-kQl" detailTextLabel="I2D-E5-r2S" style="IBUITableViewCellStyleSubtitle" id="wtT-3f-4IM">
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="wtT-3f-4IM" id="mmJ-d8-OXz">
                                     <autoresizingMask key="autoresizingMask"/>
