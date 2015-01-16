@@ -455,6 +455,7 @@
 - (IBAction)button3Pressed:(id)sender {
     // Go to find others here
     NSLog(@"button3Pressed");
+    [self.navigationController.tabBarController setSelectedIndex:0];
 }
 
 

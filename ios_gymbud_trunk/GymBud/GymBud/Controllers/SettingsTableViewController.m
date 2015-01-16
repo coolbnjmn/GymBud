@@ -66,7 +66,7 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     // Return the number of rows in the section.
-    return 6;
+    return 5;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -164,12 +164,12 @@
             cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
         }
             break;
+//        case 1:
+//        {
+//            cell.textLabel.text = @"Invite Friend";
+//        }
+//            break;
         case 1:
-        {
-            cell.textLabel.text = @"Invite Friend";
-        }
-            break;
-        case 2:
         {
             // edit profile
             cell.textLabel.text = @"Enable Email Notifications";
@@ -180,17 +180,17 @@
             cell.accessoryView = toggleNotifications;
         }
             break;
-        case 3:
+        case 2:
         {
             cell.textLabel.text = [NSString stringWithFormat:@"About -- Version Number: %@", [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"]];
         }
             break;
-        case 4:
+        case 3:
         {
             cell.textLabel.text = @"Leave Feedback";
         }
             break;
-        case 5:
+        case 4:
             cell.textLabel.text = @"Sign Out";
             cell.textLabel.textAlignment = NSTextAlignmentCenter;
             break;
@@ -212,16 +212,16 @@
         case 0:
             [self launchEditProfile];
             break;
+//        case 1:
+//            [self launchInviteFriend];
+//            break;
         case 1:
-            [self launchInviteFriend];
-            break;
-        case 3:
             [self launchAbout];
             break;
-        case 4:
+        case 3:
             [self launchLeaveFeedback];
             break;
-        case 5:
+        case 4:
             [self launchSignout];
             break;
             
