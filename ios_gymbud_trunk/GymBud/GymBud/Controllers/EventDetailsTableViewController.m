@@ -32,7 +32,7 @@
     self.navigationItem.title = @"Event Details";
     NSLog(@"object is %@", self.objectList);
     self.tableView.backgroundColor = kGymBudLightBlue;
-    self.listOfSectionNames = @[@"Organizer Information", @"Excercise Types", @"Time Information", @"Location Information", @"Confirmed Attendees"];
+    self.listOfSectionNames = @[@"Organizer Information", @"Excercise Type(s)", @"Time Information", @"Location Information", @"Confirmed Attendees"];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -218,7 +218,7 @@ heightForHeaderInSection:(NSInteger)section
                 NSNumber *duration= [self.objectList objectForKey:@"duration"];
                 NSDate *time = [self.objectList objectForKey:@"time"];
                 NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
-                [dateFormat setDateFormat:@"MMMM dd yyyy"];
+                [dateFormat setDateFormat:@"MMMM dd yyyy HH:mm"];
                 NSString *theDate = [dateFormat stringFromDate:time];
 
                 cell.textLabel.text = [NSString stringWithFormat:@"Date: %@", theDate];
