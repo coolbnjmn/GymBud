@@ -222,12 +222,11 @@
     {
         emailAddressIsValid = NO;
         errorMsg = @"The password fields must be the same";
+    } else if ([email rangeOfString:@"@ucla.edu"].location  == NSNotFound)
+    {
+        emailAddressIsValid = NO;
+        errorMsg = @"Currently GymBud is only deployed for UCLA faculty and students. Please use your UCLA email address for validation.";
     }
-//    else if ([email rangeOfString:@"@ucla.edu"].location  == NSNotFound)
-//    {
-//        emailAddressIsValid = NO;
-//        errorMsg = @"Currently GymBud is only deployed for UCLA faculty and students. Please use your UCLA email address for validation.";
-//    }
     // Display an alert if a field wasn't completed
     if (!emailAddressIsValid)
     {

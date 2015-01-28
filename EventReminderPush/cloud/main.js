@@ -13,7 +13,7 @@ app.post('/receiveSMS', function(req, res) {
 		twilio.sendSMS({
 			From: "(650) 614-5446",
 			To: req.body.From,
-			Body: "It's been noted, and notifications have been sent. Check us out at https://itunes.apple.com/us/app/gymbud-for-ucla/id935537048?mt=8"
+			Body: "It's been noted, and notifications have been sent. Check us out at https://itunes.apple.com/us/app/gymbud/id935537048?ls=1&mt=8"
 		}, {
 			success: function(httpResponse) {
 				console.log(httpResponse);
