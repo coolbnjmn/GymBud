@@ -483,6 +483,10 @@
     [self.navigationController popViewControllerAnimated:YES];
 }
 
+- (void)removeToast:(id) sender {
+    [self.errorToast removeFromSuperview];
+}
+
 - (void)updateProfileButtonHandler:(id)sender
 {
     NSLog(@"update profile");
@@ -507,16 +511,20 @@
     
     // first get all strings from the tableview
     
-    if([goal length] > 150) {
+    if([goal length] > 150 || [goal length] == 0) {
         toastMessage = [toastMessage stringByAppendingString:@"Goals max is 150 char. "];
     }
     else if([time isEqualToString:@""] || [time isEqualToString:@"When are you generally free to work out? Ex: Mon/Wed 4-6, Thurs 9am-12."]) {
         toastMessage = [toastMessage stringByAppendingString:@"Goals is mandatory. "];
     }
+    
+    if([self.name isEqualToString:@"Incomplete Profile"]) {
+        toastMessage = [toastMessage stringByAppendingString:@"Need a name for this app to function!"];
+    }
         
     if ([toastMessage length] > 0)
     {
-        self.errorToast = [[UIView alloc] initWithFrame:CGRectMake(0, self.view.bounds.size.height, self.view.bounds.size.width, 40)];
+        self.errorToast = [[UIView alloc] initWithFrame:CGRectMake(0, self.view.bounds.size.height-40, self.view.bounds.size.width, 40)];
         self.errorToast.backgroundColor = [UIColor orangeColor];
         UILabel *textLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, 40)];
         textLabel.text = toastMessage;
@@ -525,10 +533,13 @@
         [self.errorToast addSubview:textLabel];
         UIApplication *app = [UIApplication sharedApplication];
         [app.keyWindow addSubview:self.errorToast];
+        [self performSelector:@selector(removeToast:) withObject:self afterDelay:5];
+        return;
     }
 
     userProfile[@"goals"] = self.goals;
     userProfile[@"preferred"] = self.preferred;
+    
     userProfile[@"name"] = self.name;
     userProfile[@"age"] = self.age;
     userProfile[@"gender"] = self.gender;

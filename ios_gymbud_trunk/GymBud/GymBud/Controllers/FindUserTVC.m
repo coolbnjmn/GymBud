@@ -111,6 +111,7 @@
     PFQuery *query = [PFUser query];
     [query setCachePolicy:kPFCachePolicyNetworkOnly];
     [query orderByDescending:@"updatedAt"];
+    [query whereKeyExists:@"gymbudProfile"];
     self.HUD = [[MBProgressHUD alloc] initWithView:self.view];
     [self.view addSubview:self.HUD];
     UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, kLoadingAnimationWidth, kLoadingAnimationHeight)];
