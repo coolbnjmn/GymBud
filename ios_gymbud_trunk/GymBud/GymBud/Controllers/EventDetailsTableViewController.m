@@ -12,6 +12,7 @@
 #import <MapKit/MapKit.h>
 #import "MapViewAnnotation.h"
 #import "GymBudFriendDetailsTableViewController.h"
+#import <UIAlertView+Blocks.h>
 
 #define kCellHeight 70;
 
@@ -98,9 +99,9 @@
 
 -(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
-    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, tableView.frame.size.width, 18)];
+    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, tableView.frame.size.width, 0)];
     /* Create custom view to display section header... */
-    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(10, 5, tableView.frame.size.width, 40)];
+    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(10, 5, tableView.frame.size.width, 0)];
     [label setFont:[UIFont boldSystemFontOfSize:12]];
     NSString *string =[self.listOfSectionNames objectAtIndex:section];
     /* Section header is in 0th index... */
@@ -116,7 +117,7 @@
 - (CGFloat)tableView:(UITableView *)tableView
 heightForHeaderInSection:(NSInteger)section
 {
-    CGFloat height = 50;
+    CGFloat height = 5;
     return height;
 }
 
@@ -282,7 +283,7 @@ heightForHeaderInSection:(NSInteger)section
                     cell.textLabel.text = [NSString stringWithFormat:@"%@",user[@"profile"][@"name"]];
                 }
             }
-            cell.accessoryType = UITableViewCellAccessoryNone;
+            cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
             cell.textLabel.font = [UIFont fontWithName:@"MagistralATT" size:16];
             cell.textLabel.textColor = [UIColor whiteColor];
@@ -303,6 +304,64 @@ heightForHeaderInSection:(NSInteger)section
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    if(indexPath.section == 4) {
+        // join event
+        
+        RIButtonItem *cancelItem = [RIButtonItem itemWithLabel:@"Dismiss" action:^{
+            // this is the code that will be executed when the user taps "No"
+            // this is optional... if you leave the action as nil, it won't do anything
+            // but here, I'm showing a block just to show that you can use one if you want to.
+        }];
+        
+        RIButtonItem *goodItem = [RIButtonItem itemWithLabel:@"Join" action:^{
+            // join event
+            
+            // we need to create a join request for hitting the button.
+            PFObject *requestObject = [PFObject objectWithClassName:@"Request"];
+            [requestObject setObject:self.objectList forKey:@"event"];
+            [requestObject setObject:[PFUser currentUser] forKey:@"requestor"];
+            
+            [requestObject saveInBackground];
+            
+            UIAlertView * alertView =[[UIAlertView alloc ] initWithTitle:@"Join request received"
+                                                                 message:@"The organizer will contact you soon"
+                                                                delegate:self
+                                                       cancelButtonTitle:@"Ok"
+                                                       otherButtonTitles: nil];
+            [alertView show];
+            
+            
+            PFUser *organizer = self.objectList[@"organizer"];
+            PFPush *push = [[PFPush alloc] init];
+            PFQuery *query = [PFInstallation query];
+            [query whereKey:@"user" equalTo:organizer];
+            
+            NSString *name;
+            PFUser *currentUser = [PFUser currentUser];
+            if([currentUser objectForKey:@"gymbudProfile"][@"name"]) {
+                name = [currentUser objectForKey:@"gymbudProfile"][@"name"];
+            } else {
+                name = [currentUser objectForKey:@"profile"][@"name"];
+            }
+            [push setMessage:[NSString stringWithFormat:@"%@ wants to join, accept?", name]];
+            NSMutableDictionary *data = [[NSMutableDictionary alloc] init];
+            [data setObject:[NSString stringWithFormat:@"%@ wants to join, accept?", name] forKey:@"alert"];
+            [data setObject:self.objectList forKey:@"eventObj"];
+            [data setObject:currentUser forKey:@"requestor"];
+            [data setObject:@"Increment" forKey:@"badge"];
+            [push setData:data];
+            [push setQuery:query];
+            [push sendPushInBackground];
+
+            
+        }];
+        
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle: @"Would you like to join this event?"
+                                                        message: @"The user will be notified only if you join"
+                                               cancelButtonItem:cancelItem
+                                               otherButtonItems:goodItem, nil];
+        [alert show];
+    }
     [tableView deselectRowAtIndexPath:indexPath animated:NO];
 }
 

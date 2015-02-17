@@ -39,6 +39,16 @@
     self.sectionToConversationMap = [NSMutableDictionary dictionary];
 
     self.tableView.backgroundColor = kGymBudGrey;
+    self.tableView.scrollEnabled = YES;
+    if (NSClassFromString(@"UIRefreshControl")) {
+        // Use the new iOS 6 refresh control.
+        UIRefreshControl *refreshControl = [[UIRefreshControl alloc] init];
+        self.refreshControl = refreshControl;
+        self.refreshControl.tintColor = [UIColor colorWithRed:118.0f/255.0f green:117.0f/255.0f blue:117.0f/255.0f alpha:1.0f];
+        [self.refreshControl addTarget:self action:@selector(refreshControlValueChanged:) forControlEvents:UIControlEventValueChanged];
+        self.pullToRefreshEnabled = NO;
+    }
+    
     self.navigationItem.title = @"Inbox";
     self.navigationItem.rightBarButtonItem = messageButton;
     [self loadObjects];
@@ -52,6 +62,10 @@
     [self.navigationController pushViewController:controller animated:YES]; // or use presentViewController if you're using modals
 }
 
+- (void)refreshControlValueChanged:(UIRefreshControl *)refreshControl {
+    [self loadObjects:0 clear:YES];
+    //    [self loadObjects];
+}
 
 - (void)didReceiveMemoryWarning
 {
@@ -131,7 +145,7 @@
 
 - (void)objectsDidLoad:(NSError *)error {
     // This method is called every time objects are loaded from Parse via the PFQuery
-    
+    NSLog(@"objectsDIDLOAD HERE OMG OMG OMG");
     [self.sections removeAllObjects];
     [self.sectionToConversationMap removeAllObjects];
     
@@ -162,8 +176,6 @@
 //    [[NSUserDefaults standardUserDefaults] synchronize];
     
     self.tableView.tableHeaderView = nil;
-    self.tableView.scrollEnabled = YES;
-    
 //    NSUInteger unreadCount = 0;
 //    for (PFObject *activity in self.objects) {
 //        if ([lastRefresh compare:[activity createdAt]] == NSOrderedAscending && ![[activity objectForKey:kPAPActivityTypeKey] isEqualToString:kPAPActivityTypeJoined]) {
@@ -176,7 +188,9 @@
 //    } else {
 //        self.navigationController.tabBarItem.badgeValue = nil;
 //    }
-    [self.tableView reloadData];
+    if (NSClassFromString(@"UIRefreshControl")) {
+        [self.refreshControl endRefreshing];
+    }
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
