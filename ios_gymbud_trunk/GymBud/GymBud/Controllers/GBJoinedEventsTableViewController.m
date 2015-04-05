@@ -201,24 +201,33 @@
     [nameLabel sizeToFit];
 
     NSArray *subLogoIndices = [object objectForKey:@"detailLogoIndices"];
+    for (int i = 4; i<8;i++)
+    {
+        UIImageView *imv = (UIImageView*) [cell viewWithTag:i];
+        imv.hidden = YES;
+    }
     int subLogoIndex = 0;
     for(NSNumber *index in subLogoIndices) {
         if(subLogoIndex == 0) {
             
             UIImageView *imv = (UIImageView*) [cell viewWithTag:4];
             imv.image=[UIImage imageNamed:[kGBBodyPartImagesArray objectAtIndex:[index integerValue]]];
+            imv.hidden = NO;
             [cell.contentView addSubview:imv];
         } else if(subLogoIndex == 1) {
             UIImageView *imv = (UIImageView*) [cell viewWithTag:5];
             imv.image=[UIImage imageNamed:[kGBBodyPartImagesArray objectAtIndex:[index integerValue]]];
+            imv.hidden = NO;
             [cell.contentView addSubview:imv];
         } else if(subLogoIndex == 2) {
             UIImageView *imv = (UIImageView*) [cell viewWithTag:6];
             imv.image=[UIImage imageNamed:[kGBBodyPartImagesArray objectAtIndex:[index integerValue]]];
+            imv.hidden = NO;
             [cell.contentView addSubview:imv];
         } else {
             UIImageView *imv = (UIImageView*) [cell viewWithTag:7];
             imv.image=[UIImage imageNamed:[kGBBodyPartImagesArray objectAtIndex:[index integerValue]]];
+            imv.hidden = NO;
             [cell.contentView addSubview:imv];
         }
         subLogoIndex++;

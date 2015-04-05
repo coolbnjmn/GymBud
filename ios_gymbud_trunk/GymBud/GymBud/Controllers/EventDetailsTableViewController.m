@@ -13,11 +13,18 @@
 #import "MapViewAnnotation.h"
 #import "GymBudFriendDetailsTableViewController.h"
 #import <UIAlertView+Blocks.h>
+#import "InviteFriendsTVC.h"
+#import "LocationFinderVC.h"
+#import <AFNetworking/AFNetworking.h>
+#import "AppDelegate.h"
 
 #define kCellHeight 70;
 
-@interface EventDetailsTableViewController ()
+@interface EventDetailsTableViewController () <UITextFieldDelegate, LocationFinderVCDelegate>
 @property (nonatomic, strong) NSArray* listOfSectionNames;
+@property (nonatomic) BOOL isEventEditable;
+@property (nonatomic, strong) UIDatePicker *datePicker;
+@property (nonatomic, strong) UITextField *workoutTime;
 @end
 
 @implementation EventDetailsTableViewController
@@ -34,6 +41,25 @@
     NSLog(@"object is %@", self.objectList);
     self.tableView.backgroundColor = kGymBudLightBlue;
     self.listOfSectionNames = @[@"Organizer Information", @"Excercise Type(s)", @"Time Information", @"Location Information", @"Confirmed Attendees"];
+    
+    PFUser *organizer = self.objectList[@"organizer"];
+    if ([[organizer objectForKey:@"username"] isEqualToString:[[PFUser currentUser] objectForKey:@"username"]])
+    {
+        NSLog(@"organizer is same");
+        self.isEventEditable = YES;
+        self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(plusPressed:)];
+    }
+    else
+    {
+        NSLog(@"organizer is not same %@ %@", [organizer objectForKey:@"username"], [[PFUser currentUser] objectForKey:@"username"]);
+        self.isEventEditable = NO;
+    }
+
+}
+
+-(void)viewWillDisappear:(BOOL)animated
+{
+    [self.objectList saveInBackground];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -173,61 +199,125 @@ heightForHeaderInSection:(NSInteger)section
         {
             cell = [tableView dequeueReusableCellWithIdentifier:@"body" forIndexPath:indexPath];
             NSArray *subLogoIndices = [self.objectList objectForKey:@"detailLogoIndices"];
-            if (![subLogoIndices count])
+            if (self.isEventEditable)
             {
-                UILabel *nobody = (UILabel*)[cell viewWithTag:5];
-                nobody.text = @"No Excercise Type Specified";
-                nobody.font = [UIFont fontWithName:@"MagistralATT" size:16];
-                nobody.textColor = [UIColor whiteColor];
-                nobody.adjustsFontSizeToFitWidth = YES;
-                nobody.numberOfLines = 1;
+                for (int i=1;i<7;i++)
+                {
+                    UIButton *imv = (UIButton*) [cell viewWithTag:i];
+                    NSNumber *indice = [NSNumber numberWithInt:i-1];
+                    if ([subLogoIndices containsObject:indice])
+                        [imv setImage:[UIImage imageNamed:[kGBBodyPartImagesSelArray objectAtIndex:[indice integerValue]]] forState:UIControlStateNormal];
+                    else
+                        [imv setImage:[UIImage imageNamed:[kGBBodyPartImagesArray objectAtIndex:[indice integerValue]]] forState:UIControlStateNormal];
+                    [imv addTarget:self action:@selector(toggleBodyPart:) forControlEvents:UIControlEventTouchUpInside];
+                }
             }
             else
             {
-                int subLogoIndex = 0;
-                for(NSNumber *index in subLogoIndices)
+                if (![subLogoIndices count])
                 {
-                    if(subLogoIndex == 0) {
-                        
-                        UIImageView *imv = (UIImageView*) [cell viewWithTag:1];
-                        imv.image=[UIImage imageNamed:[kGBBodyPartImagesArray objectAtIndex:[index integerValue]]];
-                        [cell.contentView addSubview:imv];
-                    } else if(subLogoIndex == 1) {
-                        UIImageView *imv = (UIImageView*) [cell viewWithTag:2];
-                        imv.image=[UIImage imageNamed:[kGBBodyPartImagesArray objectAtIndex:[index integerValue]]];
-                        [cell.contentView addSubview:imv];
-                    } else if(subLogoIndex == 2) {
-                        UIImageView *imv = (UIImageView*) [cell viewWithTag:3];
-                        imv.image=[UIImage imageNamed:[kGBBodyPartImagesArray objectAtIndex:[index integerValue]]];
-                        [cell.contentView addSubview:imv];
-                    } else {
-                        UIImageView *imv = (UIImageView*) [cell viewWithTag:4];
-                        imv.image=[UIImage imageNamed:[kGBBodyPartImagesArray objectAtIndex:[index integerValue]]];
-                        [cell.contentView addSubview:imv];
+                    UILabel *nobody = (UILabel*)[cell viewWithTag:500];
+                    nobody.text = @"No Excercise Type Specified";
+                    nobody.font = [UIFont fontWithName:@"MagistralATT" size:16];
+                    nobody.textColor = [UIColor whiteColor];
+                    nobody.adjustsFontSizeToFitWidth = YES;
+                    nobody.numberOfLines = 1;
+                }
+                else
+                {
+                    int subLogoIndex = 0;
+
+                    for(NSNumber *index in subLogoIndices)
+                    {
+                        if(subLogoIndex == 0) {
+                            
+                            UIButton *imv = (UIButton*) [cell viewWithTag:1];
+                            [imv setImage:[UIImage imageNamed:[kGBBodyPartImagesSelArray objectAtIndex:[index integerValue]]] forState:UIControlStateNormal];
+                            
+                            [cell.contentView addSubview:imv];
+                        } else if(subLogoIndex == 1) {
+                            UIButton *imv = (UIButton*) [cell viewWithTag:2];
+                            [imv setImage:[UIImage imageNamed:[kGBBodyPartImagesSelArray objectAtIndex:[index integerValue]]] forState:UIControlStateNormal];
+                            [cell.contentView addSubview:imv];
+                        } else if(subLogoIndex == 2) {
+                            UIButton *imv = (UIButton*) [cell viewWithTag:3];
+                            [imv setImage:[UIImage imageNamed:[kGBBodyPartImagesSelArray objectAtIndex:[index integerValue]]] forState:UIControlStateNormal];
+                            [cell.contentView addSubview:imv];
+                        } else {
+                            UIButton *imv = (UIButton*) [cell viewWithTag:4];
+                            [imv setImage:[UIImage imageNamed:[kGBBodyPartImagesSelArray objectAtIndex:[index integerValue]]] forState:UIControlStateNormal];
+                            [cell.contentView addSubview:imv];
+                        }
+                        subLogoIndex++;
                     }
-                    subLogoIndex++;
                 }
             }
-
         }
         break;
         case 2:
         {
-            cell = [tableView dequeueReusableCellWithIdentifier:@"details" forIndexPath:indexPath];
+            cell = [tableView dequeueReusableCellWithIdentifier:@"time" forIndexPath:indexPath];
             if (indexPath.row == 0)
             {
+                self.workoutTime = (UITextField*)[cell viewWithTag:1];
+                UILabel *workoutDuration = (UILabel*)[cell viewWithTag:2];
+                
                 NSNumber *duration= [self.objectList objectForKey:@"duration"];
                 NSDate *time = [self.objectList objectForKey:@"time"];
                 NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
                 [dateFormat setDateFormat:@"MMMM dd yyyy HH:mm"];
                 NSString *theDate = [dateFormat stringFromDate:time];
+                
+                workoutDuration.text =[NSString stringWithFormat:@"Duration: %@", duration];
+                workoutDuration.font = [UIFont fontWithName:@"MagistralATT" size:12];
+                workoutDuration.textColor = [UIColor whiteColor];
 
-                cell.textLabel.text = [NSString stringWithFormat:@"Date: %@", theDate];
-                cell.detailTextLabel.text = [NSString stringWithFormat:@"Duration: %@", duration];
-                cell.textLabel.font = [UIFont fontWithName:@"MagistralATT" size:16];
-                cell.textLabel.textColor = [UIColor whiteColor];
-                cell.detailTextLabel.font = [UIFont fontWithName:@"MagistralATT" size:12];
-                cell.detailTextLabel.textColor = [UIColor whiteColor];
+                self.workoutTime.text = [NSString stringWithFormat:@"Date: %@", theDate];
+                self.workoutTime.font = [UIFont fontWithName:@"MagistralATT" size:16];
+                self.workoutTime.textColor = [UIColor whiteColor];
+                if (!self.isEventEditable)
+                {
+                    self.workoutTime.enabled = NO;
+                    cell.accessoryType = UITableViewCellAccessoryNone;
+                }
+                else
+                {
+                    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+                    self.datePicker = [[UIDatePicker alloc] init];
+                    self.datePicker.minimumDate = [NSDate date];
+                    self.datePicker.minuteInterval = 15;
+                    
+                    NSCalendar *calendar = [NSCalendar autoupdatingCurrentCalendar];
+                    NSDateComponents *components = [calendar components:NSYearCalendarUnit
+                                                    | NSMonthCalendarUnit | NSDayCalendarUnit
+                                                               fromDate:[NSDate date]];
+                    components.day += 5;
+                    NSDate *date = [calendar dateFromComponents:components];
+                    self.datePicker.maximumDate = date;
+                    self.workoutTime.delegate = self;
+                    self.datePicker.autoresizingMask = (UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight);
+                    
+                    
+                    // create a done view + done button, attach to it a doneClicked action, and place it in a toolbar as an accessory input view...
+                    // Prepare done button
+                    UIToolbar* keyboardDoneButtonView = [[UIToolbar alloc] init];
+                    keyboardDoneButtonView.barStyle = UIBarStyleBlack;
+                    keyboardDoneButtonView.translucent = YES;
+                    keyboardDoneButtonView.tintColor = nil;
+                    [keyboardDoneButtonView sizeToFit];
+                    
+                    UIBarButtonItem* doneButton = [[UIBarButtonItem alloc] initWithTitle:@"Done"
+                                                                                   style:UIBarButtonItemStyleBordered target:self
+                                                                                  action:@selector(doneClicked:)];
+                    [keyboardDoneButtonView setItems:[NSArray arrayWithObjects:doneButton, nil]];
+                    
+                    // Plug the keyboardDoneButtonView into the text field...
+                    self.workoutTime.inputAccessoryView = keyboardDoneButtonView;
+                    self.workoutTime.inputView = self.datePicker;
+                    
+                    self.workoutTime.frame = CGRectMake(5, 5, self.view.frame.size.width-5, 55);
+
+                }
             }
             
         }
@@ -243,6 +333,10 @@ heightForHeaderInSection:(NSInteger)section
                 cell.textLabel.adjustsFontSizeToFitWidth = YES;
                 cell.textLabel.numberOfLines = 2;
                 cell.detailTextLabel.text = @"";
+                if (self.isEventEditable)
+                    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+                else
+                    cell.accessoryType = UITableViewCellAccessoryNone;
             }
             else
             {
@@ -304,7 +398,20 @@ heightForHeaderInSection:(NSInteger)section
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if(indexPath.section == 4) {
+    if (indexPath.section == 3 && indexPath.row == 0)
+    {
+        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"LocationFinderVC"
+                                                             bundle:[NSBundle mainBundle]];
+        LocationFinderVC *locationFinder = [storyboard instantiateViewControllerWithIdentifier:@"LocationFinderVC"];
+        
+        [self.navigationController pushViewController:locationFinder animated:YES];
+        locationFinder.delegate = self;
+        
+//        if(![self.section2Label.text isEqualToString:@"Select a location"]) {
+//            locationFinder.input = self.section2Label.text;
+
+    }
+    else if(indexPath.section == 4) {
         // join event
         
         RIButtonItem *cancelItem = [RIButtonItem itemWithLabel:@"Dismiss" action:^{
@@ -384,5 +491,97 @@ heightForHeaderInSection:(NSInteger)section
 //    [dest setUser:[self.objects objectAtIndex:indexPath.row]];
 }
 
+- (void)plusPressed:(id)sender {
+    // Invite friends here
+    //    NSLog(@"button1Pressed");
+    NSDate *time = [self.objectList objectForKey:@"time"];
+    NSString *location = [self.objectList objectForKey:@"locationName"];
+    NSArray *subLogoIndices = [self.objectList objectForKey:@"detailLogoIndices"];
+
+    
+    InviteFriendsTVC *invite = [[InviteFriendsTVC alloc] init];
+    invite.date = time;
+    invite.location = location;
+    invite.bodyParts = subLogoIndices;
+    [self.navigationController pushViewController:invite animated:YES];
+    
+}
+
+-(void)toggleBodyPart:(id)sender
+{
+    NSLog(@"add body parts");
+    UIButton *button = (UIButton*)sender;
+    NSMutableArray *subLogoIndices = [self.objectList objectForKey:@"detailLogoIndices"];
+    NSInteger index = button.tag - 1;
+    
+    if ([subLogoIndices containsObject:[NSNumber numberWithInteger:index]])
+        [subLogoIndices removeObject:[NSNumber numberWithInteger:index]];
+    else
+        [subLogoIndices addObject:[NSNumber numberWithInteger:index]];
+    
+    [self.objectList setObject:subLogoIndices forKey:@"detailLogoIndices"];
+    [self.tableView reloadData];
+
+}
+
+- (void)doneClicked:(id)sender {
+    
+    // Write out the date...
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    [formatter setTimeStyle:NSDateFormatterShortStyle];
+    [formatter setDateStyle:NSDateFormatterShortStyle];
+    //Optionally for time zone conversions
+    
+    [self.objectList setObject:self.datePicker.date forKey:@"time"];
+    [self.workoutTime resignFirstResponder];
+    [self.tableView reloadData];
+}
+
+- (void)didSetLocation:(NSString *)locationName
+{
+    [self.objectList setObject:locationName forKey:@"locationName"];
+    [self.tableView reloadData];
+    // now for the location
+    NSURL *url = [NSURL URLWithString:@"https://maps.googleapis.com/maps/api/geocode/"];
+    NSLog(@"%@", [[locationName stringByReplacingOccurrencesOfString:@", " withString:@"+"] stringByReplacingOccurrencesOfString:@" " withString:@"+"]);
+
+    NSDictionary *params = @{@"address" : [[locationName stringByReplacingOccurrencesOfString:@", " withString:@"+"] stringByReplacingOccurrencesOfString:@" " withString:@"+"],
+                             @"sensor" : @"true",
+                             @"key" : kGoogleApiKey};
+    AFHTTPSessionManager *httpSessionManager = [[AFHTTPSessionManager alloc] initWithBaseURL:url];
+    
+    
+    [httpSessionManager GET:@"json" parameters:params success:^(NSURLSessionDataTask *task, id responseObject) {
+        NSLog(@"\n============= Entity Saved Success ===\n%@",responseObject);
+        NSString *latStr;
+        NSString *lngStr;
+        for(id object in responseObject[@"results"]) {
+            NSLog(@"%@", object);
+            if([object objectForKey:@"geometry"]) {
+                latStr = object[@"geometry"][@"location"][@"lat"];
+                lngStr = object[@"geometry"][@"location"][@"lng"];
+            }
+        }
+        
+        CLLocationDegrees lat = [latStr doubleValue];
+        CLLocationDegrees lng = [lngStr doubleValue];
+        
+        if(lat == 0 || lng == 0) {
+            AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
+            lat = appDelegate.currentLocation.coordinate.latitude;
+            lng = appDelegate.currentLocation.coordinate.longitude;
+        }
+        PFGeoPoint *eventLocation = [PFGeoPoint geoPointWithLatitude:lat longitude:lng];
+        [self.objectList setObject:eventLocation forKey:@"location"];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            //Your main thread code goes in here
+            NSLog(@"Im on the main thread");
+            [self.tableView reloadData];
+        });
+    }
+        failure:^(NSURLSessionDataTask *task, NSError *error) {
+            NSLog(@"\n============== ERROR ====\n%@",error.userInfo);
+    }];
+}
 
 @end
