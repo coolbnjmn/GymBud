@@ -23,6 +23,7 @@
 @interface EventDetailsTableViewController () <UITextFieldDelegate, LocationFinderVCDelegate>
 @property (nonatomic, strong) NSArray* listOfSectionNames;
 @property (nonatomic) BOOL isEventEditable;
+@property (nonatomic) BOOL isEditModeEnabled;
 @property (nonatomic, strong) UIDatePicker *datePicker;
 @property (nonatomic, strong) UITextField *workoutTime;
 @end
@@ -40,7 +41,7 @@
     self.navigationItem.title = @"Event Details";
     NSLog(@"object is %@", self.objectList);
     self.tableView.backgroundColor = kGymBudLightBlue;
-    self.listOfSectionNames = @[@"Organizer Information", @"Excercise Type(s)", @"Time Information", @"Location Information", @"Confirmed Attendees"];
+    self.listOfSectionNames = @[@"Organizer Information", @"Excercise Type(s)", @"Time Information", @"Location Information", @"Confirmed Attendees", @"Edit Mode"];
     
     PFUser *organizer = self.objectList[@"organizer"];
     if ([[organizer objectForKey:@"username"] isEqualToString:[[PFUser currentUser] objectForKey:@"username"]])
@@ -55,6 +56,7 @@
         self.isEventEditable = NO;
     }
 
+    self.isEditModeEnabled = NO;
 }
 
 -(void)viewWillDisappear:(BOOL)animated
@@ -71,7 +73,10 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     // Return the number of sections.
-    return 5;
+    if (self.isEventEditable)
+        return 6;
+    else
+        return 5;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -98,7 +103,8 @@
                 return [attendees count];
         }
             break;
-            
+        case 5:
+            return 1;
         default:
             break;
     }
@@ -199,11 +205,12 @@ heightForHeaderInSection:(NSInteger)section
         {
             cell = [tableView dequeueReusableCellWithIdentifier:@"body" forIndexPath:indexPath];
             NSArray *subLogoIndices = [self.objectList objectForKey:@"detailLogoIndices"];
-            if (self.isEventEditable)
+            if (self.isEditModeEnabled)
             {
                 for (int i=1;i<7;i++)
                 {
                     UIButton *imv = (UIButton*) [cell viewWithTag:i];
+                    imv.hidden = NO;
                     NSNumber *indice = [NSNumber numberWithInt:i-1];
                     if ([subLogoIndices containsObject:indice])
                         [imv setImage:[UIImage imageNamed:[kGBBodyPartImagesSelArray objectAtIndex:[indice integerValue]]] forState:UIControlStateNormal];
@@ -250,6 +257,11 @@ heightForHeaderInSection:(NSInteger)section
                         }
                         subLogoIndex++;
                     }
+                    for (NSInteger i = [subLogoIndices count]; i < 7; i++)
+                    {
+                        UIButton *imv = (UIButton*) [cell viewWithTag:i+1];
+                        imv.hidden = YES;
+                    }
                 }
             }
         }
@@ -275,7 +287,7 @@ heightForHeaderInSection:(NSInteger)section
                 self.workoutTime.text = [NSString stringWithFormat:@"Date: %@", theDate];
                 self.workoutTime.font = [UIFont fontWithName:@"MagistralATT" size:16];
                 self.workoutTime.textColor = [UIColor whiteColor];
-                if (!self.isEventEditable)
+                if (!self.isEditModeEnabled)
                 {
                     self.workoutTime.enabled = NO;
                     cell.accessoryType = UITableViewCellAccessoryNone;
@@ -333,7 +345,7 @@ heightForHeaderInSection:(NSInteger)section
                 cell.textLabel.adjustsFontSizeToFitWidth = YES;
                 cell.textLabel.numberOfLines = 2;
                 cell.detailTextLabel.text = @"";
-                if (self.isEventEditable)
+                if (self.isEditModeEnabled)
                     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
                 else
                     cell.accessoryType = UITableViewCellAccessoryNone;
@@ -383,6 +395,23 @@ heightForHeaderInSection:(NSInteger)section
             cell.textLabel.textColor = [UIColor whiteColor];
             cell.imageView.image = nil; //[UIImage imageNamed:@"yogaIcon.png"];
         }
+            break;
+        case 5:
+        {
+            cell = [tableView dequeueReusableCellWithIdentifier:@"edit" forIndexPath:indexPath];
+            UILabel *editmode = (UILabel*)[cell viewWithTag:40];
+            
+            cell.selectionStyle = UITableViewCellSelectionStyleBlue;
+            editmode.font = [UIFont fontWithName:@"MagistralATT" size:16];
+            editmode.textColor = [UIColor whiteColor];
+            if (!self.isEditModeEnabled)
+                editmode.text = @"EDIT";
+            else
+                editmode.text = @"DONE";
+            editmode.textAlignment = NSTextAlignmentCenter;
+            cell.accessoryType= UITableViewCellAccessoryNone;
+        }
+            break;
 
         default:
         {
@@ -403,7 +432,7 @@ heightForHeaderInSection:(NSInteger)section
         UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"LocationFinderVC"
                                                              bundle:[NSBundle mainBundle]];
         LocationFinderVC *locationFinder = [storyboard instantiateViewControllerWithIdentifier:@"LocationFinderVC"];
-        
+        [locationFinder setPlaceHolderText:[self.objectList objectForKey:@"locationName"]];
         [self.navigationController pushViewController:locationFinder animated:YES];
         locationFinder.delegate = self;
         
@@ -411,7 +440,8 @@ heightForHeaderInSection:(NSInteger)section
 //            locationFinder.input = self.section2Label.text;
 
     }
-    else if(indexPath.section == 4) {
+    else if(indexPath.section == 4)
+    {
         // join event
         
         RIButtonItem *cancelItem = [RIButtonItem itemWithLabel:@"Dismiss" action:^{
@@ -468,6 +498,11 @@ heightForHeaderInSection:(NSInteger)section
                                                cancelButtonItem:cancelItem
                                                otherButtonItems:goodItem, nil];
         [alert show];
+    }
+    else if (indexPath.section == 5)
+    {
+        self.isEditModeEnabled = !self.isEditModeEnabled;
+        [self.tableView reloadData];
     }
     [tableView deselectRowAtIndexPath:indexPath animated:NO];
 }

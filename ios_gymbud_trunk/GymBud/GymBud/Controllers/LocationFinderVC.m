@@ -125,6 +125,8 @@
     self.locationFinder.delegate = self;
     self.locationFinder.autoCompleteTableAppearsAsKeyboardAccessory = NO;
     self.locationFinder.autoCompleteTableOriginOffset = CGSizeMake(0, -self.view.bounds.size.height + 45);
+    if (self.placeHolderText)
+        self.locationFinder.placeholder = self.placeHolderText;
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
     self.view.backgroundColor = kGymBudGrey;

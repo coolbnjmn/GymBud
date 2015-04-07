@@ -20,5 +20,6 @@
 @property (weak, nonatomic) IBOutlet MLPAutoCompleteTextField *locationFinder;
 @property (nonatomic, strong) id <LocationFinderVCDelegate> delegate;
 @property (nonatomic, strong) NSString *input;
+@property (nonatomic, strong) NSString *placeHolderText;
 
 @end
