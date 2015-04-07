@@ -295,6 +295,8 @@ heightForHeaderInSection:(NSInteger)section
                 else
                 {
                     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+                    cell.selectionStyle = UITableViewCellSelectionStyleGray;
+                    self.workoutTime.enabled = YES;
                     self.datePicker = [[UIDatePicker alloc] init];
                     self.datePicker.minimumDate = [NSDate date];
                     self.datePicker.minuteInterval = 15;
@@ -402,13 +404,10 @@ heightForHeaderInSection:(NSInteger)section
             UILabel *editmode = (UILabel*)[cell viewWithTag:40];
             
             cell.selectionStyle = UITableViewCellSelectionStyleBlue;
-            editmode.font = [UIFont fontWithName:@"MagistralATT" size:16];
-            editmode.textColor = [UIColor whiteColor];
             if (!self.isEditModeEnabled)
                 editmode.text = @"EDIT";
             else
                 editmode.text = @"DONE";
-            editmode.textAlignment = NSTextAlignmentCenter;
             cell.accessoryType= UITableViewCellAccessoryNone;
         }
             break;

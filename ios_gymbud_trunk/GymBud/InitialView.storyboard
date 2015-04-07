@@ -10,6 +10,7 @@
         </mutableArray>
         <mutableArray key="MGS65__A.ttf">
             <string>MagistralA-Bold</string>
+            <string>MagistralA-Bold</string>
         </mutableArray>
     </customFonts>
     <scenes>
@@ -440,8 +441,8 @@
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" tag="40" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0vq-x9-Dio">
                                             <rect key="frame" x="8" y="0.0" width="304" height="45"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <fontDescription key="fontDescription" name="MagistralA-Bold" family="MagistralATT" pointSize="23"/>
+                                            <color key="textColor" red="0.99631228146853146" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>
