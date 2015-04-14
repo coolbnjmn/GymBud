@@ -238,6 +238,9 @@
 		B2E9E9011A2AEC7A00BB377F /* leg.png in Resources */ = {isa = PBXBuildFile; fileRef = B2E9E8F11A2AEC7A00BB377F /* leg.png */; };
 		B2E9E9021A2AEC7A00BB377F /* shoulder_sel.png in Resources */ = {isa = PBXBuildFile; fileRef = B2E9E8F21A2AEC7A00BB377F /* shoulder_sel.png */; };
 		B2E9E9031A2AEC7A00BB377F /* shoulder.png in Resources */ = {isa = PBXBuildFile; fileRef = B2E9E8F31A2AEC7A00BB377F /* shoulder.png */; };
+		B2EC4FBD1ADD994800361596 /* basketball.png in Resources */ = {isa = PBXBuildFile; fileRef = B2EC4FBA1ADD994800361596 /* basketball.png */; };
+		B2EC4FBE1ADD994800361596 /* soccer.png in Resources */ = {isa = PBXBuildFile; fileRef = B2EC4FBB1ADD994800361596 /* soccer.png */; };
+		B2EC4FBF1ADD994800361596 /* tennis.png in Resources */ = {isa = PBXBuildFile; fileRef = B2EC4FBC1ADD994800361596 /* tennis.png */; };
 		B2FCFBE919CAC15C0078C68D /* EPBasicInfoVC.m in Sources */ = {isa = PBXBuildFile; fileRef = B2FCFBE819CAC15C0078C68D /* EPBasicInfoVC.m */; };
 		D6179B487D9E4DCAA95C19B3 /* libPods-GymBud.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 48EE337A63E5439BA42E30F1 /* libPods-GymBud.a */; };
 /* End PBXBuildFile section */
@@ -542,6 +545,9 @@
 		B2E9E8F11A2AEC7A00BB377F /* leg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = leg.png; path = "GymBud/Assets/Body Parts/leg.png"; sourceTree = "<group>"; };
 		B2E9E8F21A2AEC7A00BB377F /* shoulder_sel.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = shoulder_sel.png; path = "GymBud/Assets/Body Parts/shoulder_sel.png"; sourceTree = "<group>"; };
 		B2E9E8F31A2AEC7A00BB377F /* shoulder.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = shoulder.png; path = "GymBud/Assets/Body Parts/shoulder.png"; sourceTree = "<group>"; };
+		B2EC4FBA1ADD994800361596 /* basketball.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = basketball.png; path = GymBud/Assets/V3/basketball.png; sourceTree = "<group>"; };
+		B2EC4FBB1ADD994800361596 /* soccer.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = soccer.png; path = GymBud/Assets/V3/soccer.png; sourceTree = "<group>"; };
+		B2EC4FBC1ADD994800361596 /* tennis.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = tennis.png; path = GymBud/Assets/V3/tennis.png; sourceTree = "<group>"; };
 		B2FCFBE719CAC15C0078C68D /* EPBasicInfoVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EPBasicInfoVC.h; path = GymBud/Controllers/EPBasicInfoVC.h; sourceTree = "<group>"; };
 		B2FCFBE819CAC15C0078C68D /* EPBasicInfoVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EPBasicInfoVC.m; path = GymBud/Controllers/EPBasicInfoVC.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -749,6 +755,7 @@
 		B2C39D6D197E193000039F90 /* Assets */ = {
 			isa = PBXGroup;
 			children = (
+				B2EC4FB91ADD98A700361596 /* V3 */,
 				B2787DD91A2AEE1F00DCACBF /* Loading Images */,
 				B2E9E8E31A2AEC6B00BB377F /* Body Parts */,
 				296D73881A2BFEEA0067624B /* background.png */,
@@ -992,6 +999,16 @@
 			name = "Body Parts";
 			sourceTree = "<group>";
 		};
+		B2EC4FB91ADD98A700361596 /* V3 */ = {
+			isa = PBXGroup;
+			children = (
+				B2EC4FBA1ADD994800361596 /* basketball.png */,
+				B2EC4FBB1ADD994800361596 /* soccer.png */,
+				B2EC4FBC1ADD994800361596 /* tennis.png */,
+			);
+			name = V3;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -1086,6 +1103,7 @@
 				B2787E4B1A2AEE6000DCACBF /* 40.png in Resources */,
 				B29774251984BF68000AD7B6 /* weightliftingMap.png in Resources */,
 				B297741819843EC9000AD7B6 /* sampleMapPin.png in Resources */,
+				B2EC4FBD1ADD994800361596 /* basketball.png in Resources */,
 				77FE648B199051E8008724CC /* GoActivityCVCell.xib in Resources */,
 				296D73971A2FA5E20067624B /* close.png in Resources */,
 				B2787E531A2AEE6000DCACBF /* 48.png in Resources */,
@@ -1095,6 +1113,7 @@
 				B2787E631A2AEE6000DCACBF /* 64.png in Resources */,
 				B2787E601A2AEE6000DCACBF /* 61.png in Resources */,
 				B2787E471A2AEE6000DCACBF /* 36.png in Resources */,
+				B2EC4FBE1ADD994800361596 /* soccer.png in Resources */,
 				B2232B7D1A265ECE00FBB97F /* MGS65__A.ttf in Resources */,
 				B2787E301A2AEE6000DCACBF /* 13.png in Resources */,
 				B29774211984BF68000AD7B6 /* basketballMap.png in Resources */,
@@ -1228,6 +1247,7 @@
 				B2787E6A1A2AEE6000DCACBF /* 71.png in Resources */,
 				B2E9E8FA1A2AEC7A00BB377F /* back_sel.png in Resources */,
 				B2787E371A2AEE6000DCACBF /* 20.png in Resources */,
+				B2EC4FBF1ADD994800361596 /* tennis.png in Resources */,
 				B2977450198629A3000AD7B6 /* people.png in Resources */,
 				B2787E551A2AEE6000DCACBF /* 50.png in Resources */,
 				B2787E501A2AEE6000DCACBF /* 45.png in Resources */,

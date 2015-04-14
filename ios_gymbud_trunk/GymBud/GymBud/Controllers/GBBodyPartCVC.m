@@ -65,7 +65,7 @@ static NSString * const reuseIdentifier = @"goActivityCell";
 //    self.collectionView.backgroundColor = color;
     
     
-    self.navigationItem.title = @"Select Body Part(s)";
+    self.navigationItem.title = @"Select Activity";
     [self.collectionView setAllowsMultipleSelection:YES];
     self.selectedBodyParts = [[NSMutableArray alloc] init];
     
@@ -111,11 +111,11 @@ static NSString * const reuseIdentifier = @"goActivityCell";
     
     // Configure the cell
     if([self.selectedBodyParts containsObject:indexPath]) {
-        cell.goActivityPictureImaveView.image = [UIImage imageNamed:[kGBBodyPartImagesSelArray objectAtIndex:indexPath.row]];
+        cell.goActivityPictureImaveView.image = [UIImage imageNamed:[kGBV3ImagesArray objectAtIndex:indexPath.row]];
     } else {
-        cell.goActivityPictureImaveView.image = [UIImage imageNamed:[kGBBodyPartImagesArray objectAtIndex:indexPath.row]];
+        cell.goActivityPictureImaveView.image = [UIImage imageNamed:[kGBV3ImagesArray objectAtIndex:indexPath.row]];
     }
-    cell.goActivityTextLabel.text = [kGBBodyPartArray objectAtIndex:indexPath.row];
+    cell.goActivityTextLabel.text = [kGBV3Array objectAtIndex:indexPath.row];
     cell.backgroundColor = [UIColor clearColor];
     cell.goActivityTextLabel.font = [UIFont fontWithName:@"MagistralATT-Bold" size:18];
     cell.goActivityTextLabel.textColor = kGymBudGold;
@@ -131,7 +131,7 @@ static NSString * const reuseIdentifier = @"goActivityCell";
 //        cell.backgroundColor = [UIColor whiteColor];
 //        cell.layer.cornerRadius = 30;
 //        cell.layer.masksToBounds = YES;
-        cell.goActivityPictureImaveView.image = [UIImage imageNamed:[kGBBodyPartImagesSelArray objectAtIndex:indexPath.row]];
+        cell.goActivityPictureImaveView.image = [UIImage imageNamed:[kGBV3ImagesArray objectAtIndex:indexPath.row]];
 
     } else {
         // DO nothing, we don't want to select more than 4

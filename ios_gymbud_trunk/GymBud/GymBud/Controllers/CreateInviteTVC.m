@@ -298,7 +298,7 @@
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
-    return [kGBBodyPartArray count];
+    return [kGBV3Array count];
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
@@ -306,11 +306,15 @@
     GoActivityCVCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"goActivityCell" forIndexPath:indexPath];
     
     if([self.selectedBodyParts containsObject:indexPath]) {
-        cell.goActivityPictureImaveView.image = [UIImage imageNamed:[kGBBodyPartImagesSelArray objectAtIndex:indexPath.row]];
+        cell.goActivityPictureImaveView.image = [UIImage imageNamed:[kGBV3ImagesArray objectAtIndex:indexPath.row]];
+        cell.goActivityPictureImaveView.layer.borderWidth = 3;
+        cell.goActivityPictureImaveView.layer.borderColor = [UIColor whiteColor].CGColor;
     } else {
-        cell.goActivityPictureImaveView.image = [UIImage imageNamed:[kGBBodyPartImagesArray objectAtIndex:indexPath.row]];
+        cell.goActivityPictureImaveView.image = [UIImage imageNamed:[kGBV3ImagesArray objectAtIndex:indexPath.row]];
+        cell.goActivityPictureImaveView.layer.borderWidth = 0;
+        cell.goActivityPictureImaveView.layer.borderColor = [UIColor whiteColor].CGColor;
     }
-    cell.goActivityTextLabel.text = [kGBBodyPartArray objectAtIndex:indexPath.row];
+    cell.goActivityTextLabel.text = [kGBV3Array objectAtIndex:indexPath.row];
     cell.backgroundColor = [UIColor clearColor];
     cell.goActivityTextLabel.font = [UIFont fontWithName:@"MagistralA-Bold" size:18];
     cell.goActivityTextLabel.textColor = kGymBudGold;
@@ -320,14 +324,16 @@
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    if([self.selectedBodyParts count] < 4) {
+    if([self.selectedBodyParts count] < 1) {
         [self.selectedBodyParts addObject:indexPath];
         GoActivityCVCell *cell = (GoActivityCVCell *)[collectionView cellForItemAtIndexPath:indexPath];
-        cell.goActivityPictureImaveView.image = [UIImage imageNamed:[kGBBodyPartImagesSelArray objectAtIndex:indexPath.row]];
+        cell.goActivityPictureImaveView.image = [UIImage imageNamed:[kGBV3ImagesArray objectAtIndex:indexPath.row]];
+        cell.goActivityPictureImaveView.layer.borderWidth = 3;
+        cell.goActivityPictureImaveView.layer.borderColor = [UIColor whiteColor].CGColor;
         
     } else {
         // DO nothing, we don't want to select more than 4
-        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Select up to 4 Body Parts" message:@"You have tried to select more than 4" delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil];
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Select only one" message:@"You have tried to select more than 1 Activity" delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil];
         [alertView show];
     }
 }
@@ -336,7 +342,10 @@
     [self.selectedBodyParts removeObject:indexPath];
     GoActivityCVCell *cell = (GoActivityCVCell *)[collectionView cellForItemAtIndexPath:indexPath];
     //    cell.backgroundColor = [UIColor clearColor];
-    cell.goActivityPictureImaveView.image = [UIImage imageNamed:[kGBBodyPartImagesArray objectAtIndex:indexPath.row]];
+    cell.goActivityPictureImaveView.backgroundColor = [UIColor clearColor];
+    cell.goActivityPictureImaveView.image = [UIImage imageNamed:[kGBV3ImagesArray objectAtIndex:indexPath.row]];
+    cell.goActivityPictureImaveView.layer.borderWidth = 0;
+    cell.goActivityPictureImaveView.layer.borderColor = [UIColor whiteColor].CGColor;
 }
 
 - (void)didSetLocation:(NSString *)locationName {
