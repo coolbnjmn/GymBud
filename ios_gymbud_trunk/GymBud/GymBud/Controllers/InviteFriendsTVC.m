@@ -264,7 +264,16 @@
     NSLog (@"extractCountryCode [%@] [%@]", countryCode, nationalNumber);
     
     NSString *shortDate = [formatter stringFromDate:self.date];
-    NSString *body = [[PFUser currentUser][@"gymbudProfile"][@"name"] stringByAppendingString: [NSString stringWithFormat:@" invited you to go lift @ %@ %@. Reply IN or OUT now!", shortDate, self.location, nil]];
+    
+    NSMutableArray *indices = [[NSMutableArray alloc] init];
+    for(NSIndexPath *indexPath in self.bodyParts) {
+        [indices addObject:[NSNumber numberWithInteger:indexPath.row]];
+    }
+    NSNumber *index = [indices objectAtIndex:0];
+    NSString *eventActivity = [kGBV3Array objectAtIndex:index.integerValue];
+
+    NSString *body = [[PFUser currentUser][@"gymbudProfile"][@"name"] stringByAppendingString: [NSString stringWithFormat:@" invited you to %@ @ %@ %@. Reply IN or OUT now!", eventActivity, shortDate, self.location, nil]];
+
     [userDict setObject:body forKey:@"body"];
         
     // now for the location
@@ -296,7 +305,6 @@
         NSString *latStr;
         NSString *lngStr;
         for(id object in responseObject[@"results"]) {
-            NSLog(@"%@", object);
             if([object objectForKey:@"geometry"]) {
                 latStr = object[@"geometry"][@"location"][@"lat"];
                 lngStr = object[@"geometry"][@"location"][@"lng"];
@@ -318,8 +326,10 @@
         [eventQuery whereKey:@"time" equalTo:self.date];
         [eventQuery whereKey:@"locationName" equalTo:self.location];
         [eventQuery whereKey:@"organizer" equalTo:[PFUser currentUser]];
+        [eventQuery whereKey:@"isVisible" equalTo:[NSNumber numberWithBool:true]];
         
         [eventQuery findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+            NSLog(@"got here");
             if([objects count] == 0) {
                 // make new object
                 PFObject *eventObject = [PFObject objectWithClassName:@"Event"];
@@ -347,12 +357,19 @@
                 [eventObject setObject:self.date forKey:@"time"];
                 [eventObject setObject:[NSNumber numberWithBool:YES] forKey:@"isVisible"];
                 
-                [eventObject setObject:@"Strength Training" forKey:@"activity"];
                 
                 NSMutableArray *indices = [[NSMutableArray alloc] init];
                 for(NSIndexPath *indexPath in self.bodyParts) {
                     [indices addObject:[NSNumber numberWithInteger:indexPath.row]];
                 }
+//                [indices objectAtIndex:0];
+//                NSLog(@"%li", gbv3Index);
+                NSNumber *index = [indices objectAtIndex:0];
+                
+                NSString *eventActivity = [kGBV3Array objectAtIndex:index.integerValue];
+                NSLog(@"%@", eventActivity);
+                [eventObject setObject:eventActivity forKey:@"activity"];
+
                 [eventObject setObject:indices forKey:@"detailLogoIndices"];
                 
                 //        int selectedCountRow = (int) [self.countPicker selectedRowInComponent:0];
@@ -361,7 +378,7 @@
                 
                 [eventObject setObject:[NSNumber numberWithInt:60] forKey:@"duration"];
                 
-                [eventObject setObject:[[PFUser currentUser][@"gymbudProfile"][@"name"] stringByAppendingString: [NSString stringWithFormat:@" invited you to go lift @ %@ %@. Reply IN or OUT now!", shortDate, self.location, nil]] forKey:@"description"];
+                [eventObject setObject:[[PFUser currentUser][@"gymbudProfile"][@"name"] stringByAppendingString: [NSString stringWithFormat:@" invited you to %@ @ %@ %@. Reply IN or OUT now!", eventActivity, shortDate, self.location, nil]] forKey:@"description"];
                 
                 [eventObject saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
                     if (error) {

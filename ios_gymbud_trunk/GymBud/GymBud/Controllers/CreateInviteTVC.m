@@ -306,13 +306,9 @@
     GoActivityCVCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"goActivityCell" forIndexPath:indexPath];
     
     if([self.selectedBodyParts containsObject:indexPath]) {
-        cell.goActivityPictureImaveView.image = [UIImage imageNamed:[kGBV3ImagesArray objectAtIndex:indexPath.row]];
-        cell.goActivityPictureImaveView.layer.borderWidth = 3;
-        cell.goActivityPictureImaveView.layer.borderColor = [UIColor whiteColor].CGColor;
+        cell.goActivityPictureImaveView.image = [UIImage imageNamed:[kGBV3ImagesSelArray objectAtIndex:indexPath.row]];
     } else {
         cell.goActivityPictureImaveView.image = [UIImage imageNamed:[kGBV3ImagesArray objectAtIndex:indexPath.row]];
-        cell.goActivityPictureImaveView.layer.borderWidth = 0;
-        cell.goActivityPictureImaveView.layer.borderColor = [UIColor whiteColor].CGColor;
     }
     cell.goActivityTextLabel.text = [kGBV3Array objectAtIndex:indexPath.row];
     cell.backgroundColor = [UIColor clearColor];
@@ -327,9 +323,7 @@
     if([self.selectedBodyParts count] < 1) {
         [self.selectedBodyParts addObject:indexPath];
         GoActivityCVCell *cell = (GoActivityCVCell *)[collectionView cellForItemAtIndexPath:indexPath];
-        cell.goActivityPictureImaveView.image = [UIImage imageNamed:[kGBV3ImagesArray objectAtIndex:indexPath.row]];
-        cell.goActivityPictureImaveView.layer.borderWidth = 3;
-        cell.goActivityPictureImaveView.layer.borderColor = [UIColor whiteColor].CGColor;
+        cell.goActivityPictureImaveView.image = [UIImage imageNamed:[kGBV3ImagesSelArray objectAtIndex:indexPath.row]];
         
     } else {
         // DO nothing, we don't want to select more than 4
@@ -344,8 +338,6 @@
     //    cell.backgroundColor = [UIColor clearColor];
     cell.goActivityPictureImaveView.backgroundColor = [UIColor clearColor];
     cell.goActivityPictureImaveView.image = [UIImage imageNamed:[kGBV3ImagesArray objectAtIndex:indexPath.row]];
-    cell.goActivityPictureImaveView.layer.borderWidth = 0;
-    cell.goActivityPictureImaveView.layer.borderColor = [UIColor whiteColor].CGColor;
 }
 
 - (void)didSetLocation:(NSString *)locationName {

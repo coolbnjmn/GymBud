@@ -213,9 +213,9 @@ heightForHeaderInSection:(NSInteger)section
                     imv.hidden = NO;
                     NSNumber *indice = [NSNumber numberWithInt:i-1];
                     if ([subLogoIndices containsObject:indice])
-                        [imv setImage:[UIImage imageNamed:[kGBBodyPartImagesSelArray objectAtIndex:[indice integerValue]]] forState:UIControlStateNormal];
+                        [imv setImage:[UIImage imageNamed:[kGBV3ImagesSelArray objectAtIndex:[indice integerValue]]] forState:UIControlStateNormal];
                     else
-                        [imv setImage:[UIImage imageNamed:[kGBBodyPartImagesArray objectAtIndex:[indice integerValue]]] forState:UIControlStateNormal];
+                        [imv setImage:[UIImage imageNamed:[kGBV3ImagesSelArray objectAtIndex:[indice integerValue]]] forState:UIControlStateNormal];
                     [imv addTarget:self action:@selector(toggleBodyPart:) forControlEvents:UIControlEventTouchUpInside];
                 }
             }

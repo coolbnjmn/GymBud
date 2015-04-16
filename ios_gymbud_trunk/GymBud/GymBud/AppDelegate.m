@@ -103,11 +103,12 @@
     
     if(notificationPayload != nil) {
         if ([notificationPayload objectForKey:@"aps"] && [[notificationPayload objectForKey:@"aps"][@"alert"] isEqualToString:@"How was your GymBud?"]) {
-            NSString *message = [notificationPayload objectForKey:@"aps"][@"alert"];
-                GymBudEventCompletionView *eventCompletionView = [[GymBudEventCompletionView alloc] initWithFrame:CGRectMake(0, self.window.bounds.size.height-kGymBudEventCompletionHeight, self.window.bounds.size.width, kGymBudEventCompletionHeight)];
-                eventCompletionView.event = notificationPayload[@"eventObjectId"];
-                [self.window.rootViewController.view addSubview:eventCompletionView];
-            
+            // don't send the how was your gymbud anymore
+//            NSString *message = [notificationPayload objectForKey:@"aps"][@"alert"];
+//                GymBudEventCompletionView *eventCompletionView = [[GymBudEventCompletionView alloc] initWithFrame:CGRectMake(0, self.window.bounds.size.height-kGymBudEventCompletionHeight, self.window.bounds.size.width, kGymBudEventCompletionHeight)];
+//                eventCompletionView.event = notificationPayload[@"eventObjectId"];
+//                [self.window.rootViewController.view addSubview:eventCompletionView];
+//            
         } else if ([notificationPayload objectForKey:@"requestor"] != nil) {
             NSString *message = [notificationPayload objectForKey:@"aps"][@"alert"];
             
@@ -311,29 +312,29 @@ didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)newDeviceToken {
 - (void)application:(UIApplication *)application
 didReceiveRemoteNotification:(NSDictionary *)userInfo {
     if ([userInfo objectForKey:@"aps"] && [[userInfo objectForKey:@"aps"][@"alert"] isEqualToString:@"How was your GymBud?"]) {
-        NSString *message = [userInfo objectForKey:@"aps"][@"alert"];
-        
-        RIButtonItem *cancelItem = [RIButtonItem itemWithLabel:@"Dismiss" action:^{
-            // this is the code that will be executed when the user taps "No"
-            // this is optional... if you leave the action as nil, it won't do anything
-            // but here, I'm showing a block just to show that you can use one if you want to.
-        }];
-        
-        RIButtonItem *goodItem = [RIButtonItem itemWithLabel:@"Good" action:^{
-            // You need to set the identifier from the Interface
-            // Builder for the following line to work
-            //        CarFinderViewController *pvc = [vc.storyboard instantiateViewControllerWithIdentifier:@"CarFinderViewController"];
-            //        GBEventCompletionView
-            GymBudEventCompletionView *eventCompletionView = [[GymBudEventCompletionView alloc] initWithFrame:CGRectMake(0, self.window.bounds.size.height-kGymBudEventCompletionHeight, self.window.bounds.size.width, kGymBudEventCompletionHeight)];
-            eventCompletionView.event = userInfo[@"eventObjectId"];
-            [self.window.rootViewController.view addSubview:eventCompletionView];
-        }];
-        
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle: message
-                                                        message: nil
-                                               cancelButtonItem:cancelItem
-                                               otherButtonItems:goodItem, nil];
-        [alert show];
+//        NSString *message = [userInfo objectForKey:@"aps"][@"alert"];
+//        
+//        RIButtonItem *cancelItem = [RIButtonItem itemWithLabel:@"Dismiss" action:^{
+//            // this is the code that will be executed when the user taps "No"
+//            // this is optional... if you leave the action as nil, it won't do anything
+//            // but here, I'm showing a block just to show that you can use one if you want to.
+//        }];
+//        
+//        RIButtonItem *goodItem = [RIButtonItem itemWithLabel:@"Good" action:^{
+//            // You need to set the identifier from the Interface
+//            // Builder for the following line to work
+//            //        CarFinderViewController *pvc = [vc.storyboard instantiateViewControllerWithIdentifier:@"CarFinderViewController"];
+//            //        GBEventCompletionView
+//            GymBudEventCompletionView *eventCompletionView = [[GymBudEventCompletionView alloc] initWithFrame:CGRectMake(0, self.window.bounds.size.height-kGymBudEventCompletionHeight, self.window.bounds.size.width, kGymBudEventCompletionHeight)];
+//            eventCompletionView.event = userInfo[@"eventObjectId"];
+//            [self.window.rootViewController.view addSubview:eventCompletionView];
+//        }];
+//        
+//        UIAlertView *alert = [[UIAlertView alloc] initWithTitle: message
+//                                                        message: nil
+//                                               cancelButtonItem:cancelItem
+//                                               otherButtonItems:goodItem, nil];
+//        [alert show];
     } else if ([userInfo objectForKey:@"requestor"] != nil) {
         NSString *message = [userInfo objectForKey:@"aps"][@"alert"];
         

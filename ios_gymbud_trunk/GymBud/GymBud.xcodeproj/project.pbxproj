@@ -164,6 +164,13 @@
 		B297745419864133000AD7B6 /* centeredGear.png in Resources */ = {isa = PBXBuildFile; fileRef = B297745119864133000AD7B6 /* centeredGear.png */; };
 		B297745519864133000AD7B6 /* centeredInbox.png in Resources */ = {isa = PBXBuildFile; fileRef = B297745219864133000AD7B6 /* centeredInbox.png */; };
 		B297745619864133000AD7B6 /* centeredPeople.png in Resources */ = {isa = PBXBuildFile; fileRef = B297745319864133000AD7B6 /* centeredPeople.png */; };
+		B297A4F51AE0389800CE9A25 /* basketball_white.png in Resources */ = {isa = PBXBuildFile; fileRef = B297A4EE1AE0389800CE9A25 /* basketball_white.png */; };
+		B297A4F61AE0389800CE9A25 /* racketball_white.png in Resources */ = {isa = PBXBuildFile; fileRef = B297A4EF1AE0389800CE9A25 /* racketball_white.png */; };
+		B297A4F71AE0389800CE9A25 /* racketball.png in Resources */ = {isa = PBXBuildFile; fileRef = B297A4F01AE0389800CE9A25 /* racketball.png */; };
+		B297A4F81AE0389800CE9A25 /* soccer_white.png in Resources */ = {isa = PBXBuildFile; fileRef = B297A4F11AE0389800CE9A25 /* soccer_white.png */; };
+		B297A4F91AE0389800CE9A25 /* tennis_white.png in Resources */ = {isa = PBXBuildFile; fileRef = B297A4F21AE0389800CE9A25 /* tennis_white.png */; };
+		B297A4FA1AE0389800CE9A25 /* volleyball_white.png in Resources */ = {isa = PBXBuildFile; fileRef = B297A4F31AE0389800CE9A25 /* volleyball_white.png */; };
+		B297A4FB1AE0389800CE9A25 /* volleyball.png in Resources */ = {isa = PBXBuildFile; fileRef = B297A4F41AE0389800CE9A25 /* volleyball.png */; };
 		B2A0C7071A294A8C0091E84B /* SettingsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B2A0C7051A294A8C0091E84B /* SettingsTableViewController.m */; };
 		B2A0C7081A294A8C0091E84B /* SettingsTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B2A0C7061A294A8C0091E84B /* SettingsTableViewController.xib */; };
 		B2A974B01A42A3B500815192 /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B2A974AF1A42A3B500815192 /* Accounts.framework */; };
@@ -448,6 +455,13 @@
 		B297745119864133000AD7B6 /* centeredGear.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = centeredGear.png; path = GymBud/Assets/centeredGear.png; sourceTree = "<group>"; };
 		B297745219864133000AD7B6 /* centeredInbox.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = centeredInbox.png; path = GymBud/Assets/centeredInbox.png; sourceTree = "<group>"; };
 		B297745319864133000AD7B6 /* centeredPeople.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = centeredPeople.png; path = GymBud/Assets/centeredPeople.png; sourceTree = "<group>"; };
+		B297A4EE1AE0389800CE9A25 /* basketball_white.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = basketball_white.png; path = GymBud/Assets/V3/basketball_white.png; sourceTree = "<group>"; };
+		B297A4EF1AE0389800CE9A25 /* racketball_white.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = racketball_white.png; path = GymBud/Assets/V3/racketball_white.png; sourceTree = "<group>"; };
+		B297A4F01AE0389800CE9A25 /* racketball.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = racketball.png; path = GymBud/Assets/V3/racketball.png; sourceTree = "<group>"; };
+		B297A4F11AE0389800CE9A25 /* soccer_white.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = soccer_white.png; path = GymBud/Assets/V3/soccer_white.png; sourceTree = "<group>"; };
+		B297A4F21AE0389800CE9A25 /* tennis_white.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = tennis_white.png; path = GymBud/Assets/V3/tennis_white.png; sourceTree = "<group>"; };
+		B297A4F31AE0389800CE9A25 /* volleyball_white.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = volleyball_white.png; path = GymBud/Assets/V3/volleyball_white.png; sourceTree = "<group>"; };
+		B297A4F41AE0389800CE9A25 /* volleyball.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = volleyball.png; path = GymBud/Assets/V3/volleyball.png; sourceTree = "<group>"; };
 		B2A0C7041A294A8C0091E84B /* SettingsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SettingsTableViewController.h; path = GymBud/Controllers/SettingsTableViewController.h; sourceTree = "<group>"; };
 		B2A0C7051A294A8C0091E84B /* SettingsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SettingsTableViewController.m; path = GymBud/Controllers/SettingsTableViewController.m; sourceTree = "<group>"; };
 		B2A0C7061A294A8C0091E84B /* SettingsTableViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = SettingsTableViewController.xib; path = GymBud/Controllers/SettingsTableViewController.xib; sourceTree = "<group>"; };
@@ -1002,6 +1016,13 @@
 		B2EC4FB91ADD98A700361596 /* V3 */ = {
 			isa = PBXGroup;
 			children = (
+				B297A4EE1AE0389800CE9A25 /* basketball_white.png */,
+				B297A4EF1AE0389800CE9A25 /* racketball_white.png */,
+				B297A4F01AE0389800CE9A25 /* racketball.png */,
+				B297A4F11AE0389800CE9A25 /* soccer_white.png */,
+				B297A4F21AE0389800CE9A25 /* tennis_white.png */,
+				B297A4F31AE0389800CE9A25 /* volleyball_white.png */,
+				B297A4F41AE0389800CE9A25 /* volleyball.png */,
 				B2EC4FBA1ADD994800361596 /* basketball.png */,
 				B2EC4FBB1ADD994800361596 /* soccer.png */,
 				B2EC4FBC1ADD994800361596 /* tennis.png */,
@@ -1060,7 +1081,7 @@
 				TargetAttributes = {
 					B2C39D31197E172600039F90 = {
 						CreatedOnToolsVersion = 6.0;
-						DevelopmentTeam = 8E2G6A5GQK;
+						DevelopmentTeam = M6Y34M2A35;
 					};
 					B2C39D47197E172600039F90 = {
 						CreatedOnToolsVersion = 6.0;
@@ -1096,6 +1117,7 @@
 				B2787E5B1A2AEE6000DCACBF /* 56.png in Resources */,
 				B2787E571A2AEE6000DCACBF /* 52.png in Resources */,
 				B2787E491A2AEE6000DCACBF /* 38.png in Resources */,
+				B297A4FB1AE0389800CE9A25 /* volleyball.png in Resources */,
 				B2787E2B1A2AEE6000DCACBF /* 8.png in Resources */,
 				B2B8DC3F19DB5CCD00BED65D /* sportsmap.png in Resources */,
 				B2E9E9031A2AEC7A00BB377F /* shoulder.png in Resources */,
@@ -1175,6 +1197,7 @@
 				B2787E421A2AEE6000DCACBF /* 31.png in Resources */,
 				B2787E4C1A2AEE6000DCACBF /* 41.png in Resources */,
 				B297745419864133000AD7B6 /* centeredGear.png in Resources */,
+				B297A4F51AE0389800CE9A25 /* basketball_white.png in Resources */,
 				B2722DE319AD86F800FEC2AF /* GymBudEventsCell.xib in Resources */,
 				B2787E271A2AEE6000DCACBF /* 4.png in Resources */,
 				29E4A5121A3407550023B22F /* greenplus.png in Resources */,
@@ -1226,6 +1249,7 @@
 				B2B8DC3A19DB361B00BED65D /* other.png in Resources */,
 				B2C39DBB197E1B5D00039F90 /* Main.storyboard in Resources */,
 				B2787E2A1A2AEE6000DCACBF /* 7.png in Resources */,
+				B297A4F91AE0389800CE9A25 /* tennis_white.png in Resources */,
 				B2C39D6A197E191C00039F90 /* just_background@2x.png in Resources */,
 				B2787E651A2AEE6000DCACBF /* 66.png in Resources */,
 				B2C39D6C197E191C00039F90 /* Map@2x.png in Resources */,
@@ -1246,6 +1270,7 @@
 				B297745519864133000AD7B6 /* centeredInbox.png in Resources */,
 				B2787E6A1A2AEE6000DCACBF /* 71.png in Resources */,
 				B2E9E8FA1A2AEC7A00BB377F /* back_sel.png in Resources */,
+				B297A4FA1AE0389800CE9A25 /* volleyball_white.png in Resources */,
 				B2787E371A2AEE6000DCACBF /* 20.png in Resources */,
 				B2EC4FBF1ADD994800361596 /* tennis.png in Resources */,
 				B2977450198629A3000AD7B6 /* people.png in Resources */,
@@ -1258,6 +1283,7 @@
 				B2787E361A2AEE6000DCACBF /* 19.png in Resources */,
 				B27996BB1A2FCFCB00FDBA9F /* 76.png in Resources */,
 				B2C39D69197E191C00039F90 /* just_background.png in Resources */,
+				B297A4F71AE0389800CE9A25 /* racketball.png in Resources */,
 				B2787E291A2AEE6000DCACBF /* 6.png in Resources */,
 				B2787E351A2AEE6000DCACBF /* 18.png in Resources */,
 				B2E9E8F61A2AEC7A00BB377F /* arm_sel.png in Resources */,
@@ -1265,7 +1291,9 @@
 				B297742D1984C1BF000AD7B6 /* PostCreateTVC.storyboard in Resources */,
 				B2C39D8F197E194F00039F90 /* PAWWallPostCreateViewController.xib in Resources */,
 				B2C39D66197E191C00039F90 /* blueBubble@2x.png in Resources */,
+				B297A4F61AE0389800CE9A25 /* racketball_white.png in Resources */,
 				B2C39D68197E191C00039F90 /* grayBubble@2x.png in Resources */,
+				B297A4F81AE0389800CE9A25 /* soccer_white.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

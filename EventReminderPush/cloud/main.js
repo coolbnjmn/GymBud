@@ -197,6 +197,7 @@ Parse.Cloud.job("eventReminder", function(request, response) {
 	     
 	     console.log("Object ID: ");
 	     console.log(eventObj.id);
+	     /*
 	     Parse.Push.send({
 	        where: pushQuery, 
 		data: {
@@ -213,6 +214,7 @@ Parse.Cloud.job("eventReminder", function(request, response) {
 	          reponse.error("didn't schedule the push")
 	       }
 	     });
+	     */
 	   }
 
 	 }).then(function() {
